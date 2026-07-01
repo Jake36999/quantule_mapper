@@ -66,3 +66,8 @@ temp_manifest_*.json
 result_queue.json.tmp*
 .active_run_pointer.json
 stop_after_gen.txt
+
+# --- salvage/junk artifacts (accidental adds) ---
+.branch_salvage/
+README - Copy.md
+Equantule_mapper_manifest.csv

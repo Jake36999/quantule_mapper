@@ -1,0 +1,8 @@
+- [DC-v1.0 hardening state](dc-v1-hardening-state.md) — what's closed/deferred in the data-contract work; next = MCP read-only tools
+- [No CuPy dev box](no-cupy-dev-box.md) — Windows python has no cupy/jax (py_compile only); JAX scout runs on GPU via WSL `~/jax_irer` venv; CuPy solver needs a GPU box
+- [Stage B tensor geometry NO_SUPPORT](stage-b-tensor-geometry-no-support.md) — faithful anisotropic metric did NOT reproduce the proxy routing; proxy effect was a flat-form artifact; do not build Stage C
+- [Routing NULL → Payan](routing-null-promising-for-payan.md) — denominator-safe hunt: strong geometric bridges do NOT route; bridge/void ratio invalid (no-bridge=949); next DOF = Payan/phase-alignment (RFC scope only)
+- [Payan diagnostic → NO_SIGNAL](payan-diagnostic-defined.md) — Payan = axial phase-winding of ∇φ; passive diagnostic ran: alignment does NOT predict bridge stability (gap −0.08) → PAYAN_COUPLING_NOT_JUSTIFIED; geometry-only + passive-Payan arc closed negative
+- [Hi-fi continuation → vortex real](hifi-continuation-vortex-real.md) — N=48/96/128 T=1600: node dynamics REAL (converged); nodes = rotational cores (not topological vortices); stable sustains/unstable dissipates = energy balance, not missing spin; corrects runaway/merger readings
+- [GL rotational-core basin](gl-rotational-core-basin.md) — bare S-NCGL self-sustaining rotational cores; eta-dominated basin (robust band eta~−0.05..0); 6h sweep 210/1920 SUSTAIN; BASIN_PARTIAL at N=96 (strong-gain edge = resolution artifact); dissipative solitons, not missing topology
+- [Test bench adaptation](test-bench-adaptation.md) — F:\Testing_suite scanner adapted to audit DC-v1.0; 16/16 COMPLIANT; middleware/UI still legacy

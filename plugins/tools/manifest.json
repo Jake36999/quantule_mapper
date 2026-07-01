@@ -1,0 +1,18 @@
+{
+  "kind": "tools",
+  "version": "1.0.0",
+  "plugins": [
+    {
+      "id": "extract_topology_metrics",
+      "name": "Extract Topology Metrics",
+      "script": "extract_topology_metrics.py",
+      "description": "Extracts topological and morphology metrics from rho history artifacts."
+    },
+    {
+      "id": "fss_scaling_analyzer",
+      "name": "FSS Scaling Analyzer",
+      "script": "fss_scaling_analyzer.py",
+      "description": "Runs finite-size scaling analysis for candidate quality gating."
+    }
+  ]
+}

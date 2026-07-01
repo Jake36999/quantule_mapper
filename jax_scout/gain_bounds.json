@@ -1,0 +1,11 @@
+{
+  "_comment": "Edge-of-stability gain bounds for CORRECTED_PHYSICS_JAX_SCOUT. Extends eta to negative (linear anti-damping/gain) and activates param_a (cubic). Search the band between dissipation and blow-up; f kept able to saturate. NOT the production CuPy hunt bounds.",
+  "param_D": [0.1, 5.0],
+  "param_eta": [-0.25, 0.5],
+  "param_rho_vac": [0.05, 2.0],
+  "param_omega0": [0.0, 2.0],
+  "param_a_coupling": [0.1, 4.0],
+  "param_s": [-1.0, 1.0],
+  "param_f": [-0.5, 0.5],
+  "param_a": [-0.5, 0.5]
+}

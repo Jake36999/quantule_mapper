@@ -1,0 +1,147 @@
+{
+  "document": "ASTE Agent Setup Guide",
+  "version": "1.0",
+  "last_updated": "2026-03-16",
+  "audience": [
+    "AI agents",
+    "operators",
+    "developers"
+  ],
+  "purpose": "Provide an agent-safe, deterministic procedure for bringing the platform up, staging backlog ingestion, verifying real GPU physics execution, and troubleshooting phantom-loop behavior.",
+  "environment": {
+    "os": "Windows",
+    "repo_root": "G:/quantule_mapper",
+    "python_executable": "g:/quantule_mapper/.venv/Scripts/python.exe",
+    "api_base_url": "http://127.0.0.1:8000"
+  },
+  "non_destructive_rules": [
+    "Never kill unrelated Python processes outside this repository command line scope.",
+    "Never delete input_configs content during routine resets.",
+    "Prefer stop_all.bat before force-kill fallback.",
+    "Treat queue_runtime.db as disposable runtime state.",
+    "Always verify artifact freshness before declaring ingestion success."
+  ],
+  "quick_start": {
+    "goal": "Clean start and ingest backlog through UI with physical execution verification.",
+    "steps": [
+      "Run stop sequence and process verification.",
+      "Reset queues and runtime SQLite files.",
+      "Run CUDA handshake and backlog extraction.",
+      "Launch API and orchestrator.",
+      "Launch worker manually on GPU0.",
+      "Stage and start backlog via UI.",
+      "Verify simulation_data receives new .h5 artifacts within 60 seconds."
+    ]
+  },
+  "process_management": {
+    "graceful_stop": [
+      "Set-Location G:/quantule_mapper",
+      "./stop_all.bat 8"
+    ],
+    "verify_no_ghosts": [
+      "Get-CimInstance Win32_Process -Filter \"Name='python.exe'\" |",
+      "Where-Object { $_.CommandLine -match 'quantule_mapper|uvicorn app:app|adaptive_hunt_orchestrator.py|worker_daemon.py|backlog_orchestrator.py' } |",
+      "Select-Object ProcessId, CommandLine | Format-List"
+    ],
+    "force_stop_fallback": [
+      "Get-CimInstance Win32_Process -Filter \"Name='python.exe'\" |",
+      "Where-Object { $_.CommandLine -match 'quantule_mapper|uvicorn app:app|adaptive_hunt_orchestrator.py|worker_daemon.py|backlog_orchestrator.py' } |",
+      "ForEach-Object { Stop-Process -Id $_.ProcessId -Force }"
+    ]
+  },
+  "clean_environment": {
+    "preflight_reset": [
+      "Set-Location G:/quantule_mapper",
+      "powershell -NoProfile -ExecutionPolicy Bypass -Command \"& { ./.venv/Scripts/Activate.ps1; $ErrorActionPreference='Stop'; New-Item -ItemType Directory -Force simulation_data, provenance_reports, input_configs, runtime_logs, pareto_snapshots, archive_runs | Out-Null; '[]' | Out-File -Encoding utf8NoBOM backlog_queue.json; '{}' | Out-File -Encoding utf8NoBOM backlog_queue.json.claims.json; '{}' | Out-File -Encoding utf8NoBOM backlog_queue.json.workers.json; '[]' | Out-File -Encoding utf8NoBOM result_queue.json; Write-Host 'Preflight complete.' }\""
+    ],
+    "clear_runtime_sqlite": [
+      "Remove-Item -Force -ErrorAction SilentlyContinue queue_runtime.db, queue_runtime.db-shm, queue_runtime.db-wal"
+    ],
+    "cuda_handshake": [
+      "g:/quantule_mapper/.venv/Scripts/python.exe -c \"import cupy; print('GPU_COUNT:', cupy.cuda.runtime.getDeviceCount()); print('DEVICE:', cupy.cuda.Device(0).attributes)\""
+    ],
+    "expected_cuda_result": "GPU_COUNT must be >= 1. If 0 or exception, stop and repair CUDA/CuPy environment before launch."
+  },
+  "backlog_preparation": {
+    "source_script": "prep_backlog.py",
+    "target": "backlog_queue.json",
+    "recommended_command": [
+      "g:/quantule_mapper/.venv/Scripts/python.exe prep_backlog.py --source csv --input-csv \"long run results (lw_SSE_1.93).csv\" --sse-threshold 7 --max-items 2100 --output backlog_queue.json"
+    ],
+    "validation": [
+      "g:/quantule_mapper/.venv/Scripts/python.exe -c \"import json; d=json.load(open('backlog_queue.json','r',encoding='utf-8')); print('BACKLOG_COUNT', len(d)); print('FIRST_KEYS', sorted(d[0].keys())[:12] if d else [])\""
+    ]
+  },
+  "launch_and_stage_via_ui": {
+    "launch_api_and_orchestrator": [
+      "Set-Location G:/quantule_mapper",
+      "./launch_all.bat burn_in_config.json 1"
+    ],
+    "launch_worker_gpu0": [
+      "Set-Location G:/quantule_mapper",
+      "$env:CUDA_VISIBLE_DEVICES='0'; g:/quantule_mapper/.venv/Scripts/python.exe worker_daemon.py"
+    ],
+    "ui_actions": [
+      "Open http://127.0.0.1:8000",
+      "Set mode to backlog",
+      "Set backlog source to backlog_queue.json",
+      "Set hunt name to INGEST_2100",
+      "Click Stage, then click Start"
+    ]
+  },
+  "api_only_staging": {
+    "stage_then_start": [
+      "$stagePayload = @{ hunt_name='INGEST_2100'; generations=2100; batch_size=1; population_size=2100; seeds_per_candidate=1; n_grid=128; t_steps=1200; dt=0.005; origin='UI_CONTROL'; mode='backlog'; backlog_source='backlog_queue.json' } | ConvertTo-Json",
+      "$stageResp = Invoke-RestMethod -Method Post -Uri 'http://127.0.0.1:8000/api/control/stage' -ContentType 'application/json' -Body $stagePayload",
+      "$startPayload = @{ staged_path=$stageResp.staged_path; hunt_name='INGEST_2100'; origin='UI_CONTROL'; mode='backlog'; backlog_source='backlog_queue.json' } | ConvertTo-Json",
+      "Invoke-RestMethod -Method Post -Uri 'http://127.0.0.1:8000/api/control/start' -ContentType 'application/json' -Body $startPayload"
+    ]
+  },
+  "verification_gates": {
+    "telemetry": [
+      "Invoke-RestMethod -Method Get -Uri 'http://127.0.0.1:8000/api/system/telemetry' | ConvertTo-Json -Depth 6"
+    ],
+    "artifact_pulse_check": [
+      "Get-ChildItem simulation_data | Sort-Object LastWriteTime | Select-Object -Last 5 | Format-Table LastWriteTime, Length, Name -AutoSize"
+    ],
+    "artifact_size_check": [
+      "Get-ChildItem simulation_data -Filter '*.h5' | Sort-Object LastWriteTime | Select-Object -Last 1 LastWriteTime, Length, Name | Format-List"
+    ],
+    "pass_criteria": [
+      "New .h5 file timestamp appears within 60 seconds of run start.",
+      "Worker logs include 'Evolution complete in XX.XXs'.",
+      "queue_depth trends down over time.",
+      "dlq_count remains stable (preferably 0 during steady-state ingestion)."
+    ]
+  },
+  "phantom_loop_forensics": {
+    "symptoms": [
+      "SQLite counters increment but no new .h5 artifacts are created.",
+      "Worker process exists but no 'Evolution complete' log lines.",
+      "simulation_data newest artifact older than 60 seconds under active run."
+    ],
+    "recovery_sequence": [
+      "Stop all ASTE processes.",
+      "Delete queue_runtime.db, queue_runtime.db-shm, queue_runtime.db-wal.",
+      "Rebuild backlog_queue.json with SSE filter.",
+      "Relaunch worker manually on GPU0.",
+      "Stage/start run again and re-check artifact pulse in 60 seconds."
+    ]
+  },
+  "logs_and_artifacts": {
+    "api_log": "runtime_logs/api_preview.log",
+    "orchestrator_log": "runtime_logs/orchestrator.log",
+    "worker_log": "runtime_logs/worker_gpu0.log",
+    "artifacts_dir": "simulation_data",
+    "queue_db": "queue_runtime.db"
+  },
+  "operator_checklist": [
+    "Confirm no ghost processes.",
+    "Confirm CUDA handshake succeeds.",
+    "Confirm backlog_queue.json count is non-zero.",
+    "Confirm API endpoint responds.",
+    "Confirm worker logs physical evolution completion.",
+    "Confirm fresh .h5 creation and meaningful file size.",
+    "Confirm telemetry queue depth drains over time."
+  ]
+}

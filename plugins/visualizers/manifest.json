@@ -1,0 +1,36 @@
+{
+  "kind": "visualizers",
+  "version": "1.0.0",
+  "plugins": [
+    {
+      "id": "gif_pipeline_manager",
+      "name": "GIF Pipeline Manager",
+      "script": "gif_pipeline_manager.py",
+      "description": "Orchestrates render and archival pipeline for high-score artifacts."
+    },
+    {
+      "id": "visual_analysis_suite",
+      "name": "Visual Analysis Suite",
+      "script": "visual_analysis_suite.py",
+      "description": "Core render engine for simulation artifact visual outputs."
+    },
+    {
+      "id": "plot_phase_transition",
+      "name": "Phase Transition Plot",
+      "script": "plot_phase_transition.py",
+      "description": "Plots phase transition diagnostics from simulation outputs."
+    },
+    {
+      "id": "compare_basin_runs",
+      "name": "Compare Basin Runs",
+      "script": "compare_basin_runs.py",
+      "description": "Compares basin dynamics across multiple candidate runs."
+    },
+    {
+      "id": "stitch_gifs_side_by_side",
+      "name": "Stitch GIFs Side-by-Side",
+      "script": "stitch_gifs_side_by_side.py",
+      "description": "Combines paired run GIFs into side-by-side comparison outputs."
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+# ============================================================
+#  quantule_mapper — repo hygiene (source + docs only in git)
+#  Large data / envs / build artifacts stay on disk, not in git.
+# ============================================================
+
+# --- Local agent / editor state ---
+.claude/
+.vscode/
+.idea/
+
+# --- Python environments & caches ---
+venv/
+.venv/
+env/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# --- Node / frontend (all of UI is node_modules) ---
+UI/
+node_modules/
+build/
+dist/
+.next/
+.cache/
+
+# --- Simulation outputs & runtime data (kept on disk, not versioned) ---
+sweep_runs/
+runtime_logs/
+provenance_reports/
+predator_queue.json
+GIFS/
+*.npz
+*.h5
+*.hdf5
+
+# --- Large binaries / media ---
+*.dll
+*.pyd
+*.so
+*.exe
+*.bin
+*.map
+*.mp4
+*.mov
+*.zip
+*.tar
+*.gz
+
+# --- docs: keep only top-level files + generated_reports; drop heavy subdirs ---
+docs/external research/
+docs/transcripts/
+docs/legacy_colab_variants_pre-deployment_ R&d/
+docs/past_variants/
+
+# --- misc / transient runtime state ---
+*.tmp
+*.bak
+*.bak_*
+*.log
+temp_params_*.json
+temp_manifest_*.json
+result_queue.json.tmp*
+.active_run_pointer.json
+stop_after_gen.txt

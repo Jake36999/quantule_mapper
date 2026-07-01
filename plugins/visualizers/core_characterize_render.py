@@ -1,0 +1,17 @@
+"""Deprecated compatibility wrapper for the centralized quantule_viz core-characterize renderer."""
+
+from __future__ import annotations
+
+import sys
+
+from quantule_viz.cli import main as quantule_viz_main
+
+
+def main() -> int:
+    print("Deprecated: use `python -m quantule_viz core-characterize <run_dir>`.")
+    argv = ["core-characterize", "--latest", *sys.argv[1:]]
+    return int(quantule_viz_main(argv))
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

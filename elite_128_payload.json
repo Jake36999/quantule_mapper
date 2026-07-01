@@ -1,0 +1,34 @@
+[
+  {
+    "param_D": 1.174132738794221,
+    "param_eta": 0.3122710019939253,
+    "param_rho_vac": 1.375349298858907,
+    "param_a_coupling": 0.5255676179294535,
+    "param_splash_coupling": 0.8176968360740376,
+    "param_splash_fraction": -0.9824513764686463
+  },
+  {
+    "param_D": 0.3715310539892388,
+    "param_eta": 0.9438024993592717,
+    "param_rho_vac": 1.3915442714697512,
+    "param_a_coupling": 0.31965001530307363,
+    "param_splash_coupling": 0.7815611875814884,
+    "param_splash_fraction": -0.20917314168079937
+  },
+  {
+    "param_D": 1.1741100470709294,
+    "param_eta": 0.3120547718002479,
+    "param_rho_vac": 1.3569260903339524,
+    "param_a_coupling": 0.5293223199423438,
+    "param_splash_coupling": 0.8176943767317817,
+    "param_splash_fraction": -0.9825264907030049
+  },
+  {
+    "param_D": 1.1740032545850094,
+    "param_eta": 0.31184919613622275,
+    "param_rho_vac": 1.3574078276919561,
+    "param_a_coupling": 0.5277308820526634,
+    "param_splash_coupling": 0.8176943767317817,
+    "param_splash_fraction": -0.981545142465821
+  }
+]

@@ -1,0 +1,14 @@
+{
+  "generations": 1,
+  "population_size": 1,
+  "seeds_per_candidate": 1,
+  "db_path": "simulation_ledger.db",
+  "ledger_db_path": "simulation_ledger.db",
+  "data_dir": "simulation_data",
+  "provenance_dir": "provenance_reports",
+  "archive_dir": "archive",
+  "audit_log": "runtime_logs/run_lifecycle_audit.jsonl",
+  "poll_interval": 0.01,
+  "max_disk_gb": 100,
+  "trigger_bleed_threshold_gb": 80
+}

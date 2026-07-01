@@ -1,0 +1,80 @@
+[
+    {
+        "cpu_percent": 14.0,
+        "cuda_status": "MISSING",
+        "disk_read_mb": 0.0,
+        "disk_write_mb": 0.0,
+        "id": 1,
+        "jax_cache_mb": 0.0,
+        "net_recv_mb": 0.0,
+        "net_sent_mb": 0.0,
+        "orphans": 0,
+        "ram_percent": 49.6,
+        "timestamp": "2026-02-16T16:04:37.164583"
+    },
+    {
+        "cpu_percent": 8.5,
+        "cuda_status": "MISSING",
+        "disk_read_mb": 0.017890493953047152,
+        "disk_write_mb": 0.5478428770311089,
+        "id": 2,
+        "jax_cache_mb": 0.0,
+        "net_recv_mb": 0.021799191042314207,
+        "net_sent_mb": 0.004418287265411718,
+        "orphans": 0,
+        "ram_percent": 49.8,
+        "timestamp": "2026-02-16T16:04:48.572964"
+    },
+    {
+        "cpu_percent": 17.6,
+        "cuda_status": "MISSING",
+        "disk_read_mb": 0.15730580590691282,
+        "disk_write_mb": 0.245172213881247,
+        "id": 3,
+        "jax_cache_mb": 0.0,
+        "net_recv_mb": 0.0016311179330252329,
+        "net_sent_mb": 0.0019882964399179546,
+        "orphans": 0,
+        "ram_percent": 51.4,
+        "timestamp": "2026-02-16T16:05:00.126147"
+    },
+    {
+        "cpu_percent": 21.7,
+        "cuda_status": "MISSING",
+        "disk_read_mb": 0.01183875016173492,
+        "disk_write_mb": 0.2098649363777052,
+        "id": 4,
+        "jax_cache_mb": 0.0,
+        "net_recv_mb": 0.00197976661302561,
+        "net_sent_mb": 0.0016373559534275585,
+        "orphans": 0,
+        "ram_percent": 51.9,
+        "timestamp": "2026-02-16T16:05:11.757047"
+    },
+    {
+        "cpu_percent": 20.1,
+        "cuda_status": "MISSING",
+        "disk_read_mb": 0.0010920820319977903,
+        "disk_write_mb": 1.622161849067487,
+        "id": 5,
+        "jax_cache_mb": 0.0,
+        "net_recv_mb": 0.0002777786779104956,
+        "net_sent_mb": 0.0004537489272070146,
+        "orphans": 0,
+        "ram_percent": 50.9,
+        "timestamp": "2026-02-16T16:05:23.381917"
+    },
+    {
+        "cpu_percent": 21.8,
+        "cuda_status": "MISSING",
+        "disk_read_mb": 0.10592912361187823,
+        "disk_write_mb": 0.5898566276911927,
+        "id": 6,
+        "jax_cache_mb": 0.0,
+        "net_recv_mb": 0.0009057234521779358,
+        "net_sent_mb": 0.002052010354296526,
+        "orphans": 0,
+        "ram_percent": 51.1,
+        "timestamp": "2026-02-16T16:05:34.937956"
+    }
+]

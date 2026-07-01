@@ -1,0 +1,24 @@
+{
+  "hunt_name": "EVO_128_DIAGNOSTIC",
+  "mode": "evolution",
+  "generations": 3,
+  "batch_size": 1,
+  "population_size": 10,
+  "seeds_per_candidate": 1,
+  "n_grid": 128,
+  "t_steps": 1200,
+  "dt": 0.00025,
+  "l_domain": 10.0,
+  "mutation_rate": 0.1,
+  "crossover_rate": 0.5,
+  "survival_fraction": 0.2,
+  "worker_script": "worker_cupy.py",
+  "bounds": {
+    "param_D": [0.1, 2.0],
+    "param_eta": [0.0, 1.0],
+    "param_rho_vac": [0.5, 1.5],
+    "param_a_coupling": [0.1, 1.0],
+    "param_splash_coupling": [0.0, 1.0],
+    "param_splash_fraction": [-1.0, 0.0]
+  }
+}

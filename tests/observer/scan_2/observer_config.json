@@ -1,0 +1,32 @@
+{
+    "intervals": {
+        "system": 2.0,
+        "gpu": 5.0,
+        "workers": 1.0,
+        "cloud_sync": 60.0
+    },
+    "http_port": 8081,
+    "db_path": "irer_telemetry.db",
+    "log_path": "irer_daemon.log",
+    "jax_cache_path": "~/.cache/jax",
+    "worker_patterns": [
+        "worker_v13_engine.py",
+        "RhoSim",
+        "python.*simulation",
+        "python.*solver"
+    ],
+    "alert_thresholds": {
+        "cpu_percent_max": 95.0,
+        "ram_percent_max": 90.0,
+        "orphan_count_max": 5
+    },
+    "enable_gpu": true,
+    "mode": "continuous",
+    "managed_processes": [
+        {
+            "name": "worker_v13",
+            "cmd": "python worker_v13_engine.py --mode headless",
+            "auto_restart": true
+        }
+    ]
+}

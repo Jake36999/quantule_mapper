@@ -1,0 +1,11 @@
+{
+  "type": "pde_history",
+  "payload": [
+    {
+      "time": 0.0,
+      "energy": 1.0,
+      "c_invariant": 0.5,
+      "max_amplitude": 2.0
+    }
+  ]
+}

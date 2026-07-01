@@ -1,0 +1,3511 @@
+- pattern_id: SID_compute_generic_66e7b090
+  canonical_signature: compute.generic > compute.generic > io.file.read > io.file.write
+    > io.file.read > compute.generic > compute.generic > compute.generic > io.file.write
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 9'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - UI/components/update_ui.py::patch_app_py@76-116
+- pattern_id: SID_compute_generic_0cac75ac
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > io.network.read > compute.generic > compute.generic
+    > compute.generic > io.file.write
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 11'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - extract_elites.py::sync_elite_artifacts@11-63
+- pattern_id: SID_compute_generic_0a533571
+  canonical_signature: compute.generic > compute.generic > compute.generic > io.file.read
+    > io.file.read > state.mutate > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 7'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - hunt_config_utils.py::load_and_merge_config@6-18
+- pattern_id: SID_compute_generic_8f8370cc
+  canonical_signature: compute.generic > compute.transform > compute.generic > compute.generic
+    > compute.generic > io.network.read > security.crypto > compute.generic > state.mutate
+    > state.mutate
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 10'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - logger_config.py::setup_logger@5-21
+- pattern_id: SID_compute_generic_9fb0df38
+  canonical_signature: compute.generic > compute.generic > io.network.read > compute.generic
+    > compute.generic > io.file.write > io.file.write > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 9'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - metrics/monte_carlo_engine.py::run_monte_carlo_p_value@4-23
+- pattern_id: SID_compute_generic_13aa4d90
+  canonical_signature: compute.generic > compute.generic > io.file.write > compute.transform
+    > compute.generic > compute.generic > io.file.read > compute.generic > io.file.write
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 9'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/diagnostics/runtime_audit.py::log_lifecycle_event@16-58
+- pattern_id: SID_compute_generic_a6d03ec5
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > ui.render > io.file.write > compute.generic > io.file.write > io.file.write
+    > state.mutate > state.mutate > state.mutate > ui.render > compute.generic > compute.generic
+    > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 22'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - plugins/tools/extract_topology_metrics.py::compute_and_plot_metrics@22-111
+- pattern_id: SID_compute_generic_34a77efe
+  canonical_signature: compute.generic > state.mutate > compute.generic > compute.generic
+    > io.file.write > ui.render > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > io.file.read
+    > ui.render > io.file.write > compute.generic > io.file.write > compute.generic
+    > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 22'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - plugins/visualizers/plot_phase_transition.py::plot_phase_transition@13-62
+- pattern_id: SID_state_mutate_46308a9a
+  canonical_signature: state.mutate > compute.generic > compute.generic > compute.generic
+    > compute.generic > io.file.read > compute.generic > compute.generic > compute.generic
+    > io.file.write > compute.generic > compute.generic > io.file.write
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 13'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - plugins/visualizers/stitch_gifs_side_by_side.py::stitch_gifs_side_by_side@12-31
+- pattern_id: SID_io_file_read_a0b30c23
+  canonical_signature: io.file.read > state.mutate > io.file.write > compute.generic
+    > compute.generic > io.network.read > compute.generic > io.file.read > io.file.write
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 9'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - prep_backlog.py::generate_backlog@5-34
+- pattern_id: SID_io_file_read_62859924
+  canonical_signature: io.file.read > state.mutate > io.file.write > compute.generic
+    > compute.generic > io.network.read > compute.generic > io.file.read > io.file.write
+    > compute.transform
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 10'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - prep_elites.py::extract_elites@5-45
+- pattern_id: SID_io_file_read_c66d8187
+  canonical_signature: io.file.read > state.mutate > compute.transform > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > io.file.write
+    > compute.generic > compute.generic > compute.generic > state.mutate > compute.generic
+    > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 21'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - tda_profiler.py::extract_and_classify_topology@12-110
+- pattern_id: SID_compute_transform_af984ba7
+  canonical_signature: compute.transform > compute.transform
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 2'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - metrics/spdc_empirical_bridge.py::calculate_joint_spectral_amplitude@4-13
+- pattern_id: SID_compute_generic_657177cb
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 4'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - metrics/spdc_empirical_bridge.py::deconvolve_to_c4_interference@15-36
+- pattern_id: SID_compute_generic_93f80ea5
+  canonical_signature: compute.generic > state.mutate
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 2'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - orchestrator/storage/artifact_gc.py::_normalize_path_set@12-16
+- pattern_id: SID_state_mutate_026116dc
+  canonical_signature: state.mutate > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > io.network.read > io.network.read > compute.generic
+    > compute.generic > io.file.write > compute.generic > compute.generic > state.mutate
+    > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 16'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/storage/artifact_gc.py::purge_old_artifacts@19-128
+- pattern_id: SID_compute_generic_1d1ddb9a
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 5'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - plugins/visualizers/compare_basin_runs.py::extract_mesh_and_metrics@21-30
+- pattern_id: SID_compute_generic_7e4b8e64
+  canonical_signature: compute.generic > compute.generic > ui.render > compute.generic
+    > compute.generic > compute.generic > compute.generic > state.mutate > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > io.file.read > compute.generic > io.file.read > io.file.write > compute.generic
+    > ui.render > compute.generic > state.mutate > io.file.write > compute.generic
+    > compute.generic > state.mutate > ui.render > compute.generic > state.mutate
+    > io.file.write
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 30'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - plugins/visualizers/compare_basin_runs.py::render_comparison_animation@32-123
+- pattern_id: SID_compute_generic_6d8fdced
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 12'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - metrics/tensor_validation.py::construct_T_info@3-33
+- pattern_id: SID_compute_generic_3ea7c88d
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 4'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - metrics/tensor_validation.py::tensor_symmetry_test@35-42
+- pattern_id: SID_compute_generic_a8588732
+  canonical_signature: compute.generic > state.mutate > compute.generic > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 5'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - metrics/tensor_validation.py::perfect_fluid_reduction_test@44-57
+- pattern_id: SID_state_mutate_b3ade556
+  canonical_signature: state.mutate > compute.generic > compute.generic > compute.generic
+    > compute.generic > io.network.read > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 8'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - orchestrator/diagnostics/lifecycle_report.py::_load_runs@14-34
+- pattern_id: SID_compute_generic_e37164bc
+  canonical_signature: compute.generic > compute.generic > io.network.read > compute.generic
+    > io.file.read > io.file.read > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 7'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - orchestrator/diagnostics/lifecycle_report.py::_load_purged_counts@37-62
+- pattern_id: SID_io_file_read_48c1475c
+  canonical_signature: io.file.read > io.file.read > state.mutate > compute.generic
+    > compute.generic > io.network.read > compute.generic > compute.generic > security.crypto
+    > compute.generic > compute.transform > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 12'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - orchestrator/diagnostics/lifecycle_report.py::render_generation_report@65-137
+- pattern_id: SID_io_file_read_215fafe3
+  canonical_signature: io.file.read > io.file.read
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 2'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - orchestrator/orchestrator_service.py::load_config@25-28
+- pattern_id: SID_compute_transform_d2f01166
+  canonical_signature: compute.transform > compute.generic > compute.generic > compute.generic
+    > compute.generic > io.file.read > compute.transform > io.file.write > ui.render
+    > security.crypto > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 13'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/orchestrator_service.py::main@31-81
+- pattern_id: SID_compute_generic_a5c1f22d
+  canonical_signature: compute.generic > io.file.write > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 3'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - orchestrator/orchestrator_service.py::signal_handler@69-72
+- pattern_id: SID_compute_generic_d4cbf4ce
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > io.file.read > compute.generic > io.file.write
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 7'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - plugins/visualizers/gif_pipeline_manager.py::init_gif_directory@21-32
+- pattern_id: SID_compute_generic_5461af0c
+  canonical_signature: compute.generic > io.file.write > compute.generic > compute.generic
+    > io.network.read > compute.generic > compute.transform > compute.generic > io.file.read
+    > compute.generic > compute.generic > io.file.read > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 20'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - plugins/visualizers/gif_pipeline_manager.py::process_new_high_score@34-82
+- pattern_id: SID_compute_transform_1258c94d
+  canonical_signature: compute.transform > compute.generic > compute.generic > compute.generic
+    > compute.transform > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 7'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - plugins/visualizers/gif_pipeline_manager.py::main@85-94
+- pattern_id: SID_compute_generic_5a9721b8
+  canonical_signature: compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 1'
+  occurrences: 2
+  highest_risk: MEDIUM
+  example_nodes:
+  - tools/batch_ledger_reproduction.py::setup_directories@15-18
+  - tools/intelligent_verifier.py::setup_dirs@75-77
+- pattern_id: SID_compute_generic_d518b322
+  canonical_signature: compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 3'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - tools/batch_ledger_reproduction.py::get_latest_provenance@20-26
+- pattern_id: SID_io_file_read_12233f99
+  canonical_signature: io.file.read > io.file.write > compute.generic > state.mutate
+    > io.file.write > compute.generic > compute.generic > compute.generic > compute.generic
+    > io.network.read > io.network.read > compute.generic > security.crypto > compute.generic
+    > io.file.read > io.file.read > io.file.write > compute.generic > state.mutate
+    > io.file.write > io.file.write
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 21'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - tools/batch_ledger_reproduction.py::main@28-132
+- pattern_id: SID_state_mutate_eb944758
+  canonical_signature: state.mutate > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 4'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - tools/detect_duplicates.py::find_py_files@5-11
+- pattern_id: SID_state_mutate_470d5928
+  canonical_signature: state.mutate > io.network.read > compute.generic > compute.generic
+    > compute.generic > io.file.read > compute.transform > io.file.read > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 10'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - tools/detect_duplicates.py::extract_defs@13-24
+- pattern_id: SID_state_mutate_f9fe966d
+  canonical_signature: state.mutate > compute.generic > compute.generic > compute.generic
+    > security.crypto > compute.generic > compute.generic > io.file.write
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 8'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - tools/detect_duplicates.py::detect_duplicates@26-39
+- pattern_id: SID_compute_generic_f34fe91a
+  canonical_signature: compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 3'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - worker_daemon.py::_build_energy_sparkline@31-43
+- pattern_id: SID_io_network_read_a97b138d
+  canonical_signature: io.network.read > compute.generic > io.file.write > io.file.read
+    > state.mutate
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 5'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - worker_daemon.py::record_fail_result@46-64
+- pattern_id: SID_compute_generic_93156523
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > io.file.write > io.file.read
+    > compute.generic > compute.generic > compute.generic > compute.generic > io.network.read
+    > io.network.read > compute.generic > compute.generic > io.file.write > compute.generic
+    > io.file.write > io.file.write > io.file.read > io.file.read > io.file.read >
+    state.mutate > compute.generic > compute.generic > compute.generic > compute.simulation
+    > compute.simulation > compute.simulation > compute.generic > state.mutate > state.mutate
+    > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 36'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - worker_daemon.py::main@67-271
+- pattern_id: SID_compute_generic_f81b4aed
+  canonical_signature: compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 2'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - Alethiea/aletheia_diagnostics.py::extract_phase_and_density@3-7
+- pattern_id: SID_compute_generic_2bd6b2be
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 5'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - Alethiea/aletheia_diagnostics.py::compute_informational_current@9-27
+- pattern_id: SID_compute_generic_5504a522
+  canonical_signature: compute.generic > compute.generic > io.file.write > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 4'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - Alethiea/aletheia_diagnostics.py::compute_field_entropy@29-46
+- pattern_id: SID_compute_generic_86ff4762
+  canonical_signature: compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 3'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - Alethiea/aletheia_diagnostics.py::compute_stress_energy_trace@48-60
+- pattern_id: SID_compute_generic_747e3e84
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 4'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - metrics/collapse_dynamics.py::compute_nonlinear_balance@3-14
+- pattern_id: SID_compute_generic_7c5568ac
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.transform > compute.transform > compute.generic > compute.transform
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 13'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - metrics/collapse_dynamics.py::compute_correlation_length@16-46
+- pattern_id: SID_compute_generic_b1ef95d0
+  canonical_signature: compute.generic > compute.generic > compute.generic > io.network.read
+    > io.file.write > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 7'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - metrics/collapse_dynamics.py::compute_fractal_dimension_boxcount@48-67
+- pattern_id: SID_compute_generic_929aec00
+  canonical_signature: compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 1'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - metrics/collapse_dynamics.py::get_counts@57-60
+- pattern_id: SID_compute_generic_43adf799
+  canonical_signature: compute.generic > io.file.write > io.file.write > compute.validation
+    > compute.validation
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 5'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - orchestrator/job_manifest.py::JobManifest@10-55
+- pattern_id: SID_compute_generic_c544df88
+  canonical_signature: compute.generic > io.file.write > compute.validation
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 3'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/job_manifest.py::from_params@14-46
+- pattern_id: SID_io_file_write_7f9d47fc
+  canonical_signature: io.file.write
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 1'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/job_manifest.py::to_json@48-50
+- pattern_id: SID_compute_validation_860c3fc0
+  canonical_signature: compute.validation
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 1'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - orchestrator/job_manifest.py::from_json@53-55
+- pattern_id: SID_compute_generic_652b7cd1
+  canonical_signature: compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 1'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - plugins/tools/fss_scaling_analyzer.py::run_simulation@5-9
+- pattern_id: SID_compute_generic_03727600
+  canonical_signature: compute.generic > compute.transform > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 3'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - plugins/tools/fss_scaling_analyzer.py::calculate_structure_factor@11-14
+- pattern_id: SID_compute_generic_52474a55
+  canonical_signature: compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 1'
+  occurrences: 2
+  highest_risk: HIGH
+  example_nodes:
+  - plugins/tools/fss_scaling_analyzer.py::calculate_relaxation_time@16-19
+  - worker_cupy.py::calculate_nonlinear_rhs@64-67
+- pattern_id: SID_state_mutate_badf203c
+  canonical_signature: state.mutate > compute.transform > compute.transform > compute.generic
+    > io.file.write > ui.render > compute.generic > ui.render > compute.generic >
+    compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 11'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - plugins/tools/fss_scaling_analyzer.py::main@21-40
+- pattern_id: SID_state_mutate_7174b6ad
+  canonical_signature: state.mutate > compute.generic > io.network.read > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 5'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - metrics/ast_governance_lens.py::AxiomaticAlignmentVisitor@5-31
+- pattern_id: SID_general operator_43f09f12
+  canonical_signature: general operator
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 0'
+  occurrences: 3
+  highest_risk: LOW
+  example_nodes:
+  - metrics/ast_governance_lens.py::__init__@6-7
+  - validation_pipeline.py::__init__@719-723
+  - app.py::__init__@2425-2429
+- pattern_id: SID_state_mutate_57833e7c
+  canonical_signature: state.mutate > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 3'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - metrics/ast_governance_lens.py::visit_Attribute@9-14
+- pattern_id: SID_state_mutate_3bc1fb26
+  canonical_signature: state.mutate > compute.generic > io.network.read > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 4'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - metrics/ast_governance_lens.py::visit_For@16-25
+- pattern_id: SID_compute_generic_3cee9518
+  canonical_signature: compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 2'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - metrics/ast_governance_lens.py::visit_FunctionDef@27-31
+- pattern_id: SID_compute_generic_6e1bdb0b
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > io.file.read > compute.transform > io.file.write > io.file.read > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 9'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - metrics/ast_governance_lens.py::audit_codebase@33-62
+- pattern_id: SID_compute_generic_46b55bcb
+  canonical_signature: compute.generic > io.file.write > state.mutate > compute.generic
+    > io.network.read > io.network.read > io.network.read > compute.generic > compute.generic
+    > compute.generic > compute.generic > io.file.write > compute.generic > compute.generic
+    > io.file.write > state.mutate > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 21'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/scheduling/job_dispatcher.py::JobDispatcher@16-111
+- pattern_id: SID_compute_generic_d5cb98df
+  canonical_signature: compute.generic > io.network.read
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 2'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - orchestrator/scheduling/job_dispatcher.py::__init__@19-24
+- pattern_id: SID_compute_generic_99cac706
+  canonical_signature: compute.generic > compute.generic > compute.generic > io.file.write
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 5'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - orchestrator/scheduling/job_dispatcher.py::_pop_backlog_seed_configs@26-40
+- pattern_id: SID_io_file_write_28f4ee5e
+  canonical_signature: io.file.write > state.mutate > compute.generic > io.network.read
+    > io.network.read > compute.generic > compute.generic > compute.generic > io.file.write
+    > compute.generic > state.mutate > compute.generic > compute.generic > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 15'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/scheduling/job_dispatcher.py::dispatch_generation@42-103
+- pattern_id: SID_compute_generic_28a559f2
+  canonical_signature: compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 1'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/scheduling/job_dispatcher.py::get_queue_depth@105-107
+- pattern_id: SID_compute_generic_e083f185
+  canonical_signature: compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 1'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - orchestrator/scheduling/job_dispatcher.py::peek_pending_jobs@109-111
+- pattern_id: SID_compute_generic_35139b24
+  canonical_signature: compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 2'
+  occurrences: 3
+  highest_risk: CRITICAL
+  example_nodes:
+  - predator_sweep.py::_connect@31-36
+  - fss_scaling_analyzer.py::_connect@66-71
+  - orchestrator/scheduling/queue_manager.py::_connect_queue@224-229
+- pattern_id: SID_compute_generic_8b40467f
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 8'
+  occurrences: 2
+  highest_risk: CRITICAL
+  example_nodes:
+  - predator_sweep.py::_execute_with_retry@39-53
+  - backlog_orchestrator.py::_execute_with_retry@98-122
+- pattern_id: SID_compute_generic_b241f072
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 4'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - predator_sweep.py::generate_micro_mutation@55-61
+- pattern_id: SID_compute_generic_50afd40e
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > io.network.read > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 7'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - predator_sweep.py::load_target_params@63-89
+- pattern_id: SID_compute_generic_acbb59ba
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > state.mutate > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 8'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - predator_sweep.py::enqueue_mutation_batch@92-116
+- pattern_id: SID_compute_transform_7ff3aa17
+  canonical_signature: compute.transform > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > io.network.read > compute.transform > compute.generic > security.crypto
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 13'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - predator_sweep.py::main@118-138
+- pattern_id: SID_compute_generic_8e3cfba5
+  canonical_signature: compute.generic > io.network.read
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 2'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - orchestrator/schema_utils.py::_safe_add_columns@10-15
+- pattern_id: SID_compute_generic_9d479d17
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > io.network.read > state.mutate
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 6'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - orchestrator/schema_utils.py::get_column_set@18-28
+- pattern_id: SID_compute_generic_ea4914f7
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > io.network.read > state.mutate
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 7'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/schema_utils.py::ensure_ledger_ready@31-61
+- pattern_id: SID_compute_generic_7f67411d
+  canonical_signature: compute.generic > compute.generic > compute.generic > state.mutate
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 12'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/schema_utils.py::initialize_ledger_schema@64-294
+- pattern_id: SID_compute_generic_317dc815
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > state.mutate > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 15'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/schema_utils.py::initialize_queue_schema@297-412
+- pattern_id: SID_io_file_read_3296399d
+  canonical_signature: io.file.read > compute.generic > state.mutate > compute.generic
+    > compute.generic > io.file.write > compute.generic > compute.generic > io.network.read
+    > compute.generic > io.network.read > compute.generic > compute.generic > compute.generic
+    > compute.generic > io.file.read > io.file.read > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 19'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/schema_utils.py::migrate_json_queue_to_sqlite@415-540
+- pattern_id: SID_compute_generic_54e0fd4b
+  canonical_signature: compute.generic > io.file.read > io.file.read
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 3'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - orchestrator/schema_utils.py::_read_json@451-458
+- pattern_id: SID_compute_generic_45062e04
+  canonical_signature: compute.generic > compute.generic > io.file.read > compute.generic
+    > compute.simulation > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > io.network.read > io.network.read > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > io.file.read > io.file.write
+    > compute.generic > compute.generic > io.file.read > compute.generic > compute.generic
+    > compute.simulation > compute.generic > state.mutate > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 35'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/storage/artifact_bleed_manager.py::ArtifactBleedManager@21-163
+- pattern_id: SID_compute_generic_c3b6be86
+  canonical_signature: compute.generic > compute.generic > io.file.read > compute.generic
+    > io.network.read > io.network.read > compute.generic > state.mutate > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 9'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - orchestrator/storage/artifact_bleed_manager.py::__init__@24-43
+- pattern_id: SID_compute_generic_8f736ad8
+  canonical_signature: compute.generic > compute.generic > compute.generic > io.network.read
+    > compute.generic > compute.generic > io.file.read > compute.generic > io.file.read
+    > compute.simulation > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 13'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/storage/artifact_bleed_manager.py::_resolve_archive_dir@45-65
+- pattern_id: SID_io_network_read_84dcebe9
+  canonical_signature: io.network.read > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 8'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - orchestrator/storage/artifact_bleed_manager.py::_cleanup_stale_part_files@67-86
+- pattern_id: SID_compute_generic_7080c342
+  canonical_signature: compute.generic > compute.generic > io.file.write > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 4'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - orchestrator/storage/artifact_bleed_manager.py::queue_for_bleed@88-107
+- pattern_id: SID_compute_generic_bba75d5b
+  canonical_signature: compute.generic > compute.simulation > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > io.file.write > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 15'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - orchestrator/storage/artifact_bleed_manager.py::_bleed_artifact@109-152
+- pattern_id: SID_compute_simulation_bdc9bfb0
+  canonical_signature: compute.simulation > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 3'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - orchestrator/storage/artifact_bleed_manager.py::get_bleed_status@154-163
+- pattern_id: SID_general operator_c65e9dde
+  canonical_signature: general operator
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 0'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - fss_scaling_analyzer.py::poly_surface@48-51
+- pattern_id: SID_compute_generic_8cfbd520
+  canonical_signature: compute.generic > compute.generic > compute.generic > io.file.write
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 5'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - fss_scaling_analyzer.py::get_prime_targets@53-63
+- pattern_id: SID_compute_generic_03fbfb07
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > io.file.read > compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 9'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - fss_scaling_analyzer.py::_read_sql_with_retry@74-85
+- pattern_id: SID_compute_generic_92d879b4
+  canonical_signature: compute.generic > compute.generic > io.file.read > compute.generic
+    > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 6'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - fss_scaling_analyzer.py::_fetch_elites@87-107
+- pattern_id: SID_compute_generic_0041ca11
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > io.network.read > compute.generic > compute.generic > compute.generic
+    > io.file.write > compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 14'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - fss_scaling_analyzer.py::_predict_candidate@110-154
+- pattern_id: SID_compute_generic_fb01257d
+  canonical_signature: compute.generic > compute.generic > compute.generic > state.mutate
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 5'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - fss_scaling_analyzer.py::enqueue_fss_candidate@157-169
+- pattern_id: SID_compute_transform_e7f43d5f
+  canonical_signature: compute.transform > io.network.read > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.transform > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 11'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - fss_scaling_analyzer.py::main@172-192
+- pattern_id: SID_compute_generic_f14dd660
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 4'
+  occurrences: 2
+  highest_risk: CRITICAL
+  example_nodes:
+  - gravity/unified_omega.py::_as_bool@25-30
+  - worker_cupy.py::_as_bool@39-44
+- pattern_id: SID_compute_generic_aaabf176
+  canonical_signature: compute.generic > compute.generic > compute.generic > io.network.read
+    > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 7'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - gravity/unified_omega.py::_resolve_mu_sigma@33-63
+- pattern_id: SID_compute_generic_bf187a69
+  canonical_signature: compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 1'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - gravity/unified_omega.py::_as_xp_float64@66-67
+- pattern_id: SID_compute_generic_9a09e47e
+  canonical_signature: compute.generic > compute.generic > compute.generic > io.file.write
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 5'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - gravity/unified_omega.py::_softplus@70-71
+- pattern_id: SID_compute_generic_958d79a1
+  canonical_signature: compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 2'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - gravity/unified_omega.py::_smooth_min_with_derivative@74-79
+- pattern_id: SID_compute_generic_93ee32f4
+  canonical_signature: compute.generic > compute.generic > io.file.write > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 5'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - gravity/unified_omega.py::_soft_clip_log_with_derivative@82-103
+- pattern_id: SID_compute_generic_04951f31
+  canonical_signature: compute.generic > compute.generic > compute.simulation > compute.generic
+    > io.file.write > compute.generic > compute.generic > compute.generic > io.network.read
+    > io.network.read > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 12'
+  occurrences: 2
+  highest_risk: CRITICAL
+  example_nodes:
+  - gravity/unified_omega.py::derive_stable_conformal_factor@106-157
+  - gravity/unified_omega.py::derive_stable_conformal_factor_with_gradient@160-210
+- pattern_id: SID_compute_generic_93b5270f
+  canonical_signature: compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 3'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - plugins/visualizers/visual_analysis_suite.py::_compute_dynamic_threshold@29-31
+- pattern_id: SID_compute_generic_a5a7f99a
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 8'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - plugins/visualizers/visual_analysis_suite.py::_filter_small_components@34-46
+- pattern_id: SID_io_file_read_6127d736
+  canonical_signature: io.file.read > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 2'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - plugins/visualizers/visual_analysis_suite.py::_load_sse_history@49-58
+- pattern_id: SID_compute_generic_20e38511
+  canonical_signature: compute.generic > io.network.write > compute.transform > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 13'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - plugins/visualizers/visual_analysis_suite.py::extract_mesh_and_metrics@61-78
+- pattern_id: SID_compute_generic_aa7aaab1
+  canonical_signature: compute.generic > ui.render > io.file.read > compute.generic
+    > compute.generic > state.mutate > compute.generic > compute.generic > compute.generic
+    > compute.generic > io.file.read > io.file.write > compute.generic > ui.render
+    > compute.generic > state.mutate > io.file.write > state.mutate > io.file.write
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 19'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - plugins/visualizers/visual_analysis_suite.py::render_single_run@81-115
+- pattern_id: SID_compute_generic_06cd1d98
+  canonical_signature: compute.generic > compute.generic > ui.render > compute.generic
+    > compute.generic > compute.generic > state.mutate > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > io.file.read
+    > compute.generic > io.file.read > io.file.write > compute.generic > ui.render
+    > compute.generic > state.mutate > io.file.write > compute.generic > state.mutate
+    > ui.render > state.mutate > io.file.write
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 27'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - plugins/visualizers/visual_analysis_suite.py::render_comparison_animation@118-184
+- pattern_id: SID_compute_generic_fa4dd7eb
+  canonical_signature: compute.generic > compute.generic > io.file.write > compute.generic
+    > io.file.write > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 6'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - plugins/visualizers/visual_analysis_suite.py::compute_topology_metrics@187-209
+- pattern_id: SID_state_mutate_4bf5ee84
+  canonical_signature: state.mutate > compute.generic > compute.generic > io.network.read
+    > io.network.read > io.network.read > compute.generic > compute.generic > compute.generic
+    > compute.generic > io.file.write > compute.generic > compute.generic > io.file.write
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 14'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - plugins/visualizers/visual_analysis_suite.py::stitch_gifs_side_by_side@212-233
+- pattern_id: SID_compute_transform_01d78a1a
+  canonical_signature: compute.transform > compute.generic > compute.transform > compute.transform
+    > io.network.write > compute.generic > compute.transform > io.file.write > ui.render
+    > ui.render > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 11'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - plugins/visualizers/visual_analysis_suite.py::main@236-284
+- pattern_id: SID_compute_generic_15ddb199
+  canonical_signature: compute.generic > io.file.read > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.validation > io.file.write
+    > compute.generic > compute.generic > state.mutate > compute.generic > compute.generic
+    > compute.generic > io.file.write > compute.generic > compute.generic > compute.generic
+    > io.network.read > compute.generic > io.network.read > io.network.read > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > state.mutate
+    > compute.generic > io.file.read > io.file.write > io.file.write > io.file.read
+    > io.file.read > io.network.write > compute.simulation > compute.generic > compute.generic
+    > state.mutate > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 42'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/result_processor.py::ResultProcessor@22-415
+- pattern_id: SID_io_network_read_be709941
+  canonical_signature: io.network.read
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 1'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - orchestrator/result_processor.py::__init__@25-30
+- pattern_id: SID_compute_generic_0667582d
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.validation > io.file.write > compute.generic > compute.generic > compute.generic
+    > io.network.read > compute.generic > io.file.write > io.file.write > io.file.read
+    > compute.generic > state.mutate > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 18'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/result_processor.py::process_result@32-119
+- pattern_id: SID_io_network_read_bb67b74f
+  canonical_signature: io.network.read > io.network.write > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 3'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - orchestrator/result_processor.py::trigger_champion_visual_async@121-132
+- pattern_id: SID_compute_generic_57faaff3
+  canonical_signature: compute.generic > state.mutate > compute.generic > compute.generic
+    > compute.generic > compute.generic > io.network.read > compute.generic > io.network.read
+    > compute.generic > compute.generic > compute.generic > state.mutate > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 15'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - orchestrator/result_processor.py::_write_worker_result_to_ledger@134-221
+- pattern_id: SID_compute_generic_b8414e9e
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > io.network.read > compute.generic > compute.generic > io.file.read
+    > io.file.read > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 12'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/result_processor.py::_validate_result@223-282
+- pattern_id: SID_compute_generic_5bb0a1b3
+  canonical_signature: compute.generic > io.file.read > compute.generic > compute.generic
+    > io.network.read > compute.generic > compute.simulation > compute.generic > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 10'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - orchestrator/result_processor.py::_trigger_visual_observer_async@284-332
+- pattern_id: SID_compute_generic_38b8c1fe
+  canonical_signature: compute.generic > io.file.read > io.network.read > compute.generic
+    > compute.simulation > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 7'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - orchestrator/result_processor.py::_trigger_predator_sweep_async@334-368
+- pattern_id: SID_compute_generic_eb031225
+  canonical_signature: compute.generic > state.mutate > compute.generic > compute.generic
+    > io.file.write > compute.generic > compute.generic > io.network.read
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 8'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - orchestrator/result_processor.py::_store_result@370-409
+- pattern_id: SID_compute_generic_40b54288
+  canonical_signature: compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 1'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - orchestrator/result_processor.py::_persist_hunter_state@411-415
+- pattern_id: SID_io_file_read_36c1fba2
+  canonical_signature: io.file.read > io.file.write > compute.generic > state.mutate
+    > compute.generic > io.network.read > compute.generic > io.file.read > compute.transform
+    > io.file.write > compute.generic > state.mutate > io.file.write > io.file.write
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 14'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - tools/intelligent_verifier.py::rerun_from_ledgers@13-57
+- pattern_id: SID_compute_generic_9020e821
+  canonical_signature: compute.generic > compute.generic > io.file.write > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 5'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - tools/intelligent_verifier.py::run_step@79-89
+- pattern_id: SID_compute_generic_3d19c42a
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 5'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - tools/intelligent_verifier.py::generate_nearby_config@91-98
+- pattern_id: SID_compute_generic_1d5f1a26
+  canonical_signature: compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 1'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - tools/intelligent_verifier.py::run_worker_and_validation@100-109
+- pattern_id: SID_io_network_read_42dccd19
+  canonical_signature: io.network.read > compute.generic > compute.generic > compute.generic
+    > io.file.read > compute.generic > io.file.read
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 7'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - tools/intelligent_verifier.py::parse_provenance@111-131
+- pattern_id: SID_compute_generic_bb367b45
+  canonical_signature: compute.generic > compute.generic > io.file.write
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 3'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - tools/intelligent_verifier.py::verify_contracts@133-154
+- pattern_id: SID_compute_generic_84dd4301
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.transform
+    > io.file.write > compute.generic > compute.validation
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 7'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - tools/intelligent_verifier.py::run_golden@156-168
+- pattern_id: SID_io_file_write_7c8ece86
+  canonical_signature: io.file.write > io.file.write > compute.generic > compute.generic
+    > compute.generic > security.crypto > compute.generic > io.file.read > compute.transform
+    > io.file.write > compute.generic > compute.generic > state.mutate > compute.generic
+    > state.mutate > compute.validation > io.file.write > io.file.write
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 18'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - tools/intelligent_verifier.py::run_sweep@170-208
+- pattern_id: SID_compute_generic_2ef44176
+  canonical_signature: compute.generic > compute.transform > io.file.write > compute.generic
+    > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 6'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - tools/intelligent_verifier.py::main@210-220
+- pattern_id: SID_general operator_49f45aaf
+  canonical_signature: general operator
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 0'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - orchestrator/contracts.py::_is_power_of_two@11-12
+- pattern_id: SID_compute_generic_775fb4b7
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 4'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - orchestrator/contracts.py::SimulationConfig@15-43
+- pattern_id: SID_compute_generic_e9018568
+  canonical_signature: compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 3'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - orchestrator/contracts.py::_validate_n_grid@26-29
+- pattern_id: SID_compute_generic_e4cf9ac9
+  canonical_signature: compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 2'
+  occurrences: 3
+  highest_risk: LOW
+  example_nodes:
+  - orchestrator/contracts.py::_validate_t_steps@33-36
+  - orchestrator/contracts.py::_validate_positive_float@40-43
+  - orchestrator/contracts.py::_validate_result_shape@153-159
+- pattern_id: SID_compute_generic_e4ae8813
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > io.file.write > compute.generic > compute.generic > compute.generic
+    > compute.generic > io.file.write > compute.validation > compute.generic > state.mutate
+    > security.crypto > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 17'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - orchestrator/contracts.py::JobManifest@46-129
+- pattern_id: SID_compute_generic_a9151b04
+  canonical_signature: compute.generic > compute.generic > io.file.write > compute.validation
+    > compute.generic > state.mutate
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 6'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - orchestrator/contracts.py::_align_params@67-84
+- pattern_id: SID_compute_generic_29a6ad66
+  canonical_signature: compute.generic > compute.generic > compute.generic > io.file.write
+    > compute.generic > compute.generic > compute.generic > security.crypto > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 10'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/contracts.py::from_params@87-129
+- pattern_id: SID_compute_generic_78c14a20
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 4'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - orchestrator/contracts.py::JobResult@132-159
+- pattern_id: SID_compute_generic_3862a84a
+  canonical_signature: compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 1'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - orchestrator/contracts.py::WorkerTelemetry@162-168
+- pattern_id: SID_compute_generic_4bf167b1
+  canonical_signature: compute.generic > compute.validation > compute.validation
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 3'
+  occurrences: 2
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/contracts.py::parse_job_manifest_payload@171-176
+  - orchestrator/contracts.py::parse_job_result_payload@179-184
+- pattern_id: SID_io_file_read_3a4688e8
+  canonical_signature: io.file.read
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 1'
+  occurrences: 2
+  highest_risk: LOW
+  example_nodes:
+  - orchestrator/contracts.py::is_valid_manifest_payload@187-192
+  - orchestrator/contracts.py::is_valid_result_payload@195-200
+- pattern_id: SID_compute_generic_16c0869f
+  canonical_signature: compute.generic > io.network.read > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 3'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - quantulemapper_real.py::_to_numpy@39-43
+- pattern_id: SID_compute_generic_54ab3e71
+  canonical_signature: compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 2'
+  occurrences: 3
+  highest_risk: CRITICAL
+  example_nodes:
+  - quantulemapper_real.py::_get_window_3d@49-65
+  - aste_hunter.py::_get_connection@149-155
+  - backlog_orchestrator.py::_get_connection@91-96
+- pattern_id: SID_compute_transform_ec858a88
+  canonical_signature: compute.transform > compute.transform > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 3'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - quantulemapper_real.py::_get_freq_coords@67-77
+- pattern_id: SID_io_network_read_3d250154
+  canonical_signature: io.network.read > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 6'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - quantulemapper_real.py::_get_shell_map@79-106
+- pattern_id: SID_compute_generic_9bf9ac50
+  canonical_signature: compute.generic > io.network.read > io.network.read > compute.generic
+    > compute.generic > compute.transform > compute.transform > compute.generic >
+    compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 17'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - quantulemapper_real.py::compute_power_spectrum@112-171
+- pattern_id: SID_io_network_read_7b42cf75
+  canonical_signature: io.network.read > compute.generic > io.network.read > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 9'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - quantulemapper_real.py::_radial_profile_shell_map@177-198
+- pattern_id: SID_io_network_read_29997608
+  canonical_signature: io.network.read > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 16'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - quantulemapper_real.py::_radial_profile_stream@200-243
+- pattern_id: SID_compute_transform_73abb241
+  canonical_signature: compute.transform > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 4'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - quantulemapper_real.py::radial_profile@245-254
+- pattern_id: SID_compute_generic_e855f043
+  canonical_signature: compute.generic > compute.generic > compute.transform > compute.generic
+    > compute.generic > compute.transform > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 8'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - quantulemapper_real.py::detect_peaks@260-290
+- pattern_id: SID_compute_generic_034900d3
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.transform > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 6'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - quantulemapper_real.py::fit_scale_factor@296-317
+- pattern_id: SID_compute_generic_d09f3210
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.transform
+    > compute.transform > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 10'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - quantulemapper_real.py::detect_bragg_peaks@323-332
+- pattern_id: SID_compute_generic_b4193f14
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.transform > compute.transform > compute.generic > compute.generic >
+    compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 14'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - quantulemapper_real.py::validate_prime_bragg_lattice@334-346
+- pattern_id: SID_compute_generic_1c52c343
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.transform
+    > io.network.read > compute.generic > compute.transform > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 9'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - quantulemapper_real.py::spectral_phase_scramble@352-366
+- pattern_id: SID_compute_generic_1bb5fc88
+  canonical_signature: compute.generic > io.file.write > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 3'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - quantulemapper_real.py::spectral_entropy@368-371
+- pattern_id: SID_compute_generic_5980100b
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > io.file.write > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 6'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - quantulemapper_real.py::spectral_slope@373-380
+- pattern_id: SID_compute_generic_353d9209
+  canonical_signature: compute.generic > compute.generic > io.network.write > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 8'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - quantulemapper_real.py::extract_isotropic_peaks@386-397
+- pattern_id: SID_state_mutate_38793782
+  canonical_signature: state.mutate > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.transform > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 8'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - quantulemapper_real.py::calculate_bipartite_sse@399-434
+- pattern_id: SID_compute_generic_61776bf4
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.transform
+    > io.network.write > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > security.crypto > security.crypto > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.validation > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 27'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - quantulemapper_real.py::prime_log_sse@436-553
+- pattern_id: SID_compute_generic_0a06e462
+  canonical_signature: compute.generic > compute.generic > io.file.write > compute.generic
+    > io.file.read > compute.generic > compute.generic > compute.generic > io.file.read
+    > io.file.read > compute.generic > compute.validation > compute.generic > compute.generic
+    > compute.generic > io.file.read > compute.generic > compute.generic > compute.generic
+    > compute.generic > io.file.write > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > io.file.write > io.file.write
+    > io.file.read > compute.generic > compute.generic > compute.generic > io.network.read
+    > compute.generic > compute.transform > compute.generic > io.network.read > io.network.read
+    > io.network.read > io.network.read > io.network.read > io.network.read > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > io.file.read > io.file.write > compute.generic > compute.generic
+    > io.file.read > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.simulation > compute.simulation
+    > compute.generic > state.mutate > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 80'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/orchestrator_engine.py::OrchestratorEngine@37-533
+- pattern_id: SID_compute_generic_43e711a1
+  canonical_signature: compute.generic > compute.generic > io.file.write > compute.generic
+    > compute.generic > compute.generic > io.file.read > compute.generic > compute.generic
+    > io.network.read > io.network.read > state.mutate > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 13'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/orchestrator_engine.py::__init__@43-95
+- pattern_id: SID_io_file_read_d6c8389b
+  canonical_signature: io.file.read > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 6'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - orchestrator/orchestrator_engine.py::start@97-113
+- pattern_id: SID_compute_generic_83ba4c44
+  canonical_signature: compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 2'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - orchestrator/orchestrator_engine.py::stop@115-120
+- pattern_id: SID_compute_generic_9d4e4e69
+  canonical_signature: compute.generic > compute.validation > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > io.file.write > compute.generic > compute.generic > compute.generic > compute.transform
+    > io.network.read > io.network.read > compute.generic > compute.generic > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 20'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/orchestrator_engine.py::_orchestration_loop@122-195
+- pattern_id: SID_io_file_read_19c5b30c
+  canonical_signature: io.file.read > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > io.network.read
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 15'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - orchestrator/orchestrator_engine.py::_trigger_batch_validation@197-232
+- pattern_id: SID_compute_generic_9b9c06d3
+  canonical_signature: compute.generic > compute.generic > compute.generic > io.network.read
+    > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 6'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - orchestrator/orchestrator_engine.py::_check_disk_pressure@234-249
+- pattern_id: SID_io_file_write_06da34c7
+  canonical_signature: io.file.write > compute.generic > compute.generic > compute.generic
+    > compute.generic > io.network.read > io.network.read > io.network.read > compute.generic
+    > compute.generic > io.file.read > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 19'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/orchestrator_engine.py::_process_pending_results@251-322
+- pattern_id: SID_compute_generic_291a5069
+  canonical_signature: compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 2'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - orchestrator/orchestrator_engine.py::_is_generation_complete@324-333
+- pattern_id: SID_io_file_write_7e86cc29
+  canonical_signature: io.file.write > compute.generic > compute.generic > io.network.read
+    > compute.generic > io.file.write
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 6'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/orchestrator_engine.py::_advance_generation@335-349
+- pattern_id: SID_compute_generic_36acd8fd
+  canonical_signature: compute.generic > io.file.read > compute.generic > compute.generic
+    > compute.generic > compute.simulation > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 8'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - orchestrator/orchestrator_engine.py::_trigger_fss_predictor_async@351-385
+- pattern_id: SID_compute_generic_f5632228
+  canonical_signature: compute.generic > io.network.read
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 2'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - orchestrator/orchestrator_engine.py::_generate_candidate_configs@387-392
+- pattern_id: SID_compute_generic_b117816f
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > io.network.read > io.network.read > compute.generic > compute.generic > compute.generic
+    > compute.generic > state.mutate > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 12'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/orchestrator_engine.py::_run_garbage_collection@394-431
+- pattern_id: SID_compute_generic_c96d7d8b
+  canonical_signature: compute.generic > io.network.read > io.file.write > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 5'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/orchestrator_engine.py::_recover_stale_workers@433-448
+- pattern_id: SID_compute_validation_5bd3d6aa
+  canonical_signature: compute.validation > io.network.read > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 3'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - orchestrator/orchestrator_engine.py::get_status@450-461
+- pattern_id: SID_compute_generic_c0ab3902
+  canonical_signature: compute.generic > compute.generic > io.network.read > compute.generic
+    > compute.generic > io.file.read > io.file.read > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 8'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/orchestrator_engine.py::_load_checkpoint@463-478
+- pattern_id: SID_io_file_read_aa562d37
+  canonical_signature: io.file.read
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 1'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - orchestrator/orchestrator_engine.py::_load_state@480-482
+- pattern_id: SID_io_file_write_9f8671ad
+  canonical_signature: io.file.write > io.file.read > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 4'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - orchestrator/orchestrator_engine.py::_save_state_atomic@484-497
+- pattern_id: SID_io_file_read_77005b2d
+  canonical_signature: io.file.read > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 4'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/orchestrator_engine.py::_initialize_ledger_schema@499-507
+- pattern_id: SID_compute_generic_87a81275
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.simulation
+    > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 6'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/orchestrator_engine.py::_refresh_active_paths@509-533
+- pattern_id: SID_general operator_ab9b3661
+  canonical_signature: general operator
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 0'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - config_utils.py::ActiveRunPointerError@18-19
+- pattern_id: SID_compute_generic_367522ad
+  canonical_signature: compute.generic > compute.simulation
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 2'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - config_utils.py::_repo_root@22-23
+- pattern_id: SID_compute_generic_5a7bc691
+  canonical_signature: compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 1'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - config_utils.py::_pointer_path@26-27
+- pattern_id: SID_compute_generic_8f6ff1f3
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 4'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - config_utils.py::sanitize_hunt_name@30-35
+- pattern_id: SID_compute_generic_f638b4f7
+  canonical_signature: compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 1'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - config_utils.py::generation_dir_name@38-39
+- pattern_id: SID_compute_generic_056816a3
+  canonical_signature: compute.generic > compute.generic > compute.simulation
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 3'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - config_utils.py::resolve_generation_dir@42-43
+- pattern_id: SID_compute_generic_e863de96
+  canonical_signature: compute.generic > compute.transform > compute.generic > compute.generic
+    > compute.simulation > compute.simulation > compute.generic > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 9'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - config_utils.py::create_session_workspace@46-70
+- pattern_id: SID_compute_generic_923d8663
+  canonical_signature: compute.generic > compute.generic > compute.generic > io.network.read
+    > compute.generic > compute.generic > compute.generic > compute.simulation > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 10'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - config_utils.py::validate_active_run_pointer@73-100
+- pattern_id: SID_compute_generic_b0133aab
+  canonical_signature: compute.generic > compute.generic > compute.generic > io.file.read
+    > io.file.read > compute.validation
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 6'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - config_utils.py::read_active_run_pointer@103-115
+- pattern_id: SID_compute_generic_746bc9e2
+  canonical_signature: compute.generic > io.file.write > io.file.read > compute.generic
+    > compute.validation > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 6'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - config_utils.py::write_active_run_pointer_atomic@118-125
+- pattern_id: SID_compute_generic_943bd191
+  canonical_signature: compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 3'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - config_utils.py::clear_active_run_pointer@128-131
+- pattern_id: SID_compute_generic_4dd5ae28
+  canonical_signature: compute.generic > compute.generic > compute.generic > io.file.read
+    > compute.simulation > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 6'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - config_utils.py::resolve_active_session_paths@134-153
+- pattern_id: SID_io_file_write_6da4fcd5
+  canonical_signature: io.file.write > compute.generic > compute.generic > security.crypto
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 4'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - config_utils.py::generate_canonical_hash@155-161
+- pattern_id: SID_compute_generic_e01c4c76
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 4'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - config_utils.py::normalize_run_mode@164-169
+- pattern_id: SID_compute_generic_6d4ad3e5
+  canonical_signature: compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 3'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - config_utils.py::normalize_backlog_source@172-177
+- pattern_id: SID_compute_generic_ee0d9cc9
+  canonical_signature: compute.generic > state.mutate > state.mutate > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 4'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - config_utils.py::_dedupe_paths@180-189
+- pattern_id: SID_compute_generic_75b408da
+  canonical_signature: compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 1'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - config_utils.py::_path_within_root@192-197
+- pattern_id: SID_compute_generic_51ce4083
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > state.mutate > compute.generic > compute.generic > compute.generic
+    > compute.generic > io.file.write > compute.simulation > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 13'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - config_utils.py::resolve_backlog_source_path@200-238
+- pattern_id: SID_compute_generic_9d7525e5
+  canonical_signature: compute.generic > compute.simulation
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 2'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - config_utils.py::run_manifest_path@245-247
+- pattern_id: SID_compute_generic_743d359b
+  canonical_signature: compute.generic > compute.generic > compute.simulation
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 3'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - config_utils.py::ensure_generation_dir@250-264
+- pattern_id: SID_compute_generic_b9d676c3
+  canonical_signature: compute.generic > compute.generic > io.file.write > io.network.read
+    > compute.transform > compute.generic > io.file.read > compute.generic > compute.simulation
+    > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 12'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - config_utils.py::init_run_manifest@267-304
+- pattern_id: SID_compute_generic_b9ed5741
+  canonical_signature: compute.generic > state.mutate > io.file.write > compute.generic
+    > io.network.read > compute.transform > io.file.read > compute.generic > io.file.read
+    > compute.generic > compute.generic > compute.transform > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 13'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - config_utils.py::update_run_manifest_generation@307-355
+- pattern_id: SID_compute_generic_12b497ee
+  canonical_signature: compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 3'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - worker_cupy.py::calculate_cov_laplacian_fused@47-61
+- pattern_id: SID_compute_generic_b8049770
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 4'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - worker_cupy.py::fused_compute_rho@70-73
+- pattern_id: SID_compute_generic_da37a537
+  canonical_signature: compute.generic > compute.generic > compute.generic > io.file.write
+    > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 7'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - worker_cupy.py::fused_process_omega@76-87
+- pattern_id: SID_compute_generic_2caccaa3
+  canonical_signature: compute.generic > compute.generic > io.file.write > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 4'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - worker_cupy.py::fused_scale_derivative@90-105
+- pattern_id: SID_compute_generic_f3d2448b
+  canonical_signature: compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 1'
+  occurrences: 2
+  highest_risk: HIGH
+  example_nodes:
+  - worker_cupy.py::compute_kt_stage_base@108-109
+  - worker_cupy.py::compute_kt_stage_c@112-113
+- pattern_id: SID_compute_generic_05c2382e
+  canonical_signature: compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 1'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - worker_cupy.py::combine_kt_etdrk4@116-117
+- pattern_id: SID_compute_transform_1416d8d9
+  canonical_signature: compute.transform > io.network.read > io.network.read > compute.generic
+    > compute.generic > compute.generic > compute.generic > state.mutate > compute.generic
+    > compute.transform > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.transform > compute.transform > compute.generic > compute.generic >
+    compute.generic > io.network.write > io.network.write > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.transform
+    > compute.transform > compute.transform > compute.generic > compute.generic >
+    io.network.write > compute.generic > compute.generic > io.network.read > io.network.read
+    > io.network.read > io.network.read > io.network.read > compute.generic > compute.transform
+    > compute.transform > compute.transform > compute.generic > compute.generic >
+    compute.generic > compute.generic > compute.generic > io.file.write > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 65'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - worker_cupy.py::ETDRK4Solver@123-525
+- pattern_id: SID_compute_generic_52f1ddab
+  canonical_signature: compute.generic > state.mutate > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.transform
+    > compute.generic > compute.generic > io.network.read > io.network.read > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 20'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - worker_cupy.py::__init__@124-257
+- pattern_id: SID_io_network_read_01185375
+  canonical_signature: io.network.read > io.network.read > compute.generic > compute.generic
+    > compute.generic > io.network.read > io.network.read > io.network.read > io.network.read
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 18'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - worker_cupy.py::_init_distributed_backend@259-322
+- pattern_id: SID_compute_transform_48f28711
+  canonical_signature: compute.transform > compute.generic > compute.transform > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 11'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - worker_cupy.py::_compute_global_mu_sigma@324-367
+- pattern_id: SID_compute_generic_2e21ba51
+  canonical_signature: compute.generic > compute.transform
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 2'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - worker_cupy.py::fft_single@369-371
+- pattern_id: SID_compute_generic_514105fc
+  canonical_signature: compute.generic > compute.transform
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 2'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - worker_cupy.py::ifft_single@373-375
+- pattern_id: SID_compute_transform_5a898646
+  canonical_signature: compute.transform
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 1'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - worker_cupy.py::ifft_batch@377-378
+- pattern_id: SID_compute_generic_410c395c
+  canonical_signature: compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 3'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - worker_cupy.py::_update_derivative_filter@380-386
+- pattern_id: SID_state_mutate_853130a6
+  canonical_signature: state.mutate > compute.generic > compute.generic > compute.generic
+    > compute.generic > io.file.write > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 7'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - worker_cupy.py::update_dynamic_filters@388-416
+- pattern_id: SID_compute_generic_033b64ee
+  canonical_signature: compute.generic > compute.generic > compute.transform
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 3'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - worker_cupy.py::update_field_of_affect@418-431
+- pattern_id: SID_compute_generic_34ae7b40
+  canonical_signature: compute.generic > compute.transform > compute.transform > compute.generic
+    > compute.generic > compute.transform > io.network.write > compute.generic > compute.generic
+    > io.network.read > compute.transform > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 12'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - worker_cupy.py::N_op@433-498
+- pattern_id: SID_compute_generic_c536eb58
+  canonical_signature: compute.generic > compute.generic > compute.generic > io.network.write
+    > io.network.write
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 5'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - worker_cupy.py::step@500-525
+- pattern_id: SID_compute_generic_8cc6e7f6
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 6'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - worker_cupy.py::initialize_psi@531-539
+- pattern_id: SID_compute_simulation_3484f58e
+  canonical_signature: compute.simulation > compute.generic > io.network.write > compute.generic
+    > compute.generic > compute.generic > state.mutate > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > state.mutate > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.transform
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > io.network.read > io.network.read > io.network.read > io.network.read > compute.generic
+    > compute.transform > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > io.file.write
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > state.mutate > state.mutate > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 55'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - worker_cupy.py::run_simulation@541-877
+- pattern_id: SID_state_mutate_f6a79afb
+  canonical_signature: state.mutate > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 8'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - worker_cupy.py::extract_params@947-959
+- pattern_id: SID_compute_generic_1ed71d33
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > io.file.write > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 9'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - aste_hunter.py::SpectralManifoldTracker@57-111
+- pattern_id: SID_compute_generic_4c5bc292
+  canonical_signature: compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 2'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - aste_hunter.py::__init__@63-69
+- pattern_id: SID_compute_generic_d7f325f8
+  canonical_signature: compute.generic > compute.generic > io.file.write > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 4'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - aste_hunter.py::train@71-92
+- pattern_id: SID_compute_generic_fecc6372
+  canonical_signature: compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 3'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - aste_hunter.py::predict_parameters@94-111
+- pattern_id: SID_io_file_read_585887ab
+  canonical_signature: io.file.read > compute.generic > compute.generic > io.network.read
+    > io.network.read > compute.generic > compute.generic > compute.generic > state.mutate
+    > compute.generic > compute.generic > compute.generic > compute.generic > state.mutate
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > io.file.write
+    > io.file.read > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.transform > io.network.read > io.network.read > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > io.network.read > io.network.read
+    > io.network.read > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > security.crypto > compute.generic > compute.generic
+    > io.file.read > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > io.file.read > compute.generic > compute.generic > io.file.write
+    > compute.generic > compute.generic > io.file.read > compute.generic > compute.generic
+    > compute.generic > state.mutate > compute.generic > compute.simulation > compute.transform
+    > compute.transform > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 87'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - aste_hunter.py::Hunter@114-1185
+- pattern_id: SID_io_network_read_46049702
+  canonical_signature: io.network.read > compute.generic > compute.generic > io.file.write
+    > compute.generic > io.network.read > io.file.read > io.file.write
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 8'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - aste_hunter.py::export_ledger_to_json@121-133
+- pattern_id: SID_compute_generic_bca35de2
+  canonical_signature: compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 3'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - aste_hunter.py::__init__@135-147
+- pattern_id: SID_compute_generic_2af9680b
+  canonical_signature: compute.generic > compute.generic > compute.generic > io.file.write
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 9'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - aste_hunter.py::execute_with_retry@157-182
+- pattern_id: SID_io_file_read_eaa315df
+  canonical_signature: io.file.read > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 2'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - aste_hunter.py::_init_db@184-187
+- pattern_id: SID_compute_generic_17f468da
+  canonical_signature: compute.generic > compute.generic > io.network.read
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 3'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - aste_hunter.py::fast_harmonic_prefilter@189-227
+- pattern_id: SID_io_network_read_bab861db
+  canonical_signature: io.network.read > compute.generic > compute.generic > io.network.read
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 4'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - aste_hunter.py::get_current_generation@229-235
+- pattern_id: SID_io_network_read_06299705
+  canonical_signature: io.network.read
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 1'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - aste_hunter.py::resume_hunt_state@237-238
+- pattern_id: SID_compute_generic_7b96f6e8
+  canonical_signature: compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 3'
+  occurrences: 2
+  highest_risk: MEDIUM
+  example_nodes:
+  - aste_hunter.py::generate_random_parameters@240-255
+  - aste_hunter.py::generate_sgn_candidate@739-752
+- pattern_id: SID_io_network_read_48aaa775
+  canonical_signature: io.network.read > state.mutate > compute.generic > compute.generic
+    > io.network.read
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 5'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - aste_hunter.py::register_new_jobs@257-277
+- pattern_id: SID_io_network_read_a18380d8
+  canonical_signature: io.network.read > compute.generic > compute.generic > state.mutate
+    > state.mutate > compute.generic > compute.generic > io.file.write > compute.generic
+    > compute.generic > compute.generic > compute.transform > io.network.read > compute.generic
+    > io.network.read > compute.generic > compute.generic > io.file.read > compute.generic
+    > io.file.read > io.file.write > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 22'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - aste_hunter.py::process_generation_results@279-470
+- pattern_id: SID_io_network_read_29b51ee8
+  canonical_signature: io.network.read > compute.generic > compute.generic > compute.generic
+    > io.network.read
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 5'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - aste_hunter.py::get_best_run@472-486
+- pattern_id: SID_state_mutate_fc289371
+  canonical_signature: state.mutate > compute.generic > io.network.read > compute.generic
+    > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 6'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - aste_hunter.py::_get_valid_breeders@488-495
+- pattern_id: SID_io_file_read_f514f502
+  canonical_signature: io.file.read > io.network.read > compute.generic > state.mutate
+    > compute.generic > state.mutate > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > io.network.read > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > io.file.read > state.mutate > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 23'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - aste_hunter.py::detect_spectral_basins@498-660
+- pattern_id: SID_io_network_read_f1a16d14
+  canonical_signature: io.network.read > compute.generic > io.file.read
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 3'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - aste_hunter.py::get_sgn_historical_data@663-678
+- pattern_id: SID_compute_generic_18ea9209
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > io.file.write
+    > compute.simulation > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 12'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - aste_hunter.py::estimate_local_error_gradient@680-737
+- pattern_id: SID_io_network_read_296e9b0c
+  canonical_signature: io.network.read > io.network.read > state.mutate > compute.generic
+    > compute.generic > state.mutate > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > io.network.read
+    > io.network.read > io.network.read > compute.generic > compute.generic > security.crypto
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > io.file.write > compute.generic > compute.generic
+    > io.file.read > compute.generic > compute.generic > compute.transform > compute.transform
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 47'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - aste_hunter.py::generate_next_generation@755-1154
+- pattern_id: SID_io_network_read_4ad7add3
+  canonical_signature: io.network.read
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 1'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - aste_hunter.py::dominates@851-869
+- pattern_id: SID_compute_generic_ff71d0ac
+  canonical_signature: compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 3'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - aste_hunter.py::tournament_select@948-960
+- pattern_id: SID_compute_generic_2784ac13
+  canonical_signature: compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 2'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - aste_hunter.py::clamp@970-974
+- pattern_id: SID_io_network_read_11a21018
+  canonical_signature: io.network.read > state.mutate > compute.generic > compute.generic
+    > io.network.read > io.file.write
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 6'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - aste_hunter.py::add_job@1156-1172
+- pattern_id: SID_io_network_read_e9ce2e4b
+  canonical_signature: io.network.read > state.mutate > compute.generic > compute.generic
+    > io.file.write
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 5'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - aste_hunter.py::record_fitness@1174-1185
+- pattern_id: SID_compute_generic_e2b2e4d6
+  canonical_signature: compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 1'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - backlog_orchestrator.py::BacklogJob@67-72
+- pattern_id: SID_compute_generic_eb2eb4c0
+  canonical_signature: compute.generic > io.network.read > compute.generic > compute.generic
+    > state.mutate > compute.generic > compute.generic > io.file.read > compute.generic
+    > io.network.read > compute.generic > compute.generic > compute.generic > io.file.read
+    > compute.generic > compute.generic > compute.generic > io.file.read > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 24'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - backlog_orchestrator.py::LedgerDB@75-273
+- pattern_id: SID_compute_generic_eac6f13f
+  canonical_signature: compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 1'
+  occurrences: 2
+  highest_risk: LOW
+  example_nodes:
+  - backlog_orchestrator.py::__init__@78-89
+  - app.py::__init__@2441-2443
+- pattern_id: SID_compute_generic_30fccde2
+  canonical_signature: compute.generic > io.network.read > state.mutate > compute.generic
+    > io.file.read > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 6'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - backlog_orchestrator.py::_init_schema@124-146
+- pattern_id: SID_compute_generic_d9b089fd
+  canonical_signature: compute.generic > io.network.read > compute.generic > state.mutate
+    > compute.generic > io.network.read
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 6'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - backlog_orchestrator.py::register_job@148-177
+- pattern_id: SID_compute_generic_a449ac6b
+  canonical_signature: compute.generic > io.network.read > state.mutate > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 4'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - backlog_orchestrator.py::mark_failed@179-187
+- pattern_id: SID_compute_generic_e8c3b752
+  canonical_signature: compute.generic > io.network.read > compute.generic > state.mutate
+    > compute.generic > io.network.read > compute.generic > compute.generic > io.file.read
+    > compute.generic > compute.generic > io.file.read
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 12'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - backlog_orchestrator.py::write_success_from_provenance@189-273
+- pattern_id: SID_compute_generic_8fe2e47b
+  canonical_signature: compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 1'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - backlog_orchestrator.py::_safe_float@276-280
+- pattern_id: SID_compute_transform_15d81c36
+  canonical_signature: compute.transform > compute.generic > compute.generic > io.network.read
+    > state.mutate > state.mutate
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 6'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - backlog_orchestrator.py::_setup_logging@283-290
+- pattern_id: SID_io_file_read_13e89e46
+  canonical_signature: io.file.read > io.file.read
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 2'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - backlog_orchestrator.py::_load_json@293-295
+- pattern_id: SID_compute_generic_07fd1dac
+  canonical_signature: compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 2'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - backlog_orchestrator.py::_strip_config_hash_for_hashing@298-301
+- pattern_id: SID_compute_generic_017bd6b8
+  canonical_signature: compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 1'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - backlog_orchestrator.py::_normalize_job_params@304-310
+- pattern_id: SID_compute_generic_347050da
+  canonical_signature: compute.generic > io.network.read > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 4'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - backlog_orchestrator.py::_flatten_single_params_wrapper@313-319
+- pattern_id: SID_security_crypto_33e8a2af
+  canonical_signature: security.crypto > compute.generic > io.file.write > compute.generic
+    > security.crypto > io.network.read > compute.generic > compute.generic > io.file.read
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 9'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - backlog_orchestrator.py::_resolve_or_create_params_file@322-341
+- pattern_id: SID_io_file_read_1657a68c
+  canonical_signature: io.file.read > compute.generic > io.file.read > compute.generic
+    > compute.generic > compute.generic > io.file.read
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 7'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - backlog_orchestrator.py::_iter_manifest_rows@344-356
+- pattern_id: SID_io_file_write_8a0bdb00
+  canonical_signature: io.file.write > compute.generic > compute.generic > io.file.read
+    > compute.generic > compute.simulation > compute.generic > compute.generic > state.mutate
+    > compute.generic > io.network.read > compute.generic > compute.generic > security.crypto
+    > compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 18'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - backlog_orchestrator.py::_build_jobs_from_manifest@359-437
+- pattern_id: SID_io_file_write_5f2dc95b
+  canonical_signature: io.file.write > io.file.read > compute.generic > compute.simulation
+    > state.mutate > io.network.read > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.transform > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 13'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - backlog_orchestrator.py::_build_jobs_from_config_dir@440-464
+- pattern_id: SID_compute_generic_6f5b80b8
+  canonical_signature: compute.generic > state.mutate > state.mutate
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 3'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - backlog_orchestrator.py::_dedupe_jobs@467-475
+- pattern_id: SID_compute_generic_cf85b32b
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 5'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - backlog_orchestrator.py::_load_backlog_jobs@478-500
+- pattern_id: SID_compute_generic_5f86b4a2
+  canonical_signature: compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 2'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - backlog_orchestrator.py::_scan_runtime_flags@502-507
+- pattern_id: SID_compute_generic_89fffca0
+  canonical_signature: compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 1'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - backlog_orchestrator.py::_run_command@510-518
+- pattern_id: SID_compute_generic_20fc5ba7
+  canonical_signature: compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 2'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - backlog_orchestrator.py::_inspect_h5_schema@521-532
+- pattern_id: SID_compute_generic_78be1009
+  canonical_signature: compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 3'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - backlog_orchestrator.py::_find_provenance_file@535-539
+- pattern_id: SID_compute_generic_68451e51
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > io.network.read > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 12'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - backlog_orchestrator.py::_invoke_artifact_gc@542-575
+- pattern_id: SID_compute_generic_ef38d6f0
+  canonical_signature: compute.generic > io.network.read > io.network.read > io.network.read
+    > compute.generic > compute.generic > compute.generic > compute.generic > state.mutate
+    > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 11'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - backlog_orchestrator.py::_known_live_workers@578-610
+- pattern_id: SID_compute_generic_ac96ce99
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 4'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - backlog_orchestrator.py::_wait_for_worker_daemon@613-621
+- pattern_id: SID_compute_generic_c04c9642
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > io.file.read > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > io.file.write
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 12'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - backlog_orchestrator.py::_process_job_direct@624-696
+- pattern_id: SID_compute_generic_04ff8530
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > io.network.read
+    > io.network.read > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > state.mutate > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > io.file.write
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 23'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - backlog_orchestrator.py::_process_job_daemon@699-792
+- pattern_id: SID_compute_transform_c787b968
+  canonical_signature: compute.transform > compute.generic > compute.generic > io.network.read
+    > io.network.read > compute.generic > compute.transform
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 7'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - backlog_orchestrator.py::_parse_args@794-849
+- pattern_id: SID_compute_generic_ffa7a6b2
+  canonical_signature: compute.generic > compute.generic > compute.generic > io.file.read
+    > compute.transform > compute.generic > compute.generic > io.file.write > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 21'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - backlog_orchestrator.py::main@852-938
+- pattern_id: SID_compute_transform_996f6ecf
+  canonical_signature: compute.transform > compute.generic > compute.generic > io.network.read
+    > state.mutate > state.mutate
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 6'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - validation_pipeline.py::setup_logger@58-66
+- pattern_id: SID_compute_generic_6df181c1
+  canonical_signature: compute.generic > compute.generic > compute.generic > io.file.read
+    > compute.generic > io.network.write > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.transform > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 32'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - validation_pipeline.py::ArtifactLoader@80-258
+- pattern_id: SID_compute_generic_1c0c47b8
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.transform
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 13'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - validation_pipeline.py::_anti_aliased_downsample@82-112
+- pattern_id: SID_compute_generic_c5d20850
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 9'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - validation_pipeline.py::_adaptive_load_dataset@115-128
+- pattern_id: SID_compute_generic_dfacbc1c
+  canonical_signature: compute.generic > compute.generic > compute.generic > io.file.read
+    > io.network.write > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.transform > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 23'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - validation_pipeline.py::load@131-247
+- pattern_id: SID_compute_generic_d1725264
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 7'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - validation_pipeline.py::_compute_tau_c@250-258
+- pattern_id: SID_compute_generic_d8b5d9c9
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > io.network.read > io.network.read > compute.generic > io.file.write > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 9'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - validation_pipeline.py::SpectralFidelityEngine@264-335
+- pattern_id: SID_compute_generic_42f29ab5
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > io.network.read > io.network.read > compute.generic > io.file.write > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 9'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - validation_pipeline.py::run@266-335
+- pattern_id: SID_compute_generic_d532ed26
+  canonical_signature: compute.generic > compute.generic > io.network.read > compute.generic
+    > compute.generic > io.file.read > io.file.read > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 8'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - validation_pipeline.py::ContractEnforcerEngine@341-357
+- pattern_id: SID_compute_generic_1c4534c7
+  canonical_signature: compute.generic > compute.generic > io.network.read > compute.generic
+    > compute.generic > io.file.read > io.file.read > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 8'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - validation_pipeline.py::enforce@343-357
+- pattern_id: SID_io_file_write_5fa72b96
+  canonical_signature: io.file.write > io.network.read > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > io.file.read > compute.generic
+    > io.file.write
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 10'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - validation_pipeline.py::TopologyEngine@363-412
+- pattern_id: SID_general operator_cdde9727
+  canonical_signature: general operator
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 0'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - validation_pipeline.py::null_result@365-373
+- pattern_id: SID_io_file_write_3719a7f0
+  canonical_signature: io.file.write > io.network.read > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > io.file.read > compute.generic
+    > io.file.write
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 10'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - validation_pipeline.py::run_tda@376-412
+- pattern_id: SID_compute_generic_5dce6d82
+  canonical_signature: compute.generic > compute.generic > compute.generic > io.network.read
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 16'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - validation_pipeline.py::LOMTelemetryEngine@415-508
+- pattern_id: SID_compute_generic_0797d240
+  canonical_signature: compute.generic > compute.generic > compute.generic > io.network.read
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 16'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - validation_pipeline.py::extract@417-508
+- pattern_id: SID_compute_generic_0ec5a31a
+  canonical_signature: compute.generic > compute.generic > compute.transform > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 9'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - validation_pipeline.py::EmpiricalBridgeEngine@511-529
+- pattern_id: SID_compute_generic_5a5547e0
+  canonical_signature: compute.generic > compute.generic > compute.transform > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 9'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - validation_pipeline.py::run@513-529
+- pattern_id: SID_compute_generic_cd3e0207
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.validation > compute.validation > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 7'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - validation_pipeline.py::TensorValidationEngine@532-544
+- pattern_id: SID_compute_generic_e156bffd
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.validation > compute.validation > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 7'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - validation_pipeline.py::run@534-544
+- pattern_id: SID_compute_generic_a134c653
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 4'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - validation_pipeline.py::StatisticalValidationEngine@547-556
+- pattern_id: SID_compute_generic_674df975
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 4'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - validation_pipeline.py::run@549-556
+- pattern_id: SID_compute_generic_18a9ae2a
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.transform > compute.transform > compute.generic >
+    io.network.read > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 18'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - validation_pipeline.py::ValidationDerivedMetricsEngine@559-597
+- pattern_id: SID_compute_generic_c573c972
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.transform > compute.transform > compute.generic >
+    io.network.read > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 18'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - validation_pipeline.py::run@561-597
+- pattern_id: SID_io_network_write_7985bc14
+  canonical_signature: io.network.write > io.network.write > io.network.write > compute.generic
+    > compute.generic > compute.generic > compute.generic > security.crypto > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 10'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - validation_pipeline.py::AletheiaMetricsEngine@600-645
+- pattern_id: SID_io_network_write_b6b55d8d
+  canonical_signature: io.network.write > io.network.write > io.network.write > compute.generic
+    > compute.generic > compute.generic > compute.generic > security.crypto > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 10'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - validation_pipeline.py::run@602-645
+- pattern_id: SID_io_network_read_3d56a21e
+  canonical_signature: io.network.read > compute.generic > compute.transform > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 4'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - validation_pipeline.py::ProvenanceAssembler@651-712
+- pattern_id: SID_io_network_read_29e07ec0
+  canonical_signature: io.network.read > compute.generic > compute.transform > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 4'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - validation_pipeline.py::assemble@653-712
+- pattern_id: SID_compute_generic_f05dc3f8
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > io.file.write > compute.generic > compute.generic
+    > compute.generic > compute.generic > security.crypto > io.network.read > compute.generic
+    > compute.generic > compute.generic > io.file.read > compute.generic > compute.generic
+    > io.file.read > compute.generic > compute.simulation > state.mutate > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 25'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - validation_pipeline.py::ValidationPipeline@718-815
+- pattern_id: SID_compute_generic_b66c0c3d
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > io.file.write > compute.generic > compute.generic
+    > compute.generic > compute.generic > security.crypto > io.network.read > compute.generic
+    > compute.generic > compute.generic > io.file.read > compute.generic > compute.generic
+    > io.file.read > compute.generic > compute.simulation > state.mutate > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 25'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - validation_pipeline.py::run@725-815
+- pattern_id: SID_compute_generic_3a0c8c01
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > state.mutate > compute.generic > compute.generic > compute.generic
+    > io.file.write > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.transform > io.network.read > compute.generic > compute.generic > compute.transform
+    > compute.generic > compute.generic > io.file.read > compute.generic > io.file.read
+    > io.network.write > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 31'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - validation_pipeline.py::run_validation@817-946
+- pattern_id: SID_io_file_read_6831d3d5
+  canonical_signature: io.file.read > compute.generic > compute.generic > compute.generic
+    > io.network.read > compute.generic > compute.generic > io.file.read > io.file.read
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 9'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - validation_pipeline.py::parse_manifest@949-965
+- pattern_id: SID_io_file_write_4a92f700
+  canonical_signature: io.file.write > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.simulation > compute.generic > io.file.read
+    > io.file.read > compute.generic > compute.generic > compute.generic > state.mutate
+    > compute.generic > compute.generic > compute.generic > io.file.write > io.file.write
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > io.network.read > io.network.read > compute.generic > io.network.read > io.network.read
+    > io.network.read > io.network.read > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > security.crypto > compute.generic
+    > compute.generic > io.file.read > compute.generic > compute.generic > io.file.write
+    > io.file.read > io.file.read > io.file.read > io.file.write > state.mutate >
+    compute.generic > compute.generic > compute.generic > compute.simulation > state.mutate
+    > security.crypto > compute.generic > compute.transform > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 59'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/scheduling/queue_manager.py::QueueManager@21-613
+- pattern_id: SID_compute_generic_21f6d7c2
+  canonical_signature: compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 1'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - orchestrator/scheduling/queue_manager.py::_initialize_schema@24-41
+- pattern_id: SID_compute_generic_f174d523
+  canonical_signature: compute.generic > io.file.read > compute.generic > state.mutate
+    > compute.generic > compute.generic > io.network.read > compute.generic > io.network.read
+    > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 12'
+  occurrences: 2
+  highest_risk: MEDIUM
+  example_nodes:
+  - orchestrator/scheduling/queue_manager.py::clear_all_workers@43-67
+  - orchestrator/scheduling/queue_manager.py::clear_worker@446-473
+- pattern_id: SID_io_file_write_88597463
+  canonical_signature: io.file.write > io.file.read
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 2'
+  occurrences: 2
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/scheduling/queue_manager.py::_coerce_manifest_dict@70-72
+  - orchestrator/scheduling/queue_manager.py::_coerce_result_dict@75-77
+- pattern_id: SID_compute_simulation_0752a457
+  canonical_signature: compute.simulation > io.file.read > compute.generic > compute.generic
+    > compute.generic > io.network.read > io.network.read > compute.generic > compute.generic
+    > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 11'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - orchestrator/scheduling/queue_manager.py::__init__@79-111
+- pattern_id: SID_compute_generic_265349a9
+  canonical_signature: compute.generic > compute.generic > compute.generic > state.mutate
+    > compute.generic > io.file.write > compute.generic > io.network.read > io.network.read
+    > compute.generic > io.file.read > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 12'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/scheduling/queue_manager.py::_sanitize_backlog_payloads@113-140
+- pattern_id: SID_compute_generic_a2d7f7db
+  canonical_signature: compute.generic > compute.generic > io.file.write > compute.generic
+    > io.network.read > compute.generic > io.file.read > compute.generic > compute.generic
+    > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 11'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - orchestrator/scheduling/queue_manager.py::_atomic_json_write@142-171
+- pattern_id: SID_io_file_write_c334921d
+  canonical_signature: io.file.write > compute.generic > io.file.read > compute.generic
+    > compute.generic > compute.generic > io.network.read > compute.generic > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 10'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/scheduling/queue_manager.py::_sync_legacy_json_from_db@173-213
+- pattern_id: SID_compute_generic_363e45c1
+  canonical_signature: compute.generic > compute.simulation > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 3'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - orchestrator/scheduling/queue_manager.py::_resolve_ledger_db_path@215-222
+- pattern_id: SID_compute_generic_889177bd
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 4'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/scheduling/queue_manager.py::_connect_ledger@231-238
+- pattern_id: SID_compute_generic_15093637
+  canonical_signature: compute.generic > io.file.read
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 2'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/scheduling/queue_manager.py::_row_payload_to_dict@240-244
+- pattern_id: SID_compute_generic_e17eaf76
+  canonical_signature: compute.generic > compute.generic > state.mutate > compute.generic
+    > io.file.write > compute.generic > compute.generic > io.network.read > compute.generic
+    > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 11'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - orchestrator/scheduling/queue_manager.py::_route_claim_to_dead_letter@246-276
+- pattern_id: SID_state_mutate_2f35d003
+  canonical_signature: state.mutate
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 1'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/scheduling/queue_manager.py::push_job@278-279
+- pattern_id: SID_compute_generic_46d25b51
+  canonical_signature: compute.generic > compute.generic > compute.generic > state.mutate
+    > compute.generic > io.file.write > compute.generic > compute.generic > io.network.read
+    > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 12'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/scheduling/queue_manager.py::push_jobs_batch@281-306
+- pattern_id: SID_io_file_write_92b72941
+  canonical_signature: io.file.write
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 1'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - orchestrator/scheduling/queue_manager.py::pop_job@308-310
+- pattern_id: SID_compute_generic_a0bbc105
+  canonical_signature: compute.generic > io.file.read > compute.generic > state.mutate
+    > compute.generic > compute.generic > compute.generic > io.network.read > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 10'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/scheduling/queue_manager.py::pop_backlog_jobs@312-335
+- pattern_id: SID_compute_generic_0d48721c
+  canonical_signature: compute.generic > io.file.read > compute.generic > state.mutate
+    > compute.generic > compute.generic > compute.generic > io.network.read > compute.generic
+    > io.network.read > compute.generic > compute.generic > security.crypto > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 15'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - orchestrator/scheduling/queue_manager.py::claim_job@337-378
+- pattern_id: SID_compute_generic_93fc4bbc
+  canonical_signature: compute.generic > compute.generic > compute.generic > state.mutate
+    > compute.generic > io.file.write > compute.generic > compute.generic > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 10'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - orchestrator/scheduling/queue_manager.py::complete_job@380-400
+- pattern_id: SID_compute_generic_c1a66218
+  canonical_signature: compute.generic > compute.generic > compute.generic > state.mutate
+    > compute.generic > io.file.write > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 9'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/scheduling/queue_manager.py::push_result@402-413
+- pattern_id: SID_compute_generic_23652ffa
+  canonical_signature: compute.generic > io.file.read > compute.generic > state.mutate
+    > compute.generic > compute.generic > compute.generic > io.network.read > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 10'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/scheduling/queue_manager.py::get_results@415-432
+- pattern_id: SID_compute_generic_e7a5b83c
+  canonical_signature: compute.generic > compute.generic > state.mutate > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 8'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - orchestrator/scheduling/queue_manager.py::set_worker_heartbeat@434-444
+- pattern_id: SID_compute_generic_1084af81
+  canonical_signature: compute.generic > io.file.read > compute.generic > compute.generic
+    > compute.generic > io.network.read > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 7'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/scheduling/queue_manager.py::peek_all@475-483
+- pattern_id: SID_compute_generic_a057bbce
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > io.network.read > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 6'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/scheduling/queue_manager.py::size@485-493
+- pattern_id: SID_compute_generic_dedd43f5
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > io.network.read > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 7'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/scheduling/queue_manager.py::get_worker_heartbeats@495-502
+- pattern_id: SID_compute_generic_905d3bbc
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > io.network.read > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 8'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/scheduling/queue_manager.py::list_stale_workers@504-516
+- pattern_id: SID_io_network_read_4d446023
+  canonical_signature: io.network.read > security.crypto > compute.generic > state.mutate
+    > compute.transform
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 5'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - orchestrator/scheduling/queue_manager.py::list_active_workers@518-521
+- pattern_id: SID_compute_generic_98eba1c3
+  canonical_signature: compute.generic > io.file.read > compute.generic > compute.generic
+    > compute.generic > io.network.read > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 9'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - orchestrator/scheduling/queue_manager.py::_read_claims@523-541
+- pattern_id: SID_compute_generic_001841ce
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > io.network.read > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 7'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - orchestrator/scheduling/queue_manager.py::get_claim_counts_by_worker@543-552
+- pattern_id: SID_compute_generic_cb98247b
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > io.network.read > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 6'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - orchestrator/scheduling/queue_manager.py::get_telemetry_counters@554-562
+- pattern_id: SID_compute_generic_f4c83d75
+  canonical_signature: compute.generic > compute.generic > io.file.read > compute.generic
+    > state.mutate > compute.generic > compute.generic > io.network.read > compute.generic
+    > io.network.read > compute.generic > compute.generic > compute.transform > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 15'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - orchestrator/scheduling/queue_manager.py::recover_stale_workers@564-613
+- pattern_id: SID_compute_generic_eadd658f
+  canonical_signature: compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 1'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - app.py::_resolve_frontend_build_dir@111-115
+- pattern_id: SID_compute_generic_456570ad
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > io.file.write
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 6'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - app.py::_save_pids@173-185
+- pattern_id: SID_compute_generic_3ff37d5a
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > io.file.read > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 10'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - app.py::_kill_saved_pids@187-209
+- pattern_id: SID_compute_generic_200dc32c
+  canonical_signature: compute.generic > compute.generic > io.file.read > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 4'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - app.py::_stream_subprocess_output@211-221
+- pattern_id: SID_compute_generic_64514976
+  canonical_signature: compute.generic > io.network.read > compute.generic > compute.generic
+    > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 6'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - app.py::_purge_ghost_workers@223-235
+- pattern_id: SID_compute_generic_85ed9d38
+  canonical_signature: compute.generic > compute.generic > io.file.write > compute.generic
+    > io.file.write > compute.generic > compute.generic > compute.generic > compute.transform
+    > io.network.read > compute.generic > io.network.write
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 12'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - app.py::kill_cluster@241-276
+- pattern_id: SID_compute_generic_bf0c0425
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.transform > io.network.write
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 6'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - app.py::kill_worker@279-288
+- pattern_id: SID_general operator_ba4943eb
+  canonical_signature: general operator
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 0'
+  occurrences: 2
+  highest_risk: LOW
+  example_nodes:
+  - app.py::ControlStartRequest@292-301
+  - app.py::ControlStageRequest@304-330
+- pattern_id: SID_general operator_7ab230ab
+  canonical_signature: general operator
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 0'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - app.py::DebugTestRunRequest@333-334
+- pattern_id: SID_compute_generic_8f5bd796
+  canonical_signature: compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 1'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - app.py::PluginExecuteRequest@337-342
+- pattern_id: SID_general operator_4833d3ab
+  canonical_signature: general operator
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 0'
+  occurrences: 2
+  highest_risk: LOW
+  example_nodes:
+  - app.py::LedgerRunsResponse@345-347
+  - app.py::LedgerRowsResponse@350-357
+- pattern_id: SID_general operator_e77d8742
+  canonical_signature: general operator
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 0'
+  occurrences: 2
+  highest_risk: LOW
+  example_nodes:
+  - app.py::FleetWorkerStatus@360-365
+  - app.py::FleetTelemetryResponse@368-378
+- pattern_id: SID_compute_generic_a641323c
+  canonical_signature: compute.generic > io.file.write > compute.generic > compute.generic
+    > io.network.write > io.network.write > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 7'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - app.py::_broadcast_payload@385-395
+- pattern_id: SID_compute_generic_f72205de
+  canonical_signature: compute.generic > io.network.write > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 3'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - app.py::send_msg@388-392
+- pattern_id: SID_io_network_write_d94d5bc2
+  canonical_signature: io.network.write
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 1'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - app.py::_enqueue_telemetry_event@398-402
+- pattern_id: SID_compute_generic_28d186af
+  canonical_signature: compute.generic > compute.transform > compute.generic > io.file.write
+    > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 7'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - app.py::_emit_terminal_debug@405-421
+- pattern_id: SID_state_mutate_5ce8fb50
+  canonical_signature: state.mutate > compute.generic > io.file.write > compute.generic
+    > io.network.read > compute.generic > compute.generic > io.network.write > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 10'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - app.py::telemetry_ticker@424-447
+- pattern_id: SID_compute_generic_f3e78f8d
+  canonical_signature: compute.generic > compute.generic > compute.generic > io.network.read
+    > compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 8'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - app.py::_initialize_log_tail_positions@450-467
+- pattern_id: SID_compute_generic_24144400
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > io.network.read > compute.generic > io.file.read
+    > io.file.read > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 17'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - app.py::_tail_logs_once@470-520
+- pattern_id: SID_io_file_write_eced0203
+  canonical_signature: io.file.write > io.file.write > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 3'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - app.py::log_tailer_task@523-528
+- pattern_id: SID_compute_generic_d792e7c0
+  canonical_signature: compute.generic > compute.generic > io.file.read > io.file.read
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 5'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - app.py::_tail_file_lines@531-539
+- pattern_id: SID_compute_generic_e458455b
+  canonical_signature: compute.generic > compute.generic > state.mutate > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 10'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - app.py::_load_pde_history_from_h5@542-578
+- pattern_id: SID_compute_generic_d4089c8d
+  canonical_signature: compute.generic > compute.generic > state.mutate > compute.generic
+    > compute.generic > compute.simulation > compute.simulation > state.mutate > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 9'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - app.py::_plugin_allowed_roots@580-607
+- pattern_id: SID_compute_generic_7437a799
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.simulation > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 14'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - app.py::_resolve_safe_artifact_path@610-638
+- pattern_id: SID_compute_generic_deff1a57
+  canonical_signature: compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 2'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - app.py::_canonicalize_control_payload@651-658
+- pattern_id: SID_compute_generic_151ad742
+  canonical_signature: compute.generic > io.network.read > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > io.file.write > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 10'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - app.py::_validate_control_payload@661-723
+- pattern_id: SID_general operator_a1098559
+  canonical_signature: general operator
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 0'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - app.py::_build_control_payload_from_request@726-753
+- pattern_id: SID_io_network_read_6f92eaec
+  canonical_signature: io.network.read > io.file.read > compute.simulation > compute.generic
+    > io.network.read > compute.generic > io.file.read > io.file.read
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 8'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - app.py::_resolve_control_payload@756-781
+- pattern_id: SID_compute_generic_ea485fbc
+  canonical_signature: compute.generic > compute.simulation > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 3'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - app.py::_active_paths_or_error@784-790
+- pattern_id: SID_compute_generic_fc8da9f3
+  canonical_signature: compute.generic > io.network.read > compute.generic > io.file.read
+    > io.file.read > compute.generic > compute.simulation > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 8'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - app.py::_load_plugin_manifest@793-808
+- pattern_id: SID_compute_generic_e163ed3a
+  canonical_signature: compute.generic > io.file.read > compute.generic > io.network.read
+    > compute.generic > compute.generic > compute.generic > compute.simulation > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 10'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - app.py::_collect_plugin_registry@811-847
+- pattern_id: SID_compute_generic_a1b755d7
+  canonical_signature: compute.generic > state.mutate > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 4'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - app.py::_validate_plugin_args@850-862
+- pattern_id: SID_compute_generic_c317c920
+  canonical_signature: compute.generic > compute.simulation > compute.generic > io.network.read
+    > compute.transform > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 7'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - app.py::_build_plugin_command@865-896
+- pattern_id: SID_io_file_write_2043fd01
+  canonical_signature: io.file.write > compute.generic > io.file.read > io.file.write
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 4'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - app.py::_record_plugin_execution_event@899-903
+- pattern_id: SID_compute_generic_36b13748
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 5'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - app.py::_artifact_hit@906-915
+- pattern_id: SID_compute_generic_e396d3de
+  canonical_signature: compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 3'
+  occurrences: 2
+  highest_risk: MEDIUM
+  example_nodes:
+  - app.py::_is_valid_run_id@918-919
+  - app.py::_is_valid_config_hash@922-923
+- pattern_id: SID_compute_generic_9a249283
+  canonical_signature: compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 3'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - app.py::_coerce_pagination@926-929
+- pattern_id: SID_compute_generic_b8a9b06f
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.transform
+    > compute.simulation > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 8'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - app.py::_session_metadata_from_dir@932-955
+- pattern_id: SID_compute_generic_7f519047
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > state.mutate > compute.generic > compute.generic > io.network.read > compute.generic
+    > compute.generic > compute.generic > io.file.read > state.mutate > compute.transform
+    > compute.transform > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 16'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - app.py::_list_known_runs@958-996
+- pattern_id: SID_compute_generic_119d37c6
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > io.network.read > compute.generic > compute.generic > io.file.read
+    > compute.simulation > compute.simulation > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 13'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - app.py::_resolve_ledger_run_or_error@999-1041
+- pattern_id: SID_compute_generic_50165e6f
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > io.network.read > io.network.read > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 9'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - app.py::_fetch_ledger_rows@1044-1084
+- pattern_id: SID_compute_generic_6bc4cb85
+  canonical_signature: compute.generic > state.mutate > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 9'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - app.py::_search_artifact_root@1087-1102
+- pattern_id: SID_compute_generic_e85d4e6c
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 7'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - app.py::_extract_tensor_binary_sync@1104-1118
+- pattern_id: SID_compute_generic_a7071523
+  canonical_signature: compute.generic > security.crypto > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 11'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - app.py::_extract_pointcloud_sync@1120-1140
+- pattern_id: SID_compute_generic_6ae48b1f
+  canonical_signature: compute.generic > io.file.read > compute.generic > io.file.read
+    > io.file.read > compute.generic > io.file.write > io.file.write > compute.generic
+    > compute.generic > compute.generic > compute.transform > io.network.read > compute.generic
+    > compute.generic > compute.transform > compute.generic > compute.generic > compute.generic
+    > io.file.read > io.network.write > compute.generic > io.file.write > security.crypto
+    > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 27'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - app.py::control_stage@1144-1264
+- pattern_id: SID_compute_generic_8af5cb75
+  canonical_signature: compute.generic > io.file.read > compute.generic > io.file.read
+    > compute.generic > io.file.write > compute.generic > io.file.write > io.file.read
+    > state.mutate > compute.generic > compute.generic > io.file.write > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.transform > compute.generic
+    > io.network.read > io.network.read > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.transform > compute.generic > compute.generic > io.file.read > io.file.read
+    > compute.generic > compute.generic > compute.generic > io.file.read > io.network.write
+    > state.mutate > state.mutate > compute.generic > io.file.read > compute.generic
+    > compute.simulation > io.file.write > compute.simulation > security.crypto >
+    compute.transform > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > io.file.write
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 56'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - app.py::control_start@1268-1573
+- pattern_id: SID_compute_generic_40bc5716
+  canonical_signature: compute.generic > compute.generic > io.file.write > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.transform > io.network.read
+    > compute.transform > compute.generic > compute.generic > io.network.write > compute.generic
+    > compute.generic > compute.simulation > compute.simulation > compute.generic
+    > io.file.write
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 19'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - app.py::control_stop@1576-1633
+- pattern_id: SID_compute_generic_00c79f83
+  canonical_signature: compute.generic > compute.generic > state.mutate > compute.generic
+    > io.network.read > compute.transform > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 11'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - app.py::debug_terminals@1637-1660
+- pattern_id: SID_compute_generic_f033984f
+  canonical_signature: compute.generic > state.mutate > compute.generic > io.network.read
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.transform > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 13'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - app.py::debug_test_suites@1664-1683
+- pattern_id: SID_compute_generic_48ccf9b9
+  canonical_signature: compute.generic > compute.generic > compute.transform > compute.generic
+    > security.crypto > compute.generic > compute.generic > compute.generic > io.file.read
+    > io.network.write > compute.generic > compute.generic > compute.simulation >
+    compute.generic > compute.transform > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > io.file.write
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 21'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - app.py::debug_run_tests@1687-1747
+- pattern_id: SID_compute_generic_c03ce768
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > state.mutate > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > io.network.read
+    > compute.generic > compute.transform > io.network.read > io.network.read > io.network.read
+    > io.network.read > compute.generic > compute.transform > security.crypto > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.simulation
+    > io.file.read > compute.generic > compute.transform > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 34'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - app.py::get_system_telemetry@1751-1840
+- pattern_id: SID_compute_generic_9650c3ab
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > io.network.read > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 7'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - app.py::_get_dlq_count@1780-1793
+- pattern_id: SID_compute_generic_50d70998
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.transform > io.network.read > compute.generic > compute.generic > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.transform > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 15'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - app.py::list_data_files@1844-1868
+- pattern_id: SID_compute_generic_3bc823c6
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.transform > io.network.read
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 6'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - app.py::list_ledger_runs@1872-1877
+- pattern_id: SID_compute_generic_840a549f
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.simulation > compute.generic > compute.generic > compute.transform >
+    io.network.read > compute.generic > compute.generic > io.file.read > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 13'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - app.py::get_ledger_rows@1881-1918
+- pattern_id: SID_compute_generic_7ab4c0fa
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > io.network.read > compute.simulation > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 9'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - app.py::download_data_file@1921-1937
+- pattern_id: SID_compute_generic_6291ce47
+  canonical_signature: compute.generic > compute.generic > io.file.read > compute.generic
+    > io.network.read > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 7'
+  occurrences: 2
+  highest_risk: LOW
+  example_nodes:
+  - app.py::list_visualizer_plugins@1941-1955
+  - app.py::list_tool_plugins@1959-1972
+- pattern_id: SID_compute_generic_b2f91145
+  canonical_signature: compute.generic > compute.generic > io.file.read > compute.generic
+    > compute.generic > compute.generic > compute.validation > compute.generic > compute.generic
+    > compute.generic > io.network.read > compute.generic > compute.generic > compute.transform
+    > security.crypto > compute.generic > compute.generic > io.file.read > io.network.write
+    > compute.generic > compute.simulation > security.crypto > compute.transform >
+    compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 25'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - app.py::execute_plugin@1976-2090
+- pattern_id: SID_compute_generic_08d9f532
+  canonical_signature: compute.generic > compute.generic > compute.generic > io.network.read
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.simulation > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 11'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - app.py::search_artifacts@2094-2123
+- pattern_id: SID_compute_generic_2565f08e
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.simulation
+    > compute.simulation > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 7'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - app.py::_find_artifact_for_config_hash@2126-2148
+- pattern_id: SID_compute_generic_46f1cdf2
+  canonical_signature: compute.generic > compute.generic > security.crypto > compute.simulation
+    > compute.generic > compute.transform > io.network.read > io.file.read > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 9'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - app.py::get_tensor_binary@2152-2170
+- pattern_id: SID_io_network_read_7bdaf9e0
+  canonical_signature: io.network.read > compute.generic > security.crypto > security.crypto
+    > compute.simulation > compute.generic > compute.generic > compute.generic > compute.transform
+    > io.network.read > compute.generic > io.file.read > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 13'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - app.py::get_pointcloud_by_hash@2174-2207
+- pattern_id: SID_io_network_read_47d043fa
+  canonical_signature: io.network.read > compute.generic > compute.generic > compute.simulation
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.transform
+    > io.network.read > compute.generic > compute.generic > compute.simulation > io.file.read
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 15'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - app.py::get_pointcloud@2214-2248
+- pattern_id: SID_compute_generic_8297a653
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.generic > io.network.read > compute.generic > compute.generic > compute.generic
+    > io.file.read > compute.generic > io.file.read > io.file.read > compute.generic
+    > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 17'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - app.py::get_active_run@2252-2311
+- pattern_id: SID_compute_generic_65320003
+  canonical_signature: compute.generic > io.file.write > compute.generic > io.network.read
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 5'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - app.py::stream_status_compat@2315-2335
+- pattern_id: SID_io_file_write_395d6388
+  canonical_signature: io.file.write > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 2'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - app.py::event_gen@2321-2329
+- pattern_id: SID_compute_generic_e8e1474a
+  canonical_signature: compute.generic > compute.generic > compute.generic > io.file.write
+    > io.network.read > compute.generic > io.file.read > compute.generic > io.network.write
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 10'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - app.py::websocket_telemetry@2339-2363
+- pattern_id: SID_compute_generic_a185d0f1
+  canonical_signature: compute.generic > compute.generic > compute.generic > io.network.read
+    > io.file.read > io.file.read
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 6'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - app.py::serve_react_root@2382-2399
+- pattern_id: SID_compute_generic_daffa91b
+  canonical_signature: compute.generic > compute.generic > compute.generic > io.network.read
+    > io.file.read > io.file.read > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 7'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - app.py::serve_react_catch_all@2402-2421
+- pattern_id: SID_compute_generic_cb2d3727
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 4'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - app.py::AsyncDebouncer@2424-2437
+- pattern_id: SID_compute_generic_c1a3fedd
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 4'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - app.py::call@2431-2437
+- pattern_id: SID_compute_generic_122d6c31
+  canonical_signature: compute.generic > compute.generic > compute.generic > io.file.read
+    > compute.generic > compute.generic > compute.generic > compute.generic > compute.generic
+    > io.network.read > compute.generic > io.file.read > io.file.read > compute.simulation
+    > compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 18'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - app.py::GifWatcherHandler@2440-2494
+- pattern_id: SID_compute_generic_121870ff
+  canonical_signature: compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 2'
+  occurrences: 1
+  highest_risk: LOW
+  example_nodes:
+  - app.py::on_modified@2445-2447
+- pattern_id: SID_compute_generic_3ff5309a
+  canonical_signature: compute.generic > compute.generic > io.file.read > compute.generic
+    > compute.generic > compute.generic > io.network.read > compute.generic > io.file.read
+    > io.file.read > compute.simulation > compute.generic > compute.generic > compute.generic
+    > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 15'
+  occurrences: 1
+  highest_risk: MEDIUM
+  example_nodes:
+  - app.py::broadcast_gif_update@2449-2494
+- pattern_id: SID_compute_generic_84bb8290
+  canonical_signature: compute.generic > compute.generic > compute.generic > compute.generic
+    > io.file.write > compute.generic > io.network.read > io.file.write > compute.generic
+    > compute.generic > compute.generic > compute.generic > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 13'
+  occurrences: 1
+  highest_risk: CRITICAL
+  example_nodes:
+  - app.py::startup_event@2497-2511
+- pattern_id: SID_compute_generic_e8912fdc
+  canonical_signature: compute.generic > io.file.write > compute.generic > compute.generic
+    > io.network.read > compute.generic > compute.generic > compute.generic > compute.generic
+    > compute.simulation > compute.generic
+  structural_complexity: 'Fan-In: 0 | Fan-Out: 11'
+  occurrences: 1
+  highest_risk: HIGH
+  example_nodes:
+  - app.py::shutdown_event@2515-2567

@@ -1,0 +1,20 @@
+{
+  "N": 32,
+  "L": 10.0,
+  "dt": 0.005,
+  "n_steps": 40,
+  "collect_every": 4,
+  "ic_seed": 12345,
+  "params": {
+    "param_D": 1.0,
+    "param_eta": 0.2,
+    "param_rho_vac": 1.33,
+    "param_omega0": 1.0,
+    "param_a": 0.1,
+    "param_s": 0.05,
+    "param_f": 0.02,
+    "param_a_coupling": 1.0,
+    "param_c_affect": 1.0,
+    "param_dealias_fraction": 0.5
+  }
+}

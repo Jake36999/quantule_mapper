@@ -12,6 +12,7 @@ from orchestrator.contracts import SOLVER_CONTRACT_VERSION
 from orchestrator.diagnostics.runtime_audit import log_lifecycle_event
 from orchestrator.run_identity import write_identity_group
 from .core import ETDRK4Solver
+from .stability_metrics import from_history as _stability_from_history
 
 sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'gravity'))
 try:
@@ -47,7 +48,11 @@ def run_simulation(
     
     # State is permanently held in Spectral Space
     psi_k = solver.fft_single(psi) * solver.dealias_mask
-    
+
+    # H7 production stability metric (READ-ONLY observer; no physics impact): css-matched initial energy
+    # ic_e = sum(|psi_0|^2) (raw: no rho-floor, no dV) for er normalisation. See solver/stability_metrics.py.
+    ic_e_raw = float(cp.sum(cp.abs(solver.ifft_single(psi_k)) ** 2, dtype=cp.float64))
+
     collapse_threshold = psi_params.get("collapse_threshold", 1e6)
     force_nan_step_raw = os.environ.get("ASTE_FORCE_NAN_STEP", "").strip()
     force_nan_step = None
@@ -139,15 +144,24 @@ def run_simulation(
 
             energy = float(cp.sum(rho, dtype=cp.float64)) * dV
             c_invariant = float(cp.sum(rho * rho, dtype=cp.float64)) * dV
+            # H7 READ-ONLY observer: raw energy sum(|psi|^2) matching the css/objective er definition
+            # (no rho-floor, no dV). psi_real is already computed above for telemetry -> no extra ifft.
+            raw_energy = float(cp.sum(cp.abs(psi_real) ** 2, dtype=cp.float64))
             history.append({
                 'step': step,
                 'energy': energy,
+                'raw_energy': raw_energy,
                 'C_invariant': c_invariant,
                 'mean_phase': mean_phase if 'mean_phase' in locals() else 0.0 # Telemetry upgrade
             })
 
     total_time = time.time() - start_time
     logging.info(f"Evolution complete in {total_time:.2f}s")
+
+    # H7 production alignment: reduce the raw-energy trajectory to the objective's stability_metrics
+    # (read-only; identical math to jax_scout.core_saturation_search.classify). Emitted into the HDF5 and
+    # the result payload so the re-aimed Hunter can score the production path. NOT a physics change.
+    stability_metrics = _stability_from_history(history, ic_e_raw, T_steps)
 
     if sentinel_code != -1.0:
         psi_snapshot = solver.ifft_single(psi_k)
@@ -168,6 +182,10 @@ def run_simulation(
             f.create_dataset(
                 'sentinel_reason',
                 data=np.array([fail_open_reason], dtype='S64'),
+            )
+            f.create_dataset(
+                'stability_metrics',
+                data=np.array([json.dumps(stability_metrics)], dtype='S1024'),
             )
             hist_grp = f.create_group('telemetry')
             hist_grp.create_dataset(
@@ -215,6 +233,7 @@ def run_simulation(
             "sentinel": sentinel_code,
             "artifact_url": output_path,
             "final_step": final_step,
+            "stability_metrics": stability_metrics,
         }
     
     # 4. Final Disk I/O 
@@ -361,6 +380,10 @@ def run_simulation(
             'solver_contract',
             data=np.array([json.dumps(solver_contract)], dtype='S512'),
         )
+        f.create_dataset(
+            'stability_metrics',
+            data=np.array([json.dumps(stability_metrics)], dtype='S1024'),
+        )
         if identity:
             write_identity_group(f, identity)
         f.flush()
@@ -385,6 +408,7 @@ def run_simulation(
         "status": "PENDING_VALIDATION",
         "artifact_url": output_path,
         "final_step": final_step,
+        "stability_metrics": stability_metrics,
     }
 
 # =============================================================================

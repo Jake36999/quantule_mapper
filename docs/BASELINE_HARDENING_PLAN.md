@@ -74,3 +74,14 @@ existing 3D joint-basin (T=12000: css-stable ranked above css-failures, growers 
 (a\* top) + T=144000 confirm (a\* seed-robust). Pre-registered PASS criteria all met, no FAIL trigger tripped.
 **Still NOT production-ready:** H7.1b (stability-NSGA front + worker `stability_metrics`) and H4 CuPy parity remain
 open; this validates the *objective* on the jax_scout path, not a deployed Hunter.
+**PRODUCTION RE-CENTERING STARTED (2026-07-03, `PRODUCTION_ALIGNMENT_PLAN.md`, Track A).** Guards against the
+split-brain risk (objective proven on the reachable jax_scout mirror; production CuPy stack must catch up).
+Verified at source: **both engines are FP64** (jax `x64`/`complex128`; CuPy `complex128`, `solver/core.py:97`) —
+CuPy is production authority for *orchestration* reasons, not precision — and **they already share the kinetic term**
+`L_k = -D·k² - η + i·ω₀` (so no CuPy kinetic change is needed for alignment). **A3 done (code-only, no GPU):**
+`solver/stability_metrics.py` (pure-numpy, mirrors `core_saturation_search.classify` er-math exactly; raw `Σ|ψ|²`,
+no floor/dV) + `solver/run.py` read-only observers (ic_e_raw, per-cadence raw_energy, emit `/stability_metrics` into
+HDF5 + result payload; **no physics change**, py_compile-checked) + `tests/test_stability_metrics.py` 5 pass
+(exact css-parity, cadence-independence, objective feed, from_history). Remaining Track A (needs the CuPy box or a
+wiring check): A1 H4 bit-parity run, A4 confirm provenance carries `stability_metrics` into `prov_data`, A5
+production H7 re-validation. **Track B (Phase D kinetic RFC) deferred** — a formalism decision, not a patch.

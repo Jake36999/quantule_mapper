@@ -43,4 +43,8 @@ core + `afield_prototype` import verified intact on WSL. **H9b** — `collapse_t
 0-vs-1.0 default mismatch is **already resolved** (`orchestrator.contracts.DEFAULT_PARAM_RHO_VAC = 1.0`;
 `unified_omega`/`physics` also 1.0) — no change needed; the `IRER_MATH_REFERENCE` note is stale. **H10** —
 `tests/test_solver_parity_artifact.py` (5 pass, dev box) + `tests/test_mobility_metrics.py` (logic verified on
-WSL). **Held:** H4 CuPy run, H7 (hunter re-aim — see design note above), H8-further, H9 (any deeper config work).
+WSL). **Held:** H4 CuPy run, H7 (hunter re-aim), H8-further, H9 (any deeper config work).
+**H7 DESIGN written** (`HUNTER_REAIM_DESIGN_SPEC.md`, 2026-07-03) — design-only; operationalizes indivisibility
+as a dynamical division-perturbation response (re-merge/heal/whole-failure vs stable daughters), keeps
+`css.classify` as the certifier, and requires re-discovery of the a\* basin at re-validation. **NOT implemented**
+(`HUNTER_REAIM_NOT_IMPLEMENTED`); implementation is a separate explicitly-approved step.

@@ -42,8 +42,12 @@ python tools/solver_parity_check.py compare parity/jax_ref.npz parity/cupy_ref.n
 ## Status (2026-07-03)
 - Step 1 (`make-ic`) — **done** on the dev box → `parity/shared_ic.npz` (N=48, seed 12345).
 - Step 2 (`run --backend jax`) — **done** on WSL → `parity/jax_ref.npz` (200 steps, mass 672.79, max|psi| 0.965).
-- Step 3 (`run --backend cupy`) — **PENDING** (needs the CuPy production box).
-- Step 4 (`compare`) — **PENDING** step 3.
+- Step 3 (`run --backend cupy`) — **PENDING — environment-blocked from the agent session.** Verified 2026-07-03:
+  CuPy is not importable in any agent-reachable environment (Windows dev, WSL `jax_irer` venv, WSL system). The
+  CuPy production solver requires the dedicated production box, which this session cannot reach. **This step must
+  be run by the operator on the CuPy box:**
+  `python tools/solver_parity_check.py run --backend cupy --ic parity/shared_ic.npz --steps 200 --out parity/cupy_ref.npz`
+- Step 4 (`compare`) — **PENDING** step 3: `python tools/solver_parity_check.py compare parity/jax_ref.npz parity/cupy_ref.npz`
 
 **Do not claim bit-parity until `cupy_ref.npz` exists and `compare` passes.** Established claim remains: *RHS
 code-parity confirmed (both solvers share `calculate_nonlinear_rhs`, local, splash→s/f); the jax reference output

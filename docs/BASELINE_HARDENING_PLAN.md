@@ -46,5 +46,13 @@ core + `afield_prototype` import verified intact on WSL. **H9b** — `collapse_t
 WSL). **Held:** H4 CuPy run, H7 (hunter re-aim), H8-further, H9 (any deeper config work).
 **H7 DESIGN written** (`HUNTER_REAIM_DESIGN_SPEC.md`, 2026-07-03) — design-only; operationalizes indivisibility
 as a dynamical division-perturbation response (re-merge/heal/whole-failure vs stable daughters), keeps
-`css.classify` as the certifier, and requires re-discovery of the a\* basin at re-validation. **NOT implemented**
-(`HUNTER_REAIM_NOT_IMPLEMENTED`); implementation is a separate explicitly-approved step.
+`css.classify` as the certifier, and requires re-discovery of the a\* basin at re-validation.
+**H7.1 + H7.2 done OFFLINE** (`HUNTER_REAIM_OFFLINE_RESCORE.md`): `tools/stability_objective.py` scorer (prime-SSE
+retired; late-slope/boundedness/breathing/window-gate; indivisibility = pending run-hook) + offline re-score over
+the real load-bearing CSVs — **ranks a\*≈×1.15 top of both the confirm and gain-ladder sets**, decayers/growers
+below, short-window discounted; `tests/test_stability_objective.py` 6 pass. This is parity-INDEPENDENT (scores the
+already-validated jax_scout results). **STILL NOT wired into `aste_hunter`; no hunt; no solver/gate change**
+(`HUNTER_REAIM_NOT_IMPLEMENTED`). **Held (gated):** H7.1 hunter-wiring (code change), indivisibility perturbation
+runs (GPU), H7.3 re-validation harness, H7.4 controlled hunt — the hunt is gated on H7.3 + the H4 CuPy parity +
+explicit go. **H4 CuPy run is environment-blocked from the agent session** (no cupy in any reachable env) → the
+operator must run it on the CuPy production box.

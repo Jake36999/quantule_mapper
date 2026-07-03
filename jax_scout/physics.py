@@ -181,7 +181,7 @@ def _nonlinear_rhs(psi, rho, lap_cov, lap_flat, D_diff, a, s, f):
 # N_op + ETDRK4 step — mirror of solver/core.py
 # ---------------------------------------------------------------------------
 
-def n_op(psi_k, ops, rho_vac_eff=None, omega_sq_mult=None, a_vec=None, q_tensor=None):
+def n_op(psi_k, ops, rho_vac_eff=None, omega_sq_mult=None, a_vec=None, q_tensor=None, drag_field=None):
     """Mirror ETDRK4Solver.N_op (geometry-corrected nonlinear operator in k-space).
     rho_vac_eff: optional A-modulated vacuum reference field (vacuum_ref topology).
     omega_sq_mult: optional multiplier on Omega^2 (additive_potential topology:
@@ -245,22 +245,30 @@ def n_op(psi_k, ops, rho_vac_eff=None, omega_sq_mult=None, a_vec=None, q_tensor=
                 + jnp.fft.ifftn(ops.ikz * jnp.fft.fftn(Fz)))
         n_real = n_real + 1j * ops.D_diff * divF
 
+    # 5d. ADIABATIC DRAG (default-off relational-mobility variant): a weak localized REAL preference field
+    #     added to the real-space RHS, N += drag_field * psi, with drag_field = V0 * G(x - x_c(t)) a movable
+    #     gain/loss "well". REAL coefficient -> keeps the substrate dissipative (tests gradient-following /
+    #     relational mobility, NOT inertia). None -> exact baseline (no-op). Mirrors the a_vec / q_tensor
+    #     optional-field pattern. See docs/PHASE_C_ADIABATIC_DRAG_DESIGN.md.
+    if drag_field is not None:
+        n_real = n_real + drag_field * psi
+
     # 6. Single spectral transform + dealias
     n_k = jnp.fft.fftn(n_real) * ops.dealias_mask
     return n_k
 
 
-def step(psi_k, ops, rho_vac_eff=None, omega_sq_mult=None, a_vec=None, q_tensor=None):
+def step(psi_k, ops, rho_vac_eff=None, omega_sq_mult=None, a_vec=None, q_tensor=None, drag_field=None):
     """Mirror ETDRK4Solver.step (Kassam-Trefethen ETDRK4 in spectral space).
-    rho_vac_eff / omega_sq_mult / a_vec (optional A-coupling fields) are held FIXED across the 4
-    ETDRK4 substages (A updated once per outer step, like solver/run.py). All None = baseline."""
-    n_n = n_op(psi_k, ops, rho_vac_eff, omega_sq_mult, a_vec, q_tensor)
+    rho_vac_eff / omega_sq_mult / a_vec / drag_field (optional coupling fields) are held FIXED across the 4
+    ETDRK4 substages (updated once per outer step, like solver/run.py). All None = baseline."""
+    n_n = n_op(psi_k, ops, rho_vac_eff, omega_sq_mult, a_vec, q_tensor, drag_field)
     a_k = ops.E2 * psi_k + ops.Q * n_n
-    n_a = n_op(a_k, ops, rho_vac_eff, omega_sq_mult, a_vec, q_tensor)
+    n_a = n_op(a_k, ops, rho_vac_eff, omega_sq_mult, a_vec, q_tensor, drag_field)
     b_k = ops.E2 * psi_k + ops.Q * n_a
-    n_b = n_op(b_k, ops, rho_vac_eff, omega_sq_mult, a_vec, q_tensor)
+    n_b = n_op(b_k, ops, rho_vac_eff, omega_sq_mult, a_vec, q_tensor, drag_field)
     c_k = ops.E2 * a_k + ops.Q * (2.0 * n_b - n_a)
-    n_c = n_op(c_k, ops, rho_vac_eff, omega_sq_mult, a_vec, q_tensor)
+    n_c = n_op(c_k, ops, rho_vac_eff, omega_sq_mult, a_vec, q_tensor, drag_field)
     psi_next_k = ops.E * psi_k + ops.f1 * n_n + 2.0 * ops.f2 * (n_a + n_b) + ops.f3 * n_c
     psi_next_k = psi_next_k * ops.dealias_mask
     return psi_next_k

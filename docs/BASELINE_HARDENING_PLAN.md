@@ -94,6 +94,11 @@ reads HDF5 `/stability_metrics` into the provenance report top-level key (peer o
 to use it for **both** objectives (was a hardcoded plain name). `tests/test_provenance_resolution.py` 7 pass (no
 cupy): plain-legacy resolves; identity-folded discoverable; missing→None/`failed`; no cross-config collision; Hunter
 **stability** reads stability_metrics from a folded file (fitness>0); Hunter **prime** reads spectral_fidelity from a
-folded file (completed). **Remaining Track A (needs the CuPy box): A1 H4 bit-parity run, first real CuPy artifact
-with `/stability_metrics`, A5 production H7 re-validation.** A2 operator audit done at code level. **Track B (Phase D
-kinetic RFC) deferred** — a formalism decision, not a patch.
+folded file (completed). **A5 PREPARED (code-only, no GPU): production re-validation harness + runbook.** `tools/production_h7_revalidation.py`
+(`build-configs` emits worker_cupy `--params` for a\*×1.15 + matched controls a×1.05/1.25 + a T=12000 window-artifact
+probe, feb-frozen, N=96/dt=0.005/T=36000 for jax_scout parity; `evaluate` scores the resulting provenance via the
+stability objective + shared resolver and prints PASS/REVIEW) + `docs/PRODUCTION_H7_REVALIDATION_RUNBOOK.md` (box
+steps + PASS criteria + the cross-IC caveat: production single-Gaussian IC ≠ jax_scout multiseed). Evaluator
+unit-tested (`tests/test_production_h7_revalidation.py` 6 pass, no cupy). **Remaining Track A (needs the CuPy box): A1
+H4 bit-parity run, then run the A5 harness (worker + validate steps) → evaluate.** A2 operator audit done at code
+level. **Track B (Phase D kinetic RFC) deferred** — a formalism decision, not a patch.

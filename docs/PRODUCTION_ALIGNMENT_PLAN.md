@@ -28,7 +28,7 @@ bottom. It is **not** part of this track and must not touch the frozen Phase C o
 | A3 | **CuPy `stability_metrics` emission** — production run emits the objective's metrics into provenance, no physics change | **DONE this session (code)** — see below; **needs a box run** to produce a real artifact | code done; **box run pending** |
 | A4 | **Wire Hunter to consume production metrics** — objective fitness from `prov_data["stability_metrics"]` | **DONE** — carry-through wired + tested (6 tests); see field contract below | no (wiring check) |
 | A4b | **Provenance-filename reconciliation** — one shared resolver so the Hunter reads the file the writer wrote (identity-folded names) | **DONE** — `resolve_provenance_report` + Hunter rewire + 7 tests; see below | no |
-| A5 | **Production H7 re-validation** — a small CuPy hunt/replay must: re-find a\*≈×1.15; recover matched controls; **not** promote T12000 short-window artifacts; and keep `css.classify` as the certifier | gated on A1+A3+A4/A4b | **yes** |
+| A5 | **Production H7 re-validation** — replay a\*≈×1.15 + matched controls + a short-window probe on the CuPy path; re-find a\*, controls below, no T12000 promotion; `css.classify` stays certifier | **harness + evaluator PREPARED + tested** (`tools/production_h7_revalidation.py`, `PRODUCTION_H7_REVALIDATION_RUNBOOK.md`); the two middle steps (worker + validate) need the box | **yes (run)** |
 
 ### A4 — the verified `stability_metrics` field contract (2026-07-03, tested without CuPy)
 Path, end to end:

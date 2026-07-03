@@ -1,5 +1,12 @@
 # Baseline Hardening Plan (Stage 2)
 
+> **STATUS (2026-07-03, authoritative):** `BASELINE_HARDENING_CLOSED` · `TRACK_A_PRODUCTION_ALIGNMENT_COMPLETE` ·
+> `PRODUCTION_H7_REVALIDATION_PASS` · `LIVE_ADAPTIVE_HUNTER_PENDING`. CuPy runs **locally in the repo `.venv`**
+> (`cupy 14.0.1`, GTX 1080) — there is **no separate machine**; A1/H4 parity and A5 both ran here and PASSED. The
+> frozen Phase C operator (`e8d6a78ea`) is the **dissipative** kinetic term `L_k = -D·k² - η + i·ω₀`; a
+> transport/dispersive kinetic operator is **not implemented** and belongs to a later Phase D RFC, not hardening.
+> Historical "CuPy box / pending parity" phrasing in the progress log below is **superseded** by this line.
+
 **Objective:** make the *existing* validated baseline as defensible and reproducible as possible. **No new
 physics, no new PDE terms, no new IRER assumptions.** Draws its backlog from `BASELINE_AUDIT.md`. Each item is
 tagged **docs-only** (safe to execute freely) or **code-change** (modifies the system → execute only on an
@@ -15,7 +22,7 @@ Discipline: **Phase C is preserved as the validated baseline** — hardening nev
 | H1 | **Preserve Phase C as validated baseline** — freeze marker + canonical object name | docs-only | none | this stage | supersede the stale "T=6000" naming in `RUNBOOK_PHASE_C_AND_VISUALS.md` |
 | H2 | **Baseline reproduction runbook** — reproduce the validated result from code | docs-only | none | **done this turn** → `BASELINE_REPRODUCTION_RUNBOOK.md` |
 | H3 | **Evidence off-box archive** — copy-script + manifest for the ~22 load-bearing runs | docs-only (+ user copy) | none | proposed | `EVIDENCE_INVENTORY.md` is the manifest; add a copy recipe; the actual off-box copy is a user action |
-| H4 | **Solver-parity artifact** — bit-level jax↔CuPy output comparison | code-change (test script; **runs on the CuPy box**) | low | proposed | RHS code-parity already confirmed (architecture audit); this closes the bit-level residual — script authorable here, runnable only where CuPy exists |
+| H4 | **Solver-parity artifact** — bit-level jax↔CuPy output comparison | code-change (test script; runs locally in `.venv`) | low | **DONE — PASSED** (`PARITY_WITHIN_TOL`, rel-L2 1.7e-12) | RHS code-parity (architecture audit) now corroborated by output parity |
 | H5 | **Gate-calibration summary** — consolidate the promotion criterion + caveats | docs-only | none | mostly-existing | `PHASE_C_STABILITY_GATE_CALIBRATION.md` + `..._GATE_V3_BREATHING...` exist; add the a\*-arc late-slope criterion + the single-exemplar caveat as a one-page summary |
 | H6 | **Validation-path reconciliation** — delineate (or bridge) the two paths | docs-only, optional small adapter (code) | low | proposed | document that `css.classify` is the gate and `validation_pipeline.py` is exploratory; decide whether to build the `.npz→HDF5` adapter or leave the paths explicitly separate |
 | H7 | **Hunter objective re-aim** — fitness prime-SSE → gain/loss-balance stability; redirect SGN/ASMT onto `param_a`/`eta`/`rho_vac` | **code-change** | medium | design-only until go-ahead | changes search behaviour → needs its **own re-validation** (does the re-aimed hunter re-find the a\* basin?); a tool change, not a physics change. **DESIGN NOTE (per user):** the re-aim must honour the project's refinement of the prime hypothesis from *spectral prime-harmonics* to **indivisibility** — structures do **not** divide when there is no clean/even division (an uneven split is energetically unfavourable). So the objective is not "seek prime spectra" (null) but "reward configurations whose stability reflects an indivisible/non-evenly-divisible balance"; treat prime-log-SSE as a retired proxy, not the target. |

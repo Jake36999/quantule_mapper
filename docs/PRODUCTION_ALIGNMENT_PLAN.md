@@ -20,8 +20,8 @@ separate, design-only RFC; **not** part of this track and must not touch the fro
    (Perf caveat: GTX 1080 FP64 ≈ 1:32, so FP64 is slow on both — a hardware limit.)
 2. **The two engines already share the kinetic term.** CuPy `L_k = -D·k² - η + i·ω₀` (`solver/core.py:97`,
    `complex128`, ω₀=0 at feb) is identical to the jax_scout mirror (`jax_scout/physics.py`). So there is **nothing
-   to update in the CuPy kinetic term** for alignment; parity is confirmed at the operator/RHS-code level. Only the
-   *bit-level output* run (A1) is still pending, and that needs the CuPy box, not a code change.
+   to update in the CuPy kinetic term** for alignment; parity is confirmed at the operator/RHS-code level, and the
+   *bit-level output* run (A1) has since PASSED locally (`PARITY_WITHIN_TOL`, rel-L2 1.7e-12).
 
 ## Track A steps
 

@@ -54,6 +54,24 @@ SGN_PROBABILITY = 0.25  # Base SGN probability (Dynamically altered by SBD)
 LAMBDA_CLASSICAL = 10.0
 LAMBDA_QUANTUM = 5.0
 
+# --- H7.1b: stability-mode search (objective="stability") ---
+# The re-aimed Hunter steers SELECTION by stability_score, restricted to the 3 validated-sensitive axes in a
+# NARROW box around the known a* basin; all other params held at the feb reference. NO SGN/ASMT/NSGA/spectral
+# steering, prime-SSE diagnostic only. Higher stability fitness = better (opposite of prime's lower-SSE-is-better).
+STABILITY_SEARCH_AXES = ("param_a", "param_eta", "param_rho_vac")
+STABILITY_FEB_PARAMS = {
+    "param_D": 2.7329, "param_eta": 0.0704, "param_rho_vac": 1.1866, "param_omega0": 0.0,
+    "param_a_coupling": 2.3098, "param_splash_coupling": 0.0129, "param_splash_fraction": -0.4861,
+    "param_a": 0.4802,
+}
+STABILITY_DEFAULT_BOUNDS = {
+    "param_a": [0.48, 0.60],           # feb 0.4802 .. feb*1.25 (brackets a*=0.5522)
+    "param_eta": [0.0598, 0.0810],     # feb 0.0704 * [0.85, 1.15]
+    "param_rho_vac": [1.068, 1.365],   # feb 1.1866 * [0.90, 1.15]
+}
+STABILITY_PARAM_KEYS = ["param_D", "param_eta", "param_rho_vac", "param_a_coupling",
+                        "param_splash_coupling", "param_splash_fraction", "param_a"]
+
 
 def _stability_fitness_from_provenance(prov_data):
     """H7 stability fitness (flag-gated path). Scores the run's `stability_metrics` with
@@ -746,7 +764,70 @@ class Hunter:
         return child
     # -----------------------------------------
 
+    def _generate_next_generation_stability(self, population_size: int, bounds: dict | None = None) -> list[dict]:
+        """H7.1b stability-mode generator. Selection = stability-fitness tournament (HIGHER=better) + bounded
+        Gaussian mutation on param_a/eta/rho_vac ONLY (all other params held at the parent/feb values). No
+        SGN/ASMT/NSGA/spectral steering; prime-SSE plays no role. Children carry no config_hash (the caller
+        assigns it, as in the prime path)."""
+        current_gen = self.get_current_generation()
+        active_bounds = bounds or STABILITY_DEFAULT_BOUNDS
+
+        def rand_indiv():
+            p = dict(STABILITY_FEB_PARAMS)
+            for ax in STABILITY_SEARCH_AXES:
+                lo, hi = active_bounds.get(ax, [p[ax], p[ax]])
+                p[ax] = random.uniform(lo, hi)
+            return p
+
+        with self._get_connection() as conn:
+            results = pd.read_sql_query(
+                "SELECT r.fitness, p.param_D, p.param_eta, p.param_rho_vac, p.param_a_coupling, "
+                "p.param_splash_coupling, p.param_splash_fraction, p.param_a "
+                "FROM runs r JOIN parameters p ON r.config_hash = p.config_hash "
+                "WHERE r.generation = ? AND r.status = 'completed' AND r.fitness IS NOT NULL",
+                conn, params=(current_gen,))
+
+        if results.empty:
+            print(f"[Hunter][stability] gen {current_gen}: no completed runs -> narrow-box random generation")
+            pop = []
+            for _ in range(population_size):
+                p = rand_indiv(); p['generation'] = current_gen + 1; p['origin'] = 'STABILITY_RANDOM'
+                pop.append(p)
+            return pop
+
+        results = results.sort_values("fitness", ascending=False).reset_index(drop=True)
+        n = len(results); fit = results["fitness"].astype(float).values
+
+        def base(i):
+            p = dict(STABILITY_FEB_PARAMS)
+            for k in STABILITY_PARAM_KEYS:
+                v = results.iloc[i][k]
+                if pd.notna(v):
+                    p[k] = float(v)
+            return p
+
+        def tournament(k=TOURNAMENT_SIZE):
+            cand = [random.randrange(n) for _ in range(min(k, n))]
+            return max(cand, key=lambda i: fit[i])
+
+        print(f"[Hunter][stability] gen {current_gen}: {n} completed, best fitness={fit[0]:.4f} "
+              f"(param_a={float(results.iloc[0]['param_a']):.4f})", flush=True)
+        nxt = []
+        elite = base(0); elite['generation'] = current_gen + 1; elite['origin'] = 'STABILITY_ELITE'
+        nxt.append(elite)                                              # elitism: carry the best unchanged
+        while len(nxt) < population_size:
+            child = base(tournament())
+            for ax in STABILITY_SEARCH_AXES:                          # mutate ONLY the 3 validated axes
+                lo, hi = active_bounds.get(ax, [child[ax], child[ax]])
+                child[ax] = float(min(hi, max(lo, child[ax] + random.gauss(0, MUTATION_STRENGTH * (hi - lo)))))
+            child['generation'] = current_gen + 1; child['origin'] = 'STABILITY_MUTATION'
+            nxt.append(child)
+        return nxt[:population_size]
+
     def generate_next_generation(self, population_size: int, bounds: dict | None = None) -> list[dict]:
+        if self.objective == "stability":
+            # H7.1b: stability search bypasses the spectral SGN/ASMT/NSGA machinery entirely.
+            return self._generate_next_generation_stability(population_size, bounds)
         current_gen = self.get_current_generation()
         if self.total_processed_runs > 0:
             rejection_rate = (self.prefilter_rejections / self.total_processed_runs) * 100

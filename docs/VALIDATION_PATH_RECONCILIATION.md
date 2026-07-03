@@ -7,7 +7,7 @@ canonical labelling and a decision on whether to bridge the paths later.
 | | Path 1 — **active Phase C gate** | Path 2 — **production pipeline** |
 |---|---|---|
 | entry | `core_saturation_search.classify` (`css.classify`, v3) | `validation_pipeline.py` (11-stage) |
-| runtime | jax_scout FP64 (WSL GPU) | CuPy production box |
+| runtime | jax_scout FP64 (WSL GPU) | CuPy production (`.venv` on this PC) |
 | input | `.npz` / in-memory `er(t)`, `psi_fin` | **HDF5** (`psi_final`/`config_hash`) |
 | what it does | energy-stability verdict (+ a\*-arc late-slope, mobility metrics) | spectral prime-SSE, TDA, falsifiability, empirical-bridge, tensor, Monte-Carlo |
 | status for Phase C | **the only gate every closed claim passed** | **never applied** to Phase C `.npz` output |

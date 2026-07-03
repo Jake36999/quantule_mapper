@@ -17,7 +17,7 @@ sys.path.insert(0, ROOT)
 from jax_scout import transfer_diag as td
 from jax_scout import afield_current_coupled as cc
 from jax_scout.afield_current_coupled import multiseed_ic, L
-from jax_scout.afield_payan_diagnostic import payan_observables, order
+from jax_scout._legacy.afield_payan_diagnostic import payan_observables, order
 
 SEED = 20260619
 N = 48

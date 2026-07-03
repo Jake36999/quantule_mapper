@@ -25,7 +25,7 @@ sys.path.insert(0, ROOT)
 from jax_scout import transfer_diag as td, geometry_diag as gd
 from jax_scout import afield_current_coupled as cc
 from jax_scout.afield_current_coupled import multiseed_ic, L as L_DEFAULT
-from jax_scout.afield_payan_diagnostic import order
+from jax_scout._legacy.afield_payan_diagnostic import order
 
 SEED = 20260619
 HASHES = {"stable": "feb56dc7", "unstable": "b31c0396"}

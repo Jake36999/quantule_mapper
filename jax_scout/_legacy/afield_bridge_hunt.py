@@ -53,7 +53,7 @@ STEPS, NSNAP, PRE_STEPS, PRE_NSNAP = 1600, 40, 400, 10
 
 
 L_ = cc.L
-from jax_scout.afield_current_tune import a_bridge_localization as cc_a_bridge_loc  # noqa: E402
+from jax_scout._legacy.afield_current_tune import a_bridge_localization as cc_a_bridge_loc  # noqa: E402
 
 
 def evaluate_one(par, g, kap, cA, N=48):

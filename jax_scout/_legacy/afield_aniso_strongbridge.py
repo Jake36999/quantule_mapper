@@ -24,7 +24,7 @@ jax.config.update("jax_enable_x64", True)
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, ROOT)
 from jax_scout import physics
-from jax_scout.afield_anisotropic import global_mode_aniso
+from jax_scout._legacy.afield_anisotropic import global_mode_aniso
 
 order = physics.SWEEP_PARAM_ORDER
 LAM, QSRC = 0.1, "stress"

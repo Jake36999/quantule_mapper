@@ -28,7 +28,7 @@ import jax
 jax.config.update("jax_enable_x64", True)
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, ROOT)
-from jax_scout.afield_payan_diagnostic import select_population, settle, payan_observables, phase_randomized
+from jax_scout._legacy.afield_payan_diagnostic import select_population, settle, payan_observables, phase_randomized
 
 # pre-registered thresholds
 DB_MIN, AUC_MIN, CTRL_MAX, BEAT_ALIGN = 0.15, 0.65, 0.10, 0.08

@@ -39,10 +39,15 @@ python tools/solver_parity_check.py compare parity/jax_ref.npz parity/cupy_ref.n
   orders across CuPy and JAX/XLA (small non-bit differences are normal and acceptable);
 - `PARITY_FAIL` — rel-L2 ≥ tol → investigate (a real operator divergence).
 
-## Status
-**PENDING the CuPy-box run (step 3).** Steps 1, 2, 4 are runnable now (make-ic verified on the dev box; the jax
-reference runs on WSL). **Do not claim bit-parity until `cupy_ref.npz` exists and `compare` passes.** Until then
-the established claim remains: *RHS code-parity confirmed; numeric output parity pending the production-box run.*
+## Status (2026-07-03)
+- Step 1 (`make-ic`) — **done** on the dev box → `parity/shared_ic.npz` (N=48, seed 12345).
+- Step 2 (`run --backend jax`) — **done** on WSL → `parity/jax_ref.npz` (200 steps, mass 672.79, max|psi| 0.965).
+- Step 3 (`run --backend cupy`) — **PENDING** (needs the CuPy production box).
+- Step 4 (`compare`) — **PENDING** step 3.
+
+**Do not claim bit-parity until `cupy_ref.npz` exists and `compare` passes.** Established claim remains: *RHS
+code-parity confirmed (both solvers share `calculate_nonlinear_rhs`, local, splash→s/f); the jax reference output
+exists; numeric output parity pending the production-box run.* (`parity/` is gitignored — artifacts stay local.)
 
 ## Guardrails honoured
 No solver behaviour change; read-only calls; the script constructs a throwaway IC and reads existing solver APIs

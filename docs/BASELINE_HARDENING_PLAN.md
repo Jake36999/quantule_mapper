@@ -18,7 +18,7 @@ Discipline: **Phase C is preserved as the validated baseline** — hardening nev
 | H4 | **Solver-parity artifact** — bit-level jax↔CuPy output comparison | code-change (test script; **runs on the CuPy box**) | low | proposed | RHS code-parity already confirmed (architecture audit); this closes the bit-level residual — script authorable here, runnable only where CuPy exists |
 | H5 | **Gate-calibration summary** — consolidate the promotion criterion + caveats | docs-only | none | mostly-existing | `PHASE_C_STABILITY_GATE_CALIBRATION.md` + `..._GATE_V3_BREATHING...` exist; add the a\*-arc late-slope criterion + the single-exemplar caveat as a one-page summary |
 | H6 | **Validation-path reconciliation** — delineate (or bridge) the two paths | docs-only, optional small adapter (code) | low | proposed | document that `css.classify` is the gate and `validation_pipeline.py` is exploratory; decide whether to build the `.npz→HDF5` adapter or leave the paths explicitly separate |
-| H7 | **Hunter objective re-aim** — fitness prime-SSE → gain/loss-balance stability; redirect SGN/ASMT onto `param_a`/`eta`/`rho_vac` | **code-change** | medium | design-only until go-ahead | changes search behaviour → needs its **own re-validation** (does the re-aimed hunter re-find the a\* basin?); a tool change, not a physics change |
+| H7 | **Hunter objective re-aim** — fitness prime-SSE → gain/loss-balance stability; redirect SGN/ASMT onto `param_a`/`eta`/`rho_vac` | **code-change** | medium | design-only until go-ahead | changes search behaviour → needs its **own re-validation** (does the re-aimed hunter re-find the a\* basin?); a tool change, not a physics change. **DESIGN NOTE (per user):** the re-aim must honour the project's refinement of the prime hypothesis from *spectral prime-harmonics* to **indivisibility** — structures do **not** divide when there is no clean/even division (an uneven split is energetically unfavourable). So the objective is not "seek prime spectra" (null) but "reward configurations whose stability reflects an indivisible/non-evenly-divisible balance"; treat prime-log-SSE as a retired proxy, not the target. |
 | H8 | **Dead-script archival** — move the 25 `afield/payan/bridge/corridor/transfer` scripts to `jax_scout/_legacy/` (or a manifest) | code-change (file moves) | low | proposed | falsified-hypothesis era; keeps the core 6 + recent `feb_*` clean. Lightweight repo, so moving is fine |
 | H9 | **Config/diagnostic fixes** — `param_rho_vac` default mismatch (0 vs 1.0); permissive `collapse_threshold` (1e10); `collapse_dynamics` 2-term heuristic | code-change (small, targeted) | low | design-only until go-ahead | each is an isolated fix; none touches the validated operator |
 | H10 | **Test gaps** — add solver-parity + mobility-script (`feb_kick_inertia`, `feb_adiabatic_drag`) coverage | code-change (tests) | low | proposed | strengthens the suite; no behaviour change |
@@ -32,3 +32,15 @@ Discipline: **Phase C is preserved as the validated baseline** — hardening nev
 Items H7 and H9 are marked **design-only until go-ahead** because they change behaviour/config; H4/H8/H10 are
 low-risk and can proceed on the general "free to proceed" grant. All of Stage 2 completes **before** any Stage-3
 `CAPABILITY_EXPANSION_RFC.md` is written — the validated dissipative baseline must be hardened and frozen first.
+
+## Progress (2026-07-03)
+**Done:** H1/H2/H3/H5/H6 (docs). **H4** — parity script + docs done; **jax reference produced**
+(`parity/jax_ref.npz`, N=48/200 steps); **CuPy-box run + `compare` PENDING** (needs the CuPy machine).
+**H8** — **24 legacy scripts moved** to `jax_scout/_legacy/` with cross-imports repointed; excluded the 3
+dependencies (`afield_current_coupled`, `transfer_diag` = live core deps; `afield_prototype` = test dep); live
+core + `afield_prototype` import verified intact on WSL. **H9b** — `collapse_threshold` 1e10→1e6 (4 configs +
+`solver/run.py`); guardrail only, validated jax_scout runs unaffected. **H9a** — the flagged `param_rho_vac`
+0-vs-1.0 default mismatch is **already resolved** (`orchestrator.contracts.DEFAULT_PARAM_RHO_VAC = 1.0`;
+`unified_omega`/`physics` also 1.0) — no change needed; the `IRER_MATH_REFERENCE` note is stale. **H10** —
+`tests/test_solver_parity_artifact.py` (5 pass, dev box) + `tests/test_mobility_metrics.py` (logic verified on
+WSL). **Held:** H4 CuPy run, H7 (hunter re-aim — see design note above), H8-further, H9 (any deeper config work).

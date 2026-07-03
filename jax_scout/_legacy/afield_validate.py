@@ -24,7 +24,7 @@ jax.config.update("jax_enable_x64", True)
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, ROOT)
 from jax_scout import physics
-from jax_scout.afield_current_tune import global_mode_under_A
+from jax_scout._legacy.afield_current_tune import global_mode_under_A
 base = physics.SWEEP_PARAM_ORDER
 
 

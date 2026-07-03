@@ -48,7 +48,7 @@ def run_simulation(
     # State is permanently held in Spectral Space
     psi_k = solver.fft_single(psi) * solver.dealias_mask
     
-    collapse_threshold = psi_params.get('collapse_threshold', 1e10)
+    collapse_threshold = psi_params.get("collapse_threshold", 1e6)
     force_nan_step_raw = os.environ.get("ASTE_FORCE_NAN_STEP", "").strip()
     force_nan_step = None
     if force_nan_step_raw:

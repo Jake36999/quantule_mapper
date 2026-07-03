@@ -34,6 +34,6 @@
     "L_domain": 10.0,
     "T_steps": 1200,
     "dt": 0.0005,
-    "collapse_threshold": 10000000000.0
+    "collapse_threshold": 1000000.0
   }
 }

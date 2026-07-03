@@ -36,9 +36,13 @@ Grouped by the hypothesis they explored, each **falsified / no-support** per the
 **Transfer diagnostics** (exploratory; the *live* `transfer_diag.py` is excluded above):
 `transfer_deepdive.py`, `transfer_null_control.py`.
 
-## Disposition
-- **Status:** inventory only. Files remain in `jax_scout/`.
-- **Proposed later action (H8, on explicit approval):** move the standalone candidates to `jax_scout/_legacy/`
-  (keeping git history), after (a) confirming none has become a dependency, and (b) extracting the two live
-  modules' still-used symbols into a core location if they are ever included in a move.
-- **Not proposed:** deletion. These document falsified directions and have provenance value.
+## Disposition — EXECUTED 2026-07-03 (H8)
+- **24 scripts moved** to `jax_scout/_legacy/` via `git mv` (history preserved); cross-imports to moved siblings
+  (`afield_anisotropic`, `afield_current_tune`, `afield_payan_diagnostic`) repointed to `jax_scout._legacy.*`.
+- **3 excluded (stayed in `jax_scout/`):** `afield_current_coupled` + `transfer_diag` (live core deps, above) and
+  **`afield_prototype`** — imported by `tests/test_afield_prototype.py` (`from jax_scout import afield_prototype`),
+  so it is a test dependency, not fully dead.
+- **Verified:** live core (`core_saturation_search`) and `afield_prototype` still import on WSL; all 24 moved
+  files compile; no live-code or test importer references a moved file.
+- **Not done:** deletion (these document falsified directions and keep provenance value). Any later resurrection
+  of a `_legacy` script needs its internal imports checked (siblings are now under `jax_scout._legacy.*`).

@@ -22,7 +22,7 @@ import plotly.graph_objects as go
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, ROOT)
 from jax_scout import physics, transfer_diag as td
-from jax_scout.afield_anisotropic import capture_aniso
+from jax_scout._legacy.afield_anisotropic import capture_aniso
 from jax_scout.afield_current_coupled import multiseed_ic, L, order
 
 BASE_SEED, SETTLE, N = 20260619, 800, 48

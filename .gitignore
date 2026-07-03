@@ -71,3 +71,9 @@ stop_after_gen.txt
 .branch_salvage/
 README - Copy.md
 Equantule_mapper_manifest.csv
+
+# parity check artifacts (H4)
+parity/
+# stray artifact-named files
+Equantule_mappervalidation_pipeline.py
+"E*quantule_mapper*validation_pipeline.py"

@@ -328,6 +328,37 @@ def provenance_path_for_artifact(output_dir: str, artifact_path: Optional[str], 
     return os.path.join(output_dir, provenance_filename(config_hash, seed, run_id, utc_date))
 
 
+def resolve_provenance_report(
+    output_dir: str,
+    config_hash: str,
+    artifact_path: Optional[str] = None,
+) -> Optional[str]:
+    """Resolve the provenance JSON a *reader* (e.g. aste_hunter) should open for a config_hash.
+
+    The writer (validation_pipeline) folds seed/run_id/utc into the filename via
+    ``provenance_path_for_artifact`` when the artifact carries an /identity group, so a reader that only
+    knows the config_hash cannot assume the plain ``provenance_{config_hash}.json`` name. This centralises the
+    lookup so writer and reader share one contract, while staying backward-compatible with legacy plain files.
+
+    Preference:
+      1. the exact identity-folded path (when ``artifact_path`` is provided and exists on disk);
+      2. otherwise the most-recently-written existing file among the plain name and the folded
+         ``provenance_{config_hash}_*.json`` variants (the ``_`` separator makes the glob hash-collision-safe).
+    Returns an existing path, or ``None`` when nothing matches (caller decides the safe-failure action).
+    """
+    import glob as _glob
+    if artifact_path:
+        exact = provenance_path_for_artifact(output_dir, artifact_path, config_hash)
+        if exact and os.path.exists(exact):
+            return exact
+    candidates = [os.path.join(output_dir, f"provenance_{config_hash}.json")]
+    candidates += _glob.glob(os.path.join(output_dir, f"provenance_{config_hash}_*.json"))
+    existing = [p for p in candidates if os.path.exists(p)]
+    if not existing:
+        return None
+    return max(existing, key=os.path.getmtime)
+
+
 # ---------------------------------------------------------------------------
 # Solver helper: k=0 zero-mode projection (array-library agnostic)
 # ---------------------------------------------------------------------------

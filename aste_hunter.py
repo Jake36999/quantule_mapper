@@ -10,6 +10,7 @@ import numpy as np
 import pandas as pd
 from collections import OrderedDict
 from orchestrator.schema_utils import initialize_ledger_schema, ensure_ledger_ready
+from orchestrator.run_identity import resolve_provenance_report
 
 try:
     from sklearn.cluster import DBSCAN
@@ -303,8 +304,11 @@ class Hunter:
         with self._get_connection() as conn:
             cursor = conn.cursor()
             for config_hash in job_hashes:
-                prov_path = os.path.join(provenance_dir, f"provenance_{config_hash}.json")
-                if not os.path.exists(prov_path):
+                # Shared provenance-resolution contract (run_identity.resolve_provenance_report): tolerates the
+                # seed/run_id-folded filename the writer produces for identity-stamped artifacts, while staying
+                # backward-compatible with legacy plain provenance_{config_hash}.json. Applies to BOTH objectives.
+                prov_path = resolve_provenance_report(provenance_dir, config_hash)
+                if not prov_path:
                     self.execute_with_retry(cursor, "UPDATE runs SET status='failed' WHERE config_hash=?", (config_hash,))
                     continue
                 try:

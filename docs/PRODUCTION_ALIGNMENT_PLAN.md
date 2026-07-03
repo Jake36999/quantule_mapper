@@ -26,8 +26,9 @@ bottom. It is **not** part of this track and must not touch the frozen Phase C o
 | A1 | **H4 CuPy bit-parity run** — `python tools/solver_parity_check.py run --backend cupy` then `compare` vs `parity/jax_ref.npz`; record `BIT_PARITY` / `PARITY_WITHIN_TOL` / `PARITY_FAIL` in `SOLVER_PARITY_ARTIFACT.md` | recipe + jax reference staged; **run pending** | **yes** — run-and-record only |
 | A2 | **Operator audit** — `worker_cupy.py` / `solver/core.py` / `solver/run.py` / `gravity/unified_omega.py` vs the frozen Phase C operator (`e8d6a78ea`) | done at code level (BASELINE_AUDIT §1.4: shared local cubic-quintic-septic RHS, splash→s/f alias, uncoupled field-of-affect); re-confirmed `L_k` this session | no |
 | A3 | **CuPy `stability_metrics` emission** — production run emits the objective's metrics into provenance, no physics change | **DONE this session (code)** — see below; **needs a box run** to produce a real artifact | code done; **box run pending** |
-| A4 | **Wire Hunter to consume production metrics** — objective fitness from `prov_data["stability_metrics"]` | **DONE this session** — carry-through wired + tested (6 tests); see field contract below | no (wiring check) |
-| A5 | **Production H7 re-validation** — a small CuPy hunt/replay must: re-find a\*≈×1.15; recover matched controls; **not** promote T12000 short-window artifacts; and keep `css.classify` as the certifier | gated on A1+A3+A4 | **yes** |
+| A4 | **Wire Hunter to consume production metrics** — objective fitness from `prov_data["stability_metrics"]` | **DONE** — carry-through wired + tested (6 tests); see field contract below | no (wiring check) |
+| A4b | **Provenance-filename reconciliation** — one shared resolver so the Hunter reads the file the writer wrote (identity-folded names) | **DONE** — `resolve_provenance_report` + Hunter rewire + 7 tests; see below | no |
+| A5 | **Production H7 re-validation** — a small CuPy hunt/replay must: re-find a\*≈×1.15; recover matched controls; **not** promote T12000 short-window artifacts; and keep `css.classify` as the certifier | gated on A1+A3+A4/A4b | **yes** |
 
 ### A4 — the verified `stability_metrics` field contract (2026-07-03, tested without CuPy)
 Path, end to end:
@@ -47,12 +48,23 @@ Path, end to end:
   dataset → `None` (no raise). Verified by `tests/test_stability_metrics_provenance.py` (6 pass, no cupy).
 - **Backward-compatible:** default `objective="prime"` is unchanged; the new key is purely additive (the prime
   consumer still reads `spectral_fidelity` untouched).
-- **Pre-existing seam to flag (NOT introduced or fixed here — out of A4 scope):** the writer resolves the
-  provenance filename via `run_identity.provenance_path_for_artifact`, which **folds seed/run_id/utc into the name
-  when the artifact carries an `/identity` group**, whereas `aste_hunter.process_generation_results` reads the
-  **plain** `provenance_{config_hash}.json`. This affects the *entire* provenance read (spectral_fidelity too), so
-  `stability_metrics` rides the exact same rails as the existing prime path — but reconciling that filename
-  resolution is a shared production-path item for A5, independent of the stability metric carry-through.
+- **Provenance-filename seam — RESOLVED in A4b (below).** The writer folds seed/run_id/utc into the filename
+  (`run_identity.provenance_path_for_artifact`) when the artifact carries an `/identity` group, whereas the Hunter
+  historically read the plain `provenance_{config_hash}.json`. Since this affected the *entire* provenance read
+  (spectral_fidelity too), it was fixed as a shared resolution contract, not a stability-only patch.
+
+### A4b — provenance-filename reconciliation (2026-07-03, code-only, no GPU)
+Single shared resolver so writer and reader agree on the filename, backward-compatible with legacy plain files:
+- **`orchestrator/run_identity.py`** — new `resolve_provenance_report(output_dir, config_hash, artifact_path=None)`:
+  prefers the exact identity-folded path (when an artifact is available), else returns the most-recently-written
+  existing file among the plain name and the `provenance_{config_hash}_*.json` folded variants (the `_` separator
+  makes the glob hash-collision-safe). Returns `None` when nothing matches (caller decides the safe failure).
+- **`aste_hunter.process_generation_results`** — now resolves via `resolve_provenance_report` for **both**
+  objectives (was a hardcoded plain name); missing → `status='failed'` (unchanged safe behaviour).
+- **`tests/test_provenance_resolution.py`** — 7 pass, no cupy: plain-legacy resolves; identity-folded is
+  discoverable; missing → `None`; no cross-config hash-collision; **Hunter stability mode** reads `stability_metrics`
+  from a folded file (fitness > 0); **Hunter prime mode** reads `spectral_fidelity` from a folded file
+  (`status='completed'`); missing provenance fails safely (`status='failed'`).
 
 ### A3 detail — what shipped this session (code-only, no GPU)
 - **`solver/stability_metrics.py`** — pure-numpy (no cupy/jax) reduction of a run's **raw** energy trajectory

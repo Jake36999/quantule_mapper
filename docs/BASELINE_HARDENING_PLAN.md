@@ -87,9 +87,13 @@ HDF5 + result payload; **no physics change**, py_compile-checked) + `tests/test_
 reads HDF5 `/stability_metrics` into the provenance report top-level key (peer of `spectral_fidelity`), which
 `aste_hunter._stability_fitness_from_provenance` already consumes. `tests/test_stability_metrics_provenance.py` 6 pass
 (no cupy): emit→assemble→prov_data→consume survives verbatim; absent metrics → `NO_STABILITY_METRICS` non-promotion
-(never prime fallback); grower carried + hard-rejected; prime default backward-compatible. Field contract in
-`PRODUCTION_ALIGNMENT_PLAN.md`; flagged a **pre-existing shared seam** (writer folds seed/run_id into the provenance
-filename via `provenance_path_for_artifact`, Hunter reads the plain name — affects the prime path too, deferred to A5).
-**Remaining Track A (needs the CuPy box): A1 H4 bit-parity run, first real CuPy artifact with `/stability_metrics`, A5
-production H7 re-validation.** A2 operator audit done at code level. **Track B (Phase D kinetic RFC) deferred** — a
-formalism decision, not a patch.
+(never prime fallback); grower carried + hard-rejected; prime default backward-compatible. Field contract in `PRODUCTION_ALIGNMENT_PLAN.md`.
+**A4b done (code-only, no GPU): provenance-filename seam RESOLVED.** New `run_identity.resolve_provenance_report`
+(single shared resolver: prefers the identity-folded path, else most-recent of plain +
+`provenance_{hash}_*.json`, collision-safe, `None` when absent) + `aste_hunter.process_generation_results` rewired
+to use it for **both** objectives (was a hardcoded plain name). `tests/test_provenance_resolution.py` 7 pass (no
+cupy): plain-legacy resolves; identity-folded discoverable; missing→None/`failed`; no cross-config collision; Hunter
+**stability** reads stability_metrics from a folded file (fitness>0); Hunter **prime** reads spectral_fidelity from a
+folded file (completed). **Remaining Track A (needs the CuPy box): A1 H4 bit-parity run, first real CuPy artifact
+with `/stability_metrics`, A5 production H7 re-validation.** A2 operator audit done at code level. **Track B (Phase D
+kinetic RFC) deferred** — a formalism decision, not a patch.

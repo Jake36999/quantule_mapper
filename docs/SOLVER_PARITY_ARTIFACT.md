@@ -16,20 +16,21 @@ non-local Field of Affect is *computed but uncoupled* in both baselines (`solver
 compares the field after N steps (isolates *solver* differences from IC-RNG differences). Modes: `make-ic` (pure
 numpy), `run --backend {jax,cupy}`, `compare`.
 
-## Exact procedure (three boxes)
+## Exact procedure (all local to this PC — no separate machine)
 ```bash
-# 1. anywhere (numpy only — runs on the Windows dev box):
+# 1. numpy only (any python):
 python tools/solver_parity_check.py make-ic --N 48 --seed 12345 --out parity/shared_ic.npz
 
-# 2. WSL Ubuntu (jax_scout venv):
+# 2. jax_scout mirror — WSL Ubuntu (jax_irer venv):
 wsl.exe -d Ubuntu -- bash -c "cd /mnt/f/quantule_mapper && source ~/jax_irer/bin/activate && \
   python tools/solver_parity_check.py run --backend jax --ic parity/shared_ic.npz --steps 200 --out parity/jax_ref.npz"
 
-# 3. CuPy PRODUCTION box (has cupy + solver/):
-python tools/solver_parity_check.py run --backend cupy --ic parity/shared_ic.npz --steps 200 --out parity/cupy_ref.npz
+# 3. CuPy production — the repo .venv on THIS PC (cupy 14.0.1 + solver/); NOT the PATH system python:
+CUDA_VISIBLE_DEVICES=0 .venv/Scripts/python.exe tools/solver_parity_check.py run --backend cupy \
+  --ic parity/shared_ic.npz --steps 200 --out parity/cupy_ref.npz
 
-# 4. anywhere (numpy only):
-python tools/solver_parity_check.py compare parity/jax_ref.npz parity/cupy_ref.npz
+# 4. numpy only:
+.venv/Scripts/python.exe tools/solver_parity_check.py compare parity/jax_ref.npz parity/cupy_ref.npz
 ```
 
 ## Acceptance
@@ -39,19 +40,21 @@ python tools/solver_parity_check.py compare parity/jax_ref.npz parity/cupy_ref.n
   orders across CuPy and JAX/XLA (small non-bit differences are normal and acceptable);
 - `PARITY_FAIL` — rel-L2 ≥ tol → investigate (a real operator divergence).
 
-## Status (2026-07-03)
-- Step 1 (`make-ic`) — **done** on the dev box → `parity/shared_ic.npz` (N=48, seed 12345).
-- Step 2 (`run --backend jax`) — **done** on WSL → `parity/jax_ref.npz` (200 steps, mass 672.79, max|psi| 0.965).
-- Step 3 (`run --backend cupy`) — **PENDING — environment-blocked from the agent session.** Verified 2026-07-03:
-  CuPy is not importable in any agent-reachable environment (Windows dev, WSL `jax_irer` venv, WSL system). The
-  CuPy production solver requires the dedicated production box, which this session cannot reach. **This step must
-  be run by the operator on the CuPy box:**
-  `python tools/solver_parity_check.py run --backend cupy --ic parity/shared_ic.npz --steps 200 --out parity/cupy_ref.npz`
-- Step 4 (`compare`) — **PENDING** step 3: `python tools/solver_parity_check.py compare parity/jax_ref.npz parity/cupy_ref.npz`
+## Status (2026-07-03) — H4/A1 COMPLETE, PASSED
+- Step 1 (`make-ic`) — done → `parity/shared_ic.npz` (N=48, seed 12345).
+- Step 2 (`run --backend jax`) — done on WSL → `parity/jax_ref.npz` (200 steps, mass 672.79, max|psi| 0.965).
+- Step 3 (`run --backend cupy`) — **done, locally in `.venv`** → `parity/cupy_ref.npz` (200 steps, mass 672.789,
+  max|psi| 0.965329). *(Earlier "environment-blocked / needs a CuPy box" note was WRONG — it tested the PATH system
+  python whose cupy is broken (numpy-ABI). The production env is the repo `.venv`: cupy 14.0.1, GTX 1080.)*
+- Step 4 (`compare`) — **done → `PARITY_WITHIN_TOL`**:
+  ```
+  max_abs_diff = 4.581e-13   rel-L2 = 1.735e-12   tol=1.0e-06  ->  PARITY_WITHIN_TOL
+  ```
 
-**Do not claim bit-parity until `cupy_ref.npz` exists and `compare` passes.** Established claim remains: *RHS
-code-parity confirmed (both solvers share `calculate_nonlinear_rhs`, local, splash→s/f); the jax reference output
-exists; numeric output parity pending the production-box run.* (`parity/` is gitignored — artifacts stay local.)
+**Result: rel-L2 = 1.7e-12** (≈ machine precision for FP64 across two ETDRK4/FFT implementations). Bit-level residual
+**closed** — RHS code-parity (architecture audit) is now corroborated by numeric output parity; the production
+`solver.core.ETDRK4Solver` and the jax_scout mirror evolve identically from the shared IC. (Also fixed a cp1252
+console `UnicodeEncodeError` in `compare`'s output — cosmetic.) `parity/` stays gitignored — artifacts local.
 
 ## Guardrails honoured
 No solver behaviour change; read-only calls; the script constructs a throwaway IC and reads existing solver APIs

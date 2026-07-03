@@ -5,14 +5,14 @@ Feeds the SAME deterministic initial field + params to both solvers and compares
 Isolates *solver* differences from IC-RNG differences by using one shared IC array (built once, saved). This
 script only CALLS the existing public solver paths read-only — it changes no solver behaviour.
 
-Neither backend runs on the Windows dev box (no cupy/jax). Workflow across the three boxes:
-  1. anywhere (numpy):   python tools/solver_parity_check.py make-ic  --N 48 --out parity/shared_ic.npz
-  2. WSL (jax_scout):    python tools/solver_parity_check.py run --backend jax  --ic parity/shared_ic.npz --steps 200 --out parity/jax_ref.npz
-  3. CuPy production box: python tools/solver_parity_check.py run --backend cupy --ic parity/shared_ic.npz --steps 200 --out parity/cupy_ref.npz
-  4. anywhere (numpy):   python tools/solver_parity_check.py compare parity/jax_ref.npz parity/cupy_ref.npz
+Both backends run locally on this PC (cupy via the repo .venv; jax via the WSL jax_irer venv). Workflow:
+  1. numpy (any python):        python tools/solver_parity_check.py make-ic  --N 48 --out parity/shared_ic.npz
+  2. jax mirror (WSL jax_irer): python tools/solver_parity_check.py run --backend jax  --ic parity/shared_ic.npz --steps 200 --out parity/jax_ref.npz
+  3. cupy production (.venv):   .venv/Scripts/python.exe tools/solver_parity_check.py run --backend cupy --ic parity/shared_ic.npz --steps 200 --out parity/cupy_ref.npz
+  4. numpy (any python):        python tools/solver_parity_check.py compare parity/jax_ref.npz parity/cupy_ref.npz
 
-Do NOT claim bit-parity until step 3 (the CuPy-box run) has actually produced cupy_ref.npz and step 4 passes.
-See docs/SOLVER_PARITY_ARTIFACT.md.
+Run cupy with the repo .venv python (NOT the PATH system python, whose cupy is a broken numpy-ABI build).
+See docs/SOLVER_PARITY_ARTIFACT.md (H4/A1 PASSED: PARITY_WITHIN_TOL, rel-L2 1.7e-12).
 """
 import os, sys, argparse, json
 import numpy as np
@@ -87,11 +87,11 @@ def cmd_compare(args):
     max_abs = float(d.max()); l2_rel = float(np.linalg.norm(d) / (np.linalg.norm(pb) + 1e-30))
     print(f"compare {os.path.basename(args.a)} vs {os.path.basename(args.b)}:")
     print(f"  backends: {a['backend']} vs {b['backend']}  steps: {a['steps']}/{b['steps']}  N={a['N']}")
-    print(f"  max|Δ| = {max_abs:.3e}   rel-L2 = {l2_rel:.3e}")
+    print(f"  max_abs_diff = {max_abs:.3e}   rel-L2 = {l2_rel:.3e}")
     tol = args.tol
     verdict = "BIT_PARITY" if max_abs == 0.0 else ("PARITY_WITHIN_TOL" if l2_rel < tol else "PARITY_FAIL")
     print(f"  tol(rel-L2)={tol:.1e}  ->  {verdict}")
-    print("  NOTE: only meaningful once BOTH artifacts are from real backend runs (jax on WSL, cupy on the CuPy box).")
+    print("  NOTE: meaningful only when BOTH artifacts are real backend runs (jax on WSL jax_irer, cupy in the repo .venv).")
 
 
 def main():

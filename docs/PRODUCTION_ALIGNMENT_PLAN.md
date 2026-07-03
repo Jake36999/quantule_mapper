@@ -1,12 +1,16 @@
 # Production Alignment Plan (Track A) — bring the CuPy production stack up to the re-aimed objective
 
-**Why this exists.** The H7 re-aim was validated on the **jax_scout** path because that is the only runtime
-reachable from the dev session (no CuPy in the Windows python, the WSL `jax_irer` venv, or the WSL system). That
-is a real *split-brain risk*: the objective logic is proven on the mirror, but the **production CuPy stack** —
+**Why this exists.** The H7 re-aim was first validated on the **jax_scout** mirror. The **production CuPy stack** —
 `worker_daemon.py` → [`worker_cupy.py`](../worker_cupy.py) → `solver/` + `gravity/unified_omega.py` → HDF5
-provenance → Hunter orchestration — has not yet been re-aimed end to end. This plan closes that gap **without any
-physics change**. (Track B — the *kinetic-operator* formalism question — is a separate, design-only RFC; see the
-bottom. It is **not** part of this track and must not touch the frozen Phase C operator.)
+provenance → Hunter orchestration — must be re-aimed end to end so the two don't diverge (*split-brain risk*). This
+plan closes that gap **without any physics change**. (Track B — the *kinetic-operator* formalism question — is a
+separate, design-only RFC; **not** part of this track and must not touch the frozen Phase C operator.)
+
+> **ENVIRONMENT CORRECTION (2026-07-03).** There is **NO separate "CuPy box".** The CuPy production engine runs on
+> **this PC** via the repo **`.venv`** (`cupy 14.0.1`, GTX 1080; `launch_all.ps1:10`/`.bat:5` use
+> `.venv\Scripts\python.exe`). The earlier "no reachable CuPy" claim tested the wrong python (the PATH system python,
+> whose cupy is a broken numpy-ABI build). **All Track-A steps run locally in `.venv`** — none needs another machine.
+> **A1/H4 parity has now RUN and PASSED here** (`PARITY_WITHIN_TOL`, rel-L2 1.7e-12; see `SOLVER_PARITY_ARTIFACT.md`).
 
 ## Two facts that frame the work (verified 2026-07-03, at source)
 1. **Both engines are FP64.** jax_scout runs `jax_enable_x64=True` / `complex128`; CuPy is `complex128`
@@ -21,14 +25,14 @@ bottom. It is **not** part of this track and must not touch the frozen Phase C o
 
 ## Track A steps
 
-| # | step | state | needs the CuPy box? |
+| # | step | state | run location |
 |---|---|---|---|
-| A1 | **H4 CuPy bit-parity run** — `python tools/solver_parity_check.py run --backend cupy` then `compare` vs `parity/jax_ref.npz`; record `BIT_PARITY` / `PARITY_WITHIN_TOL` / `PARITY_FAIL` in `SOLVER_PARITY_ARTIFACT.md` | recipe + jax reference staged; **run pending** | **yes** — run-and-record only |
-| A2 | **Operator audit** — `worker_cupy.py` / `solver/core.py` / `solver/run.py` / `gravity/unified_omega.py` vs the frozen Phase C operator (`e8d6a78ea`) | done at code level (BASELINE_AUDIT §1.4: shared local cubic-quintic-septic RHS, splash→s/f alias, uncoupled field-of-affect); re-confirmed `L_k` this session | no |
-| A3 | **CuPy `stability_metrics` emission** — production run emits the objective's metrics into provenance, no physics change | **DONE this session (code)** — see below; **needs a box run** to produce a real artifact | code done; **box run pending** |
-| A4 | **Wire Hunter to consume production metrics** — objective fitness from `prov_data["stability_metrics"]` | **DONE** — carry-through wired + tested (6 tests); see field contract below | no (wiring check) |
-| A4b | **Provenance-filename reconciliation** — one shared resolver so the Hunter reads the file the writer wrote (identity-folded names) | **DONE** — `resolve_provenance_report` + Hunter rewire + 7 tests; see below | no |
-| A5 | **Production H7 re-validation** — replay a\*≈×1.15 + matched controls + a short-window probe on the CuPy path; re-find a\*, controls below, no T12000 promotion; `css.classify` stays certifier | **harness + evaluator PREPARED + tested** (`tools/production_h7_revalidation.py`, `PRODUCTION_H7_REVALIDATION_RUNBOOK.md`); the two middle steps (worker + validate) need the box | **yes (run)** |
+| A1 | **H4 CuPy bit-parity run** — `run --backend cupy` then `compare` vs `parity/jax_ref.npz` | **DONE & PASSED** — `PARITY_WITHIN_TOL`, rel-L2 1.7e-12 (`SOLVER_PARITY_ARTIFACT.md`) | `.venv` (local) |
+| A2 | **Operator audit** — `worker_cupy.py` / `solver/core.py` / `solver/run.py` / `gravity/unified_omega.py` vs the frozen Phase C operator (`e8d6a78ea`) | done at code level (BASELINE_AUDIT §1.4: shared local cubic-quintic-septic RHS, splash→s/f alias, uncoupled field-of-affect); re-confirmed `L_k` this session | local |
+| A3 | **CuPy `stability_metrics` emission** — production run emits the objective's metrics into provenance, no physics change | **DONE (code)** — see below; needs a real `.venv` worker run to produce a first artifact | `.venv` (local) |
+| A4 | **Wire Hunter to consume production metrics** — objective fitness from `prov_data["stability_metrics"]` | **DONE** — carry-through wired + tested (6 tests); see field contract below | local |
+| A4b | **Provenance-filename reconciliation** — one shared resolver so the Hunter reads the file the writer wrote (identity-folded names) | **DONE** — `resolve_provenance_report` + Hunter rewire + 7 tests; see below | local |
+| A5 | **Production H7 re-validation** — replay a\*≈×1.15 + matched controls + a short-window probe on the CuPy path; re-find a\*, controls below, no T12000 promotion; `css.classify` stays certifier | **harness + evaluator PREPARED + tested** (`tools/production_h7_revalidation.py`, `PRODUCTION_H7_REVALIDATION_RUNBOOK.md`); worker + validate steps run in `.venv` | `.venv` (local) |
 
 ### A4 — the verified `stability_metrics` field contract (2026-07-03, tested without CuPy)
 Path, end to end:

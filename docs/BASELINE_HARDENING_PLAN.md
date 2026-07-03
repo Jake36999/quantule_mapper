@@ -99,6 +99,10 @@ folded file (completed). **A5 PREPARED (code-only, no GPU): production re-valida
 probe, feb-frozen, N=96/dt=0.005/T=36000 for jax_scout parity; `evaluate` scores the resulting provenance via the
 stability objective + shared resolver and prints PASS/REVIEW) + `docs/PRODUCTION_H7_REVALIDATION_RUNBOOK.md` (box
 steps + PASS criteria + the cross-IC caveat: production single-Gaussian IC ≠ jax_scout multiseed). Evaluator
-unit-tested (`tests/test_production_h7_revalidation.py` 6 pass, no cupy). **Remaining Track A (needs the CuPy box): A1
-H4 bit-parity run, then run the A5 harness (worker + validate steps) → evaluate.** A2 operator audit done at code
-level. **Track B (Phase D kinetic RFC) deferred** — a formalism decision, not a patch.
+unit-tested (`tests/test_production_h7_revalidation.py` 6 pass, no cupy).
+**ENVIRONMENT CORRECTION + A1 DONE (2026-07-03):** there is **no separate "CuPy box"** — CuPy runs on THIS PC via the
+repo `.venv` (`cupy 14.0.1`, GTX 1080; the earlier "no reachable CuPy" note tested the wrong PATH python). **A1/H4
+parity RAN locally in `.venv` and PASSED: `PARITY_WITHIN_TOL`, rel-L2 1.7e-12** (production `ETDRK4Solver` ≡ jax mirror
+to ~machine precision; `SOLVER_PARITY_ARTIFACT.md`). **Remaining Track A (all local in `.venv`): run the A5 harness
+(worker + validate) → evaluate.** A2 operator audit done at code level. **Track B (Phase D kinetic RFC) deferred** — a
+formalism decision, not a patch.

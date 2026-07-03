@@ -1,9 +1,11 @@
-# Production H7 Re-Validation Runbook (A5) — CuPy box
+# Production H7 Re-Validation Runbook (A5) — local CuPy (`.venv`)
 
-**Status:** *prepared, not yet run.* The harness + evaluator are built and unit-tested on the dev box
+**Status:** *prepared, not yet run.* The harness + evaluator are built and unit-tested
 ([`tools/production_h7_revalidation.py`](../tools/production_h7_revalidation.py),
-`tests/test_production_h7_revalidation.py` 6 pass, no cupy). Execution of the middle two steps needs the **CuPy
-production box**. This is the last A-track gate before the production Hunter re-aim can be called *validated*.
+`tests/test_production_h7_revalidation.py` 6 pass, no cupy). **All steps run locally on this PC** — the worker +
+validate steps use the repo **`.venv`** (`cupy 14.0.1`, GTX 1080); there is **no separate machine**. Prefix CuPy
+commands with `.venv/Scripts/python.exe` (NOT the PATH system python). This is the last A-track gate before the
+production Hunter re-aim can be called *validated*. (A1/H4 parity has already PASSED here — `PARITY_WITHIN_TOL`.)
 
 **Question (production analog of the jax_scout re-discovery PASS):** with production `stability_metrics` now
 flowing worker → HDF5 → `validation_pipeline` → provenance → Hunter (A3/A4/A4b), does the re-aimed objective
@@ -26,24 +28,26 @@ feb params are frozen (`= core_saturation_search.FEB`); only `param_a` varies. `
 | `grower_longT` | matched control | 0.60025 (feb×1.25) | 36000 | below a\* (grows / band-penalised) |
 | `astar_shortT` | window-artifact probe | 0.55223 (feb×1.15) | 12000 | **NOT certifiable** (window gate) |
 
-## Steps
+## Steps (all local; PY=.venv python for the CuPy steps)
 ```bash
-# 0. Dev box (or the CuPy box): write the worker configs
+PY=".venv/Scripts/python.exe"   # the repo venv with cupy 14.0.1; NOT the PATH system python
+
+# 0. write the worker configs (numpy only)
 python tools/production_h7_revalidation.py build-configs --out a5_configs
 #    -> a5_configs/<cell>.params.json  (worker_cupy --params shape) + cells_index.json
 
-# 1. CuPy box: run each cell through the production worker (writes HDF5 with /stability_metrics)
+# 1. run each cell through the production worker in .venv (writes HDF5 with /stability_metrics)
 for cell in astar_longT decayer_longT grower_longT astar_shortT; do
-  python worker_cupy.py --params a5_configs/$cell.params.json --output a5_artifacts/$cell.h5
+  CUDA_VISIBLE_DEVICES=0 "$PY" worker_cupy.py --params a5_configs/$cell.params.json --output a5_artifacts/$cell.h5
 done
 
-# 2. CuPy box: validate each artifact -> provenance_reports/provenance_{config_hash}[_folded].json
+# 2. validate each artifact in .venv -> provenance_reports/provenance_{config_hash}[_folded].json
 #    (validation_pipeline carries /stability_metrics into the report; A4)
 for cell in astar_longT decayer_longT grower_longT astar_shortT; do
-  python validation_pipeline.py a5_artifacts/$cell.h5
+  "$PY" validation_pipeline.py a5_artifacts/$cell.h5
 done
 
-# 3. Dev box or CuPy box: score the provenance reports and print the verdict (no CuPy needed)
+# 3. score the provenance reports and print the verdict (numpy only)
 python tools/production_h7_revalidation.py evaluate --provenance-dir provenance_reports --json-out a5_verdict.json
 ```
 
@@ -69,5 +73,5 @@ the jax_scout spec): a control out-ranks a\*, or a short-window run certifies, o
   result stands at T=36000/72000/144000.
 
 ## On success
-Only after this PASSes on the box may the status advance from `HUNTER_REAIM_OBJECTIVE_VALIDATED_ON_JAX_SCOUT` to a
+Only after this PASSes (locally in `.venv`) may the status advance from `HUNTER_REAIM_OBJECTIVE_VALIDATED_ON_JAX_SCOUT` to a
 production-validated re-aim. Until then: `HUNTER_PRODUCTION_DEPLOYMENT_PENDING`.

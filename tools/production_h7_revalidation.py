@@ -1,4 +1,4 @@
-"""A5 -- production H7 re-validation harness (prepares the CuPy-box run; the evaluator is reachable now).
+"""A5 -- production H7 re-validation harness (runs locally in the repo .venv; no separate machine).
 
 Question (same as the jax_scout re-discovery, but on the PRODUCTION CuPy path): with production `stability_metrics`
 now flowing worker -> HDF5 -> validation_pipeline -> provenance -> Hunter (A3/A4/A4b), does the re-aimed objective
@@ -9,8 +9,8 @@ Two commands:
   build-configs --out DIR    # writes worker_cupy `--params` JSON per cell (pure python, no CuPy)
   evaluate --provenance-dir DIR   # scores the resulting provenance reports and prints the A5 verdict (no CuPy)
 
-Between them, on the CuPy box, the operator runs each cell through worker_cupy + validation_pipeline (see
-docs/PRODUCTION_H7_REVALIDATION_RUNBOOK.md). jax-free; runs anywhere.
+Between them, in the repo .venv (.venv/Scripts/python.exe; cupy 14.0.1, local), each cell runs through
+worker_cupy + validation_pipeline (see docs/PRODUCTION_H7_REVALIDATION_RUNBOOK.md). This driver is jax-free.
 """
 import os, sys, json, argparse
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

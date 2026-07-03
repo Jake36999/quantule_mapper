@@ -1,0 +1,34 @@
+# Baseline Hardening Plan (Stage 2)
+
+**Objective:** make the *existing* validated baseline as defensible and reproducible as possible. **No new
+physics, no new PDE terms, no new IRER assumptions.** Draws its backlog from `BASELINE_AUDIT.md`. Each item is
+tagged **docs-only** (safe to execute freely) or **code-change** (modifies the system → execute only on an
+explicit go-ahead; audit discipline is over, but changes still need sign-off).
+
+Discipline: **Phase C is preserved as the validated baseline** — hardening never alters the frozen operator
+(`e8d6a78ea`) or the closed claims; it improves reproducibility, tests, and hygiene around them.
+
+## Prioritized backlog
+
+| # | item | type | risk | status | note |
+|---|---|---|---|---|---|
+| H1 | **Preserve Phase C as validated baseline** — freeze marker + canonical object name | docs-only | none | this stage | supersede the stale "T=6000" naming in `RUNBOOK_PHASE_C_AND_VISUALS.md` |
+| H2 | **Baseline reproduction runbook** — reproduce the validated result from code | docs-only | none | **done this turn** → `BASELINE_REPRODUCTION_RUNBOOK.md` |
+| H3 | **Evidence off-box archive** — copy-script + manifest for the ~22 load-bearing runs | docs-only (+ user copy) | none | proposed | `EVIDENCE_INVENTORY.md` is the manifest; add a copy recipe; the actual off-box copy is a user action |
+| H4 | **Solver-parity artifact** — bit-level jax↔CuPy output comparison | code-change (test script; **runs on the CuPy box**) | low | proposed | RHS code-parity already confirmed (architecture audit); this closes the bit-level residual — script authorable here, runnable only where CuPy exists |
+| H5 | **Gate-calibration summary** — consolidate the promotion criterion + caveats | docs-only | none | mostly-existing | `PHASE_C_STABILITY_GATE_CALIBRATION.md` + `..._GATE_V3_BREATHING...` exist; add the a\*-arc late-slope criterion + the single-exemplar caveat as a one-page summary |
+| H6 | **Validation-path reconciliation** — delineate (or bridge) the two paths | docs-only, optional small adapter (code) | low | proposed | document that `css.classify` is the gate and `validation_pipeline.py` is exploratory; decide whether to build the `.npz→HDF5` adapter or leave the paths explicitly separate |
+| H7 | **Hunter objective re-aim** — fitness prime-SSE → gain/loss-balance stability; redirect SGN/ASMT onto `param_a`/`eta`/`rho_vac` | **code-change** | medium | design-only until go-ahead | changes search behaviour → needs its **own re-validation** (does the re-aimed hunter re-find the a\* basin?); a tool change, not a physics change |
+| H8 | **Dead-script archival** — move the 25 `afield/payan/bridge/corridor/transfer` scripts to `jax_scout/_legacy/` (or a manifest) | code-change (file moves) | low | proposed | falsified-hypothesis era; keeps the core 6 + recent `feb_*` clean. Lightweight repo, so moving is fine |
+| H9 | **Config/diagnostic fixes** — `param_rho_vac` default mismatch (0 vs 1.0); permissive `collapse_threshold` (1e10); `collapse_dynamics` 2-term heuristic | code-change (small, targeted) | low | design-only until go-ahead | each is an isolated fix; none touches the validated operator |
+| H10 | **Test gaps** — add solver-parity + mobility-script (`feb_kick_inertia`, `feb_adiabatic_drag`) coverage | code-change (tests) | low | proposed | strengthens the suite; no behaviour change |
+
+## Suggested execution order
+1. **Foundation (docs-only, execute now):** H1, H2 (done), H3, H5, H6.
+2. **Parity & tests (low-risk code):** H4 (script only), H10.
+3. **Hygiene (low-risk code, on go-ahead):** H8 dead-script archival, H9 config fixes.
+4. **Tool change (medium, on go-ahead + re-validation):** H7 hunter re-aim.
+
+Items H7 and H9 are marked **design-only until go-ahead** because they change behaviour/config; H4/H8/H10 are
+low-risk and can proceed on the general "free to proceed" grant. All of Stage 2 completes **before** any Stage-3
+`CAPABILITY_EXPANSION_RFC.md` is written — the validated dissipative baseline must be hardened and frozen first.

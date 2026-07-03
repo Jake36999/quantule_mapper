@@ -1,5 +1,10 @@
 # Hunter Re-Aim — Re-Discovery Results (H7 re-validation)
 
+**STATUS (2026-07-03):** `HUNTER_REAIM_OBJECTIVE_VALIDATED_ON_JAX_SCOUT` · `HUNTER_REAIM_REDISCOVERY_PASS` ·
+`HUNTER_PRODUCTION_DEPLOYMENT_PENDING` · `CUPY_PARITY_PENDING`. The stability objective re-finds a\*≈×1.15 on the
+**reachable jax_scout path**; production CuPy deployment (H4 parity + worker `stability_metrics` + stability-NSGA
+front + production re-validation) is **not** yet done. This validates the *objective logic*, not the production Hunter.
+
 **Question (pre-registered, narrow):** can the re-aimed stability objective (`tools/stability_objective.py`,
 prime-SSE retired) *re-discover* the known **a\*≈×1.15 / eta×1.0** gain/loss-balanced attractor from a broader
 `param_a × param_eta × param_rho_vac` search — **without** using prime-SSE as a steering signal, on the reachable

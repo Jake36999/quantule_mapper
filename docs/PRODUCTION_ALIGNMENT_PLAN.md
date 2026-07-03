@@ -26,8 +26,33 @@ bottom. It is **not** part of this track and must not touch the frozen Phase C o
 | A1 | **H4 CuPy bit-parity run** — `python tools/solver_parity_check.py run --backend cupy` then `compare` vs `parity/jax_ref.npz`; record `BIT_PARITY` / `PARITY_WITHIN_TOL` / `PARITY_FAIL` in `SOLVER_PARITY_ARTIFACT.md` | recipe + jax reference staged; **run pending** | **yes** — run-and-record only |
 | A2 | **Operator audit** — `worker_cupy.py` / `solver/core.py` / `solver/run.py` / `gravity/unified_omega.py` vs the frozen Phase C operator (`e8d6a78ea`) | done at code level (BASELINE_AUDIT §1.4: shared local cubic-quintic-septic RHS, splash→s/f alias, uncoupled field-of-affect); re-confirmed `L_k` this session | no |
 | A3 | **CuPy `stability_metrics` emission** — production run emits the objective's metrics into provenance, no physics change | **DONE this session (code)** — see below; **needs a box run** to produce a real artifact | code done; **box run pending** |
-| A4 | **Wire Hunter to consume production metrics** — objective fitness from `prov_data["stability_metrics"]` | `aste_hunter._stability_fitness_from_provenance` already reads `prov_data["stability_metrics"]` (H7.1); remaining = confirm the provenance-assembly path carries it from the worker payload / HDF5 into `prov_data` | no (wiring check) |
+| A4 | **Wire Hunter to consume production metrics** — objective fitness from `prov_data["stability_metrics"]` | **DONE this session** — carry-through wired + tested (6 tests); see field contract below | no (wiring check) |
 | A5 | **Production H7 re-validation** — a small CuPy hunt/replay must: re-find a\*≈×1.15; recover matched controls; **not** promote T12000 short-window artifacts; and keep `css.classify` as the certifier | gated on A1+A3+A4 | **yes** |
+
+### A4 — the verified `stability_metrics` field contract (2026-07-03, tested without CuPy)
+Path, end to end:
+
+| stage | file | what it does with `stability_metrics` |
+|---|---|---|
+| **emit** | `solver/run.py` | writes HDF5 `/stability_metrics` (single-element `S1024` JSON string) **and** `result_payload["stability_metrics"]`, on both fail and success artifacts |
+| **assemble** | `validation_pipeline.py` | `read_json_dataset(h5f, "stability_metrics")` → `telemetry['stability_metrics']` → provenance report **top-level key `"stability_metrics"`** (a peer of `spectral_fidelity` / `solver_contract`) |
+| **persist** | `validation_pipeline.py` | `json.dump(payload, provenance_{…}.json)` |
+| **consume** | `aste_hunter._stability_fitness_from_provenance` | `prov_data.get("stability_metrics", {})` → `tools.stability_objective.stability_score` → fitness |
+
+- **Block shape** (exactly what `solver/stability_metrics.compute` emits): `{er_fin, er_max, er0, er_min,
+  floor_ratio, late_slope_50pct_per1k, late_drift, T, n_samples, energy_definition}`. The objective reads
+  `er_fin, er_max, floor_ratio, late_slope_50pct_per1k` (or `late_drift`) and `T`.
+- **Absent metrics → explicit non-promotion:** no `stability_metrics` → `score 0.0`, `reject="NO_STABILITY_METRICS"`,
+  **never** a prime-SSE fallback (prime-SSE stays a recorded diagnostic in stability mode). Malformed/absent HDF5
+  dataset → `None` (no raise). Verified by `tests/test_stability_metrics_provenance.py` (6 pass, no cupy).
+- **Backward-compatible:** default `objective="prime"` is unchanged; the new key is purely additive (the prime
+  consumer still reads `spectral_fidelity` untouched).
+- **Pre-existing seam to flag (NOT introduced or fixed here — out of A4 scope):** the writer resolves the
+  provenance filename via `run_identity.provenance_path_for_artifact`, which **folds seed/run_id/utc into the name
+  when the artifact carries an `/identity` group**, whereas `aste_hunter.process_generation_results` reads the
+  **plain** `provenance_{config_hash}.json`. This affects the *entire* provenance read (spectral_fidelity too), so
+  `stability_metrics` rides the exact same rails as the existing prime path — but reconciling that filename
+  resolution is a shared production-path item for A5, independent of the stability metric carry-through.
 
 ### A3 detail — what shipped this session (code-only, no GPU)
 - **`solver/stability_metrics.py`** — pure-numpy (no cupy/jax) reduction of a run's **raw** energy trajectory

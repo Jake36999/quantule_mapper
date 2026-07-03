@@ -81,6 +81,20 @@ ANTI_ALIAS_MAX_SOURCE_ELEMENTS = int(
 )
 
 
+def read_json_dataset(h5f, key):
+    """Read a single-element JSON-string HDF5 dataset (e.g. 'stability_metrics', 'solver_contract') back
+    to a python object; returns None if the dataset is absent or malformed. Pure pass-through, no compute."""
+    if key not in h5f:
+        return None
+    try:
+        raw = h5f[key][0]
+        if isinstance(raw, (bytes, np.bytes_)):
+            raw = raw.decode("utf-8", errors="replace")
+        return json.loads(raw)
+    except Exception:
+        return None
+
+
 # ==========================================
 # STAGE 1: Artifact Loader
 # ==========================================
@@ -258,6 +272,11 @@ class ArtifactLoader:
                     telemetry['solver_contract'] = json.loads(raw)
                 except Exception:
                     telemetry['solver_contract'] = None
+
+            # H7 production stability metrics (written by solver/run.py; absent in legacy artifacts).
+            # Pure pass-through: the objective's stability_score consumes this block verbatim via the
+            # provenance report -> aste_hunter._stability_fitness_from_provenance. No recomputation here.
+            telemetry['stability_metrics'] = read_json_dataset(h5f, "stability_metrics")
 
             # Optional quantule_events import for legacy timelines
             if "quantule_events" in h5f:
@@ -744,6 +763,9 @@ class ProvenanceAssembler:
                 "mean_random_sse": rand_sse
             },
             "solver_contract": telemetry.get("solver_contract", None),
+            # H7: production stability metrics carried through verbatim for the re-aimed Hunter's
+            # stability objective (aste_hunter._stability_fitness_from_provenance reads this key).
+            "stability_metrics": telemetry.get("stability_metrics", None),
         }
 
 

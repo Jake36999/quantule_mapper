@@ -82,6 +82,14 @@ CuPy is production authority for *orchestration* reasons, not precision — and 
 `solver/stability_metrics.py` (pure-numpy, mirrors `core_saturation_search.classify` er-math exactly; raw `Σ|ψ|²`,
 no floor/dV) + `solver/run.py` read-only observers (ic_e_raw, per-cadence raw_energy, emit `/stability_metrics` into
 HDF5 + result payload; **no physics change**, py_compile-checked) + `tests/test_stability_metrics.py` 5 pass
-(exact css-parity, cadence-independence, objective feed, from_history). Remaining Track A (needs the CuPy box or a
-wiring check): A1 H4 bit-parity run, A4 confirm provenance carries `stability_metrics` into `prov_data`, A5
-production H7 re-validation. **Track B (Phase D kinetic RFC) deferred** — a formalism decision, not a patch.
+(exact css-parity, cadence-independence, objective feed, from_history).
+**A4 done (code-only, no GPU):** `stability_metrics` carry-through wired + tested — `validation_pipeline.read_json_dataset`
+reads HDF5 `/stability_metrics` into the provenance report top-level key (peer of `spectral_fidelity`), which
+`aste_hunter._stability_fitness_from_provenance` already consumes. `tests/test_stability_metrics_provenance.py` 6 pass
+(no cupy): emit→assemble→prov_data→consume survives verbatim; absent metrics → `NO_STABILITY_METRICS` non-promotion
+(never prime fallback); grower carried + hard-rejected; prime default backward-compatible. Field contract in
+`PRODUCTION_ALIGNMENT_PLAN.md`; flagged a **pre-existing shared seam** (writer folds seed/run_id into the provenance
+filename via `provenance_path_for_artifact`, Hunter reads the plain name — affects the prime path too, deferred to A5).
+**Remaining Track A (needs the CuPy box): A1 H4 bit-parity run, first real CuPy artifact with `/stability_metrics`, A5
+production H7 re-validation.** A2 operator audit done at code level. **Track B (Phase D kinetic RFC) deferred** — a
+formalism decision, not a patch.

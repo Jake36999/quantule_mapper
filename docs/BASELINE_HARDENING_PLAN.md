@@ -63,3 +63,14 @@ steering (recorded diagnostic only), **default "prime" path unchanged**; `tests/
 in stability mode → falls back toward fitness-ranking); a proper stability-NSGA front + the worker emitting
 `stability_metrics` into provenance are follow-ups (H7.1b), not done. No hunt, no solver/gate change, no
 re-discovery claim.
+**H7.3 RE-DISCOVERY DONE — PASS** (`HUNTER_REAIM_REDISCOVERY_RESULTS.md`, harness
+`jax_scout/hunter_reaim_rediscovery.py`, jax_scout/WSL, **no CuPy, no prime-SSE**). Searched the validated
+`param_a × eta × rho_vac` axes around the basin; scored with `tools/stability_objective`; certified with
+`css.classify`. **Fresh long-T flip (T=36000, eta×1.0 a-triplet): a\* (a×1.15) → rank 0, score 0.867, late-slope
+≈0, certified**; slow-decayer a×1.05 (er 1.709→1.285) below; a×1.25 `TRANSIENT_GROWER_REJECT` by css *and*
+objective. The cheap T=8000 filter under-resolves a\* (ranks it 5th, all *uncertifiable*) — a documented
+short-window transient, corrected once the window is certifiable; **no artifact was promoted**. Corroborated by the
+existing 3D joint-basin (T=12000: css-stable ranked above css-failures, growers lowest) + the T=72000 gain-ladder
+(a\* top) + T=144000 confirm (a\* seed-robust). Pre-registered PASS criteria all met, no FAIL trigger tripped.
+**Still NOT production-ready:** H7.1b (stability-NSGA front + worker `stability_metrics`) and H4 CuPy parity remain
+open; this validates the *objective* on the jax_scout path, not a deployed Hunter.

@@ -106,15 +106,49 @@ def evaluate(provenance_dir):
                     "cross-IC re-validation of a*."}
 
 
+def run_local(out_dir):
+    """Full local A5 batch (must run in the repo .venv): build-configs -> worker_cupy per cell ->
+    validation_pipeline per cell -> evaluate. cupy/validation imports are lazy (kept out of build-configs/evaluate
+    so those stay import-light + testable without cupy)."""
+    import subprocess, sys, time
+    from validation_pipeline import ValidationPipeline
+    cfgs = build_configs(out_dir)
+    art = os.path.join(out_dir, "artifacts"); os.makedirs(art, exist_ok=True)
+    prov = os.path.join(out_dir, "provenance"); os.makedirs(prov, exist_ok=True)
+    env = dict(os.environ); env.setdefault("CUDA_VISIBLE_DEVICES", "0")
+    for c in cfgs:
+        h5 = os.path.join(art, c["name"] + ".h5")
+        t0 = time.time()
+        print(f"[run-local] worker {c['name']} (T={c['T']}, hash {c['config_hash'][:12]}) ...", flush=True)
+        subprocess.run([sys.executable, "worker_cupy.py", "--params", c["params_file"], "--output", h5],
+                       check=True, env=env)
+        print(f"[run-local] validate {c['name']} ({(time.time()-t0)/60:.1f} min so far) ...", flush=True)
+        ValidationPipeline(h5, c["params_file"], prov).run()
+        print(f"[run-local] {c['name']} done in {(time.time()-t0)/60:.1f} min", flush=True)
+    res = evaluate(prov)
+    print(f"\n{'name':16s} {'role':16s} {'score':>7} {'cert':>5} {'status'}")
+    for r in res["rows"]:
+        sc = f"{r['score']:.3f}" if r["score"] is not None else "  -  "
+        print(f"{r['name']:16s} {r['role']:16s} {sc:>7} {str(r['certifiable']):>5} {r['status']}")
+    print(f"\n=== A5 verdict: {res['verdict']} ===", flush=True)
+    if res.get("failed_checks"):
+        print(f"failed checks: {res['failed_checks']}", flush=True)
+    json.dump(res, open(os.path.join(out_dir, "a5_verdict.json"), "w"), indent=2, default=float)
+    return res
+
+
 def main():
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd", required=True)
     b = sub.add_parser("build-configs"); b.add_argument("--out", required=True)
     e = sub.add_parser("evaluate"); e.add_argument("--provenance-dir", required=True)
     e.add_argument("--json-out", default=None)
+    r = sub.add_parser("run-local"); r.add_argument("--out", required=True)   # full batch in .venv (cupy)
     args = ap.parse_args()
     if args.cmd == "build-configs":
         build_configs(args.out)
+    elif args.cmd == "run-local":
+        run_local(args.out)
     else:
         res = evaluate(args.provenance_dir)
         print(f"\n{'name':16s} {'role':16s} {'score':>7} {'cert':>5} {'status'}")

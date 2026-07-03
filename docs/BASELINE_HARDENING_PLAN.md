@@ -103,6 +103,11 @@ unit-tested (`tests/test_production_h7_revalidation.py` 6 pass, no cupy).
 **ENVIRONMENT CORRECTION + A1 DONE (2026-07-03):** there is **no separate "CuPy box"** — CuPy runs on THIS PC via the
 repo `.venv` (`cupy 14.0.1`, GTX 1080; the earlier "no reachable CuPy" note tested the wrong PATH python). **A1/H4
 parity RAN locally in `.venv` and PASSED: `PARITY_WITHIN_TOL`, rel-L2 1.7e-12** (production `ETDRK4Solver` ≡ jax mirror
-to ~machine precision; `SOLVER_PARITY_ARTIFACT.md`). **Remaining Track A (all local in `.venv`): run the A5 harness
-(worker + validate) → evaluate.** A2 operator audit done at code level. **Track B (Phase D kinetic RFC) deferred** — a
-formalism decision, not a patch.
+to ~machine precision; `SOLVER_PARITY_ARTIFACT.md`). **A5 RAN locally (`run-local`, ~2.5 h) and PASSED —
+`PRODUCTION_H7_REVALIDATION_PASS` (cross-IC):** a\*≈×1.15 re-found from the production single-Gaussian IC, top-ranked +
+certified (0.884, slope +0.0005); decayer a×1.05 below (0.448); grower a×1.25 `GROWER_BLOWUP`; short-window (T=12000)
+uncertifiable → not promoted (`A5_PROD_20260703_192713`). **Track A COMPLETE.** Also confirmed on real output: worker
+HDF5 `/stability_metrics` (A3), provenance top-level `stability_metrics` (A4), identity-folded provenance resolved
+(A4b). **NEXT (gated, NOT run): tiny first live Hunter run** — `FIRST_LIVE_HUNTER_RUN_PLAN.md` (design-only) + H7.1b
+(redirect search operators / stability-NSGA front). A2 operator audit done at code level. **Track B (Phase D kinetic
+RFC) deferred.**

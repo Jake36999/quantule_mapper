@@ -32,7 +32,7 @@ separate, design-only RFC; **not** part of this track and must not touch the fro
 | A3 | **CuPy `stability_metrics` emission** — production run emits the objective's metrics into provenance, no physics change | **DONE (code)** — see below; needs a real `.venv` worker run to produce a first artifact | `.venv` (local) |
 | A4 | **Wire Hunter to consume production metrics** — objective fitness from `prov_data["stability_metrics"]` | **DONE** — carry-through wired + tested (6 tests); see field contract below | local |
 | A4b | **Provenance-filename reconciliation** — one shared resolver so the Hunter reads the file the writer wrote (identity-folded names) | **DONE** — `resolve_provenance_report` + Hunter rewire + 7 tests; see below | local |
-| A5 | **Production H7 re-validation** — replay a\*≈×1.15 + matched controls + a short-window probe on the CuPy path; re-find a\*, controls below, no T12000 promotion; `css.classify` stays certifier | **harness + evaluator PREPARED + tested** (`tools/production_h7_revalidation.py`, `PRODUCTION_H7_REVALIDATION_RUNBOOK.md`); worker + validate steps run in `.venv` | `.venv` (local) |
+| A5 | **Production H7 re-validation** — replay a\*≈×1.15 + matched controls + a short-window probe on the CuPy path; re-find a\*, controls below, no T12000 promotion; `css.classify` stays certifier | **DONE & PASSED** (`A5_PROD_20260703_192713`): a\* re-found from the production single-Gaussian IC, top+certified 0.884, decayer below, grower `GROWER_BLOWUP`, short-window uncertifiable — **cross-IC PASS** | `.venv` (local) |
 
 ### A4 — the verified `stability_metrics` field contract (2026-07-03, tested without CuPy)
 Path, end to end:

@@ -1,9 +1,11 @@
 # Hunter Re-Aim — Re-Discovery Results (H7 re-validation)
 
-**STATUS (2026-07-03):** `HUNTER_REAIM_OBJECTIVE_VALIDATED_ON_JAX_SCOUT` · `HUNTER_REAIM_REDISCOVERY_PASS` ·
-`HUNTER_PRODUCTION_DEPLOYMENT_PENDING` · `CUPY_PARITY_PENDING`. The stability objective re-finds a\*≈×1.15 on the
-**reachable jax_scout path**; production CuPy deployment (H4 parity + worker `stability_metrics` + stability-NSGA
-front + production re-validation) is **not** yet done. This validates the *objective logic*, not the production Hunter.
+**STATUS (2026-07-03):** `HUNTER_REAIM_REDISCOVERY_PASS` (jax_scout) · `CUPY_PARITY_PASS` (rel-L2 1.7e-12) ·
+`PRODUCTION_H7_REVALIDATION_PASS` (cross-IC, `A5_PROD_20260703_192713`: a\*≈×1.15 re-found from the production
+single-Gaussian IC, top-ranked + certified 0.884; decayer below; grower `GROWER_BLOWUP`; short-window not promoted).
+The re-aimed objective now re-finds a\* on **both** the jax_scout mirror and the **production CuPy path** (by replay).
+**Still pending:** re-find by *adaptive search* — see `FIRST_LIVE_HUNTER_RUN_PLAN.md` (tiny, gated, NOT run) + H7.1b
+(redirect search operators / stability-NSGA front). No live Hunter hunt has been run.
 
 **Question (pre-registered, narrow):** can the re-aimed stability objective (`tools/stability_objective.py`,
 prime-SSE retired) *re-discover* the known **a\*≈×1.15 / eta×1.0** gain/loss-balanced attractor from a broader

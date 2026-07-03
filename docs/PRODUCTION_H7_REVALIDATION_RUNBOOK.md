@@ -1,11 +1,19 @@
 # Production H7 Re-Validation Runbook (A5) — local CuPy (`.venv`)
 
-**Status:** *prepared, not yet run.* The harness + evaluator are built and unit-tested
-([`tools/production_h7_revalidation.py`](../tools/production_h7_revalidation.py),
-`tests/test_production_h7_revalidation.py` 6 pass, no cupy). **All steps run locally on this PC** — the worker +
-validate steps use the repo **`.venv`** (`cupy 14.0.1`, GTX 1080); there is **no separate machine**. Prefix CuPy
-commands with `.venv/Scripts/python.exe` (NOT the PATH system python). This is the last A-track gate before the
-production Hunter re-aim can be called *validated*. (A1/H4 parity has already PASSED here — `PARITY_WITHIN_TOL`.)
+**Status: RAN & PASSED (2026-07-03, `sweep_runs/A5_PROD_20260703_192713`, `.venv`, ~2.5 h).**
+`PRODUCTION_H7_REVALIDATION_PASS` — all 5 checks held:
+
+| cell | param_a | er_fin | late-slope/1k | score | cert | verdict |
+|---|---|---|---|---|---|---|
+| a\* (a×1.15) | 0.5522 | 2.135 | **+0.0005** | **0.884** | ✅ | top |
+| decayer (a×1.05) | 0.5042 | 1.406 | −0.0126 | 0.448 | ✅ | below a\* |
+| grower (a×1.25) | 0.6003 | 3.005 | +0.0184 | −1.0 | ❌ | `GROWER_BLOWUP` |
+| a\* short (T=12000) | 0.5522 | 2.125 | +0.0051 | 0.279 | ❌ | not promoted |
+
+**a\* was re-found from the production single-Gaussian IC** (the cross-IC caveat below resolved favourably — a\* is
+IC-robust; no IC change made). Reproduce: `.venv/Scripts/python.exe tools/production_h7_revalidation.py run-local --out DIR`.
+All steps run locally in `.venv` (`cupy 14.0.1`, GTX 1080) — no separate machine. (A1/H4 parity also PASSED here,
+`PARITY_WITHIN_TOL`.)
 
 **Question (production analog of the jax_scout re-discovery PASS):** with production `stability_metrics` now
 flowing worker → HDF5 → `validation_pipeline` → provenance → Hunter (A3/A4/A4b), does the re-aimed objective

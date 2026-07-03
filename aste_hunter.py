@@ -54,6 +54,19 @@ LAMBDA_CLASSICAL = 10.0
 LAMBDA_QUANTUM = 5.0
 
 
+def _stability_fitness_from_provenance(prov_data):
+    """H7 stability fitness (flag-gated path). Scores the run's `stability_metrics` with
+    tools.stability_objective (late-slope->0 / boundedness / v3-breathing / window gate). **log_prime_sse is NOT
+    used as fitness here.** Returns (fitness>=0.0, score_dict). Absent stability_metrics -> fitness 0.0."""
+    try:
+        from tools.stability_objective import stability_score
+    except Exception:
+        return 0.0, {"score": 0.0, "reject": "SCORER_UNAVAILABLE"}
+    stab = prov_data.get("stability_metrics", {}) if isinstance(prov_data, dict) else {}
+    ss = stability_score(stab) if stab else {"score": 0.0, "reject": "NO_STABILITY_METRICS", "certifiable": False}
+    return max(0.0, float(ss.get("score", 0.0))), ss
+
+
 class SpectralManifoldTracker:
     """
     V16 Adaptive Spectral Manifold Tracking (ASMT) Module.
@@ -132,7 +145,12 @@ class Hunter:
         except Exception as e:
             print(f"[Hunter Error] Failed to export JSON ledger: {e}")
 
-    def __init__(self, db_file: str = DB_FILENAME):
+    def __init__(self, db_file: str = DB_FILENAME, objective: str = "prime"):
+        # H7 re-aim: `objective` steers fitness — "prime" (default, legacy log_prime_sse, unchanged) or
+        # "stability" (gain/loss-balanced standing-attractor scorer; prime-SSE recorded as diagnostic only,
+        # NOT steering). Hunter proposes; core_saturation_search.classify (v3) still certifies. See
+        # docs/HUNTER_REAIM_DESIGN_SPEC.md + docs/HUNTER_REAIM_IMPLEMENTATION_NOTES.md.
+        self.objective = objective
         self.db_file = db_file
         self._init_db()
         # True LRU implementation via OrderedDict
@@ -292,6 +310,21 @@ class Hunter:
                 try:
                     with open(prov_path, 'r') as f:
                         prov_data = json.load(f)
+                    if self.objective == "stability":
+                        # H7 re-aim: fitness = gain/loss-balance stability score; the prime prefilter and
+                        # spectral fitness below are SKIPPED. log_prime_sse is recorded as a diagnostic only.
+                        _fit, _ss = _stability_fitness_from_provenance(prov_data)
+                        self.total_processed_runs += 1
+                        _sd = prov_data.get("spectral_fidelity", {})
+                        self.execute_with_retry(cursor,
+                            """INSERT OR REPLACE INTO metrics
+                               (config_hash, log_prime_sse, primary_harmonic_error, dominant_peak_k, secondary_peak_k, pcs)
+                               VALUES (?, ?, ?, ?, ?, ?)""",
+                            (config_hash, float(_sd.get("log_prime_sse", 999.0)), float(_sd.get("primary_harmonic_error", 999.0)),
+                             float(_sd.get("dominant_peak_k", 0.0)), float(_sd.get("secondary_peak_k", 0.0)), float(_sd.get("pcs", 0.0))))
+                        self.execute_with_retry(cursor, "UPDATE runs SET status='completed', fitness=? WHERE config_hash=?",
+                                                (_fit, config_hash))
+                        continue
                     spec = prov_data.get("spectral_fidelity", {})
                     aletheia = prov_data.get("aletheia_metrics", {})
                     pcs = float(aletheia.get("pcs") or spec.get("pcs", 0.0))

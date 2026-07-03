@@ -56,3 +56,10 @@ already-validated jax_scout results). **STILL NOT wired into `aste_hunter`; no h
 runs (GPU), H7.3 re-validation harness, H7.4 controlled hunt — the hunt is gated on H7.3 + the H4 CuPy parity +
 explicit go. **H4 CuPy run is environment-blocked from the agent session** (no cupy in any reachable env) → the
 operator must run it on the CuPy production box.
+**H7.1 WIRING DONE** (`HUNTER_REAIM_IMPLEMENTATION_NOTES.md`): `aste_hunter.Hunter(objective="stability")` flag +
+`_stability_fitness_from_provenance` branch — fitness from `tools.stability_objective`, prime-SSE dethroned as
+steering (recorded diagnostic only), **default "prime" path unchanged**; `tests/test_hunter_stability_wiring.py`
+5 pass (dev box). **Honest scope limit — FITNESS ONLY:** NSGA fronts still rank on spectral objectives (degenerate
+in stability mode → falls back toward fitness-ranking); a proper stability-NSGA front + the worker emitting
+`stability_metrics` into provenance are follow-ups (H7.1b), not done. No hunt, no solver/gate change, no
+re-discovery claim.

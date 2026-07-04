@@ -280,9 +280,14 @@ def step(psi_k, ops, rho_vac_eff=None, omega_sq_mult=None, a_vec=None, q_tensor=
 
 def _construct_ops(N, L, dt, D_diff, eta, rho_vac, omega0, a, s, f,
                    a_coupling, soft_clip_beta, omega_min_geo, omega_max_geo,
-                   c_affect, dealias_frac, rd, cd) -> Ops:
+                   c_affect, dealias_frac, rd, cd, D_imag=0.0) -> Ops:
     """Build Ops from scalar values. Scalars may be Python floats OR traced jnp
-    scalars, so this is safe under jax.vmap (the sweep path)."""
+    scalars, so this is safe under jax.vmap (the sweep path).
+
+    D_imag (Phase D / C1, DEFAULT 0.0 = frozen Phase C baseline): imaginary part of a complex diffusion
+    coefficient (D_diff + i*D_imag), i.e. a Schrodinger-like dispersive channel. It enters ONLY the linear
+    operator L_k as an imaginary -D_imag*k^2 term; the nonlinearity, geometry and gate are untouched. See
+    docs/PHASE_D_KINETIC_OPERATOR_RFC.md (candidate C1). D_imag=0.0 -> L_k is byte-identical to the baseline."""
     # --- k grid (computed in float64 for determinism, then cast) ---
     k = jnp.fft.fftfreq(N, d=L / N).astype(jnp.float64) * (2.0 * jnp.pi)
     kx, ky, kz = jnp.meshgrid(k, k, k, indexing='ij')
@@ -294,7 +299,11 @@ def _construct_ops(N, L, dt, D_diff, eta, rho_vac, omega0, a, s, f,
     minus_k_sq = (-k_sq).astype(cd)
     c_sq_k_sq = ((c_affect ** 2) * k_sq).astype(rd)
 
-    L_k = (-D_diff * k_sq + (-eta + 1j * omega0)).astype(jnp.complex128)
+    if D_imag == 0.0:
+        L_k = (-D_diff * k_sq + (-eta + 1j * omega0)).astype(jnp.complex128)   # exact frozen Phase C baseline
+    else:
+        # C1 dispersive channel: complex diffusion (D_diff + i*D_imag)*lap -> L_k imag gains -D_imag*k^2.
+        L_k = (-D_diff * k_sq - eta + 1j * (omega0 - D_imag * k_sq)).astype(jnp.complex128)
 
     # --- Kassam-Trefethen contour-integral coefficients (M points) ---
     M = KT_CONTOUR_M
@@ -364,6 +373,7 @@ def build_operators(N, L, dt, params: Dict[str, float],
         fget('param_c_affect', 1.0),
         fget('param_dealias_fraction', 0.5),
         real_dtype, complex_dtype,
+        D_imag=fget('param_D_imag', 0.0),   # Phase D C1: default 0.0 = frozen baseline
     )
 
 

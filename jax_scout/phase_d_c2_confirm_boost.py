@@ -66,13 +66,15 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--Tconfirm", type=int, default=12000); ap.add_argument("--Tboost", type=int, default=6000)
     ap.add_argument("--dtchunk", type=int, default=1000); ap.add_argument("--out", default=None)
+    ap.add_argument("--cands", default=None, help="override CANDS as 'A:sig,A:sig' (e.g. 1.0:0.15,0.5:0.15)")
     a = ap.parse_args()
+    cands = [tuple(float(y) for y in c.split(":")) for c in a.cands.split(",")] if a.cands else CANDS
     out = a.out or os.path.join(ROOT, "sweep_runs", f"PHASE_D_C2_CONFIRM_{time.strftime('%Y%m%d_%H%M%S')}")
     os.makedirs(out, exist_ok=True)
     ops = _ops()
-    print(f"=== C2.1 STAGE 2+3 confirm+boost | N={N} dt={DT} Tconfirm={a.Tconfirm} Tboost={a.Tboost} | cands={CANDS} ===", flush=True)
+    print(f"=== C2.1 STAGE 2+3 confirm+boost | N={N} dt={DT} Tconfirm={a.Tconfirm} Tboost={a.Tboost} | cands={cands} ===", flush=True)
     results = []
-    for (A, sig) in CANDS:
+    for (A, sig) in cands:
         t0 = time.time()
         settled, verdict, traj = confirm(A, sig, ops, a.Tconfirm, a.dtchunk)
         tr = traj[-1] if traj else {}

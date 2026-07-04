@@ -1,4 +1,7 @@
-# First Live Hunter Run — Plan (tiny, controlled; DESIGN ONLY — not executed)
+# First Live Hunter Run — Plan (tiny, controlled)
+
+> **EXECUTED 2026-07-04 → `LIVE_HUNTER_REDISCOVERY_PASS`.** See `FIRST_LIVE_HUNTER_RUN_RESULTS.md`. Ran in the minimal
+> stability-selection mode below (H7.1b delivered the search-operator alignment). This plan is retained for provenance.
 
 **Gate:** this plan is unlocked because **A5 production re-validation PASSED** (`sweep_runs/A5_PROD_20260703_192713`:
 a\*≈×1.15 re-found from the production single-Gaussian IC, top-ranked + certified at 0.884; decayer below; grower

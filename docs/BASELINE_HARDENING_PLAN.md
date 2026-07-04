@@ -1,7 +1,8 @@
 # Baseline Hardening Plan (Stage 2)
 
-> **STATUS (2026-07-03, authoritative):** `BASELINE_HARDENING_CLOSED` · `TRACK_A_PRODUCTION_ALIGNMENT_COMPLETE` ·
-> `PRODUCTION_H7_REVALIDATION_PASS` · `LIVE_ADAPTIVE_HUNTER_PENDING`. CuPy runs **locally in the repo `.venv`**
+> **STATUS (2026-07-04, authoritative):** `BASELINE_HARDENING_CLOSED` · `TRACK_A_PRODUCTION_ALIGNMENT_COMPLETE` ·
+> `PRODUCTION_H7_REVALIDATION_PASS` · `H7_1B_SEARCH_ALIGNED` · `LIVE_HUNTER_REDISCOVERY_PASS`
+> (tiny adaptive run re-found a\* by search — `FIRST_LIVE_HUNTER_RUN_RESULTS.md`). CuPy runs **locally in the repo `.venv`**
 > (`cupy 14.0.1`, GTX 1080) — there is **no separate machine**; A1/H4 parity and A5 both ran here and PASSED. The
 > frozen Phase C operator (`e8d6a78ea`) is the **dissipative** kinetic term `L_k = -D·k² - η + i·ω₀`; a
 > transport/dispersive kinetic operator is **not implemented** and belongs to a later Phase D RFC, not hardening.

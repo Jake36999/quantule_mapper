@@ -6,9 +6,14 @@ conservative substrate opens a transport channel the dissipative sector structur
 *and* translate, v∝k) — the first motion in the whole Phase D investigation — but it is not clean coherent transport.
 Mirror only, `kinetic_mode="conservative"`, Phase C default byte-identical; no gate/clipping; no matter claims.
 
-**Classification: `C2_NATIVE_SOLITON_FOUND_NO_TRANSPORT`** by the strict criterion ("radiates under kick"), **with the
-essential nuance that finite ballistic mobility IS present** — honestly, *weak lossy transport*, qualitatively
-distinct from the fully-pinned dissipative sector.
+**Classification (two-level, revised):**
+- **Primary: `C2_NATIVE_SOLITON_FOUND_LOSSY_BALLISTIC_TRANSPORT`** — the native C2 soliton *does* translate
+  ballistically under a boost (v∝k, r²=1.00, μ≈0.043 for A=1.0), qualitatively unlike the pinned dissipative sector.
+- **Sub-verdict: `CLEAN_COHERENT_TRANSPORT_NOT_YET_SUPPORTED`** — the motion is lossy: kick-associated radiation grows
+  with the boost, and profile-preserving coherent transport is not yet demonstrated.
+
+(The earlier strict label `C2_NATIVE_SOLITON_FOUND_NO_TRANSPORT` buried the genuinely new positive result — motion is
+no longer structurally absent — so it is superseded by the two-level verdict above.)
 
 ## Budget
 ~2 h of the allocated 12 h (Stage 1 scout ~18 min; Stage 2+3 confirm+boost ~1 h + a restart re-run). Stopped early
@@ -49,10 +54,23 @@ native conservative soliton is a **wide, moderate-amplitude** structure.
 | | 2 | 1.257 | +0.010 | 0.008 | 0.005 | 1.00 | 0.75 |
 - **Ballistic mobility is REAL:** v∝k (r²=1.00, v/k ≈ constant), μ=dv/dk = **+0.043** (A=1.0), +0.008 (A=0.5). This is
   **~36× the dissipative a\* mobility (μ≈0.001, pinned)** — the soliton genuinely translates.
-- **But it radiates under the kick:** mass drops with kick strength (0.79→0.74→0.59). A *gentle* n=1 boost (k=0.63,
-  far below the dealias cutoff ~15) already loses ~26% → **physical radiation, not a dealiasing artifact.** The
-  density-sourced conformal geometry **breaks Galilean invariance**, so an accelerated soliton is not a stationary
-  solution and sheds a radiative tail.
+- **The loss must be read against the n=0 control, not against initial mass** (a correction to the first draft). The
+  soliton is **quasi-conservative even at rest**: the n=0 control (no kick, evolved through T_boost) itself bleeds to
+  0.795 (A=1.0) / 0.941 (A=0.5) — the documented dealias/non-self-adjoint mass leak. The *kick-associated* extra loss
+  (control − boosted) is therefore modest at n=1 and only clearly large at n=2:
+
+  | candidate | n=0 control | kick-assoc loss n=1 (k²=0.40) | kick-assoc loss n=2 (k²=1.58) |
+  |---|---|---|---|
+  | A=1.0 σ=0.15 | 0.795 | **+0.054** | **+0.203** |
+  | A=0.5 σ=0.15 | 0.941 | **+0.041** | **+0.193** |
+
+- **The kick-associated radiation scales ≈ k².** For A=1.0, loss ratio n2/n1 = 0.203/0.054 = 3.8 ≈ the k² ratio 4.0;
+  for A=0.5, 0.193/0.041 = 4.7. So radiation is a smooth, boost-induced ∝k² term on top of the resting bleed — at the
+  gentlest periodic kick (n=1) it is only ~4–5% (comparable to the resting bleed), becoming dominant at n=2. This is a
+  *cleaner* result than "radiates 26% under any kick": low-k transport is nearly as clean as the resting soliton, and
+  the loss grows smoothly with k². The likely cause is the density-sourced conformal geometry Ω²(ρ), which **breaks
+  Galilean invariance** so an accelerated soliton is not a stationary solution — **quantified and tested in C2.2**
+  (`docs/PHASE_D_C2_2_LOSS_SOURCE_RESULTS.md`).
 
 ## Interpretation vs the dissipative baseline (D.5/D.6)
 | | dissipative sector (Phase C + D.1–D.6) | conservative sector (C2/C2.1) |

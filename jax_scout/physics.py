@@ -73,6 +73,7 @@ class Ops(NamedTuple):
     rho_floor: jnp.ndarray
     D_spatial: jnp.ndarray
     geom_eps: jnp.ndarray
+    kfac: jnp.ndarray = None       # Phase D C2: nonlinearity multiplier (1.0 dissipative default; 1j conservative/NLS)
 
 
 # ---------------------------------------------------------------------------
@@ -253,7 +254,9 @@ def n_op(psi_k, ops, rho_vac_eff=None, omega_sq_mult=None, a_vec=None, q_tensor=
     if drag_field is not None:
         n_real = n_real + drag_field * psi
 
-    # 6. Single spectral transform + dealias
+    # 6. Phase D C2: Hamiltonian factor (kfac=1.0 dissipative -> exact identity; 1j conservative/NLS)
+    n_real = n_real * ops.kfac
+    # 7. Single spectral transform + dealias
     n_k = jnp.fft.fftn(n_real) * ops.dealias_mask
     return n_k
 
@@ -280,14 +283,17 @@ def step(psi_k, ops, rho_vac_eff=None, omega_sq_mult=None, a_vec=None, q_tensor=
 
 def _construct_ops(N, L, dt, D_diff, eta, rho_vac, omega0, a, s, f,
                    a_coupling, soft_clip_beta, omega_min_geo, omega_max_geo,
-                   c_affect, dealias_frac, rd, cd, D_imag=0.0) -> Ops:
+                   c_affect, dealias_frac, rd, cd, D_imag=0.0, kinetic_mode="dissipative") -> Ops:
     """Build Ops from scalar values. Scalars may be Python floats OR traced jnp
     scalars, so this is safe under jax.vmap (the sweep path).
 
     D_imag (Phase D / C1, DEFAULT 0.0 = frozen Phase C baseline): imaginary part of a complex diffusion
-    coefficient (D_diff + i*D_imag), i.e. a Schrodinger-like dispersive channel. It enters ONLY the linear
-    operator L_k as an imaginary -D_imag*k^2 term; the nonlinearity, geometry and gate are untouched. See
-    docs/PHASE_D_KINETIC_OPERATOR_RFC.md (candidate C1). D_imag=0.0 -> L_k is byte-identical to the baseline."""
+    coefficient (D_diff + i*D_imag), a Schrodinger-like dispersive channel added to the dissipative L_k.
+
+    kinetic_mode (Phase D / C2, DEFAULT 'dissipative' = frozen Phase C baseline): 'conservative' switches to a
+    Hamiltonian / NLS-like substrate -- L_k = -i*D*k^2 (dispersive, NO gain/loss eta) and the whole nonlinear RHS is
+    multiplied by i (kfac=1j) so |psi|^2 is (near-)conserved -- a DIFFERENT regime where nodes can move (NOT Phase C).
+    'dissipative' -> L_k and kfac=1.0 are byte-identical to the frozen baseline. See docs/PHASE_D_C2_TRANSPORT_BRANCH_PLAN.md."""
     # --- k grid (computed in float64 for determinism, then cast) ---
     k = jnp.fft.fftfreq(N, d=L / N).astype(jnp.float64) * (2.0 * jnp.pi)
     kx, ky, kz = jnp.meshgrid(k, k, k, indexing='ij')
@@ -299,11 +305,17 @@ def _construct_ops(N, L, dt, D_diff, eta, rho_vac, omega0, a, s, f,
     minus_k_sq = (-k_sq).astype(cd)
     c_sq_k_sq = ((c_affect ** 2) * k_sq).astype(rd)
 
-    if D_imag == 0.0:
+    if kinetic_mode == "conservative":
+        # C2 conservative / NLS substrate: L_k = -i*D*k^2 (dispersive, NO gain/loss); nonlinearity gets kfac=1j.
+        L_k = (-1j * D_diff * k_sq).astype(jnp.complex128)
+        kfac = jnp.asarray(1j, dtype=cd)
+    elif D_imag == 0.0:
         L_k = (-D_diff * k_sq + (-eta + 1j * omega0)).astype(jnp.complex128)   # exact frozen Phase C baseline
+        kfac = jnp.asarray(1.0, dtype=cd)
     else:
         # C1 dispersive channel: complex diffusion (D_diff + i*D_imag)*lap -> L_k imag gains -D_imag*k^2.
         L_k = (-D_diff * k_sq - eta + 1j * (omega0 - D_imag * k_sq)).astype(jnp.complex128)
+        kfac = jnp.asarray(1.0, dtype=cd)
 
     # --- Kassam-Trefethen contour-integral coefficients (M points) ---
     M = KT_CONTOUR_M
@@ -346,6 +358,7 @@ def _construct_ops(N, L, dt, D_diff, eta, rho_vac, omega0, a, s, f,
         omega_min_geo=sc(omega_min_geo), omega_max_geo=sc(omega_max_geo),
         omega_sq_min=sc(OMEGA_SQ_MIN), omega_sq_max=sc(OMEGA_SQ_MAX),
         rho_floor=sc(RHO_FLOOR), D_spatial=sc(D_SPATIAL), geom_eps=sc(GEOM_EPSILON),
+        kfac=kfac,
     )
 
 
@@ -374,6 +387,7 @@ def build_operators(N, L, dt, params: Dict[str, float],
         fget('param_dealias_fraction', 0.5),
         real_dtype, complex_dtype,
         D_imag=fget('param_D_imag', 0.0),   # Phase D C1: default 0.0 = frozen baseline
+        kinetic_mode=str(params.get('kinetic_mode', 'dissipative')),   # Phase D C2: default = frozen baseline
     )
 
 

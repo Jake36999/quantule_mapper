@@ -34,18 +34,37 @@ redistribution: dispersion changes the local density ρ, which shifts the densit
   mobility (0.002) breaks coherence. **Mass grows monotonically with `D_imag`** (0.99 → 1.03 → 1.35), i.e. the
   dispersion pushes a\* off its balance toward growth.
 
-## Long-T confirmation (pending)
-The `D_imag=0.001` coherence over T=30 already shows slow mass growth (→1.03); a long-T run
-(`D_imag∈{0,0.001}`, tkick=48000) tests whether that coherence is a **stable** moving regime or merely **slow
-destabilisation**. <!-- LONG_T_RESULT -->
+## Q3 — long-T confirmation: is the D_imag=0.001 coherence stable, or slow destabilisation? (tkick=48000, T=240)
+| D_imag | T | mass ratio | nodes | v_x | com r² | verdict |
+|---|---|---|---|---|---|---|
+| 0.0 | 240 | **0.988** | 4→4 | +0.0002 | 1.00 | **stable + pinned** (baseline holds over the full window) |
+| 0.001 | 30 | 1.03 | 4→4 | — | 1.00 | *looked* coherent |
+| 0.001 | **240** | **2.518** | 4→**7** | −0.0002 | 0.80 | **runs away** — mass 2.5×, fragmenting |
 
-## Interpretation (so far — honest, not over-claimed)
-C1 refines the Phase C mobility null: it is **not** that transport is structurally forbidden (adding the dispersive
-kinetic term *does* confer a real, k-proportional advective response), but that a\* is a **dissipative attractor
-whose coherence is in tension with the dispersion needed for meaningful transport** — the more you disperse (to
-move it), the faster you break the gain/loss balance. No robust *stable moving coherent soliton* regime was found in
-the coherent range; a\* is **"softly pinned."** This is a genuine Phase D finding on the C1 route, and it does not
-touch or weaken any Phase C result (all of which stand as the `D_imag→0` limit).
+**Decisive.** The `D_imag=0.001` coherence at T=30 was **slow destabilisation**: over the long window mass more
+than **doubled** (1.03 → 2.52) and the node count grew (4→7), while the drift did **not** accumulate (disp <0.5% of a
+box, `r²` fell to 0.80 — no sustained linear motion). The `D_imag=0` baseline stayed perfectly pinned and stable
+(mass 0.99). ⇒ **there is no stable moving-coherent-soliton regime**: the dispersion that would confer mobility
+instead breaks a\*'s gain/loss balance before it translates.
+
+## Verdict — `C1_NO_STABLE_TRANSPORT`
+The C1 route (adding a Schrödinger-like dispersive channel to the validated dissipative attractor) **does not yield
+matter-like transport.** Precisely:
+- The Phase C mobility null is **not merely a missing kinetic channel** — adding one (C1) confers only a transient,
+  negligible drift and, at any dispersion strength large enough to matter, **destabilises a\*** (mass runaway,
+  fragmentation).
+- a\* is a **fundamentally stationary dissipative attractor**: its coherence and the dispersion needed to move it are
+  **incompatible**. This *sharpens* (does not contradict) the Phase C site-pinning finding and matches the formalism
+  gap review's "sectors are cleanly split" — the dissipative stability sector does not smoothly extend into a
+  transport sector by a kinetic-term tweak.
+- **Implication for Phase D:** matter transport, if it exists in IRER, is **not** reachable by perturbing the
+  validated dissipative operator. It would require a genuinely different regime — e.g. **C2** (conservative
+  nonlinear Schrödinger: matter as a norm-conserving moving soliton, which *abandons* the gain/loss balance that is
+  the Phase C result) — i.e. a **different object**, not an extension of a\*. That is the natural next RFC branch, and
+  a real scope decision.
+
+Every Phase C result stands untouched (they are the `D_imag→0` limit); C1 was tested and cleanly answered on the
+mirror without altering the frozen operator.
 
 ## Guardrails
 jax_scout mirror only; `param_D_imag` default 0.0; frozen Phase C operator (`e8d6a78ea`) intact; nonlinearity,

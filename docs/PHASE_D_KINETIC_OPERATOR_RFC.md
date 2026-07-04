@@ -1,4 +1,12 @@
-# Phase D — Kinetic Operator RFC (DESIGN ONLY; nothing is implemented)
+# Phase D — Kinetic Operator RFC
+
+> **UPDATE (2026-07-04): C1 has been PROTOTYPED + TESTED on the jax_scout mirror → `C1_NO_STABLE_TRANSPORT`**
+> (`PHASE_D_C1_RESULTS.md`). Adding the dispersive channel does **not** mobilise a\*: it confers only a transient,
+> negligible drift and destabilises the attractor (mass runaway/fragmentation) at any dispersion strong enough to
+> matter. a\* is a **fundamentally stationary dissipative attractor** — coherence and transport-conferring dispersion
+> are incompatible. The frozen Phase C operator is untouched (`D_imag=0` = baseline byte-for-byte). **Remaining
+> route: C2 (conservative NLS) — a *different object* (norm-conserving soliton, abandons the gain/loss balance),
+> not an extension of a\*.** The sections below are the original design comparison.
 
 **Status:** design/decision document. **No solver, physics, geometry, or gate change is made or proposed for
 execution here.** This RFC compares candidate kinetic operators for the IRER **transport/matter sector**, states

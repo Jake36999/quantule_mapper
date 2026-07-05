@@ -68,9 +68,10 @@ native conservative soliton is a **wide, moderate-amplitude** structure.
   for A=0.5, 0.193/0.041 = 4.7. So radiation is a smooth, boost-induced ∝k² term on top of the resting bleed — at the
   gentlest periodic kick (n=1) it is only ~4–5% (comparable to the resting bleed), becoming dominant at n=2. This is a
   *cleaner* result than "radiates 26% under any kick": low-k transport is nearly as clean as the resting soliton, and
-  the loss grows smoothly with k². The likely cause is the density-sourced conformal geometry Ω²(ρ), which **breaks
-  Galilean invariance** so an accelerated soliton is not a stationary solution — **quantified and tested in C2.2**
-  (`docs/PHASE_D_C2_2_LOSS_SOURCE_RESULTS.md`).
+  the loss grows smoothly with k². *(C2.1 conjectured the cause was the conformal geometry Ω²(ρ) breaking Galilean
+  invariance. **C2.2 refuted that** (`docs/PHASE_D_C2_2_LOSS_SOURCE_RESULTS.md`): a pure NLS with geometry off radiates
+  identically, and the loss converges away as dt→0 — it is dominantly a numerical / boost-protocol artifact, not
+  geometry. The ballistic mobility is real and resolution-robust; the transport gets cleaner with finer numerics.)*
 
 ## Interpretation vs the dissipative baseline (D.5/D.6)
 | | dissipative sector (Phase C + D.1–D.6) | conservative sector (C2/C2.1) |

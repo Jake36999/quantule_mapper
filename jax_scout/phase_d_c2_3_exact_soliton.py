@@ -211,6 +211,7 @@ def main():
     ap.add_argument("--mus", default="0.10,0.15,0.20,0.22", help="Petviashvili mu scan (branches only exist mu<~0.23)")
     ap.add_argument("--seeds", default="1.0:0.08,1.5:0.06,0.8:0.12", help="narrow seeds 'A:sig,...' to avoid the uniform attractor")
     ap.add_argument("--settle-Tphys", type=float, default=12.0, help="fallback dynamical settle time (phys units)")
+    ap.add_argument("--object-npy", default=None, help="load a saved object field (skips scan+settle)")
     ap.add_argument("--dtchunk", type=int, default=2000); ap.add_argument("--out", default=None)
     a = ap.parse_args()
     kicks = [int(x) for x in a.kicks.split(",")]
@@ -222,6 +223,17 @@ def main():
     D = float(np.asarray(ops.D_diff))
     print(f"=== C2.3 EXACT-SOLITON | N={a.N} dt={a.dt} Tphys={a.Tphys} ({T_steps} steps) kicks={kicks} "
           f"seed A={a.A} sig={a.sigma} | D={D} (Galilean v=2Dk) | out={out} ===", flush=True)
+
+    if a.object_npy:
+        psi_exact = np.load(a.object_npy)
+        exact_found = False; obj_src = f"LOADED:{os.path.basename(a.object_npy)}"
+        mu_chk, res = stationarity(psi_exact, ops)
+        rho = np.abs(psi_exact) ** 2
+        prof = {"amp": float(np.max(np.abs(psi_exact))), "occ": occ(rho), "mass": float(rho.sum()),
+                "mu_check": mu_chk, "residual": res}
+        print(f"[loaded] {a.object_npy} amp={prof['amp']:.3f} | stationarity mu={mu_chk:+.4f} "
+              f"residual={res:.2e}", flush=True)
+        return _boost_and_report(a, ops, Xax, D, psi_exact, prof, obj_src, exact_found, kicks, T_steps, out)
 
     # Petviashvili (seed x mu x gamma) scan -> pick the best-converged localized stationary state
     seeds = [tuple(float(y) for y in c.split(":")) for c in a.seeds.split(",")]
@@ -270,12 +282,17 @@ def main():
         print(f"[settled] mass_ret={prof['mass_ret']:.4f} amp={prof['amp']:.3f} occ_ratio={prof['occ_ratio']:.3f} "
               f"n={prof['n']} | stationarity mu={mu_chk:+.4f} residual={res:.2e} "
               f"({(time.time()-t0)/60:.1f}m)", flush=True)
+    _boost_and_report(a, ops, Xax, D, psi_exact, prof, obj_src, exact_found, kicks, T_steps, out)
 
+
+def _boost_and_report(a, ops, Xax, D, psi_exact, prof, obj_src, exact_found, kicks, T_steps, out):
+    np.save(os.path.join(out, "object_psi.npy"), psi_exact)          # crash-resilient: reuse via --object-npy
     boosts = []
     for nk in kicks:
         t0 = time.time()
         b = boost_exact(psi_exact, ops, Xax, nk, a.N, a.dt, T_steps, a.dtchunk)
         boosts.append(b)
+        json.dump(boosts, open(os.path.join(out, "boosts_partial.json"), "w"), indent=2, default=float)
         pret = b["P_ret_traj"][-1] if b.get("P_ret_traj") else np.nan
         print(f"[boost] n={nk} k={b['k']:.3f} v_cent={_f(b.get('v'), '+.5f')} v_peak={_f(b.get('v_peak'), '+.5f')} "
               f"(pred 2Dk={b['v_pred_2Dk']:+.3f}; frac cent={_f(b.get('v_frac_of_galilean'))} "

@@ -81,6 +81,17 @@ plays no role in the radiation (it is a mild drag on speed). So the honest upgra
 | kick-loss n=2 | n/a (no motion) | ~0.20 | ~0.09 → extrapolates ~0.03 |
 | loss cause | — | *thought* geometry | shown: dt/boost-protocol numerical |
 
+## Addendum (2026-07-08): the algebraic component has since been localized
+A parallel Codex diagnostic campaign on the CuPy side (see `docs/PHASE_D_C2_CONTRACT_REVIEW.md` and
+`quantule_viz/outputs/conservative_geometry_campaign/`) independently reproduced the dt-scaling (ETDRK4 one-step
+defect ∝ dt²) and, using an RK4 diagnostic stepper ~1.5e5× less lossy per step, exposed and localized a small
+REAL algebraic norm flux (~1e-4 fractional per unit time) to the `geometry_covariant_correction` term: the
+implemented `lap_cov` is the Laplace–Beltrami operator of the live conformal metric, self-adjoint w.r.t. the Ω³
+measure (audit near-pass 2.15e-4) but not the flat one, and not canonical for a live Ω(ρ). This refines this
+report's conclusion: geom-ON ≈ geom-OFF here because the ETDRK4 stepper error dominates at the tested dt; the dt→0
+residual decomposes into remaining stepper/boost error + (geometry-ON only) that identified algebraic flux. The
+pure-NLS (geometry-off) branch is algebraically norm-conserving — strengthening the clean-transport trend.
+
 ## Follow-ups (not done)
 1. **Paired N-dt convergence** (N=128 @ dt≈2.5e-4, N=160 @ smaller dt) to test spatial convergence and drive the
    residual toward its true continuum value — the one loose end.

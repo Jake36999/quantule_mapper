@@ -44,8 +44,8 @@ GRID_T2 = {"a": [0.30, 0.45, FEB_ASF[0], 0.80, 1.00, 1.20],
            "f": [FEB_ASF[2], -0.25, -0.10, 0.0]}
 MU_FRACS = [0.25, 0.5, 0.75]
 SEEDS = [(1.0, 0.08), (1.5, 0.06)]
-COLS = ["a", "s", "f", "g_max", "rho_star", "mu", "seedA", "seedsig", "p0", "residual", "amp", "occ", "mass",
-        "p1", "p1_mass_ret", "p1_amp_ret", "p1_occ_ratio", "p2", "p2_vfrac", "p2_v", "p2_mass", "p2_corefrac"]
+COLS = ["a", "s", "f", "D", "g_max", "rho_star", "mu", "ell", "seedA", "seedsig", "p0", "residual", "amp", "occ",
+        "mass", "p1", "p1_mass_ret", "p1_amp_ret", "p1_occ_ratio", "p2", "p2_vfrac", "p2_v", "p2_mass", "p2_corefrac"]
 
 
 def g_of(a, s, f):
@@ -56,9 +56,13 @@ def g_of(a, s, f):
     return float(g[i]), float(rho[i]), unbounded
 
 
-def _ops_family(a, s, f):
-    return physics.build_operators(N, L, DT, {**css.FEB, "param_a": a, "param_s": s, "param_f": f,
-                                              "kinetic_mode": "conservative", "param_a_coupling": 0.0})
+def _ops_family(a, s, f, D=None):
+    """TRUE pure NLS (param_geom_off — a_coupling=0 alone is defeated by the soft-clip squash; see physics.Ops.geom_fac)."""
+    p = {**css.FEB, "param_a": a, "param_s": s, "param_f": f,
+         "kinetic_mode": "conservative", "param_a_coupling": 0.0, "param_geom_off": True}
+    if D is not None:
+        p["param_D"] = D
+    return physics.build_operators(N, L, DT, p)
 
 
 def classify_p0(prof):
@@ -91,7 +95,10 @@ def main():
     ap.add_argument("--tier", type=int, default=1); ap.add_argument("--out", default=None)
     ap.add_argument("--kloc", type=float, default=0.628); ap.add_argument("--Tboost", type=float, default=3.0)
     ap.add_argument("--families", default=None, help="override grid: 'a:s:f,a:s:f' (smoke/targeted)")
+    ap.add_argument("--Ds", default=None, help="comma list of param_D values (default: feb 2.7329). "
+                    "Soliton width ell=sqrt(D/mu) must fit the box (ell << L/4) — lower D opens the window.")
     a_ = ap.parse_args()
+    Ds = [float(x) for x in a_.Ds.split(",")] if a_.Ds else [float(css.FEB["param_D"])]
     grid = GRID_T1 if a_.tier == 1 else GRID_T2
     out = a_.out or os.path.join(ROOT, "sweep_runs", f"PHASE_D_C2_5_SCOUT_T{a_.tier}_{time.strftime('%Y%m%d_%H%M%S')}")
     os.makedirs(out, exist_ok=True); csv_path = os.path.join(out, "family_scout.csv")
@@ -105,21 +112,21 @@ def main():
           f"| out={out} ===", flush=True)
     rows, hits = [], []
     t_start = time.time()
-    for (av, sv, fv) in fams:
+    for (Dv, (av, sv, fv)) in itertools.product(Ds, fams):
         g_max, rho_star, unb = g_of(av, sv, fv)
-        tag = "FEB_CONTROL" if (round(av, 4), sv, fv) == FEB_ASF else ""
+        tag = "FEB_CONTROL" if (round(av, 4), sv, fv) == FEB_ASF and abs(Dv - 2.7329) < 1e-6 else ""
         if g_max <= 0.05:
-            rows.append({"a": av, "s": sv, "f": fv, "g_max": g_max, "rho_star": rho_star, "p0": "NO_BINDING"})
+            rows.append({"a": av, "s": sv, "f": fv, "D": Dv, "g_max": g_max, "rho_star": rho_star, "p0": "NO_BINDING"})
             _dump(rows, csv_path); continue
-        ops = _ops_family(av, sv, fv)
+        ops = _ops_family(av, sv, fv, Dv)
         best = None
         for frac in MU_FRACS:
             mu = frac * g_max
             for (A, sig) in SEEDS:
                 psi_c, prof = petviashvili(A, sig, ops, N, mu)
                 k = classify_p0(prof if psi_c is not None else None)
-                rec = {"a": av, "s": sv, "f": fv, "g_max": round(g_max, 4), "rho_star": round(rho_star, 3),
-                       "mu": round(mu, 4), "seedA": A, "seedsig": sig, "p0": k}
+                rec = {"a": av, "s": sv, "f": fv, "D": Dv, "g_max": round(g_max, 4), "rho_star": round(rho_star, 3),
+                       "mu": round(mu, 4), "ell": round(float(np.sqrt(Dv / mu)), 2), "seedA": A, "seedsig": sig, "p0": k}
                 if psi_c is not None:
                     rec.update({"residual": prof["residual"], "amp": round(prof["amp"], 3),
                                 "occ": round(prof["occ"], 4), "mass": round(prof["mass"], 1)})
@@ -134,8 +141,8 @@ def main():
             p1, m1 = p1_stability(psi_c, ops)
             rec["p1"] = p1
             rec.update({f"p1_{k}": round(v, 4) for k, v in m1.items()})
-            print(f"[fam a={av} s={sv} f={fv}]{tag} g_max={g_max:.3f} TRUE_BRANCH mu={rec['mu']} "
-                  f"amp={rec['amp']} res={rec['residual']:.1e} -> P1 {p1} {m1}", flush=True)
+            print(f"[fam a={av} s={sv} f={fv} D={Dv}]{tag} g_max={g_max:.3f} TRUE_BRANCH mu={rec['mu']} "
+                  f"ell={rec['ell']} amp={rec['amp']} res={rec['residual']:.1e} -> P1 {p1} {m1}", flush=True)
             if p1 == "STABLE":
                 T_steps = int(round(a_.Tboost / DT))
                 r = run_case(psi_c, ops, Xax, a_.kloc, N, DT, T_steps, 500)
@@ -150,8 +157,9 @@ def main():
                       f"mass={rec.get('p2_mass')}", flush=True)
                 hits.append(rec)
         else:
-            p0s = {r.get("p0") for r in rows if r.get("a") == av and r.get("s") == sv and r.get("f") == fv}
-            print(f"[fam a={av} s={sv} f={fv}]{tag} g_max={g_max:.3f} -> {sorted(p0s)}", flush=True)
+            p0s = {r.get("p0") for r in rows
+                   if r.get("a") == av and r.get("s") == sv and r.get("f") == fv and r.get("D") == Dv}
+            print(f"[fam a={av} s={sv} f={fv} D={Dv}]{tag} g_max={g_max:.3f} -> {sorted(p0s)}", flush=True)
         _dump(rows, csv_path)
         json.dump({"hits": hits, "elapsed_min": round((time.time() - t_start) / 60, 1)},
                   open(os.path.join(out, "hits.json"), "w"), indent=2, default=float)

@@ -59,10 +59,14 @@ def _velocity(angles, t_phys):
 
 
 def _ops(geom_on, N, dt):
-    """Conservative substrate. geom_on=False sets param_a_coupling=0 => exact flat (pure NLS)."""
+    """Conservative substrate. geom_on=False => TRUE flat geometry (pure NLS).
+    NOTE (2026-07-09 correction): param_a_coupling=0 alone does NOT give flat geometry — the log-tanh soft-clip
+    chain maps omega_sq 1 -> ~151, cancelling ~99.3% of the dispersion (D_eff=D/151). param_geom_off=1 (Ops.geom_fac)
+    is the real off-switch; all pre-fix "geom-off" C2.2-C2.5 runs actually ran with the squashed geometry."""
     p = {**css.FEB, "param_a": float(css.FEB["param_a"]) * 1.15, "kinetic_mode": "conservative"}
     if not geom_on:
         p["param_a_coupling"] = 0.0
+        p["param_geom_off"] = True
     return physics.build_operators(N, L, dt, p)
 
 

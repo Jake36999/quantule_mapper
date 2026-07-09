@@ -74,6 +74,13 @@ class Ops(NamedTuple):
     D_spatial: jnp.ndarray
     geom_eps: jnp.ndarray
     kfac: jnp.ndarray = None       # Phase D C2: nonlinearity multiplier (1.0 dissipative default; 1j conservative/NLS)
+    geom_fac: jnp.ndarray = None   # Phase D C2.5: multiplier on the geometry covariant correction. DEFAULT 1.0 =
+                                   # baseline (x1.0 is bitwise-exact). param_geom_off=1 -> 0.0 = TRUE flat geometry.
+                                   # NOTE: a_coupling=0 does NOT give flat geometry -- the log-tanh soft-clip chain
+                                   # (beta=3 squash, asymmetric window) maps omega_sq 1 -> ~151, so lap_cov ~ lap/151
+                                   # and the correction term cancels ~99.3% of the dispersion (D_eff = D/151). That
+                                   # silent defeat of "geometry off" invalidated the C2.2-C2.5 pure-NLS transport
+                                   # readings; see docs/PHASE_D_C2_6_GEOMETRY_OFF_BUG_REPORT.md.
 
 
 # ---------------------------------------------------------------------------
@@ -172,10 +179,12 @@ def _cov_laplacian(psi, dx, dy, dz, lap_flat, omega, omega_sq, d_omega_d_rho, D_
     return (lap_flat + cov_term) / omega_sq
 
 
-def _nonlinear_rhs(psi, rho, lap_cov, lap_flat, D_diff, a, s, f):
-    """Mirror kernels.calculate_nonlinear_rhs (cubic-quintic-septic GL)."""
+def _nonlinear_rhs(psi, rho, lap_cov, lap_flat, D_diff, a, s, f, geom_fac=1.0):
+    """Mirror kernels.calculate_nonlinear_rhs (cubic-quintic-septic GL).
+    geom_fac: multiplier on the geometry covariant correction (1.0 default = bitwise-identical baseline;
+    0.0 = true flat geometry, see Ops.geom_fac)."""
     nonlin = a * psi * rho + s * psi * (rho ** 2) + f * psi * (rho ** 3)
-    return D_diff * (lap_cov - lap_flat) + nonlin
+    return D_diff * (geom_fac * (lap_cov - lap_flat)) + nonlin
 
 
 # ---------------------------------------------------------------------------
@@ -220,7 +229,7 @@ def n_op(psi_k, ops, rho_vac_eff=None, omega_sq_mult=None, a_vec=None, q_tensor=
     )
 
     # 5. Nonlinear field operator
-    n_real = _nonlinear_rhs(psi, rho, lap_cov, lap_flat, ops.D_diff, ops.a, ops.s, ops.f)
+    n_real = _nonlinear_rhs(psi, rho, lap_cov, lap_flat, ops.D_diff, ops.a, ops.s, ops.f, ops.geom_fac)
 
     # 5b. Current-coupled minimal-coupling term (grad -> grad - i*a_vec), a_vec = gamma_A*A_real.
     #     (grad_x/y/z are already d psi/d{x,y,z}.) a_vec=None -> exact baseline (no-op).
@@ -283,7 +292,7 @@ def step(psi_k, ops, rho_vac_eff=None, omega_sq_mult=None, a_vec=None, q_tensor=
 
 def _construct_ops(N, L, dt, D_diff, eta, rho_vac, omega0, a, s, f,
                    a_coupling, soft_clip_beta, omega_min_geo, omega_max_geo,
-                   c_affect, dealias_frac, rd, cd, D_imag=0.0, kinetic_mode="dissipative") -> Ops:
+                   c_affect, dealias_frac, rd, cd, D_imag=0.0, kinetic_mode="dissipative", geom_off=False) -> Ops:
     """Build Ops from scalar values. Scalars may be Python floats OR traced jnp
     scalars, so this is safe under jax.vmap (the sweep path).
 
@@ -359,6 +368,7 @@ def _construct_ops(N, L, dt, D_diff, eta, rho_vac, omega0, a, s, f,
         omega_sq_min=sc(OMEGA_SQ_MIN), omega_sq_max=sc(OMEGA_SQ_MAX),
         rho_floor=sc(RHO_FLOOR), D_spatial=sc(D_SPATIAL), geom_eps=sc(GEOM_EPSILON),
         kfac=kfac,
+        geom_fac=sc(0.0 if geom_off else 1.0),
     )
 
 
@@ -388,6 +398,7 @@ def build_operators(N, L, dt, params: Dict[str, float],
         real_dtype, complex_dtype,
         D_imag=fget('param_D_imag', 0.0),   # Phase D C1: default 0.0 = frozen baseline
         kinetic_mode=str(params.get('kinetic_mode', 'dissipative')),   # Phase D C2: default = frozen baseline
+        geom_off=bool(params.get('param_geom_off', False)),   # Phase D C2.5: TRUE flat geometry (see Ops.geom_fac)
     )
 
 

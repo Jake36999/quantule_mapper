@@ -53,6 +53,25 @@ e = |v_out,rel| / |v_in,rel| directly. Pair it with a robust tracker (parabolic 
 nearest-neighbor identity association across frames, longer post-collision T). One bounded run. This is `C2.8b`.
 (Add the Δφ ∈ {π/4, π/2, 3π/4} static sweep alongside — near-free.)
 
+## C2.8b elasticity attempt — INCONCLUSIVE (instrument too fragile; do not trust its auto-verdict)
+Ran `jax_scout/phase_d_c2_8b_elasticity.py` (asymmetric collisions n_L≠n_R + Δφ∈{π/4,π/2,3π/4} static sweep),
+`sweep_runs/C28B_ELAS`. **Mass (0.9989) and momentum (conserved to 0.3%, P 1622→1617) are excellent** — the dynamics
+are sound. But the reported `C2_8B_ELASTIC` verdict is NOT reliable:
+- **asym_3_2** is plausible: clean re-separation (sep_end 8.96), relative speed retained e=|v_out,rel|/|v_in,rel|=0.91
+  → roughly elastic / mildly inelastic. One believable point.
+- **asym_4_3** is a tracking artifact: e=3.21 is unphysical (outgoing rel-speed 3× incoming violates energy
+  conservation); sep_end=2.49 means the cores never cleanly separated, so the outgoing-velocity fit ran on
+  peak-finder noise. The "ELASTIC" label came from that garbage clearing the 0.85 threshold.
+- **Static Δφ sweep contradicts theory AND the earlier Codex supplement:** this run reports π/4, π/2, 3π/4 all REPEL,
+  but the cos(Δφ) NLS interaction law predicts π/4 should ATTRACT and Codex's π/2 supplement measured ATTRACT. The
+  likely failure: `two_peaks_tracked` picks up a spurious far-field second peak after an attracting pair merges →
+  false "repel." Crossover location unresolved.
+**Root cause: extracting outgoing velocities / separation from projected-density peak-finding is too fragile**
+(breaks when cores are close, breathing, or merged). A robust redo needs a different observable — **local half-space
+momentum** P_x integrated over x<0 and x>0 (gives each core's momentum directly, no peak identification), and
+saved full separation trajectories for the static sweep. Elasticity remains OPEN. The durable C2.8 findings above
+(mass/P-conserving strong interactions; in-phase attract / anti-phase repel) are unaffected.
+
 ## C2.6 fix — independently confirmed by Codex (external replication)
 The Codex audit (`tools/c2_6_independent_audit.py`, run `PHASE_D_C2_6_CODEX_AUDIT_20260709`) reproduces our fix on
 independent tooling: default parity max|Δ|=0.0 (L_k, E, f1); `param_geom_off=True` genuinely flat (geom_fac=0.0,

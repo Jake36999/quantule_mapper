@@ -154,11 +154,11 @@ def main():
     assert phi_iso.shape == (N, N, N)
     print(f"=== C2.8b ELASTICITY | family {FAM} | N={N} L={L} dt={dt} | phi_iso={a_.phi_iso} | out={out} ===", flush=True)
     res = {"collisions": [], "static_phase": []}
-    for (nL, nR) in [(3, 2), (4, 3)]:                       # asymmetric: distinct speeds, net P != 0
-        res["collisions"].append(collide_asym(phi_iso, ops, N, L, dt, nL, nR, out, f"asym_{nL}_{nR}"))
-        json.dump(res, open(os.path.join(out, "summary.json"), "w"), indent=2, default=float)
-    for dphi in (np.pi / 4, np.pi / 2, 3 * np.pi / 4):      # fill the force-vs-phase curve (0 and pi from C2.8)
+    for dphi in (np.pi / 4, np.pi / 2, 3 * np.pi / 4):      # CHEAP-FIRST: fill force-vs-phase curve (0 and pi from C2.8)
         res["static_phase"].append(static_phase(phi_iso, ops, N, L, dt, dphi, out, f"static_{dphi:.2f}"))
+        json.dump(res, open(os.path.join(out, "summary.json"), "w"), indent=2, default=float)
+    for (nL, nR) in [(3, 2), (4, 3)]:                       # asymmetric collisions: distinct speeds, net P != 0
+        res["collisions"].append(collide_asym(phi_iso, ops, N, L, dt, nL, nR, out, f"asym_{nL}_{nR}"))
         json.dump(res, open(os.path.join(out, "summary.json"), "w"), indent=2, default=float)
     outcomes = [c["outcome"] for c in res["collisions"]]
     verdict = ("C2_8B_ELASTIC" if all(o == "ELASTIC" for o in outcomes) else

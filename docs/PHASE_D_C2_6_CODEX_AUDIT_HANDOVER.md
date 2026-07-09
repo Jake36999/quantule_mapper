@@ -1,0 +1,32 @@
+# Codex Handover — Independent Audit of the C2.6 Geometry-Off Fix
+
+**For:** the Codex diagnostic lane (CuPy/`.venv` side). **Context:** `docs/PHASE_D_C2_6_GEOMETRY_OFF_BUG_REPORT.md`
+(commit 0886dd0). The jax mirror found and fixed a silent defeat of "geometry off": the log-tanh soft-clip chain
+maps ω²=1 → ~151 at `a_coupling=0`, so the covariant correction cancelled 99.34% of the conservative kinetic term
+(D_eff = D/151). Fix = `Ops.geom_fac` multiplier (default 1.0 bitwise-exact) + `param_geom_off=True`. Before the
+long fixed-substrate campaigns, please independently verify with your stepper/flux tooling:
+
+## Audit checklist
+1. **Default-path parity:** dissipative default (no `param_geom_off`) byte-identical / parity-preserving vs the
+   frozen baseline (jax side: C1 parity re-ran PASS, max|Δ|=0.0 over 50 steps — replicate on your fingerprints).
+2. **Flat behavior:** with `param_geom_off=True` (conservative, `jax_scout/physics.py` mirror), the covariant
+   correction term is identically zero on arbitrary states (your term-flux decomposition tool is perfect for this).
+3. **Linear transport:** boosted linear packet translates at v = 2Dk (jax gate: exact; replicate independently —
+   an RK4 CuPy diagnostic against the same IC is ideal since it shares no stepper code with ETDRK4).
+4. **Soliton transport:** the Petviashvili state (a=0.8, s=−0.2, f=0, D=1.0, μ=0.2, N=48) translates at v = 2Dk
+   with mass_ret ≥ 0.999 under winding boost n=1 (jax gate: [24→27] cells over t=0.5, mass 0.9999).
+5. **Flux:** ordinary-norm RHS flux ≈ numerical zero on geometry-off corrected C2 states (your
+   `run_rhs_flux_source_isolation` rerun with `param_geom_off=True`).
+6. **Regression:** the old behavior (one-step linear phase ~1/151 of exact at `a_coupling=0` WITHOUT
+   `param_geom_off`) is reproducible — confirms the diagnosis, not just the fix.
+7. **No production defaults changed:** protected-file diff empty except `jax_scout/physics.py` +
+   `jax_scout/phase_d_c2_*.py` harnesses (production solver/worker/Hunter untouched).
+
+## Separate (bigger) contract question raised — do NOT patch, just scope it
+The soft-clip squash is production behavior (`unified_omega._soft_clip_log_with_derivative`, β=3): the *implemented*
+Ω²(ρ) is a log-amplified, offset version of the *documented* `(ρ_vac/ρ)^a_coupling`-with-clipping law — for ALL
+runs, dissipative included. Phase C results are self-consistent (they used this de facto geometry throughout, and
+mirror parity holds), but the stated law and the implemented law differ. Suggested Codex deliverable: a short
+characterization report (effective exponent/offset curve ω²_impl(ρ) vs nominal, over the Phase C ρ range) feeding a
+theory decision — keep-and-redocument vs a future corrected-geometry branch. Same discipline as the C2 contract
+review: label, don't hot-patch.

@@ -1,0 +1,46 @@
+# Phase D / C2.5 — Coefficient-Family Scout: Campaign Plan
+
+**Goal:** the C2 transport null (no stationary soliton, flow-through pinning) is specific to the feb/a\* coefficients
+(a=0.552, s=+0.013, f=−0.486). This campaign searches (a,s,f) space for families that admit a **true localized
+stationary branch**, then gates candidates for stability and **genuine transport** — directly addressing the
+limited-sample concern. Agreed queue position: after the C3 RFC (written), before C4 and C2′.
+
+## Theory guide (why this grid)
+- Existence ceiling: a stationary branch needs chemical potential μ below the nonlinearity saturation
+  g_max = max_ρ(aρ + sρ² + fρ³). feb/a\* has g_max ≈ 0.23 — too low a ceiling; Petviashvili found nothing (C2.3).
+- **feb's s=+0.013 (focusing quintic) is the anomaly.** The classic stable-3D-soliton setting (cubic-quintic
+  droplets) is a>0, **s<0** (defocusing quintic saturation). The Hunter has never explored s<0 — that is the
+  highest-prior unexplored region, and the scout grid concentrates there.
+- 3D cubic-only is supercritical (Townes-unstable) — saturation (s<0 or f<0) is required, enforced in the grid.
+
+## Staged design (cheap-first; harness `jax_scout/phase_d_c2_5_family_scout.py`)
+| Stage | Test | Cost/case | Pass criterion |
+|---|---|---|---|
+| P0 | Petviashvili existence at μ ∈ {0.25,0.5,0.75}·g_max, 2 narrow seeds | seconds | TRUE_BRANCH: residual<1e-8, occ<0.5, S=1 |
+| P1 | real-time hold of the exact profile (N=48, T=3, dt=1e-3) | ~1 min | mass_ret>0.90, amp_ret 0.6–1.6, occ_ratio<1.8 |
+| P2 | local boost (C2.4 zero-winding protocol, k_loc=0.628) | ~1 min | GALILEAN: v/(2Dk)>0.5; PARTIAL: >10× drag baseline 0.0054 |
+| P3 (manual) | N=96 + dt-ladder + momentum budget on the best ≤3 hits | ~1–2 h each | survives refinement; density+momentum co-move |
+feb/a\* runs as a **control** (expected NO_FIXED_POINT — validates the classifier against C2.3). Every family row is
+checkpointed to CSV as it completes; hits to `hits.json`; crash-safe.
+
+## Tiers and budget
+- **Tier 1 (~1.5–2.5 h):** 4×4×3 grid minus unsaturated combos ≈ 44 families. The decision-grade first pass.
+- **Tier 2 (overnight, ~6–9 h):** 6×7×4 ≈ 160 families with finer s<0 resolution — run only if Tier 1 is
+  promising-but-sparse or if finer structure is needed.
+- P3 promotion is always manual and bounded (≤3 candidates).
+
+## Verdict tree
+- `C2_5_MOVING_SOLITON_FAMILY_FOUND` (any GALILEAN P2): conservative transport REOPENS with a concrete family →
+  P3 confirm → then two-node (Stage 4) becomes meaningful in that family.
+- `C2_5_TRUE_BRANCHES_NO_TRANSPORT` (stable true solitons that still pin): a *stronger* null than C2.4 — pinning
+  would not be an artifact of the missing branch; big push toward C3/C4.
+- `C2_5_NO_TRUE_BRANCH_IN_GRID`: existence window empty across families → the feb no-soliton result generalizes;
+  C3 becomes the main line (its ω-window search reuses this same machinery).
+- Note: for a TRUE soliton in pure NLS, Galilean covariance essentially guarantees P2 passes — so P2 failures on
+  true branches would be a genuinely new phenomenon; either way the information is decisive.
+
+## Guardrails
+Mirror-only, pure NLS geometry-off (contract blocker absent), Phase C untouched, no production/Hunter changes, no
+clipping, no matter claims. This is a scout for *existence + mobility*, not stability-objective work (H7 unaffected).
+Coefficients outside feb are exploratory substrate variants — results labeled per-family, never merged into the
+frozen baselines.

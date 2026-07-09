@@ -222,13 +222,22 @@ def main():
     print(f"[G2] rest Q-ball T=6: dE/E={dE:.2e} dQ/Q={dQ:.2e} mass {inv0['mass']:.2f}->{inv1['mass']:.2f}", flush=True)
     print(f"[G5] null control: centroid drift = {abs(xN-x0):.4f} (should be ~0)", flush=True)
 
-    # G4 transport: moving Q-ball  psi=phi, pi = -v.grad phi - i w phi ; density should co-move at v
-    print("[G4] velocity-kick transport:", flush=True)
+    # G4 transport: Lorentz-boosted Q-ball. The KG-covariant moving IC is
+    #   psi_0 = phi(x) e^{i k x},  k = gamma*w*v/c^2   (CARRIER PHASE = momentum; group velocity v = c^2 k/w)
+    #   pi_0  = (-gamma*v*grad phi - i*gamma*w*phi) e^{i k x}
+    # (profile Lorentz-contraction phi(gamma x) skipped: O((v/c)^2) shape correction; the transport-enabling term
+    # is the carrier phase, absent in the earlier naive kick which gave a spurious constant v_frac~0.04.)
+    print("[G4] velocity-kick transport (Lorentz-boosted IC, k=gamma*w*v/c^2):", flush=True)
     boosts = []
+    xax = np.linspace(-A.L / 2, A.L / 2, A.N, endpoint=False)[:, None, None]
     gx = np.asarray(jnp.fft.ifftn(op["ikx"] * jnp.fft.fftn(jnp.asarray(phi))))
     for v in (0.1 * A.c, 0.25 * A.c):
-        pi0 = (-v * gx - 1j * w * phi).astype(np.complex128)
-        pk = jnp.fft.fftn(jnp.asarray(phi.astype(np.complex128))); qk = jnp.fft.fftn(jnp.asarray(pi0))
+        gam = 1.0 / np.sqrt(1.0 - (v / A.c) ** 2)
+        kk = gam * w * v / A.c ** 2
+        carrier = np.exp(1j * kk * xax)
+        psi0 = (phi * carrier).astype(np.complex128)
+        pi0 = ((-gam * v * gx - 1j * gam * w * phi) * carrier).astype(np.complex128)
+        pk = jnp.fft.fftn(jnp.asarray(psi0)); qk = jnp.fft.fftn(jnp.asarray(pi0))
         xs, ts = [x0], [0.0]
         Tp = min(0.35 * A.L / v, 8.0); steps = int(round(Tp / A.dt)); chunk = min(500, steps)
         for c_ in range(steps // chunk):

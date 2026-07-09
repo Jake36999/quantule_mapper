@@ -10,6 +10,7 @@ from .plots import render_frame_pack
 from .renderers import (
     core_basin,
     core_characterize,
+    emergence_sequence,
     feb_bound_state,
     phase_c,
     phase_c_current_closure,
@@ -83,6 +84,20 @@ def run_frames(args: argparse.Namespace) -> int:
     outdir = Path(args.outdir) if args.outdir else npz_path.parent
     guard_outputs(outdir, ("frame_density_slices.png", "frame_vector_preview.png"), bool(args.overwrite))
     outputs = render_frame_pack(npz_path, outdir)
+    for output in outputs:
+        print(output)
+    return 0
+
+
+def run_emergence_sequence(args: argparse.Namespace) -> int:
+    outputs = emergence_sequence.render(
+        args.source,
+        outdir=args.outdir,
+        overwrite=bool(args.overwrite),
+        fps=int(args.fps),
+        spatial_stride=int(args.spatial_stride),
+        rho_percentile=float(args.rho_percentile),
+    )
     for output in outputs:
         print(output)
     return 0
@@ -165,6 +180,18 @@ def build_parser() -> argparse.ArgumentParser:
     p_frames.add_argument("--outdir", help="Output directory. Defaults to the NPZ parent.")
     p_frames.add_argument("--overwrite", action="store_true", help="Accepted for CLI consistency.")
     p_frames.set_defaults(func=run_frames)
+
+    p_emerge = sub.add_parser(
+        "emergence-sequence",
+        help="Render rho/phase/geometry emergence visuals from a saved complex frame bundle.",
+    )
+    p_emerge.add_argument("source", help="frames.npz path or a run directory containing frames.npz.")
+    p_emerge.add_argument("--outdir", required=True, help="Output directory for GIFs, stills, and metadata.")
+    p_emerge.add_argument("--overwrite", action="store_true", help="Replace existing generated outputs.")
+    p_emerge.add_argument("--fps", type=int, default=6, help="GIF frames per second.")
+    p_emerge.add_argument("--spatial-stride", type=int, default=1, help="Optional spatial downsampling stride.")
+    p_emerge.add_argument("--rho-percentile", type=float, default=99.7, help="Percentile used for fixed rho color scaling.")
+    p_emerge.set_defaults(func=run_emergence_sequence)
 
     p_structured = sub.add_parser(
         "phase-c-structured",

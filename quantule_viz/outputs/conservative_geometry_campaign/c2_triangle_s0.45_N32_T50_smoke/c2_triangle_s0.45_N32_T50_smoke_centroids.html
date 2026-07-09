@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>c2_triangle_s0.45_N32_T50_smoke centroid diagnostics</title>
+  <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+  <style>body{font-family:Arial,sans-serif;margin:18px} #plot{width:100%;height:680px} pre{white-space:pre-wrap}</style>
+</head>
+<body>
+  <h1>c2_triangle_s0.45_N32_T50_smoke</h1>
+  <p>Conservative C2 diagnostic only. Dissipative triangle results are geometry priors only.</p>
+  <div id="plot"></div>
+  <pre id="metrics"></pre>
+  <script>
+  const payload = {"config": {"case_id": "c2_triangle_s0.45_N32_T50_smoke", "phase_d_regime": "conservative_c2_geometry_diagnostic_only", "solver_component": "tools.conservative_geometry_campaign.ConservativeCupySolver", "source_conservative_path": {"implementation_reference": "jax_scout/physics.py", "mode": "kinetic_mode='conservative'", "linear_operator": "L_k = -1j * param_D * k^2", "nonlinear_factor": "kfac = 1j", "entry_scripts": ["jax_scout/phase_d_c2_transport.py", "jax_scout/phase_d_c2_soliton_scout.py", "jax_scout/phase_d_c2_2_loss_source.py"]}, "params": {"param_D": 2.7329, "param_eta": 0.0704, "param_rho_vac": 1.1866, "param_omega0": 0.0, "param_a_coupling": 2.3098, "param_s": 0.0129, "param_f": -0.4861, "param_a": 0.55223, "kinetic_mode": "conservative"}, "simulation": {"n_grid": 32, "t_steps": 50, "dt": 0.001, "l_domain": 10.0}, "geometry": {"template": "triangle", "spacing_box": 0.45, "width_box": 0.08333333333333333, "amplitude": 1.0, "seed": 20260708, "perturbations": {}, "generator": "tools.conservative_geometry_campaign.build_geometry_ic", "points_box": [[0.5, 0.7598076211353316, 0.5], [0.275, 0.3700961894323342, 0.5], [0.725, 0.3700961894323342, 0.5]], "node_count_initial_design": 3}, "limitations": ["Standalone diagnostic path only.", "Conservative C2 moving-substrate geometry test only.", "Dissipative Phase C triangle results are historical geometry priors only.", "No claim that dissipative stability transfers to the conservative substrate.", "No production solver defaults, Hunter objectives, validation gates, or configs are changed."], "config_hash": "47729befc51f997bd32d102936887ebe968dc57d34011d761bf6902796ee2483"}, "frames": [{"step": 0, "t_phys": 0.001, "centroids_vox": [[8.776263661162213, 11.82743187092651, 16.0], [23.22373633883778, 11.827431870926514, 16.0], [16.0, 24.322156470924185, 16.0]], "node_count": 3, "pairwise_distances_box": [0.4514835211773615, 0.45101936358751965, 0.45101936358751943], "mass_cv": 0.004537539046808365, "peak_cv": 0.0022434393823206043, "z_spread_box": 0.0, "planarity_score": 0.0}, {"step": 10, "t_phys": 0.011, "centroids_vox": [[8.776233012504711, 11.827412539484602, 16.0], [23.223766987495285, 11.827412539484602, 16.0], [16.0, 24.3221674259342, 16.0]], "node_count": 3, "pairwise_distances_box": [0.4514854367184554, 0.45102066233554816, 0.4510206623355481], "mass_cv": 0.00454000099153339, "peak_cv": 0.0022425767896169365, "z_spread_box": 0.0, "planarity_score": 0.0}, {"step": 20, "t_phys": 0.021, "centroids_vox": [[8.776202105589194, 11.82739304543243, 16.0], [23.2237978944108, 11.82739304543243, 16.0], [16.0, 24.322178469542834, 16.0]], "node_count": 3, "pairwise_distances_box": [0.4514873684006752, 0.451021971919502, 0.45102197191950194], "mass_cv": 0.004542482120357992, "peak_cv": 0.002242441635086241, "z_spread_box": 0.0, "planarity_score": 0.0}, {"step": 30, "t_phys": 0.031, "centroids_vox": [[8.776171000453298, 11.827373428212068, 16.0], [23.2238289995467, 11.827373428212068, 16.0], [16.0, 24.322189577497067, 16.0]], "node_count": 3, "pairwise_distances_box": [0.45148931247166885, 0.4510232896771262, 0.4510232896771262], "mass_cv": 0.0045449800282823935, "peak_cv": 0.002242827739121168, "z_spread_box": 0.0, "planarity_score": 0.0}, {"step": 40, "t_phys": 0.041, "centroids_vox": [[8.776139748302722, 11.82735372148101, 16.0], [23.22386025169728, 11.82735372148101, 16.0], [16.0, 24.303330425230264, 16.0]], "node_count": 3, "pairwise_distances_box": [0.4514912657310799, 0.4505141936934764, 0.4505141936934764], "mass_cv": 0.010643453622337738, "peak_cv": 0.002243570771632843, "z_spread_box": 0.0, "planarity_score": 0.0}, {"step": 49, "t_phys": 0.05, "centroids_vox": [[8.776111531851415, 11.827335932656434, 16.0], [23.223888468148584, 11.827335932656434, 16.0], [16.0, 24.30331934591877, 16.0]], "node_count": 3, "pairwise_distances_box": [0.4514930292592865, 0.4505148169822539, 0.4505148169822539], "mass_cv": 0.010648661555392095, "peak_cv": 0.0022444366018833967, "z_spread_box": 0.0, "planarity_score": 0.0}]};
+  const traces = [];
+  const maxNodes = Math.max(...payload.frames.map(f => (f.centroids_vox || []).length), 0);
+  for (let i = 0; i < maxNodes; i++) {
+    const xs=[], ys=[], zs=[], text=[];
+    for (const f of payload.frames) {
+      if ((f.centroids_vox || [])[i]) {
+        xs.push(f.centroids_vox[i][0]); ys.push(f.centroids_vox[i][1]); zs.push(f.centroids_vox[i][2]);
+        text.push(`step=${f.step} nodes=${f.node_count}`);
+      }
+    }
+    traces.push({type:'scatter3d', mode:'lines+markers', x:xs, y:ys, z:zs, text:text, name:`node ${i+1}`});
+  }
+  Plotly.newPlot('plot', traces, {scene:{xaxis:{title:'x vox'},yaxis:{title:'y vox'},zaxis:{title:'z vox'}}, margin:{l:0,r:0,b:0,t:20}});
+  document.getElementById('metrics').textContent = JSON.stringify(payload.frames.map(f => ({
+    step:f.step, t_phys:f.t_phys, node_count:f.node_count, distances:f.pairwise_distances_box,
+    mass_cv:f.mass_cv, peak_cv:f.peak_cv, z_spread_box:f.z_spread_box, planarity_score:f.planarity_score
+  })), null, 2);
+  </script>
+</body>
+</html>

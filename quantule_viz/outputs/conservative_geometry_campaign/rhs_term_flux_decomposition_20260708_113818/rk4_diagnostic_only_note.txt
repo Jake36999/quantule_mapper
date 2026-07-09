@@ -1,0 +1,1 @@
+RK4 remains diagnostic-only.

@@ -155,6 +155,8 @@ def main():
     ap.add_argument("--c", type=float, default=1.0); ap.add_argument("--m", type=float, default=1.0)
     ap.add_argument("--a", type=float, default=0.8); ap.add_argument("--s", type=float, default=-0.5)
     ap.add_argument("--f", type=float, default=-0.1); ap.add_argument("--dt", type=float, default=0.002)
+    ap.add_argument("--wfracs", default="0.9,0.8,0.6,0.4", help="w/m values to scan (mu=m^2-w^2)")
+    ap.add_argument("--sigs", default="1.2", help="Petviashvili seed widths to try per w")
     ap.add_argument("--out", default=None)
     A = ap.parse_args()
     out = A.out or os.path.join(ROOT, "sweep_runs", f"PHASE_D_C3_WAVE_{time.strftime('%Y%m%d_%H%M%S')}")
@@ -171,16 +173,26 @@ def main():
           f"({'PASS' if e1 < 1e-10 else 'FAIL'})", flush=True)
 
     # G3 Q-ball existence: scan omega (mu = m^2 - w^2)
-    print("[G3] Q-ball existence scan (Petviashvili in omega):", flush=True)
+    gmax = float(np.max(_g(np.linspace(0, 5, 4000), a, s, f)))
+    print(f"[G3] Q-ball existence scan (Petviashvili in omega); g_max={gmax:.3f} -> binding needs mu<g_max:", flush=True)
     qball = None
-    for wfrac in (0.9, 0.8, 0.6, 0.4):
+    wfracs = [float(x) for x in A.wfracs.split(",")]
+    sigs = [float(x) for x in A.sigs.split(",")]
+    for wfrac in wfracs:
         w = wfrac * A.m; mu = A.m ** 2 - w ** 2
-        phi, prof = qball_petviashvili(op, a, s, f, mu)
-        if phi is None:
-            print(f"   w={w:.3f} mu={mu:.3f} -> FAIL {prof.get('fail')}", flush=True); continue
+        best = None
+        for sig in sigs:
+            phi, prof = qball_petviashvili(op, a, s, f, mu, sig=sig)
+            if phi is not None and (best is None or prof["residual"] < best[1]["residual"]):
+                best = (phi, prof)
+        if best is None:
+            print(f"   w={w:.3f} mu={mu:.3f} -> FAIL (all seeds collapsed)", flush=True); continue
+        phi, prof = best
         loc = prof["occ"] < 0.5 and prof["amp"] > 0.05
-        print(f"   w={w:.3f} mu={mu:.3f}: residual={prof['residual']:.2e} amp={prof['amp']:.3f} "
-              f"occ={prof['occ']:.4f} {'Q-BALL' if loc and prof['residual'] < 1e-6 else '--'}", flush=True)
+        binds = mu < gmax
+        print(f"   w={w:.3f} mu={mu:.3f} ({'bindable' if binds else 'mu>gmax'}): residual={prof['residual']:.2e} "
+              f"amp={prof['amp']:.3f} occ={prof['occ']:.4f} "
+              f"{'Q-BALL' if loc and prof['residual'] < 1e-6 else '--'}", flush=True)
         if loc and prof["residual"] < 1e-6 and qball is None:
             qball = (phi, w, mu, prof)
     res["G3_qball_found"] = qball is not None

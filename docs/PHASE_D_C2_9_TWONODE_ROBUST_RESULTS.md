@@ -1,0 +1,62 @@
+# Phase D / C2.9 — Hardened Two-Node Qualification: Results
+
+**Supersedes the C2.8/C2.8b collision readings.** Using a validated momentum-density observable (no peak-tracking),
+the two-soliton interaction law is now trustworthy: a **phase-dependent static force with an attract→repel crossover
+at Δφ=π/2** (canonical NLS), and **capture-dominated collisions** — at closing speeds up to 1.3, the solitons merge
+into a bound state rather than scattering elastically, conserving mass and momentum (non-radiative capture).
+Family A (a=0.8, s=−0.5, f=−0.1, D=0.3, μ=0.070), N=96, L=20, dt=1e-3. Mirror-only; true-flat substrate; no matter
+claims. Run `sweep_runs/C29_ROBUST`.
+
+## The observable (why this is trustworthy where C2.8b was not)
+For iψ_t = −D∇²ψ + N(ρ)ψ (N real), mass continuity ∂_tρ + ∇·J = 0 has current J_x = 2D·Im(ψ*∂_xψ). Hence any
+region's COM velocity is **v = 2D·(∫_window Im ψ*∂_xψ)/(∫_window ρ)** — an integral over a COM-following window, with
+no peak identification. It is robust to breathing, proximity, and merger, which is exactly where C2.8b's
+projected-density peak-tracking produced garbage (unphysical e=3.21; spurious far-peaks → false "repel").
+**Validated (V0/V1):** V0 a single boosted soliton reads v=+0.3769 vs 2Dk=+0.3770 (**0.03%**); V1 an in-phase pair
+attracts sep 5.14→0.09, tracked cleanly *through* the merger.
+
+## Static force law: crossover at Δφ = π/2
+| Δφ | outcome | sep_start → sep_end | mass |
+|---|---|---|---|
+| 0 | ATTRACT → merge | 5.14 → 0.00 | 0.9996 |
+| π/4 | ATTRACT → merge | 5.28 → 0.00 | 0.9996 |
+| π/2 | ~neutral / mild repel | 5.62 → 6.64 | 0.9996 |
+| 3π/4 | REPEL | 6.01 → 7.87 | 0.9995 |
+| π | REPEL | 6.18 → 8.30 | 0.9995 |
+Attractive for Δφ<π/2, repulsive for Δφ>π/2, **crossover at π/2** — the textbook cos(Δφ) NLS soliton interaction.
+Its clean appearance is strong evidence these are genuine solitons, and it is the conservative analog of the
+dissipative D.5 merge-or-hold. **This corrects the C2.8b static sweep** (which mislabeled π/4 as repel — a
+post-merge spurious-far-peak artifact).
+
+## Collisions: capture, not elastic scattering (at these speeds)
+| case | v_in measured (pred) | outcome | sep_min | mass | momentum |
+|---|---|---|---|---|---|
+| asym 3/2 | [0.375, 0.565] ([0.377,0.565]) | **CAPTURE** | 0.00 | 0.9989 | 1621.7→1617.0 (0.3%) |
+| asym 4/3 | [0.564, 0.754] ([0.565,0.754]) | **CAPTURE** | 0.00 | 0.9988 | 1621.9→1616.4 (0.3%) |
+- Incoming speeds are measured to sub-percent — the instrument is trustworthy.
+- Both collisions (closing speeds 0.94 and 1.32) end with the cores **merged and not re-separating** (sep_min→0, no
+  clean outgoing pair within T, so outgoing velocity is undefined → CAPTURE). Mass and momentum are conserved →
+  **non-radiative capture into a bound oscillating state** ("soliton molecule"), consistent with the strong
+  attractive static force. No elastic scattering was observed.
+- **This supersedes C2.8's "n=4 two cores survive"** — that reading came from the fragile peak-tracker and was
+  almost certainly the same spurious-far-peak artifact; the robust observable at comparable speed (4/3) shows capture.
+
+## Interpretation
+These are **strongly attractive, non-integrable solitons that form bound states** rather than passing through — the
+opposite of integrable 1D-NLS behavior, and physically expected for a 3D cubic-quintic-septic substrate. The
+conservative sector therefore supports: (i) clean single-soliton ballistic transport (C2.7), and (ii) a rich
+two-body interaction with a phase-dependent force and velocity-independent capture up to v≈0.75. The relational
+dynamics are real; they are *binding* dynamics, not billiard-ball scattering.
+
+## Open (bounded follow-ups, not blocking)
+1. **Critical velocity for pass-through:** all tested collisions capture; a higher-speed ladder (n=6→v≈1.13,
+   n=8→v≈1.51 each) would find v_crit if an elastic-transmission window exists above the capture regime. This is the
+   one genuinely open question about the collision law.
+2. Whether the captured bound state is long-lived (oscillating molecule) or slowly decays — a long hold of a
+   post-capture state.
+3. C2.8's static/collision numbers should be treated as superseded by this run wherever they disagree.
+
+## Provenance
+`jax_scout/phase_d_c2_9_two_node_robust.py` (validated observable); reuses the C2.8 soliton object
+`phi_iso.npy`. Per-case trajectories saved as `track_*.npz`. Guardrails: mirror-only, true-flat
+(`param_geom_off`), Phase C untouched, no clipping, no matter claims; C2.8b explicitly retracted as inconclusive.

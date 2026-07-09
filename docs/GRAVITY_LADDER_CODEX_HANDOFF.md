@@ -1,0 +1,55 @@
+# Codex Handoff — Gravity Ladder Follow-Ups (execution + hygiene, NOT measurement design)
+
+**For the Codex lane.** Scope discipline (user directive): Codex executes bounded, well-specified tasks and does
+hygiene/replication; **Codex does not design the scientific measurement or interpret gravity.** The rung-B (probe)
+design and all gravity interpretation stay with Claude. Context: `docs/IRER_GRAVITY_RUNG_A_D_RESULTS.md` (rung A+D:
+a geometry-dependent response exists but is a soft-clip saturation cliff, not a graded potential; the C2.6 geometry
+contract is the gate). Everything below is read-only telemetry / diagnostic; **no production solver, worker, Hunter,
+validation, or config changes.**
+
+## Priority 1 — Geometry characterization / de-saturation (the gating task; well-specified)
+The blocker: the production Ω²(ρ) (`gravity/unified_omega.derive_stable_conformal_factor`) is dominated by the
+log-space soft-clip (β=3, window [1e-9,1e6]); it maps Ω²(ρ_vac)=1→~720 and saturates vacuum at the 1e6 cap, so the
+load's response is a saturation switch, not a graded conformal potential. **Deliverable: a characterization report**
+(no physics change):
+1. Tabulate/plot the **effective Ω²(ρ) curve vs the nominal (ρ_vac/ρ)^a** across the ρ range spanned by a real load
+   (≈ [1e-4, 2]), for the production params (a_coupling=2.31, softclip β=3, window as-is). Show where the soft-clip
+   dominates and where (if anywhere) Ω² is *graded* rather than saturated.
+2. Scan the soft-clip window / β (diagnostic only) to find a setting where Ω²(ρ) is a **smooth graded function over the
+   load's ρ range** (not a switch) while still finite/stable — i.e., a regime in which a distance-graded geometry
+   response *could* form. Report the candidate window/β; do NOT change any default.
+3. Cross-reference the C2′ canonical divergence-form geometry (`docs/PHASE_D_C2PRIME_CANONICAL_GEOMETRY_RFC.md`) as
+   the principled alternative. This report feeds the geometry-contract decision.
+Your existing tooling (RHS flux, tensor decomposition, the adjoint/weighted-invariant audits) is well-suited.
+
+## Priority 2 — Production Phase C attractor as the coherent load (execution)
+The rung-A load was a gain-drifting a\*×1.15 relaxation (mass grew 13029→14501). Codex has CuPy production access and
+saved Phase C standing attractors (e.g. `sweep_runs/PHASE_C_OPTION_B_N96_TRACE_*/k6_mid_mass_true/frames.npz`).
+- Load a **certified stable standing attractor** (balanced gain/loss, N=96 production) as the coherent load and re-run
+  the rung-A telemetry (`jax_scout/gravity_ladder_A_D.py` observables: Ω² well/profile, T_info shear/aniso,
+  correlation length) on it. A genuinely balanced load removes the gain-drift confound.
+- **Load-free baseline subtraction:** compute Ω²(load) − Ω²(background only, same box) to isolate the load's
+  perturbation from the ambient/soft-clip floor. Report the subtracted profile + its radial falloff.
+
+## Priority 3 — Replication of the finalized Phase D harnesses (confidence)
+Independently re-run (CuPy/production where applicable; JAX-mirror parity otherwise) and confirm the headline numbers:
+- `jax_scout/phase_d_c2_9_two_node_robust.py` — static force crossover at Δφ=π/2; asymmetric collisions capture.
+- `jax_scout/phase_d_c3_wave.py` — Q-ball at the C2-mapped point; E/Q conservation ~1e-13; Lorentz-boost v_frac~0.9.
+- `jax_scout/gravity_ladder_A_D.py` — rung A+D verdict.
+Confirm protected production/reference diff empty; report any divergence.
+
+## Priority 4 — Repo hygiene
+`quantule_viz/outputs/` has a large untracked pile of render/diagnostic artifacts (gifs, pngs, csvs from earlier
+Codex campaigns). Recommend adding `quantule_viz/outputs/` (and `sweep_runs/` if not already) to `.gitignore` as
+regenerable data products, and confirming nothing scientific-source lives only there. Small, safe, self-contained.
+
+## Explicitly NOT for Codex (Claude retains)
+- Designing rung B (neutral-probe) and rungs C–E (phase-shuffle, geometry-null, propagation-delay).
+- Any interpretation of "gravity-like" behaviour or path-bias claims.
+- Changing the geometry contract (Priority 1 is a *characterization report* feeding a decision, not a patch).
+- Cautious-language contract applies to all outputs: "geometry-density interaction," "candidate mechanism," "not yet
+  an emergent-gravity claim"; never "gravity proven" / "mass attracts mass".
+
+## Return format
+For each task: a short results markdown + the raw CSV/JSON, protected-diff status, runtime/GPU/commit metadata, and
+an explicit "no production/solver change" attestation. No commits unless asked.

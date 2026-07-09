@@ -1,0 +1,56 @@
+# Phase D / C2.7 — Re-Derivation on the Fixed Substrate: Results
+
+**Headline: on the corrected instrument, the conservative substrate class supports TRUE stationary solitons that
+transport ballistically at the exact Galilean velocity with ~zero loss (v/2Dk = 0.9999, mass_ret 0.9999, N=96) —
+`C2_5_MOVING_SOLITON_FAMILY_FOUND` + `CLEAN_TRANSPORT_N96_CONFIRMED`. The feb/a\* coefficient family, by contrast,
+has NO localized conservative structures at all on the true substrate (everything disperses): the C2.1 "native
+solitons" were artifacts of the suppressed dispersion. Two-node interaction (old Stage 4) is UNLOCKED.**
+Runs: `sweep_runs/C27_REDERIVE`, `C25_SCOUT_T1B_FIXED`, `C25_SCOUT_T1_FIXED` (~56 min total).
+
+## R0 — CFL/dt re-baseline (full dispersion restored)
+All tested pairs STABLE with resting mass_ret ≈ 0.998 over T=1: N=48 @ dt ∈ {1e-3, 5e-4}; N=96 @ {1e-3, 5e-4,
+2.5e-4}; both D=2.7329 and D=1.0 (linear stiffness up to 2.49 rad/step — ETDRK4's exact linear part carries it).
+Generous windows; campaigns can run at dt=1e-3 (N=48) / 5e-4 (N=96) with dt-ladder spot checks.
+
+## R2 — feb/a\* on the TRUE pure NLS: `FEB_TRUE_NLS_NO_LOCALIZED` (0/6)
+Every A×σ cell disperses (occ_ratio 5.8–67, amp collapse to 0.12–0.5) — exactly as the binding argument predicts
+(g_max = 0.23 ≪ box binding floor ~16·D/L² = 0.44 at D=2.7329). **The C2.1 "native soliton" family does not exist
+on the true substrate** — it was frozen-in structure on the D_eff≈0 instrument. The feb/a\* conservative pure-NLS
+sector is structureless.
+
+## R1 — family scout reruns (fixed substrate)
+- **Existence map reproduced exactly** (P0 is solver-independent — same stationary equation): 3 TRUE_BRANCH
+  families, feb control `UNIFORM_ONLY`, D=2.7329 grid has no branch (box constraint).
+- **P1 holds are now near-perfect** (matched equations): mass_ret 0.9998–0.99995 over T=3.
+- **P2 transport gates flipped from PINNED to moving:**
+| family | μ | P2 (local boost) | v_frac | mass |
+|---|---|---|---|---|
+| a=0.8, s=−0.5, f=−0.1, D=0.3 | 0.070 | **GALILEAN** | **1.0009** | 0.9999 |
+| a=0.8, s=−0.5, f=0, D=0.3 | 0.080 | **GALILEAN** | 0.9376 | 0.9999 |
+| a=0.8, s=−0.2, f=0, D=1.0 | 0.20 | PARTIAL | 0.469 | 0.9995 |
+  The D=1.0 PARTIAL is a *protocol-shape* effect, not pinning: its ℓ=2.24 profile carries a 46% condensate pedestal
+  and outsizes the w=2.0 local ramp (the pedestal absorbs the compensating counter-gradient). The same soliton under
+  the winding boost (R3) moves at **0.9999** of Galilean — and the winding boost is the exact test for a stationary
+  state in a box.
+
+## R3 — production-resolution confirmation: `CLEAN_TRANSPORT_N96_CONFIRMED`
+(a=0.8, s=−0.2, f=0, D=1.0, μ=0.2) at N=96, dt=2.5e-4: Petviashvili residual 1.1e-12; **hold T=3 mass_ret =
+1.0000**; winding boosts n=1: v=+1.2565 vs 1.2566 predicted (**frac 0.9999**, r²=1.000, mass 0.9999); n=2:
+v=+2.5130 vs 2.5133 (frac 0.9999, mass 0.9996). Four-digit agreement with Galilean covariance at production
+resolution — the substrate, stepper, and diagnostics are now mutually consistent.
+
+## Where this leaves Phase D
+1. **Conservative transport: ANSWERED POSITIVE** for the substrate class — true solitons exist and move cleanly —
+   with a sharp coefficient criterion: needs s<0 (defocusing quintic saturation) and box-compatible D (soliton
+   width ℓ = √(D/μ) must fit; feb's D=2.73 + g_max=0.23 cannot).
+2. **feb/a\* specifically: conservative sector is structureless** (this replaces the C2.1–C2.4 narrative wholesale).
+   The dissipative sector remains feb's regime (Phase C intact).
+3. **Two-node interaction is unlocked** with two GALILEAN families — the natural next package: co-moving/colliding
+   soliton pairs (scatter? merge? pass through?), the first genuine relational-dynamics experiment of the program.
+4. Follow-ons per the agreed ranking: two-node → C3 wave-kinetic → C4 → C2′ canonical geometry. The Codex
+   independent audit of the fix (`docs/PHASE_D_C2_6_CODEX_AUDIT_HANDOVER.md`) should proceed in parallel.
+
+## Guardrails
+Mirror-only; fixed substrate via `param_geom_off` (default byte-identical, C1 parity PASS); no production changes;
+no matter claims — "transport" = the measured v/2Dk + mass metrics above; feb-external coefficients labeled
+exploratory substrate variants, never merged into frozen baselines.

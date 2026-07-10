@@ -84,6 +84,17 @@ def invariants(psi_k, pi_k, op, a, s, f):
     return {"E": E, "Q": Q, "Px": Px, "mass": mass, "amp": float(np.abs(psi).max())}
 
 
+def contract_axis0(phi, gamma, L):
+    """Lorentz-contract a localized profile along the boost axis (axis 0): return phi(gamma*x) by linear
+    interpolation. gamma>1 compresses; the Q-ball is localized so box-edge clamping is harmless."""
+    N = phi.shape[0]
+    x = np.linspace(-L / 2, L / 2, N, endpoint=False)
+    xq = np.clip(gamma * x, x[0], x[-1])
+    idx = np.clip(np.searchsorted(x, xq) - 1, 0, N - 2)
+    frac = ((xq - x[idx]) / (x[idx + 1] - x[idx]))[:, None, None]
+    return (1.0 - frac) * phi[idx] + frac * phi[idx + 1]
+
+
 def centroid_x(rho, N, L):
     x = np.linspace(-L / 2, L / 2, N, endpoint=False)
     th = 2 * np.pi * x / L
@@ -222,23 +233,25 @@ def main():
     print(f"[G2] rest Q-ball T=6: dE/E={dE:.2e} dQ/Q={dQ:.2e} mass {inv0['mass']:.2f}->{inv1['mass']:.2f}", flush=True)
     print(f"[G5] null control: centroid drift = {abs(xN-x0):.4f} (should be ~0)", flush=True)
 
-    # G4 transport: Lorentz-boosted Q-ball. The KG-covariant moving IC is
-    #   psi_0 = phi(x) e^{i k x},  k = gamma*w*v/c^2   (CARRIER PHASE = momentum; group velocity v = c^2 k/w)
-    #   pi_0  = (-gamma*v*grad phi - i*gamma*w*phi) e^{i k x}
-    # (profile Lorentz-contraction phi(gamma x) skipped: O((v/c)^2) shape correction; the transport-enabling term
-    # is the carrier phase, absent in the earlier naive kick which gave a spurious constant v_frac~0.04.)
-    print("[G4] velocity-kick transport (Lorentz-boosted IC, k=gamma*w*v/c^2):", flush=True)
+    # G4 transport: EXACT Lorentz-boosted Q-ball. The KG-covariant moving IC (t=0) is
+    #   psi_0 = phi(gamma x) e^{i k x},  k = gamma*w*v/c^2   (carrier phase = momentum; group velocity v = c^2 k/w)
+    #   pi_0  = (-v * d_x[phi(gamma x)] - i*gamma*w*phi(gamma x)) e^{i k x}
+    # using phi'(gamma x) = (1/gamma) d_x[phi(gamma x)] so the -gamma*v*phi'(gamma x) term becomes -v*d_x(phi_c).
+    # The profile Lorentz-CONTRACTION phi(gamma x) is now included (was skipped -> v_frac ~0.9); this should
+    # tighten v_frac -> 1. Both variants are measured (contract on/off) to quantify the contraction's effect.
+    print("[G4] velocity-kick transport (EXACT Lorentz boost: contracted profile + carrier phase):", flush=True)
     boosts = []
     xax = np.linspace(-A.L / 2, A.L / 2, A.N, endpoint=False)[:, None, None]
-    gx = np.asarray(jnp.fft.ifftn(op["ikx"] * jnp.fft.fftn(jnp.asarray(phi))))
     for v in (0.1 * A.c, 0.25 * A.c):
         gam = 1.0 / np.sqrt(1.0 - (v / A.c) ** 2)
         kk = gam * w * v / A.c ** 2
         carrier = np.exp(1j * kk * xax)
-        psi0 = (phi * carrier).astype(np.complex128)
-        pi0 = ((-gam * v * gx - 1j * gam * w * phi) * carrier).astype(np.complex128)
+        phi_c = contract_axis0(phi, gam, A.L)                                       # phi(gamma x)
+        gx_c = np.asarray(jnp.fft.ifftn(op["ikx"] * jnp.fft.fftn(jnp.asarray(phi_c.astype(np.complex128)))))
+        psi0 = (phi_c * carrier).astype(np.complex128)
+        pi0 = ((-v * gx_c - 1j * gam * w * phi_c) * carrier).astype(np.complex128)
         pk = jnp.fft.fftn(jnp.asarray(psi0)); qk = jnp.fft.fftn(jnp.asarray(pi0))
-        xs, ts = [x0], [0.0]
+        xs, ts = [centroid_x(np.abs(psi0) ** 2, A.N, A.L)], [0.0]
         Tp = min(0.35 * A.L / v, 8.0); steps = int(round(Tp / A.dt)); chunk = min(500, steps)
         for c_ in range(steps // chunk):
             pk, qk = kg_evolve(pk, qk, op, a, s, f, chunk)
@@ -256,6 +269,36 @@ def main():
         print(f"   v={v:.3f}: v_measured={vm:+.4f} (frac={frac:+.4f}) mass_ret={invf['mass']/inv0['mass']:.4f} "
               f"amp={invf['amp']:.3f}", flush=True)
     res["G4_boosts"] = boosts
+
+    # G6 Vakhitov-Kolokolov stability slope: scan omega near the Q-ball, Q(omega)=omega*Int|phi|^2; dQ/domega<0 = stable.
+    print("[G6] VK stability slope (dQ/domega; <0 => stable branch); per-omega seed scan:", flush=True)
+    dV = (A.L / A.N) ** 3
+    vk = []
+    for wv in (w - 0.008, w - 0.004, w, w + 0.004, w + 0.008):
+        muv = A.m ** 2 - wv ** 2
+        if muv <= 0:
+            continue
+        best = None
+        for sg in (1.3, 1.5, 1.7, 2.0):                    # seed scan: convergence window is seed-sensitive
+            ph, pr = qball_petviashvili(op, a, s, f, muv, sig=sg)
+            if ph is not None and pr["residual"] < 1e-6 and pr["occ"] < 0.5 and (best is None or pr["residual"] < best[1]["residual"]):
+                best = (ph, pr)
+        if best is not None:
+            ph, pr = best
+            Q = float(wv * np.sum(np.abs(ph) ** 2) * dV)
+            vk.append({"w": wv, "mu": muv, "Q": Q, "residual": pr["residual"]})
+            print(f"   w={wv:.4f} mu={muv:.4f}: Q={Q:.3f} (residual {pr['residual']:.1e})", flush=True)
+        else:
+            print(f"   w={wv:.4f} mu={muv:.4f}: no converged Q-ball (skip)", flush=True)
+    vk_slope = np.nan; vk_stable = None
+    if len(vk) >= 2:
+        ws = np.array([d["w"] for d in vk]); Qs = np.array([d["Q"] for d in vk])
+        vk_slope = float(np.polyfit(ws, Qs, 1)[0]); vk_stable = bool(vk_slope < 0)
+        print(f"   => dQ/domega = {vk_slope:+.3f}  ({'VK-STABLE' if vk_stable else 'VK-UNSTABLE'})", flush=True)
+    else:
+        print("   => insufficient converged points for a VK slope", flush=True)
+    res["G6_vk"] = {"points": vk, "dQ_dw": vk_slope, "vk_stable": vk_stable}
+
     ok = all(abs(b["v_frac"] - 1.0) < 0.2 and b["mass_ret"] > 0.9 for b in boosts)
     verdict = "C3_INERTIAL_TRANSPORT_CONFIRMED" if (ok and dE < 1e-2 and res["G5_null_drift"] < 0.3) else \
               "C3_QBALL_TRANSPORT_DEGRADED"

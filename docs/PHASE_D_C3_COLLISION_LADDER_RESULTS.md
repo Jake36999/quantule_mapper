@@ -1,23 +1,27 @@
 # Phase D / C3 — Collision Ladder: Results (in-phase + anti-phase channels)
 
-**Result: the C3 collision outcome is PHASE- and SPEED-controlled. In-phase (attractive) collisions CAPTURE at every
-speed up to 0.75c. Anti-phase (repulsive) collisions TRANSMIT / bounce at low-to-moderate speed (0.15–0.45c, cleanest
-at 0.30c with ~91% elasticity) and only CAPTURE at high speed (≥0.60c, where the violent overlap scrambles the phase
-distinction). So transmission DOES exist in this substrate — in the repulsive channel below a speed threshold — but
-there is no transmission in the attractive channel at any tested speed.** Energy and U(1) charge conserved to machine
-precision throughout (dE_rel ≤ 6.6e-6), so both the capture and transmission results are trustworthy. C3 collision
-results only — **not** a general theory claim. VK-stable branch (a=0.8, s=−0.5, f=−0.1, c²=0.3, w=0.964), head-on,
-separation 10, L=20, N=80, dt=0.001.
+**Result: C3 Q-ball collisions form a relational phase diagram, but CAPTURE is the generic outcome across almost the
+entire (relative-phase × speed) plane. Transmission is a NARROW feature confined to Δφ ≈ π (exact anti-phase) and
+v ≲ 0.45–0.6c — enabled by the destructive-interference node the two anti-phase fields force at the collision
+midplane, which forbids merging. Even Δφ=3π/4 and 7π/8 (statically repulsive, close to anti-phase) still CAPTURE; the
+static attract→repel force (crossover Δφ=π/2, from C2.9/C3) does NOT map onto the collision capture/transmit boundary.**
+So the substrate supports transmission, but only through the anti-phase node channel; a head-on collision otherwise
+binds, its kinetic energy overwhelming the static repulsion. Energy and U(1) charge conserved to machine precision
+throughout (dE_rel ≤ 6.6e-6) — capture and transmission results alike are trustworthy. C3 collision results only —
+**not** a general theory claim. VK-stable branch (a=0.8, s=−0.5, f=−0.1, c²=0.3, w=0.964), head-on, separation 10,
+L=20, N=80, dt=0.001.
 
-## Collision phase diagram (outcome vs relative phase × speed)
-| v/c | in-phase Δφ=0 (attractive) | anti-phase Δφ=π (repulsive) |
-|---|---|---|
-| 0.15 | CAPTURE | **PASS_THROUGH** (gentle bounce, elast 51%, rad 0.02) |
-| 0.30 | CAPTURE | **PASS_THROUGH** (full re-separate, **elast 91%**, rad 0.07) |
-| 0.45 | CAPTURE | **PASS_THROUGH** (overlap sep_min 0.01→9.45, elast 50%, rad 0.08) |
-| 0.60 | CAPTURE | **CAPTURE** (violent overlap wins, sep_end 5.61) |
-| 0.75 | CAPTURE | **CAPTURE** (merged, rad 0.10) |
-The transmission window is the repulsive channel at v ≲ 0.45–0.6c; above it, even anti-phase captures.
+## Collision phase diagram (outcome vs relative phase × impact speed)
+| v/c | Δφ=0 | Δφ=π/2 | Δφ=3π/4 | Δφ=7π/8 | Δφ=π |
+|---|---|---|---|---|---|
+| 0.15 | CAPTURE | — | — | — | **PASS_THROUGH** (bounce, elast 51%) |
+| 0.30 | CAPTURE | CAPTURE | CAPTURE | CAPTURE | **PASS_THROUGH** (elast **91%**, rad 0.07) |
+| 0.45 | CAPTURE | CAPTURE | CAPTURE | CAPTURE | **PASS_THROUGH** (elast 50%, rad 0.08) |
+| 0.60 | CAPTURE | CAPTURE | CAPTURE | — | CAPTURE |
+| 0.75 | CAPTURE | — | — | — | CAPTURE |
+Off-anti-phase captures are *violent* (radiation 0.42–0.54); the Δφ=π transmissions are *clean* (radiation 0.02–0.08).
+**The only transmission cells are Δφ=π at v ≤ 0.45c.** The transmission band in Δφ is narrow (7π/8 already captures) —
+it is a node feature at exact anti-phase, not a broad repulsive region.
 
 ## In-phase (attractive) channel — capture-dominated at all speeds
 
@@ -63,15 +67,22 @@ speed ⇒ the identity-ambiguity flag (pass-through vs rebound) is moot: nothing
   The physically robust statement is transmission-or-bounce with the measured elasticity.
 
 ## Interpretation (bounded)
-**The collision outcome is jointly controlled by relative phase and speed** — a small phase diagram, not a single
-law. The attractive (in-phase) Q-ball interaction is **strong enough to capture at all tested speeds up to 0.75c** —
-the incoming kinetic energy does not overcome the
-binding within the relativistic range accessible here. **But transmission is NOT categorically absent in the
-substrate** — the repulsive (anti-phase) channel transmits/bounces below v ≈ 0.5–0.6c (cleanest, near-elastic at
-0.30c), and only crosses over to capture at high speed. So the substrate supports both binding and transmission; which
-one occurs is set by the *relative phase* (the same phase that sets the static attract/repel force, C2.9/C3) and the
-*impact speed*. Coherent IRER-family structures are neither purely "sticky" nor purely "elastic" — the relational
-outcome is a phase×speed phase diagram.
+**Capture is the generic collision outcome; transmission is a narrow anti-phase node feature.** Three precise
+statements from the phase diagram:
+1. **Almost everywhere the cores CAPTURE** — Δφ ∈ {0, π/2, 3π/4, 7π/8} all merge at every tested speed, and Δφ=π
+   captures too above ~0.5–0.6c. A head-on collision generically binds: the incoming kinetic energy overwhelms the
+   static repulsion.
+2. **Transmission occurs only at Δφ ≈ π and v ≲ 0.45c.** At exact anti-phase the two fields destructively interfere
+   to a forced zero (a node) at the collision midplane; you cannot merge through an enforced zero, so the pair
+   bounces/transmits (cleanest, ~91% elastic, at 0.30c). Detuning the phase even to 7π/8 spoils the node and the pair
+   captures — so the transmission band is *narrow* in Δφ (a node feature, not a repulsive region) and bounded in v
+   (at high speed the violent overlap scrambles the node and it captures).
+3. **The static force law does NOT govern collisions.** The static attract/repel crossover is at Δφ=π/2 (C2.9/C3),
+   but statically-repulsive collisions (3π/4, 7π/8) still capture. Static pairwise force and dynamic collision
+   outcome are different physics; only the exact-anti-phase node survives into the collision.
+Coherent IRER-family structures are therefore predominantly *binding* under head-on collision, with a narrow,
+node-protected transmission channel at exact anti-phase — a relational phase diagram, not a single "sticky" or
+"elastic" law.
 
 ## Honest caveats
 - **Radiation metric** uses fixed W_WIN=3 windows around the tracked centroids; as a merged object broadens, some of

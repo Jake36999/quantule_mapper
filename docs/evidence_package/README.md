@@ -1,0 +1,68 @@
+# Quantule Mapper — Evidence Package
+
+The third documentation layer. Where the other two say *what was tested* and *what it means*, this one says **where
+every claim's supporting artifact lives** and **how the project matured to get there** — including the false
+baselines, the instrument bugs, and the retractions. It is a curated, traceable record, not a plot dump.
+
+## The three layers
+1. **`docs/IRER_MASTER_HYPOTHESIS_CATALOG.md`** — what was tested (verdict ledger).
+2. **`docs/theory_synthesis/`** — what the results mean (theory ↔ implementation ↔ evidence ↔ maths).
+3. **`docs/evidence_package/`** (this) — where the artifacts are, in chronological/tagged order.
+
+## Two-layer artifact model (important)
+- **Git-tracked (portable):** this package's indexes + manifests + the canonical result docs under `docs/`. These
+  travel with the repo and are the shareable evidence.
+- **Local raw (gitignored):** the actual run outputs under `sweep_runs/` (summary.json, trajectory `.npz`, panels)
+  and figures under `quantule_viz/outputs/`. These are **on-disk, not in git** (they are large/regenerable). The
+  manifests record their paths + checksums so they are traceable and Codex-verifiable, without bloating the repo.
+So an entry's *summary/verdict/caveat* is in git; its *raw numbers/figure* is a local path in the manifest.
+
+## Layout
+```
+docs/evidence_package/
+  README.md                         (this)
+  EVIDENCE_GAPS.md                  where the package would be stronger (queued enrichments)
+  00_project_timeline/
+    PROJECT_MATURITY_TIMELINE.md    the maturity arc as evidence (with commit hashes)
+    hypothesis_status_snapshot.md   pointer to the catalog's current verdict counts
+  02_phase_c_stability/evidence_index.md
+  03_phase_d_c2_instrument_correction/evidence_index.md   ← the "why old results changed" folder
+  04_phase_d_c2_transport_and_two_body/evidence_index.md
+  05_phase_d_c3_kg_qball/evidence_index.md
+  06_gravity_ladder_paused/evidence_index.md
+  07_instrument_integrity_ledger/evidence_index.md         ← the 3 bugs, as maturity evidence
+  08_external_comparison_candidates.md
+  09_machine_readable/
+    evidence_manifest.json          claim → run → report → figure → verdict → status
+    run_manifest.csv                run folder → sector → what it contains
+```
+(Sectors 01 foundational-theory and thumbnails are folded into the timeline + theory_synthesis links to avoid empty
+scaffolding; Codex enrichment can expand them if wanted.)
+
+## Evidence-card schema (used in every index + the manifest)
+```
+Evidence ID · Claim supported · Theory concept · Sector · Run/script · Output files/figures ·
+Conservation/parity gate · Verdict · Caveat · Current status · Supersedes / superseded-by
+```
+The `Supersedes / superseded-by` line is what makes the maturity arc legible — e.g. the C2 "pinning" cards are
+marked *superseded by the C2.6 bug report + C2.7 corrected transport*.
+
+## Reading order
+- **Reviewer / new agent:** `00_project_timeline/PROJECT_MATURITY_TIMELINE.md` → `07_instrument_integrity_ledger`
+  (why results changed) → the sector indexes.
+- **Tracing a specific claim:** `09_machine_readable/evidence_manifest.json` (find the entry) → its report doc (git)
+  → its run folder (local).
+
+## Scientific-honesty stance
+This package deliberately foregrounds the project's maturity timeline: early exploratory models, a false
+conservative-transport baseline, three instrument bugs, and the corrections that followed. **That is the science.**
+The model got stronger not by avoiding failed hypotheses but by preserving nulls, chasing contradictions against
+known identities, and correcting instruments. No IRER / matter / gravity proof is claimed; every entry is a measured
+observable with its gate and caveat.
+
+## Codex enrichment (mechanical only — after this structure is set)
+See `EVIDENCE_GAPS.md` for the queued list. Codex tasks: walk `sweep_runs/`, `quantule_viz/outputs/`, and the
+promoted archives; fill missing manifest paths; generate checksums; make contact-sheet thumbnails of existing plots;
+verify every entry points to an existing file; flag broken/stale/duplicate links; build old-vs-corrected overlays
+**only from existing data**; list any tiny smoke rerun that would materially strengthen a comparison as
+`QUEUED_OPTIONAL` (do not run without approval). No new science; no re-authoring interpretation.

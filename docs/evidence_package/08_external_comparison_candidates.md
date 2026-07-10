@@ -1,0 +1,39 @@
+# 08 · External Comparison Candidates
+
+Model families and phenomenological analogues to search against the *implemented, confirmed* core. These are
+**search candidates, not claimed correspondences.** No claim is made that IRER reproduces any of these; the point is
+to check whether IRER's implemented mechanisms are known elsewhere (prior theory, and possible external data to
+compare simulations against). Drawn from the theory-synthesis translation (Report 1) and status (Report 5 §8).
+
+## Model-family search terms
+| implemented mechanism (confirmed) | model family / literature terms | why it maps |
+|---|---|---|
+| conservative NLS solitons; v=2Dk transport | nonlinear Schrödinger equation; Gross–Pitaevskii; bright/dark solitons | same cubic(-quintic-septic) NLS structure; Galilean boost |
+| VK-stable Q-balls; inertial transport | complex Klein–Gordon Q-balls; non-topological solitons; oscillons | KG stationary eq ≡ our C3; VK criterion; Lorentz boost |
+| π/2 two-body phase-force; capture/transmission | soliton interaction forces; Peierls–Nabarro barrier; soliton molecules | cos(Δφ) overlap interaction; collision phase diagrams |
+| dissipative standing attractor a\* | dissipative solitons; complex Ginzburg–Landau; reaction–diffusion | gain/loss-balanced localized states |
+| density-sourced conformal geometry Ω²(ρ) | scalar–tensor / dilaton gravity; analogue gravity | conformal factor from a scalar density field |
+| informational stress tensor T_info | scalar-field stress-energy; effective fluid stress | phase-gradient stress ∂φ∂φ − δL |
+
+## Possible external data candidates (phenomenology to compare against)
+| implemented phenomenon | candidate experimental analogue | comparison quantity |
+|---|---|---|
+| bright NLS soliton transport | BEC bright solitons; optical spatial/temporal solitons | velocity–momentum (Galilean) relation; shape stability |
+| soliton collisions (capture/transmit) | colliding BEC/optical solitons; soliton molecules | phase-dependent bounce/pass; elasticity |
+| Q-ball stability & motion | field-theory Q-balls; driven oscillons | charge–frequency Q(ω); VK stability sign |
+| dissipative attractor patterns | dissipative optical solitons; excitable media | existence range; pinning |
+| conformal/analogue geometry response | analogue-gravity (BEC/optics) horizons | metric response to density; propagation |
+
+## What is NOT claimed (explicit)
+- No claim that IRER *is* any of these models.
+- No claim of experimental correspondence, agreement, or prediction.
+- These are directions to (a) check whether the implemented model is already studied (novelty check) and (b)
+  identify external datasets a *future* comparison could test against — with VK stability, U(1) charge conservation,
+  and the Galilean/Lorentz transport identities as the first quantitative hooks.
+
+## Quantitative hooks a comparison would test first
+1. **Galilean identity** v=2Dk (NLS) / **Lorentz boost** (KG) — velocity vs imparted momentum.
+2. **VK stability** dQ/dω<0 — branch stability sign.
+3. **π/2 phase-force crossover** — sign of the two-body force vs relative phase.
+4. **Collision phase diagram** — capture/transmission boundary vs (Δφ, v).
+5. **Conservation** — E, U(1) charge (KG); ∫ρ (NLS) — as fidelity/comparison anchors.

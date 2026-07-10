@@ -1,0 +1,127 @@
+{
+  "schema": "quantule_mapper.evidence.v1",
+  "generated_by": "Claude (first pass); paths/checksums to be verified by Codex enrichment",
+  "artifact_model": "summaries/verdicts are git-tracked under docs/; raw runs are local under sweep_runs/ (gitignored). run_path fields are local.",
+  "status_legend": ["canonical", "superseded", "retracted", "historical", "paused", "design-only"],
+  "entries": [
+    {
+      "id": "EV-PHC-01", "sector": "phase_c_stability", "catalog_row": "C-1",
+      "claim": "a*~x1.15 cubic gain is a genuine long-time stable attractor",
+      "concept": "Quantule / stable resonance", "script": "aste_hunter.py + core_saturation_search",
+      "run_path": "sweep_runs/PHASE_C_OPTION_B_N96_TRACE_20260625_003926/", "report": "docs/PHASE_C_* (catalog)",
+      "figures": "sweep_runs/PHASE_C_VISUAL_ANALYSIS_V2_20260624_185426/cases/*", "gate": "late er-slope<=1.5e-4",
+      "verdict": "CONFIRMED", "status": "canonical", "caveat": "knife-edge balance; site-pinned",
+      "supersedes": null, "superseded_by": null
+    },
+    {
+      "id": "EV-PHC-02", "sector": "phase_c_stability", "catalog_row": "C-2/C-4..C-9",
+      "claim": "a* mobility + prime-SSE/TDA/routing/Payan/vortex all fail to predict/produce",
+      "concept": "mobility, prime-harmonic, angular-deficit", "script": "phase C harnesses",
+      "run_path": "sweep_runs/SUBSTRATE_HUNT_20260621_161557/", "report": "docs/IRER_MASTER_HYPOTHESIS_CATALOG.md",
+      "figures": "sweep_runs/SUBSTRATE_HUNT_20260621_161557/hifi_*", "gate": "kick mobility, prediction corr",
+      "verdict": "FALSIFIED/NULL", "status": "canonical", "caveat": "informative negatives",
+      "supersedes": null, "superseded_by": null
+    },
+    {
+      "id": "EV-D-01", "sector": "phase_d_dissipative", "catalog_row": "D1/D5",
+      "claim": "dissipative nodes couple+merge but never move (C1 destabilises; D.5 merge-or-hold)",
+      "concept": "gradient-derived force, transport", "script": "phase_d_c1_transport.py, two_node_dynamics.py",
+      "run_path": "sweep_runs/PHASE_D_C1_TRANSPORT_20260704_105309/", "report": "docs/PHASE_D_C1_RESULTS.md, PHASE_D_TWONODE_DYNAMICS_RESULTS.md",
+      "figures": null, "gate": "mobility mu; long-T stability", "verdict": "FALSIFIED (transport)", "status": "canonical",
+      "caveat": "dissipative sector only", "supersedes": null, "superseded_by": null
+    },
+    {
+      "id": "EV-C2-OLD", "sector": "phase_d_c2_instrument_correction", "catalog_row": "C2.1b/2.2b/2.3b/2.4",
+      "claim": "conservative solitons are pinned / flow-through / drag mu~0.04",
+      "concept": "conservative transport", "script": "phase_d_c2_2/3/4 (pre-fix)",
+      "run_path": "sweep_runs/C24_LOCAL_N96/, sweep_runs/C23_N96/", "report": "docs/PHASE_D_C2_4_LOCAL_BOOST_RESULTS.md (retraction noted)",
+      "figures": null, "gate": "boost mobility (on bugged substrate)", "verdict": "RETRACTED", "status": "retracted",
+      "caveat": "artifact of the C2.6 D_eff=D/151 bug", "supersedes": null, "superseded_by": "EV-C26-BUG, EV-C27-01"
+    },
+    {
+      "id": "EV-C26-BUG", "sector": "phase_d_c2_instrument_correction", "catalog_row": "C2.6",
+      "claim": "param_a_coupling=0 did NOT turn geometry off; soft-clip squash gave D_eff=D/151",
+      "concept": "geometry-off contract / Galilean identity", "script": "physics.py geom_fac; phase_d_c2_6_geom_off_gate.py",
+      "run_path": "sweep_runs/PHASE_D_C2_6_CODEX_AUDIT_20260709/", "report": "docs/PHASE_D_C2_6_GEOMETRY_OFF_BUG_REPORT.md",
+      "figures": null, "gate": "linear packet v=2Dk; ETDRK4==RK4", "verdict": "BUG CONFIRMED + FIXED", "status": "canonical",
+      "caveat": "the pivotal maturity event; Codex-re-audited (D_eff ratio 0.006511~1/151)", "supersedes": "EV-C2-OLD", "superseded_by": null
+    },
+    {
+      "id": "EV-C27-01", "sector": "phase_d_c2_transport_and_two_body", "catalog_row": "C2.7",
+      "claim": "on the fixed substrate a true soliton translates at v=2Dk (0.9999, mass 0.9999)",
+      "concept": "FMIA / Galilean transport", "script": "phase_d_c2_7_rederivation.py",
+      "run_path": "sweep_runs/C27_REDERIVE/", "report": "docs/PHASE_D_C2_7_REDERIVATION_RESULTS.md",
+      "figures": null, "gate": "Galilean identity v=2Dk", "verdict": "CONFIRMED", "status": "canonical",
+      "caveat": "feb/a* itself structureless; needs s<0 + box-fit D", "supersedes": "EV-C2-OLD", "superseded_by": null
+    },
+    {
+      "id": "EV-C29-01", "sector": "phase_d_c2_transport_and_two_body", "catalog_row": "C2.9",
+      "claim": "static two-body force: attract<pi/2 / repel>pi/2, crossover pi/2; collisions capture",
+      "concept": "gradient-derived force", "script": "phase_d_c2_9_two_node_robust.py",
+      "run_path": "sweep_runs/C29_ROBUST/", "report": "docs/PHASE_D_C2_9_TWONODE_ROBUST_RESULTS.md",
+      "figures": "sweep_runs/C29_ROBUST/track_*.npz (data)", "gate": "momentum-density observable; mass/P conservation",
+      "verdict": "CONFIRMED", "status": "canonical", "caveat": "supersedes C2.8b peak-tracker (EV-C28B-BUG)",
+      "supersedes": "EV-C28B-BUG", "superseded_by": null
+    },
+    {
+      "id": "EV-C28B-BUG", "sector": "instrument_integrity", "catalog_row": "C2.8/8b",
+      "claim": "two-node elasticity via projected-density peak-tracking",
+      "concept": "collision observable", "script": "phase_d_c2_8b_elasticity.py",
+      "run_path": "sweep_runs/C28B_ELAS/", "report": "docs/PHASE_D_C2_8_TWONODE_RESULTS.md (C2.8b inconclusive)",
+      "figures": null, "gate": "elasticity (fragile)", "verdict": "INCONCLUSIVE (tracker bug)", "status": "retracted",
+      "caveat": "unphysical e=3.21; fixed by momentum-density observable", "supersedes": null, "superseded_by": "EV-C29-01"
+    },
+    {
+      "id": "EV-C3-01", "sector": "phase_d_c3_kg_qball", "catalog_row": "C3-2..C3-6",
+      "claim": "KG Q-ball: exists, E/Q conserved ~1e-13, VK-stable (dQ/dw=-849), inertial transport",
+      "concept": "Payan/inertia; manifold; conservation", "script": "phase_d_c3_wave.py",
+      "run_path": "sweep_runs/C3_EXACT_VK2/, sweep_runs/C3_WAVE_BOOSTFIX2/", "report": "docs/PHASE_D_C3_WAVE_KINETIC_RESULTS.md",
+      "figures": "sweep_runs/C3_*/qball.npy (data)", "gate": "linear parity; dE/dQ; dQ/dw; v_frac",
+      "verdict": "CONFIRMED", "status": "canonical", "caveat": "boost-IC bug fixed (EV-C3-BUG); v-fidelity measurement-limited",
+      "supersedes": null, "superseded_by": null
+    },
+    {
+      "id": "EV-C3-BUG", "sector": "instrument_integrity", "catalog_row": "C3-5b",
+      "claim": "naive velocity kick (no carrier phase) barely moves the Q-ball (v_frac~0.04)",
+      "concept": "boost IC", "script": "phase_d_c3_wave.py (G4, pre-fix)",
+      "run_path": "sweep_runs/C3_WAVE/ (BOOSTFIX vs pre)", "report": "docs/PHASE_D_C3_WAVE_KINETIC_RESULTS.md",
+      "figures": null, "gate": "v_frac constant vs v (tell)", "verdict": "BUG FIXED", "status": "historical",
+      "caveat": "KG boost needs psi=phi*e^{ikx}, k=gamma*w*v/c^2", "supersedes": null, "superseded_by": "EV-C3-01"
+    },
+    {
+      "id": "EV-C3-PHASE", "sector": "phase_d_c3_kg_qball", "catalog_row": "C3-8..C3-11",
+      "claim": "collision phase diagram: capture generic; transmission a narrow anti-phase node feature (v<=0.45c)",
+      "concept": "gradient-derived force / relational dynamics", "script": "phase_d_c3_collision_ladder.py",
+      "run_path": "sweep_runs/C3_COLLISION_LADDER_FULL/, C3_ANTIPHASE_LADDER/, C3_PHASE_{pi2,3pi4,7pi8}/",
+      "report": "docs/PHASE_D_C3_COLLISION_LADDER_RESULTS.md", "figures": "collide_*.npz (data)",
+      "gate": "E/Q conservation (dE<=6.6e-6); classifier", "verdict": "CONFIRMED (phase diagram)", "status": "canonical",
+      "caveat": "static force law does NOT govern collisions; identity ambiguity flagged", "supersedes": null, "superseded_by": null
+    },
+    {
+      "id": "EV-C3-2QB", "sector": "phase_d_c3_kg_qball", "catalog_row": "C3-7",
+      "claim": "KG two-Q-ball obeys same pi/2 phase-force law as NLS -> cross-substrate universality",
+      "concept": "gradient-derived force universality", "script": "phase_d_c3_two_qball.py",
+      "run_path": "sweep_runs/C3_TWOQBALL_FULL/", "report": "docs/PHASE_D_C3_TWOQBALL_RESULTS.md",
+      "figures": "pair_*.npz (data)", "gate": "dE_rel~1e-9 static", "verdict": "CONFIRMED", "status": "canonical",
+      "caveat": "pi/2 label at crossover corrected (threshold artifact)", "supersedes": null, "superseded_by": null
+    },
+    {
+      "id": "EV-GR-AD", "sector": "gravity_ladder_paused", "catalog_row": "GR-A/D, GR-1",
+      "claim": "coherent load creates a geometry-dependent Omega^2/T_info response, but it is a saturation cliff not a graded potential",
+      "concept": "geometry-density gravity-like", "script": "gravity_ladder_A_D.py",
+      "run_path": "sweep_runs/GRAVITY_AD_bg0/", "report": "docs/IRER_GRAVITY_RUNG_A_D_RESULTS.md",
+      "figures": "sweep_runs/PHASE_D_CODEX_REPRODUCTION_20260709_233433/gravity_geometry/radial_omega_profiles.png",
+      "gate": "geometry-on vs geometry-null; radial profile", "verdict": "CHANNEL LIVE, NOT GRADED", "status": "paused",
+      "caveat": "response entangled with load-stability; production Omega^2 soft-clip dominated", "supersedes": null, "superseded_by": null
+    },
+    {
+      "id": "EV-GR-DESAT", "sector": "gravity_ladder_paused", "catalog_row": "GR-2/GR-3",
+      "claim": "de-saturating the soft-clip (or C2') does NOT unblock the ladder",
+      "concept": "geometry contract", "script": "gravity_desaturation_pilot.py",
+      "run_path": "sweep_runs/GRAVITY_DESAT_PILOT/", "report": "docs/GRAVITY_LADDER_GEOMETRY_DECISION.md",
+      "figures": null, "gate": "radial profile gradedness", "verdict": "FALSIFIED (fix); PAUSED", "status": "paused",
+      "caveat": "cliff is (rho_vac/rho)^a at near-zero vacuum, not the cap; re-entry = stable overdense load on rho_vac bg",
+      "supersedes": null, "superseded_by": null
+    }
+  ]
+}

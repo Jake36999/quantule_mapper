@@ -36,17 +36,17 @@ def core_com(rx, x, xc, L, w=W_WIN):
     return L * np.arctan2(S, C) / (2 * np.pi), M
 
 
-def collide(phi, w, c, vfrac, op, a, s, f, out):
+def collide(phi, w, c, vfrac, op, a, s, f, out, dphi=0.0):
     N, L, dt = op["N"], op["L"], op["dt"]
     v = vfrac * c
     x = np.linspace(-L / 2, L / 2, N, endpoint=False)
     psiL, piL = boosted_qball(phi, w, c, +v, -5.0, L, op)              # left, moving right
-    psiR, piR = boosted_qball(phi, w, c, -v, +5.0, L, op)              # right, moving left
+    psiR, piR = boosted_qball(phi, w, c, -v, +5.0, L, op, dphi=dphi)   # right, moving left (relative phase dphi)
     psi = (psiL + psiR).astype(np.complex128); pi = (piL + piR).astype(np.complex128)
     amp_single = float(np.abs(phi).max())
     pk = jnp.fft.fftn(jnp.asarray(psi)); qk = jnp.fft.fftn(jnp.asarray(pi))
     inv0 = invariants(pk, qk, op, a, s, f); M0 = inv0["mass"]
-    Tp = min(10.0 / (2 * v) + 20.0, 45.0)
+    Tp = min(10.0 / (2 * v) + 22.0, 60.0)                             # room for slow collisions to fully re-separate
     steps = int(round(Tp / dt)); chunk = 250
     traj = []; xcL, xcR = -5.0, 5.0; dE_max = dQ_max = 0.0
     for cix in range(steps // chunk):
@@ -66,15 +66,15 @@ def collide(phi, w, c, vfrac, op, a, s, f, out):
         traj.append({"t": round((cix + 1) * chunk * dt, 3), "sep": round(sep, 3), "xcL": round(xcL, 2),
                      "xcR": round(xcR, 2), "mass_ret": round(inv["mass"] / M0, 4), "amp": round(inv["amp"], 3),
                      "rad_frac": round(rad, 4), "dE_rel": dEr, "dQ_rel": dQr})
-    np.savez_compressed(os.path.join(out, f"collide_v{vfrac:.2f}.npz"),
+    np.savez_compressed(os.path.join(out, f"collide_v{vfrac:.2f}_p{dphi:.2f}.npz"),
                         t=np.array([q["t"] for q in traj]), sep=np.array([q["sep"] for q in traj]),
                         amp=np.array([q["amp"] for q in traj]), rad=np.array([q["rad_frac"] for q in traj]))
-    return _classify(vfrac, v, c, traj, dE_max, dQ_max, amp_single)
+    return _classify(vfrac, v, c, traj, dE_max, dQ_max, amp_single, dphi)
 
 
-def _classify(vfrac, v, c, traj, dE_max, dQ_max, amp_single):
+def _classify(vfrac, v, c, traj, dE_max, dQ_max, amp_single, dphi=0.0):
     seps = np.array([q["sep"] for q in traj]); ts = np.array([q["t"] for q in traj])
-    i_min = int(np.argmin(seps)); sep_min = float(seps[i_min])
+    sep0 = float(seps[0]); i_min = int(np.argmin(seps)); sep_min = float(seps[i_min])
     sep_end = float(seps[-1]); amp_end = float(traj[-1]["amp"]); rad_end = float(traj[-1]["rad_frac"])
     mass_end = float(traj[-1]["mass_ret"])
     # outgoing relative speed from the post-min separation slope (clean-separated frames only)
@@ -83,20 +83,31 @@ def _classify(vfrac, v, c, traj, dE_max, dQ_max, amp_single):
     if len(post) >= 3:
         tp = np.array([p[0] for p in post]); sp = np.array([p[1] for p in post])
         vout_rel = float(np.polyfit(tp, sp, 1)[0])                     # d(sep)/dt of the separating pair
-    re_separated = sep_end > SEP_CLEAN and sep_min < 2 * W_WIN
-    coherent = amp_end > 0.55 * amp_single and rad_end < 0.35
+    approached = sep_min < sep0 - 1.5                                  # cores meaningfully closed in
+    overlapped = sep_min < 2 * W_WIN                                   # cores actually reached full overlap
+    re_separated = overlapped and sep_end > SEP_CLEAN                  # overlapped then re-separated (transmit/bounce)
+    merged = overlapped and sep_end < 2 * W_WIN                        # overlapped and stayed bound
+    bounced = approached and not overlapped                           # repelled BEFORE overlapping (repulsive channel)
+    coherent = amp_end > 0.55 * amp_single and rad_end < 0.5
     numerically_ok = dE_max < 5e-2 and dQ_max < 5e-2
     if not numerically_ok:
         outcome = "INCONCLUSIVE"; reason = f"E/Q drift too high (dE={dE_max:.1e} dQ={dQ_max:.1e}) -> reduce dt"
+    elif not approached:
+        outcome = "INCONCLUSIVE"; reason = f"cores did not meaningfully approach (sep_min={sep_min:.2f} vs sep0={sep0:.2f})"
+    elif bounced:
+        rev = "re-separating" if sep_end > sep_min + 0.3 else "at/near turning point (window may be short)"
+        outcome = "BOUNCE"; reason = (f"repelled before overlap (sep_min={sep_min:.2f}, {rev}, sep_end={sep_end:.2f}, "
+                                      f"rad={rad_end:.2f})")
+    elif merged:
+        outcome = "CAPTURE"; reason = f"overlapped & stayed bound (sep_min={sep_min:.2f}, sep_end={sep_end:.2f}, rad={rad_end:.2f})"
     elif re_separated and coherent:
-        outcome = "PASS_THROUGH"; reason = f"two coherent cores re-separated (vout_rel={vout_rel:+.3f}, 2v_in={2*v:.3f})"
-    elif not re_separated:
-        outcome = "CAPTURE"; reason = f"cores merged & bound (sep_min={sep_min:.2f}, sep_end={sep_end:.2f})"
+        outcome = "PASS_THROUGH"; reason = (f"two coherent cores overlapped then re-separated (sep_min={sep_min:.2f}->end "
+                                            f"{sep_end:.2f}, vout_rel={vout_rel:+.3f} vs 2v_in={2*v:.3f}, rad={rad_end:.2f})")
     elif re_separated and not coherent:
         outcome = "DISRUPT"; reason = f"cores separated but incoherent (amp {amp_end:.2f}/{amp_single:.2f}, rad {rad_end:.2f})"
     else:
-        outcome = "INCONCLUSIVE"; reason = "ambiguous"
-    return {"vfrac": vfrac, "v": v, "v_over_c": vfrac, "outcome": outcome, "reason": reason,
+        outcome = "INCONCLUSIVE"; reason = f"intermediate (sep_min={sep_min:.2f} sep_end={sep_end:.2f} rad={rad_end:.2f})"
+    return {"vfrac": vfrac, "v": v, "v_over_c": vfrac, "dphi": dphi, "outcome": outcome, "reason": reason,
             "sep_min": sep_min, "sep_end": sep_end, "vout_rel": vout_rel, "v_in_closing": 2 * v,
             "elasticity_est": float(abs(vout_rel) / (2 * v)) if np.isfinite(vout_rel) else np.nan,
             "amp_end": amp_end, "amp_single": amp_single, "rad_frac_end": rad_end, "mass_ret_end": mass_end,
@@ -110,6 +121,7 @@ def main():
     ap.add_argument("--a", type=float, default=0.8); ap.add_argument("--s", type=float, default=-0.5)
     ap.add_argument("--f", type=float, default=-0.1); ap.add_argument("--dt", type=float, default=0.001)
     ap.add_argument("--wfrac", type=float, default=0.964); ap.add_argument("--vfracs", default="0.45,0.60,0.75")
+    ap.add_argument("--dphi", type=float, default=0.0, help="relative phase between the two Q-balls (pi = anti-phase / repulsive channel)")
     ap.add_argument("--out", default=None)
     A = ap.parse_args()
     out = A.out or os.path.join(ROOT, "sweep_runs", f"PHASE_D_C3_COLLISION_LADDER_{time.strftime('%Y%m%d_%H%M%S')}")
@@ -117,7 +129,8 @@ def main():
     op = build_kg(A.N, A.L, A.c, A.m, A.dt)
     a, s, f = A.a, A.s, A.f
     w = A.wfrac * A.m; mu = A.m ** 2 - w ** 2
-    print(f"=== C3 COLLISION LADDER | N={A.N} L={A.L} c={A.c} dt={A.dt} w={w:.3f} | in-phase head-on, sep=10 "
+    chan = "IN-PHASE (attractive)" if abs(A.dphi) < 1e-6 else f"dphi={A.dphi:.3f} ({'ANTI-PHASE/repulsive' if abs(A.dphi-np.pi)<0.3 else 'off-phase'})"
+    print(f"=== C3 COLLISION LADDER | N={A.N} L={A.L} c={A.c} dt={A.dt} w={w:.3f} | {chan} head-on, sep=10 "
           f"| out={out} ===", flush=True)
     # Q-ball in this box + single-object hold sanity
     phi = None
@@ -128,22 +141,30 @@ def main():
     if phi is None:
         print(f"FAIL: no Q-ball in L={A.L} box", flush=True); return
     print(f"[T0] Q-ball: residual={prof['residual']:.2e} amp={prof['amp']:.3f} occ={prof['occ']:.4f}", flush=True)
-    res = {"config": vars(A), "w": w, "qball": prof, "known": {"0.15c": "CAPTURE", "0.30c": "CAPTURE"}, "ladder": []}
+    res = {"config": vars(A), "w": w, "dphi": A.dphi, "qball": prof, "ladder": []}
     for vf in [float(x) for x in A.vfracs.split(",")]:
         t0 = time.time()
-        r = collide(phi, w, A.c, vf, op, a, s, f, out)
+        r = collide(phi, w, A.c, vf, op, a, s, f, out, dphi=A.dphi)
         res["ladder"].append(r)
         print(f"[v={vf:.2f}c] {r['outcome']}: {r['reason']} | mass_ret={r.get('mass_ret_end')} "
               f"rad={r.get('rad_frac_end')} dE_max={r.get('dE_rel_max'):.1e} dQ_max={r.get('dQ_rel_max'):.1e} "
               f"({(time.time()-t0)/60:.1f}m)", flush=True)
         json.dump(res, open(os.path.join(out, "summary.json"), "w"), indent=2, default=float)
     ladder = [(f"{r['vfrac']:.2f}c", r["outcome"]) for r in res["ladder"]]
-    any_pass = any(r["outcome"] == "PASS_THROUGH" for r in res["ladder"])
+    outs = {r["outcome"] for r in res["ladder"]}
     vmax = f"{res['ladder'][-1]['vfrac']:.2f}" if res["ladder"] else "NA"
-    verdict = "C3_CRITICAL_VELOCITY_FOUND" if any_pass else f"C3_CAPTURE_DOMINATED_UP_TO_{vmax}c"
+    chan_tag = "INPHASE" if abs(A.dphi) < 1e-6 else ("ANTIPHASE" if abs(A.dphi - np.pi) < 0.3 else f"DPHI{A.dphi:.2f}")
+    if "PASS_THROUGH" in outs:
+        verdict = f"C3_{chan_tag}_TRANSMISSION_FOUND"
+    elif outs <= {"BOUNCE"}:
+        verdict = f"C3_{chan_tag}_BOUNCE_DOMINATED_UP_TO_{vmax}c"
+    elif outs == {"CAPTURE"}:
+        verdict = f"C3_{chan_tag}_CAPTURE_DOMINATED_UP_TO_{vmax}c"
+    else:
+        verdict = f"C3_{chan_tag}_MIXED_{'_'.join(sorted(outs))}"
     res["verdict"] = verdict
     json.dump(res, open(os.path.join(out, "summary.json"), "w"), indent=2, default=float)
-    print(f"\n=== {verdict} | known 0.15c/0.30c CAPTURE; ladder {ladder} ===", flush=True)
+    print(f"\n=== {verdict} | dphi={A.dphi:.3f} | ladder {ladder} ===", flush=True)
     print(f"C3_COLLISION_LADDER_DONE {out}", flush=True)
 
 

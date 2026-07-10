@@ -1,0 +1,59 @@
+# Phase D / C3 — Two-Q-Ball Interaction: Results (KG analog of C2.9)
+
+**Headline: the second-order (Klein–Gordon) Q-ball pair obeys the SAME relational-dynamics law as the first-order
+(NLS) soliton pair — a phase-dependent static force with an attract→repel crossover at Δφ=π/2, and capture-dominated
+head-on collisions. The two conservative substrate families are relationally universal.** And C3 does it with
+machine-clean conservation (dE_rel ~1e-9 static), so the signal is trustworthy, not a quasi-conservative artifact.
+VK-stable Q-ball (a=0.8, s=−0.5, f=−0.1, c²=0.3, w=0.964), N=64, L=16. Standalone KG module; no production/Phase C
+path; no matter claims.
+
+## Static relative-phase force (rest Q-ball pair, sep≈6)
+| Δφ | sep start → end | trend | dE_rel (max) |
+|---|---|---|---|
+| 0 | 5.53 → 2.41 | **attract** (→merge) | 5.6e-9 |
+| π/4 | 5.62 → 3.42 | **attract** | 4.1e-9 |
+| **π/2** | 5.88 → 5.77 | **≈neutral — the crossover** | 6.7e-10 |
+| 3π/4 | 6.24 → 6.66 | **repel** | 2.2e-9 |
+| π | 6.43 → 6.95 | **repel** | 3.2e-9 |
+**Attract for Δφ<π/2, repel for Δφ>π/2, crossover at Δφ=π/2** — the canonical cos(Δφ) pair-interaction law, identical
+to the C2.9 NLS result. (The π/2 case: the cores barely move, sep 5.88→5.77 — the neutral crossover. The harness's
+auto-label "MERGE" there is a threshold artifact — sep 5.77 dipped just below the 2·W_WIN=6 merge cutoff while the
+pair is in fact essentially static; corrected here.)
+
+## Head-on collisions (symmetric in-phase, speed ladder)
+| v | v/c | outcome | sep_min | sep_end | dE_rel (max) |
+|---|---|---|---|---|---|
+| 0.082 | 0.15 | **CAPTURE** | 0.07 | 0.07 | 1.5e-6 |
+| 0.164 | 0.30 | **CAPTURE** | 0.02 | 0.05 | 6.3e-6 |
+Both collisions capture — the cores merge into a bound state and do not re-separate, energy conserved (the ~1e-6
+dE_rel is the Strang splitting error during the violent overlap, still tiny). Capture-dominated at the tested speeds,
+exactly as the C2.9 NLS solitons. (Speeds are low, ≤0.3c; a pass-through critical velocity, if any, would appear at
+higher v — the same open question as C2.9.)
+
+## Cross-substrate universality (the point)
+| property | C2 / NLS (1st-order) | C3 / KG (2nd-order) |
+|---|---|---|
+| native object | soliton (s<0 saturation) | Q-ball (0<ω<m), **VK-stable** |
+| single-object transport | v = 2Dk exact (C2.7) | density co-moves under Lorentz boost (C3 G4) |
+| static pair force | attract/repel, **crossover Δφ=π/2** | attract/repel, **crossover Δφ=π/2** |
+| collisions | capture-dominated | capture-dominated |
+| conservation | quasi-conservative (geometry-on) / clean pure-NLS | **machine-exact** E,Q (dE ~1e-9) |
+Both conservative substrate families — despite different order-in-time and different native objects — exhibit the
+**same two-body relational law**: a phase-dependent force with a π/2 crossover and non-integrable capture. This is a
+robust, substrate-independent statement about the relational dynamics of coherent IRER-family structures: they bind
+via a phase-dependent force rather than scatter elastically. C3's advantage is exact conservation, making it the
+cleaner platform for any future quantitative two-body work.
+
+## Open (bounded follow-ups)
+1. **Pass-through critical velocity** — a higher-speed ladder (0.5c, 0.7c) to test whether capture gives way to
+   transmission above some v_crit (open for both C2 and C3).
+2. **Asymmetric / elasticity** — distinct-velocity collisions + the momentum-based elasticity observable (the C2.9
+   hardening), to quantify capture vs inelastic-survival cleanly.
+3. **Bound-state fate** — long-time evolution of a captured pair (stable "Q-ball molecule" vs slow decay); the
+   machine-clean KG conservation makes this well-posed.
+
+## Provenance / guardrails
+`jax_scout/phase_d_c3_two_qball.py`; run `sweep_runs/C3_TWOQBALL_FULL` (+ smoke `C3_2QB_SMOKE`). Windowed |ψ|²
+centroid tracking; E/Q/P conservation telemetry as the Strang error meter. Standalone module (no Ops/Phase C
+contact); no matter/gravity claims — "attract/repel/capture" are the measured separation-trajectory + conservation
+observables. The π/2-crossover MERGE-label caveat is corrected above.

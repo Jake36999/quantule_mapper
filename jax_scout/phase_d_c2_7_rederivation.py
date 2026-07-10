@@ -47,10 +47,11 @@ def _evolve(psi, ops, steps, dt_chunk):
     return cur, float(np.sum(np.abs(cur) ** 2)) / M0
 
 
-def r0_cfl(out):
-    print("=== R0: CFL/dt re-baseline (true substrate, full dispersion) ===", flush=True)
+def r0_cfl(out, quick=False):
+    print(f"=== R0: CFL/dt re-baseline (true substrate, full dispersion){' [QUICK]' if quick else ''} ===", flush=True)
     rows = []
-    for (N, dt) in [(48, 1e-3), (48, 5e-4), (96, 1e-3), (96, 5e-4), (96, 2.5e-4)]:
+    nd_pairs = [(48, 1e-3), (96, 5e-4)] if quick else [(48, 1e-3), (48, 5e-4), (96, 1e-3), (96, 5e-4), (96, 2.5e-4)]
+    for (N, dt) in nd_pairs:
         for (Dv, tag) in [(2.7329, "feb-D"), (1.0, "family-D")]:
             ops = _ops_flat(N, dt, D=Dv)
             psi = gaussian_ic(1.0, 0.15, N)
@@ -66,16 +67,19 @@ def r0_cfl(out):
     return rows
 
 
-def r2_feb_scout(out, dt=5e-4):
-    print("=== R2: feb/a* TRUE pure-NLS mini-scout (N=48) ===", flush=True)
+def r2_feb_scout(out, dt=5e-4, quick=False):
+    print(f"=== R2: feb/a* TRUE pure-NLS mini-scout (N=48){' [QUICK 2-cell]' if quick else ''} ===", flush=True)
     N = 48
     ops = _ops_flat(N, dt)                                   # feb coefficients, D=2.7329, a*=x1.15
+    As = (1.0, 2.0) if quick else (0.5, 1.0, 2.0)
+    sigs = (0.15,) if quick else (0.083, 0.15)
+    T_phys = 2.0 if quick else 4.0
     rows = []
-    for A in (0.5, 1.0, 2.0):
-        for sig in (0.083, 0.15):
+    for A in As:
+        for sig in sigs:
             psi = gaussian_ic(A, sig, N)
             occ0 = occ(np.abs(psi) ** 2)
-            cur, mret = _evolve(psi, ops, int(round(4.0 / dt)), 1000)
+            cur, mret = _evolve(psi, ops, int(round(T_phys / dt)), 1000)
             if cur is None:
                 k = "COLLAPSE"; occr = np.nan; ampf = np.nan
             else:
@@ -137,13 +141,20 @@ def r3_family_n96(out, dt=2.5e-4):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", default=None)
+    ap.add_argument("--quick", action="store_true",
+                    help="bounded smoke: R0 CFL + R2 feb pure-NLS scout only; SKIP the long N=96 R3 hold/boost")
     a_ = ap.parse_args()
-    out = a_.out or os.path.join(ROOT, "sweep_runs", f"PHASE_D_C2_7_REDERIVE_{time.strftime('%Y%m%d_%H%M%S')}")
+    tag = "PHASE_D_C2_7_REDERIVE" + ("_QUICK" if a_.quick else "")
+    out = a_.out or os.path.join(ROOT, "sweep_runs", f"{tag}_{time.strftime('%Y%m%d_%H%M%S')}")
     os.makedirs(out, exist_ok=True)
-    print(f"=== C2.7 RE-DERIVATION CAMPAIGN (fixed substrate) | out={out} ===", flush=True)
+    print(f"=== C2.7 RE-DERIVATION CAMPAIGN (fixed substrate){' [QUICK]' if a_.quick else ''} | out={out} ===", flush=True)
     t0 = time.time()
-    r0 = r0_cfl(out)
-    v2 = r2_feb_scout(out)
+    r0 = r0_cfl(out, quick=a_.quick)
+    v2 = r2_feb_scout(out, quick=a_.quick)
+    if a_.quick:
+        print(f"\n=== C2.7 QUICK DONE | R2={v2} (R3 N=96 hold skipped: see docs/PHASE_D_C2_7_REDERIVATION_RESULTS.md "
+              f"for the finalized CLEAN_TRANSPORT_N96_CONFIRMED) | {round((time.time()-t0)/60,1)}m ===", flush=True)
+        return
     v3 = r3_family_n96(out)
     print(f"\n=== C2.7 DONE | R2={v2} R3={v3} | {round((time.time()-t0)/60,1)}m ===", flush=True)
 

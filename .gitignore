@@ -77,3 +77,6 @@ parity/
 # stray artifact-named files
 Equantule_mappervalidation_pipeline.py
 "E*quantule_mapper*validation_pipeline.py"
+
+# --- Codex diagnostic render/output tree (regenerable; unique handover MDs promoted to docs/codex_conservative_c2_campaign_archive/) ---
+quantule_viz/outputs/

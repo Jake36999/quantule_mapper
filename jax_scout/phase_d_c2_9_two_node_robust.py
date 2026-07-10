@@ -169,10 +169,13 @@ def main():
     res["V0_single"] = {"v_meas": float(vmeas), "v_pred": 2 * D * k, "mass_end": r["rec"][-1]["mtot"]}
 
     # V1 — static in-phase VALIDATION: must reproduce C2.8 attraction (5.83 -> ~1.46).
+    # Quick mode uses a short window (attraction is clearly underway by T~5) to keep the smoke bounded (<~5 min).
+    v1_T = 5.0 if a_.quick else 12.0
     psi = (place(phi_iso, -3.0, N, L) + place(phi_iso, +3.0, N, L)).astype(np.complex128)
-    r = evolve_track(psi, ops, N, L, dt, 12.0, x, -3.0, 3.0, "v1_inphase", out)
+    r = evolve_track(psi, ops, N, L, dt, v1_T, x, -3.0, 3.0, "v1_inphase", out)
     s0, se = r["rec"][0]["sep"], r["rec"][-1]["sep"]
-    print(f"[V1] static in-phase: sep {s0:.2f} -> {se:.2f} (C2.8 said ATTRACT) mass {r['rec'][-1]['mtot']:.4f}", flush=True)
+    print(f"[V1] static in-phase (T={v1_T}): sep {s0:.2f} -> {se:.2f} (attracting; C2.8 ATTRACT) "
+          f"mass {r['rec'][-1]['mtot']:.4f}", flush=True)
     res["V1_inphase"] = {"sep_start": s0, "sep_end": se}
     json.dump(res, open(os.path.join(out, "summary.json"), "w"), indent=2, default=float)
     if a_.quick:

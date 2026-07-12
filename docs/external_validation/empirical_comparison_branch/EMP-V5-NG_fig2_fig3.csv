@@ -1,0 +1,5 @@
+source_figure,relative_phase_rad,phase_class,speed_value,speed_units,observed_outcome,include_in_comparison,exclusion_reason,extraction_uncertainty,digitizer_notes
+Fig2a,0.000000,in_phase,,,COLLAPSE,true,,"phase class from text Delta phi approx 0; outcome from Fig. 2 caption/text","N/Nc=-0.53; caption says collapse/no remaining atoms observed"
+Fig2b,0.000000,in_phase,,,MERGE,true,,"phase class from text Delta phi approx 0; outcome from Fig. 2 caption/text","N/Nc=-0.53; caption says merger/fusion of soliton pair"
+Fig2c,3.141593,anti_phase,,,NO_COLLAPSE,true,,"phase class from text Delta phi approx pi; outcome qualitative from text/Fig. 2c","out-of-phase collisions after ten trap periods; text says survive more than 20 collisions"
+Fig3,3.141593,anti_phase,,,PASS_THROUGH,true,,"phase class inferred from repulsive-looking density minimum/out-of-phase context; outcome from caption/text","tagged 2:1 atom-number trajectory; text says solitons pass through one another"

@@ -1,0 +1,49 @@
+{
+  "status": "PROVISIONAL_UNTIL_CLAUDE_REVIEW",
+  "created_utc": "2026-07-12T00:12:53.183166+00:00",
+  "data_source": "docs\\external_validation\\empirical_comparison_branch\\EMP-V5-NG_fig2_fig3.csv",
+  "provenance": "docs\\external_validation\\empirical_comparison_branch\\provenance_EMP-V5-NG.md",
+  "comparison": {
+    "metric": "v5",
+    "internal_reference": {
+      "available": true,
+      "source": "generated_metrics/v5",
+      "non_antiphase_capture_fraction": 1.0,
+      "anti_phase_transmission_cells": 3,
+      "outcome_counts": {
+        "CAPTURE": 13,
+        "PASS_THROUGH": 3
+      },
+      "internal_transmission_only_at_antiphase": true
+    },
+    "phase_class_transmission_fraction": {
+      "in_phase": 0.0,
+      "anti_phase": 1.0
+    },
+    "phase_class_counts": {
+      "in_phase": {
+        "transmitted": 0,
+        "decisive": 2
+      },
+      "anti_phase": {
+        "transmitted": 2,
+        "decisive": 2
+      }
+    },
+    "n_ambiguous_dropped": 0,
+    "direction_verdict": "DIRECTION_CONSISTENT",
+    "direction_consistent_with_c3": true,
+    "n_rows_used": 4,
+    "match_level": "CLOSE ANALOGUE",
+    "caveats": [
+      "Qualitative phase-direction comparison only; no numeric, rate, or speed-boundary match.",
+      "COLLAPSE grouped as not-transmitted; its density-spike destruction mechanism differs from C3 CAPTURE (binding) \u2014 a CLOSE ANALOGUE mechanism difference."
+    ]
+  },
+  "guardrails": {
+    "match_level_ceiling": "CLOSE ANALOGUE",
+    "promotes_verdict": false,
+    "gates_production": false,
+    "feeds_hunter": false
+  }
+}

@@ -1,0 +1,2 @@
+External NLSE package was run from archived source with local CPU compatibility shims because pyfftw/numba/tqdm were not installed in the active venv; CuPy was shadow-disabled inside the child process to keep the package on its CPU path without pyvkfft.
+This is a reduced-equation method sanity check only, not empirical validation and not a full IRER comparison.

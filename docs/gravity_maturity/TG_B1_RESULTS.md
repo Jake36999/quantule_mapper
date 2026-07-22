@@ -1,0 +1,24 @@
+# TG-B1 Spatial Feedback Scout Results
+
+Timestamp: 2026-07-14.
+Run directory: `sweep_runs/TG_B1_FEEDBACK_GPU_20260714_115402`.
+Status: `TG_SOURCE_SEMANTICS_FAILED_ON_KG_NODE`.
+
+## Summary
+
+The WSL/JAX CUDA pilot completed, but the source-semantics gate failed.
+The intervention structure behaved as designed, and a tiny full-loop core-energy difference was detected.
+The current driver baseline arm is not a pure phi-only baseline, so source-off and temporal-off are used as the practical null controls.
+However, the phase-scrambled density-matched feed-forward control produced a stronger response than the coherent feed-forward run, so the continuous source cannot yet be treated as a clean resolution-source observable on this KG node.
+
+## Key Metrics
+
+- Coherent feed-forward max T/G: `9.336816e-04` / `8.916267e-04`.
+- Phase-scrambled feed-forward max T/G: `6.625924e-03` / `6.696465e-03`.
+- Threshold feed-forward max T/G: `4.026214e-03` / `4.253014e-03`.
+- Full-loop minus feedback-off core-energy-delta: `-2.115276e-06`.
+- Full-loop minus feedback-off integrated flux: `3.379820e-25`.
+
+## Bounded Interpretation
+
+This run narrows the hypothesis: T/G intervention plumbing works on GPU, but the current B1 source observable does not distinguish coherent node activity from the scrambled control. Do not promote causal feedback, radiative relaxation, photon, gravity, or objective-time claims from this run.

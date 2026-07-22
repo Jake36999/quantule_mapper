@@ -1,0 +1,38 @@
+{
+  "bounded_feedback_promoted": false,
+  "gate_results": {
+    "50_period_node_localized": true,
+    "T_G_bounded": true,
+    "phase_consistent_25_50": true,
+    "basin_qualitative_consistency": false,
+    "numerical_validation": false,
+    "energy_ledger": true,
+    "no_unresolved_monotonic_drift": false
+  },
+  "gates": {
+    "core_amp_trend_max": 0.0002,
+    "ledger_abs_max": 0.0001,
+    "modal_leakage_max": 0.001,
+    "phase_slope_relative_tolerance": 0.35,
+    "profile_overlap_min": 0.999,
+    "width_trend_max": 0.0005
+  },
+  "labels": [
+    "TG_STATE_LOAD_CONTINUOUS_SLOW_DRIFT"
+  ],
+  "max_periods_completed": 50.0,
+  "preserved_prior_labels": [
+    "TG_STATE_LOAD_FEEDFORWARD_CHAIN_SUPPORTED",
+    "TG_STATE_LOAD_GEOMETRIC_BACKREACTION_DETECTED",
+    "TG_STATE_LOAD_BACKREACTION_ROBUST",
+    "TG_STATE_LOAD_BACKREACTION_ROBUST_BUT_WEAK"
+  ],
+  "period50_class": "CONTINUOUS_DRIFT",
+  "period50_delta_modal_phase_final": -0.0007268209223525446,
+  "period50_delta_modal_phase_slope": -1.940653048627504e-06,
+  "period50_modal_leakage_max": 9.158673397262747e-05,
+  "period50_profile_overlap": 0.9999999967790276,
+  "primary_interpretation": "The KG node stays localized and T/G fields remain bounded, but full-loop minus feedback-off node observables continue drifting through 50 periods. Bounded feedback is not promoted.",
+  "run_directory": "/mnt/f/quantule_mapper/sweep_runs/TG_B1S_LONG_TIME_GPU_20260714_154323",
+  "status": "TG_STATE_LOAD_CONTINUOUS_SLOW_DRIFT"
+}

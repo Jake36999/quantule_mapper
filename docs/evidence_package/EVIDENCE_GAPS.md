@@ -23,7 +23,7 @@ approval). Nothing here blocks the current documentation.
 | id | task | cost | payoff |
 |---|---|---|---|
 | RUN-1 | Re-run **one** old-parameter case on the corrected substrate to produce a clean side-by-side (if no existing pair overlays cleanly) | ~1 smoke run | makes ENR-6 airtight |
-| RUN-2 | **C2 anti-phase collision** (NLS analog of the C3 phase diagram) — does the first-order substrate show the same anti-phase node channel? | ~10–20 min | extends cross-substrate universality to collisions |
+| RUN-2 | ~~C2 anti-phase collision~~ **DONE + TRANSITION MAPPED (2026-07-12, `docs/PHASE_D_C2_10_ANTIPHASE_COLLISION_RESULTS.md`)** → `C2_ANTIPHASE_NODE_CHANNEL_CONFIRMED_WITH_TRANSMISSION_WINDOW`: NLS shares the C3 collision phase×speed structure incl. the anti-phase PASS_THROUGH channel (closing 0.47–0.57), with a sharp capture threshold bracketed to closing (0.565, 0.660) and a bounce sub-regime ≲0.42. Cross-substrate universality extended to collisions. | done | positive |
 | RUN-3 | **C3 captured-remnant long-time fate** (evolve a captured pair long) — stable "Q-ball molecule" vs slow decay | ~15 min | closes an open C3 thread |
 | RUN-4 | **C3 continuum-limit velocity fidelity** (bigger box + longer T) — tighten v_frac→1 to an identity | ~20–30 min | upgrades C3 transport from "supported" to "identity" |
 | RUN-5 | **stable-overdense-load-on-ρ_vac-background** pilot — the gravity re-entry condition | research sub-project | unblocks the gravity ladder (rung B) |

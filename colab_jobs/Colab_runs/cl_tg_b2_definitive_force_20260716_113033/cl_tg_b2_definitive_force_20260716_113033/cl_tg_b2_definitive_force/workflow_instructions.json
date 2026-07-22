@@ -1,0 +1,15 @@
+{
+  "agent_plans_run": true,
+  "analogy": "Sometimes it is quicker to send the car to the shop than fix it yourself.",
+  "drive_persistence_required": true,
+  "intended_use": "Targeted Colab A100 fast-lane run for CL_TG_B2_DEFINITIVE_FORCE while the local GTX 1080 remains occupied. This is a full-fidelity dynamical force campaign, not a broad hunt or UI trial.",
+  "local_results_dir": "F:\\quantule_mapper\\colab_jobs\\results",
+  "manual_colab_execution": true,
+  "manual_upload_to_colab": true,
+  "mode": "manual_colab_upload",
+  "result_policy": {
+    "hard_archive_bytes": 5000000000,
+    "ideal_archive_bytes": 1000000000
+  },
+  "review_prompt_after_download": true
+}

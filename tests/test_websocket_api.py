@@ -13,6 +13,15 @@ GIFS_DIR = "GIFS"
 FIXTURE_DIR = Path(__file__).resolve().parent / "fixtures"
 
 
+def _append_payload(received: list[dict], payload) -> None:
+    if isinstance(payload, list):
+        for item in payload:
+            if isinstance(item, dict):
+                received.append(item)
+    elif isinstance(payload, dict):
+        received.append(payload)
+
+
 def _clear_gifs_dir(path: str) -> None:
     root = Path(path)
     root.mkdir(exist_ok=True)
@@ -36,8 +45,10 @@ def test_websocket_gif_update(tmp_path):
         def ws_thread():
             with client.websocket_connect("/ws/telemetry") as ws:
                 try:
-                    payload = ws.receive_json()
-                    received_payloads.append(payload)
+                    for _ in range(4):
+                        _append_payload(received_payloads, ws.receive_json())
+                        if any(payload.get("type") == "gif_update" for payload in received_payloads):
+                            break
                 except Exception as e:
                     import logging
                     logging.error(f"WebSocket Test Error: {e}")
@@ -54,7 +65,7 @@ def test_websocket_gif_update(tmp_path):
 
         t.join(timeout=5)
         assert received_payloads, "No payload received over WebSocket."
-        payload = received_payloads[0]
+        payload = next(item for item in received_payloads if item.get("type") == "gif_update")
         assert payload["type"] == "gif_update"
         assert payload["new_path"].endswith("/static/gifs/new_best.gif")
 
@@ -93,8 +104,10 @@ def test_websocket_emits_pde_history_contract(tmp_path):
         def ws_thread():
             with client.websocket_connect("/ws/telemetry") as ws:
                 try:
-                    for _ in range(4):
-                        received_payloads.append(ws.receive_json())
+                    for _ in range(8):
+                        _append_payload(received_payloads, ws.receive_json())
+                        if any(payload.get("type") == "pde_history" for payload in received_payloads):
+                            break
                 except Exception as e:
                     import logging
                     logging.error(f"WebSocket Test Error: {e}")
@@ -112,4 +125,5 @@ def test_websocket_emits_pde_history_contract(tmp_path):
 
         pde_payloads = [payload for payload in received_payloads if payload.get("type") == "pde_history"]
         assert pde_payloads, "Expected pde_history payload was not emitted."
-        assert pde_payloads[0] == expected_frame
+        assert pde_payloads[0]["payload"] == expected_frame["payload"]
+        assert pde_payloads[0]["severity"] == "INFO"

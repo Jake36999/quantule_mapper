@@ -1,0 +1,29 @@
+{
+  "row_id": "cx_tg_b2_cooled_pair_secular_force",
+  "return_code": 0,
+  "duration_seconds": 5860.1317484378815,
+  "finished_utc": "2026-07-18T00:01:26Z",
+  "log_path": "/content/qm_job/run_cx_tg_b2_cooled_pair_secular_force.log",
+  "log_sha256": "aa6bbfd856ed80f4abd9f4ffed8ff05974efd2e409745fcab8cded7c8e59e394",
+  "stages": [
+    {
+      "stage_id": "main",
+      "command": [
+        "/usr/bin/python3",
+        "-u",
+        "jax_scout/gravity_TG_B2_cooled_pair_secular_force_gpu.py",
+        "--out",
+        "/content/qm_job/results/cx_tg_b2_cooled_pair_secular_force",
+        "--seps",
+        "3.0,4.0",
+        "--cool-T-values",
+        "0,40",
+        "--T",
+        "180"
+      ],
+      "return_code": 0,
+      "duration_seconds": 5860.131207942963,
+      "finished_utc": "2026-07-18T00:01:26Z"
+    }
+  ]
+}

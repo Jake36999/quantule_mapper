@@ -1,0 +1,20 @@
+{
+  "baseline_id": "tg_b1s_d_20260714_184736",
+  "compared_observable_count": 17,
+  "comparison_status": "REPRODUCTION_WITHIN_DECLARED_TOLERANCES",
+  "failed_observables": [],
+  "informational_observables_without_declared_tolerances": [
+    "final_delta_theta",
+    "final_orbital_distance",
+    "final_phase_aligned_distance"
+  ],
+  "schema_version": "qm-reproduction-comparison/1.0",
+  "scientific_claim_boundary": "Infrastructure/numerical reproduction only; no new scientific conclusion is inferred.",
+  "target_run": "D3_100P_lam1",
+  "valid_statuses": [
+    "REPRODUCTION_INCOMPLETE",
+    "REPRODUCTION_INVALID",
+    "REPRODUCTION_OUTSIDE_DECLARED_TOLERANCES",
+    "REPRODUCTION_WITHIN_DECLARED_TOLERANCES"
+  ]
+}

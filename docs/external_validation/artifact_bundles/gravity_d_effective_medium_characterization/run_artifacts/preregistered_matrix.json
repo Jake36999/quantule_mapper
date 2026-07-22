@@ -1,0 +1,9428 @@
+{
+  "source_profile_metadata": [
+    {
+      "source_family": "gaussian",
+      "N_min_target": 1.0,
+      "matched_width": 1.5,
+      "N_min": 1.0,
+      "N_max": 1.0,
+      "integrated_deficit": 0.0,
+      "deficit_second_moment": 0.0,
+      "ell_S": 0.0,
+      "max_grad_N": 0.0,
+      "effective_support_radius": 3.9280640906176694
+    },
+    {
+      "source_family": "supergaussian4",
+      "N_min_target": 1.0,
+      "matched_width": 0.25,
+      "N_min": 1.0,
+      "N_max": 1.0,
+      "integrated_deficit": 0.0,
+      "deficit_second_moment": 0.0,
+      "ell_S": 0.0,
+      "max_grad_N": 0.0,
+      "effective_support_radius": 0.3125000000000009
+    },
+    {
+      "source_family": "compact_bump",
+      "N_min_target": 1.0,
+      "matched_width": 0.25,
+      "N_min": 1.0,
+      "N_max": 1.0,
+      "integrated_deficit": 0.0,
+      "deficit_second_moment": 0.0,
+      "ell_S": 0.0,
+      "max_grad_N": 0.0,
+      "effective_support_radius": 0.0
+    },
+    {
+      "source_family": "two_lobe",
+      "N_min_target": 1.0,
+      "matched_width": 0.35,
+      "N_min": 1.0,
+      "N_max": 1.0,
+      "integrated_deficit": 0.0,
+      "deficit_second_moment": 0.0,
+      "ell_S": 0.0,
+      "max_grad_N": 0.0,
+      "effective_support_radius": 2.209708691207963
+    },
+    {
+      "source_family": "shell",
+      "N_min_target": 1.0,
+      "matched_width": 0.2,
+      "N_min": 1.0,
+      "N_max": 1.0,
+      "integrated_deficit": 0.0,
+      "deficit_second_moment": 0.0,
+      "ell_S": 0.0,
+      "max_grad_N": 0.0,
+      "effective_support_radius": 3.013640862810299
+    },
+    {
+      "source_family": "gaussian",
+      "N_min_target": 0.95,
+      "matched_width": 1.5,
+      "N_min": 0.9500000000000001,
+      "N_max": 1.0,
+      "integrated_deficit": 0.9712153709682632,
+      "deficit_second_moment": 3.4058033032801394,
+      "ell_S": 1.8454818620837592,
+      "max_grad_N": 0.02828781158661701,
+      "effective_support_radius": 3.9280640906176694
+    },
+    {
+      "source_family": "supergaussian4",
+      "N_min_target": 0.95,
+      "matched_width": 1.7033628781940755,
+      "N_min": 0.9500000000000001,
+      "N_max": 1.0,
+      "integrated_deficit": 0.9712153709682634,
+      "deficit_second_moment": 2.1653086789287608,
+      "ell_S": 1.4714987865875937,
+      "max_grad_N": 0.044827871006266014,
+      "effective_support_radius": 2.7599252707274537
+    },
+    {
+      "source_family": "compact_bump",
+      "N_min_target": 0.95,
+      "matched_width": 2.513035161904811,
+      "N_min": 0.9500000000000001,
+      "N_max": 1.0,
+      "integrated_deficit": 0.9712153709682636,
+      "deficit_second_moment": 2.130009766133372,
+      "ell_S": 1.4594552977509698,
+      "max_grad_N": 0.04634071643431703,
+      "effective_support_radius": 2.3385358667337144
+    },
+    {
+      "source_family": "two_lobe",
+      "N_min_target": 0.95,
+      "matched_width": 1.1917114198593297,
+      "N_min": 0.9500000000000001,
+      "N_max": 1.0,
+      "integrated_deficit": 0.9712153709682632,
+      "deficit_second_moment": 3.976250733990509,
+      "ell_S": 1.9940538443057423,
+      "max_grad_N": 0.0357337131852305,
+      "effective_support_radius": 4.4304521496118205
+    },
+    {
+      "source_family": "shell",
+      "N_min_target": 0.95,
+      "matched_width": 0.2,
+      "N_min": 0.9500000000000001,
+      "N_max": 1.0,
+      "integrated_deficit": 1.4180375151946063,
+      "deficit_second_moment": 6.355368366131467,
+      "ell_S": 2.520985594193562,
+      "max_grad_N": 0.19938860046698967,
+      "effective_support_radius": 3.013640862810299
+    },
+    {
+      "source_family": "gaussian",
+      "N_min_target": 0.9,
+      "matched_width": 1.5,
+      "N_min": 0.8999999999999999,
+      "N_max": 1.0,
+      "integrated_deficit": 2.010723217132054,
+      "deficit_second_moment": 3.4387070245356277,
+      "ell_S": 1.8543751035148277,
+      "max_grad_N": 0.055995432307685424,
+      "effective_support_radius": 3.9280640906176694
+    },
+    {
+      "source_family": "supergaussian4",
+      "N_min_target": 0.9,
+      "matched_width": 1.710723244962295,
+      "N_min": 0.8999999999999999,
+      "N_max": 1.0,
+      "integrated_deficit": 2.0107232171320546,
+      "deficit_second_moment": 2.2045381649090445,
+      "ell_S": 1.484768724384052,
+      "max_grad_N": 0.0896171359309751,
+      "effective_support_radius": 2.7599252707274537
+    },
+    {
+      "source_family": "compact_bump",
+      "N_min_target": 0.9,
+      "matched_width": 2.5239639948424912,
+      "N_min": 0.8999999999999999,
+      "N_max": 1.0,
+      "integrated_deficit": 2.010723217132054,
+      "deficit_second_moment": 2.1639888588572407,
+      "ell_S": 1.471050257080716,
+      "max_grad_N": 0.09460493812700778,
+      "effective_support_radius": 2.3385358667337144
+    },
+    {
+      "source_family": "two_lobe",
+      "N_min_target": 0.9,
+      "matched_width": 1.1923197950280535,
+      "N_min": 0.8999999999999999,
+      "N_max": 1.0,
+      "integrated_deficit": 2.010723217132053,
+      "deficit_second_moment": 4.003647725449112,
+      "ell_S": 2.0009117235523193,
+      "max_grad_N": 0.07069226901677418,
+      "effective_support_radius": 4.4304521496118205
+    },
+    {
+      "source_family": "shell",
+      "N_min_target": 0.9,
+      "matched_width": 0.2,
+      "N_min": 0.8999999999999999,
+      "N_max": 1.0,
+      "integrated_deficit": 2.880588432855416,
+      "deficit_second_moment": 6.356934952950723,
+      "ell_S": 2.5212962842456106,
+      "max_grad_N": 0.3963938769326597,
+      "effective_support_radius": 3.013640862810299
+    },
+    {
+      "source_family": "gaussian",
+      "N_min_target": 0.8,
+      "matched_width": 1.5,
+      "N_min": 0.8,
+      "N_max": 1.0,
+      "integrated_deficit": 4.3317197693531435,
+      "deficit_second_moment": 3.511931161062198,
+      "ell_S": 1.8740147174081099,
+      "max_grad_N": 0.10962995046036343,
+      "effective_support_radius": 3.9280640906176694
+    },
+    {
+      "source_family": "supergaussian4",
+      "N_min_target": 0.8,
+      "matched_width": 1.7267315367471268,
+      "N_min": 0.8,
+      "N_max": 1.0,
+      "integrated_deficit": 4.331719769353143,
+      "deficit_second_moment": 2.291648290096215,
+      "ell_S": 1.5138191074551195,
+      "max_grad_N": 0.17931557774342854,
+      "effective_support_radius": 2.7950849718747377
+    },
+    {
+      "source_family": "compact_bump",
+      "N_min_target": 0.8,
+      "matched_width": 2.5481442792689197,
+      "N_min": 0.8,
+      "N_max": 1.0,
+      "integrated_deficit": 4.331719769353141,
+      "deficit_second_moment": 2.2398801575029266,
+      "ell_S": 1.49662291760581,
+      "max_grad_N": 0.19819822641516385,
+      "effective_support_radius": 2.3799290955824732
+    },
+    {
+      "source_family": "two_lobe",
+      "N_min_target": 0.8,
+      "matched_width": 1.1936940568356342,
+      "N_min": 0.8,
+      "N_max": 1.0,
+      "integrated_deficit": 4.3317197693531435,
+      "deficit_second_moment": 4.065181652740734,
+      "ell_S": 2.0162295635023146,
+      "max_grad_N": 0.1382900907142165,
+      "effective_support_radius": 4.4304521496118205
+    },
+    {
+      "source_family": "shell",
+      "N_min_target": 0.8,
+      "matched_width": 0.2,
+      "N_min": 0.8,
+      "N_max": 1.0,
+      "integrated_deficit": 5.957169268840215,
+      "deficit_second_moment": 6.360414610779404,
+      "ell_S": 2.521986243178064,
+      "max_grad_N": 0.7806842155769744,
+      "effective_support_radius": 3.013640862810299
+    },
+    {
+      "source_family": "gaussian",
+      "N_min_target": 0.65,
+      "matched_width": 1.5,
+      "N_min": 0.65,
+      "N_max": 1.0,
+      "integrated_deficit": 8.61424855636,
+      "deficit_second_moment": 3.646170538476892,
+      "ell_S": 1.9094948385572799,
+      "max_grad_N": 0.18707316697718845,
+      "effective_support_radius": 3.9280640906176694
+    },
+    {
+      "source_family": "supergaussian4",
+      "N_min_target": 0.65,
+      "matched_width": 1.7548468354437259,
+      "N_min": 0.65,
+      "N_max": 1.0,
+      "integrated_deficit": 8.614248556359998,
+      "deficit_second_moment": 2.4506859984097518,
+      "ell_S": 1.5654667030664535,
+      "max_grad_N": 0.31567761410063855,
+      "effective_support_radius": 2.829807855667943
+    },
+    {
+      "source_family": "compact_bump",
+      "N_min_target": 0.65,
+      "matched_width": 2.5920033576264387,
+      "N_min": 0.65,
+      "N_max": 1.0,
+      "integrated_deficit": 8.614248556359998,
+      "deficit_second_moment": 2.379826765805023,
+      "ell_S": 1.542668715507326,
+      "max_grad_N": 0.37813903186352005,
+      "effective_support_radius": 2.4003580462089418
+    },
+    {
+      "source_family": "two_lobe",
+      "N_min_target": 0.65,
+      "matched_width": 1.1962778099125315,
+      "N_min": 0.65,
+      "N_max": 1.0,
+      "integrated_deficit": 8.614248556359994,
+      "deficit_second_moment": 4.179933943040144,
+      "ell_S": 2.0444886752046694,
+      "max_grad_N": 0.23466869508550137,
+      "effective_support_radius": 4.4304521496118205
+    },
+    {
+      "source_family": "shell",
+      "N_min_target": 0.65,
+      "matched_width": 0.2,
+      "N_min": 0.65,
+      "N_max": 1.0,
+      "integrated_deficit": 11.040692315745524,
+      "deficit_second_moment": 6.366779131849156,
+      "ell_S": 2.5232477349339195,
+      "max_grad_N": 1.3403452651531178,
+      "effective_support_radius": 3.013640862810299
+    },
+    {
+      "source_family": "gaussian",
+      "N_min_target": 0.5,
+      "matched_width": 1.5,
+      "N_min": 0.5,
+      "N_max": 1.0,
+      "integrated_deficit": 14.37948989633522,
+      "deficit_second_moment": 3.8251467119655733,
+      "ell_S": 1.9557982288481532,
+      "max_grad_N": 0.2623635069377632,
+      "effective_support_radius": 3.9280640906176694
+    },
+    {
+      "source_family": "supergaussian4",
+      "N_min_target": 0.5,
+      "matched_width": 1.7901271813556772,
+      "N_min": 0.5,
+      "N_max": 1.0,
+      "integrated_deficit": 14.379489896335215,
+      "deficit_second_moment": 2.661478447435256,
+      "ell_S": 1.631403827209945,
+      "max_grad_N": 0.45792918460892734,
+      "effective_support_radius": 2.898005779842409
+    },
+    {
+      "source_family": "compact_bump",
+      "N_min_target": 0.5,
+      "matched_width": 2.6496571772212203,
+      "N_min": 0.5,
+      "N_max": 1.0,
+      "integrated_deficit": 14.379489896335217,
+      "deficit_second_moment": 2.567624909607077,
+      "ell_S": 1.602381012620618,
+      "max_grad_N": 0.606680761727474,
+      "effective_support_radius": 2.4606274606286926
+    },
+    {
+      "source_family": "two_lobe",
+      "N_min_target": 0.5,
+      "matched_width": 1.1998239372359478,
+      "N_min": 0.5,
+      "N_max": 1.0,
+      "integrated_deficit": 14.379489896335222,
+      "deficit_second_moment": 4.336562442040088,
+      "ell_S": 2.0824414618519502,
+      "max_grad_N": 0.32836115574228153,
+      "effective_support_radius": 4.463392767839281
+    },
+    {
+      "source_family": "shell",
+      "N_min_target": 0.5,
+      "matched_width": 0.2,
+      "N_min": 0.5,
+      "N_max": 1.0,
+      "integrated_deficit": 16.907891772419553,
+      "deficit_second_moment": 6.375274950267632,
+      "ell_S": 2.5249306822698383,
+      "max_grad_N": 1.8670472775808415,
+      "effective_support_radius": 3.013640862810299
+    },
+    {
+      "source_family": "gaussian",
+      "N_min_target": 0.35,
+      "matched_width": 1.5,
+      "N_min": 0.35,
+      "N_max": 1.0,
+      "integrated_deficit": 22.862321839064126,
+      "deficit_second_moment": 4.084973667045859,
+      "ell_S": 2.0211317787432512,
+      "max_grad_N": 0.3399329525951281,
+      "effective_support_radius": 3.9280640906176694
+    },
+    {
+      "source_family": "supergaussian4",
+      "N_min_target": 0.35,
+      "matched_width": 1.8375279059168608,
+      "N_min": 0.35,
+      "N_max": 1.0,
+      "integrated_deficit": 22.862321839064133,
+      "deficit_second_moment": 2.9651596794322908,
+      "ell_S": 1.721963901895824,
+      "max_grad_N": 0.6146271793528174,
+      "effective_support_radius": 2.9646353064078577
+    },
+    {
+      "source_family": "compact_bump",
+      "N_min_target": 0.35,
+      "matched_width": 2.732079648049285,
+      "N_min": 0.35,
+      "N_max": 1.0,
+      "integrated_deficit": 22.862321839064116,
+      "deficit_second_moment": 2.8419681247909234,
+      "ell_S": 1.6858137871042944,
+      "max_grad_N": 0.903806716941605,
+      "effective_support_radius": 2.5387620014487404
+    },
+    {
+      "source_family": "two_lobe",
+      "N_min_target": 0.35,
+      "matched_width": 1.2050972057982254,
+      "N_min": 0.35,
+      "N_max": 1.0,
+      "integrated_deficit": 22.86232183906413,
+      "deficit_second_moment": 4.5704411573773305,
+      "ell_S": 2.13785901251166,
+      "max_grad_N": 0.4235636138252638,
+      "effective_support_radius": 4.463392767839281
+    },
+    {
+      "source_family": "shell",
+      "N_min_target": 0.35,
+      "matched_width": 0.2,
+      "N_min": 0.35,
+      "N_max": 1.0,
+      "integrated_deficit": 24.02708715350763,
+      "deficit_second_moment": 6.387779522841458,
+      "ell_S": 2.527405690197254,
+      "max_grad_N": 2.312015120421707,
+      "effective_support_radius": 3.013640862810299
+    }
+  ],
+  "instantaneous_force_atlas": [
+    {
+      "stage": "E1",
+      "run_id": "E1_dist_gaussian_r0p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_dist_gaussian_r0p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        0.9778991144240766,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_dist_gaussian_r1p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.9557982288481532,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_dist_gaussian_r1p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        2.9336973432722298,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_dist_gaussian_r2p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.9115964576963065,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_dist_gaussian_r3p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        5.8673946865444595,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_dist_gaussian_r4p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        7.823192915392613,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_dist_gaussian_r5p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        9.778991144240766,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_dist_supergaussian4_r0p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.7901271813556772,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_dist_supergaussian4_r0p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.7901271813556772,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        0.8157019136049725,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_dist_supergaussian4_r1p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.7901271813556772,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.631403827209945,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_dist_supergaussian4_r1p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.7901271813556772,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        2.4471057408149175,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_dist_supergaussian4_r2p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.7901271813556772,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.26280765441989,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_dist_supergaussian4_r3p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.7901271813556772,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.894211481629835,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_dist_supergaussian4_r4p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.7901271813556772,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        6.52561530883978,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_dist_supergaussian4_r5p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.7901271813556772,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        8.157019136049724,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_dist_compact_bump_r0p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "compact_bump",
+      "source_width": 2.6496571772212203,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_dist_compact_bump_r0p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "compact_bump",
+      "source_width": 2.6496571772212203,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        0.801190506310309,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_dist_compact_bump_r1p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "compact_bump",
+      "source_width": 2.6496571772212203,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.602381012620618,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_dist_compact_bump_r1p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "compact_bump",
+      "source_width": 2.6496571772212203,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        2.403571518930927,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_dist_compact_bump_r2p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "compact_bump",
+      "source_width": 2.6496571772212203,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.204762025241236,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_dist_compact_bump_r3p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "compact_bump",
+      "source_width": 2.6496571772212203,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.807143037861854,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_dist_compact_bump_r4p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "compact_bump",
+      "source_width": 2.6496571772212203,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        6.409524050482472,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_dist_compact_bump_r5p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "compact_bump",
+      "source_width": 2.6496571772212203,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        8.01190506310309,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_dist_two_lobe_r0p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "two_lobe",
+      "source_width": 1.1998239372359478,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_dist_two_lobe_r0p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "two_lobe",
+      "source_width": 1.1998239372359478,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.0412207309259751,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_dist_two_lobe_r1p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "two_lobe",
+      "source_width": 1.1998239372359478,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        2.0824414618519502,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_dist_two_lobe_r1p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "two_lobe",
+      "source_width": 1.1998239372359478,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.1236621927779256,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_dist_two_lobe_r2p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "two_lobe",
+      "source_width": 1.1998239372359478,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.1648829237039005,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_dist_two_lobe_r3p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "two_lobe",
+      "source_width": 1.1998239372359478,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        6.247324385555851,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_dist_two_lobe_r4p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "two_lobe",
+      "source_width": 1.1998239372359478,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        8.329765847407801,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_dist_two_lobe_r5p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "two_lobe",
+      "source_width": 1.1998239372359478,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        10.41220730925975,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_dist_shell_r0p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "shell",
+      "source_width": 0.2,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_dist_shell_r0p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "shell",
+      "source_width": 0.2,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.2624653411349192,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_dist_shell_r1p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "shell",
+      "source_width": 0.2,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        2.5249306822698383,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_dist_shell_r1p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "shell",
+      "source_width": 0.2,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.7873960234047575,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_dist_shell_r2p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "shell",
+      "source_width": 0.2,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        5.049861364539677,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_dist_shell_r3p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "shell",
+      "source_width": 0.2,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        7.574792046809515,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_dist_shell_r4p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "shell",
+      "source_width": 0.2,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        10.099722729079353,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_dist_shell_r5p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "shell",
+      "source_width": 0.2,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        12.624653411349192,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_strength_Nmin1p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 1.0,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_strength_Nmin0p95",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.95,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_strength_Nmin0p9",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.9,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_strength_Nmin0p8",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.8,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_strength_Nmin0p65",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.65,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_strength_Nmin0p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_strength_Nmin0p35",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.35,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_width_ratio0p15",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.29336973432722296,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_width_ratio0p25",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.4889495572120383,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_width_ratio0p4",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.7823192915392614,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_width_ratio0p6",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.1734789373088919,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_width_ratio0p8",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.5646385830785228,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_width_ratio1p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.9557982288481532,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_width_ratio1p4",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 2.7381175203874144,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r0p5_w0p25_n0p9",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.9,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        0.9271875517574139,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.4635937758787069,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r0p5_w0p25_n0p65",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.65,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        0.9547474192786399,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.47737370963931997,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r0p5_w0p25_n0p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        0.9778991144240766,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.4889495572120383,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r0p5_w0p25_n0p35",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.35,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.0105658893716256,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.5052829446858128,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r0p5_w0p6_n0p9",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.9,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        0.9271875517574139,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.1126250621088967,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r0p5_w0p6_n0p65",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.65,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        0.9547474192786399,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.1456969031343678,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r0p5_w0p6_n0p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        0.9778991144240766,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.1734789373088919,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r0p5_w0p6_n0p35",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.35,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.0105658893716256,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.2126790672459506,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r0p5_w1p0_n0p9",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.9,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        0.9271875517574139,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.8543751035148277,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r0p5_w1p0_n0p65",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.65,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        0.9547474192786399,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.9094948385572799,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r0p5_w1p0_n0p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        0.9778991144240766,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.9557982288481532,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r0p5_w1p0_n0p35",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.35,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.0105658893716256,
+        0.0,
+        0.0
+      ],
+      "probe_width": 2.0211317787432512,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r1p0_w0p25_n0p9",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.9,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.8543751035148277,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.4635937758787069,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r1p0_w0p25_n0p65",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.65,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.9094948385572799,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.47737370963931997,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r1p0_w0p25_n0p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.9557982288481532,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.4889495572120383,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r1p0_w0p25_n0p35",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.35,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        2.0211317787432512,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.5052829446858128,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r1p0_w0p6_n0p9",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.9,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.8543751035148277,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.1126250621088967,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r1p0_w0p6_n0p65",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.65,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.9094948385572799,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.1456969031343678,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r1p0_w0p6_n0p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.9557982288481532,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.1734789373088919,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r1p0_w0p6_n0p35",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.35,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        2.0211317787432512,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.2126790672459506,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r1p0_w1p0_n0p9",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.9,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.8543751035148277,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.8543751035148277,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r1p0_w1p0_n0p65",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.65,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.9094948385572799,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.9094948385572799,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r1p0_w1p0_n0p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.9557982288481532,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.9557982288481532,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r1p0_w1p0_n0p35",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.35,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        2.0211317787432512,
+        0.0,
+        0.0
+      ],
+      "probe_width": 2.0211317787432512,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r2p0_w0p25_n0p9",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.9,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.7087502070296554,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.4635937758787069,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r2p0_w0p25_n0p65",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.65,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.8189896771145597,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.47737370963931997,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r2p0_w0p25_n0p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.9115964576963065,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.4889495572120383,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r2p0_w0p25_n0p35",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.35,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.0422635574865025,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.5052829446858128,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r2p0_w0p6_n0p9",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.9,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.7087502070296554,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.1126250621088967,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r2p0_w0p6_n0p65",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.65,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.8189896771145597,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.1456969031343678,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r2p0_w0p6_n0p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.9115964576963065,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.1734789373088919,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r2p0_w0p6_n0p35",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.35,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.0422635574865025,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.2126790672459506,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r2p0_w1p0_n0p9",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.9,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.7087502070296554,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.8543751035148277,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r2p0_w1p0_n0p65",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.65,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.8189896771145597,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.9094948385572799,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r2p0_w1p0_n0p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.9115964576963065,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.9557982288481532,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r2p0_w1p0_n0p35",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.35,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.0422635574865025,
+        0.0,
+        0.0
+      ],
+      "probe_width": 2.0211317787432512,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r4p0_w0p25_n0p9",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.9,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        7.417500414059311,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.4635937758787069,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r4p0_w0p25_n0p65",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.65,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        7.6379793542291194,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.47737370963931997,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r4p0_w0p25_n0p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        7.823192915392613,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.4889495572120383,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r4p0_w0p25_n0p35",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.35,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        8.084527114973005,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.5052829446858128,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r4p0_w0p6_n0p9",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.9,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        7.417500414059311,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.1126250621088967,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r4p0_w0p6_n0p65",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.65,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        7.6379793542291194,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.1456969031343678,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r4p0_w0p6_n0p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        7.823192915392613,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.1734789373088919,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r4p0_w0p6_n0p35",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.35,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        8.084527114973005,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.2126790672459506,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r4p0_w1p0_n0p9",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.9,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        7.417500414059311,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.8543751035148277,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r4p0_w1p0_n0p65",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.65,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        7.6379793542291194,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.9094948385572799,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r4p0_w1p0_n0p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        7.823192915392613,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.9557982288481532,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_gaussian_r4p0_w1p0_n0p35",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.35,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        8.084527114973005,
+        0.0,
+        0.0
+      ],
+      "probe_width": 2.0211317787432512,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r0p5_w0p25_n0p9",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.710723244962295,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.9,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        0.742384362192026,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.371192181096013,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r0p5_w0p25_n0p65",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.7548468354437259,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.65,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        0.7827333515332268,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.3913666757666134,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r0p5_w0p25_n0p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.7901271813556772,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        0.8157019136049725,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.40785095680248623,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r0p5_w0p25_n0p35",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.8375279059168608,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.35,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        0.860981950947912,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.430490975473956,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r0p5_w0p6_n0p9",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.710723244962295,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.9,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        0.742384362192026,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.8908612346304311,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r0p5_w0p6_n0p65",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.7548468354437259,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.65,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        0.7827333515332268,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.939280021839872,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r0p5_w0p6_n0p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.7901271813556772,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        0.8157019136049725,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.9788422963259669,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r0p5_w0p6_n0p35",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.8375279059168608,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.35,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        0.860981950947912,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0331783411374944,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r0p5_w1p0_n0p9",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.710723244962295,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.9,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        0.742384362192026,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.484768724384052,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r0p5_w1p0_n0p65",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.7548468354437259,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.65,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        0.7827333515332268,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.5654667030664535,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r0p5_w1p0_n0p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.7901271813556772,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        0.8157019136049725,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.631403827209945,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r0p5_w1p0_n0p35",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.8375279059168608,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.35,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        0.860981950947912,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.721963901895824,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r1p0_w0p25_n0p9",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.710723244962295,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.9,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.484768724384052,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.371192181096013,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r1p0_w0p25_n0p65",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.7548468354437259,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.65,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.5654667030664535,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.3913666757666134,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r1p0_w0p25_n0p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.7901271813556772,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.631403827209945,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.40785095680248623,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r1p0_w0p25_n0p35",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.8375279059168608,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.35,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.721963901895824,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.430490975473956,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r1p0_w0p6_n0p9",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.710723244962295,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.9,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.484768724384052,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.8908612346304311,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r1p0_w0p6_n0p65",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.7548468354437259,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.65,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.5654667030664535,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.939280021839872,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r1p0_w0p6_n0p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.7901271813556772,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.631403827209945,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.9788422963259669,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r1p0_w0p6_n0p35",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.8375279059168608,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.35,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.721963901895824,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0331783411374944,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r1p0_w1p0_n0p9",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.710723244962295,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.9,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.484768724384052,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.484768724384052,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r1p0_w1p0_n0p65",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.7548468354437259,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.65,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.5654667030664535,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.5654667030664535,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r1p0_w1p0_n0p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.7901271813556772,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.631403827209945,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.631403827209945,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r1p0_w1p0_n0p35",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.8375279059168608,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.35,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.721963901895824,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.721963901895824,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r2p0_w0p25_n0p9",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.710723244962295,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.9,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        2.969537448768104,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.371192181096013,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r2p0_w0p25_n0p65",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.7548468354437259,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.65,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.130933406132907,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.3913666757666134,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r2p0_w0p25_n0p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.7901271813556772,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.26280765441989,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.40785095680248623,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r2p0_w0p25_n0p35",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.8375279059168608,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.35,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.443927803791648,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.430490975473956,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r2p0_w0p6_n0p9",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.710723244962295,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.9,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        2.969537448768104,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.8908612346304311,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r2p0_w0p6_n0p65",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.7548468354437259,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.65,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.130933406132907,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.939280021839872,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r2p0_w0p6_n0p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.7901271813556772,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.26280765441989,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.9788422963259669,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r2p0_w0p6_n0p35",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.8375279059168608,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.35,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.443927803791648,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0331783411374944,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r2p0_w1p0_n0p9",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.710723244962295,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.9,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        2.969537448768104,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.484768724384052,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r2p0_w1p0_n0p65",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.7548468354437259,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.65,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.130933406132907,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.5654667030664535,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r2p0_w1p0_n0p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.7901271813556772,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.26280765441989,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.631403827209945,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r2p0_w1p0_n0p35",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.8375279059168608,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.35,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.443927803791648,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.721963901895824,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r4p0_w0p25_n0p9",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.710723244962295,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.9,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        5.939074897536208,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.371192181096013,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r4p0_w0p25_n0p65",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.7548468354437259,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.65,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        6.261866812265814,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.3913666757666134,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r4p0_w0p25_n0p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.7901271813556772,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        6.52561530883978,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.40785095680248623,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r4p0_w0p25_n0p35",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.8375279059168608,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.35,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        6.887855607583296,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.430490975473956,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r4p0_w0p6_n0p9",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.710723244962295,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.9,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        5.939074897536208,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.8908612346304311,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r4p0_w0p6_n0p65",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.7548468354437259,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.65,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        6.261866812265814,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.939280021839872,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r4p0_w0p6_n0p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.7901271813556772,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        6.52561530883978,
+        0.0,
+        0.0
+      ],
+      "probe_width": 0.9788422963259669,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r4p0_w0p6_n0p35",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.8375279059168608,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.35,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        6.887855607583296,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0331783411374944,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r4p0_w1p0_n0p9",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.710723244962295,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.9,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        5.939074897536208,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.484768724384052,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r4p0_w1p0_n0p65",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.7548468354437259,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.65,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        6.261866812265814,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.5654667030664535,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r4p0_w1p0_n0p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.7901271813556772,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        6.52561530883978,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.631403827209945,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_core_supergaussian4_r4p0_w1p0_n0p35",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "supergaussian4",
+      "source_width": 1.8375279059168608,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.35,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        6.887855607583296,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.721963901895824,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_radial_carrier_r1p0_km0p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.9557982288481532,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        -0.5,
+        -0.0,
+        -0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_radial_carrier_r1p0_km0p2",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.9557982288481532,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        -0.2,
+        -0.0,
+        -0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_radial_carrier_r1p0_k0p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.9557982288481532,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_radial_carrier_r1p0_k0p2",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.9557982288481532,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.2,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_radial_carrier_r1p0_k0p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.9557982288481532,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.5,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_tangential_carrier_r1p0_k0p2",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.9557982288481532,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.2,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_tangential_carrier_r1p0_k0p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.9557982288481532,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.5,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_tangential_carrier_r1p0_k1p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.9557982288481532,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_radial_carrier_r2p0_km0p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.9115964576963065,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        -0.5,
+        -0.0,
+        -0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_radial_carrier_r2p0_km0p2",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.9115964576963065,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        -0.2,
+        -0.0,
+        -0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_radial_carrier_r2p0_k0p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.9115964576963065,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_radial_carrier_r2p0_k0p2",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.9115964576963065,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.2,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_radial_carrier_r2p0_k0p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.9115964576963065,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.5,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_tangential_carrier_r2p0_k0p2",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.9115964576963065,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.2,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_tangential_carrier_r2p0_k0p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.9115964576963065,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.5,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_tangential_carrier_r2p0_k1p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.9115964576963065,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_radial_carrier_r4p0_km0p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        7.823192915392613,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        -0.5,
+        -0.0,
+        -0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_radial_carrier_r4p0_km0p2",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        7.823192915392613,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        -0.2,
+        -0.0,
+        -0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_radial_carrier_r4p0_k0p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        7.823192915392613,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_radial_carrier_r4p0_k0p2",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        7.823192915392613,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.2,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_radial_carrier_r4p0_k0p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        7.823192915392613,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.5,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_tangential_carrier_r4p0_k0p2",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        7.823192915392613,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.2,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_tangential_carrier_r4p0_k0p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        7.823192915392613,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.5,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_tangential_carrier_r4p0_k1p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        7.823192915392613,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_shell_center",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "shell",
+      "source_width": 0.2,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_shell_inner",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "shell",
+      "source_width": 0.2,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.5,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_shell_gradient",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "shell",
+      "source_width": 0.2,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        2.5,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_shell_outer",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "shell",
+      "source_width": 0.2,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.5,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_shell_exterior",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "shell",
+      "source_width": 0.2,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        5.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_two_lobe_midpoint",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "two_lobe",
+      "source_width": 1.1998239372359478,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_two_lobe_lobe_plus",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "two_lobe",
+      "source_width": 1.1998239372359478,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        0.0,
+        1.35,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_two_lobe_lobe_minus",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "two_lobe",
+      "source_width": 1.1998239372359478,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        0.0,
+        -1.35,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E1",
+      "run_id": "E1_two_lobe_offaxis_midpoint",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "two_lobe",
+      "source_width": 1.1998239372359478,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.5,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    }
+  ],
+  "trajectory_runs": [
+    {
+      "stage": "E0",
+      "run_id": "E0_reference_medium",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 4.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E0",
+      "run_id": "E0_reference_flat",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 4.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 1.0,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E2",
+      "run_id": "E2_weak_inward_deflection_short",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.5,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.9,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E2",
+      "run_id": "E2_weak_inward_deflection_standard",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 4.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.9,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E2",
+      "run_id": "E2_strong_inward_deflection_short",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.5,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.35,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E2",
+      "run_id": "E2_strong_inward_deflection_standard",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 4.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.35,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E2",
+      "run_id": "E2_strong_inward_deflection_long",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 12.0,
+      "sample_dt": 0.1,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.35,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0,
+      "requires_gate": "E2_strong_inward_deflection_standard"
+    },
+    {
+      "stage": "E2",
+      "run_id": "E2_near_source_motion_short",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.5,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        0.9778991144240766,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E2",
+      "run_id": "E2_near_source_motion_standard",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 4.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        0.9778991144240766,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E2",
+      "run_id": "E2_far_field_near_null_short",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.5,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        9.778991144240766,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E2",
+      "run_id": "E2_far_field_near_null_standard",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 4.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        9.778991144240766,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E2",
+      "run_id": "E2_radial_inward_carrier_short",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.5,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.9115964576963065,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        -0.35,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E2",
+      "run_id": "E2_radial_inward_carrier_standard",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 4.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.9115964576963065,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        -0.35,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E2",
+      "run_id": "E2_radial_outward_carrier_short",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.5,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.9115964576963065,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.35,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E2",
+      "run_id": "E2_radial_outward_carrier_standard",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 4.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.9115964576963065,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.35,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E2",
+      "run_id": "E2_radial_outward_carrier_long",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 12.0,
+      "sample_dt": 0.1,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.9115964576963065,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.35,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0,
+      "requires_gate": "E2_radial_outward_carrier_standard"
+    },
+    {
+      "stage": "E2",
+      "run_id": "E2_tangential_carrier_short",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.5,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.9115964576963065,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.5,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E2",
+      "run_id": "E2_tangential_carrier_standard",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 4.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.9115964576963065,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.5,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E2",
+      "run_id": "E2_tangential_carrier_long",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 12.0,
+      "sample_dt": 0.1,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.9115964576963065,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.5,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0,
+      "requires_gate": "E2_tangential_carrier_standard"
+    },
+    {
+      "stage": "E2",
+      "run_id": "E2_shell_interior_short",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.5,
+      "sample_dt": 0.05,
+      "source_family": "shell",
+      "source_width": 0.2,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E2",
+      "run_id": "E2_shell_interior_standard",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 4.0,
+      "sample_dt": 0.05,
+      "source_family": "shell",
+      "source_width": 0.2,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E2",
+      "run_id": "E2_shell_interior_long",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 12.0,
+      "sample_dt": 0.1,
+      "source_family": "shell",
+      "source_width": 0.2,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0,
+      "requires_gate": "E2_shell_interior_standard"
+    },
+    {
+      "stage": "E2",
+      "run_id": "E2_shell_exterior_short",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.5,
+      "sample_dt": 0.05,
+      "source_family": "shell",
+      "source_width": 0.2,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        5.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E2",
+      "run_id": "E2_shell_exterior_standard",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 4.0,
+      "sample_dt": 0.05,
+      "source_family": "shell",
+      "source_width": 0.2,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        5.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E2",
+      "run_id": "E2_two_lobe_midpoint_short",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.5,
+      "sample_dt": 0.05,
+      "source_family": "two_lobe",
+      "source_width": 1.1998239372359478,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E2",
+      "run_id": "E2_two_lobe_midpoint_standard",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 4.0,
+      "sample_dt": 0.05,
+      "source_family": "two_lobe",
+      "source_width": 1.1998239372359478,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E2",
+      "run_id": "E2_two_lobe_midpoint_long",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 12.0,
+      "sample_dt": 0.1,
+      "source_family": "two_lobe",
+      "source_width": 1.1998239372359478,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0,
+      "requires_gate": "E2_two_lobe_midpoint_standard"
+    },
+    {
+      "stage": "E2",
+      "run_id": "E2_two_lobe_offaxis_short",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.5,
+      "sample_dt": 0.05,
+      "source_family": "two_lobe",
+      "source_width": 1.1998239372359478,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.5,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E2",
+      "run_id": "E2_two_lobe_offaxis_standard",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 4.0,
+      "sample_dt": 0.05,
+      "source_family": "two_lobe",
+      "source_width": 1.1998239372359478,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.5,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    }
+  ],
+  "numerical_validation": [
+    {
+      "stage": "E7",
+      "run_id": "E7_baseline_N96",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 1.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E7",
+      "run_id": "E7_baseline_N128",
+      "N": 128,
+      "L": 40.0,
+      "dt": 0.001,
+      "T": 1.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E7",
+      "run_id": "E7_baseline_dt_half",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.0005,
+      "T": 1.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E7",
+      "run_id": "E7_strong_N96",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 1.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.35,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E7",
+      "run_id": "E7_strong_N128",
+      "N": 128,
+      "L": 40.0,
+      "dt": 0.001,
+      "T": 1.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.35,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E7",
+      "run_id": "E7_strong_dt_half",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.0005,
+      "T": 1.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.35,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E7",
+      "run_id": "E7_compact_N96",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 1.0,
+      "sample_dt": 0.05,
+      "source_family": "compact_bump",
+      "source_width": 2.6496571772212203,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E7",
+      "run_id": "E7_compact_N128",
+      "N": 128,
+      "L": 40.0,
+      "dt": 0.001,
+      "T": 1.0,
+      "sample_dt": 0.05,
+      "source_family": "compact_bump",
+      "source_width": 2.6496571772212203,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E7",
+      "run_id": "E7_compact_dt_half",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.0005,
+      "T": 1.0,
+      "sample_dt": 0.05,
+      "source_family": "compact_bump",
+      "source_width": 2.6496571772212203,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    }
+  ],
+  "falsification": [
+    {
+      "stage": "E8",
+      "run_id": "E8_probe_structure_gaussian",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E8",
+      "run_id": "E8_probe_structure_supergaussian",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "supergaussian",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E8",
+      "run_id": "E8_probe_structure_node_radial",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "node_radial",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E8",
+      "run_id": "E8_probe_structure_phase_modulated",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "phase_modulated",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E8",
+      "run_id": "E8_probe_structure_two_component",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "two_component",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E8",
+      "run_id": "E8_shell_map_r0p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "shell",
+      "source_width": 0.2,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E8",
+      "run_id": "E8_shell_map_r1p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "shell",
+      "source_width": 0.2,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E8",
+      "run_id": "E8_shell_map_r2p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "shell",
+      "source_width": 0.2,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        2.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E8",
+      "run_id": "E8_shell_map_r2p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "shell",
+      "source_width": 0.2,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        2.5,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E8",
+      "run_id": "E8_shell_map_r3p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "shell",
+      "source_width": 0.2,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E8",
+      "run_id": "E8_shell_map_r4p5",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "shell",
+      "source_width": 0.2,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.5,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E8",
+      "run_id": "E8_shell_map_r6p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "shell",
+      "source_width": 0.2,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        6.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E8",
+      "run_id": "E8_exterior_decay_r3p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "compact_bump",
+      "source_width": 2.6496571772212203,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        3.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E8",
+      "run_id": "E8_exterior_decay_r5p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "compact_bump",
+      "source_width": 2.6496571772212203,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        5.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E8",
+      "run_id": "E8_exterior_decay_r8p0",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "compact_bump",
+      "source_width": 2.6496571772212203,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.5,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        8.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E8",
+      "run_id": "E8_superposition_n0p95",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "two_source",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.95,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E8",
+      "run_id": "E8_superposition_n0p9",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "two_source",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.9,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E8",
+      "run_id": "E8_superposition_n0p8",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "two_source",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.8,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E8",
+      "run_id": "E8_superposition_n0p65",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "two_source",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 0.65,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E8",
+      "run_id": "E8_constant_N_gaussian",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 1.0,
+      "probe_profile": "gaussian",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E8",
+      "run_id": "E8_constant_N_node_radial",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 1.0,
+      "probe_profile": "node_radial",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    },
+    {
+      "stage": "E8",
+      "run_id": "E8_constant_N_two_component",
+      "N": 96,
+      "L": 30.0,
+      "dt": 0.001,
+      "T": 0.0,
+      "sample_dt": 0.05,
+      "source_family": "gaussian",
+      "source_width": 1.5,
+      "source_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "N_min": 1.0,
+      "probe_profile": "two_component",
+      "probe_position": [
+        4.0,
+        0.0,
+        0.0
+      ],
+      "probe_width": 1.0,
+      "probe_amplitude": 1.0,
+      "carrier_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radial_hat": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "normalize_probe": true,
+      "target_norm": 1.0
+    }
+  ]
+}

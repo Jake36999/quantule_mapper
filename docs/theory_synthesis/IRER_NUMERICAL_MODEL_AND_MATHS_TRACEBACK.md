@@ -42,11 +42,16 @@ Not a claim of physical truth — a claim about *what the code integrates*.
 | C2 local | phase ramp ∇φ≈k across the core, zero net winding | `phase_d_c2_4_local_boost.py::local_phase` | (used to test flow-through; verdict retracted post-C2.6) |
 | C3 KG | ψ₀=φ(γx)·e^{ikx}, k=γωv/c²; π₀=(−v∂ₓφ_c − iγωφ_c)e^{ikx} | `phase_d_c3_wave.py` (G4) + `contract_axis0` | naive kick π=−v∇φ−iωφ (no carrier phase) gave spurious v_frac≈0.04 |
 
-## 4. Collision classifiers (C2.9 / C3 two-body)
+## 4. Collision classifiers (C2.9 / C3 / C2.10 two-body)
 | classifier | rule | code | outputs |
 |---|---|---|---|
 | static force | sep decreasing = ATTRACT, increasing = REPEL, crossover at Δφ=π/2 | `_c2_9`, `_c3_two_qball` | attract/repel/hold/merge |
-| collision outcome | overlap+re-separate coherent = PASS_THROUGH; overlap+bound = CAPTURE; repel-before-overlap = BOUNCE; incoherent = DISRUPT; E/Q drift too high = INCONCLUSIVE | `phase_d_c3_collision_ladder.py::_classify` | 5-way + elasticity, radiation, identity-ambiguity flag |
+| collision outcome | overlap+re-separate coherent = PASS_THROUGH; overlap+bound = CAPTURE; repel-before-overlap = BOUNCE; incoherent = DISRUPT; E/Q (or mass) drift too high = INCONCLUSIVE | `phase_d_c3_collision_ladder.py::_classify` (KG); `phase_d_c2_10_antiphase_collision.py::_classify` (NLS, RUN-2) | 5-way + elasticity, radiation, identity-ambiguity flag |
+
+*RUN-2 classifier refinements (C2.10, both fixed + re-verified from saved trajectories):* the overlap/merge scale is
+the **soliton core** (`MERGE_SEP≈3.5`), not the tracking window (`2·W_WIN=7`); and re-separation is judged by the
+**post-min peak** separation, not the final frame — a periodic-box pass-through pair separates fully then wraps back,
+so `sep_end` understates it. Both mislabels (BOUNCE→CAPTURE, PASS_THROUGH→INTERMEDIATE) were caught and corrected.
 
 ## 5. What this traceback establishes
 1. **The engine is a small family of well-posed PDEs**, not a monolithic "adaptive" black box: dissipative

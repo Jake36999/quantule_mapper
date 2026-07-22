@@ -1,0 +1,23 @@
+{
+  "backend": "gpu",
+  "command_line": "/usr/bin/python3 jax_scout/gravity_TG_clock_migration_characterization_gpu.py --out /content/qm_job/results/cx_tg_clock_migration_characterization --matrix pilot --time-domain selected",
+  "devices": [
+    "cuda:0"
+  ],
+  "env": {
+    "CUDA_VISIBLE_DEVICES": null,
+    "XLA_PYTHON_CLIENT_MEM_FRACTION": "0.90",
+    "XLA_PYTHON_CLIENT_PREALLOCATE": "false"
+  },
+  "git_commit": "UNKNOWN",
+  "jax_version": "0.7.2",
+  "jaxlib_version": "0.7.2",
+  "numpy_version": "2.0.2",
+  "operator": "A u = omega^2 M u; phi_t=N_t Pi; Pi_t=div(N_t grad phi)-N_t(m^2+V)phi",
+  "platform": "Linux-6.6.122+-x86_64-with-glibc2.35",
+  "python": "3.12.13",
+  "scipy_version": "1.16.3",
+  "scope": "local clock calibration; supplied objective temporal field only",
+  "selected_device": "cuda:0",
+  "x64_enabled": true
+}

@@ -1,0 +1,34 @@
+{
+  "baseline": {
+    "dE_rel": 5.470133127026032e-14,
+    "dQ_rel": 6.768139891839495e-14,
+    "max_shell_flux_proxy": 2.148959071815996e-10,
+    "profile_overlap": 0.999999999999997,
+    "qball_residual": 1.1854848438084138e-09,
+    "status": "TG_SOURCE_NODE_BASELINE_CLOSED"
+  },
+  "caveat": "Backreaction was detected over the bounded short run and dt/2 validation, but bounded long-term feedback is not yet supported.",
+  "labels": [
+    "TG_STATE_LOAD_FEEDFORWARD_CHAIN_SUPPORTED",
+    "TG_STATE_LOAD_GEOMETRIC_BACKREACTION_DETECTED"
+  ],
+  "metrics": {
+    "full_loop_minus_feedback_off_charge": 1.4210854715202004e-14,
+    "full_loop_minus_feedback_off_core_energy": -1.5745503789688087e-09,
+    "full_loop_minus_feedback_off_node_frequency": 4.778801965255042e-08,
+    "G_peak_feed_forward": 0.0005703573852635597,
+    "T_peak_temporal_feed_forward": 0.00225097903078486
+  },
+  "run_directory": "/mnt/f/quantule_mapper/sweep_runs/TG_B1S_STATE_LOAD_GPU_20260714_140157",
+  "source": {
+    "casewise_normalization": false,
+    "disabled_sources": [
+      "R_relax",
+      "L_lock",
+      "P_threshold"
+    ],
+    "enabled_source": "S_state",
+    "source_global_norm_S0": 135.6862187684289
+  },
+  "status": "TG_STATE_LOAD_GEOMETRIC_BACKREACTION_DETECTED"
+}

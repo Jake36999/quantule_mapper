@@ -1,0 +1,44 @@
+# TG-B1S-D Drift Decomposition Results
+
+Timestamp: 2026-07-14.
+Run directory: `/mnt/f/quantule_mapper/sweep_runs/TG_B1S_DRIFT_DECOMPOSITION_GPU_20260714_184736`.
+Status: `TG_STATE_LOAD_LONG_TIME_DRIFT_UNRESOLVED`.
+
+## Labels
+
+- `TG_STATE_LOAD_LONG_TIME_DRIFT_UNRESOLVED`
+
+## Preserved Prior Labels
+
+- `TG_STATE_LOAD_BACKREACTION_ROBUST`
+- `TG_STATE_LOAD_BACKREACTION_ROBUST_BUT_WEAK`
+- `TG_STATE_LOAD_CONTINUOUS_SLOW_DRIFT`
+
+## Key Metrics
+
+- Target run: `D3_100P_lam1`.
+- Final phase-aligned orbital distance: `4.9140079664143094e-05`.
+- Final phase drift: `-0.0013329967322306402`.
+- Asymptotic frequency slope: `-2.150936882840006e-06`.
+- Structural channels: ``.
+
+## Interpretation
+
+The D0-D3 primary run separates phase drift from profile drift. Through 100 node periods, the relative phase channel is `LINEAR_SECULAR`, while all measured phase-aligned structural channels are `BOUNDED_OSCILLATORY` or below numerical floor. No structural channel is classified as secular or accelerating.
+
+This means the old 50-period `CONTINUOUS_DRIFT` label is best interpreted, within this primary run, as an accumulated frequency shift rather than confirmed structural drift. The measured asymptotic modal-frequency difference is approximately `-2.150936882840006e-06`, and the final phase-aligned orbital distance is `4.9140079664143094e-05`.
+
+Formal promotion to `TG_STATE_LOAD_ORBITALLY_BOUNDED_FREQUENCY_SHIFT_SUPPORTED` is not made here because this primary matrix did not run D4 numerical validation or D5 basin-orbital stability. The correct formal status remains `TG_STATE_LOAD_LONG_TIME_DRIFT_UNRESOLVED`, with a strong provisional interpretation of `STABLE_FREQUENCY_SHIFT`.
+
+`TG_STATE_LOAD_BOUNDED_FEEDBACK_SUPPORTED` remains unpromoted.
+
+## Gate Results
+
+- D0 phase-aligned profile comparison: passed for the 50- and 100-period primary runs.
+- D1 separate drift channels: phase is linear-secular; structural channels are bounded/oscillatory.
+- D2 asymptotic frequency contract: constant-slope support is true at 50 and 100 periods.
+- D3 extended 100-period run: completed.
+- D4 numerical validation: not run in this primary matrix.
+- D5 basin orbital stability: not run in this primary matrix.
+
+No damping, coupling, source normalization or field map was changed. No bounded-feedback, gravity, photon, objective-time, geodesic, universal-free-fall, production or IRER-validation claim is made unless explicitly listed above.

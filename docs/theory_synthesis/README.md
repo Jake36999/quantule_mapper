@@ -19,6 +19,12 @@ tool. Nulls, falsifications, and retractions are first-class results.
 | 4 | `QUANTULE_MAPPER_ARCHITECTURE_AND_DESIGN_PATTERNS.md` | why the monolith was retired for sector harnesses + separated search/validation/interpretation | "why is it built this way — and what should agents NOT re-merge?" |
 | 5 | `IRER_SIMULATION_RESULTS_AND_THEORY_STATUS.md` | public-facing synthesis: confirmed / falsified / retracted / paused / speculative + external-search candidates | "where does the theory stand after simulation contact?" |
 
+## Addenda
+
+| date | report | authorship label | purpose |
+|---|---|---|---|
+| 2026-07-14 | `IRER_TEMPORAL_GEOMETRIC_FEEDBACK_LOOP.md` | Codex formalization addendum; conceptual authorship remains Jake McIntosh | collects the scattered OIW/RD/PAS/chronology/manifold feedback concepts into one temporal-geometric loop hypothesis, states candidate PDE scaffolds, and distinguishes verified limbs from untested closed-loop dynamics |
+
 ## How this relates to the other canonical documents
 - **`docs/_Declaration of Intellectual Provenance v9.txt`** — the source of the theory's concepts and authorship
   framing. This bundle copies its disciplined structure but adds implementation + evidence; it never redefines the

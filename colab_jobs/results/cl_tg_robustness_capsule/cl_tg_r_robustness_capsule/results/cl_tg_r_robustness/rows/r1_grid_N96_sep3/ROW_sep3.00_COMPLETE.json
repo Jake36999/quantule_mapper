@@ -1,0 +1,17 @@
+{
+  "sep": 3.0,
+  "n": 361,
+  "t_end": 180.0,
+  "F_R_well_avg": -5.452931236310377e-05,
+  "F_R_hill_avg": 5.45282371341913e-05,
+  "F_R_off_avg": 0.0,
+  "F_R_well_std": 7.956136379591495e-06,
+  "F_R_hill_std": 7.956092404915266e-06,
+  "well_attracts": true,
+  "sign_reverses": true,
+  "off_null_ok": true,
+  "charge_ok": true,
+  "sep_min": 2.9251837223243857,
+  "nodes_distinct": true,
+  "gates_pass": true
+}

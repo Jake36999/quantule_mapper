@@ -1,0 +1,28 @@
+{
+  "cwd": "/content/qm_job",
+  "events": [
+    {
+      "label": "prepare",
+      "step": 1,
+      "steps": 3,
+      "timestamp_utc": "2026-07-15T15:53:09Z"
+    },
+    {
+      "label": "prepare",
+      "step": 2,
+      "steps": 3,
+      "timestamp_utc": "2026-07-15T15:53:10Z"
+    },
+    {
+      "label": "prepare",
+      "step": 3,
+      "steps": 3,
+      "timestamp_utc": "2026-07-15T15:53:10Z"
+    }
+  ],
+  "phase": "prepare",
+  "platform": "Linux-6.6.122+-x86_64-with-glibc2.35",
+  "python": "3.12.13 (main, Mar  4 2026, 09:23:07) [GCC 11.4.0]",
+  "status": "PREPARE_PASS",
+  "timestamp_utc": "2026-07-15T15:53:10Z"
+}

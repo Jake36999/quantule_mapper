@@ -1,0 +1,47 @@
+{
+  "args": {
+    "out": "/content/qm_job/results/cl_tg_r_robustness/rows/r1_dt_half_sep3",
+    "seps": "3.0",
+    "N": 64,
+    "L": 16.0,
+    "T": 180.0,
+    "dt": 0.001,
+    "sample_dt": 0.5,
+    "f_discard": 0.4,
+    "merge_thresh": 1.2,
+    "q_tol": 0.01,
+    "cool_T": 0.0,
+    "gamma_cool": 0.3,
+    "c": 0.5477,
+    "m": 1.0,
+    "a": 0.8,
+    "s": -0.5,
+    "f": -0.1,
+    "w": 0.964,
+    "alpha_T": 0.35,
+    "omega_T": 1.25,
+    "omega_G": 0.85,
+    "gamma_T": 0.08,
+    "gamma_G": 0.06,
+    "kappa_TG": 0.55,
+    "epsilon_G": 0.06,
+    "cT": 0.7,
+    "cG": 0.55,
+    "absorb_width": 1.6,
+    "absorb_strength": 0.02,
+    "core_radius": 2.0
+  },
+  "seps": [
+    3.0
+  ],
+  "preflight": {
+    "backend": "gpu",
+    "devices": [
+      "cuda:0"
+    ],
+    "gpu_ok": true,
+    "x64": true
+  },
+  "observable": "PRIMARY: <F_R> = time-avg of -c^2 Int_{x>0} d_x A |grad phi|^2 dV over settled window; F_R<0=attract; off(A=1)=0 null; well/hill antisymmetry control",
+  "boundary": "mirror-only; frozen TG-B1S untouched; no gravity/UFF/IRER claim"
+}

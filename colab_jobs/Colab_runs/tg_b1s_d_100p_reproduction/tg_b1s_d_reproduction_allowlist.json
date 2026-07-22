@@ -1,0 +1,28 @@
+{
+  "schema_version": "qm-colab-allowlist/1.0",
+  "job_id": "tg_b1s_d_100p_reproduction",
+  "purpose": "Run the existing TG-B1S-D primary drift-decomposition simulation and compare it against a frozen local baseline.",
+  "entrypoint": "colab_jobs/tg_b1s_d_reproduce_and_compare.py",
+  "simulation_entrypoint": "jax_scout/gravity_TG_B1S_drift_decomposition_gpu.py",
+  "analysis_entrypoint": "colab_jobs/tg_b1s_d_reproduction_compare.py",
+  "source_files": [
+    "jax_scout/__init__.py",
+    "jax_scout/phase_d_c3_wave.py",
+    "jax_scout/gravity_TG_B1S_state_load_feedback_gpu.py",
+    "jax_scout/gravity_TG_B1S_backreaction_robustness_gpu.py",
+    "jax_scout/gravity_TG_B1S_long_time_gpu.py",
+    "jax_scout/gravity_TG_B1S_drift_decomposition_gpu.py",
+    "colab_jobs/tg_b1s_d_reproduce_and_compare.py",
+    "colab_jobs/tg_b1s_d_reproduction_compare.py"
+  ],
+  "config_files": [
+    "colab_jobs/baselines/tg_b1s_d_20260714_184736_baseline_manifest.json"
+  ],
+  "not_packaged": [
+    "full repository",
+    "Hunter search tools",
+    "web application",
+    "historic sweep output tables other than frozen baseline values embedded in the manifest",
+    "binary datasets"
+  ]
+}

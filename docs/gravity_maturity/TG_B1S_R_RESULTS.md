@@ -1,0 +1,60 @@
+# TG-B1S-R Backreaction Robustness Results
+
+Timestamp: 2026-07-14.
+Run directory: `/mnt/f/quantule_mapper/sweep_runs/TG_B1S_BACKREACTION_ROBUSTNESS_GPU_20260714_142319`.
+Status: `TG_STATE_LOAD_BACKREACTION_ROBUST_BUT_WEAK`.
+
+## Bounded Labels
+
+- `TG_STATE_LOAD_BACKREACTION_ROBUST`
+- `TG_STATE_LOAD_BACKREACTION_ROBUST_BUT_WEAK`
+
+## Key Metrics
+
+- Best SNR observable: `delta_core_amp_final` = `131.65175529252588`.
+- Max long duration tested in node periods: `10.0`.
+- Baseline modal phase drift at lambda=1: `-3.876371246214205e-08`.
+
+## Numerical-Floor Result
+
+The feedback signal exceeded the calibrated numerical floor for multiple observables:
+
+- core-amplitude delta SNR: `131.65175529252588`;
+- node-frequency delta SNR: `10.920148801270711`;
+- modal-frequency delta SNR: `5.520083225871324`;
+- modal-phase final-drift SNR: `5.498598847431243`.
+
+Core-energy and shell-flux deltas remained below the suggested SNR `5` threshold, so they should be treated as secondary.
+
+## Coupling Contract
+
+The `lambda_fb` ladder vanished at zero coupling and changed smoothly through `{0, 0.25, 0.5, 1, 1.5, 2}`. At `lambda_fb=1`, the measured deltas were:
+
+- core amplitude: `-7.330591547116683e-07`;
+- node frequency: `4.778801965255042e-08`;
+- modal frequency: `3.434895534670801e-08`;
+- modal phase: `-3.876371246214205e-08`.
+
+## Long-Time Scout
+
+The 2-period and 10-period paired runs were classified as `STABLE_SHIFTED_NODE`:
+
+- 10-period modal phase drift: `-9.114930590925496e-05`;
+- 10-period modal leakage max: `6.889513350929407e-05`;
+- 10-period profile overlap: `0.9999999981230413`.
+
+This is not enough to promote `TG_STATE_LOAD_BOUNDED_FEEDBACK_SUPPORTED`, because the 25/50-period gate and full basin requirement were not run.
+
+## Replay Controls
+
+Correct replay produced a first-order effect close to the live full-loop result. Sign-reversed replay reversed the signs of the core-amplitude, node-frequency, modal-frequency and modal-phase shifts.
+
+## Caveat
+
+The translated basin row is conservative because the modal leakage diagnostic is referenced to the original stationary mode rather than a translated mode. It does not affect the robust-but-weak verdict or the denial of bounded-feedback promotion.
+
+## Interpretation
+
+This audit tests whether the short-run TG-B1S backreaction exceeds numerical spread, vanishes at zero feedback coupling, scales smoothly with `lambda_fb`, appears in modal phase, and remains bounded in the tested long-duration scout.
+
+No bounded-feedback, radiation, photon, gravity, objective-time, geodesic, universal-free-fall or IRER-validation claim is made unless explicitly listed above.

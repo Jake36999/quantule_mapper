@@ -1,0 +1,6 @@
+{
+  "L_lock": "R_lock=[d_t C_l]_+ W_activity with C_l=|K_l*(rho*z)|/(K_l*rho+eps)",
+  "P_threshold": "comparison-only threshold/PAS-like density activity source",
+  "R_relax": "R_relax=[-d_t K_mismatch]_+, K_mismatch=|j|^2/(rho+eps)",
+  "S_state": "bounded normalized local KG energy/absolute charge density; state load, not a rate"
+}

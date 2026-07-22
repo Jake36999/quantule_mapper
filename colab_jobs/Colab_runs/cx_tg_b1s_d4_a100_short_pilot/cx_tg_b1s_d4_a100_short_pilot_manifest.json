@@ -1,0 +1,217 @@
+{
+  "job_name": "CX TG-B1S D4 A100 Short Scientific Pilot",
+  "job_id": "cx_tg_b1s_d4_a100_short_pilot",
+  "job_root": "/content/qm_job",
+  "run_class": "short-scientific-pilot",
+  "estimated_runtime": {
+    "a100_minutes_min": 5,
+    "a100_minutes_max": 30,
+    "basis": "One real D4 dt_half row, shortened to 2 periods at N=32. This is deliberately much smaller than the prior TG-B1S-D 100P reproduction, which took 6250.04 seconds on A100."
+  },
+  "operator_confirmation": {
+    "required_before_j1": false,
+    "message": "J1 is a short scientific pilot expected to finish in under 30 minutes on A100."
+  },
+  "stop_rule": "If no new J1 log output appears for 15 minutes, or total J1 runtime exceeds 30 minutes without D4_RUN_COMPLETE.json/archive progress, stop and return the logs for review.",
+  "workflow": {
+    "mode": "manual_colab_upload",
+    "agent_plans_run": true,
+    "manual_upload_to_colab": true,
+    "manual_colab_execution": true,
+    "drive_persistence_required": true,
+    "local_results_dir": "F:\\quantule_mapper\\colab_jobs\\results",
+    "review_prompt_after_download": true,
+    "intended_use": "Short scientific Colab A100 pilot for the TG-B1S D4 row runner. It exercises real D4 numerical-validation code without launching the full active D4 campaign."
+  },
+  "result_policy": {
+    "ideal_archive_bytes": 1000000000,
+    "hard_archive_bytes": 5000000000
+  },
+  "control_panel": {
+    "schema_version": "qm-colab-controls/1.0",
+    "reserved_test_slots": [
+      "T1",
+      "T2",
+      "T3"
+    ],
+    "tail_lines": 800,
+    "actions": [
+      {
+        "action_id": "T1",
+        "kind": "system_test",
+        "label": "Run Preflight",
+        "handler": "runtime_preflight",
+        "output_channel": "terminal_T1",
+        "required": true,
+        "fixed": true
+      },
+      {
+        "action_id": "T2",
+        "kind": "system_test",
+        "label": "Run Smoke Test",
+        "handler": "numeric_smoke_test",
+        "output_channel": "terminal_T2",
+        "requires_pass": [
+          "T1"
+        ],
+        "required": true,
+        "fixed": true
+      },
+      {
+        "action_id": "T3",
+        "kind": "system_test",
+        "label": "Test Persistence",
+        "handler": "persistence_test",
+        "output_channel": "terminal_T3",
+        "requires_pass": [
+          "T1",
+          "T2"
+        ],
+        "required": true,
+        "fixed": true
+      },
+      {
+        "action_id": "J1",
+        "kind": "job",
+        "label": "Run D4 dt_half Short Pilot (<30m)",
+        "handler": "run_registered_job",
+        "job_id": "cx_tg_b1s_d4_a100_short_pilot",
+        "row_id": "d4_dt_half_2p_n32",
+        "output_channel": "terminal_J1",
+        "requires_pass": [
+          "T1",
+          "T2",
+          "T3"
+        ],
+        "confirmation_required": false
+      }
+    ]
+  },
+  "entrypoint": {
+    "path": "jax_scout/gravity_TG_B1S_D4_rows_gpu.py"
+  },
+  "arguments": [
+    "--out",
+    "{job_root}/results/cx_tg_b1s_d4_a100_short_pilot",
+    "--reference-run",
+    "{job_root}/sweep_runs/TG_B1S_DRIFT_DECOMPOSITION_GPU_20260714_184736",
+    "--cases",
+    "dt_half",
+    "--d4-periods",
+    "2",
+    "--N",
+    "32"
+  ],
+  "rows": [
+    {
+      "row_id": "d4_dt_half_2p_n32",
+      "arguments": [
+        "--out",
+        "{job_root}/results/cx_tg_b1s_d4_a100_short_pilot",
+        "--reference-run",
+        "{job_root}/sweep_runs/TG_B1S_DRIFT_DECOMPOSITION_GPU_20260714_184736",
+        "--cases",
+        "dt_half",
+        "--d4-periods",
+        "2",
+        "--N",
+        "32"
+      ],
+      "expected_outputs": [
+        "results/cx_tg_b1s_d4_a100_short_pilot/environment_versions.json",
+        "results/cx_tg_b1s_d4_a100_short_pilot/model_spec.json",
+        "results/cx_tg_b1s_d4_a100_short_pilot/preregistered_gates.json",
+        "results/cx_tg_b1s_d4_a100_short_pilot/preregistered_matrix.json",
+        "results/cx_tg_b1s_d4_a100_short_pilot/baseline_reproduction.csv",
+        "results/cx_tg_b1s_d4_a100_short_pilot/numerical_validation.csv",
+        "results/cx_tg_b1s_d4_a100_short_pilot/asymptotic_frequency.csv",
+        "results/cx_tg_b1s_d4_a100_short_pilot/structural_trends.csv",
+        "results/cx_tg_b1s_d4_a100_short_pilot/field_boundedness.csv",
+        "results/cx_tg_b1s_d4_a100_short_pilot/energy_ledger.csv",
+        "results/cx_tg_b1s_d4_a100_short_pilot/boundary_flux.csv",
+        "results/cx_tg_b1s_d4_a100_short_pilot/orbital_distance.csv",
+        "results/cx_tg_b1s_d4_a100_short_pilot/phase_alignment.csv",
+        "results/cx_tg_b1s_d4_a100_short_pilot/attractor_classification.csv",
+        "results/cx_tg_b1s_d4_a100_short_pilot/falsification_results.csv",
+        "results/cx_tg_b1s_d4_a100_short_pilot/artifact_hashes.csv",
+        "results/cx_tg_b1s_d4_a100_short_pilot/ROW_D4_dt_half_50P_COMPLETE.json",
+        "results/cx_tg_b1s_d4_a100_short_pilot/D4_RUN_COMPLETE.json",
+        "results/cx_tg_b1s_d4_a100_short_pilot/D4_SUMMARY.json",
+        "results/cx_tg_b1s_d4_a100_short_pilot/TECHNICAL_HANDOFF.md"
+      ]
+    }
+  ],
+  "source_files": [
+    "jax_scout/__init__.py",
+    "jax_scout/phase_d_c3_wave.py",
+    "jax_scout/gravity_TG_B1S_state_load_feedback_gpu.py",
+    "jax_scout/gravity_TG_B1S_backreaction_robustness_gpu.py",
+    "jax_scout/gravity_TG_B1S_long_time_gpu.py",
+    "jax_scout/gravity_TG_B1S_drift_decomposition_gpu.py",
+    "jax_scout/gravity_TG_B1S_D4_D5_closure_gpu.py",
+    "jax_scout/gravity_TG_B1S_D4_rows_gpu.py"
+  ],
+  "config_files": [
+    "sweep_runs/TG_B1S_DRIFT_DECOMPOSITION_GPU_20260714_184736/artifact_hashes.csv",
+    "sweep_runs/TG_B1S_DRIFT_DECOMPOSITION_GPU_20260714_184736/asymptotic_frequency.csv",
+    "sweep_runs/TG_B1S_DRIFT_DECOMPOSITION_GPU_20260714_184736/baseline_node_contract.csv",
+    "sweep_runs/TG_B1S_DRIFT_DECOMPOSITION_GPU_20260714_184736/basin_orbital_stability.csv",
+    "sweep_runs/TG_B1S_DRIFT_DECOMPOSITION_GPU_20260714_184736/drift_channel_fits.csv",
+    "sweep_runs/TG_B1S_DRIFT_DECOMPOSITION_GPU_20260714_184736/energy_ledger.csv",
+    "sweep_runs/TG_B1S_DRIFT_DECOMPOSITION_GPU_20260714_184736/environment_versions.json",
+    "sweep_runs/TG_B1S_DRIFT_DECOMPOSITION_GPU_20260714_184736/falsification_results.csv",
+    "sweep_runs/TG_B1S_DRIFT_DECOMPOSITION_GPU_20260714_184736/gpu_preflight.json",
+    "sweep_runs/TG_B1S_DRIFT_DECOMPOSITION_GPU_20260714_184736/long_time_100_period.csv",
+    "sweep_runs/TG_B1S_DRIFT_DECOMPOSITION_GPU_20260714_184736/numerical_validation.csv",
+    "sweep_runs/TG_B1S_DRIFT_DECOMPOSITION_GPU_20260714_184736/orbital_distance.csv",
+    "sweep_runs/TG_B1S_DRIFT_DECOMPOSITION_GPU_20260714_184736/phase_alignment.csv",
+    "sweep_runs/TG_B1S_DRIFT_DECOMPOSITION_GPU_20260714_184736/preregistered_matrix.json",
+    "sweep_runs/TG_B1S_DRIFT_DECOMPOSITION_GPU_20260714_184736/source_spec.json",
+    "sweep_runs/TG_B1S_DRIFT_DECOMPOSITION_GPU_20260714_184736/TECHNICAL_HANDOFF.md"
+  ],
+  "external_inputs": [],
+  "expected_outputs": [
+    "results/cx_tg_b1s_d4_a100_short_pilot/environment_versions.json",
+    "results/cx_tg_b1s_d4_a100_short_pilot/model_spec.json",
+    "results/cx_tg_b1s_d4_a100_short_pilot/preregistered_gates.json",
+    "results/cx_tg_b1s_d4_a100_short_pilot/preregistered_matrix.json",
+    "results/cx_tg_b1s_d4_a100_short_pilot/baseline_reproduction.csv",
+    "results/cx_tg_b1s_d4_a100_short_pilot/numerical_validation.csv",
+    "results/cx_tg_b1s_d4_a100_short_pilot/asymptotic_frequency.csv",
+    "results/cx_tg_b1s_d4_a100_short_pilot/structural_trends.csv",
+    "results/cx_tg_b1s_d4_a100_short_pilot/field_boundedness.csv",
+    "results/cx_tg_b1s_d4_a100_short_pilot/energy_ledger.csv",
+    "results/cx_tg_b1s_d4_a100_short_pilot/boundary_flux.csv",
+    "results/cx_tg_b1s_d4_a100_short_pilot/orbital_distance.csv",
+    "results/cx_tg_b1s_d4_a100_short_pilot/phase_alignment.csv",
+    "results/cx_tg_b1s_d4_a100_short_pilot/attractor_classification.csv",
+    "results/cx_tg_b1s_d4_a100_short_pilot/falsification_results.csv",
+    "results/cx_tg_b1s_d4_a100_short_pilot/artifact_hashes.csv",
+    "results/cx_tg_b1s_d4_a100_short_pilot/ROW_D4_dt_half_50P_COMPLETE.json",
+    "results/cx_tg_b1s_d4_a100_short_pilot/D4_RUN_COMPLETE.json",
+    "results/cx_tg_b1s_d4_a100_short_pilot/D4_SUMMARY.json",
+    "results/cx_tg_b1s_d4_a100_short_pilot/TECHNICAL_HANDOFF.md"
+  ],
+  "precision": {
+    "jax_enable_x64": true
+  },
+  "environment_policy": {
+    "require_gpu": true,
+    "accepted_gpu_names": [
+      "A100"
+    ]
+  },
+  "runtime_environment": {
+    "env": {
+      "XLA_PYTHON_CLIENT_PREALLOCATE": "false",
+      "XLA_PYTHON_CLIENT_MEM_FRACTION": "0.90"
+    },
+    "notes": "Preserved at 0.90 for the A100 Colab lane. This is an environment policy only and does not alter TG-B1S scientific source or gates."
+  },
+  "install_policy": {
+    "allow_pip_install": false
+  },
+  "seed": 1729,
+  "drive_results_dir": "/content/drive/MyDrive/QuantuleMapperRuns/cx_tg_b1s_d4_a100_short_pilot",
+  "drive_checkpoint_dir": "/content/drive/MyDrive/QuantuleMapperRuns/cx_tg_b1s_d4_a100_short_pilot/checkpoints"
+}

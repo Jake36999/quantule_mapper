@@ -1,0 +1,57 @@
+{
+  "status": "G0_FOUNDATION_FROZEN",
+  "maturity_gate": "G-M0 mechanisms reproduced; first G-M1 temporal clock calibration attempt completed as characterized negative",
+  "current_bounded_interpretation": "Spatial medium force is confirmed; temporal KG differential response is detected; the first independent temporal clock calibration attempt failed because the local clock mode did not remain localized.",
+  "supported_labels": [
+    "SPATIAL_MEDIUM_FORCE_REPRODUCED",
+    "TEMPORAL_THROTTLING_REPRODUCED",
+    "TEMPORAL_SPATIAL_DECOMPOSITION_PASSED",
+    "TEMPORAL_KG_LAPSE_EQUATION_IMPLEMENTED",
+    "OBJECTIVE_TEMPORAL_KG_DIFFERENTIAL_RESPONSE_DETECTED",
+    "RELATIONAL_WEAK_PROBE_FIELD_COLLAPSE_REPRODUCED"
+  ],
+  "open_labels": [
+    "TEMPORAL_KG_CLOCK_RATE_CALIBRATION_OPEN",
+    "TEMPORAL_SPATIAL_METRIC_UNIFICATION_OPEN",
+    "OBJECTIVE_LOCAL_CLOCK_LIMIT_SUPPORTED"
+  ],
+  "g1_result": {
+    "run_path": "sweep_runs/GRAVITY_MATURITY_G1_CLOCK_20260714_100527/",
+    "label": "TEMPORAL_CLOCK_CALIBRATION_FAILED",
+    "maturity_status": "CHARACTERIZED_NEGATIVE",
+    "failure_boundary": "Far local clock eigenmodes migrated toward the low-lapse source region; eigen/time and clock-family agreement gates failed."
+  },
+  "superseded_labels": [
+    "OBJECTIVE_LAPSE_WEAK_PROBE_LIMIT_SUPPORTED",
+    "RELATIONAL_SOURCE_UNSUITABLE_FOR_GRAVITY",
+    "OBJECTIVE_TEMPORAL_LAPSE_KG_SCOUT_SUPPORTED"
+  ],
+  "corrected_bridge_archive": {
+    "path": "docs/external_validation/artifact_bundles/gravity_ts_bridge_audit_20260714.zip",
+    "sha256": "f55992c9c7b70a9ac0a04ebe3d9e5cc9f3460e3103c9930c62443fd43598805f"
+  },
+  "protected_scope": "Production geometry, production solvers, Hunter, GPU launch infrastructure, CPU/GPU fallback policy, and master theory verdicts remain untouched.",
+  "tg_b1s_state_load_branch": {
+    "note": "Dual-substrate state-load T/G feedback line (KG Q-ball + dynamical temporal T + geometric G, S_state source, frozen S0). Continuation of the mechanism work above; the most recent gravity-maturity activity.",
+    "current_formal_status": "TG_STATE_LOAD_LONG_TIME_DRIFT_UNRESOLVED",
+    "supported_labels": [
+      "TG_NODE_STATE_LOAD_SOURCE_SUPPORTED",
+      "TG_STATE_LOAD_FEEDFORWARD_CHAIN_SUPPORTED",
+      "TG_STATE_LOAD_GEOMETRIC_BACKREACTION_DETECTED",
+      "TG_STATE_LOAD_BACKREACTION_ROBUST_BUT_WEAK"
+    ],
+    "d4_result": {
+      "label": "TG_STATE_LOAD_D4_NUMERICAL_VALIDATION_FAILED",
+      "run_path": "sweep_runs/TG_B1S_D4_ROWS_GPU_20260715_091558/",
+      "summary": "5/6 rows pass; larger_box (L=12) failed frequency-scale gate (rel-diff 0.6037 > 0.60). Failure isolated to box size L (not resolution); box-dependence discriminator shows the local mechanism predicts the opposite sign, so the drop is comparability/absorber/dynamical, not physical box-fragility.",
+      "d5_allowed": false,
+      "final_analysis": "docs/gravity_maturity/TG_B1S_D4_FINAL_ANALYSIS.md"
+    },
+    "claude_mechanism_checks": {
+      "frequency_contract": "docs/gravity_maturity/TG_B1S_FREQUENCY_CONTRACT_RESULTS.md (SIGN_MATCH_ONLY; measured shift bracketed by analytic limits; sign puzzle was a convention artifact)",
+      "box_dependence": "docs/gravity_maturity/TG_B1S_BOX_DEPENDENCE_RESULTS.md (NOT resolution; local mechanism predicts opposite sign of the larger-box drop)"
+    },
+    "equation_audit": "docs/gravity_maturity/TG_B1S_EQUATION_AUDIT_ADDENDUM_20260715.md (phenomenological/non-variational ledger; A-hill sign gate before two-node; frequency-contract now done)",
+    "next_action": "CX run-data lane: re-derive larger_box delta_omega vs a same-geometry (L=12) feedback-off baseline to decide comparability-artifact vs real box-sensitivity; Claude verifies before any D5 launch."
+  }
+}

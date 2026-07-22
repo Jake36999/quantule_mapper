@@ -1,0 +1,78 @@
+# TG-B2 Overnight Long-Average Dynamical Run — Results
+
+Author: Claude (primary), 2026-07-16. Run: `sweep_runs/TG_B2_OVERNIGHT_20260716_010733` (local GTX 1080, WSL/JAX
+CUDA, x64; detached tmux `tg_b2_20260716_010733`; **11.91 h**). Driver: `jax_scout/gravity_TG_B2_overnight_dynamical.py`.
+Config: seps {3.0, 4.0} × arms {off, well, hill}, T=320/arm (640 samples), dt=0.002, N=64, L=16, Δφ=0, single-node
+B1S normalization, transient discard = first 40%. Companion to `TG_B2_TWO_NODE_FORCE_RESULTS.md` (§Definitive holds
+the final direction verdict); this documents what the overnight campaign itself established.
+
+## Auto-verdict (accurate about the proxies)
+
+```text
+TG_B2_DYNAMICAL_SIGN_INCONSISTENT_OR_NULL_ACROSS_SEP
+```
+
+This is the machine reading of the **momentum proxy**, and it is *correct about that proxy* — see §3. It is **not**
+the physics verdict; the direction question was settled by the body-force observable
+(`CL_TG_B2_DEFINITIVE_FORCE`, Colab A100): **A-well attraction**.
+
+## 1. Row results (both rows gate-clean)
+
+| quantity | sep 3.0 | sep 4.0 |
+|---|---:|---:|
+| slope_J_well (secular d/dt of P_R,full−P_R,off) | +4.5105e-6 | +9.0773e-6 |
+| slope_J_hill | −4.5102e-6 | −9.0749e-6 |
+| antisymmetry (well+hill) | ~3e-10 | ~2.3e-9 |
+| off (bare) secular P_R drift | **+1.6546e-3** | **−3.5393e-3** |
+| bare sep trajectory | 3.500 → 3.628 (apart) | 4.143 → 3.359 (toward) |
+| sep_min | 2.982 | 2.585 |
+| charge conserved / P_tot max | yes / 1.1e-11 | yes / 1.6e-13 |
+| gates_pass | **yes** | **yes** |
+
+Instrument-side, the campaign is clean: momentum conservation at machine precision, charge conserved, no merger
+(both rows stayed above the 1.2 distinctness gate), all markers/CSVs written, no crashes over 11.9 h unattended.
+
+## 2. What the long averaging established (positive content)
+
+- **A real, secular, sign-controlled loop signal exists.** The T=12 run's loop impulse was consistent with zero;
+  here, averaging over ~24 breathing periods (settled window t=128–320) extracts clean secular slopes in *both*
+  proxies, antisymmetric under the A-sign flip to ≤2e-9 — the linear A-coupling, not noise. The loop demonstrably
+  does something secular and dynamical.
+- **The sep-differential proxy reads ATTRACT at both separations:** settled-window `sep_well − sep_off = −2.408e-5`
+  (sep 3.0) and `−2.414e-5` (sep 4.0), each with the hill mirror at `+2.41e-5`. Consistent with the definitive
+  body-force result and the static prediction.
+
+## 3. The run's most valuable finding: the momentum proxy is NOT a direction meter
+
+The half-space momentum slope is sign-controlled but **uninterpretable as a direction**: its calibration reference —
+the *bare* pair's secular momentum drift — **flips sign between separations** (+1.65e-3 at sep 3.0, −3.54e-3 at
+sep 4.0) while nothing physical flips. The bare drift is breathing-radiation/absorber momentum bookkeeping, not the
+inter-node force; any "inward/outward" reading calibrated from it is unreliable. This is why the T=12 run and the
+sep-3.0 preliminary appeared to contradict each other, and it is the concrete, evidenced justification for the
+body-force observable used in the definitive run. **Instrument lesson recorded: for weak forces on breathing
+solitons, use force-density observables (body force / stress flux), not half-space momentum or masked-COM.**
+
+## 4. Secondary observations (recorded, not over-read)
+
+- The **bare pair dynamics are geometry-sensitive**: at sep 3.0 the pair drifted apart (3.50→3.63); at sep 4.0 it
+  swung substantially closer (4.14→3.36, min 2.59). The bare in-phase two-node breather does not follow a simple
+  monotone force law at these near-field separations — consistent with the method assessment's "violently breathing
+  excited state" diagnosis.
+- slope_J magnitude *grew* with separation (4.5e-6 → 9.1e-6); given §3, this is a property of the proxy, not
+  evidence about the force's range.
+- Amplitude breathing persisted through T=320 (~0.85–1.57 at sep 3.0) — long averaging tames it statistically; it
+  does not decay away.
+
+## 5. Status and relation to the record
+
+- **Superseded for the direction question** by `CL_TG_B2_DEFINITIVE_FORCE`
+  (`colab_jobs/Colab_runs/cl_tg_b2_definitive_force_20260716_113033`): A-well attraction, endorsed after scrutiny.
+- Retained as: (a) the proxy-exposure evidence (§3), (b) the sep-differential attraction record (§2), (c) an 11.9 h
+  clean unattended-automation validation of the row-marker/streaming/gate pattern on the local lane.
+- Runtime note: actual rate ~1.9 h/arm (T=320) vs the smoke-test extrapolation ~1.5 h/arm → total 11.9 h vs ~9 h
+  planned. The A100 ran the (shorter) definitive campaign ~8× faster than the 1080 — recalibrate future lane choices.
+
+## Boundaries
+
+Mirror-only; frozen TG-B1S and production untouched; near-field, short-range, weak; no gravity / 1/r² / UFF / IRER
+claim. Direction verdict lives in `TG_B2_TWO_NODE_FORCE_RESULTS.md` §Definitive.

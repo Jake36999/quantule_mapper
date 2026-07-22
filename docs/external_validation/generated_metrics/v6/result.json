@@ -1,0 +1,44 @@
+{
+  "behavioural_result": "PASS",
+  "caveats": [
+    "V6 is an instrument regression/overlay check, not an empirical validation."
+  ],
+  "created_utc": "2026-07-12T00:34:08+00:00",
+  "data_sources": [
+    "sweep_runs/C23_N96",
+    "sweep_runs/C24_LOCAL_N96",
+    "sweep_runs/C27_REDERIVE",
+    "sweep_runs/PHASE_D_C2_6_CODEX_AUDIT_20260709",
+    "sweep_runs/PHASE_D_CODEX_REPRODUCTION_20260709_233433"
+  ],
+  "files_read": [
+    "sweep_runs/C27_REDERIVE/r3_n96.json",
+    "sweep_runs/PHASE_D_C2_6_CODEX_AUDIT_20260709/c2_6_independent_audit_summary.json",
+    "sweep_runs/PHASE_D_CODEX_REPRODUCTION_20260709_233433/c2_6_reproduction_summary.json"
+  ],
+  "fit_parameters": {
+    "corrected_interpretation_status": "CANONICAL",
+    "corrected_points": 2,
+    "corrected_v_over_2Dk": 0.9998909278496895,
+    "expected_bug_ratio_1_over_151": 0.006622516556291391,
+    "old_D_eff_ratio": 0.006511027642497719,
+    "old_interpretation_status": "RETRACTED",
+    "old_regression_points": 2
+  },
+  "fit_quality": {
+    "clean_overlay_available": true,
+    "corrected_interpretation_status": "CANONICAL",
+    "corrected_mean_v_frac": 0.9998909278496895,
+    "corrected_v_over_2Dk": 0.9998909278496895,
+    "expected_bug_ratio_1_over_151": 0.006622516556291391,
+    "old_D_eff_ratio": 0.006511027642497719,
+    "old_interpretation_status": "RETRACTED"
+  },
+  "formula_target": "old effective mobility/D_eff regression evidence versus corrected v = 2Dk C2 transport",
+  "match_level_candidate": "EXACT EQUATION",
+  "metric_id": "v6",
+  "no_new_simulation": true,
+  "provisional_until_claude_review": true,
+  "status": "RAN",
+  "validation_depth": "INTERNAL_DATA_BEHAVIOUR_CHECK"
+}

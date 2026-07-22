@@ -1,0 +1,31 @@
+{
+  "bounded_feedback_promoted": false,
+  "delta_omega_infty": -2.150936882840006e-06,
+  "final_delta_theta": -0.0013329967322306402,
+  "final_orbital_distance": 4.9140079664143094e-05,
+  "final_phase_aligned_distance": 4.9140079664143094e-05,
+  "interpretation": "The audit separates phase drift from profile drift, but the available gates do not yet distinguish stable frequency shift, structural drift and numerical accumulation robustly enough for promotion.",
+  "labels": [
+    "TG_STATE_LOAD_LONG_TIME_DRIFT_UNRESOLVED"
+  ],
+  "measured_primary_classification": "STABLE_FREQUENCY_SHIFT",
+  "gate_results": {
+    "D0_phase_aligned_profile_comparison": true,
+    "D1_structural_channels_bounded_or_below_floor": true,
+    "D2_asymptotic_frequency_constant_slope": true,
+    "D3_100_period_run_completed": true,
+    "D4_numerical_validation": false,
+    "D5_basin_orbital_stability": false
+  },
+  "formal_promotion_blocker": "D4 numerical validation and D5 basin-orbital stability were not run in the primary matrix.",
+  "interpretation_detail": "Through 100 node periods, delta_theta is linear-secular while phase-aligned orbital distance, core amplitude, width, core energy and modal leakage classify as bounded oscillatory. This supports a frequency-shift interpretation of the earlier continuous-drift label, but formal promotion is blocked until numerical and basin gates close.",
+  "preserved_prior_labels": [
+    "TG_STATE_LOAD_BACKREACTION_ROBUST",
+    "TG_STATE_LOAD_BACKREACTION_ROBUST_BUT_WEAK",
+    "TG_STATE_LOAD_CONTINUOUS_SLOW_DRIFT"
+  ],
+  "run_directory": "/mnt/f/quantule_mapper/sweep_runs/TG_B1S_DRIFT_DECOMPOSITION_GPU_20260714_184736",
+  "status": "TG_STATE_LOAD_LONG_TIME_DRIFT_UNRESOLVED",
+  "structural_channels": "",
+  "target_run": "D3_100P_lam1"
+}

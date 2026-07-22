@@ -1,0 +1,53 @@
+{
+  "args": [
+    "--seps",
+    "3.0",
+    "--epsilon-G",
+    "0.03",
+    "--T",
+    "180"
+  ],
+  "command": [
+    "/usr/bin/python3",
+    "-u",
+    "jax_scout/gravity_TG_B2_definitive_force.py",
+    "--seps",
+    "3.0",
+    "--epsilon-G",
+    "0.03",
+    "--T",
+    "180",
+    "--out",
+    "/content/qm_job/results/cl_tg_r_robustness_v2/rows/r2_eps_003_sep3"
+  ],
+  "duration_seconds": 1364.7082197666168,
+  "epsilon_G": 0.03,
+  "log_path": "logs/r2_eps_003_sep3.log",
+  "metrics": {
+    "F_R_hill_avg": 2.725021402968578e-05,
+    "F_R_hill_std": 3.975145057146255e-06,
+    "F_R_off_avg": 0.0,
+    "F_R_well_avg": -2.7250482735304782e-05,
+    "F_R_well_std": 3.9751559792717775e-06,
+    "charge_ok": true,
+    "gates_pass": true,
+    "n": 361,
+    "nodes_distinct": true,
+    "off_null_ok": true,
+    "sep": 3.0,
+    "sep_min": 2.9824541315359623,
+    "sign_reverses": true,
+    "t_end": 180.0,
+    "well_attracts": true,
+    "well_hill_antisym_rel": 9.860581979806513e-06,
+    "well_negative": true
+  },
+  "phase": "R2_epsilon_scaling",
+  "reason": "epsilon half-scale point",
+  "return_code": 0,
+  "row_id": "r2_eps_003_sep3",
+  "script_verdict": "TG_B2_DEFINITIVE_AWELL_ATTRACTION_CONFIRMED",
+  "source": "v2_capsule",
+  "status": "COMPLETE",
+  "summary_path": "rows/r2_eps_003_sep3/summary.json"
+}

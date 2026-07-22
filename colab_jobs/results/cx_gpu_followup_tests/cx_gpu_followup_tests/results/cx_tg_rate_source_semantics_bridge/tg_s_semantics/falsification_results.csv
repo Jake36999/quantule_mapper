@@ -1,0 +1,4 @@
+test,pass,evidence,labels
+preserve_TG_B1_negative,True,TG_SOURCE_SEMANTICS_FAILED_ON_KG_NODE left unchanged; TG-S is a new source audit,
+baseline_node_gate,True,baseline_node_contract.csv,
+at_least_one_non_threshold_source_supported,True,,"TG_NODE_STATE_LOAD_SOURCE_SUPPORTED,TG_PHASE_TENSION_RELAXATION_SOURCE_SUPPORTED"

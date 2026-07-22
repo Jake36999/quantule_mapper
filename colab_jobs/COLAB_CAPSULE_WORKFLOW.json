@@ -1,0 +1,239 @@
+{
+  "name": "Quantule Mapper Colab Capsule Workflow",
+  "version": "1.2",
+  "active_packager": "F:\\quantule_mapper\\colab_jobs\\notebook_packager_v4.py",
+  "mode": "manual_colab_upload",
+  "purpose": "Use Google Colab as a burst-compute lane for targeted, preregistered simulations and cross-hardware checks.",
+  "not_for": [
+    "long-form hunts",
+    "broad parameter searches",
+    "jobs that cannot persist useful partial results",
+    "jobs expected to exceed Colab session limits"
+  ],
+  "local_results_dir": "F:\\quantule_mapper\\colab_jobs\\results",
+  "result_policy": {
+    "ideal_archive_bytes": 1000000000,
+    "hard_archive_bytes": 5000000000,
+    "notes": "Keep returned archives below 1 GB when practical. The generated notebook refuses to copy archives over 5 GB."
+  },
+  "resource_profile_defaults": {
+    "class": "standard",
+    "push_level": "balanced",
+    "xla_mem_fraction": "0.90",
+    "xla_preallocate": "false",
+    "autotune_before_j1": true,
+    "autotune_target_mb": 1024,
+    "autotune_max_seconds": 20,
+    "warn_if_gpu_memory_used_fraction_below": 0.15,
+    "notes": "The packager applies runtime resource policy and profiling. Larger T/grid/box/row counts must be explicit in the run queue and manifest arguments."
+  },
+  "control_panel": {
+    "schema_version": "qm-colab-controls/1.0",
+    "reserved_test_slots": [
+      "T1",
+      "T2",
+      "T3"
+    ],
+    "trusted_handlers": [
+      "runtime_preflight",
+      "numeric_smoke_test",
+      "persistence_test",
+      "run_registered_job"
+    ],
+    "states": [
+      "NOT_RUN",
+      "READY",
+      "BLOCKED",
+      "RUNNING",
+      "PASS",
+      "FAILED",
+      "INTERRUPTED",
+      "LOCAL_COMMITTED",
+      "DRIVE_COMMITTED"
+    ],
+    "log_pattern": "/content/qm_colab/jobs/<job_id>/run/logs/<action_id>.log",
+    "status_pattern": "/content/qm_colab/jobs/<job_id>/run/status/<action_id>.json",
+    "ui_bridge_manifest": "/content/qm_job/control_panel_ui_bridge.json",
+    "bridge_schema_version": "qm-colab-ui-bridge/1.0",
+    "stable_runtime_handles": {
+      "button_registry": "button_widgets",
+      "output_registry": "output_widgets",
+      "status_registry": "status_widgets",
+      "context_registry": "job_contexts",
+      "runner_function": "run_action",
+      "per_action_aliases": [
+        "button_<action_id>",
+        "output_<action_id>",
+        "status_<action_id>",
+        "context_<action_id>"
+      ]
+    },
+    "safety_boundary": "Dashboard statuses report infrastructure state only. They do not validate scientific claims."
+  },
+  "workflow": [
+    {
+      "stage": "plan_run",
+      "owner": "agent",
+    "description": "Choose a small, targeted simulation with a clear single entrypoint or manifest-declared row stages, arguments, source allowlist, expected outputs, and Drive result directory."
+    },
+    {
+      "stage": "user_requests_packaging",
+      "owner": "user",
+    "description": "Prompt the agent to use notebook_packager_v4.py and provide or approve a suitable JSON manifest. Future agents should only need to write the manifest when all simulation and analysis scripts already exist."
+    },
+    {
+      "stage": "package_notebook",
+      "owner": "agent",
+      "description": "Run the packager locally against the project root and manifest. Verify dry-run hash output and notebook cell compilation."
+    },
+    {
+      "stage": "manual_upload",
+      "owner": "user",
+      "description": "Upload the generated .ipynb to Google Colab manually and select the intended GPU runtime."
+    },
+    {
+      "stage": "manual_colab_run",
+      "owner": "user",
+      "description": "Run notebook cells top to bottom in Colab. The notebook extracts files, verifies hashes, performs preflight checks, executes the job, and archives results."
+    },
+    {
+      "stage": "drive_persistence",
+      "owner": "notebook",
+      "description": "Copy the result archive to the manifest drive_results_dir when the archive is under the hard size cap."
+    },
+    {
+      "stage": "local_recovery",
+      "owner": "user",
+      "description": "Download the archive from Drive and place it in F:\\quantule_mapper\\colab_jobs\\results."
+    },
+    {
+      "stage": "review_results",
+      "owner": "supporting_agent",
+      "description": "Review the downloaded result capsule, compare outputs against expected files and gates, then resume the normal local workflow."
+    }
+  ],
+  "required_manifest_fields": [
+    "job_name",
+    "job_id",
+    "entrypoint.path or rows[].stages[].entrypoint.path",
+    "arguments",
+    "source_files",
+    "expected_outputs",
+    "external_inputs[].stage_to",
+    "external_inputs[].required_files[].sha256",
+    "drive_results_dir",
+    "drive_checkpoint_dir",
+    "control_panel.schema_version",
+    "control_panel.reserved_test_slots",
+    "control_panel.actions[].action_id",
+    "control_panel.actions[].handler",
+    "control_panel.actions[].output_channel",
+    "rows[].row_id",
+    "rows[].arguments or rows[].stages[].arguments",
+    "rows[].stages[].stage_id",
+    "rows[].stages[].entrypoint.path",
+    "rows[].stages[].expected_outputs",
+    "workflow.mode",
+    "workflow.local_results_dir",
+    "result_policy.ideal_archive_bytes",
+    "result_policy.hard_archive_bytes",
+    "runtime_environment.env",
+    "resource_profile.push_level or default",
+    "resource_profile.xla_mem_fraction or default",
+    "queue colab push target for colab-a100 rows"
+  ],
+  "agent_control_panel_rules": [
+    "T1, T2 and T3 are immutable reserved slots.",
+    "Job controls begin at J1.",
+    "Every action_id must be unique.",
+    "Every action must name exactly one output_channel.",
+    "Output channels cannot be shared.",
+    "Job actions must reference a declared row_id or job subset.",
+    "Dependencies between actions use requires_pass.",
+    "The UI may invoke only registered trusted handlers.",
+    "Full logs must be persisted outside the widget.",
+    "Agents should use control_panel_ui_bridge.json or the stable runtime handle registries instead of scraping notebook output.",
+    "Buttons do not constitute completion evidence; status files and hashes do.",
+    "A regenerated capsule must produce the same action routing for the same canonical manifest."
+  ],
+  "manifest_only_staged_row_contract": {
+    "purpose": "Allow an agent to create a Colab capsule by writing one JSON manifest when the underlying simulation and analysis scripts already exist.",
+    "shape": {
+      "rows[].stages[]": {
+        "stage_id": "stable short identifier such as simulation or analysis",
+        "entrypoint": {
+          "path": "manifest-relative Python script path"
+        },
+        "arguments": [
+          "literal argv values; strings may use {job_root}, {job_id}, {row_id}, and {stage_id}"
+        ],
+        "expected_outputs": [
+          "job-root-relative files that must exist after this stage"
+        ]
+      }
+    },
+    "runtime_behavior": [
+      "The J-button runs stages sequentially in the declared order.",
+      "All stage stdout/stderr streams into the action's dedicated output terminal and persistent log.",
+      "Stage expected_outputs are fail-closed before the next stage runs.",
+      "The row is committed only after all stages complete and row-level expected_outputs pass.",
+      "The final archive still includes provenance, control-panel logs, status files, and integrity hashes."
+    ],
+    "limits": [
+      "The packager does not invent analysis logic or scientific tolerances.",
+      "Custom comparison logic still belongs in an existing analysis script referenced by the manifest.",
+      "This remains a manual Colab upload lane, not a dynamic orchestration service."
+    ]
+  },
+  "runtime_environment_contract": {
+    "purpose": "Let a manifest override runtime controls, such as JAX/XLA memory allocation settings, without editing packaged scientific source files.",
+    "shape": {
+      "runtime_environment": {
+        "env": {
+          "XLA_PYTHON_CLIENT_PREALLOCATE": "false",
+          "XLA_PYTHON_CLIENT_MEM_FRACTION": "0.90"
+        }
+      }
+    },
+    "runtime_behavior": [
+      "The generated runtime setup cell applies these variables before any JAX import.",
+      "Child simulation and analysis subprocesses inherit the same environment.",
+      "Scripts that use os.environ.setdefault keep the manifest value.",
+      "The applied values are recorded in runtime_environment_overrides.json."
+    ],
+    "limits": [
+      "This changes execution environment policy only; it must not be used to alter scientific equations or validation gates.",
+      "Higher memory fractions can improve A100 utilization but may increase out-of-memory risk."
+    ]
+  },
+  "resource_profile_contract": {
+    "purpose": "Make Colab resource policy and utilization evidence a manifest-level contract without editing scientific source files.",
+    "shape": {
+      "resource_profile": {
+        "class": "a100_aggressive",
+        "push_level": "aggressive",
+        "xla_mem_fraction": "0.90",
+        "xla_preallocate": "false",
+        "autotune_before_j1": true,
+        "autotune_target_mb": 2048,
+        "autotune_max_seconds": 30,
+        "warn_if_gpu_memory_used_fraction_below": 0.15,
+        "launch_env": {}
+      }
+    },
+    "runtime_behavior": [
+      "The packager resolves defaults and exposes RESOURCE_PROFILE in the generated notebook.",
+      "The runtime setup cell applies XLA_PYTHON_CLIENT_PREALLOCATE and XLA_PYTHON_CLIENT_MEM_FRACTION before JAX imports.",
+      "T1 records CPU RAM, disk, GPU memory, GPU utilization, JAX backend, device list and x64 status.",
+      "T2 runs a bounded generic JAX float64 resource probe and writes it into the smoke-test artifact.",
+      "The final archive provenance includes the resolved resource profile."
+    ],
+    "limits": [
+      "The resource profile does not automatically alter scientific arguments.",
+      "If Colab should push a longer T, larger grid, larger box, denser cadence, or batched physics path, the queue's colab push target and manifest arguments must say so.",
+      "Low GPU memory use is not automatically a defect; inspect utilization and logs before changing scientific scale.",
+      "Independent jobs may use separate Colab tabs/sessions rather than being bundled into one capsule."
+    ]
+  },
+  "analogy": "Sometimes it is quicker to send the car to the shop than fix it yourself."
+}

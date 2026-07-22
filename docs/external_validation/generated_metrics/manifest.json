@@ -1,0 +1,329 @@
+{
+  "final_decision": "VALIDATION_HARNESS_READY_WITH_GAPS",
+  "git_commit": "9fc7785df19d24f4be29e5d90bad59ed993da87b",
+  "metrics": [
+    {
+      "behavioural_result": "PASS",
+      "caveats": [
+        "Constants C/lambda are freely fit; canonical NLS constants are secondary context only.",
+        "Force-direction sign uses net early drift (q_dot); trajectory curvature q_ddot is unreliable for breathing C3 Q-ball pairs and is retained (as *_qddot_legacy) only to document that artifact. phase_sign_accuracy_qddot_legacy shows the old value.",
+        "C3 magnitude fit (lambda_C3) uses early-window q_ddot and is provisional; the C2 lambda is the clean quantity (recovers ~2A, the canonical NLS interaction rate)."
+      ],
+      "created_utc": "2026-07-12T00:34:07+00:00",
+      "data_sources": [
+        "sweep_runs/C29_ROBUST",
+        "sweep_runs/C29_VALIDATE",
+        "sweep_runs/C3_TWOQBALL_FULL"
+      ],
+      "files_read": [
+        "sweep_runs/C29_ROBUST/track_static_0.00.npz",
+        "sweep_runs/C29_ROBUST/track_static_0.79.npz",
+        "sweep_runs/C29_ROBUST/track_static_1.57.npz",
+        "sweep_runs/C29_ROBUST/track_static_2.36.npz",
+        "sweep_runs/C29_ROBUST/track_static_3.14.npz",
+        "sweep_runs/C29_ROBUST/summary.json",
+        "sweep_runs/C29_VALIDATE/summary.json",
+        "sweep_runs/C3_TWOQBALL_FULL/pair_static_0.00.npz",
+        "sweep_runs/C3_TWOQBALL_FULL/pair_static_0.79.npz",
+        "sweep_runs/C3_TWOQBALL_FULL/pair_static_1.57.npz",
+        "sweep_runs/C3_TWOQBALL_FULL/pair_static_2.36.npz",
+        "sweep_runs/C3_TWOQBALL_FULL/pair_static_3.14.npz",
+        "sweep_runs/C3_TWOQBALL_FULL/summary.json"
+      ],
+      "fit_parameters": {
+        "C": 46.98825676937529,
+        "fit_available": true,
+        "lambda": 2.8018555459448433,
+        "log_residual_rms": 0.3990678714646614,
+        "n_fit": 8,
+        "normalized_rms_residual": 0.09321648077343084
+      },
+      "fit_quality": {
+        "acceleration_window": "first_35_percent_min_4_points",
+        "c2_fit_quality": {
+          "C": 4.198507387557667,
+          "fit_available": true,
+          "lambda": 1.9810732125316175,
+          "log_residual_rms": 0.3075338065199263,
+          "n_fit": 4,
+          "normalized_rms_residual": 0.07385043124365313
+        },
+        "c3_fit_quality": {
+          "C": 4301.664333489826,
+          "fit_available": true,
+          "lambda": 4.286676971543021,
+          "log_residual_rms": 0.2972793953711582,
+          "n_fit": 4,
+          "normalized_rms_residual": 0.06759583632112126
+        },
+        "crossover_error_from_pi_over_2": null,
+        "crossover_phase_estimate": null,
+        "fit_C": 46.98825676937529,
+        "fit_lambda": 2.8018555459448433,
+        "force_sign_proxy": "net_early_drift_q_dot",
+        "n_files_used": 10,
+        "n_non_neutral": 8,
+        "n_phase_points": 10,
+        "n_rows": 10,
+        "normalized_rms_residual": 0.09321648077343084,
+        "phase_sign_accuracy": 1.0,
+        "phase_sign_accuracy_qddot_legacy": 0.5,
+        "pi_over_2_neutral_rows": 2,
+        "q_convention": "half_separation",
+        "rms_residual": 0.3990678714646614
+      },
+      "formula_target": "q_ddot = -C * exp(-lambda * q) * cos(Delta_phi), with q = half-separation",
+      "match_level_candidate": "SAME FAMILY",
+      "metric_id": "v1",
+      "no_new_simulation": true,
+      "provisional_until_claude_review": true,
+      "status": "RAN",
+      "validation_depth": "INTERNAL_DATA_ANALYTIC_FIT"
+    },
+    {
+      "behavioural_result": "PASS",
+      "caveats": [
+        "sweep_runs/C27_REDERIVE/r3_n96.json lacks explicit D; using project C2.7 convention D=1.0.",
+        "Uses corrected C2.7 data only; old C2.6 bugged geometry-off data are excluded."
+      ],
+      "created_utc": "2026-07-12T00:34:08+00:00",
+      "data_sources": [
+        "sweep_runs/C27_REDERIVE"
+      ],
+      "files_read": [
+        "sweep_runs/C27_REDERIVE/r3_n96.json"
+      ],
+      "fit_parameters": {
+        "expected_slope_2D": 2.0,
+        "intercept": -9.986275745059968e-08,
+        "r2": 1.0,
+        "slope": 1.9997819749017656,
+        "slope_relative_error": 0.00010901254911721558
+      },
+      "fit_quality": {
+        "D_used": 1.0,
+        "expected_slope_2D": 2.0,
+        "intercept": -9.986275745059968e-08,
+        "mass_retention_min": 0.9996329889054258,
+        "mean_mass_retention": 0.999754131719139,
+        "n_boosts": 2,
+        "n_points": 2,
+        "r_squared": 1.0,
+        "slope": 1.9997819749017656,
+        "slope_percent_error": 0.010901254911721558,
+        "source_of_D": "project C2.7 convention or explicit summary field if present"
+      },
+      "formula_target": "v = 2Dk for corrected flat-NLS C2 transport",
+      "match_level_candidate": "EXACT EQUATION",
+      "metric_id": "v2",
+      "no_new_simulation": true,
+      "provisional_until_claude_review": true,
+      "status": "RAN",
+      "validation_depth": "INTERNAL_DATA_BEHAVIOUR_CHECK"
+    },
+    {
+      "behavioural_result": "PASS",
+      "caveats": [
+        "VK sign depends on branch variable convention; this report uses omega/w."
+      ],
+      "created_utc": "2026-07-12T00:34:08+00:00",
+      "data_sources": [
+        "sweep_runs/C3_EXACT_VK2"
+      ],
+      "files_read": [
+        "sweep_runs/C3_EXACT_VK2/summary.json"
+      ],
+      "fit_parameters": {
+        "dQ_domega_fit": -849.138404192748,
+        "dQ_domega_reported": -849.1384041927649,
+        "intercept": 869.8962280490451
+      },
+      "fit_quality": {
+        "Q_max": 59.04310622445989,
+        "Q_min": 48.911713893680094,
+        "dQ_domega_fit": -849.138404192748,
+        "monotone_decreasing": true,
+        "monotonic_decreasing": true,
+        "n_points": 4,
+        "omega_max": 0.968,
+        "omega_min": 0.956,
+        "sign": "negative",
+        "sign_pass": true
+      },
+      "formula_target": "dQ/domega < 0 under the stated C3 Q-ball branch convention",
+      "match_level_candidate": "SAME FAMILY",
+      "metric_id": "v3",
+      "no_new_simulation": true,
+      "provisional_until_claude_review": true,
+      "status": "RAN",
+      "validation_depth": "INTERNAL_DATA_BEHAVIOUR_CHECK"
+    },
+    {
+      "behavioural_result": "PASS",
+      "caveats": [
+        "Uses existing outcome labels only; no collision reinterpretation is performed."
+      ],
+      "created_utc": "2026-07-12T00:34:08+00:00",
+      "data_sources": [
+        "sweep_runs/C3_COLLISION_LADDER_FULL",
+        "sweep_runs/C3_ANTIPHASE_LADDER",
+        "sweep_runs/C3_PHASE_pi2",
+        "sweep_runs/C3_PHASE_3pi4",
+        "sweep_runs/C3_PHASE_7pi8"
+      ],
+      "files_read": [
+        "sweep_runs/C3_COLLISION_LADDER_FULL/summary.json",
+        "sweep_runs/C3_ANTIPHASE_LADDER/summary.json",
+        "sweep_runs/C3_PHASE_pi2/summary.json",
+        "sweep_runs/C3_PHASE_3pi4/summary.json",
+        "sweep_runs/C3_PHASE_7pi8/summary.json"
+      ],
+      "fit_parameters": {
+        "phase_count": 5,
+        "speed_count": 5
+      },
+      "fit_quality": {
+        "anti_phase_transmission_cells": 3,
+        "max_charge_drift": 1.489717348076215e-06,
+        "max_dE_rel": 6.588342536583086e-06,
+        "max_dQ_rel": 1.489717348076215e-06,
+        "max_energy_drift": 6.588342536583086e-06,
+        "missing_phase_speed_cells": 9,
+        "n_cells": 16,
+        "n_missing_cells": 9,
+        "non_antiphase_capture_fraction": 1.0,
+        "outcome_counts": {
+          "CAPTURE": 13,
+          "PASS_THROUGH": 3
+        },
+        "outcomes": [
+          "CAPTURE",
+          "PASS_THROUGH"
+        ],
+        "phase_values": [
+          "0.00",
+          "1.57",
+          "2.36",
+          "2.75",
+          "3.14"
+        ],
+        "rows": 16,
+        "speed_values": [
+          "0.15",
+          "0.3",
+          "0.45",
+          "0.6",
+          "0.75"
+        ]
+      },
+      "formula_target": "phase x speed collision outcome grid with conservation/radiation telemetry where available",
+      "match_level_candidate": "CLOSE ANALOGUE",
+      "metric_id": "v5",
+      "no_new_simulation": true,
+      "provisional_until_claude_review": true,
+      "status": "RAN",
+      "validation_depth": "INTERNAL_DATA_BEHAVIOUR_CHECK"
+    },
+    {
+      "behavioural_result": "PASS",
+      "caveats": [
+        "V6 is an instrument regression/overlay check, not an empirical validation."
+      ],
+      "created_utc": "2026-07-12T00:34:08+00:00",
+      "data_sources": [
+        "sweep_runs/C23_N96",
+        "sweep_runs/C24_LOCAL_N96",
+        "sweep_runs/C27_REDERIVE",
+        "sweep_runs/PHASE_D_C2_6_CODEX_AUDIT_20260709",
+        "sweep_runs/PHASE_D_CODEX_REPRODUCTION_20260709_233433"
+      ],
+      "files_read": [
+        "sweep_runs/C27_REDERIVE/r3_n96.json",
+        "sweep_runs/PHASE_D_C2_6_CODEX_AUDIT_20260709/c2_6_independent_audit_summary.json",
+        "sweep_runs/PHASE_D_CODEX_REPRODUCTION_20260709_233433/c2_6_reproduction_summary.json"
+      ],
+      "fit_parameters": {
+        "corrected_interpretation_status": "CANONICAL",
+        "corrected_points": 2,
+        "corrected_v_over_2Dk": 0.9998909278496895,
+        "expected_bug_ratio_1_over_151": 0.006622516556291391,
+        "old_D_eff_ratio": 0.006511027642497719,
+        "old_interpretation_status": "RETRACTED",
+        "old_regression_points": 2
+      },
+      "fit_quality": {
+        "clean_overlay_available": true,
+        "corrected_interpretation_status": "CANONICAL",
+        "corrected_mean_v_frac": 0.9998909278496895,
+        "corrected_v_over_2Dk": 0.9998909278496895,
+        "expected_bug_ratio_1_over_151": 0.006622516556291391,
+        "old_D_eff_ratio": 0.006511027642497719,
+        "old_interpretation_status": "RETRACTED"
+      },
+      "formula_target": "old effective mobility/D_eff regression evidence versus corrected v = 2Dk C2 transport",
+      "match_level_candidate": "EXACT EQUATION",
+      "metric_id": "v6",
+      "no_new_simulation": true,
+      "provisional_until_claude_review": true,
+      "status": "RAN",
+      "validation_depth": "INTERNAL_DATA_BEHAVIOUR_CHECK"
+    },
+    {
+      "behavioural_result": "PARTIAL",
+      "caveats": [
+        "This is a design constraint and soft-clip diagnosis, not a gravity result.",
+        "Nominal exponent a=+2.31 (as configured) vs effective a=+2.93 (fit from the spatial Omega^2(rho) profile; steeper because ~31% of radial points are cap-saturated). Both are positive and thus opposite in sign to the physical BEC analogue-gravity value a=-0.5 (gamma=2), which is exactly why Omega^2 diverges at the vacuum (the cliff). Re-entry design constraint: target a<0 / gamma<3 on a filled rho_vac background."
+      ],
+      "created_utc": "2026-07-12T00:34:08+00:00",
+      "data_sources": [
+        "sweep_runs/GRAVITY_AD_bg0",
+        "sweep_runs/GRAVITY_DESAT_PILOT",
+        "sweep_runs/PHASE_D_CODEX_REPRODUCTION_20260709_233433/gravity_geometry"
+      ],
+      "files_read": [
+        "sweep_runs/GRAVITY_AD_bg0/summary.json",
+        "sweep_runs/GRAVITY_DESAT_PILOT/desat_pilot.json",
+        "sweep_runs/PHASE_D_CODEX_REPRODUCTION_20260709_233433/gravity_geometry/radial_profiles.csv"
+      ],
+      "fit_parameters": {
+        "a_effective": 2.9259806516213103,
+        "cap_fraction": 0.3090277777777778,
+        "fit_available": true,
+        "floor_fraction": 0.003472222222222222,
+        "gamma_effective": 8.851961303242621,
+        "graded_fraction": 0.6875,
+        "log_intercept": 6.66156140796944,
+        "n_fit": 198
+      },
+      "fit_quality": {
+        "bec_reference_a": -0.5,
+        "bec_reference_gamma": 2.0,
+        "cap_fraction": 0.3090277777777778,
+        "cliff_detected": true,
+        "design_constraint_only": true,
+        "effective_gamma": 8.851961303242621,
+        "effective_steeper_than_nominal": true,
+        "fitted_effective_exponent": 2.9259806516213103,
+        "floor_fraction": 0.003472222222222222,
+        "graded_fraction": 0.6875,
+        "implied_gamma": 7.6196,
+        "n_radial_points": 288,
+        "nominal_a": 2.3098,
+        "nominal_gamma": 7.6196,
+        "production_a": 2.3098,
+        "rows": 3,
+        "same_sign_as_bec_analogue": false,
+        "unsaturated_points": 198
+      },
+      "formula_target": "Omega^2 = (rho_vac / rho)^a, gamma = 2a + 3; design-constraint diagnosis only",
+      "match_level_candidate": "CLOSE ANALOGUE",
+      "metric_id": "v7",
+      "no_new_simulation": true,
+      "provisional_until_claude_review": true,
+      "status": "RAN",
+      "validation_depth": "INTERNAL_DATA_BEHAVIOUR_CHECK"
+    }
+  ],
+  "no_new_simulation": true,
+  "provisional_until_claude_review": true
+}

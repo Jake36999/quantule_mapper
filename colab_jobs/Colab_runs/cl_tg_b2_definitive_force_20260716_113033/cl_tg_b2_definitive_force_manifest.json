@@ -1,0 +1,178 @@
+{
+  "job_name": "CL TG-B2 Definitive Force - Dynamical Body-Force Observable",
+  "job_id": "cl_tg_b2_definitive_force",
+  "job_root": "/content/qm_job",
+  "run_class": "full-campaign",
+  "execution_scope": "full-fidelity simulation",
+  "fidelity_requirement": "scientific source unchanged; A-well branch; frozen TG-B1S untouched; single-node norm",
+  "scope_boundary": "Run the clean TG-B2 dynamical body-force observable exactly as queued. Do not substitute proxy momentum/COM observables, shorten the run, relax gates, or modify scientific source for Colab convenience.",
+  "estimated_runtime": {
+    "a100_minutes_min": 150,
+    "a100_minutes_max": 210,
+    "basis": "Queue estimate for CL_TG_B2_DEFINITIVE_FORCE: about 2.5-3.5h on A100, about 6.5h on GTX 1080."
+  },
+  "operator_confirmation": {
+    "required_before_j1": true,
+    "message": "J1 is a full TG-B2 definitive-force campaign expected to run about 2.5-3.5 hours on A100. It is not a UI smoke test."
+  },
+  "stop_rule": "Per-arm stop is handled by the script if node separation falls below 1.2 or becomes invalid. Operator stop rule: if no new J1 log output appears for 30 minutes, or total J1 runtime exceeds 5 hours on A100 without RUN_COMPLETE.json/archive progress, stop and return logs for review.",
+  "workflow": {
+    "mode": "manual_colab_upload",
+    "agent_plans_run": true,
+    "manual_upload_to_colab": true,
+    "manual_colab_execution": true,
+    "drive_persistence_required": true,
+    "local_results_dir": "F:\\quantule_mapper\\colab_jobs\\results",
+    "review_prompt_after_download": true,
+    "intended_use": "Targeted Colab A100 fast-lane run for CL_TG_B2_DEFINITIVE_FORCE while the local GTX 1080 remains occupied. This is a full-fidelity dynamical force campaign, not a broad hunt or UI trial."
+  },
+  "result_policy": {
+    "ideal_archive_bytes": 1000000000,
+    "hard_archive_bytes": 5000000000
+  },
+  "control_panel": {
+    "schema_version": "qm-colab-controls/1.0",
+    "reserved_test_slots": [
+      "T1",
+      "T2",
+      "T3"
+    ],
+    "tail_lines": 1000,
+    "actions": [
+      {
+        "action_id": "T1",
+        "kind": "system_test",
+        "label": "Run Preflight",
+        "handler": "runtime_preflight",
+        "output_channel": "terminal_T1",
+        "required": true,
+        "fixed": true
+      },
+      {
+        "action_id": "T2",
+        "kind": "system_test",
+        "label": "Run Smoke Test",
+        "handler": "numeric_smoke_test",
+        "output_channel": "terminal_T2",
+        "requires_pass": [
+          "T1"
+        ],
+        "required": true,
+        "fixed": true
+      },
+      {
+        "action_id": "T3",
+        "kind": "system_test",
+        "label": "Test Persistence",
+        "handler": "persistence_test",
+        "output_channel": "terminal_T3",
+        "requires_pass": [
+          "T1",
+          "T2"
+        ],
+        "required": true,
+        "fixed": true
+      },
+      {
+        "action_id": "J1",
+        "kind": "job",
+        "label": "Run TG-B2 Definitive Force (~2.5-3.5h)",
+        "handler": "run_registered_job",
+        "job_id": "cl_tg_b2_definitive_force",
+        "row_id": "tg_b2_definitive_force_seps_3_4",
+        "output_channel": "terminal_J1",
+        "requires_pass": [
+          "T1",
+          "T2",
+          "T3"
+        ],
+        "confirmation_required": true
+      }
+    ]
+  },
+  "entrypoint": {
+    "path": "jax_scout/gravity_TG_B2_definitive_force.py"
+  },
+  "arguments": [
+    "--seps",
+    "3.0,4.0",
+    "--T",
+    "180",
+    "--out",
+    "{job_root}/results/cl_tg_b2_definitive"
+  ],
+  "rows": [
+    {
+      "row_id": "tg_b2_definitive_force_seps_3_4",
+      "arguments": [
+        "--seps",
+        "3.0,4.0",
+        "--T",
+        "180",
+        "--out",
+        "{job_root}/results/cl_tg_b2_definitive"
+      ],
+      "expected_outputs": [
+        "results/cl_tg_b2_definitive/config.json",
+        "results/cl_tg_b2_definitive/scalars_sep3.00_off.csv",
+        "results/cl_tg_b2_definitive/scalars_sep3.00_well.csv",
+        "results/cl_tg_b2_definitive/scalars_sep3.00_hill.csv",
+        "results/cl_tg_b2_definitive/ROW_sep3.00_STARTED.json",
+        "results/cl_tg_b2_definitive/ROW_sep3.00_COMPLETE.json",
+        "results/cl_tg_b2_definitive/scalars_sep4.00_off.csv",
+        "results/cl_tg_b2_definitive/scalars_sep4.00_well.csv",
+        "results/cl_tg_b2_definitive/scalars_sep4.00_hill.csv",
+        "results/cl_tg_b2_definitive/ROW_sep4.00_STARTED.json",
+        "results/cl_tg_b2_definitive/ROW_sep4.00_COMPLETE.json",
+        "results/cl_tg_b2_definitive/summary.json",
+        "results/cl_tg_b2_definitive/RUN_COMPLETE.json"
+      ]
+    }
+  ],
+  "source_files": [
+    "jax_scout/__init__.py",
+    "jax_scout/phase_d_c3_wave.py",
+    "jax_scout/gravity_TG_B1S_state_load_feedback_gpu.py",
+    "jax_scout/gravity_TG_B2_two_node_awell.py",
+    "jax_scout/gravity_TG_B2_definitive_force.py"
+  ],
+  "config_files": [],
+  "external_inputs": [],
+  "expected_outputs": [
+    "results/cl_tg_b2_definitive/config.json",
+    "results/cl_tg_b2_definitive/scalars_sep3.00_off.csv",
+    "results/cl_tg_b2_definitive/scalars_sep3.00_well.csv",
+    "results/cl_tg_b2_definitive/scalars_sep3.00_hill.csv",
+    "results/cl_tg_b2_definitive/ROW_sep3.00_STARTED.json",
+    "results/cl_tg_b2_definitive/ROW_sep3.00_COMPLETE.json",
+    "results/cl_tg_b2_definitive/scalars_sep4.00_off.csv",
+    "results/cl_tg_b2_definitive/scalars_sep4.00_well.csv",
+    "results/cl_tg_b2_definitive/scalars_sep4.00_hill.csv",
+    "results/cl_tg_b2_definitive/ROW_sep4.00_STARTED.json",
+    "results/cl_tg_b2_definitive/ROW_sep4.00_COMPLETE.json",
+    "results/cl_tg_b2_definitive/summary.json",
+    "results/cl_tg_b2_definitive/RUN_COMPLETE.json"
+  ],
+  "precision": {
+    "jax_enable_x64": true
+  },
+  "environment_policy": {
+    "require_gpu": true,
+    "accepted_gpu_names": [
+      "A100"
+    ]
+  },
+  "runtime_environment": {
+    "env": {
+      "XLA_PYTHON_CLIENT_PREALLOCATE": "false",
+      "XLA_PYTHON_CLIENT_MEM_FRACTION": "0.90"
+    },
+    "notes": "Preserved at 0.90 for the Colab A100 fast lane. This is an environment resource policy only and does not alter TG-B2 or frozen TG-B1S scientific source or gates."
+  },
+  "install_policy": {
+    "allow_pip_install": false
+  },
+  "seed": null,
+  "drive_results_dir": "/content/drive/MyDrive/QuantuleMapperRuns/cl_tg_b2_definitive_force",
+  "drive_checkpoint_dir": "/content/drive/MyDrive/QuantuleMapperRuns/cl_tg_b2_definitive_force/checkpoints"
+}

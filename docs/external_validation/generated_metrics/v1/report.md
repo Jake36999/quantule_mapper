@@ -1,0 +1,84 @@
+# V1 Phase-Force Fit
+
+Status: provisional until Claude review.
+
+- Metric ID: `v1`
+- Status: `RAN`
+- Match-level candidate: `SAME FAMILY`
+- Validation depth: `INTERNAL_DATA_ANALYTIC_FIT`
+- Behavioural result: `PASS`
+- Formula target: `q_ddot = -C * exp(-lambda * q) * cos(Delta_phi), with q = half-separation`
+- No new simulation: `True`
+
+## Fit Parameters
+
+```json
+{
+  "C": 46.98825676937529,
+  "fit_available": true,
+  "lambda": 2.8018555459448433,
+  "log_residual_rms": 0.3990678714646614,
+  "n_fit": 8,
+  "normalized_rms_residual": 0.09321648077343084
+}
+```
+
+## Fit Quality
+
+```json
+{
+  "acceleration_window": "first_35_percent_min_4_points",
+  "c2_fit_quality": {
+    "C": 4.198507387557667,
+    "fit_available": true,
+    "lambda": 1.9810732125316175,
+    "log_residual_rms": 0.3075338065199263,
+    "n_fit": 4,
+    "normalized_rms_residual": 0.07385043124365313
+  },
+  "c3_fit_quality": {
+    "C": 4301.664333489826,
+    "fit_available": true,
+    "lambda": 4.286676971543021,
+    "log_residual_rms": 0.2972793953711582,
+    "n_fit": 4,
+    "normalized_rms_residual": 0.06759583632112126
+  },
+  "crossover_error_from_pi_over_2": null,
+  "crossover_phase_estimate": null,
+  "fit_C": 46.98825676937529,
+  "fit_lambda": 2.8018555459448433,
+  "force_sign_proxy": "net_early_drift_q_dot",
+  "n_files_used": 10,
+  "n_non_neutral": 8,
+  "n_phase_points": 10,
+  "n_rows": 10,
+  "normalized_rms_residual": 0.09321648077343084,
+  "phase_sign_accuracy": 1.0,
+  "phase_sign_accuracy_qddot_legacy": 0.5,
+  "pi_over_2_neutral_rows": 2,
+  "q_convention": "half_separation",
+  "rms_residual": 0.3990678714646614
+}
+```
+
+## Rows
+
+| source | family | file | dphi | q_convention | acceleration_window | force_sign_proxy | q_start | q_end | full_sep_start | full_sep_end | q_dot | q_ddot | cos_delta_phi | q_ddot_over_cos | expected_sign | measured_sign | sign_match | measured_sign_qddot_legacy | sign_match_qddot_legacy |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| sweep_runs/C29_ROBUST | C2 | sweep_runs/C29_ROBUST/track_static_0.00.npz | 0.0 | half_separation | first_35_percent_min_4_points | net_early_drift_q_dot | 2.5715 | 0.0 | 5.143 | 0.0 | -0.19768181818181832 | -0.017569430569430985 | 1.0 | -0.017569430569430985 | -1 | -1 | True | -1 | True |
+| sweep_runs/C29_ROBUST | C2 | sweep_runs/C29_ROBUST/track_static_0.79.npz | 0.79 | half_separation | first_35_percent_min_4_points | net_early_drift_q_dot | 2.6375 | 0.0 | 5.275 | 0.0 | -0.1321783216783216 | -0.025237762237762605 | 0.7038453156522361 | -0.03585697265652098 | -1 | -1 | True | -1 | True |
+| sweep_runs/C29_ROBUST | C2 | sweep_runs/C29_ROBUST/track_static_1.57.npz | 1.57 | half_separation | first_35_percent_min_4_points | net_early_drift_q_dot | 2.81 | 3.321 | 5.62 | 6.642 | -0.0009580419580420837 | 0.012229770229769723 | 0.0007963267107332633 | 15.357729515952647 | 0 | -1 |  | 1 |  |
+| sweep_runs/C29_ROBUST | C2 | sweep_runs/C29_ROBUST/track_static_2.36.npz | 2.36 | half_separation | first_35_percent_min_4_points | net_early_drift_q_dot | 3.0045 | 3.9345 | 6.009 | 7.869 | 0.03136363636363642 | 0.006815184815184648 | -0.7097925563621205 | -0.009601657208289588 | 1 | 1 | True | 1 | True |
+| sweep_runs/C29_ROBUST | C2 | sweep_runs/C29_ROBUST/track_static_3.14.npz | 3.14 | half_separation | first_35_percent_min_4_points | net_early_drift_q_dot | 3.0915 | 4.151 | 6.183 | 8.302 | 0.03460489510489501 | 0.009643356643355923 | -0.9999987317275395 | -0.009643368873775092 | 1 | 1 | True | 1 | True |
+| sweep_runs/C3_TWOQBALL_FULL | C3 | sweep_runs/C3_TWOQBALL_FULL/pair_static_0.00.npz | 0.0 | half_separation | first_35_percent_min_4_points | net_early_drift_q_dot | 2.7645 | 1.2065 | 5.529 | 2.413 | -0.053042857142857114 | 0.02505357142857139 | 1.0 | 0.02505357142857139 | -1 | -1 | True | 1 | False |
+| sweep_runs/C3_TWOQBALL_FULL | C3 | sweep_runs/C3_TWOQBALL_FULL/pair_static_0.79.npz | 0.79 | half_separation | first_35_percent_min_4_points | net_early_drift_q_dot | 2.8095 | 1.712 | 5.619 | 3.424 | -0.046599999999999885 | 0.024357142857142734 | 0.7038453156522361 | 0.03460581794818308 | -1 | -1 | True | 1 | False |
+| sweep_runs/C3_TWOQBALL_FULL | C3 | sweep_runs/C3_TWOQBALL_FULL/pair_static_1.57.npz | 1.57 | half_separation | first_35_percent_min_4_points | net_early_drift_q_dot | 2.9415 | 2.884 | 5.883 | 5.768 | -0.008014285714285684 | 0.008625000000000193 | 0.0007963267107332633 | 10.830981660854038 | 0 | -1 |  | 1 |  |
+| sweep_runs/C3_TWOQBALL_FULL | C3 | sweep_runs/C3_TWOQBALL_FULL/pair_static_2.36.npz | 2.36 | half_separation | first_35_percent_min_4_points | net_early_drift_q_dot | 3.1215 | 3.33 | 6.243 | 6.66 | 0.008628571428571387 | -0.003232142857142866 | -0.7097925563621205 | 0.0045536443404090845 | 1 | 1 | True | -1 | False |
+| sweep_runs/C3_TWOQBALL_FULL | C3 | sweep_runs/C3_TWOQBALL_FULL/pair_static_3.14.npz | 3.14 | half_separation | first_35_percent_min_4_points | net_early_drift_q_dot | 3.2155 | 3.4745 | 6.431 | 6.949 | 0.014428571428571308 | -0.005803571428571463 | -0.9999987317275395 | 0.005803578789090613 | 1 | 1 | True | -1 | False |
+
+## Warnings
+
+- None
+
+Guardrail: this report is a first-pass metric preparation artifact, not a verdict change or a physical-correspondence claim.

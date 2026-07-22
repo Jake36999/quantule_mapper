@@ -1,0 +1,212 @@
+{
+  "job_name": "CX Colab Fast-Lane Handoff Test - TG-B1S-D 100P Reproduction",
+  "job_id": "cx_colab_fast_lane_handoff_test",
+  "job_root": "/content/qm_job",
+  "execution_scope": "full-fidelity simulation",
+  "fidelity_requirement": "exact reproduction; scientific source unchanged",
+  "scope_boundary": "This is a queue-handoff workflow test, but the workload is intentionally a real TG-B1S-D 100-period reproduction. Do not replace J1 with a toy smoke test or shortened procedural job for performance reasons.",
+  "run_class": "full-reproduction",
+  "estimated_runtime": {
+    "a100_minutes_min": 90,
+    "a100_minutes_max": 120,
+    "basis": "Prior TG-B1S-D 100P Colab reproduction took 6250.04 seconds (~1h44m) on A100."
+  },
+  "operator_confirmation": {
+    "required_before_j1": true,
+    "message": "J1 is a full TG-B1S-D 100P reproduction and may run for about 1.5-2 hours on A100. Use the UI smoke capsule for short Colab workflow trials."
+  },
+  "stop_rule": "If J1 shows no new log output for 30 minutes, or total runtime exceeds 2.5 hours without checkpoint/archive progress, stop and return the logs for review.",
+  "workflow": {
+    "mode": "manual_colab_upload",
+    "agent_plans_run": true,
+    "manual_upload_to_colab": true,
+    "manual_colab_execution": true,
+    "drive_persistence_required": true,
+    "local_results_dir": "F:\\quantule_mapper\\colab_jobs\\results",
+    "review_prompt_after_download": true,
+    "intended_use": "Run the CX_COLAB_FAST_LANE_QUEUE_HANDOFF_TEST as a real TG-B1S-D 100-period A100 reproduction with frozen-baseline comparison; not a broad hunt."
+  },
+  "result_policy": {
+    "ideal_archive_bytes": 1000000000,
+    "hard_archive_bytes": 5000000000
+  },
+  "control_panel": {
+    "schema_version": "qm-colab-controls/1.0",
+    "reserved_test_slots": [
+      "T1",
+      "T2",
+      "T3"
+    ],
+    "tail_lines": 800,
+    "actions": [
+      {
+        "action_id": "T1",
+        "kind": "system_test",
+        "label": "Run Preflight",
+        "handler": "runtime_preflight",
+        "output_channel": "terminal_T1",
+        "required": true,
+        "fixed": true
+      },
+      {
+        "action_id": "T2",
+        "kind": "system_test",
+        "label": "Run Smoke Test",
+        "handler": "numeric_smoke_test",
+        "output_channel": "terminal_T2",
+        "requires_pass": [
+          "T1"
+        ],
+        "required": true,
+        "fixed": true
+      },
+      {
+        "action_id": "T3",
+        "kind": "system_test",
+        "label": "Test Persistence",
+        "handler": "persistence_test",
+        "output_channel": "terminal_T3",
+        "requires_pass": [
+          "T1",
+          "T2"
+        ],
+        "required": true,
+        "fixed": true
+      },
+      {
+        "action_id": "J1",
+        "kind": "job",
+        "label": "Run TG-B1S-D 100P Reproduction (~1.5-2h)",
+        "handler": "run_registered_job",
+        "job_id": "cx_colab_fast_lane_handoff_test",
+        "row_id": "tg_b1s_d_100p_reproduction",
+        "output_channel": "terminal_J1",
+        "requires_pass": [
+          "T1",
+          "T2",
+          "T3"
+        ],
+        "confirmation_required": true
+      }
+    ]
+  },
+  "entrypoint": {
+    "path": "colab_jobs/tg_b1s_d_reproduce_and_compare.py"
+  },
+  "arguments": [
+    "--out",
+    "{job_root}/results/cx_colab_fast_lane_handoff_test",
+    "--baseline-manifest",
+    "colab_jobs/baselines/tg_b1s_d_20260714_184736_baseline_manifest.json",
+    "--simulation-entrypoint",
+    "jax_scout/gravity_TG_B1S_drift_decomposition_gpu.py",
+    "--analysis-entrypoint",
+    "colab_jobs/tg_b1s_d_reproduction_compare.py",
+    "--matrix",
+    "primary",
+    "--sample-dt",
+    "1.0"
+  ],
+  "rows": [
+    {
+      "row_id": "tg_b1s_d_100p_reproduction",
+      "arguments": [
+        "--out",
+        "{job_root}/results/cx_colab_fast_lane_handoff_test",
+        "--baseline-manifest",
+        "colab_jobs/baselines/tg_b1s_d_20260714_184736_baseline_manifest.json",
+        "--simulation-entrypoint",
+        "jax_scout/gravity_TG_B1S_drift_decomposition_gpu.py",
+        "--analysis-entrypoint",
+        "colab_jobs/tg_b1s_d_reproduction_compare.py",
+        "--matrix",
+        "primary",
+        "--sample-dt",
+        "1.0"
+      ],
+      "expected_outputs": [
+        "results/cx_colab_fast_lane_handoff_test/baseline_manifest.json",
+        "results/cx_colab_fast_lane_handoff_test/reproduction_manifest.json",
+        "results/cx_colab_fast_lane_handoff_test/environment_report.json",
+        "results/cx_colab_fast_lane_handoff_test/gpu_preflight_before.json",
+        "results/cx_colab_fast_lane_handoff_test/gpu_preflight_final.json",
+        "results/cx_colab_fast_lane_handoff_test/simulation_command.json",
+        "results/cx_colab_fast_lane_handoff_test/analysis_command.json",
+        "results/cx_colab_fast_lane_handoff_test/logs/simulation_stdout_stderr.log",
+        "results/cx_colab_fast_lane_handoff_test/logs/analysis_stdout_stderr.log",
+        "results/cx_colab_fast_lane_handoff_test/simulation/baseline_node_contract.csv",
+        "results/cx_colab_fast_lane_handoff_test/simulation/preregistered_matrix.json",
+        "results/cx_colab_fast_lane_handoff_test/simulation/source_spec.json",
+        "results/cx_colab_fast_lane_handoff_test/simulation/environment_versions.json",
+        "results/cx_colab_fast_lane_handoff_test/simulation/gpu_preflight.json",
+        "results/cx_colab_fast_lane_handoff_test/simulation/orbital_distance.csv",
+        "results/cx_colab_fast_lane_handoff_test/simulation/phase_alignment.csv",
+        "results/cx_colab_fast_lane_handoff_test/simulation/drift_channel_fits.csv",
+        "results/cx_colab_fast_lane_handoff_test/simulation/asymptotic_frequency.csv",
+        "results/cx_colab_fast_lane_handoff_test/simulation/long_time_100_period.csv",
+        "results/cx_colab_fast_lane_handoff_test/simulation/energy_ledger.csv",
+        "results/cx_colab_fast_lane_handoff_test/simulation/numerical_validation.csv",
+        "results/cx_colab_fast_lane_handoff_test/simulation/basin_orbital_stability.csv",
+        "results/cx_colab_fast_lane_handoff_test/simulation/falsification_results.csv",
+        "results/cx_colab_fast_lane_handoff_test/simulation/artifact_hashes.csv",
+        "results/cx_colab_fast_lane_handoff_test/observable_comparison.csv",
+        "results/cx_colab_fast_lane_handoff_test/observable_comparison.json",
+        "results/cx_colab_fast_lane_handoff_test/comparison_summary.json",
+        "results/cx_colab_fast_lane_handoff_test/completion_status.json",
+        "results/cx_colab_fast_lane_handoff_test/artifact_hashes.json"
+      ]
+    }
+  ],
+  "source_files": [
+    "jax_scout/__init__.py",
+    "jax_scout/phase_d_c3_wave.py",
+    "jax_scout/gravity_TG_B1S_state_load_feedback_gpu.py",
+    "jax_scout/gravity_TG_B1S_backreaction_robustness_gpu.py",
+    "jax_scout/gravity_TG_B1S_long_time_gpu.py",
+    "jax_scout/gravity_TG_B1S_drift_decomposition_gpu.py",
+    "colab_jobs/tg_b1s_d_reproduce_and_compare.py",
+    "colab_jobs/tg_b1s_d_reproduction_compare.py"
+  ],
+  "config_files": [
+    "colab_jobs/baselines/tg_b1s_d_20260714_184736_baseline_manifest.json"
+  ],
+  "external_inputs": [],
+  "expected_outputs": [
+    "results/cx_colab_fast_lane_handoff_test/baseline_manifest.json",
+    "results/cx_colab_fast_lane_handoff_test/reproduction_manifest.json",
+    "results/cx_colab_fast_lane_handoff_test/environment_report.json",
+    "results/cx_colab_fast_lane_handoff_test/gpu_preflight_before.json",
+    "results/cx_colab_fast_lane_handoff_test/gpu_preflight_final.json",
+    "results/cx_colab_fast_lane_handoff_test/simulation_command.json",
+    "results/cx_colab_fast_lane_handoff_test/analysis_command.json",
+    "results/cx_colab_fast_lane_handoff_test/logs/simulation_stdout_stderr.log",
+    "results/cx_colab_fast_lane_handoff_test/logs/analysis_stdout_stderr.log",
+    "results/cx_colab_fast_lane_handoff_test/observable_comparison.csv",
+    "results/cx_colab_fast_lane_handoff_test/observable_comparison.json",
+    "results/cx_colab_fast_lane_handoff_test/comparison_summary.json",
+    "results/cx_colab_fast_lane_handoff_test/completion_status.json",
+    "results/cx_colab_fast_lane_handoff_test/artifact_hashes.json"
+  ],
+  "precision": {
+    "jax_enable_x64": true
+  },
+  "environment_policy": {
+    "require_gpu": true,
+    "accepted_gpu_names": [
+      "A100"
+    ]
+  },
+  "runtime_environment": {
+    "env": {
+      "XLA_PYTHON_CLIENT_PREALLOCATE": "false",
+      "XLA_PYTHON_CLIENT_MEM_FRACTION": "0.90"
+    },
+    "notes": "Applied by notebook setup before JAX imports. This raises Colab A100 memory availability relative to the old conservative cap; it does not alter the TG-B1S-D equations or comparison gates."
+  },
+  "install_policy": {
+    "allow_pip_install": false
+  },
+  "seed": null,
+  "drive_results_dir": "/content/drive/MyDrive/QuantuleMapperRuns/cx_colab_fast_lane_handoff_test",
+  "drive_checkpoint_dir": "/content/drive/MyDrive/QuantuleMapperRuns/cx_colab_fast_lane_handoff_test/checkpoints"
+}

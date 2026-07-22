@@ -1,0 +1,19 @@
+{
+  "backend": "gpu",
+  "command_line": "/usr/bin/python3 /content/qm_job/jax_scout/gravity_TG_S_source_semantics_gpu.py --out /content/qm_job/results/cx_tg_rate_source_semantics_bridge/tg_s_semantics --N 48 --sample-dt 0.05",
+  "devices": [
+    "cuda:0"
+  ],
+  "env": {
+    "CUDA_VISIBLE_DEVICES": null,
+    "XLA_PYTHON_CLIENT_MEM_FRACTION": "0.90",
+    "XLA_PYTHON_CLIENT_PREALLOCATE": "false"
+  },
+  "git_commit": "UNKNOWN",
+  "jax_version": "0.7.2",
+  "jaxlib_version": "0.7.2",
+  "platform": "Linux-6.6.122+-x86_64-with-glibc2.35",
+  "python": "3.12.13",
+  "selected_device": "cuda:0",
+  "x64_enabled": true
+}

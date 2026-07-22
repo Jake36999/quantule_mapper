@@ -1,0 +1,318 @@
+{
+  "job_name": "CX GPU Follow-up Tests Capsule",
+  "job_id": "cx_gpu_followup_tests",
+  "job_root": "/content/qm_job",
+  "run_class": "full-campaign",
+  "execution_scope": "full-fidelity simulation",
+  "fidelity_requirement": "scientific source unchanged; standalone wrappers only; no production edits",
+  "scope_boundary": "Package the four GPU-facing follow-up tests requested from the queue. The CPU D4 discrepancy review script is intentionally excluded.",
+  "estimated_runtime": {
+    "a100_minutes_min": 60,
+    "a100_minutes_max": 420,
+    "basis": "Rows are exposed as independent buttons. Cooled-pair may take several hours if run with seps 3.0,4.0 and cool-T 0,40. The other pilot rows are expected to be shorter, but live Colab runtime is unverified."
+  },
+  "operator_confirmation": {
+    "required_before_j1": true,
+    "message": "This notebook contains four independent GPU job buttons. Run only the row you intend to dispatch; do not assume every button is a quick smoke test."
+  },
+  "stop_rule": "For any J row, if no new log output appears for 30 minutes, or runtime exceeds that row's expected bound without RUN_COMPLETE/archive progress, stop and return logs for review.",
+  "workflow": {
+    "mode": "manual_colab_upload",
+    "agent_plans_run": true,
+    "manual_upload_to_colab": true,
+    "manual_colab_execution": true,
+    "drive_persistence_required": true,
+    "local_results_dir": "F:\\quantule_mapper\\colab_jobs\\results",
+    "review_prompt_after_download": true,
+    "intended_use": "Targeted Colab A100 execution for queued GPU follow-up tests; not a broad hunt."
+  },
+  "result_policy": {
+    "ideal_archive_bytes": 1000000000,
+    "hard_archive_bytes": 5000000000
+  },
+  "control_panel": {
+    "schema_version": "qm-colab-controls/1.0",
+    "reserved_test_slots": [
+      "T1",
+      "T2",
+      "T3"
+    ],
+    "tail_lines": 1200,
+    "actions": [
+      {
+        "action_id": "T1",
+        "kind": "system_test",
+        "label": "Run Preflight",
+        "handler": "runtime_preflight",
+        "output_channel": "terminal_T1",
+        "required": true,
+        "fixed": true
+      },
+      {
+        "action_id": "T2",
+        "kind": "system_test",
+        "label": "Run Smoke Test",
+        "handler": "numeric_smoke_test",
+        "output_channel": "terminal_T2",
+        "requires_pass": [
+          "T1"
+        ],
+        "required": true,
+        "fixed": true
+      },
+      {
+        "action_id": "T3",
+        "kind": "system_test",
+        "label": "Test Persistence",
+        "handler": "persistence_test",
+        "output_channel": "terminal_T3",
+        "requires_pass": [
+          "T1",
+          "T2"
+        ],
+        "required": true,
+        "fixed": true
+      },
+      {
+        "action_id": "J1",
+        "kind": "job",
+        "label": "Cooled Pair Secular Force",
+        "handler": "run_registered_job",
+        "job_id": "cx_gpu_followup_tests",
+        "row_id": "cx_tg_b2_cooled_pair_secular_force",
+        "output_channel": "terminal_J1",
+        "requires_pass": [
+          "T1",
+          "T2",
+          "T3"
+        ],
+        "confirmation_required": true
+      },
+      {
+        "action_id": "J2",
+        "kind": "job",
+        "label": "Clock Migration Pilot",
+        "handler": "run_registered_job",
+        "job_id": "cx_gpu_followup_tests",
+        "row_id": "cx_tg_clock_migration_characterization",
+        "output_channel": "terminal_J2",
+        "requires_pass": [
+          "T1",
+          "T2",
+          "T3"
+        ],
+        "confirmation_required": true
+      },
+      {
+        "action_id": "J3",
+        "kind": "job",
+        "label": "Rate Source Semantics",
+        "handler": "run_registered_job",
+        "job_id": "cx_gpu_followup_tests",
+        "row_id": "cx_tg_rate_source_semantics_bridge",
+        "output_channel": "terminal_J3",
+        "requires_pass": [
+          "T1",
+          "T2",
+          "T3"
+        ],
+        "confirmation_required": true
+      },
+      {
+        "action_id": "J4",
+        "kind": "job",
+        "label": "Gravity-D Yield Map",
+        "handler": "run_registered_job",
+        "job_id": "cx_gpu_followup_tests",
+        "row_id": "cx_gravity_d_load_capacity_yield_map",
+        "output_channel": "terminal_J4",
+        "requires_pass": [
+          "T1",
+          "T2",
+          "T3"
+        ],
+        "confirmation_required": true
+      }
+    ]
+  },
+  "rows": [
+    {
+      "row_id": "cx_tg_b2_cooled_pair_secular_force",
+      "run_class": "full-campaign",
+      "runtime_note": "Potentially several A100 hours with seps 3.0,4.0 and cool-T 0,40.",
+      "stages": [
+        {
+          "stage_id": "main",
+          "entrypoint": {
+            "path": "jax_scout/gravity_TG_B2_cooled_pair_secular_force_gpu.py"
+          },
+          "arguments": [
+            "--out",
+            "{job_root}/results/{row_id}",
+            "--seps",
+            "3.0,4.0",
+            "--cool-T-values",
+            "0,40",
+            "--T",
+            "180"
+          ],
+          "expected_outputs": [
+            "results/cx_tg_b2_cooled_pair_secular_force/cooled_pair_metrics.csv",
+            "results/cx_tg_b2_cooled_pair_secular_force/secular_force_assessment.json",
+            "results/cx_tg_b2_cooled_pair_secular_force/run_manifest.csv",
+            "results/cx_tg_b2_cooled_pair_secular_force/RUN_COMPLETE.json"
+          ]
+        }
+      ],
+      "expected_outputs": [
+        "results/cx_tg_b2_cooled_pair_secular_force/cooled_pair_metrics.csv",
+        "results/cx_tg_b2_cooled_pair_secular_force/secular_force_assessment.json",
+        "results/cx_tg_b2_cooled_pair_secular_force/run_manifest.csv",
+        "results/cx_tg_b2_cooled_pair_secular_force/RUN_COMPLETE.json"
+      ]
+    },
+    {
+      "row_id": "cx_tg_clock_migration_characterization",
+      "run_class": "pilot",
+      "runtime_note": "Pilot matrix with selected time-domain rows.",
+      "stages": [
+        {
+          "stage_id": "main",
+          "entrypoint": {
+            "path": "jax_scout/gravity_TG_clock_migration_characterization_gpu.py"
+          },
+          "arguments": [
+            "--out",
+            "{job_root}/results/{row_id}",
+            "--matrix",
+            "pilot",
+            "--time-domain",
+            "selected"
+          ],
+          "expected_outputs": [
+            "results/cx_tg_clock_migration_characterization/clock_migration_metrics.csv",
+            "results/cx_tg_clock_migration_characterization/eigenfrequency_metrics.csv",
+            "results/cx_tg_clock_migration_characterization/time_domain_clock_metrics.csv",
+            "results/cx_tg_clock_migration_characterization/migration_summary.json",
+            "results/cx_tg_clock_migration_characterization/RUN_COMPLETE.json"
+          ]
+        }
+      ],
+      "expected_outputs": [
+        "results/cx_tg_clock_migration_characterization/clock_migration_metrics.csv",
+        "results/cx_tg_clock_migration_characterization/eigenfrequency_metrics.csv",
+        "results/cx_tg_clock_migration_characterization/time_domain_clock_metrics.csv",
+        "results/cx_tg_clock_migration_characterization/migration_summary.json",
+        "results/cx_tg_clock_migration_characterization/RUN_COMPLETE.json"
+      ]
+    },
+    {
+      "row_id": "cx_tg_rate_source_semantics_bridge",
+      "run_class": "full-fidelity semantic gate",
+      "runtime_note": "Runs TG-S source-semantics bridge only; no feedback loop.",
+      "stages": [
+        {
+          "stage_id": "main",
+          "entrypoint": {
+            "path": "jax_scout/gravity_TG_rate_source_semantics_bridge_gpu.py"
+          },
+          "arguments": [
+            "--out",
+            "{job_root}/results/{row_id}"
+          ],
+          "expected_outputs": [
+            "results/cx_tg_rate_source_semantics_bridge/rate_source_admissibility.csv",
+            "results/cx_tg_rate_source_semantics_bridge/rate_source_bridge_summary.json",
+            "results/cx_tg_rate_source_semantics_bridge/RUN_COMPLETE.json"
+          ]
+        }
+      ],
+      "expected_outputs": [
+        "results/cx_tg_rate_source_semantics_bridge/rate_source_admissibility.csv",
+        "results/cx_tg_rate_source_semantics_bridge/rate_source_bridge_summary.json",
+        "results/cx_tg_rate_source_semantics_bridge/RUN_COMPLETE.json"
+      ]
+    },
+    {
+      "row_id": "cx_gravity_d_load_capacity_yield_map",
+      "run_class": "pilot",
+      "runtime_note": "Instantaneous Gravity-D force atlas pilot.",
+      "stages": [
+        {
+          "stage_id": "main",
+          "entrypoint": {
+            "path": "jax_scout/gravity_D_load_capacity_yield_map_gpu.py"
+          },
+          "arguments": [
+            "--out",
+            "{job_root}/results/{row_id}",
+            "--matrix",
+            "pilot"
+          ],
+          "expected_outputs": [
+            "results/cx_gravity_d_load_capacity_yield_map/instantaneous_force_atlas.csv",
+            "results/cx_gravity_d_load_capacity_yield_map/yield_classification.csv",
+            "results/cx_gravity_d_load_capacity_yield_map/yield_summary.json",
+            "results/cx_gravity_d_load_capacity_yield_map/RUN_COMPLETE.json"
+          ]
+        }
+      ],
+      "expected_outputs": [
+        "results/cx_gravity_d_load_capacity_yield_map/instantaneous_force_atlas.csv",
+        "results/cx_gravity_d_load_capacity_yield_map/yield_classification.csv",
+        "results/cx_gravity_d_load_capacity_yield_map/yield_summary.json",
+        "results/cx_gravity_d_load_capacity_yield_map/RUN_COMPLETE.json"
+      ]
+    }
+  ],
+  "source_files": [
+    "jax_scout/__init__.py",
+    "jax_scout/phase_d_c3_wave.py",
+    "jax_scout/gravity_TG_B1S_state_load_feedback_gpu.py",
+    "jax_scout/gravity_TG_B2_two_node_awell.py",
+    "jax_scout/gravity_TG_B2_definitive_force.py",
+    "jax_scout/gravity_TG_B2_cooled_pair_secular_force_gpu.py",
+    "jax_scout/gravity_G1_clock_calibration_gpu.py",
+    "jax_scout/gravity_TG_clock_migration_characterization_gpu.py",
+    "jax_scout/gravity_TG_S_source_semantics_gpu.py",
+    "jax_scout/gravity_TG_rate_source_semantics_bridge_gpu.py",
+    "jax_scout/gravity_D_neutral_probe_gpu.py",
+    "jax_scout/gravity_D_dynamics_characterization_gpu.py",
+    "jax_scout/gravity_D_load_capacity_yield_map_gpu.py"
+  ],
+  "config_files": [],
+  "external_inputs": [],
+  "expected_outputs": [],
+  "precision": {
+    "jax_enable_x64": true
+  },
+  "environment_policy": {
+    "require_gpu": true,
+    "accepted_gpu_names": [
+      "A100"
+    ]
+  },
+  "runtime_environment": {
+    "env": {
+      "XLA_PYTHON_CLIENT_PREALLOCATE": "false",
+      "XLA_PYTHON_CLIENT_MEM_FRACTION": "0.90"
+    },
+    "notes": "Colab resource policy only; does not alter scientific equations or gates."
+  },
+  "resource_profile": {
+    "class": "a100_aggressive",
+    "push_level": "aggressive",
+    "xla_mem_fraction": "0.90",
+    "xla_preallocate": "false",
+    "autotune_before_j1": true,
+    "autotune_target_mb": 2048,
+    "autotune_max_seconds": 30,
+    "warn_if_gpu_memory_used_fraction_below": 0.15,
+    "notes": "Use A100 resources for selected queued follow-up rows. Run one job button at a time unless deliberately dispatching multiple archives."
+  },
+  "install_policy": {
+    "allow_pip_install": false
+  },
+  "drive_results_dir": "/content/drive/MyDrive/QuantuleMapperRuns/cx_gpu_followup_tests",
+  "drive_checkpoint_dir": "/content/drive/MyDrive/QuantuleMapperRuns/cx_gpu_followup_tests/checkpoints"
+}

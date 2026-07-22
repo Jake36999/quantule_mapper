@@ -1,0 +1,119 @@
+{
+  "files": [
+    {
+      "path": "RUN_COMPLETE_CAPSULE.json",
+      "sha256": "3eebe78d09e50df8de60d7d0379a918000463a7a2520ce5944ed2074a4a881b7",
+      "size_bytes": 129
+    },
+    {
+      "path": "artifact_hashes_extracted.json",
+      "sha256": "4d20c08bd35f8dff67077ef333647c58e8ba9190b4ee083ec4811d4a1a17d0b5",
+      "size_bytes": 278
+    },
+    {
+      "path": "capsule_provenance.json",
+      "sha256": "f5a10175cda2599c7873c59d1d4788e330512e971941f9ba15ea6a96424a0634",
+      "size_bytes": 9636
+    },
+    {
+      "path": "colab_jobs/__pycache__/ui_ux_smoke_job.cpython-312.pyc",
+      "sha256": "b37dc742f0bd5b881b4fc3fde53ee85a76a133acf8c7cbd4b02edd8d7281c800",
+      "size_bytes": 5724
+    },
+    {
+      "path": "colab_jobs/ui_ux_smoke_job.py",
+      "sha256": "5324046f0fd6091d415b8fc14ccb782075a2b59b75567c352a7eac1abec90ca3",
+      "size_bytes": 4070
+    },
+    {
+      "path": "completion_ledger.json",
+      "sha256": "a02201f7aec4b44c5e321af51883e658754452bc9a806e5efced5ab005e5154e",
+      "size_bytes": 1449
+    },
+    {
+      "path": "control_panel_registry.json",
+      "sha256": "50edb868ffa32977bfcfe1a3120b4f64a76053a4add819ea26549ac674ee7998",
+      "size_bytes": 1408
+    },
+    {
+      "path": "control_panel_ui_bridge.json",
+      "sha256": "567f9acdf6d14dadd3647de09583504bcce9ef41f4f58b439c5fb0f044639bcf",
+      "size_bytes": 3784
+    },
+    {
+      "path": "environment_pip_freeze.txt",
+      "sha256": "bc1e910d7ea64fdef2518f58d4c09fd819a60157f9b24e82fcf3e93962a1c3e1",
+      "size_bytes": 14056
+    },
+    {
+      "path": "external_inputs_staged.json",
+      "sha256": "e1a981b8c600eba0a543aea205051e96b21ab3514d67150f8aa49d1eed8aeb84",
+      "size_bytes": 27
+    },
+    {
+      "path": "gpu_preflight.json",
+      "sha256": "f40a39f682bcbe205b753772f3f13712479bf7e0bbcb80567ba670376faaab68",
+      "size_bytes": 17342
+    },
+    {
+      "path": "gpu_preflight_after_dependencies.json",
+      "sha256": "d95dd93b4b91247c5d5bd830a463ea163c221e83d487e4edbd465358e110ca37",
+      "size_bytes": 198
+    },
+    {
+      "path": "job_manifest.json",
+      "sha256": "670acc4bcb9357917201ed2f091bbc10941cbd998288a3c5cf272caf8544c70b",
+      "size_bytes": 4201
+    },
+    {
+      "path": "results/ui_ux_smoke_test/completion_status.json",
+      "sha256": "8a5fa354780144b2beec73f1ca630f51e2f6ef011e51b6709a8694155e275427",
+      "size_bytes": 276
+    },
+    {
+      "path": "results/ui_ux_smoke_test/preflight_marker.json",
+      "sha256": "2ffefcac2642d75c679157e3ea77d0d79e39461ee86d781299464ba7fc5e2821",
+      "size_bytes": 621
+    },
+    {
+      "path": "results/ui_ux_smoke_test/ui_event_log.json",
+      "sha256": "2fca37bbcee6817d03d34ba023e8dc3c23ec2fa3d546bf5d8dbd171cf60e950b",
+      "size_bytes": 1009
+    },
+    {
+      "path": "results/ui_ux_smoke_test/ui_smoke_metrics.csv",
+      "sha256": "3b3035854c297743c40e8418cb3403d68c88562e20e00d8318cce6498a4430ac",
+      "size_bytes": 102
+    },
+    {
+      "path": "row_markers/ui_ux_smoke_row_COMPLETE.json",
+      "sha256": "dec4d97230f959e1a0b8e1b5f440676c926ce3d020909fb395752a6efa425921",
+      "size_bytes": 1167
+    },
+    {
+      "path": "row_markers/ui_ux_smoke_row_STARTED.json",
+      "sha256": "a3180a67221181f38c1090943c735a550d65c498dc9e2fec9443fe084a58f3d3",
+      "size_bytes": 118
+    },
+    {
+      "path": "run_ui_ux_smoke_row.log",
+      "sha256": "8ae50ad55dc8b4881362543dba723977cbfae3ff03d51407cd4d01059d39087f",
+      "size_bytes": 1007
+    },
+    {
+      "path": "runtime_environment_overrides.json",
+      "sha256": "fb73ed585f35468dd2bfd3698927488a4e47e5de7966eebd403bf1f62dce2752",
+      "size_bytes": 38
+    },
+    {
+      "path": "source_manifest.json",
+      "sha256": "52a73947f66ff152d402507e139ae41feedc5930f1cb43bb6682f874a8c53297",
+      "size_bytes": 2654
+    },
+    {
+      "path": "workflow_instructions.json",
+      "sha256": "53cb5aaa7b92452c632369519bd5294cb87292ea751cf2a549bf194ee0028387",
+      "size_bytes": 575
+    }
+  ]
+}

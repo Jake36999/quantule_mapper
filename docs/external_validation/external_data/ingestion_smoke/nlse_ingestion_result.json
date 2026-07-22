@@ -1,0 +1,131 @@
+{
+  "adapter_status": "INGESTED_SOURCE_ARCHIVE",
+  "archive_inventory": {
+    "compressed_size_bytes": 56628688,
+    "member_count": 373,
+    "sample_members": [
+      {
+        "filename": "__init__.py",
+        "size_bytes": 292
+      },
+      {
+        "filename": "__MACOSX/.___init__.py",
+        "size_bytes": 163
+      },
+      {
+        "filename": "examples/",
+        "size_bytes": 0
+      },
+      {
+        "filename": "__MACOSX/._examples",
+        "size_bytes": 163
+      },
+      {
+        "filename": "examples/juliaGPE_vs_NLSE.py",
+        "size_bytes": 2398
+      },
+      {
+        "filename": "examples/vortex_precession.jl",
+        "size_bytes": 1663
+      },
+      {
+        "filename": "examples/nlse.py",
+        "size_bytes": 774
+      },
+      {
+        "filename": "examples/fig2_benchmarks.py",
+        "size_bytes": 3110
+      },
+      {
+        "filename": "examples/gpe.py",
+        "size_bytes": 683
+      },
+      {
+        "filename": "examples/fft.wisdom",
+        "size_bytes": 13665
+      },
+      {
+        "filename": "__MACOSX/examples/._fft.wisdom",
+        "size_bytes": 163
+      },
+      {
+        "filename": "examples/fig1_turbulence.py",
+        "size_bytes": 602
+      },
+      {
+        "filename": "examples/nlse_tutorial.ipynb",
+        "size_bytes": 21826732
+      },
+      {
+        "filename": "examples/nlse3d.py",
+        "size_bytes": 1057
+      },
+      {
+        "filename": "examples/nonlocality.py",
+        "size_bytes": 792
+      },
+      {
+        "filename": "examples/callbacks.py",
+        "size_bytes": 1673
+      },
+      {
+        "filename": "examples/broadcasting.py",
+        "size_bytes": 702
+      },
+      {
+        "filename": "examples/ddgpe.py",
+        "size_bytes": 3343
+      },
+      {
+        "filename": "examples/cnlse_1d.py",
+        "size_bytes": 924
+      },
+      {
+        "filename": "examples/cnlse.py",
+        "size_bytes": 1017
+      }
+    ],
+    "suffix_counts": {
+      ".aux": 1,
+      ".bbl": 2,
+      ".bib": 4,
+      ".blg": 1,
+      ".css": 6,
+      ".fdb_latexmk": 1,
+      ".fls": 1,
+      ".gz": 3,
+      ".html": 38,
+      ".inv": 2,
+      ".ipynb": 4,
+      ".jl": 1,
+      ".js": 76,
+      ".log": 1,
+      ".map": 8,
+      ".md": 24,
+      ".pdf": 4,
+      ".png": 16,
+      ".py": 46,
+      ".pyc": 42,
+      ".svg": 5,
+      ".tex": 2,
+      ".txt": 2,
+      ".wisdom": 11,
+      ".xml": 2,
+      ".yml": 1,
+      "<dir>": 69
+    },
+    "uncompressed_size_bytes": 83993322,
+    "zip_path": "E:\\quantule_mapper_external_data\\DATA-NUM-001_nlse_package\\raw\\Archive.zip"
+  },
+  "comparison_fields_available_now": [],
+  "comparison_role": "Reduced-NLS numerical-method sanity candidate only.",
+  "created_utc": "2026-07-10T23:38:53+00:00",
+  "dataset_id": "DATA-NUM-001",
+  "direct_level3_comparison_ready": false,
+  "project_data_available": [
+    "docs/external_validation/generated_metrics/v2/summary.csv",
+    "docs/external_validation/generated_metrics/v2/result.json",
+    "sweep_runs/C27_REDERIVE/r3_n96.json"
+  ],
+  "queued_followup": "Run external NLSE package in an isolated environment on the same reduced flat-NLS boost identity used for C2 V2, then compare v=2Dk slope and mass/norm retention."
+}

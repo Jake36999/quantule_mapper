@@ -1,0 +1,63 @@
+# TG-B2 Characterization — Range and Mass-Scaling of the In-Phase Attraction
+
+Author: Claude (primary), 2026-07-18. Run `sweep_runs/TG_B2_CHARACTERIZATION_20260718_121223` (local 1080, 8.9h,
+`jax_scout/gravity_TG_B2_characterization.py`, reuses the frozen definitive body-force diag). Characterizes the ONE
+hardened two-node result — the in-phase (Δφ=0) A-well body-force attraction (Phase R PASS) — on its two most
+gravity-diagnostic axes: falloff with separation, and scaling with node mass. All 8 rows gate-clean, no failures.
+
+## Results
+
+**F(sep)** (w=0.964, mass 52.06, in-phase):
+
+| sep | `<F_R_well>` |
+|---:|---:|
+| 2.5 | −5.60e-5 |
+| 3.0 | −5.45e-5 |
+| 4.0 | −4.85e-5 |
+| 5.0 | −4.21e-5 |
+
+Fit: **`F ~ sep^−0.41`** (effective decay length ≈ 8.6). Gentle near-field falloff — **not 1/r²** (gravity would drop
+~4× over this range; this drops ~1.3×) and **not steep screening** either. Reconciles with the ~1.5 T/G screening
+length: the *field* is screened at ~1.5, but the *force* between two **extended** nodes (size ~2) decays slowly in
+this near-field range — field screening ≠ force range for extended sources.
+
+**F(mass)** (sep=3.0, in-phase, node mass varied via the Q-ball w-family):
+
+| w | node mass | amp | `<F_R_well>` |
+|---:|---:|---:|---:|
+| 0.980 | 38.7 | 0.825 | −5.85e-5 |
+| 0.972 | 42.8 | 0.927 | −5.20e-5 |
+| 0.964 | 52.1 | 0.988 | −5.45e-5 |
+| 0.955 | 69.9 | 1.027 | −6.11e-5 |
+| 0.945 | 105.9 | 1.048 | −5.00e-5 (noisy, std≈mean) |
+
+Fit: **`F ~ M^−0.07 ≈ M^0`** — the force is **essentially mass-INDEPENDENT**. Across a 2.7× mass range the force
+stays −5.5e-5 ± ~15% with no trend. **Nothing like gravity's M².**
+
+## The key finding and its cause
+
+The mediated in-phase attraction is a **gentle-range, mass-independent** effective-medium force: `F ~ sep^−0.4`,
+`F ~ M^0`. Neither of gravity's two diagnostic properties (1/r² range, M² mass-scaling).
+
+**The mass-independence is traceable and is a design consequence, not a mystery.** The source `S_state` is
+**normalized** — energy+charge densities divided by the field maxima (`e_ref`, `q_ref`) with the frozen `S0`. So a
+heavier node does **not** produce a proportionally stronger source; the normalized load is ~O(1) regardless of mass.
+Hence the geometric response, and the force, do not scale with mass. **A mass-proportional (un-normalized) or
+rate-based source would be required for any mass-dependence.** This points the mass-scaling question squarely at the
+source — i.e. at the GAP-1 foundations choice — and connects directly to the rate-source bridge result
+(`R_relax` admissible, `CX_GPU_FOLLOWUP_SPRINT_REVIEW_20260718.md` #4).
+
+## Reading (bounded)
+
+Positive: the robust result is now *characterized* — a clean, reproducible, bounded effective-medium interaction with
+measured range and mass-scaling exponents. Consistent with the MC-1 theme (IRER's force was never predicted to be
+Newtonian). Firmly **not gravity** in its two most gravity-diagnostic properties — which keeps the no-gravity-claim
+posture correct and *sharpens* it: we can now say precisely *how* it differs.
+
+Caveats: the w-family varies amplitude/width along with mass (not a perfect mass isolation); the highest-mass point is
+noisy (that Q-ball breathes hard); near-field only (sep 2.5–5, comparable to node size — a genuine far-field range
+test would need larger boxes/separations). None of these change the two headline exponents.
+
+## Boundaries
+
+Mirror-only; frozen modules imported unchanged; in-phase (clean) case only; no gravity/UFF/IRER claim.

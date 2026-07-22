@@ -1,0 +1,34 @@
+{
+  "datasets": [
+    {
+      "dataset_id": "DATA-NUM-001",
+      "download_status": "DOWNLOADED",
+      "metadata_path": "E:\\quantule_mapper_external_data\\DATA-NUM-001_nlse_package\\metadata\\dataset_metadata.json"
+    },
+    {
+      "dataset_id": "DATA-BEC-001",
+      "download_status": "DOWNLOADED",
+      "metadata_path": "E:\\quantule_mapper_external_data\\DATA-BEC-001_nist_dark_solitons_v2\\metadata\\dataset_metadata.json"
+    },
+    {
+      "dataset_id": "DATA-OPT-006",
+      "download_status": "SKIPPED",
+      "metadata_path": "E:\\quantule_mapper_external_data\\DATA-OPT-006_mitschke_mollenauer_optical_force\\metadata\\dataset_metadata.json"
+    },
+    {
+      "dataset_id": "DATA-BEC-005",
+      "download_status": "SKIPPED",
+      "metadata_path": "E:\\quantule_mapper_external_data\\DATA-BEC-005_nguyen_hulet_matter_wave_collisions\\metadata\\dataset_metadata.json"
+    },
+    {
+      "dataset_id": "DATA-QB-004",
+      "download_status": "SKIPPED",
+      "metadata_path": "E:\\quantule_mapper_external_data\\DATA-QB-004_qball_oscillon_repository_search\\metadata\\dataset_metadata.json"
+    },
+    {
+      "dataset_id": "DATA-AG-003",
+      "download_status": "SKIPPED",
+      "metadata_path": "E:\\quantule_mapper_external_data\\DATA-AG-003_photon_fluid_bogoliubov\\metadata\\dataset_metadata.json"
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "bundle_sha256": "31177fb86b6eeefdd3e172d6a099f5dcbff7c3f91af1d3b17beb88eaddb3d543",
+  "control_panel": {
+    "actions": [
+      {
+        "action_id": "T1",
+        "fixed": true,
+        "handler": "runtime_preflight",
+        "kind": "system_test",
+        "label": "Run Preflight",
+        "output_channel": "terminal_T1",
+        "required": true
+      },
+      {
+        "action_id": "T2",
+        "fixed": true,
+        "handler": "numeric_smoke_test",
+        "kind": "system_test",
+        "label": "Run Smoke Test",
+        "output_channel": "terminal_T2",
+        "required": true,
+        "requires_pass": [
+          "T1"
+        ]
+      },
+      {
+        "action_id": "T3",
+        "fixed": true,
+        "handler": "persistence_test",
+        "kind": "system_test",
+        "label": "Test Persistence",
+        "output_channel": "terminal_T3",
+        "required": true,
+        "requires_pass": [
+          "T1",
+          "T2"
+        ]
+      },
+      {
+        "action_id": "J1",
+        "confirmation_required": true,
+        "handler": "run_registered_job",
+        "job_id": "cl_tg_b2_definitive_force",
+        "kind": "job",
+        "label": "Run TG-B2 Definitive Force (~2.5-3.5h)",
+        "output_channel": "terminal_J1",
+        "requires_pass": [
+          "T1",
+          "T2",
+          "T3"
+        ],
+        "row_id": "tg_b2_definitive_force_seps_3_4"
+      }
+    ],
+    "log_root": "/content/qm_colab/jobs/cl_tg_b2_definitive_force/run/logs",
+    "reserved_test_slots": [
+      "T1",
+      "T2",
+      "T3"
+    ],
+    "schema_version": "qm-colab-controls/1.0",
+    "status_root": "/content/qm_colab/jobs/cl_tg_b2_definitive_force/run/status",
+    "tail_lines": 1000
+  },
+  "files": [
+    {
+      "path": "jax_scout/__init__.py",
+      "sha256": "ed23112aa9afa87ff78171fa36b063a296cb786354053562117b7fb2e605ebc5",
+      "size_bytes": 94
+    },
+    {
+      "path": "jax_scout/gravity_TG_B1S_state_load_feedback_gpu.py",
+      "sha256": "85215ef2f634820aae806dcd799d4fcb78ececab3224b994f696fb817bdeebf1",
+      "size_bytes": 39939
+    },
+    {
+      "path": "jax_scout/gravity_TG_B2_definitive_force.py",
+      "sha256": "b000cc031d9fc7f088bbafac60da02cd3b3c9ee5609d87bde6619d53178ec19c",
+      "size_bytes": 12784
+    },
+    {
+      "path": "jax_scout/gravity_TG_B2_two_node_awell.py",
+      "sha256": "6f6b9f0fad2bf5e27378c3efc3620ee6d79a577978a9c0a7533c0648e38012be",
+      "size_bytes": 12975
+    },
+    {
+      "path": "jax_scout/phase_d_c3_wave.py",
+      "sha256": "aacc2c709c1eefe98b9fed2a8ef9aa9b2ca2c439d8d982717a96aeb8bee2ccff",
+      "size_bytes": 16850
+    }
+  ],
+  "generated_at_utc": "2026-07-16T10:36:33.508431+00:00",
+  "job_id": "cl_tg_b2_definitive_force",
+  "manifest_path": "cl_tg_b2_definitive_force_manifest.json",
+  "packager_version": "4.5",
+  "project_root_name": "quantule_mapper",
+  "workflow": {
+    "agent_plans_run": true,
+    "analogy": "Sometimes it is quicker to send the car to the shop than fix it yourself.",
+    "drive_persistence_required": true,
+    "intended_use": "Targeted Colab A100 fast-lane run for CL_TG_B2_DEFINITIVE_FORCE while the local GTX 1080 remains occupied. This is a full-fidelity dynamical force campaign, not a broad hunt or UI trial.",
+    "local_results_dir": "F:\\quantule_mapper\\colab_jobs\\results",
+    "manual_colab_execution": true,
+    "manual_upload_to_colab": true,
+    "mode": "manual_colab_upload",
+    "result_policy": {
+      "hard_archive_bytes": 5000000000,
+      "ideal_archive_bytes": 1000000000
+    },
+    "review_prompt_after_download": true
+  }
+}

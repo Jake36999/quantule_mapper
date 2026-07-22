@@ -1,0 +1,49 @@
+{
+  "config_hash": "839d6874841b7e50bfc9dcbc779758fdd28d4c481180eba37fb497de488a4162",
+  "coupling_off_limits": {
+    "feedback_off": "evolve T/G but set epsilon_G=0 in A_s(G)",
+    "geometric_off": "kappa_TG=0 or G disabled retains T response but removes G-mediated phi feedback",
+    "source_off": "R_res=0 leaves T/G at homogeneous null if initialized at null",
+    "temporal_off": "alpha_T=0 removes T forcing and downstream G response"
+  },
+  "fields": [
+    "phi",
+    "T",
+    "G"
+  ],
+  "flat_state": "phi=0, Pi=0, T=0, V_T=0, G=0, V_G=0",
+  "ledger_identity": "dE_TG/dt = integral alpha_T R_res V_T dV - integral gamma_T V_T^2 dV - integral gamma_G V_G^2 dV - boundary_absorption + numerical_residual",
+  "linear_stability_condition": "|kappa_TG| < omega_T * omega_G",
+  "linear_stability_margin": 0.7125,
+  "linear_stability_pass": true,
+  "model_class": "explicitly_budgeted_dissipative_response",
+  "no_separate_radiation_field": true,
+  "parameters": {
+    "P_c": 0.5,
+    "alpha_T": 0.4,
+    "delta_P": 0.08,
+    "epsilon_G": 0.08,
+    "gamma_G": 0.06,
+    "gamma_T": 0.08,
+    "kappa_TG": 0.35,
+    "omega_G": 0.85,
+    "omega_T": 1.25,
+    "source_T": 12.0,
+    "source_dt": 0.01
+  },
+  "positive_maps": {
+    "A_s(G)": "exp(-0.08 * G)",
+    "N_t(T)": "not applied to phi in TG-B1 pilot; T is response/chronology-load telemetry"
+  },
+  "rationale": "The first formal model keeps damping and boundary/export losses in an explicit ledger. The T/G exchange itself is reciprocal and uses a positive-definite quadratic energy when |kappa_TG| < omega_T * omega_G.",
+  "reduced_TG_energy_density": "0.5 V_T^2 + 0.5 c_T^2 |grad T|^2 + 0.5 omega_T^2 T^2 + 0.5 V_G^2 + 0.5 c_G^2 |grad G|^2 + 0.5 omega_G^2 G^2 + kappa_TG T G",
+  "spatial_pilot_equations": {
+    "G_t": "V_G",
+    "Pi_t": "d_x(A_s(G) d_x phi) - m^2 phi - gamma_abs(x) Pi",
+    "T_t": "V_T",
+    "V_G_t": "c_G^2 G_xx - omega_G^2 G - gamma_G V_G - kappa_TG T - gamma_abs(x) V_G",
+    "V_T_t": "c_T^2 T_xx - omega_T^2 T - gamma_T V_T + alpha_T R_res - kappa_TG G - gamma_abs(x) V_T",
+    "phi_t": "Pi"
+  },
+  "stage": "TG-A"
+}

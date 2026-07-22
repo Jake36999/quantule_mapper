@@ -215,6 +215,43 @@ Ranked by scientific value ÷ cost. These are **future science**, not documentat
 | **C2′** — canonical divergence-form geometry | adding the metric-variation term `D·Ω′(ρ)\|∇ψ\|²ψ` makes geometry-on C2 exactly conservative | machine-exact conservation with geometry on | ∫ρ / energy drift → ~1e-13 | still quasi-conservative → the covariant term is not the whole story | full conservation telemetry, parity vs geom-off | **Claude** (RFC-first; `docs/PHASE_D_C2PRIME_CANONICAL_GEOMETRY_RFC.md`) | design + run |
 | **RUN-5** — stable-overdense-load on ρ_vac background | a persistent core with ρ>ρ_vac on a filled ρ_vac background yields a *graded* Ω² well (re-entry condition) | overdense load survives; Ω²(ρ) graded, no vacuum cliff | load persistence + monotone graded Ω²(r) | load dissolves on filled bg (as before) → re-entry still blocked | load mass/persistence, radial Ω², T_info shear | **Claude** (design); Codex may replicate once defined | research sub-project |
 
+### TG-A/TG-B - temporal-geometric feedback formalization and reduced scout
+
+**Codex addendum, 2026-07-14. Conceptual authorship remains Jake McIntosh.** This branch is motivated by
+`docs/theory_synthesis/IRER_TEMPORAL_GEOMETRIC_FEEDBACK_LOOP.md`. It is not a production re-entry and does not change
+the current Gravity D or G1 labels.
+
+**Claim to test:** a phase-locked OIW/node can enter a bounded temporal-geometric relaxation cycle:
+
+```text
+Psi -> R_res[Psi] -> T or N_t -> G or A_s -> modified Psi evolution -> outgoing perturbation
+```
+
+**TG-A design gate:** before simulation, specify the resolution source, choose either conservative exchange or
+explicit dissipative accounting, derive the temporal response PDE, geometric response PDE, positive coefficient
+maps, energy/action ledger, null controls, flat-state stability and frequency diagnostics. Do not start with a full
+3D double-field solver.
+
+**TG-B reduced scout:** after TG-A review, run a zero-dimensional exchange model first, then implement a 1D radial or
+2D axisymmetric KG-first scout with a later NLS comparison. Sweep phase relation, carrier, and separation for two
+OIW/node structures; measure whether `R_res` peaks before `T`, `T` before `G`, and `G` before outgoing flux.
+
+**Primary metrics:** event frequency, temporal-field frequency, geometric-field frequency, outgoing flux frequency,
+cross-correlation lags, wavelet/coherence spectra, energy or action accounting, and whether an FMIA-like
+low-resistance channel forms without being hand-coded.
+
+**Success:** causal phase-ordered sequence survives source-off, temporal-off, geometric-off, feedback-off,
+phase-scrambled, grid, timestep, and box controls. **Falsification:** pulses are absent, track numerical cadence,
+require a hand-written emission trigger, or disappear under matched controls.
+
+**G1b boundary:** TG-A/TG-B does not replace objective local-clock calibration. A positive feedback result can
+characterize a temporal-geometric field mechanism, but it cannot establish objective time dilation while the clock
+instrument remains uncalibrated.
+
+**Interpretation boundary:** this can support a temporal-geometric feedback-loop scout, not gravity, photons,
+geodesics, universal free fall, or production readiness. Photon-like labels require a separately defined outgoing
+field observable and quantization test.
+
 **No Section-4 run is required** for the current results to stand. RUN-2 is the most scientifically informative
 and cheapest — the natural first pick when Claude returns to active science.
 
@@ -270,6 +307,10 @@ Each row: source verified? · formula/dataset extracted · units/scaling require
 
 **No Codex output changes a verdict without Claude review.** Codex external metrics are *initial/provisional*
 until Claude reviews the data and comparison.
+
+For feedback-loop formalization specifically: Jake owns the conceptual hypothesis and accepts model choices. Codex
+may propose and implement candidate mathematics, controls and instrumentation. Any scientific verdict remains
+provisional until reviewed.
 
 ---
 

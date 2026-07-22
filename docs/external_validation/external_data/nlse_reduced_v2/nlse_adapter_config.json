@@ -1,0 +1,14 @@
+{
+  "D": 1.0,
+  "L": 10.0,
+  "N": 512,
+  "T": 1.0,
+  "dt": 0.002,
+  "k_values": [
+    0.6283185307179586,
+    1.2566370614359172
+  ],
+  "sample_every": 25,
+  "sigma": 0.45,
+  "source_root": "E:\\quantule_mapper_external_data\\DATA-NUM-001_nlse_package\\extracted\\source"
+}

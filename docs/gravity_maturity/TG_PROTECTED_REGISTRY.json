@@ -1,0 +1,82 @@
+{
+  "frozen_utc": "2026-07-16T14:01:51Z",
+  "rule": "FROZEN-PROVEN: no edits without a RUN_QUEUE row + primary review; new science imports these, never modifies them. Verify by re-hashing against this registry.",
+  "semantic_commitments": {
+    "S0": 135.6862187684289,
+    "source_normalization": "single-node B1S refs (ref_source_norms on the single Q-ball)",
+    "awell_polarity": "A = exp(+eps_G*G) on the TG-B2 branch (theory-faithful); frozen TG-B1S = exp(-eps_G*G) A-hill scaffold",
+    "pair_placement": "dphi=0, +-sep/2 along x"
+  },
+  "files": {
+    "jax_scout/phase_d_c3_wave.py": {
+      "tier": "T0",
+      "sha256": "aacc2c709c1eefe98b9fed2a8ef9aa9b2ca2c439d8d982717a96aeb8bee2ccff",
+      "bytes": 16850
+    },
+    "jax_scout/gravity_TG_B1S_state_load_feedback_gpu.py": {
+      "tier": "T0",
+      "sha256": "85215ef2f634820aae806dcd799d4fcb78ececab3224b994f696fb817bdeebf1",
+      "bytes": 39939
+    },
+    "jax_scout/gravity_TG_B1S_backreaction_robustness_gpu.py": {
+      "tier": "T1",
+      "sha256": "5dee51919094afcb90b2a6c9d88ebd6e26fe787c0781f20ec331f3790e1495a2",
+      "bytes": 37359
+    },
+    "jax_scout/gravity_TG_B1S_long_time_gpu.py": {
+      "tier": "T1",
+      "sha256": "1c08bca7e2c214f3a0c6b2799ac2a290719b4c23626fca91f6d17ea16ab120a9",
+      "bytes": 32179
+    },
+    "jax_scout/gravity_TG_B1S_drift_decomposition_gpu.py": {
+      "tier": "T1",
+      "sha256": "478568c4a1d09d076637ab9d47580a19662616c70f5940bd4a79d1a49122335b",
+      "bytes": 39745
+    },
+    "jax_scout/gravity_TG_B1S_D4_rows_gpu.py": {
+      "tier": "T1",
+      "sha256": "059f0d1d7157de51ae133a769dd2f5ef7bde5df25d6fa3c74793051f2790f5a8",
+      "bytes": 15097
+    },
+    "jax_scout/gravity_TG_B1S_D4_D5_closure_gpu.py": {
+      "tier": "T1",
+      "sha256": "46323d37161d53c83c88e58f4df13e0830171bbb8bed01e2c65bd83cfceff11c",
+      "bytes": 30837
+    },
+    "jax_scout/gravity_TG_B1S_frequency_contract.py": {
+      "tier": "T1",
+      "sha256": "69de43d65779dd047cca12c418d22465e15d501aac0112ac84c003b5fdc12aba",
+      "bytes": 9746
+    },
+    "jax_scout/gravity_TG_B1S_box_dependence.py": {
+      "tier": "T1",
+      "sha256": "60b4eabe92c74d321704ab8a8dc55593fbe9a944ea8678b47851f12e801724c3",
+      "bytes": 10293
+    },
+    "jax_scout/gravity_TG_B2_two_node_awell.py": {
+      "tier": "T1",
+      "sha256": "6f6b9f0fad2bf5e27378c3efc3620ee6d79a577978a9c0a7533c0648e38012be",
+      "bytes": 12975
+    },
+    "jax_scout/gravity_TG_B2_static_force.py": {
+      "tier": "T1",
+      "sha256": "ca1938588e4d73d8a5db2c3c63f3c11132611ff34bee7d84bff5a44eebae4593",
+      "bytes": 7954
+    },
+    "jax_scout/gravity_TG_B2_dynamical_force.py": {
+      "tier": "T1",
+      "sha256": "8f75dc9ccc76e7c1a23704a5d6b077317a57ce566f42efed596aa2de0638de63",
+      "bytes": 8630
+    },
+    "jax_scout/gravity_TG_B2_definitive_force.py": {
+      "tier": "T1",
+      "sha256": "b000cc031d9fc7f088bbafac60da02cd3b3c9ee5609d87bde6619d53178ec19c",
+      "bytes": 12784
+    },
+    "jax_scout/gravity_TG_B2_overnight_dynamical.py": {
+      "tier": "T1",
+      "sha256": "89763db91d786053da141e54417bca4a93e15dfcfefbe3abd9d3278fcd6e5606",
+      "bytes": 12094
+    }
+  }
+}

@@ -1,0 +1,159 @@
+{
+  "files": [
+    {
+      "path": "analysis_command.json",
+      "sha256": "73bf4bc04f78382381e725596c4dc2f4558255034b285eb65a2028e81d9808d1",
+      "size_bytes": 434
+    },
+    {
+      "path": "artifact_hashes.json",
+      "sha256": "9f6ace9eec9d4eeef72e4f32e1575ec90ee1c029016137d38e7f66e13935bce6",
+      "size_bytes": 5239
+    },
+    {
+      "path": "baseline_manifest.json",
+      "sha256": "de7ae552df59481bb97c700537aef70cb8cf9d096875655d701b58919a42e468",
+      "size_bytes": 7791
+    },
+    {
+      "path": "comparison_summary.json",
+      "sha256": "35769f49e91ff0f544197b909d794d3fe6c5991e2f89380d3c757ad86d799ffc",
+      "size_bytes": 718
+    },
+    {
+      "path": "completion_status.json",
+      "sha256": "e681ce058e31e9448f635b41201f784747d8dc9c83038e36314d9cacd9b68c37",
+      "size_bytes": 280
+    },
+    {
+      "path": "environment_report.json",
+      "sha256": "77a34bab16f549c0ff42394b42e94d1c597d9e071e1d9ca8a11aa4997ded9a24",
+      "size_bytes": 252
+    },
+    {
+      "path": "gpu_preflight_before.json",
+      "sha256": "0872c1d41b16866693841ca2405bd99516dd1edfa6e741cea92ec71581ac3933",
+      "size_bytes": 17342
+    },
+    {
+      "path": "gpu_preflight_final.json",
+      "sha256": "d95dd93b4b91247c5d5bd830a463ea163c221e83d487e4edbd465358e110ca37",
+      "size_bytes": 198
+    },
+    {
+      "path": "logs/analysis_stdout_stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "logs/simulation_stdout_stderr.log",
+      "sha256": "982910f6e21396f68555bd9a7513c7f1f26ec91d4d112837147a20912def9a2a",
+      "size_bytes": 381
+    },
+    {
+      "path": "observable_comparison.csv",
+      "sha256": "75c0e577f24ff2e46f9c5e371d5b200537219b7944f89a23ae5b938d59aa262c",
+      "size_bytes": 3617
+    },
+    {
+      "path": "observable_comparison.json",
+      "sha256": "739585286406183d13129a35583241a8282fdc328a20462a25130eb7e8e236d7",
+      "size_bytes": 9008
+    },
+    {
+      "path": "reproduction_manifest.json",
+      "sha256": "84957984087c2e09a62e5692c244f201027230ad34b390d9815c4dc9185cc791",
+      "size_bytes": 2929
+    },
+    {
+      "path": "simulation/TECHNICAL_HANDOFF.md",
+      "sha256": "d098e552ec5c265a11a7fa22f340959ee2ab45d8cc8202aa168fcb516c7eb828",
+      "size_bytes": 577
+    },
+    {
+      "path": "simulation/artifact_hashes.csv",
+      "sha256": "2cedfc1eaa23e4b1dad2c0e1f40fbac1439d6aea390e1f53904db050c4236732",
+      "size_bytes": 1437
+    },
+    {
+      "path": "simulation/asymptotic_frequency.csv",
+      "sha256": "721018b0e8be9833a9847a7b617b19942bdfe06706b63cd21bc67768cda2b3b9",
+      "size_bytes": 772
+    },
+    {
+      "path": "simulation/baseline_node_contract.csv",
+      "sha256": "47fd0fbe738334c71e168c8db05f040978b08f8ce2e4a5506c0f5fe74368020d",
+      "size_bytes": 328
+    },
+    {
+      "path": "simulation/basin_orbital_stability.csv",
+      "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+      "size_bytes": 2
+    },
+    {
+      "path": "simulation/drift_channel_fits.csv",
+      "sha256": "4e882f459e2dd38740ae2c5a074fa5d5f729b319ea0db99b6ef7cf9c2b30c844",
+      "size_bytes": 4995
+    },
+    {
+      "path": "simulation/energy_ledger.csv",
+      "sha256": "c5b51595652d84fa039c126112ac7aceed74044dae067b72ff20e9f3e8edc8ff",
+      "size_bytes": 305
+    },
+    {
+      "path": "simulation/environment_versions.json",
+      "sha256": "e563d6dd4078293207f7636d45ff9bad1034bc9b232af9fc9e7d991580cb8542",
+      "size_bytes": 643
+    },
+    {
+      "path": "simulation/falsification_results.csv",
+      "sha256": "f15baab60cd6661428d3596ab75d9a4a10f2790d3999b93fef60b1990c9ee523",
+      "size_bytes": 290
+    },
+    {
+      "path": "simulation/git_state_before.txt",
+      "sha256": "98554b6f9dd9121bec466a6c4cd78092065799e6bb108816473e7639319f341c",
+      "size_bytes": 93
+    },
+    {
+      "path": "simulation/gpu_preflight.json",
+      "sha256": "27bf653c02408a1dd1ed5ef9216e23b33fd3af67e760fb51350339a8a8b87632",
+      "size_bytes": 600
+    },
+    {
+      "path": "simulation/long_time_100_period.csv",
+      "sha256": "ff32bc8fab4ecc29d18320d8ab126654d3ba298fb3c110d55d90a1c64757b297",
+      "size_bytes": 1722
+    },
+    {
+      "path": "simulation/numerical_validation.csv",
+      "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+      "size_bytes": 2
+    },
+    {
+      "path": "simulation/orbital_distance.csv",
+      "sha256": "40a9e67edbc71c6cc2a479e49f6cfe16158cd804fb37b04144d67818efc3f32d",
+      "size_bytes": 649838
+    },
+    {
+      "path": "simulation/phase_alignment.csv",
+      "sha256": "e9e00c9c7ec2d87dad9ab6cafdbd3262d14f6542a7b9106b7b08d5ef02638f91",
+      "size_bytes": 127654
+    },
+    {
+      "path": "simulation/preregistered_matrix.json",
+      "sha256": "9deedcf7ef31647d80e3e8444b10522fbce7c06354f657e15c2c79b4ad75e745",
+      "size_bytes": 272
+    },
+    {
+      "path": "simulation/source_spec.json",
+      "sha256": "ea2bb9104fc3ee48aeaa0d2d23c9a79c89036f8619fdf47332a36c2a3a136b41",
+      "size_bytes": 236
+    },
+    {
+      "path": "simulation_command.json",
+      "sha256": "744540489cc029063191e9be154683591d8a48a7043f6e82b539eba3e153d1a4",
+      "size_bytes": 316
+    }
+  ]
+}

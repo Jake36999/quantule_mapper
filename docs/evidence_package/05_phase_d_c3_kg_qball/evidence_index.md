@@ -18,6 +18,7 @@ phase×speed diagram (capture generic; transmission a narrow anti-phase node fea
 | anti-phase transmits below ~0.5c | CONFIRMED (narrow) | `C3_ANTIPHASE_LADDER/` | — | elasticity, rad |
 | off-phase (π/2,3π/4,7π/8) all capture | CONFIRMED | `C3_PHASE_{pi2,3pi4,7pi8}/` | — | classifier |
 | static force law governs collisions | FALSIFIED | (above) | — | 3π/4 repels statically, captures dynamically |
+| collision phase×speed structure is cross-substrate (NLS analog holds) | CONFIRMED (RUN-2) | `sweep_runs/C2_10_*` (see folder 04) | — | NLS anti-phase pass-through→capture mirrors this diagram |
 
 ## Docs
 `docs/PHASE_D_C3_WAVE_KINETIC_RFC.md`, `PHASE_D_C3_WAVE_KINETIC_RESULTS.md`, `PHASE_D_C3_TWOQBALL_RESULTS.md`,

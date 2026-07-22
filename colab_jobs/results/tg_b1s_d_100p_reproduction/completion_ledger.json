@@ -1,0 +1,41 @@
+{
+  "completed_rows": [
+    "tg_b1s_d_100p_primary"
+  ],
+  "failed_rows": [],
+  "rows": [
+    {
+      "duration_seconds": 6250.036316156387,
+      "finished_utc": "2026-07-15T13:16:45Z",
+      "log_path": "/content/qm_job/run_tg_b1s_d_100p_primary.log",
+      "log_sha256": "a847ddd4ab3125b9456b260064fb94325f1d862cb93ed08bca7c383c1c3dfba1",
+      "return_code": 0,
+      "row_id": "tg_b1s_d_100p_primary",
+      "stages": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-u",
+            "colab_jobs/tg_b1s_d_reproduce_and_compare.py",
+            "--out",
+            "/content/qm_job/results/tg_b1s_d_100p_reproduction",
+            "--baseline-manifest",
+            "colab_jobs/baselines/tg_b1s_d_20260714_184736_baseline_manifest.json",
+            "--simulation-entrypoint",
+            "jax_scout/gravity_TG_B1S_drift_decomposition_gpu.py",
+            "--analysis-entrypoint",
+            "colab_jobs/tg_b1s_d_reproduction_compare.py",
+            "--matrix",
+            "primary",
+            "--sample-dt",
+            "1.0"
+          ],
+          "duration_seconds": 6250.035220384598,
+          "finished_utc": "2026-07-15T13:16:45Z",
+          "return_code": 0,
+          "stage_id": "main"
+        }
+      ]
+    }
+  ]
+}

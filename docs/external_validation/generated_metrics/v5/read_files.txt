@@ -1,0 +1,5 @@
+sweep_runs/C3_COLLISION_LADDER_FULL/summary.json
+sweep_runs/C3_ANTIPHASE_LADDER/summary.json
+sweep_runs/C3_PHASE_pi2/summary.json
+sweep_runs/C3_PHASE_3pi4/summary.json
+sweep_runs/C3_PHASE_7pi8/summary.json

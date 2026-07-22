@@ -1,0 +1,20 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='720' height='420'>
+<rect x='0' y='0' width='720' height='420' fill='white'/>
+<text x='60' y='30' font-size='18'>model comparison error</text>
+<line x1='60' y1='360' x2='680' y2='360' stroke='black'/>
+<line x1='60' y1='60' x2='60' y2='360' stroke='black'/>
+<text x='60' y='395' font-size='12'>normalized_RMSE</text>
+<text x='10' y='55' font-size='12'>R2</text>
+<circle cx='449.37' cy='189.71' r='3' fill='#d62728'/>
+<circle cx='412.78' cy='169.08' r='3' fill='#2ca02c'/>
+<circle cx='680.00' cy='360.00' r='3' fill='#9467bd'/>
+<circle cx='460.91' cy='196.58' r='3' fill='#ff7f0e'/>
+<circle cx='639.20' cy='324.81' r='3' fill='#17becf'/>
+<circle cx='60.00' cy='60.00' r='3' fill='#1f77b4'/>
+<rect x='555' y='55' width='10' height='10' fill='#1f77b4'/><text x='570' y='65' font-size='11'>M0_Kgrad_gradN_reduced</text>
+<rect x='555' y='70' width='10' height='10' fill='#d62728'/><text x='570' y='80' font-size='11'>M1_local_gradient</text>
+<rect x='555' y='85' width='10' height='10' fill='#2ca02c'/><text x='570' y='95' font-size='11'>M2_log_gradient</text>
+<rect x='555' y='100' width='10' height='10' fill='#9467bd'/><text x='570' y='110' font-size='11'>M3_ray</text>
+<rect x='555' y='115' width='10' height='10' fill='#ff7f0e'/><text x='570' y='125' font-size='11'>M4_source_tail</text>
+<rect x='555' y='130' width='10' height='10' fill='#17becf'/><text x='570' y='140' font-size='11'>M5_newtonian</text>
+</svg>

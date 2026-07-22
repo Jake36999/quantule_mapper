@@ -1,0 +1,30 @@
+{
+  "verified": [
+    {
+      "path": "jax_scout/__init__.py",
+      "sha256": "ed23112aa9afa87ff78171fa36b063a296cb786354053562117b7fb2e605ebc5",
+      "size_bytes": 94
+    },
+    {
+      "path": "jax_scout/gravity_TG_B1S_state_load_feedback_gpu.py",
+      "sha256": "85215ef2f634820aae806dcd799d4fcb78ececab3224b994f696fb817bdeebf1",
+      "size_bytes": 39939
+    },
+    {
+      "path": "jax_scout/gravity_TG_B2_definitive_force.py",
+      "sha256": "b000cc031d9fc7f088bbafac60da02cd3b3c9ee5609d87bde6619d53178ec19c",
+      "size_bytes": 12784
+    },
+    {
+      "path": "jax_scout/gravity_TG_B2_two_node_awell.py",
+      "sha256": "6f6b9f0fad2bf5e27378c3efc3620ee6d79a577978a9c0a7533c0648e38012be",
+      "size_bytes": 12975
+    },
+    {
+      "path": "jax_scout/phase_d_c3_wave.py",
+      "sha256": "aacc2c709c1eefe98b9fed2a8ef9aa9b2ca2c439d8d982717a96aeb8bee2ccff",
+      "size_bytes": 16850
+    }
+  ],
+  "bundle_sha256": "31177fb86b6eeefdd3e172d6a099f5dcbff7c3f91af1d3b17beb88eaddb3d543"
+}

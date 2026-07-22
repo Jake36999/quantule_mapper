@@ -48,6 +48,7 @@ from config_utils import (
     RUNS_ROOT_DIR,
     SESSION_DB_BASENAME,
 )
+from quantule_viz.visual_analysis import create_visual_router
 
 try:
     from orchestrator.job_manifest import JobManifest
@@ -165,6 +166,24 @@ telemetry_ticker_task: asyncio.Task | None = None
 log_tailer_task_instance: asyncio.Task | None = None
 missing_log_warned_sources: set[str] = set()
 stale_worker_alert_cache: dict[str, float] = {}
+
+
+def _active_visual_session_dir() -> Path | None:
+    try:
+        active_paths = resolve_active_session_paths(require_exists=True)
+        return Path(str(active_paths["session_dir"]))
+    except Exception:
+        return None
+
+
+app.include_router(
+    create_visual_router(
+        project_root=Path(__file__).parent,
+        data_dir_getter=lambda: Path(DATA_DIR),
+        active_session_dir_getter=_active_visual_session_dir,
+        runs_root_name=RUNS_ROOT_DIR,
+    )
+)
 
 
 # ==============================================================================
@@ -380,8 +399,10 @@ class FleetTelemetryResponse(BaseModel):
     dlq_count: int
     active_workers: list[str]
     stale_workers: list[str]
+    historical_workers: list[str] = []
     total_claims_processed: int
     worker_heartbeat_ttl_seconds: float
+    historical_worker_cutoff_seconds: float | None = None
     workers: list[FleetWorkerStatus]
     message: str | None = None
 
@@ -391,7 +412,7 @@ class FleetTelemetryResponse(BaseModel):
 # ==============================================================================
 
 async def _broadcast_payload(payload: dict) -> None:
-    message = json.dumps(payload)
+    message = json.dumps(_normalize_telemetry_event(payload))
     
     async def send_msg(connection: WebSocket):
         try:
@@ -408,6 +429,20 @@ def _enqueue_telemetry_event(payload: dict) -> None:
         telemetry_queue.put_nowait(payload)
     except Exception:
         return
+
+
+def _normalize_telemetry_event(payload: dict[str, Any]) -> dict[str, Any]:
+    """Attach the stable telemetry envelope without removing legacy fields."""
+    event = dict(payload)
+    event.setdefault("ts", event.get("timestamp") or datetime.now(timezone.utc).isoformat())
+    event.setdefault("source", event.get("feed_id") or event.get("type") or "backend")
+    level = str(event.get("level") or "").upper()
+    if "severity" not in event:
+        if level in {"CRITICAL", "ERROR", "WARN", "WARNING", "INFO"}:
+            event["severity"] = "WARNING" if level == "WARN" else level
+        else:
+            event["severity"] = "INFO"
+    return event
 
 
 def _emit_terminal_debug(feed_id: str, line: str, level: str = "INFO") -> None:
@@ -431,6 +466,7 @@ def _emit_terminal_debug(feed_id: str, line: str, level: str = "INFO") -> None:
 
 async def telemetry_ticker() -> None:
     """Drain telemetry queue every 0.5s and emit one JSON array batch."""
+    last_heartbeat = 0.0
     while True:
         await asyncio.sleep(0.5)
         batch: list[dict] = []
@@ -440,7 +476,20 @@ async def telemetry_ticker() -> None:
             except asyncio.QueueEmpty:
                 break
             if isinstance(item, dict):
-                batch.append(item)
+                batch.append(_normalize_telemetry_event(item))
+
+        now = time.time()
+        if active_connections and now - last_heartbeat >= 5.0:
+            batch.append(
+                _normalize_telemetry_event(
+                    {
+                        "type": "heartbeat",
+                        "state": "running" if active_connections else "idle",
+                        "active_connections": len(active_connections),
+                    }
+                )
+            )
+            last_heartbeat = now
 
         if not batch or not active_connections:
             continue
@@ -463,11 +512,7 @@ def _initialize_log_tail_positions() -> dict[str, int]:
             continue
         path = Path(str(source.get("path", "")))
         if not path.exists():
-            _emit_terminal_debug(
-                "backend",
-                f"Debug log source missing at startup: {source_id} -> {path}",
-                "WARN",
-            )
+            logging.info("Debug log source not started yet: %s -> %s", source_id, path)
         try:
             file_positions[source_id] = int(path.stat().st_size) if path.exists() else 0
         except Exception:
@@ -486,11 +531,7 @@ async def _tail_logs_once(file_positions: dict[str, int]) -> None:
         path = Path(str(source.get("path", "")))
         if not path.exists():
             if source_id not in missing_log_warned_sources:
-                _emit_terminal_debug(
-                    "system",
-                    f"Awaiting {source_name} creation...",
-                    "WARN",
-                )
+                logging.info("Awaiting optional debug log source creation: %s", source_name)
                 missing_log_warned_sources.add(source_id)
             continue
         missing_log_warned_sources.discard(source_id)
@@ -1745,7 +1786,7 @@ async def debug_run_tests(req: DebugTestRunRequest):
 
 
 @app.get("/api/system/telemetry")
-async def get_system_telemetry(ttl_seconds: float | None = None):
+async def get_system_telemetry(ttl_seconds: float | None = None, include_historical: bool = False):
     global stale_worker_alert_cache
     try:
         effective_ttl = float(ttl_seconds) if ttl_seconds is not None else SYSTEM_TELEMETRY_TTL_SECONDS
@@ -1766,7 +1807,7 @@ async def get_system_telemetry(ttl_seconds: float | None = None):
         heartbeats = queue_manager.get_worker_heartbeats()
         claims_by_worker = queue_manager.get_claim_counts_by_worker()
         active_workers = queue_manager.list_active_workers(effective_ttl)
-        stale_workers = queue_manager.list_stale_workers(effective_ttl)
+        all_stale_workers = queue_manager.list_stale_workers(effective_ttl)
         counters = queue_manager.get_telemetry_counters()
         dlq_count = 0
         try:
@@ -1793,11 +1834,22 @@ async def get_system_telemetry(ttl_seconds: float | None = None):
             dlq_count = 0
             
         now = time.time()
+        historical_cutoff_seconds = max(effective_ttl * 10.0, 3600.0)
+        historical_workers: list[str] = []
+        stale_workers: list[str] = []
         workers: list[FleetWorkerStatus] = []
         for worker_id in sorted(heartbeats.keys()):
             heartbeat_ts = float(heartbeats[worker_id])
             age_seconds = max(0.0, now - heartbeat_ts)
-            if age_seconds > 60.0:
+            is_historical = age_seconds > historical_cutoff_seconds
+            if is_historical:
+                historical_workers.append(worker_id)
+                stale_worker_alert_cache.pop(worker_id, None)
+                if not include_historical:
+                    continue
+            if worker_id in all_stale_workers and not is_historical:
+                stale_workers.append(worker_id)
+            if worker_id in all_stale_workers and not is_historical and age_seconds > 60.0:
                 last_alert = float(stale_worker_alert_cache.get(worker_id, 0.0))
                 if now - last_alert >= 60.0:
                     _emit_terminal_debug(
@@ -1813,7 +1865,7 @@ async def get_system_telemetry(ttl_seconds: float | None = None):
                     worker_id=worker_id,
                     last_heartbeat_epoch=heartbeat_ts,
                     age_seconds=age_seconds,
-                    state="stale" if worker_id in stale_workers else "active",
+                    state="historical" if is_historical else ("stale" if worker_id in all_stale_workers else "active"),
                     in_flight_claims=int(claims_by_worker.get(worker_id, 0)),
                 )
             )
@@ -1825,8 +1877,10 @@ async def get_system_telemetry(ttl_seconds: float | None = None):
             dlq_count=dlq_count,
             active_workers=active_workers,
             stale_workers=stale_workers,
+            historical_workers=historical_workers,
             total_claims_processed=int(counters.get("total_claims_processed", 0)),
             worker_heartbeat_ttl_seconds=effective_ttl,
+            historical_worker_cutoff_seconds=historical_cutoff_seconds,
             workers=workers,
         )
     except Exception as exc:
@@ -1898,7 +1952,9 @@ async def get_ledger_rows(run_id: str, limit: int = 50, offset: int = 0):
         return JSONResponse(status_code=500, content={"status": "error", "message": f"failed to query ledger: {exc}"})
     except Exception as exc:
         logging.error(f"Internal error fetching ledger rows:\n{traceback.format_exc()}")
-        return JSONResponse(status_code=500, content={"status": "error", "message": "Internal error fetching ledger rows"})
+        detail = str(exc).strip()
+        message = f"Internal error fetching ledger rows: {detail}" if detail else "Internal error fetching ledger rows"
+        return JSONResponse(status_code=500, content={"status": "error", "message": message})
 
     return LedgerRowsResponse(
         status="success",
@@ -2245,65 +2301,88 @@ async def get_pointcloud(filename: str, dataset_name: str, threshold: float = 0.
         raise HTTPException(status_code=500, detail="Internal processing error")
 
 
+def _build_active_run_payload() -> dict[str, Any]:
+    payload = read_active_run_pointer()
+    session_dir = Path(payload.get("session_dir", ""))
+    session_name = (
+        payload.get("session_name")
+        or f"{payload.get('hunt_name', '')}_{payload.get('run_id', '')}"
+    )
+    manifest_p = run_manifest_path(session_dir, session_name) if session_dir.as_posix() != "." else None
+
+    mode = "evolution"
+    queue_remaining: int | None = None
+    chunks_completed = 0
+    purge_cycles_completed = 0
+    backlog_source: str | None = None
+    manifest_data: dict | None = None
+
+    if manifest_p and manifest_p.exists():
+        try:
+            with open(manifest_p, "r", encoding="utf-8") as _mf:
+                manifest_data = json.load(_mf)
+        except Exception:
+            pass
+
+    _backlog_path = Path(BACKLOG_QUEUE_FILE)
+    if _backlog_path.exists():
+        try:
+            with open(_backlog_path, "r", encoding="utf-8") as _bf:
+                _bl_data = json.load(_bf)
+            queue_remaining = len(_bl_data) if isinstance(_bl_data, list) else None
+        except Exception:
+            pass
+
+    if manifest_data:
+        gens = manifest_data.get("generations", [])
+        if any(g.get("mode") == "backlog" for g in gens):
+            mode = "backlog"
+            backlog_entries = [g for g in gens if g.get("mode") == "backlog"]
+            chunks_completed = int(max((g.get("chunks_completed") or g.get("chunk") or 0) for g in backlog_entries) if backlog_entries else 0)
+            purge_cycles_completed = int(max((g.get("purge_cycles_completed") or 0) for g in backlog_entries) if backlog_entries else 0)
+            for entry in reversed(backlog_entries):
+                if entry.get("backlog_source"):
+                    backlog_source = str(entry.get("backlog_source"))
+                    break
+
+    observability: dict = {
+        "mode": mode,
+        "queue_remaining": queue_remaining,
+        "chunks_completed": chunks_completed,
+        "purge_cycles_completed": purge_cycles_completed,
+        "backlog_source": backlog_source,
+        "manifest_path": str(manifest_p).replace("\\", "/") if manifest_p else None,
+    }
+    return {"status": "success", "active_run": payload, "observability": observability}
+
+
+@app.get("/api/run/status")
+async def get_run_status():
+    try:
+        active_payload = _build_active_run_payload()
+        return {
+            "status": "active",
+            "active_run": active_payload.get("active_run"),
+            "last_run": None,
+            "observability": active_payload.get("observability"),
+            "message": "Active hunt session detected.",
+            "updated_at": datetime.now(timezone.utc).isoformat(),
+        }
+    except ActiveRunPointerError:
+        return {
+            "status": "idle",
+            "active_run": None,
+            "last_run": None,
+            "observability": None,
+            "message": ACTIVE_RUN_POINTER_ERROR,
+            "updated_at": datetime.now(timezone.utc).isoformat(),
+        }
+
+
 @app.get("/api/run/active")
 async def get_active_run():
     try:
-        payload = read_active_run_pointer()
-        # Phase 3: augment with backlog observability fields
-        session_dir = Path(payload.get("session_dir", ""))
-        session_name = (
-            payload.get("session_name")
-            or f"{payload.get('hunt_name', '')}_{payload.get('run_id', '')}"
-        )
-        manifest_p = run_manifest_path(session_dir, session_name) if session_dir.as_posix() != "." else None
-
-        mode = "evolution"
-        queue_remaining: int | None = None
-        chunks_completed = 0
-        purge_cycles_completed = 0
-        backlog_source: str | None = None
-        manifest_data: dict | None = None
-
-        if manifest_p and manifest_p.exists():
-            try:
-                with open(manifest_p, "r", encoding="utf-8") as _mf:
-                    manifest_data = json.load(_mf)
-            except Exception:
-                pass
-
-        # Peek the active backlog source for queue depth
-        _backlog_path = Path(BACKLOG_QUEUE_FILE)
-        if _backlog_path.exists():
-            try:
-                with open(_backlog_path, "r", encoding="utf-8") as _bf:
-                    _bl_data = json.load(_bf)
-                queue_remaining = len(_bl_data) if isinstance(_bl_data, list) else None
-            except Exception:
-                pass
-
-        if manifest_data:
-            gens = manifest_data.get("generations", [])
-            # If any generation entry carries mode=backlog the run is a backlog run
-            if any(g.get("mode") == "backlog" for g in gens):
-                mode = "backlog"
-                backlog_entries = [g for g in gens if g.get("mode") == "backlog"]
-                chunks_completed = int(max((g.get("chunks_completed") or g.get("chunk") or 0) for g in backlog_entries) if backlog_entries else 0)
-                purge_cycles_completed = int(max((g.get("purge_cycles_completed") or 0) for g in backlog_entries) if backlog_entries else 0)
-                for entry in reversed(backlog_entries):
-                    if entry.get("backlog_source"):
-                        backlog_source = str(entry.get("backlog_source"))
-                        break
-
-        observability: dict = {
-            "mode": mode,
-            "queue_remaining": queue_remaining,
-            "chunks_completed": chunks_completed,
-            "purge_cycles_completed": purge_cycles_completed,
-            "backlog_source": backlog_source,
-            "manifest_path": str(manifest_p).replace("\\", "/") if manifest_p else None,
-        }
-
-        return {"status": "success", "active_run": payload, "observability": observability}
+        return _build_active_run_payload()
     except ActiveRunPointerError as exc:
         return JSONResponse(status_code=409, content={"status": "error", "message": str(exc)})
 
@@ -2337,22 +2416,48 @@ async def websocket_telemetry(websocket: WebSocket):
     await websocket.accept()
     active_connections.add(websocket)
     try:
+        await websocket.send_text(
+            json.dumps(
+                _normalize_telemetry_event(
+                    {
+                        "type": "hello",
+                        "state": "connected",
+                        "active_connections": len(active_connections),
+                    }
+                )
+            )
+        )
         while True:
-            msg = await websocket.receive_text()
+            try:
+                msg = await asyncio.wait_for(websocket.receive_text(), timeout=30.0)
+            except asyncio.TimeoutError:
+                continue
             try:
                 data = json.loads(msg)
             except Exception:
                 continue
             if data.get("event") == "START_HUNT":
-                await websocket.send_text(json.dumps({
-                    "type": "log",
-                    "message": "Hunt sequence initialized by Sovereign Auditor."
-                }))
-                await websocket.send_text(json.dumps({
-                    "type": "status",
-                    "state": "running",
-                    "details": "Hunt sequence initialized"
-                }))
+                await websocket.send_text(
+                    json.dumps(
+                        _normalize_telemetry_event(
+                            {
+                                "type": "log",
+                                "message": "Hunt sequence initialized by Sovereign Auditor.",
+                            }
+                        )
+                    )
+                )
+                await websocket.send_text(
+                    json.dumps(
+                        _normalize_telemetry_event(
+                            {
+                                "type": "status",
+                                "state": "running",
+                                "details": "Hunt sequence initialized",
+                            }
+                        )
+                    )
+                )
                 # Optionally trigger hunt task here (no nested app or imports)
     except WebSocketDisconnect:
         logging.info("WebSocket disconnected.")

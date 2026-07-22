@@ -1,0 +1,68 @@
+{
+  "author": "Codex",
+  "timestamp": "2026-07-15",
+  "scope": "TG-B1S state-load feedback handoff and runtime architecture note",
+  "current_formal_status": "TG_STATE_LOAD_LONG_TIME_DRIFT_UNRESOLVED",
+  "active_run": {
+    "run_directory": "sweep_runs/TG_B1S_D4_ROWS_GPU_20260715_091558",
+    "purpose": "D4 numerical validation rows for TG-B1S state-load drift decomposition",
+    "completed_rows_at_handoff": [
+      "D4_baseline_50P",
+      "D4_output_cadence_50P",
+      "D4_dt_half_50P"
+    ],
+    "pending_rows_at_handoff": [
+      "D4_grid_refined_50P",
+      "D4_larger_box_50P",
+      "D4_absorber_wider_50P"
+    ],
+    "completed_frequency_shift_values": {
+      "reference_100P": -2.150936882840006e-06,
+      "D4_baseline_50P": -2.162695983559886e-06,
+      "D4_output_cadence_50P": -2.1611703237875384e-06,
+      "D4_dt_half_50P": -2.162695983550959e-06
+    }
+  },
+  "preserved_labels": [
+    "TG_NODE_STATE_LOAD_SOURCE_SUPPORTED",
+    "TG_PHASE_TENSION_RELAXATION_SOURCE_SUPPORTED",
+    "TG_STATE_LOAD_FEEDFORWARD_CHAIN_SUPPORTED",
+    "TG_STATE_LOAD_GEOMETRIC_BACKREACTION_DETECTED",
+    "TG_STATE_LOAD_BACKREACTION_ROBUST",
+    "TG_STATE_LOAD_BACKREACTION_ROBUST_BUT_WEAK",
+    "TG_STATE_LOAD_CONTINUOUS_SLOW_DRIFT"
+  ],
+  "not_yet_promoted": [
+    "TG_STATE_LOAD_ORBITALLY_BOUNDED_FREQUENCY_SHIFT_SUPPORTED",
+    "TG_STATE_LOAD_BOUNDED_FEEDBACK_SUPPORTED"
+  ],
+  "runtime_issue_found": {
+    "description": "Evolution was GPU-backed, but live orbital diagnostics pulled full 3D fields to NumPy at checkpoint cadence.",
+    "patched_file": "jax_scout/gravity_TG_B1S_drift_decomposition_gpu.py",
+    "patch": "Added GPU-resident orbital_metrics_jax and routed live run_pair_decomposition diagnostics through it.",
+    "remaining_policy": "Full field evolution and live full-field diagnostics should remain GPU-resident; CPU should receive scalar rows only during simulation."
+  },
+  "handoff_documents": [
+    "docs/gravity_maturity/CLAUDE_HANDOFF_20260715_TG_B1S_AND_RUNTIME.md",
+    "docs/gravity_maturity/GRAVITY_RUNTIME_ARCHITECTURE_HARDENING_PLAN.md",
+    "docs/gravity_maturity/TG_B1S_EQUATION_AUDIT_ADDENDUM_20260715.md",
+    "docs/gravity_maturity/TG_B1S_FREQUENCY_CONTRACT_RESULTS.md",
+    "docs/gravity_maturity/TG_B1S_PROPOSED_CHECKS_CATALOG.md",
+    "docs/RUN_QUEUE.md",
+    "docs/gravity_maturity/TG_B1S_FC1_AND_RUN_QUEUE_BANKING_NOTE_20260715.md"
+  ],
+  "claude_equation_audit_findings": {
+    "non_variational_ledger_semantics": "The frozen TG-B1S phi/T/G model is phenomenological and non-variational; energy ledger closure is diagnostic, not an exact conserved-energy contract.",
+    "sign_chain_design_gate": "The implemented S_state -> T -> G -> A chain creates an A-hill near the node. This is acceptable for self-frequency-shift auditing but must be decided explicitly before two-node attraction tests.",
+    "frequency_contract_status": "FC-1 closed with TG_B1S_FREQUENCY_CONTRACT_SIGN_MATCH_ONLY. The prior sign puzzle is superseded: delta_omega_infty is a phase-difference slope and physical delta_omega is its negative, giving a positive physical shift consistent with A-hill stiffening.",
+    "frequency_contract_mechanism": "Measured physical delta_omega is +2.150936882840006e-06, bracketed by fixed-profile +5.398e-07 and fixed-Q envelope +4.690e-06 limits. Interpretation: quasi-static geometric stiffening with partial profile relaxation.",
+    "dealiasing_note": "The RK4 TG-B1S path does not restore the older C3 dealiasing mask; current evidence does not show aliasing failure, but sharper future TG runs need an explicit dealiasing audit."
+  },
+  "run_queue": {
+    "path": "docs/RUN_QUEUE.md",
+    "status_vocabulary": "PROPOSED -> QUEUED -> ACTIVE -> REVIEW -> DONE / DROPPED / BLOCKED(gate)",
+    "lane_vocabulary": "local-gpu / colab-a100 / cpu",
+    "purpose": "Shared planning queue for proposed runs, tests and checks so agent recommendations are not lost in conversation."
+  },
+  "scientific_boundary": "A passing D4/D5 result would support only a numerically converged and orbitally bounded modal-frequency shift in the tested state-load T/G feedback model. It would not establish gravity, geodesic motion, objective chronology, photon emission, universal free fall, production readiness or IRER validation."
+}

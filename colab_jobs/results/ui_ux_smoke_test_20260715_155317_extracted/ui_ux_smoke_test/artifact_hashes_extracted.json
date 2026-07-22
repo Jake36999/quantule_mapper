@@ -1,0 +1,10 @@
+{
+  "verified": [
+    {
+      "path": "colab_jobs/ui_ux_smoke_job.py",
+      "sha256": "5324046f0fd6091d415b8fc14ccb782075a2b59b75567c352a7eac1abec90ca3",
+      "size_bytes": 4070
+    }
+  ],
+  "bundle_sha256": "59f70ff26d2231dd2a3f582d3243473947ae5f90700d40f1570e2cd1be5ef0b2"
+}

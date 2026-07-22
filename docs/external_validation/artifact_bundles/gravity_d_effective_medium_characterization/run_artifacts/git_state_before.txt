@@ -1,0 +1,79 @@
+ M .gitignore
+ M app.py
+ M docs/IRER_MASTER_HYPOTHESIS_CATALOG.md
+ M docs/evidence_package/00_project_timeline/PROJECT_MATURITY_TIMELINE.md
+ M docs/evidence_package/00_project_timeline/hypothesis_status_snapshot.md
+ M docs/evidence_package/04_phase_d_c2_transport_and_two_body/evidence_index.md
+ M docs/evidence_package/05_phase_d_c3_kg_qball/evidence_index.md
+ M docs/evidence_package/09_machine_readable/evidence_manifest.json
+ M docs/evidence_package/09_machine_readable/run_manifest.csv
+ M docs/evidence_package/EVIDENCE_GAPS.md
+ M docs/external_validation/empirical_comparison_branch/EMP-V5-NG_fig2_fig3_comparison/comparison_report.md
+ M docs/external_validation/empirical_comparison_branch/EMP-V5-NG_fig2_fig3_comparison/comparison_result.json
+ M docs/theory_synthesis/IRER_NUMERICAL_MODEL_AND_MATHS_TRACEBACK.md
+ M docs/theory_synthesis/IRER_SIMULATION_RESULTS_AND_THEORY_STATUS.md
+ M docs/theory_synthesis/IRER_THEORY_AND_CONCEPT_TRANSLATION.md
+ M quantule_viz/__init__.py
+ D run/orchestrator.pid
+ M run/workers.pid
+ M tests/test_e2e_integration.py
+ M tests/test_websocket_api.py
+?? UI/
+?? docs/AUTHOR_RESEARCH_TIMELINE_AND_METHOD.md
+?? docs/GRAVITY_AUDIT_A_RINT_RESULTS.md
+?? docs/GRAVITY_AUDIT_C_CLOCK_RESULTS.md
+?? docs/GRAVITY_AUDIT_D_PROBE_RESULTS.md
+?? docs/GRAVITY_D_EFFECTIVE_MEDIUM_CODEX_REPLICATION.md
+?? docs/GRAVITY_D_EFFECTIVE_MEDIUM_ROBUSTNESS_CLOSURE.md
+?? docs/GRAVITY_D_EFFECTIVE_MEDIUM_ROBUSTNESS_FIRST_PASS.md
+?? docs/IRER_GRAVITY_AUDIT_B_METRIC_DESIGN.md
+?? docs/IRER_GRAVITY_REENTRY_AUDIT_AND_VALIDATION_PLAN.md
+?? docs/PHASE_D_C2_10_ANTIPHASE_COLLISION_RESULTS.md
+?? docs/external_validation/CODEX_EXTERNAL_VALIDATION_REPORT.md
+?? docs/external_validation/DATASET_CANDIDATES.md
+?? docs/external_validation/EXTERNAL_SOURCE_REGISTRY.md
+?? docs/external_validation/EXTERNAL_VALIDATION_AUTOMATION_REPORT.md
+?? docs/external_validation/EXTERNAL_VALIDATION_BEHAVIOURAL_COMPARISON_REPORT.md
+?? docs/external_validation/HARNESS_DEPTH_AUDIT.md
+?? docs/external_validation/IRER_PRESERVATION_RULES_FOR_EXTERNAL_VALIDATION.md
+?? docs/external_validation/VALIDATION_METRIC_CANDIDATES.md
+?? docs/external_validation/empirical_comparison_branch/CODEX_DIGITIZATION_HANDOFF.md
+?? docs/external_validation/empirical_comparison_branch/CODEX_DIGITIZATION_HANDOFF_V5_NG.md
+?? docs/external_validation/empirical_comparison_branch/DATA_SCHEMA.md
+?? docs/external_validation/empirical_comparison_branch/DIGITIZATION_PROVENANCE_TEMPLATE.md
+?? docs/external_validation/empirical_comparison_branch/EMP-V1-MM_CLAUDE_REVIEW.md
+?? docs/external_validation/empirical_comparison_branch/EMP-V1-MM_fig3.csv
+?? docs/external_validation/empirical_comparison_branch/EMP-V1-MM_fig3_comparison/
+?? docs/external_validation/empirical_comparison_branch/EMP-V5-NG_CLAUDE_REVIEW.md
+?? docs/external_validation/empirical_comparison_branch/EMP_V5_NG_DATA_SCHEMA.md
+?? docs/external_validation/empirical_comparison_branch/README.md
+?? docs/external_validation/empirical_comparison_branch/TARGETS.md
+?? docs/external_validation/empirical_comparison_branch/datasets/
+?? docs/external_validation/empirical_comparison_branch/provenance_EMP-V1-MM.md
+?? docs/external_validation/external_data/
+?? docs/external_validation/generated_metrics/
+?? jax_scout/gravity_A1_causal_ablation.py
+?? jax_scout/gravity_A1_matched_density.py
+?? jax_scout/gravity_A1_mirror_ablation.py
+?? jax_scout/gravity_A1_predictive.py
+?? jax_scout/gravity_A2_predictor_coupling.py
+?? jax_scout/gravity_A2b_force_contract.py
+?? jax_scout/gravity_A_rint_diagnostic.py
+?? jax_scout/gravity_B_lapse_precheck.py
+?? jax_scout/gravity_C1_relational_clocks.py
+?? jax_scout/gravity_C2_source_map.py
+?? jax_scout/gravity_C3_backreaction.py
+?? jax_scout/gravity_C_clock_experiment.py
+?? jax_scout/gravity_D_dynamics_characterization_gpu.py
+?? jax_scout/gravity_D_effective_medium_replicate.py
+?? jax_scout/gravity_D_neutral_probe.py
+?? jax_scout/gravity_D_neutral_probe_gpu.py
+?? jax_scout/gravity_D_robustness_closure_gpu.py
+?? jax_scout/gravity_D_robustness_gpu.py
+?? jax_scout/phase_d_c2_10_antiphase_collision.py
+?? quantule_viz/visual_analysis.py
+?? tests/test_external_validation_harness.py
+?? tests/test_visual_analysis.py
+?? tools/create_desktop_shortcut.ps1
+?? tools/deploy_webapp.ps1
+?? tools/external_validation/

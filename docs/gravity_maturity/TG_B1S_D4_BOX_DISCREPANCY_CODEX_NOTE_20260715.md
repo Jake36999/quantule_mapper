@@ -1,0 +1,159 @@
+# TG-B1S D4 Larger-Box Discrepancy: Codex Note
+
+Author: Codex  
+Timestamp: 2026-07-15  
+Scope: handoff clarification after Claude's FC-box / SCREEN-1 discriminator. This does not change model equations, labels or D4 artifacts.
+
+## Current Formal State
+
+D4 remains formally failed:
+
+```text
+TG_STATE_LOAD_D4_NUMERICAL_VALIDATION_FAILED
+```
+
+Failed row:
+
+```text
+D4_larger_box_50P
+```
+
+Failure:
+
+```text
+frequency_scale
+```
+
+D5 remains blocked.
+
+## Claude Box-Dependence Result
+
+Claude's analytic geometry sweep is recorded in:
+
+```text
+docs/gravity_maturity/TG_B1S_BOX_DEPENDENCE_RESULTS.md
+sweep_runs/TG_B1S_BOX_DEPENDENCE_20260715_222213
+```
+
+Key result:
+
+| geometry | N | L | analytic fixed-profile shift / baseline | measured shift / baseline |
+| --- | ---: | ---: | ---: | ---: |
+| baseline | 48 | 10 | `1.000` | `1.000` |
+| grid_refined | 56 | 10 | `1.000` | `1.000` |
+| larger_box | 56 | 12 | `1.319` | `0.394` |
+| larger_box_fine | 68 | 12 | `1.319` | not run |
+| baseline_fine | 68 | 10 | `1.000` | not run |
+
+Interpretation accepted by Codex:
+
+- The discrepancy is not explained by grid resolution.
+- The local quasi-static screened stiffening mechanism predicts the opposite box trend.
+- The larger-box failure should be reviewed as a box/comparability/dynamic-measurement discrepancy, not as a generic runaway, structural drift or boundary-flux failure.
+
+## Important Implementation Clarification
+
+The D4 larger-box measurement already uses a same-geometry feedback-off trajectory internally.
+
+In `jax_scout/gravity_TG_B1S_D4_rows_gpu.py`, each D4 row:
+
+1. builds a per-row config;
+2. solves the Q-ball for that same config;
+3. evolves a feedback-off state and a full-loop state with that same config;
+4. computes:
+
+```text
+delta_theta = (theta_full - theta_full[0]) - (theta_off - theta_off[0])
+```
+
+and then fits:
+
+```text
+delta_omega_infty
+```
+
+Therefore, the phrase "compare against a same-geometry feedback-off baseline" should not mean rerunning the basic full-minus-off subtraction. That subtraction already exists in `D4_larger_box_50P`.
+
+The remaining comparability question is subtler:
+
+```text
+Is the L=12 full-minus-off frequency shift comparable to the fixed L=10
+reference gate, and if not, what row-level quantity explains the scale change?
+```
+
+## Refined Next Review
+
+The immediate review should be CPU analysis of existing D4 artifacts and source code, not a new field evolution.
+
+Recommended diagnostics:
+
+1. Compare per-geometry Q-ball branch properties:
+
+```text
+charge
+energy
+node width
+core amplitude
+profile overlap with its own reference
+gradient energy
+state-load integral
+S_state spatial distribution
+```
+
+2. Compare per-geometry T/G response:
+
+```text
+T_peak
+G_peak
+T/G approach-to-fixed-profile slopes
+late-time T/G values
+```
+
+3. Compare phase fit windows:
+
+```text
+delta_theta(t)
+early slope
+late slope
+fit residual
+instantaneous frequency variance
+```
+
+4. Check whether the L=12 row's smaller shift is caused by:
+
+```text
+modal projection convention
+changed stationary branch
+charge/norm normalization difference
+source normalization mismatch
+absorber-position coupling
+T/G transient dynamics
+diagnostic fit-window artifact
+```
+
+5. If existing artifacts cannot answer this, queue a new preregistered row. Do not reinterpret the failed D4 gate by changing tolerance after the fact.
+
+## Current Evidence Boundary
+
+The analytic FC-box result strengthens mechanism understanding but does not close D4.
+
+Current accurate statement:
+
+```text
+D4 failed because the L=12 row's same-geometry full-minus-off frequency
+shift is much smaller than the L=10 reference, despite clean structural,
+ledger, boundary and boundedness diagnostics. Analytic fixed-profile
+screened stiffening predicts a larger shift at L=12, so the drop is not
+explained by resolution or by the local quasi-static mechanism.
+```
+
+## What Not To Do
+
+Do not:
+
+- mark D4 as passed;
+- run D5 before resolving or explicitly accepting the D4 failure;
+- relax the `0.60` tolerance because the row was close;
+- rerun a basic same-geometry full-minus-off subtraction and treat it as new;
+- promote bounded feedback from this result.
+

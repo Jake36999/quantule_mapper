@@ -1,0 +1,33 @@
+{
+  "args": [
+    "--seps",
+    "3.0",
+    "--L",
+    "20",
+    "--T",
+    "180"
+  ],
+  "command": [
+    "/usr/bin/python3",
+    "-u",
+    "jax_scout/gravity_TG_B2_definitive_force.py",
+    "--seps",
+    "3.0",
+    "--L",
+    "20",
+    "--T",
+    "180",
+    "--out",
+    "/content/qm_job/results/cl_tg_r_robustness/rows/r1_box_L20_sep3"
+  ],
+  "compare_to_baseline_sep": 3.0,
+  "drift_tolerance": 0.2,
+  "duration_seconds": 3.813398838043213,
+  "log_path": "logs/r1_box_L20_sep3.log",
+  "phase": "R1_convergence",
+  "reason": "larger-box sentinel",
+  "return_code": 1,
+  "row_id": "r1_box_L20_sep3",
+  "status": "FAILED_SUBPROCESS",
+  "summary_path": "rows/r1_box_L20_sep3/summary.json"
+}

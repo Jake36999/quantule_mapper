@@ -12,6 +12,7 @@ from .renderers import (
     core_characterize,
     emergence_sequence,
     feb_bound_state,
+    field_analysis_suite,
     phase_c,
     phase_c_current_closure,
     phase_c_current_closure_dynamics,
@@ -97,6 +98,21 @@ def run_emergence_sequence(args: argparse.Namespace) -> int:
         fps=int(args.fps),
         spatial_stride=int(args.spatial_stride),
         rho_percentile=float(args.rho_percentile),
+    )
+    for output in outputs:
+        print(output)
+    return 0
+
+
+def run_field_suite(args: argparse.Namespace) -> int:
+    outputs = field_analysis_suite.render(
+        args.source,
+        outdir=args.outdir,
+        overwrite=bool(args.overwrite),
+        fps=int(args.fps),
+        rho_percentile=float(args.rho_percentile),
+        topology_quantile=float(args.topology_quantile),
+        max_gif_frames=int(args.max_gif_frames),
     )
     for output in outputs:
         print(output)
@@ -192,6 +208,19 @@ def build_parser() -> argparse.ArgumentParser:
     p_emerge.add_argument("--spatial-stride", type=int, default=1, help="Optional spatial downsampling stride.")
     p_emerge.add_argument("--rho-percentile", type=float, default=99.7, help="Percentile used for fixed rho color scaling.")
     p_emerge.set_defaults(func=run_emergence_sequence)
+
+    p_field = sub.add_parser(
+        "field-suite",
+        help="Render topology, vector, density, energy, and GIF outputs from a saved HDF5/NPZ field artifact.",
+    )
+    p_field.add_argument("source", help="HDF5/NPZ artifact path, or a directory containing one.")
+    p_field.add_argument("--outdir", required=True, help="Output directory for the visual-analysis suite.")
+    p_field.add_argument("--overwrite", action="store_true", help="Replace existing generated outputs.")
+    p_field.add_argument("--fps", type=int, default=8, help="Density GIF frames per second.")
+    p_field.add_argument("--rho-percentile", type=float, default=99.7, help="Density color scale percentile.")
+    p_field.add_argument("--topology-quantile", type=float, default=0.995, help="Density quantile for active-set topology.")
+    p_field.add_argument("--max-gif-frames", type=int, default=160, help="Maximum frames to include in the density GIF.")
+    p_field.set_defaults(func=run_field_suite)
 
     p_structured = sub.add_parser(
         "phase-c-structured",

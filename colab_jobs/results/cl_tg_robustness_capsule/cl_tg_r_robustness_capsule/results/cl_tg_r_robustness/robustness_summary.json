@@ -1,0 +1,212 @@
+{
+  "assessment": {
+    "completed_rows": [
+      "r1_grid_N96_sep3",
+      "r1_dt_half_sep3"
+    ],
+    "failed_rows": [
+      "r1_box_L20_sep3"
+    ],
+    "verdict": "TG_R_ROBUSTNESS_INCOMPLETE"
+  },
+  "baseline": {
+    "baseline_id": "tg_b2_definitive_force_20260716_113033",
+    "baseline_rows": [
+      {
+        "F_R_hill_avg": 5.4500159344052916e-05,
+        "F_R_off_avg": 0.0,
+        "F_R_well_avg": -5.4501234166498155e-05,
+        "F_R_well_std": 7.950322869780782e-06,
+        "charge_ok": true,
+        "gates_pass": true,
+        "nodes_distinct": true,
+        "off_null_ok": true,
+        "sep": 3.0,
+        "sign_reverses": true,
+        "well_attracts": true
+      },
+      {
+        "F_R_hill_avg": 4.852472172424024e-05,
+        "F_R_off_avg": 0.0,
+        "F_R_well_avg": -4.852570312000416e-05,
+        "F_R_well_std": 8.38309624534848e-06,
+        "charge_ok": true,
+        "gates_pass": true,
+        "nodes_distinct": true,
+        "off_null_ok": true,
+        "sep": 4.0,
+        "sign_reverses": true,
+        "well_attracts": true
+      }
+    ],
+    "boundary": "Mirror-only TG-B2 A-well branch; frozen TG-B1S untouched; near-field screened result; not gravity, UFF, or IRER validation.",
+    "command": "python jax_scout/gravity_TG_B2_definitive_force.py --seps 3.0,4.0 --T 180 --out /content/qm_job/results/cl_tg_b2_definitive",
+    "config": {
+      "L": 16.0,
+      "N": 64,
+      "T": 180.0,
+      "cool_T": 0.0,
+      "dt": 0.002,
+      "epsilon_G": 0.06,
+      "f_discard": 0.4,
+      "sample_dt": 0.5
+    },
+    "reviewed_science_status": "TG_B2_DEFINITIVE_AWELL_ATTRACTION_CONFIRMED",
+    "source": {
+      "archive_sha256": "f678d77ec5e02382005148ccab5a84d5fae4df3c6dc8a71482f433514ab4180e",
+      "capsule_dir": "colab_jobs/Colab_runs/cl_tg_b2_definitive_force_20260716_113033",
+      "first_pass_review": "colab_jobs/Colab_runs/cl_tg_b2_definitive_force_20260716_113033/FIRST_PASS_REVIEW_20260716.md",
+      "results_doc": "docs/gravity_maturity/TG_B2_TWO_NODE_FORCE_RESULTS.md"
+    }
+  },
+  "boundary": "Mirror-only robustness check; frozen TG-B1S and TG-B2 protected modules unchanged; not gravity, UFF, or IRER validation.",
+  "finished_utc": "2026-07-17T11:21:49Z",
+  "notes": [
+    "R1 is a compact one-separation sentinel for N, dt and box robustness, compared to sep=3.0 baseline.",
+    "R2 uses epsilon values 0.03, 0.06 baseline, and 0.12 with a through-origin linear fit.",
+    "Auto-verdict is an infrastructure/science-check label; primary review remains required."
+  ],
+  "rows": [
+    {
+      "args": [
+        "--seps",
+        "3.0",
+        "--N",
+        "96",
+        "--T",
+        "180"
+      ],
+      "command": [
+        "/usr/bin/python3",
+        "-u",
+        "jax_scout/gravity_TG_B2_definitive_force.py",
+        "--seps",
+        "3.0",
+        "--N",
+        "96",
+        "--T",
+        "180",
+        "--out",
+        "/content/qm_job/results/cl_tg_r_robustness/rows/r1_grid_N96_sep3"
+      ],
+      "compare_to_baseline_sep": 3.0,
+      "drift_tolerance": 0.2,
+      "duration_seconds": 3642.630120754242,
+      "log_path": "logs/r1_grid_N96_sep3.log",
+      "metrics": {
+        "F_R_hill_avg": 5.45282371341913e-05,
+        "F_R_hill_std": 7.956092404915266e-06,
+        "F_R_off_avg": 0.0,
+        "F_R_well_avg": -5.452931236310377e-05,
+        "F_R_well_std": 7.956136379591495e-06,
+        "charge_ok": true,
+        "gates_pass": true,
+        "n": 361,
+        "nodes_distinct": true,
+        "off_null_ok": true,
+        "sep": 3.0,
+        "sep_min": 2.9251837223243857,
+        "sign_reverses": true,
+        "t_end": 180.0,
+        "well_attracts": true,
+        "well_hill_antisym_rel": 1.9718365515245898e-05,
+        "well_negative": true
+      },
+      "phase": "R1_convergence",
+      "reason": "grid refinement sentinel",
+      "return_code": 0,
+      "row_id": "r1_grid_N96_sep3",
+      "script_verdict": "TG_B2_DEFINITIVE_AWELL_ATTRACTION_CONFIRMED",
+      "status": "COMPLETE",
+      "summary_path": "rows/r1_grid_N96_sep3/summary.json"
+    },
+    {
+      "args": [
+        "--seps",
+        "3.0",
+        "--dt",
+        "0.001",
+        "--T",
+        "180"
+      ],
+      "command": [
+        "/usr/bin/python3",
+        "-u",
+        "jax_scout/gravity_TG_B2_definitive_force.py",
+        "--seps",
+        "3.0",
+        "--dt",
+        "0.001",
+        "--T",
+        "180",
+        "--out",
+        "/content/qm_job/results/cl_tg_r_robustness/rows/r1_dt_half_sep3"
+      ],
+      "compare_to_baseline_sep": 3.0,
+      "drift_tolerance": 0.2,
+      "duration_seconds": 2726.4668986797333,
+      "log_path": "logs/r1_dt_half_sep3.log",
+      "metrics": {
+        "F_R_hill_avg": 5.450015934412122e-05,
+        "F_R_hill_std": 7.950279181313958e-06,
+        "F_R_off_avg": 0.0,
+        "F_R_well_avg": -5.450123416655863e-05,
+        "F_R_well_std": 7.950322869774316e-06,
+        "charge_ok": true,
+        "gates_pass": true,
+        "n": 361,
+        "nodes_distinct": true,
+        "off_null_ok": true,
+        "sep": 3.0,
+        "sep_min": 2.982444806208853,
+        "sign_reverses": true,
+        "t_end": 180.0,
+        "well_attracts": true,
+        "well_hill_antisym_rel": 1.9721066024442024e-05,
+        "well_negative": true
+      },
+      "phase": "R1_convergence",
+      "reason": "timestep-halved sentinel",
+      "return_code": 0,
+      "row_id": "r1_dt_half_sep3",
+      "script_verdict": "TG_B2_DEFINITIVE_AWELL_ATTRACTION_CONFIRMED",
+      "status": "COMPLETE",
+      "summary_path": "rows/r1_dt_half_sep3/summary.json"
+    },
+    {
+      "args": [
+        "--seps",
+        "3.0",
+        "--L",
+        "20",
+        "--T",
+        "180"
+      ],
+      "command": [
+        "/usr/bin/python3",
+        "-u",
+        "jax_scout/gravity_TG_B2_definitive_force.py",
+        "--seps",
+        "3.0",
+        "--L",
+        "20",
+        "--T",
+        "180",
+        "--out",
+        "/content/qm_job/results/cl_tg_r_robustness/rows/r1_box_L20_sep3"
+      ],
+      "compare_to_baseline_sep": 3.0,
+      "drift_tolerance": 0.2,
+      "duration_seconds": 3.813398838043213,
+      "log_path": "logs/r1_box_L20_sep3.log",
+      "phase": "R1_convergence",
+      "reason": "larger-box sentinel",
+      "return_code": 1,
+      "row_id": "r1_box_L20_sep3",
+      "status": "FAILED_SUBPROCESS",
+      "summary_path": "rows/r1_box_L20_sep3/summary.json"
+    }
+  ],
+  "started_utc": "2026-07-17T09:35:36Z",
+  "verdict": "TG_R_ROBUSTNESS_INCOMPLETE"
+}

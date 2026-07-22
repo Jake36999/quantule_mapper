@@ -1,0 +1,99 @@
+{
+  "bounded_labels": [
+    "D_EFFECTIVE_MEDIUM_DYNAMICS_CHARACTERIZED",
+    "D_FINITE_WIDTH_WAVE_FORCE_CONFIRMED",
+    "D_GRADIENT_ENERGY_WEIGHTED_FORCE_SUPPORTED",
+    "D_NEWTONIAN_COMPARISON_REJECTED",
+    "D_NO_UNIVERSAL_FREE_FALL_LIMIT_FOUND",
+    "D_REDUCED_MODEL_PARTIAL"
+  ],
+  "best_model": {
+    "model": "M0_Kgrad_gradN_reduced",
+    "feature": "feature_K_gradN",
+    "n": 193,
+    "coefficient": 0.2800836375056448,
+    "RMSE": 0.011398278374696678,
+    "normalized_RMSE": 0.09307384958591862,
+    "median_absolute_error": 0.002359942129442772,
+    "maximum_error": 0.0709655247129955,
+    "R2": 0.9913372585232578,
+    "radial_sign_accuracy": 0.9533678756476683
+  },
+  "falsification_results": [
+    {
+      "test": "probe_structure_dependence",
+      "n": 5,
+      "force_min": -0.010508342149979833,
+      "force_max": -0.006211596169843487,
+      "relative_spread": 0.545667105716804,
+      "result": "structure_dependent"
+    },
+    {
+      "test": "shell_interior",
+      "n": 7,
+      "interior_max_abs_force": 0.030907622228041737,
+      "result": "LOCAL_MEDIUM_SHELL_RESPONSE"
+    },
+    {
+      "test": "newtonian_exterior_decay",
+      "n": 3,
+      "far_force": 1.6622404314605333e-13,
+      "result": "compact_tail_decay"
+    },
+    {
+      "test": "source_free_background",
+      "n": 3,
+      "max_abs_force": 0.0,
+      "result": "zero_force"
+    },
+    {
+      "test": "weak_field_superposition",
+      "n": 4,
+      "note": "combined two-source force map computed; one-source additivity is approximated in model comparison",
+      "result": "quantified_not_promoted"
+    }
+  ],
+  "numerical_validation": [
+    {
+      "case": "E7_baseline",
+      "n": 3,
+      "radial_force_min": -0.006211596169843499,
+      "radial_force_max": -0.006211596169843487,
+      "relative_force_spread": 1.9549024115235762e-15,
+      "classification_changed": 0.0,
+      "max_norm_error": 4.440892098500626e-16,
+      "max_energy_error": 3.3306690738754696e-16,
+      "max_force_abs_residual": 8.211273582038621e-17
+    },
+    {
+      "case": "E7_strong",
+      "n": 3,
+      "radial_force_min": -0.010672967154244234,
+      "radial_force_max": -0.01067296715424421,
+      "relative_force_spread": 2.275480502534636e-15,
+      "classification_changed": 0.0,
+      "max_norm_error": 2.220446049250313e-16,
+      "max_energy_error": 2.220446049250313e-16,
+      "max_force_abs_residual": 6.859060593075985e-17
+    },
+    {
+      "case": "E7_compact",
+      "n": 3,
+      "radial_force_min": -0.003788022439976239,
+      "radial_force_max": -0.003788022439948279,
+      "relative_force_spread": 7.381117653877826e-12,
+      "classification_changed": 0.0,
+      "max_norm_error": 4.440892098500626e-16,
+      "max_energy_error": 7.327471962526033e-15,
+      "max_force_abs_residual": 8.328104476519418e-14
+    }
+  ],
+  "artifact_path": "sweep_runs/GRAVITY_D_DYNAMICS_CHARACTERIZATION_GPU_20260713_221727",
+  "rejected_interpretations": [
+    "gravity confirmation",
+    "geodesic validation",
+    "universal free fall",
+    "IRER gravity validation",
+    "production readiness"
+  ]
+}

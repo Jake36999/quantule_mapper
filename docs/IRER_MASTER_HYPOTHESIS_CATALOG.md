@@ -3,7 +3,14 @@
 **Purpose:** a single, centralized record of every hypothesis the project has tested — confirmed, falsified, null,
 retracted, or open — so the whole arc is legible at a glance. Includes the quickly-falsified and the
 instrument-bug-invalidated ones on purpose: the nulls and retractions are as much of the map as the positives.
-Last updated at the C3-collision-phase-diagram milestone.
+Last updated **2026-07-18** after the TG-B1S/TG-B2 temporal-geometric dual-substrate implementation (§8C), Phase-R
+robustness, the MC concept cross-maps, clock-migration and source-semantics sprints, the TG-B2 characterization, and
+three independent review audits (external-physics-object comparison; consolidated progress/validation audit;
+provenance×workflow assessment). Those audits' central finding is folded into the §8C verdicts and §11:
+**numerical robustness currently leads theory fidelity — several headline characterizations advanced ahead of quieter
+validation gates, and some prior prose (mass-independence, force-range, "independent" confirmations, the MC-1 yield
+reframe) is stronger than the data support and is corrected here.** (Prior "Last updated 2026-07-14": Gravity D
+characterization + Codex TG feedback-loop formalization.)
 
 ## 0. Executive assessment
 Two of the three IRER simulation sectors are answered; the third is scoped and paused.
@@ -12,10 +19,23 @@ Two of the three IRER simulation sectors are answered; the third is scoped and p
 - **Transport/coupling sector (Phase D): ANSWERED POSITIVE across two conservative substrate families.** After a
   pivotal instrument bug was found and fixed (C2.6), true solitons (NLS) translate at exactly v=2Dk, and Q-balls
   (Klein–Gordon) transport inertially and are VK-stable. Both substrates share the same two-body relational law
-  (π/2 phase-force crossover; capture-dominated collisions with a narrow anti-phase transmission channel).
-- **Gravity-like sector: SCOPED + PAUSED.** The geometry-density channel is *live* (a load produces a
-  geometry-dependent response) but the production Ω²(ρ) is a saturation cliff, not a graded potential; a clean rung
-  requires a stable-overdense-load-on-ρ_vac-background regime that does not yet exist.
+  (π/2 phase-force crossover) AND the same collision phase×speed *diagram* (RUN-2): capture is generic, with an
+  exact-anti-phase destructive-interference node that transmits (pass-through) at intermediate speed and captures
+  above a sharp threshold — cross-substrate universality now spans the full collision structure, not just the static
+  force.
+- **Gravity-like sector: SPATIAL MIRROR CHARACTERIZED + PRODUCTION CLOSED.** The standalone Gravity D branch now
+  has a reproduced, converged, robustness-closed and dynamically characterized spatial effective-medium force:
+  `F = -D integral grad(N)|grad psi|^2 dV`. It is finite-width, probe-structure-dependent and non-Newtonian. The
+  production gravity ladder remains closed; temporal lapse, nonlocal source fields and IRER source semantics remain
+  separate open hypotheses.
+- **Temporal-geometric dual-substrate (TG-B1S/B2): FIRST CLOSED LOOP IMPLEMENTED; ONE ROBUST, NON-GRAVITATIONAL
+  RESULT (§8C).** The full chain `S_state → T → G → A(G) → force` now runs dynamically. On the theory-faithful
+  A-well branch it produces a numerically-hardened, externally-legible **in-phase inter-node attraction** — a
+  normalized-charge, extended-source, screened-medium force (BEC smeared-Yukawa family), **not gravity** (source
+  charge not mass-proportional; no 1/r²; no UFF; no N_t lapse on the field). It does **not yet** establish secular
+  binding, an alignment law, a resolution-rate mechanism, or a yield transition. **Numerical robustness leads theory
+  fidelity**; the next work is to factor source/probe/observable apart and close the preregistered contracts (§11),
+  not to tune toward gravity.
 - **Scientific posture:** no matter claim, no gravity claim, no emergent-physics claim. Every "transport",
   "interaction", "response" is a specific measured observable with conservation telemetry. Three instrument bugs were
   caught by chasing contradictions rather than shipping convenient nulls.
@@ -89,8 +109,13 @@ incompatible in this sector. Every non-stability structural hypothesis (prime/TD
 | C2.8/8b | two-node elasticity from projected-density peak-tracking | **INCONCLUSIVE** | fragile tracker (unphysical e=3.21; false-repel static) |
 | C2.9 | (robust momentum observable) static pair force has a π/2 crossover | **CONFIRMED** | attract Δφ<π/2, repel >π/2, crossover π/2 |
 | C2.9b | collisions are capture-dominated (non-integrable binding) | **CONFIRMED** | asym 3/2 & 4/3 both capture, mass/P conserved |
+| C2.10 (RUN-2) | the NLS anti-phase collision has the same node channel as C3 | **CONFIRMED** | in-phase captures at all speeds; anti-phase = BOUNCE (closing≲0.42) → PASS_THROUGH (0.47–0.57) → CAPTURE (≳0.61); phase-driven (in-phase control captures where anti-phase bounces) |
+| C2.10b (RUN-2) | the NLS substrate has an anti-phase transmission (pass-through) window | **CONFIRMED** | cores reach the midplane node (sep_min≈0.1) & re-emerge coherently, ≤7% radiation; capture threshold sharp, bracketed to closing (0.565, 0.660) |
+| C2.10c (RUN-2) | the collision phase×speed *diagram* (not just the static law) is cross-substrate universal | **CONFIRMED** | NLS reproduces the C3 structure — capture-generic + exact-anti-phase pass-through→capture |
 **Sector verdict:** the conservative NLS substrate **supports clean coherent transport** (v=2Dk) for solitons that
-satisfy s<0 + box-fit; two-body dynamics = phase-force (π/2) + capture. feb/a\* itself is structureless there.
+satisfy s<0 + box-fit; two-body dynamics = phase-force (π/2) + capture, with an exact-anti-phase node channel
+(pass-through → capture) that mirrors C3 — the whole collision diagram is cross-substrate universal (RUN-2). feb/a\*
+itself is structureless there.
 
 ## 6. Geometry contract (Codex adjointness thread)
 | # | hypothesis | verdict | evidence |
@@ -117,7 +142,9 @@ satisfy s<0 + box-fit; two-body dynamics = phase-force (π/2) + capture. feb/a\*
 | C3-11 | the static force law governs the collision outcome | **FALSIFIED** | static crossover π/2 ≠ collision boundary; only the exact-anti-phase node survives |
 **Sector verdict:** the KG substrate is genuinely conservative, hosts a **VK-stable Q-ball that transports
 inertially**, and its collisions form a **relational phase diagram** — capture generic, transmission a narrow
-anti-phase node channel. Same π/2 two-body force as NLS (universality); cleaner conservation.
+anti-phase node channel. Same π/2 two-body force as NLS (universality); cleaner conservation. **RUN-2 (C2.10)
+confirmed the NLS substrate reproduces this collision diagram (anti-phase pass-through → capture), so the
+universality extends from the static two-body law to the full collision phase×speed structure.**
 
 ## 8. Gravity-like sector (geometry-density)
 | # | hypothesis | verdict | evidence |
@@ -131,6 +158,86 @@ anti-phase node channel. Same π/2 two-body force as NLS (universality); cleaner
 Re-entry condition: a **validated stable-overdense-load-on-ρ_vac-background** regime (a research sub-project) before
 any rung B. Cautious framing preserved: *dense sequential geometry-mediated interaction around coherent mass-like
 field loads*, not "mass attracts mass"; not yet an emergent-gravity claim.
+
+## 8A. Gravity D spatial effective-medium mechanism (standalone mirror)
+| # | hypothesis | verdict | evidence |
+|---|---|---|---|
+| GR-D-1 | bounded spatial coefficient gradients generate a finite-width wave force under `i d_t psi = -D div(N grad psi)` | **CONFIRMED / SUPPORTED** | GPU replication, convergence, robustness closure, and exact force contract: `d<P>/dt = -D integral grad(N)|grad psi|^2 dV` |
+| GR-D-2 | the force is well described by a gradient-energy-weighted coarse-grained law | **SUPPORTED (PARTIAL REDUCED MODEL)** | dynamics characterization: `F_cg ~= -D K_grad grad N(R)`; best model R2=0.9913, normalized RMSE=0.0931; 6/193 sign errors in far-tail/near-null rows |
+| GR-D-3 | the characterized spatial operator produces a Newtonian exterior vacuum field | **REJECTED FOR THIS MODEL** | inverse-square benchmark R2=0.0206; compact-source far exterior force ~1.66e-13 |
+| GR-D-4 | the characterized spatial operator obeys Newtonian shell-theorem behaviour | **REJECTED FOR THIS MODEL** | smooth shell interior shows local-medium response; interior force max ~3.09e-02 |
+| GR-D-5 | the characterized spatial operator establishes universal free fall | **REJECTED FOR THIS MODEL** | probe internal structure changes force by ~54.6%; width/gradient-energy dependence is intrinsic |
+| GR-D-6 | a global point-ray description explains the characterized dynamics | **REJECTED FOR THIS MODEL** | ray benchmark has R2=-0.1085 and sign accuracy ~0.109 globally |
+| GR-D-7 | metric-consistent temporal lapse, nonlocal environment field, and IRER-derived source semantics explain gravity | **OPEN / SEPARATE HYPOTHESES** | not tested by the spatial effective-medium campaign; production gravity remains closed |
+
+**Sector update:** the standalone spatial effective-medium branch is now characterized, but it is not Newtonian or
+relativistic gravity. It is a robust finite-width wave response to bounded coefficient gradients. Do not promote it
+as geodesic validation, temporal-lapse validation, universal free fall, IRER gravity-source confirmation, or
+production readiness.
+
+## 8B. Temporal-geometric feedback loop (Codex formalization addendum, 2026-07-14)
+
+This section records an additive formalization pass, not a new simulation result. The source trace is
+`docs/theory_synthesis/IRER_TEMPORAL_GEOMETRIC_FEEDBACK_LOOP.md`. Conceptual authorship remains Jake McIntosh; Codex's
+role was to consolidate notation, map the hypothesis to existing evidence, and define falsifiable next tests.
+
+| # | hypothesis | verdict | evidence / boundary |
+|---|---|---|---|
+| TG-1 | OIW phase-locking, RD/PAS rise, chronology load, geometric strain, and outgoing release form one closed temporal-geometric feedback-loop hypothesis | **OPEN / FORMALIZED** | original provenance contains the ingredients across OIW/RD/PAS, Quantules, time-as-resolution, Chrono-Coherence, Payan states, FMIA, manifold deformation, and splash-like redistribution; no full closed-loop solver yet |
+| TG-2 | the current C-series, Gravity D, bridge, or G1 runs already implement the full `Psi -> R_res -> T -> G -> Psi` recursion | **REJECTED AS CURRENT STATUS** | existing work tests limbs separately: temporal throttling, temporal KG response, spatial effective-medium force, and temporal-spatial decomposition |
+| TG-3 | dynamic temporal load can drive a geometric response that emits or modulates an outgoing perturbation at a measurable frequency | **OPEN / DESIGN-ONLY** | proposed TG-A/TG-B scout; no modern frequency-gated two-field run yet |
+| TG-4 | FMIA bridges/wires emerge as low-resistance decay routes under dynamic temporal-geometric stress | **OPEN / DESIGN-ONLY** | relates to FMIA and Informational Parallels, but previous tensor-routing/Payan predictors were null in the earlier static/proxy sector |
+| TG-5 | photon-like emission is a minimal geometric relaxation mode, and emission pattern is a source-geometry projection | **OPEN / UNDEFINED OBSERVABLE** | recorded as `PHOTON_AS_MINIMAL_GEOMETRIC_RELAXATION_MODE` and `EMISSION_PATTERN_AS_SOURCE_GEOMETRY_PROJECTION`; requires precise outgoing-field observable before simulation |
+
+**Current boundary:** this loop is relevant to the gravity-like sector because it is the first explicit notation for
+mutual chronology/geometry feedback. It does not reopen production gravity, validate photons, validate geodesic
+motion, or alter the banked Gravity D interpretation.
+
+## 8C. Temporal-geometric dual-substrate — IMPLEMENTED loop (TG-B1S / TG-B2), 2026-07-14 → 07-18
+
+The TG-1 loop (§8B) is now partly **built and run**: `state=(φ,π,T,V_T,G,V_G)`, chain `S_state → T → G → A(G) → δφ`,
+with damped 2nd-order T/G fields and symmetric `−κTG` exchange. Two branches: **TG-B1S** (`A=exp(−ε_G G)` → A-hill;
+the numerically-safe scaffold, later found to be the *anti-throttling* polarity) and **TG-B2** (`A=exp(+ε_G G)` →
+A-well; the theory-faithful polarity: dense load → slower chronology → attraction). Conceptual authorship Jake;
+implementation/measurement/review AI. Verdict language reflects three independent review audits (2026-07-18) that
+corrected several over-strong prior labels — kept here deliberately, per the "nulls and retractions are the map" rule.
+
+| # | hypothesis | verdict | evidence / boundary |
+|---|---|---|---|
+| TG-S1 | `S_state` (normalized energy+charge density) is an admissible **node state-load** source | **CONFIRMED (as a load)** | TG-S semantics: stable/nonzero on stationary node, phase/translation-invariant, frozen `S0`=135.686. It is a *load*, explicitly **NOT** a completed-resolution rate |
+| TG-S2 | phase-locking (`L_lock`) operationalizes as a source | **FALSIFIED (semantics)** | failed the TG-S separation gate |
+| TG-S3 | phase-tension relaxation (`R_relax`) is admissible as a resolution-**rate** source | **CONFIRMED (admissible-for-design only)** | passed the TG-S semantics bridge — but NOT shown to be the recovered `R_coh`, nor extensive in mass, nor correctly normalized; needs dimensional/null/sign/lag/energy contracts before B3 wiring |
+| TG-B1S-1 | the `S_state→T→G→A→δφ` feed-forward chain is intervention-clean | **CONFIRMED** | source/temporal/geometric-off remove the right fields; translation-covariant; global-phase-invariant |
+| TG-B1S-2 | the loop produces a bounded geometric backreaction | **CONFIRMED (robust but weak)** | SNR ~132; vanishes at zero coupling; smooth λ ladder; `STABLE_SHIFTED_NODE` |
+| TG-B1S-3 | the single-node modal frequency shift (+2.15e-6) is a stable, box-independent, converged result | **FAILED (D4)** | D4 validation 5/6 pass; larger-box (L=12) fails the frequency-scale gate → `TG_STATE_LOAD_LONG_TIME_DRIFT_UNRESOLVED`. On the **A-hill scaffold** branch (control sign), not the live A-well direction |
+| TG-B1S-4 | the frequency shift is a **temporal** (time-dilation) effect | **FALSIFIED / REFRAMED** | FC-1 frequency contract: the shift is **geometric** (A-stiffening), bracketed by fixed-profile (0.25×) and relaxed (2.18×) analytic limits; the earlier sign "puzzle" was a reporting-convention artifact. **No `N_t` lapse acts on φ** (code-verified) — temporal effects reach the field only via geometry |
+| TG-B1S-5 | the D4 larger-box failure is a resolution or local-mechanism effect | **FALSIFIED** | box-dependence discriminator: dx-independent (not resolution); local mechanism predicts the opposite sign → comparability/absorber/dynamical. It is the A-hill scaffold's frequency observable, **distinct** from the production saturation cliff (§8) and from the A-well direction |
+| TG-B2-1 | the theory-faithful **A-well** polarity produces in-phase inter-node **attraction** (dynamical body force) | **CONFIRMED (implementation, robust)** | `<F_R_well>` negative at 100% of settled samples (both seps); sign-flip control (A-hill repels); exact off-null. Validates the A-well *implementation + robustness*, **not** the theoretical polarity independently |
+| TG-B2-2 | that attraction survives Phase-R robustness | **CONFIRMED (scoped)** | grid N96, dt/2, larger-box L20 (2.45% drift), ε_G-linear (0.5×/1×/2×) all pass **for the in-phase body force**. SCOPE NOTE: normalization-consistency, dealiasing, placement are **not all closed**; phase-invariance is a *distinct physical hypothesis* (TG-B2-4), not a numerical control |
+| TG-B2-3 | the attraction produces secular **pair binding** | **UNRESOLVED (attractive lean)** | body force attracts + separation closes (both cool_T) — but these are **downstream of the same trajectory, not independent votes**; the momentum proxy is invalid as a direction meter; cooling@T=40 did not quiet the breathing. Binding needs bound-state energy over turning cycles + a successful cooling precondition |
+| TG-B2-4 | the loop force follows a clean alignment law `a·cos(Δφ)+b` | **FALSIFIED (dynamically)** | quasi-static fit failed free dynamics: attract@0, **REPEL@π/2**, noise beyond. Δφ≠0 drives relative motion (max@π/2) → motion-confounded; only Δφ=0 is clean. Falsifies the **TG-loop** cosine law only; the bare NLS/KG phase-force (§5, §7) is unaffected |
+| TG-B2-5 | F(sep) identifies the force **range / falloff law** | **INCONCLUSIVE (shallow near-field)** | 4 near-field points (r 2.5–5): `|F(5)|/|F(2.5)|=0.75`; local power p≈0.41 ≈ exp λ≈8.6, indistinguishable. Asymptotic law + physical range **unresolved**; the original coupled-mode range ~0.8 expectation was **not reproduced** — needs r=6–8+ in a large box with an SNR stop rule |
+| TG-B2-6 | F(mass) reveals **gravity-like mass scaling** | **FALSIFIED-as-gravity / otherwise UNRESOLVED** | no mass trend resolved (p_M≈−0.07, R²=0.11); **incompatible with equal-mass M²**. The w-sweep conflates mass/amplitude/width/breathing/source/probe — "mass-independent" overstates it |
+| TG-B2-6a | the flat `M⁰` force is caused by the **normalized `S_state` source** (my earlier causal claim) | **FALSIFIED (P1 charge audit)** | audit `TG_B2_CHARGE_AUDIT_...`: normalization removes only ~0.35 powers (raw load `M^0.94` → normalized source `∫S_state ~ M^0.59`, still **scaling**); receiver `∫\|∇φ\|² ~ M^1.10`. Naive `Q_src·Q_recv ~ M^1.69` vs measured `M^−0.07` ⇒ a **~1.7-power cancellation from the near-field kernel** at sep=3.0, **not** the normalization. Mass-flatness is **separation-specific**, not intrinsic — needs a far-field mass sweep + measured-kernel convolution (Gate 3). `F_R` classified: a total half-space **force** (not acceleration/mass-normalized) |
+| TG-B2-7 | the in-phase force is an externally recognizable physics object | **CONFIRMED (legible, non-gravitational)** | = a normalized-charge, extended-source, screened-medium attraction; closest analogue the BEC smeared-Yukawa (Girelli–Liberati–Sindoni 2008); **not** a gravitational force law (source charge not ∝ mass; acoustic metrics don't supply this force) |
+| TG-B2-8 | an **independent** force instrument (midplane stress flux) confirms the body-force sign/scale | **OPEN** | planned in the consolidation framework; not yet run. Currently **one** well-hardened force channel, not multiple independent confirmations |
+| TG-clock-1 | the G1 clock-mode migration toward the source is a real field response (not just an instrument fault) | **CONFIRMED (directional response detected)** | 5/5 near-clocks migrate toward source; flat control null 7.7e-11. **NOT** a clock-rate/lapse/time-dilation law — it is spatial relocation; needs distance/strength/grid/box scaling before informing any `N_t` |
+| MC-1 | the Gravity-D non-Newtonian "failures" are IRER-**predicted** force behaviour (gradient-derived + saturating-yield + non-universal) | **PARTIAL: class-match SUPPORTED; yield/saturation SPECULATIVE + DOWNGRADED** | the gradient-derived-force *class* match holds (GR-D-2). BUT the yield-point pilot is **INCONCLUSIVE** (no onset), the production cliff has a simpler encoded cause (`(ρ_vac/ρ)^a` vacuum divergence), and the "cap out / elastic yield" language is **AI-proposed future-expansion (Weight C), not an author-derived prediction.** Non-Newtonian failures are **not** automatic IRER confirmations |
+| MC-2…6 | recovered-concept cross-maps | **corrected (see crossmap)** | MC-2 DII → *candidate* operational interpretation (mixed AI lineage); MC-3 → bare phase-force supported / TG-loop cosine **unsupported**; MC-4 speculative, collision-only; MC-5 untested-in-transport, low priority; MC-6 provenance anchor / test-direction, not a confirmation |
+
+**Sector verdict (TG dual-substrate):** the first *implemented* closed TG loop yields a **numerically robust,
+externally-legible, in-phase effective-medium attraction** on the A-well branch — a real, hardened property of the
+equations. It is **not gravity** (source charge not mass-proportional; no 1/r²; no UFF), **not** a temporal-lapse
+result (geometric shift only; no `N_t` on the field), and does **not yet** establish secular binding, an alignment
+law, a resolution-rate mechanism, or a yield transition. **Numerical robustness currently leads theory fidelity.**
+
+**Provenance-attribution note (Weight A/B/C/D — binding for all cross-maps).** The recovered-concept work separates:
+**A** Jake-originated concepts · **B** Jake-adopted AI development · **C** AI-generated formalization candidates
+(includes the RFD and FMIA *names*, `C_ij`, `g_ij(RD,PAS,φ)`, `F_info=m_info·a_PAS`, the **"cap out / elastic yield"**
+language, the **DII name**, and the **`cos(Δφ)` law**) · **D** 2026 retrospective cross-maps. A concept or label being
+present in the provenance does **NOT** make a later matching result an "IRER prediction" — a Weight-C match earns a
+controlled test, not a confirmation. This tempers MC-1 and several cross-maps, and is why the entries above avoid
+"IRER predicted X" framing.
 
 ## 9. Hunter / objective
 | # | hypothesis | verdict | evidence |
@@ -150,6 +257,12 @@ Recording them because they reshaped several verdicts:
 | **C3 boost IC** | Q-ball density barely moved (v_frac~0.04) | naive kick lacked the carrier phase that IS the momentum | constant v_frac independent of v | ψ₀=φe^{ikx}, k=γωv/c² → density co-moves |
 **Retractions triggered:** C2.1b, C2.2b, C2.3b, C2.4 (all "conservative pinning/flow-through"); C2.8 "n=4 survives";
 "the repulsive channel transmits" → refined to the anti-phase node.
+**Same discipline in RUN-2 (caught in-flight, before any verdict was published — so not verdict-reshaping bugs):**
+two C2.10 classifier thresholds were corrected against the physics — the overlap/merge scale must be the soliton
+core (`MERGE_SEP≈3.5`), not the tracking window (`2·W_WIN=7`) (a clean bounce was reading as CAPTURE); and
+re-separation must use the post-min *peak* separation, not `sep_end`, because a periodic-box pass-through pair
+separates fully then wraps back (a pass-through was reading as INTERMEDIATE). Both caught by trajectory inspection
+contradicting the label.
 **Lesson (kept as a standing rule):** every transport/interaction claim is gated on a correct boost IC, a robust
 (non-peak-tracking) observable, and conservation telemetry; a null that contradicts a symmetry identity is treated as
 an instrument fault until proven physical.
@@ -159,10 +272,13 @@ an instrument fault until proven physical.
 |---|---|---|
 | C3 asymmetric-velocity elasticity | OPEN | quantify captured-vs-radiated energy budget with the momentum observable |
 | C3 captured-remnant long-time fate | OPEN | stable "Q-ball molecule" vs slow decay (machine-clean conservation makes it well-posed) |
-| C2 higher-speed / off-phase (NLS analog of C3) | OPEN | does the NLS pair show the same anti-phase node channel? |
+| ~~C2 anti-phase collision (NLS analog of C3)~~ | **RESOLVED (RUN-2 → CONFIRMED, §5 C2.10)** | NLS reproduces the collision diagram: bounce → pass-through → capture; transition mapped, capture threshold bracketed to closing (0.565, 0.660) |
+| C2 bounce→transmit boundary & transmission-window width | OPEN (refinement) | pin the ≈0.42 bounce/transmit boundary; whether KG has the same low-speed bounce sub-regime (C3 didn't sample <0.15c) |
 | C2′ canonical geometry | DESIGN-ONLY | RFC; theory choices (§7) pending; only if a conservation-exact geometry is needed |
 | Gravity ladder rung B+ | PAUSED | re-entry = stable-overdense-load-on-ρ_vac-background pilot |
 | Codex replication | AVAILABLE | finalized C2.9/C3/collision harnesses ready for independent re-run; C2.6/C3 already re-audited |
+| **TG dual-substrate — factor apart & close contracts (the diagnosed next move)** | **PRIORITY** | three review audits converge: *numerical robustness leads theory fidelity.* Do these **before** any new source branch or broad sweep — **(P1) reconcile existing evidence**: audit fixed-vs-recomputed `e_ref`/`q_ref` across all mass/sep rows; expose per-row source integral, mediator amplitude/gradient, probe susceptibility, raw force, `F/M_p`, breathing amp, uncertainty; classify what `F_R_well` actually is (total force / density integral / average / acceleration). **(P2) close the planned contracts**: validate dynamical T/G profiles vs the analytic screened solution; implement the **independent midplane stress-flux** force; **close the non-variational energy/work ledger**. **(P3) factor source vs probe**: asymmetric `2×2` sweep → `F ∝ M_s^α M_p^β` (does normalization give α≈0?); then compare source candidates (normalized `S_state` vs unnormalized load vs `R_relax`) at matched coupling — do **not** retune coupling to improve an exponent. **(P4) only then** targeted characterization: far-field r=6–8+ (large box, SNR stop), phase-isolated alignment (pin centres / counter-momentum so Δφ varies without relative motion), binding via bound-state energy over turning cycles, and separate lapse/yield gates |
+| **Documentation reconciliation** | **PARTIAL (this update)** | this catalog now covers §8C; still outstanding per the audits: correct the CROSSMAP "predicted/confirmed-analogue" labels down to Weight-C where due; add the machine-readable MC-3 verdict override; scope the "Phase R complete" label (which controls passed vs respecified vs open); add the A/B/C/D attribution field to the archive; note the concept-recovery objective is *complete and shelved* (322 dossiers intentionally deferred to provenance-only) so no agent restarts it |
 
 ## 12. Guardrails maintained throughout
 Mirror-first (jax_scout); the frozen Phase C dissipative operator stays byte-identical; no production solver / Hunter

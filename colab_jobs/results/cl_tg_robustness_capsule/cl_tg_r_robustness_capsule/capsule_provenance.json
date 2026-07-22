@@ -1,0 +1,363 @@
+{
+  "completion_ledger": {
+    "completed_rows": [],
+    "failed_rows": [
+      "tg_r_robustness_matrix"
+    ],
+    "rows": [
+      {
+        "duration_seconds": 6372.992845773697,
+        "finished_utc": "2026-07-17T11:21:49Z",
+        "log_path": "/content/qm_job/run_tg_r_robustness_matrix.log",
+        "log_sha256": "8cd9b56d2edbe5098114704e6835f411b051c42821ab25ae2e3ef3fec0432353",
+        "return_code": 2,
+        "row_id": "tg_r_robustness_matrix",
+        "stages": [
+          {
+            "command": [
+              "/usr/bin/python3",
+              "-u",
+              "colab_jobs/tg_r_robustness_driver.py",
+              "--out",
+              "/content/qm_job/results/cl_tg_r_robustness",
+              "--baseline-summary",
+              "colab_jobs/baselines/tg_b2_definitive_force_20260716_baseline_summary.json",
+              "--protected-registry",
+              "docs/gravity_maturity/TG_PROTECTED_REGISTRY.json"
+            ],
+            "duration_seconds": 6372.992139816284,
+            "finished_utc": "2026-07-17T11:21:49Z",
+            "return_code": 2,
+            "stage_id": "main"
+          }
+        ]
+      }
+    ]
+  },
+  "generated_utc": "2026-07-17T11:25:58Z",
+  "job_manifest": {
+    "arguments": [
+      "--out",
+      "{job_root}/results/cl_tg_r_robustness",
+      "--baseline-summary",
+      "colab_jobs/baselines/tg_b2_definitive_force_20260716_baseline_summary.json",
+      "--protected-registry",
+      "docs/gravity_maturity/TG_PROTECTED_REGISTRY.json"
+    ],
+    "config_files": [
+      "colab_jobs/baselines/tg_b2_definitive_force_20260716_baseline_summary.json",
+      "docs/gravity_maturity/TG_PROTECTED_REGISTRY.json"
+    ],
+    "control_panel": {
+      "actions": [
+        {
+          "action_id": "T1",
+          "fixed": true,
+          "handler": "runtime_preflight",
+          "kind": "system_test",
+          "label": "Run Preflight",
+          "output_channel": "terminal_T1",
+          "required": true
+        },
+        {
+          "action_id": "T2",
+          "fixed": true,
+          "handler": "numeric_smoke_test",
+          "kind": "system_test",
+          "label": "Run Smoke Test",
+          "output_channel": "terminal_T2",
+          "required": true,
+          "requires_pass": [
+            "T1"
+          ]
+        },
+        {
+          "action_id": "T3",
+          "fixed": true,
+          "handler": "persistence_test",
+          "kind": "system_test",
+          "label": "Test Persistence",
+          "output_channel": "terminal_T3",
+          "required": true,
+          "requires_pass": [
+            "T1",
+            "T2"
+          ]
+        },
+        {
+          "action_id": "J1",
+          "confirmation_required": true,
+          "handler": "run_registered_job",
+          "job_id": "cl_tg_r_robustness_capsule",
+          "kind": "job",
+          "label": "Run TG-R Robustness (~3-5h)",
+          "output_channel": "terminal_J1",
+          "requires_pass": [
+            "T1",
+            "T2",
+            "T3"
+          ],
+          "row_id": "tg_r_robustness_matrix"
+        }
+      ],
+      "reserved_test_slots": [
+        "T1",
+        "T2",
+        "T3"
+      ],
+      "schema_version": "qm-colab-controls/1.0",
+      "tail_lines": 1200
+    },
+    "drive_checkpoint_dir": "/content/drive/MyDrive/QuantuleMapperRuns/cl_tg_r_robustness_capsule/checkpoints",
+    "drive_results_dir": "/content/drive/MyDrive/QuantuleMapperRuns/cl_tg_r_robustness_capsule",
+    "entrypoint": {
+      "path": "colab_jobs/tg_r_robustness_driver.py"
+    },
+    "environment_policy": {
+      "accepted_gpu_names": [
+        "A100"
+      ],
+      "require_gpu": true
+    },
+    "estimated_runtime": {
+      "a100_minutes_max": 300,
+      "a100_minutes_min": 180,
+      "basis": "Prior baseline row with two separations took 45.3 minutes on A100. This capsule runs five one-separation rows including N=96 and dt/2 sentinels, so 3-5h is a conservative operator estimate."
+    },
+    "execution_scope": "full-fidelity simulation",
+    "expected_outputs": [
+      "results/cl_tg_r_robustness/baseline_reference.json",
+      "results/cl_tg_r_robustness/protected_hash_verification.json",
+      "results/cl_tg_r_robustness/robustness_matrix_plan.json",
+      "results/cl_tg_r_robustness/robustness_matrix.csv",
+      "results/cl_tg_r_robustness/robustness_summary.json",
+      "results/cl_tg_r_robustness/ROBUSTNESS_RUN_COMPLETE.json"
+    ],
+    "external_inputs": [],
+    "fidelity_requirement": "scientific source unchanged; protected TG-B2/TG-B1S modules imported unchanged; compact Phase R sentinel matrix",
+    "install_policy": {
+      "allow_pip_install": false
+    },
+    "job_id": "cl_tg_r_robustness_capsule",
+    "job_name": "CL TG-R Robustness Capsule - TG-B2 A-well Attraction",
+    "job_root": "/content/qm_job",
+    "operator_confirmation": {
+      "message": "J1 is a full Phase R robustness capsule expected to run about 3-5 hours on A100. It is not a UI smoke test.",
+      "required_before_j1": true
+    },
+    "precision": {
+      "jax_enable_x64": true
+    },
+    "result_policy": {
+      "hard_archive_bytes": 5000000000,
+      "ideal_archive_bytes": 1000000000
+    },
+    "rows": [
+      {
+        "arguments": [
+          "--out",
+          "{job_root}/results/cl_tg_r_robustness",
+          "--baseline-summary",
+          "colab_jobs/baselines/tg_b2_definitive_force_20260716_baseline_summary.json",
+          "--protected-registry",
+          "docs/gravity_maturity/TG_PROTECTED_REGISTRY.json"
+        ],
+        "expected_outputs": [
+          "results/cl_tg_r_robustness/baseline_reference.json",
+          "results/cl_tg_r_robustness/protected_hash_verification.json",
+          "results/cl_tg_r_robustness/robustness_matrix_plan.json",
+          "results/cl_tg_r_robustness/robustness_matrix.csv",
+          "results/cl_tg_r_robustness/robustness_summary.json",
+          "results/cl_tg_r_robustness/ROBUSTNESS_RUN_COMPLETE.json",
+          "results/cl_tg_r_robustness/logs/r1_grid_N96_sep3.log",
+          "results/cl_tg_r_robustness/logs/r1_dt_half_sep3.log",
+          "results/cl_tg_r_robustness/logs/r1_box_L20_sep3.log",
+          "results/cl_tg_r_robustness/logs/r2_eps_003_sep3.log",
+          "results/cl_tg_r_robustness/logs/r2_eps_012_sep3.log",
+          "results/cl_tg_r_robustness/rows/r1_grid_N96_sep3/summary.json",
+          "results/cl_tg_r_robustness/rows/r1_grid_N96_sep3/RUN_COMPLETE.json",
+          "results/cl_tg_r_robustness/rows/r1_dt_half_sep3/summary.json",
+          "results/cl_tg_r_robustness/rows/r1_dt_half_sep3/RUN_COMPLETE.json",
+          "results/cl_tg_r_robustness/rows/r1_box_L20_sep3/summary.json",
+          "results/cl_tg_r_robustness/rows/r1_box_L20_sep3/RUN_COMPLETE.json",
+          "results/cl_tg_r_robustness/rows/r2_eps_003_sep3/summary.json",
+          "results/cl_tg_r_robustness/rows/r2_eps_003_sep3/RUN_COMPLETE.json",
+          "results/cl_tg_r_robustness/rows/r2_eps_012_sep3/summary.json",
+          "results/cl_tg_r_robustness/rows/r2_eps_012_sep3/RUN_COMPLETE.json"
+        ],
+        "row_id": "tg_r_robustness_matrix"
+      }
+    ],
+    "run_class": "full-campaign",
+    "runtime_environment": {
+      "env": {
+        "XLA_PYTHON_CLIENT_MEM_FRACTION": "0.90",
+        "XLA_PYTHON_CLIENT_PREALLOCATE": "false"
+      },
+      "notes": "Preserved at 0.90 for the Colab A100 fast lane. This is an environment resource policy only and does not alter TG-R, TG-B2, or frozen TG-B1S scientific source or gates."
+    },
+    "scope_boundary": "Run the Phase R robustness capsule exactly as queued. This capsule hardens the TG-B2 definitive force result; it does not modify frozen modules, invent new gates, or make gravity/UFF/IRER claims.",
+    "seed": null,
+    "source_files": [
+      "colab_jobs/tg_r_robustness_driver.py",
+      "jax_scout/__init__.py",
+      "jax_scout/phase_d_c3_wave.py",
+      "jax_scout/gravity_TG_B1S_state_load_feedback_gpu.py",
+      "jax_scout/gravity_TG_B2_two_node_awell.py",
+      "jax_scout/gravity_TG_B2_definitive_force.py"
+    ],
+    "stop_rule": "If no new J1 log output appears for 30 minutes, or total J1 runtime exceeds 6 hours on A100 without ROBUSTNESS_RUN_COMPLETE.json/archive progress, stop and return logs for review.",
+    "workflow": {
+      "agent_plans_run": true,
+      "drive_persistence_required": true,
+      "intended_use": "Targeted Colab A100 Phase R robustness run for the reviewed TG-B2 A-well attraction result; not a broad hunt.",
+      "local_results_dir": "F:\\quantule_mapper\\colab_jobs\\results",
+      "manual_colab_execution": true,
+      "manual_upload_to_colab": true,
+      "mode": "manual_colab_upload",
+      "review_prompt_after_download": true
+    }
+  },
+  "source_manifest": {
+    "bundle_sha256": "8ea2d53d69753b2edbd8b2ccec98bb0741eb9ff15660e7cdd24afe767981bf44",
+    "control_panel": {
+      "actions": [
+        {
+          "action_id": "T1",
+          "fixed": true,
+          "handler": "runtime_preflight",
+          "kind": "system_test",
+          "label": "Run Preflight",
+          "output_channel": "terminal_T1",
+          "required": true
+        },
+        {
+          "action_id": "T2",
+          "fixed": true,
+          "handler": "numeric_smoke_test",
+          "kind": "system_test",
+          "label": "Run Smoke Test",
+          "output_channel": "terminal_T2",
+          "required": true,
+          "requires_pass": [
+            "T1"
+          ]
+        },
+        {
+          "action_id": "T3",
+          "fixed": true,
+          "handler": "persistence_test",
+          "kind": "system_test",
+          "label": "Test Persistence",
+          "output_channel": "terminal_T3",
+          "required": true,
+          "requires_pass": [
+            "T1",
+            "T2"
+          ]
+        },
+        {
+          "action_id": "J1",
+          "confirmation_required": true,
+          "handler": "run_registered_job",
+          "job_id": "cl_tg_r_robustness_capsule",
+          "kind": "job",
+          "label": "Run TG-R Robustness (~3-5h)",
+          "output_channel": "terminal_J1",
+          "requires_pass": [
+            "T1",
+            "T2",
+            "T3"
+          ],
+          "row_id": "tg_r_robustness_matrix"
+        }
+      ],
+      "log_root": "/content/qm_colab/jobs/cl_tg_r_robustness_capsule/run/logs",
+      "reserved_test_slots": [
+        "T1",
+        "T2",
+        "T3"
+      ],
+      "schema_version": "qm-colab-controls/1.0",
+      "status_root": "/content/qm_colab/jobs/cl_tg_r_robustness_capsule/run/status",
+      "tail_lines": 1200
+    },
+    "files": [
+      {
+        "path": "colab_jobs/baselines/tg_b2_definitive_force_20260716_baseline_summary.json",
+        "sha256": "bcb6436e0fede58f466d9f6f289678ca3a67f7ba83f0908a2578f753acba8a1d",
+        "size_bytes": 1718
+      },
+      {
+        "path": "colab_jobs/tg_r_robustness_driver.py",
+        "sha256": "f0423516512ea7e5fc3a25715776e5f1f5340a1adffb82664c7af5f4088d0521",
+        "size_bytes": 13790
+      },
+      {
+        "path": "docs/gravity_maturity/TG_PROTECTED_REGISTRY.json",
+        "sha256": "e0dfaa7cafc7f5418e5167a756b3791c981350b110474008f75f06b27e7aa4dc",
+        "size_bytes": 3235
+      },
+      {
+        "path": "jax_scout/__init__.py",
+        "sha256": "ed23112aa9afa87ff78171fa36b063a296cb786354053562117b7fb2e605ebc5",
+        "size_bytes": 94
+      },
+      {
+        "path": "jax_scout/gravity_TG_B1S_state_load_feedback_gpu.py",
+        "sha256": "85215ef2f634820aae806dcd799d4fcb78ececab3224b994f696fb817bdeebf1",
+        "size_bytes": 39939
+      },
+      {
+        "path": "jax_scout/gravity_TG_B2_definitive_force.py",
+        "sha256": "b000cc031d9fc7f088bbafac60da02cd3b3c9ee5609d87bde6619d53178ec19c",
+        "size_bytes": 12784
+      },
+      {
+        "path": "jax_scout/gravity_TG_B2_two_node_awell.py",
+        "sha256": "6f6b9f0fad2bf5e27378c3efc3620ee6d79a577978a9c0a7533c0648e38012be",
+        "size_bytes": 12975
+      },
+      {
+        "path": "jax_scout/phase_d_c3_wave.py",
+        "sha256": "aacc2c709c1eefe98b9fed2a8ef9aa9b2ca2c439d8d982717a96aeb8bee2ccff",
+        "size_bytes": 16850
+      }
+    ],
+    "generated_at_utc": "2026-07-17T09:25:19.254040+00:00",
+    "job_id": "cl_tg_r_robustness_capsule",
+    "manifest_path": "cl_tg_r_robustness_capsule_manifest.json",
+    "packager_version": "4.5",
+    "project_root_name": "quantule_mapper",
+    "workflow": {
+      "agent_plans_run": true,
+      "analogy": "Sometimes it is quicker to send the car to the shop than fix it yourself.",
+      "drive_persistence_required": true,
+      "intended_use": "Targeted Colab A100 Phase R robustness run for the reviewed TG-B2 A-well attraction result; not a broad hunt.",
+      "local_results_dir": "F:\\quantule_mapper\\colab_jobs\\results",
+      "manual_colab_execution": true,
+      "manual_upload_to_colab": true,
+      "mode": "manual_colab_upload",
+      "result_policy": {
+        "hard_archive_bytes": 5000000000,
+        "ideal_archive_bytes": 1000000000
+      },
+      "review_prompt_after_download": true
+    }
+  },
+  "workflow": {
+    "agent_plans_run": true,
+    "analogy": "Sometimes it is quicker to send the car to the shop than fix it yourself.",
+    "drive_persistence_required": true,
+    "intended_use": "Targeted Colab A100 Phase R robustness run for the reviewed TG-B2 A-well attraction result; not a broad hunt.",
+    "local_results_dir": "F:\\quantule_mapper\\colab_jobs\\results",
+    "manual_colab_execution": true,
+    "manual_upload_to_colab": true,
+    "mode": "manual_colab_upload",
+    "result_policy": {
+      "hard_archive_bytes": 5000000000,
+      "ideal_archive_bytes": 1000000000
+    },
+    "review_prompt_after_download": true
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "behavioural_result": "PARTIAL",
+  "caveats": [
+    "This is a design constraint and soft-clip diagnosis, not a gravity result.",
+    "Nominal exponent a=+2.31 (as configured) vs effective a=+2.93 (fit from the spatial Omega^2(rho) profile; steeper because ~31% of radial points are cap-saturated). Both are positive and thus opposite in sign to the physical BEC analogue-gravity value a=-0.5 (gamma=2), which is exactly why Omega^2 diverges at the vacuum (the cliff). Re-entry design constraint: target a<0 / gamma<3 on a filled rho_vac background."
+  ],
+  "created_utc": "2026-07-12T00:34:08+00:00",
+  "data_sources": [
+    "sweep_runs/GRAVITY_AD_bg0",
+    "sweep_runs/GRAVITY_DESAT_PILOT",
+    "sweep_runs/PHASE_D_CODEX_REPRODUCTION_20260709_233433/gravity_geometry"
+  ],
+  "files_read": [
+    "sweep_runs/GRAVITY_AD_bg0/summary.json",
+    "sweep_runs/GRAVITY_DESAT_PILOT/desat_pilot.json",
+    "sweep_runs/PHASE_D_CODEX_REPRODUCTION_20260709_233433/gravity_geometry/radial_profiles.csv"
+  ],
+  "fit_parameters": {
+    "a_effective": 2.9259806516213103,
+    "cap_fraction": 0.3090277777777778,
+    "fit_available": true,
+    "floor_fraction": 0.003472222222222222,
+    "gamma_effective": 8.851961303242621,
+    "graded_fraction": 0.6875,
+    "log_intercept": 6.66156140796944,
+    "n_fit": 198
+  },
+  "fit_quality": {
+    "bec_reference_a": -0.5,
+    "bec_reference_gamma": 2.0,
+    "cap_fraction": 0.3090277777777778,
+    "cliff_detected": true,
+    "design_constraint_only": true,
+    "effective_gamma": 8.851961303242621,
+    "effective_steeper_than_nominal": true,
+    "fitted_effective_exponent": 2.9259806516213103,
+    "floor_fraction": 0.003472222222222222,
+    "graded_fraction": 0.6875,
+    "implied_gamma": 7.6196,
+    "n_radial_points": 288,
+    "nominal_a": 2.3098,
+    "nominal_gamma": 7.6196,
+    "production_a": 2.3098,
+    "rows": 3,
+    "same_sign_as_bec_analogue": false,
+    "unsaturated_points": 198
+  },
+  "formula_target": "Omega^2 = (rho_vac / rho)^a, gamma = 2a + 3; design-constraint diagnosis only",
+  "match_level_candidate": "CLOSE ANALOGUE",
+  "metric_id": "v7",
+  "no_new_simulation": true,
+  "provisional_until_claude_review": true,
+  "status": "RAN",
+  "validation_depth": "INTERNAL_DATA_BEHAVIOUR_CHECK"
+}

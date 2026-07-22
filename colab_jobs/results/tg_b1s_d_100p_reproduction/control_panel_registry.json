@@ -1,0 +1,62 @@
+{
+  "actions": [
+    {
+      "action_id": "T1",
+      "fixed": true,
+      "handler": "runtime_preflight",
+      "kind": "system_test",
+      "label": "Run Preflight",
+      "output_channel": "terminal_T1",
+      "required": true
+    },
+    {
+      "action_id": "T2",
+      "fixed": true,
+      "handler": "numeric_smoke_test",
+      "kind": "system_test",
+      "label": "Run Smoke Test",
+      "output_channel": "terminal_T2",
+      "required": true,
+      "requires_pass": [
+        "T1"
+      ]
+    },
+    {
+      "action_id": "T3",
+      "fixed": true,
+      "handler": "persistence_test",
+      "kind": "system_test",
+      "label": "Test Persistence",
+      "output_channel": "terminal_T3",
+      "required": true,
+      "requires_pass": [
+        "T1",
+        "T2"
+      ]
+    },
+    {
+      "action_id": "J1",
+      "confirmation_required": true,
+      "handler": "run_registered_job",
+      "job_id": "tg_b1s_d_100p_reproduction",
+      "kind": "job",
+      "label": "Run TG-B1S-D Reproduction",
+      "output_channel": "terminal_J1",
+      "requires_pass": [
+        "T1",
+        "T2",
+        "T3"
+      ],
+      "row_id": "tg_b1s_d_100p_primary"
+    }
+  ],
+  "log_root": "/content/qm_colab/jobs/tg_b1s_d_100p_reproduction/run/logs",
+  "reserved_test_slots": [
+    "T1",
+    "T2",
+    "T3"
+  ],
+  "schema_version": "qm-colab-controls/1.0",
+  "status_root": "/content/qm_colab/jobs/tg_b1s_d_100p_reproduction/run/status",
+  "tail_lines": 800
+}

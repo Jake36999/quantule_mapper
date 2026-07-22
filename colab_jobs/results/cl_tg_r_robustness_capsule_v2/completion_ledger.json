@@ -1,0 +1,37 @@
+{
+  "completed_rows": [
+    "tg_r_robustness_v2_completion"
+  ],
+  "failed_rows": [],
+  "rows": [
+    {
+      "duration_seconds": 6365.630994558334,
+      "finished_utc": "2026-07-17T13:44:17Z",
+      "log_path": "/content/qm_job/run_tg_r_robustness_v2_completion.log",
+      "log_sha256": "99543c65b55eb190e44d755a45cbf599d5d475ed87204b17105ca4c6174300ac",
+      "return_code": 0,
+      "row_id": "tg_r_robustness_v2_completion",
+      "stages": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-u",
+            "colab_jobs/tg_r_robustness_driver_v2.py",
+            "--out",
+            "/content/qm_job/results/cl_tg_r_robustness_v2",
+            "--baseline-summary",
+            "colab_jobs/baselines/tg_b2_definitive_force_20260716_baseline_summary.json",
+            "--v1-evidence",
+            "colab_jobs/baselines/tg_r_robustness_v1_partial_evidence_20260717.json",
+            "--protected-registry",
+            "docs/gravity_maturity/TG_PROTECTED_REGISTRY.json"
+          ],
+          "duration_seconds": 6365.630343437195,
+          "finished_utc": "2026-07-17T13:44:17Z",
+          "return_code": 0,
+          "stage_id": "main"
+        }
+      ]
+    }
+  ]
+}

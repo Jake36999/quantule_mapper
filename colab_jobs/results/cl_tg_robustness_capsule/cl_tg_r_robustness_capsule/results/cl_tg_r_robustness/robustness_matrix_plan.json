@@ -1,0 +1,82 @@
+{
+  "baseline_summary": "colab_jobs/baselines/tg_b2_definitive_force_20260716_baseline_summary.json",
+  "boundary": "Phase R robustness only; mirror TG-B2 A-well branch; frozen modules imported unchanged.",
+  "entrypoint": "jax_scout/gravity_TG_B2_definitive_force.py",
+  "matrix": [
+    {
+      "args": [
+        "--seps",
+        "3.0",
+        "--N",
+        "96",
+        "--T",
+        "180"
+      ],
+      "compare_to_baseline_sep": 3.0,
+      "drift_tolerance": 0.2,
+      "phase": "R1_convergence",
+      "reason": "grid refinement sentinel",
+      "row_id": "r1_grid_N96_sep3"
+    },
+    {
+      "args": [
+        "--seps",
+        "3.0",
+        "--dt",
+        "0.001",
+        "--T",
+        "180"
+      ],
+      "compare_to_baseline_sep": 3.0,
+      "drift_tolerance": 0.2,
+      "phase": "R1_convergence",
+      "reason": "timestep-halved sentinel",
+      "row_id": "r1_dt_half_sep3"
+    },
+    {
+      "args": [
+        "--seps",
+        "3.0",
+        "--L",
+        "20",
+        "--T",
+        "180"
+      ],
+      "compare_to_baseline_sep": 3.0,
+      "drift_tolerance": 0.2,
+      "phase": "R1_convergence",
+      "reason": "larger-box sentinel",
+      "row_id": "r1_box_L20_sep3"
+    },
+    {
+      "args": [
+        "--seps",
+        "3.0",
+        "--epsilon-G",
+        "0.03",
+        "--T",
+        "180"
+      ],
+      "epsilon_G": 0.03,
+      "phase": "R2_epsilon_scaling",
+      "reason": "epsilon half-scale point",
+      "row_id": "r2_eps_003_sep3"
+    },
+    {
+      "args": [
+        "--seps",
+        "3.0",
+        "--epsilon-G",
+        "0.12",
+        "--T",
+        "180"
+      ],
+      "epsilon_G": 0.12,
+      "phase": "R2_epsilon_scaling",
+      "reason": "epsilon double-scale point",
+      "row_id": "r2_eps_012_sep3"
+    }
+  ],
+  "protected_registry": "docs/gravity_maturity/TG_PROTECTED_REGISTRY.json",
+  "started_utc": "2026-07-17T09:35:36Z"
+}

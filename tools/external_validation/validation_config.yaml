@@ -1,0 +1,35 @@
+# Read-only defaults for external-validation metric harnesses.
+# Paths are relative to the repository root unless absolute.
+output_root: docs/external_validation/generated_metrics
+metrics:
+  v1:
+    paths:
+      - sweep_runs/C29_ROBUST
+      - sweep_runs/C29_VALIDATE
+      - sweep_runs/C3_TWOQBALL_FULL
+  v2:
+    paths:
+      - sweep_runs/C27_REDERIVE
+  v3:
+    paths:
+      - sweep_runs/C3_EXACT_VK2
+  v5:
+    paths:
+      - sweep_runs/C3_COLLISION_LADDER_FULL
+      - sweep_runs/C3_ANTIPHASE_LADDER
+      - sweep_runs/C3_PHASE_pi2
+      - sweep_runs/C3_PHASE_3pi4
+      - sweep_runs/C3_PHASE_7pi8
+  v6:
+    paths:
+      - sweep_runs/C23_N96
+      - sweep_runs/C24_LOCAL_N96
+      - sweep_runs/C27_REDERIVE
+      - sweep_runs/PHASE_D_C2_6_CODEX_AUDIT_20260709
+      - sweep_runs/PHASE_D_CODEX_REPRODUCTION_20260709_233433
+  v7:
+    paths:
+      - sweep_runs/GRAVITY_AD_bg0
+      - sweep_runs/GRAVITY_DESAT_PILOT
+      - sweep_runs/PHASE_D_CODEX_REPRODUCTION_20260709_233433/gravity_geometry
+

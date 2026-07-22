@@ -1,0 +1,78 @@
+{
+  "behavioural_result": "PASS",
+  "caveats": [
+    "Constants C/lambda are freely fit; canonical NLS constants are secondary context only.",
+    "Force-direction sign uses net early drift (q_dot); trajectory curvature q_ddot is unreliable for breathing C3 Q-ball pairs and is retained (as *_qddot_legacy) only to document that artifact. phase_sign_accuracy_qddot_legacy shows the old value.",
+    "C3 magnitude fit (lambda_C3) uses early-window q_ddot and is provisional; the C2 lambda is the clean quantity (recovers ~2A, the canonical NLS interaction rate)."
+  ],
+  "created_utc": "2026-07-12T00:34:07+00:00",
+  "data_sources": [
+    "sweep_runs/C29_ROBUST",
+    "sweep_runs/C29_VALIDATE",
+    "sweep_runs/C3_TWOQBALL_FULL"
+  ],
+  "files_read": [
+    "sweep_runs/C29_ROBUST/track_static_0.00.npz",
+    "sweep_runs/C29_ROBUST/track_static_0.79.npz",
+    "sweep_runs/C29_ROBUST/track_static_1.57.npz",
+    "sweep_runs/C29_ROBUST/track_static_2.36.npz",
+    "sweep_runs/C29_ROBUST/track_static_3.14.npz",
+    "sweep_runs/C29_ROBUST/summary.json",
+    "sweep_runs/C29_VALIDATE/summary.json",
+    "sweep_runs/C3_TWOQBALL_FULL/pair_static_0.00.npz",
+    "sweep_runs/C3_TWOQBALL_FULL/pair_static_0.79.npz",
+    "sweep_runs/C3_TWOQBALL_FULL/pair_static_1.57.npz",
+    "sweep_runs/C3_TWOQBALL_FULL/pair_static_2.36.npz",
+    "sweep_runs/C3_TWOQBALL_FULL/pair_static_3.14.npz",
+    "sweep_runs/C3_TWOQBALL_FULL/summary.json"
+  ],
+  "fit_parameters": {
+    "C": 46.98825676937529,
+    "fit_available": true,
+    "lambda": 2.8018555459448433,
+    "log_residual_rms": 0.3990678714646614,
+    "n_fit": 8,
+    "normalized_rms_residual": 0.09321648077343084
+  },
+  "fit_quality": {
+    "acceleration_window": "first_35_percent_min_4_points",
+    "c2_fit_quality": {
+      "C": 4.198507387557667,
+      "fit_available": true,
+      "lambda": 1.9810732125316175,
+      "log_residual_rms": 0.3075338065199263,
+      "n_fit": 4,
+      "normalized_rms_residual": 0.07385043124365313
+    },
+    "c3_fit_quality": {
+      "C": 4301.664333489826,
+      "fit_available": true,
+      "lambda": 4.286676971543021,
+      "log_residual_rms": 0.2972793953711582,
+      "n_fit": 4,
+      "normalized_rms_residual": 0.06759583632112126
+    },
+    "crossover_error_from_pi_over_2": null,
+    "crossover_phase_estimate": null,
+    "fit_C": 46.98825676937529,
+    "fit_lambda": 2.8018555459448433,
+    "force_sign_proxy": "net_early_drift_q_dot",
+    "n_files_used": 10,
+    "n_non_neutral": 8,
+    "n_phase_points": 10,
+    "n_rows": 10,
+    "normalized_rms_residual": 0.09321648077343084,
+    "phase_sign_accuracy": 1.0,
+    "phase_sign_accuracy_qddot_legacy": 0.5,
+    "pi_over_2_neutral_rows": 2,
+    "q_convention": "half_separation",
+    "rms_residual": 0.3990678714646614
+  },
+  "formula_target": "q_ddot = -C * exp(-lambda * q) * cos(Delta_phi), with q = half-separation",
+  "match_level_candidate": "SAME FAMILY",
+  "metric_id": "v1",
+  "no_new_simulation": true,
+  "provisional_until_claude_review": true,
+  "status": "RAN",
+  "validation_depth": "INTERNAL_DATA_ANALYTIC_FIT"
+}

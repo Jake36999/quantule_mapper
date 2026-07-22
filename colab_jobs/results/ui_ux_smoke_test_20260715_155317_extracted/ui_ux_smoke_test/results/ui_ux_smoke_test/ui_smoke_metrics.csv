@@ -1,0 +1,5 @@
+metric,value
+events_emitted,8
+sleep_seconds,0.4
+stdout_flush_test,pass
+expected_output_test,pass

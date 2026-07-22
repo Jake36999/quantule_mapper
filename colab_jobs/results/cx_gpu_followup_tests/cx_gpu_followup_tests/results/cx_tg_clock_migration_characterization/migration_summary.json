@@ -1,0 +1,6 @@
+{
+  "flat_max_abs_projection": 7.652412037373324e-11,
+  "near_rows": 5,
+  "near_toward_count": 5,
+  "verdict": "TG_CLOCK_MIGRATION_RESPONSE_DETECTED"
+}

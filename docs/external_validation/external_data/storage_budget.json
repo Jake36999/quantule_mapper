@@ -1,0 +1,11 @@
+{
+  "archive_root": "E:\\quantule_mapper_external_data",
+  "datasets_10gb_or_larger_policy": "store on E:/quantule_mapper_external_data",
+  "provisional_until_claude_review": true,
+  "remaining_budget_bytes": 60037701027,
+  "remaining_budget_gb": 55.9145,
+  "storage_cap_bytes": 64424509440,
+  "storage_cap_gb": 60.0,
+  "total_downloaded_bytes": 4386808413,
+  "total_downloaded_gb": 4.0855
+}

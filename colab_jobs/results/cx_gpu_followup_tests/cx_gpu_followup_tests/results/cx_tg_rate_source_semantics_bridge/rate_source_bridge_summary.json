@@ -1,0 +1,8 @@
+{
+  "admissible_sources": [
+    "R_relax"
+  ],
+  "log": "/content/qm_job/results/cx_tg_rate_source_semantics_bridge/tg_s_semantics_stdout_stderr.log",
+  "status": "TG_RATE_SOURCE_ADMISSIBLE_FOR_DESIGN_REVIEW",
+  "tg_s_returncode": 0
+}

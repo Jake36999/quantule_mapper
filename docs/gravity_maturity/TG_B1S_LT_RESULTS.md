@@ -1,0 +1,55 @@
+# TG-B1S-LT Long-Time Boundedness Results
+
+Timestamp: 2026-07-14.
+Run directory: `/mnt/f/quantule_mapper/sweep_runs/TG_B1S_LONG_TIME_GPU_20260714_154323`.
+Status: `TG_STATE_LOAD_CONTINUOUS_SLOW_DRIFT`.
+
+## Labels
+
+- `TG_STATE_LOAD_CONTINUOUS_SLOW_DRIFT`
+
+## Key Metrics
+
+- Max period horizon completed: `50.0`.
+- 50-period attractor class: `CONTINUOUS_DRIFT`.
+- 50-period modal leakage max: `9.158673397262747e-05`.
+- 50-period profile overlap: `0.9999999967790276`.
+- 50-period modal phase drift: `-0.0007268209223525446`.
+- 50-period modal phase slope: `-1.940653048627504e-06`.
+- 50-period ledger residual: `2.6548487782443767e-06`.
+- 50-period T/G field class: `APPROACH_FIXED_PROFILE` / `APPROACH_FIXED_PROFILE`.
+
+## Interpretation
+
+The corrected translated modal reference removes the large apparent leakage from the old fixed-origin diagnostic. The old fixed stationary reference gave leakage near `0.2958746012992398`; the translated initial-grid reference gives leakage near `1.601819683246674e-05`.
+
+The 25-period pair classified as `STABLE_SHIFTED_NODE`, with high profile overlap, low modal leakage and bounded T/G fields. The 50-period pair remains localized and T/G bounded, but the full-loop minus feedback-off node observables continue to drift rather than settling. The falsification table therefore marks `no_unresolved_monotonic_drift` as false.
+
+`TG_STATE_LOAD_BOUNDED_FEEDBACK_SUPPORTED` is not promoted. The appropriate long-time status for this primary pass is `TG_STATE_LOAD_CONTINUOUS_SLOW_DRIFT`.
+
+The preserved prior labels remain valid:
+
+- `TG_STATE_LOAD_FEEDFORWARD_CHAIN_SUPPORTED`
+- `TG_STATE_LOAD_GEOMETRIC_BACKREACTION_DETECTED`
+- `TG_STATE_LOAD_BACKREACTION_ROBUST`
+- `TG_STATE_LOAD_BACKREACTION_ROBUST_BUT_WEAK`
+
+The new result means the robust weak backreaction has not yet matured into a bounded long-time feedback attractor under the frozen model.
+
+## Gate Results
+
+- Node localization at 50 periods: pass.
+- T/G boundedness: pass.
+- Energy ledger: pass.
+- Phase consistency between 25 and 50 periods: pass.
+- Basin consistency: not run in this primary pass, therefore not passed.
+- Numerical validation: not run in this primary pass, therefore not passed.
+- No unresolved monotonic drift: fail.
+
+Because the long-time drift gate failed, the full closure matrix should not be used to promote bounded feedback without first explaining or redesigning the frozen model in a new branch.
+
+## Scope
+
+This is a state-load long-time boundedness closure. It does not enable `R_relax`, `L_lock`, or `P_threshold`, and it does not test photon emission or radiative relaxation.
+
+No gravity, objective-time, geodesic, universal-free-fall, photon, production or IRER-validation claim is made.

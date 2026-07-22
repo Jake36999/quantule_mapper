@@ -19,8 +19,19 @@ __pycache__/
 .mypy_cache/
 .ruff_cache/
 
-# --- Node / frontend (all of UI is node_modules) ---
-UI/
+# --- Node / frontend ---
+UI/*
+!UI/components/
+UI/components/*
+!UI/components/package.json
+!UI/components/package-lock.json
+!UI/components/tsconfig.json
+!UI/components/postcss.config.js
+!UI/components/tailwind.config.js
+!UI/components/src/
+!UI/components/src/**
+UI/components/node_modules/
+UI/components/build/
 node_modules/
 build/
 dist/
@@ -65,6 +76,7 @@ temp_params_*.json
 temp_manifest_*.json
 result_queue.json.tmp*
 .active_run_pointer.json
+run/*.pid
 stop_after_gen.txt
 
 # --- salvage/junk artifacts (accidental adds) ---

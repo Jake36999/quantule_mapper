@@ -1,0 +1,10 @@
+{
+  "status": "RUN_COMPLETE_CAPSULE",
+  "completed_rows": [
+    "cx_tg_b2_cooled_pair_secular_force",
+    "cx_tg_clock_migration_characterization",
+    "cx_tg_rate_source_semantics_bridge",
+    "cx_gravity_d_load_capacity_yield_map"
+  ],
+  "finished_utc": "2026-07-18T00:03:07Z"
+}

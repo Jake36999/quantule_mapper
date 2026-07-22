@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "-u",
+    "colab_jobs/tg_b1s_d_reproduction_compare.py",
+    "--baseline-manifest",
+    "colab_jobs/baselines/tg_b1s_d_20260714_184736_baseline_manifest.json",
+    "--reproduction-run",
+    "/content/qm_job/results/tg_b1s_d_100p_reproduction/simulation",
+    "--out",
+    "/content/qm_job/results/tg_b1s_d_100p_reproduction"
+  ],
+  "finished_utc": "2026-07-15T13:16:45Z",
+  "return_code": 0
+}

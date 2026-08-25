@@ -1,0 +1,16 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='720' height='420'>
+<rect x='0' y='0' width='720' height='420' fill='white'/>
+<text x='60' y='30' font-size='18'>two source superposition proxy</text>
+<line x1='60' y1='360' x2='680' y2='360' stroke='black'/>
+<line x1='60' y1='60' x2='60' y2='360' stroke='black'/>
+<text x='60' y='395' font-size='12'>N_min</text>
+<text x='10' y='55' font-size='12'>radial_force</text>
+<circle cx='680.00' cy='60.00' r='3' fill='#9467bd'/>
+<circle cx='576.67' cy='104.69' r='3' fill='#2ca02c'/>
+<circle cx='370.00' cy='199.88' r='3' fill='#d62728'/>
+<circle cx='60.00' cy='360.00' r='3' fill='#1f77b4'/>
+<rect x='555' y='55' width='10' height='10' fill='#1f77b4'/><text x='570' y='65' font-size='11'>E8_superposition_n0p65</text>
+<rect x='555' y='70' width='10' height='10' fill='#d62728'/><text x='570' y='80' font-size='11'>E8_superposition_n0p8</text>
+<rect x='555' y='85' width='10' height='10' fill='#2ca02c'/><text x='570' y='95' font-size='11'>E8_superposition_n0p9</text>
+<rect x='555' y='100' width='10' height='10' fill='#9467bd'/><text x='570' y='110' font-size='11'>E8_superposition_n0p95</text>
+</svg>

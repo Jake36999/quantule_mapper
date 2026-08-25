@@ -1,0 +1,85 @@
+# TG-B2 Convergence Hardening — N=80 / L=20 (sep 3.0)
+
+Author: Claude (primary), 2026-08-25. Run `sweep_runs/TG_B2_CONV_SEP3_20260824_221915`
+(`jax_scout/gravity_TG_B2_definitive_force.py`, WSL/JAX GPU on GTX 1080, 5.68 h, x64).
+Mirror-only; frozen TG-B1S untouched. **No gravity / UFF / IRER-validation claim.**
+
+## Question
+
+`TG_B2_DEFINITIVE_AWELL_ATTRACTION_CONFIRMED` was established on the A100 at **N=64, L=16**
+(`<F_R_well>` = −5.450e-05 at sep 3.0). The first item on that result's own "hardening next" list was
+N/dt/box convergence. This run asks the narrow question: **does the confirmed A-well inter-node
+attraction survive a finer grid and a larger box, or was it a discretization/box artifact?**
+
+Only sep 3.0 was run. The earlier two-separation attempt died twice to a WSL failure mode; running one
+separation yields a complete, directly comparable answer rather than a partial matrix.
+
+## Result — attraction survives; verdict reproduced
+
+```text
+TG_B2_DEFINITIVE_AWELL_ATTRACTION_CONFIRMED   (reproduced at N=80, L=20)
+```
+
+Primary observable = time-averaged dynamical Gravity-D body force `<F_R>` on live fields,
+settled window t ≥ 72 of 180 (first 40% discarded), 217 settled samples.
+
+| arm | mean `<F_R>` | std | sample consistency |
+|---|---:|---:|---|
+| **A-well** | **−5.2786e-05** | 6.608e-06 | **100.0% negative (attractive)** |
+| A-hill (sign control) | +5.2785e-05 | 6.608e-06 | 100.0% positive (repulsive) |
+| off (A=1 null) | **0.000e+00** | — | max\|F_R\| = 0.00e+00, exact |
+
+All preregistered gates pass: `well_attracts`, `sign_reverses`, `off_null_ok`, `charge_ok`,
+`nodes_distinct` (sep_min 3.074, no merge), `gates_pass = true`.
+
+**Antisymmetry:** `|well + hill|` = 1.126e-09, i.e. **2.13e-05 relative** — the response is linear in the
+A-coupling to five digits, so it is genuinely the coupling and not noise or drift.
+
+## Convergence comparison
+
+| configuration | grid | box | `<F_R_well>` at sep 3.0 |
+|---|---|---|---:|
+| baseline (A100) | N=64 | L=16 | −5.450e-05 |
+| **this run** | **N=80** | **L=20** | **−5.2786e-05** |
+
+**Change: 3.15%** for ~1.95× the grid points and a 25% larger box. The force is stable in sign,
+magnitude and scale under refinement.
+
+## Interpretation (bounded)
+
+The A-well attraction is **not a discretization or box-size artifact**. It converges: the residual 3.15%
+shift is the expected level of grid/box sensitivity for this observable, and it moves the magnitude
+slightly *down*, not toward zero or toward a sign change.
+
+This hardens the existing bounded claim; **it does not extend it**. Specifically it does NOT establish:
+gravity, an inverse-square law, universal free fall, temporal-lapse gravity, or IRER validation. The
+force remains **short-range, screened and near-field** (sep 3.0 is comparable to the node size), and the
+separate far-field work showed the falloff is exponential-like rather than a power law.
+
+## Caveats
+
+- **One separation only.** sep 4.0 is queued (`CL_TG_B2_CONVERGENCE_SEP4`) and is required before
+  quoting a converged falloff *shape* at this resolution.
+- **One refinement step.** N=64→80 with L=16→20 changes grid and box together, so it demonstrates joint
+  insensitivity rather than isolating either. A dt-refinement row was previously closed separately
+  (dt=0.001, ~1e-12 drift).
+- **Same observable family.** This uses the Gravity-D body force, as the baseline did; the independent
+  midplane stress-flux cross-check remains unimplemented and is still the strongest outstanding
+  instrument check.
+
+## Operational note (why this took three attempts)
+
+Two earlier launches died to the same cause, now identified: **WSL2 terminates the distro when its last
+client session exits, killing even `setsid nohup` jobs.** The successful run used two defences — an
+independent keep-alive session holding the distro open, plus a genuinely detached (`setsid nohup`)
+launch. A liveness check based on `pgrep -f <script>` also self-matched its own wrapping `bash -c`
+command string and reported a dead job as running; the corrected check
+(`runtime_logs/check_run_alive.sh`) uses the bracket trick and treats **file freshness as authoritative,
+process state as advisory**. Any long local-GPU run should adopt both.
+
+## Next
+
+- sep 4.0 at N=80/L=20 to complete the converged pair (queued, not launched).
+- Midplane stress-flux cross-check — the one independent observable still missing.
+- Given three consecutive local-lane failures before success, multi-hour runs are better suited to the
+  A100 capsule lane.

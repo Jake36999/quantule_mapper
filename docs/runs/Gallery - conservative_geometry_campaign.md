@@ -1,0 +1,232 @@
+---
+tags: [gallery, viz, transport]
+---
+
+# Gallery — conservative geometry campaign
+
+Conservative-geometry campaign renders (the C2 arc that the C2.6 geometry-off bug reshaped).
+
+> [!info] Source
+> `quantule_viz/outputs/conservative_geometry_campaign/` — gitignored and outside the vault; these are copies so
+> Obsidian can display them. 38 images.
+
+- Branch: [[Branch - Transport - Index]]
+- Methodology: [[DOCUMENTATION_METHODOLOGY]] §5
+
+> [!warning] Every figure needs a sentence
+> These are imported unannotated. Add a description under any image you review —
+> below the Review-notes marker, or inline here if you prefer (inline edits above the
+> marker are lost on rebuild).
+
+## `conservative_geometry_campaign/c2_ablated_triangle_s0.45_N48_T4000_ablated_triangle_control`
+
+![[_gallery/conservative_geometry_campaign/conservative_geometry_campaign__c2_ablated_triangle_s0.45_N48_T4000_ablated_triangle_control__c2_ablated_triangle_s0.45_N48_T4000_ablated_triangle_control_final_rho.png]]
+
+*c2_ablated_triangle_s0.45_N48_T4000_ablated_triangle_control_final_rho.png*
+
+## `conservative_geometry_campaign/c2_tetrahedron_s0.45_N48_T4000_tetrahedron_matched_045`
+
+![[_gallery/conservative_geometry_campaign/conservative_geometry_campaign__c2_tetrahedron_s0.45_N48_T4000_tetrahedron_matched_045__c2_tetrahedron_s0.45_N48_T4000_tetrahedron_matched_045_final_rho.png]]
+
+*c2_tetrahedron_s0.45_N48_T4000_tetrahedron_matched_045_final_rho.png*
+
+## `conservative_geometry_campaign/c2_triangle_s0.36_N48_T4000_triangle_transfer_036`
+
+![[_gallery/conservative_geometry_campaign/conservative_geometry_campaign__c2_triangle_s0.36_N48_T4000_triangle_transfer_036__c2_triangle_s0.36_N48_T4000_triangle_transfer_036_final_rho.png]]
+
+*c2_triangle_s0.36_N48_T4000_triangle_transfer_036_final_rho.png*
+
+## `conservative_geometry_campaign/c2_triangle_s0.45_N32_T50_smoke`
+
+![[_gallery/conservative_geometry_campaign/conservative_geometry_campaign__c2_triangle_s0.45_N32_T50_smoke__c2_triangle_s0.45_N32_T50_smoke_final_rho.png]]
+
+*c2_triangle_s0.45_N32_T50_smoke_final_rho.png*
+
+## `conservative_geometry_campaign/c2_triangle_s0.45_N48_T4000_triangle_transfer_045`
+
+![[_gallery/conservative_geometry_campaign/conservative_geometry_campaign__c2_triangle_s0.45_N48_T4000_triangle_transfer_045__c2_triangle_s0.45_N48_T4000_triangle_transfer_045_final_rho.png]]
+
+*c2_triangle_s0.45_N48_T4000_triangle_transfer_045_final_rho.png*
+
+## `conservative_geometry_campaign/c2_triangular_prism_s0.45_N48_T4000_triangular_prism_6node_045`
+
+![[_gallery/conservative_geometry_campaign/conservative_geometry_campaign__c2_triangular_prism_s0.45_N48_T4000_triangular_prism_6node_045__c2_triangular_prism_s0.45_N48_T4000_triangular_prism_6node_045_final_rho.png]]
+
+*c2_triangular_prism_s0.45_N48_T4000_triangular_prism_6node_045_final_rho.png*
+
+## `conservative_geometry_campaign/norm_loss_isolation`
+
+![[_gallery/conservative_geometry_campaign/conservative_geometry_campaign__norm_loss_isolation__conservative_norm_loss_norm_vs_time.png]]
+
+*conservative_norm_loss_norm_vs_time.png*
+
+![[_gallery/conservative_geometry_campaign/conservative_geometry_campaign__norm_loss_isolation__conservative_norm_loss_rho_max_vs_time.png]]
+
+*conservative_norm_loss_rho_max_vs_time.png*
+
+## `conservative_geometry_campaign/rk4_integrity_diagnostic_20260708_094514`
+
+![[_gallery/conservative_geometry_campaign/conservative_geometry_campaign__rk4_integrity_diagnostic_20260708_094514__dt_integrity_norm_vs_time.png]]
+
+*dt_integrity_norm_vs_time.png*
+
+![[_gallery/conservative_geometry_campaign/conservative_geometry_campaign__rk4_integrity_diagnostic_20260708_094514__dt_integrity_rho_vs_time.png]]
+
+*dt_integrity_rho_vs_time.png*
+
+## `conservative_geometry_campaign/rk4_stepper_diagnostic`
+
+![[_gallery/conservative_geometry_campaign/conservative_geometry_campaign__rk4_stepper_diagnostic__multistep_norm_vs_time.png]]
+
+*multistep_norm_vs_time.png*
+
+![[_gallery/conservative_geometry_campaign/conservative_geometry_campaign__rk4_stepper_diagnostic__multistep_profile_overlap_vs_time.png]]
+
+*multistep_profile_overlap_vs_time.png*
+
+![[_gallery/conservative_geometry_campaign/conservative_geometry_campaign__rk4_stepper_diagnostic__multistep_rho_max_vs_time.png]]
+
+*multistep_rho_max_vs_time.png*
+
+![[_gallery/conservative_geometry_campaign/conservative_geometry_campaign__rk4_stepper_diagnostic__one_step_rk4_vs_etdrk4_norm_defect_vs_dt.png]]
+
+*one_step_rk4_vs_etdrk4_norm_defect_vs_dt.png*
+
+![[_gallery/conservative_geometry_campaign/conservative_geometry_campaign__rk4_stepper_diagnostic__one_step_rk4_vs_etdrk4_rho_max_defect_vs_dt.png]]
+
+*one_step_rk4_vs_etdrk4_rho_max_defect_vs_dt.png*
+
+## `conservative_geometry_campaign/rk4_stepper_diagnostic/geometry_replay/rk4_ablated_triangle_s0p45_N48_T1_dt0p001`
+
+![[_gallery/conservative_geometry_campaign/conservative_geometry_campaign__rk4_stepper_diagnostic__geometry_replay__rk4_ablated_triangle_s0p45_N48_T1_dt0p001__rk4_ablated_triangle_s0p45_N48_T1_dt0p001_final_rho.png]]
+
+*rk4_ablated_triangle_s0p45_N48_T1_dt0p001_final_rho.png*
+
+## `conservative_geometry_campaign/rk4_stepper_diagnostic/geometry_replay/rk4_ablated_triangle_s0p45_N48_T2_dt0p001`
+
+![[_gallery/conservative_geometry_campaign/conservative_geometry_campaign__rk4_stepper_diagnostic__geometry_replay__rk4_ablated_triangle_s0p45_N48_T2_dt0p001__rk4_ablated_triangle_s0p45_N48_T2_dt0p001_final_rho.png]]
+
+*rk4_ablated_triangle_s0p45_N48_T2_dt0p001_final_rho.png*
+
+## `conservative_geometry_campaign/rk4_stepper_diagnostic/geometry_replay/rk4_ablated_triangle_s0p45_N48_T4_dt0p001`
+
+![[_gallery/conservative_geometry_campaign/conservative_geometry_campaign__rk4_stepper_diagnostic__geometry_replay__rk4_ablated_triangle_s0p45_N48_T4_dt0p001__rk4_ablated_triangle_s0p45_N48_T4_dt0p001_final_rho.png]]
+
+*rk4_ablated_triangle_s0p45_N48_T4_dt0p001_final_rho.png*
+
+## `conservative_geometry_campaign/rk4_stepper_diagnostic/geometry_replay/rk4_tetrahedron_s0p45_N48_T1_dt0p001`
+
+![[_gallery/conservative_geometry_campaign/conservative_geometry_campaign__rk4_stepper_diagnostic__geometry_replay__rk4_tetrahedron_s0p45_N48_T1_dt0p001__rk4_tetrahedron_s0p45_N48_T1_dt0p001_final_rho.png]]
+
+*rk4_tetrahedron_s0p45_N48_T1_dt0p001_final_rho.png*
+
+## `conservative_geometry_campaign/rk4_stepper_diagnostic/geometry_replay/rk4_tetrahedron_s0p45_N48_T2_dt0p001`
+
+![[_gallery/conservative_geometry_campaign/conservative_geometry_campaign__rk4_stepper_diagnostic__geometry_replay__rk4_tetrahedron_s0p45_N48_T2_dt0p001__rk4_tetrahedron_s0p45_N48_T2_dt0p001_final_rho.png]]
+
+*rk4_tetrahedron_s0p45_N48_T2_dt0p001_final_rho.png*
+
+## `conservative_geometry_campaign/rk4_stepper_diagnostic/geometry_replay/rk4_tetrahedron_s0p45_N48_T4_dt0p001`
+
+![[_gallery/conservative_geometry_campaign/conservative_geometry_campaign__rk4_stepper_diagnostic__geometry_replay__rk4_tetrahedron_s0p45_N48_T4_dt0p001__rk4_tetrahedron_s0p45_N48_T4_dt0p001_final_rho.png]]
+
+*rk4_tetrahedron_s0p45_N48_T4_dt0p001_final_rho.png*
+
+## `conservative_geometry_campaign/rk4_stepper_diagnostic/geometry_replay/rk4_triangle_s0p36_N48_T1_dt0p001`
+
+![[_gallery/conservative_geometry_campaign/conservative_geometry_campaign__rk4_stepper_diagnostic__geometry_replay__rk4_triangle_s0p36_N48_T1_dt0p001__rk4_triangle_s0p36_N48_T1_dt0p001_final_rho.png]]
+
+*rk4_triangle_s0p36_N48_T1_dt0p001_final_rho.png*
+
+## `conservative_geometry_campaign/rk4_stepper_diagnostic/geometry_replay/rk4_triangle_s0p36_N48_T2_dt0p001`
+
+![[_gallery/conservative_geometry_campaign/conservative_geometry_campaign__rk4_stepper_diagnostic__geometry_replay__rk4_triangle_s0p36_N48_T2_dt0p001__rk4_triangle_s0p36_N48_T2_dt0p001_final_rho.png]]
+
+*rk4_triangle_s0p36_N48_T2_dt0p001_final_rho.png*
+
+## `conservative_geometry_campaign/rk4_stepper_diagnostic/geometry_replay/rk4_triangle_s0p36_N48_T4_dt0p001`
+
+![[_gallery/conservative_geometry_campaign/conservative_geometry_campaign__rk4_stepper_diagnostic__geometry_replay__rk4_triangle_s0p36_N48_T4_dt0p001__rk4_triangle_s0p36_N48_T4_dt0p001_final_rho.png]]
+
+*rk4_triangle_s0p36_N48_T4_dt0p001_final_rho.png*
+
+## `conservative_geometry_campaign/rk4_stepper_diagnostic/geometry_replay/rk4_triangle_s0p45_N48_T1_dt0p001`
+
+![[_gallery/conservative_geometry_campaign/conservative_geometry_campaign__rk4_stepper_diagnostic__geometry_replay__rk4_triangle_s0p45_N48_T1_dt0p001__rk4_triangle_s0p45_N48_T1_dt0p001_final_rho.png]]
+
+*rk4_triangle_s0p45_N48_T1_dt0p001_final_rho.png*
+
+## `conservative_geometry_campaign/rk4_stepper_diagnostic/geometry_replay/rk4_triangle_s0p45_N48_T2_dt0p001`
+
+![[_gallery/conservative_geometry_campaign/conservative_geometry_campaign__rk4_stepper_diagnostic__geometry_replay__rk4_triangle_s0p45_N48_T2_dt0p001__rk4_triangle_s0p45_N48_T2_dt0p001_final_rho.png]]
+
+*rk4_triangle_s0p45_N48_T2_dt0p001_final_rho.png*
+
+## `conservative_geometry_campaign/rk4_stepper_diagnostic/geometry_replay/rk4_triangle_s0p45_N48_T4_dt0p001`
+
+![[_gallery/conservative_geometry_campaign/conservative_geometry_campaign__rk4_stepper_diagnostic__geometry_replay__rk4_triangle_s0p45_N48_T4_dt0p001__rk4_triangle_s0p45_N48_T4_dt0p001_final_rho.png]]
+
+*rk4_triangle_s0p45_N48_T4_dt0p001_final_rho.png*
+
+## `conservative_geometry_campaign/rk4_stepper_diagnostic/geometry_replay/rk4_triangular_prism_s0p45_N48_T1_dt0p001`
+
+![[_gallery/conservative_geometry_campaign/conservative_geometry_campaign__rk4_stepper_diagnostic__geometry_replay__rk4_triangular_prism_s0p45_N48_T1_dt0p001__rk4_triangular_prism_s0p45_N48_T1_dt0p001_final_rho.png]]
+
+*rk4_triangular_prism_s0p45_N48_T1_dt0p001_final_rho.png*
+
+## `conservative_geometry_campaign/rk4_stepper_diagnostic/geometry_replay/rk4_triangular_prism_s0p45_N48_T2_dt0p001`
+
+![[_gallery/conservative_geometry_campaign/conservative_geometry_campaign__rk4_stepper_diagnostic__geometry_replay__rk4_triangular_prism_s0p45_N48_T2_dt0p001__rk4_triangular_prism_s0p45_N48_T2_dt0p001_final_rho.png]]
+
+*rk4_triangular_prism_s0p45_N48_T2_dt0p001_final_rho.png*
+
+## `conservative_geometry_campaign/rk4_stepper_diagnostic/geometry_replay/rk4_triangular_prism_s0p45_N48_T4_dt0p001`
+
+![[_gallery/conservative_geometry_campaign/conservative_geometry_campaign__rk4_stepper_diagnostic__geometry_replay__rk4_triangular_prism_s0p45_N48_T4_dt0p001__rk4_triangular_prism_s0p45_N48_T4_dt0p001_final_rho.png]]
+
+*rk4_triangular_prism_s0p45_N48_T4_dt0p001_final_rho.png*
+
+## `conservative_geometry_campaign/rk4_stepper_diagnostic_smoke`
+
+![[_gallery/conservative_geometry_campaign/conservative_geometry_campaign__rk4_stepper_diagnostic_smoke__one_step_rk4_vs_etdrk4_norm_defect_vs_dt.png]]
+
+*one_step_rk4_vs_etdrk4_norm_defect_vs_dt.png*
+
+![[_gallery/conservative_geometry_campaign/conservative_geometry_campaign__rk4_stepper_diagnostic_smoke__one_step_rk4_vs_etdrk4_rho_max_defect_vs_dt.png]]
+
+*one_step_rk4_vs_etdrk4_rho_max_defect_vs_dt.png*
+
+## `conservative_geometry_campaign/stepper_contract_audit`
+
+![[_gallery/conservative_geometry_campaign/conservative_geometry_campaign__stepper_contract_audit__norm_loss_vs_dt.png]]
+
+*norm_loss_vs_dt.png*
+
+![[_gallery/conservative_geometry_campaign/conservative_geometry_campaign__stepper_contract_audit__one_step_norm_defect_vs_dt.png]]
+
+*one_step_norm_defect_vs_dt.png*
+
+![[_gallery/conservative_geometry_campaign/conservative_geometry_campaign__stepper_contract_audit__rho_max_vs_time.png]]
+
+*rho_max_vs_time.png*
+
+## `conservative_geometry_campaign/stepper_contract_audit_smoke`
+
+![[_gallery/conservative_geometry_campaign/conservative_geometry_campaign__stepper_contract_audit_smoke__norm_loss_vs_dt.png]]
+
+*norm_loss_vs_dt.png*
+
+![[_gallery/conservative_geometry_campaign/conservative_geometry_campaign__stepper_contract_audit_smoke__one_step_norm_defect_vs_dt.png]]
+
+*one_step_norm_defect_vs_dt.png*
+
+![[_gallery/conservative_geometry_campaign/conservative_geometry_campaign__stepper_contract_audit_smoke__rho_max_vs_time.png]]
+
+*rho_max_vs_time.png*
+
+---
+
+## Review notes
+
+*(Preserved across catalogue rebuilds - everything above this line is regenerated.)*
+

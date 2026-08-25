@@ -1,0 +1,3 @@
+This note is just a palceholder. 
+
+An associated document is defined similarly to a [[Previous experiment]] But is based also on context as the note itself will contain a large amount of semantic, and descriptive information of which could be interpretated differerntly based on the context of which its being read. it is important to define and track the chronology of notes, and their contained information. 

@@ -92,3 +92,8 @@ Equantule_mappervalidation_pipeline.py
 
 # --- Codex diagnostic render/output tree (regenerable; unique handover MDs promoted to docs/codex_conservative_c2_campaign_archive/) ---
 quantule_viz/outputs/
+
+# Obsidian vault config (docs/ is the vault root)
+docs/.obsidian/workspace*.json
+docs/.obsidian/cache
+docs/.trash/

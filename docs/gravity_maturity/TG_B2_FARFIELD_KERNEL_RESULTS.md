@@ -1,0 +1,66 @@
+# TG-B2 Far-Field Kernel & Mass Scaling — Results (Gate-3)
+
+Author: Claude (primary), 2026-08-22. Run `sweep_runs/TG_B2_FARFIELD_20260822_205537`
+(`jax_scout/gravity_TG_B2_farfield_kernel.py`, CPU, N=112 L=28, frozen static-force machinery).
+Mirror-only. No gravity / UFF / IRER-validation claim.
+
+## Question
+
+The July characterization (`TG_B2_CHARACTERIZATION_RESULTS.md`) measured **F(mass) ~ M^-0.07 —
+mass-INDEPENDENT**, which is not gravity's mass coupling, and traced it to the *normalized* `S_state`
+source (GAP-1). Gate-3 asks the prior question: **was that mass-independence a near-field artifact?**
+The static body force is a kernel convolution with no free exponent, so the near-field can cancel the
+mass dependence that a true far field would expose.
+
+## Result — `TG_B2_FARFIELD_MASS_SCALING_RECOVERED`
+
+**Mass scaling returns at larger separation.** At sep = 8:
+
+| quantity | measured | near-field (July) |
+|---|---:|---:|
+| `F ~ M^p` | **+1.42** | **0** (mass-independent) |
+| `Q_source ~ M^p` | +0.57 | — |
+| `Q_recv ~ M^p` | +1.00 | — |
+| predicted `Q_source*Q_recv` | **+1.57** | (near-field predicted +1.69) |
+
+The measured far-field exponent (+1.42) sits close to the charge-product prediction (+1.57), so the
+**monopole picture is recovered** and the near-field `M^0` is explained as **kernel cancellation**, not
+as a property of the source.
+
+**Separation dependence is exponential-like, not a power law.** The local power slope steepens
+monotonically and does not settle:
+
+| interval | power slope | exp lambda |
+|---|---:|---:|
+| 3 -> 4 | -0.27 | 12.97 |
+| 5 -> 6 | -2.39 | 2.29 |
+| 7 -> 8 | -4.30 | 1.74 |
+| 9 -> 10 | -5.85 | 1.62 |
+
+`exp_lambda` converges toward ~1.6 (single-source kernel screening length measured separately at
+**0.922**), i.e. screened mediation.
+
+## Caveat that bounds the claim
+
+`support_radius_99 = 6.51`, so two nodes still **overlap at every sampled separation** (surface gap is
+negative from sep 3 through sep 10). The preregistered `h > 0` far-field power fit therefore returned
+**NaN** — this is a *larger*-separation measurement, **not yet a true far field**. The recovered mass
+exponent should be read as "the near-field cancellation lifts as the sources separate," not as a
+converged asymptotic law.
+
+## What this does and does not change
+
+- **Does:** removes "mass-independence" as a standing anomaly and as evidence *for* GAP-1 in the way the
+  July note framed it. The July `F(mass) ~ M^-0.07` stands as a near-field measurement, correctly
+  labelled, but its interpretation is superseded.
+- **Does not:** make this gravity. The falloff is screened (not `1/r^2`), and the coupling tracks the
+  **charge product** `Q_source*Q_recv`, not a mass-squared coupling. `TG_B2` remains
+  FALSIFIED-as-gravity / CONFIRMED-legible as a BEC smeared-Yukawa analogue.
+- **Open:** a genuine non-overlapping far field (larger box, or smaller/compacter sources) is required
+  before quoting an asymptotic exponent. GAP-1 (rate vs load source) is untouched by this run and
+  remains the Phase-F foundations item.
+
+## Next
+
+Queued as `CL_TG_B2_FARFIELD_KERNEL_RESULT` (REVIEW) in `docs/RUN_QUEUE.md`. A non-overlapping-support
+far-field row is the natural follow-up; it is not launched.

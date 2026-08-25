@@ -21,6 +21,7 @@ Vault root is `docs/`. Everything below is a note; wikilinks and backlinks work 
 | [[runs/_INDEX\|Run Catalogue]] | One note per simulation run, with plots and figures. Generated from `sweep_runs/`. |
 | [[EXPERIMENT_TRACKER]] | **Chronological experiment → result tracker**, and the visual-review queue. |
 | [[DOCUMENTATION_METHODOLOGY]] | How this vault is built: note kinds, branch discipline, backlink categories, image rules. |
+| [[META_ANALYSIS_BRANCH_PROGRESS]] | **Where every branch stands and whether the goals still hold** (2026-08-25). |
 
 ## Current campaign
 

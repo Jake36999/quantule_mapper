@@ -45,6 +45,13 @@ FAMILIES = [
     (r"^GRAVITY", "Gravity-D", "gravity", "Spatial-geometry gravity mirror (non-Newtonian)"),
     (r"^(CORE_SAT|ADAPTIVE_HUNT|STAGE|ATTRACTOR)", "Stability", "stability",
      "Phase C attractor / saturation hunts"),
+    (r"^PHASE_C", "Phase-C", "stability", "Phase C closure / visual analysis / gates"),
+    (r"^SUBSTRATE_HUNT", "Substrate-hunt", "stability",
+     "Bare S-NCGL substrate hunt (rotational-core basin)"),
+    (r"^CORE_BASIN", "Core-basin", "stability", "Core-basin calibration and refinement"),
+    (r"^FEB_", "Feb-basin", "stability", "Feb-external basin / observable extraction"),
+    (r"^(STABLE_COLLAPSE|A5_PROD)", "Stability", "stability", "Phase C stability production"),
+    (r"^CORRECTED_PHYSICS", "Baseline", "infra", "Corrected-physics baseline scout"),
     (r"^PHASE_D", "Phase-D", "transport", "Transport sector harness"),
     (r"^C3", "C3-KG", "transport", "Klein-Gordon Q-ball transport & collisions"),
     (r"^C2", "C2-NLS", "transport", "NLS soliton transport & collisions"),
@@ -1012,7 +1019,12 @@ def write_branch_indexes(recs):
              "> drifting into the main line uncontrolled and keeps graph view readable.", "",
              "- Parent: [[Main branch]]",
              "- Methodology: [[DOCUMENTATION_METHODOLOGY]]",
-             "- All runs: [[runs/_INDEX|Run Catalogue]] &middot; tracker: [[EXPERIMENT_TRACKER]]", "",
+             "- All runs: [[runs/_INDEX|Run Catalogue]] &middot; tracker: [[EXPERIMENT_TRACKER]]"]
+        _chk = name.replace(" - Index", " - Review Checklist")
+        if os.path.exists(os.path.join(VAULT, "%s.md" % _chk)):
+            L += ["- **Review in progress:** [[%s]]" % _chk]
+        L += [""]
+        L += [
              "## Chronology (%d runs)" % len(rs), "",
              "| date | run | family | verdict | figures | reading |",
              "|---|---|---|---|---:|---|"]

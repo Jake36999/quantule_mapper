@@ -1,18 +1,18 @@
 ---
 run_id: "CORE_BASIN_REFINE_20260622_095451"
 date: 2026-06-22
-family: "other"
-sector: "other"
+family: "Core-basin"
+sector: "stability"
 verdict: null
 complete: false
 source: derived
 n_csv: 1
 n_plots: 1
-tags: [run, other, other]
+tags: [run, stability, Core_basin]
 ---
 # CORE_BASIN_REFINE_20260622_095451
 
-*Unclassified run* &middot; **other** &middot; `2026-06-22`
+*Core-basin calibration and refinement* &middot; **Core-basin** &middot; `2026-06-22`
 
 > [!note] No verdict recorded
 > This run's summary carries no `verdict` key.
@@ -45,26 +45,25 @@ tags: [run, other, other]
 
 ## Previous experiments
 
-*Auto-derived: the preceding runs in the same family (`other`). Correct by hand if the lineage is wrong — edits here survive rebuilds only if you move the link below the Review notes marker.*
+*Auto-derived: the preceding runs in the same family (`Core-basin`). Correct by hand if the lineage is wrong — edits here survive rebuilds only if you move the link below the Review notes marker.*
 
 - [[CORE_BASIN_CALIB_20260622_022504]] &middot; `2026-06-22`
 - [[CORE_BASIN_20260622_023759]] &middot; `2026-06-22`
-- [[SUBSTRATE_HUNT_20260621_161557]] &middot; `2026-06-21`
 
 ## Associated docs
 
-- [[Branch - Unsorted - Index]]
+- [[Branch - Stability - Index]]
 - [[EXPERIMENT_TRACKER]]
 - [[claud_memory_files/gl-rotational-core-basin]]
 
 ## Next experiment
 
-- [[PHASE_C_VISUAL_ANALYSIS_20260624_161650]] &middot; `2026-06-24`
+*None yet — this is the most recent run in the `Core-basin` family.*
 
 ## Branches
 
-- [[Main branch]] &larr; via [[Branch - Unsorted - Index|other sector index]]
-- Sector: `other` &middot; family: `other`
+- [[Main branch]] &larr; via [[Branch - Stability - Index|stability sector index]]
+- Sector: `stability` &middot; family: `Core-basin`
 
 ---
 

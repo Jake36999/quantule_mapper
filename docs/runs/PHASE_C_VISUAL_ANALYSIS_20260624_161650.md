@@ -1,18 +1,18 @@
 ---
 run_id: "PHASE_C_VISUAL_ANALYSIS_20260624_161650"
 date: 2026-06-24
-family: "other"
-sector: "other"
+family: "Phase-C"
+sector: "stability"
 verdict: null
 complete: false
 source: derived
 n_csv: 0
 n_plots: 0
-tags: [run, other, other]
+tags: [run, stability, Phase_C]
 ---
 # PHASE_C_VISUAL_ANALYSIS_20260624_161650
 
-*Unclassified run* &middot; **other** &middot; `2026-06-24`
+*Phase C closure / visual analysis / gates* &middot; **Phase-C** &middot; `2026-06-24`
 
 > [!note] No verdict recorded
 > This run's summary carries no `verdict` key.
@@ -203,15 +203,12 @@ tags: [run, other, other]
 
 ## Previous experiments
 
-*Auto-derived: the preceding runs in the same family (`other`). Correct by hand if the lineage is wrong — edits here survive rebuilds only if you move the link below the Review notes marker.*
-
-- [[CORE_BASIN_REFINE_20260622_095451]] &middot; `2026-06-22`
-- [[CORE_BASIN_CALIB_20260622_022504]] &middot; `2026-06-22`
-- [[CORE_BASIN_20260622_023759]] &middot; `2026-06-22`
+*None — this is the first catalogued run in the `Phase-C` family.*
 
 ## Associated docs
 
-- [[Branch - Unsorted - Index]]
+- [[Branch - Stability - Index]]
+- [[Branch - Stability - Review Checklist]]
 - [[EXPERIMENT_TRACKER]]
 - [[PHASE_C_VISUAL_ANALYSIS_PACK]]
 - [[codex_conservative_c2_campaign_archive/candidate_2node_3node_search/candidate_2node_3node_report]]
@@ -222,8 +219,8 @@ tags: [run, other, other]
 
 ## Branches
 
-- [[Main branch]] &larr; via [[Branch - Unsorted - Index|other sector index]]
-- Sector: `other` &middot; family: `other`
+- [[Main branch]] &larr; via [[Branch - Stability - Index|stability sector index]]
+- Sector: `stability` &middot; family: `Phase-C`
 
 ---
 

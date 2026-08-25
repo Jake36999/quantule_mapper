@@ -49,7 +49,6 @@ tags: [run, transport, C2_NLS]
 - [[Branch - Transport - Index]]
 - [[EXPERIMENT_TRACKER]]
 - [[PHASE_D_C2_7_REDERIVATION_RESULTS]]
-- [[template - draft]]
 
 ## Next experiment
 

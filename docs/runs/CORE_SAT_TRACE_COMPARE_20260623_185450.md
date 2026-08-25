@@ -70,6 +70,7 @@ tags: [run, stability, Stability]
 ## Associated docs
 
 - [[Branch - Stability - Index]]
+- [[Branch - Stability - Review Checklist]]
 - [[EXPERIMENT_TRACKER]]
 - [[PHASE_C_MASS_THRESHOLD_TRACE_COMPARISON]]
 - [[RUNBOOK_PHASE_C_AND_VISUALS]]

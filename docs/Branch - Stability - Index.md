@@ -15,11 +15,17 @@ branch_kind: main
 - Parent: [[Main branch]]
 - Methodology: [[DOCUMENTATION_METHODOLOGY]]
 - All runs: [[runs/_INDEX|Run Catalogue]] &middot; tracker: [[EXPERIMENT_TRACKER]]
+- **Review in progress:** [[Branch - Stability - Review Checklist]]
 
-## Chronology (35 runs)
+## Chronology (54 runs)
 
 | date | run | family | verdict | figures | reading |
 |---|---|---|---|---:|---|
+| 2026-06-19 | [[STABLE_COLLAPSE_multiseed_20260619_132254]] | Stability | `-` | 1 | ⬜ |
+| 2026-06-21 | [[SUBSTRATE_HUNT_20260621_161557]] | Substrate-hunt | `-` | 48 | ⬜ |
+| 2026-06-22 | [[CORE_BASIN_20260622_023759]] | Core-basin | `-` | 6 | ⬜ |
+| 2026-06-22 | [[CORE_BASIN_CALIB_20260622_022504]] | Core-basin | `-` | 1 | ⬜ |
+| 2026-06-22 | [[CORE_BASIN_REFINE_20260622_095451]] | Core-basin | `-` | 2 | ⬜ |
 | 2026-06-22 | [[CORE_SAT_CALIB_20260622_185337]] | Stability | `-` | 1 | ⬜ |
 | 2026-06-22 | [[CORE_SAT_CALIB_20260622_185907]] | Stability | `-` | 1 | ⬜ |
 | 2026-06-22 | [[CORE_SAT_PILOT_20260622_190340]] | Stability | `-` | 7 | ⬜ |
@@ -55,6 +61,20 @@ branch_kind: main
 | 2026-06-24 | [[CORE_SAT_HUNT_20260624_150101]] | Stability | `-` | 1 | ⬜ |
 | 2026-06-24 | [[CORE_SAT_HUNT_20260624_152029]] | Stability | `-` | 1 | ⬜ |
 | 2026-06-24 | [[CORE_SAT_THRESHOLD_BRANCH_ROBUSTNESS_20260624_001934]] | Stability | `-` | 6 | ⬜ |
+| 2026-06-24 | [[PHASE_C_VISUAL_ANALYSIS_20260624_161650]] | Phase-C | `-` | 42 | ⬜ |
+| 2026-06-24 | [[PHASE_C_VISUAL_ANALYSIS_V2_20260624_185426]] | Phase-C | `-` | 36 | ⬜ |
+| 2026-06-25 | [[FEB_BASIN_TOPOLOGY_20260625_154619]] | Feb-basin | `-` | 2 | ⬜ |
+| 2026-06-25 | [[PHASE_C_N96_CLOSURE_DYNAMICS_20260625_013018]] | Phase-C | `-` | 5 | ⬜ |
+| 2026-06-25 | [[PHASE_C_N96_CURRENT_CLOSURE_20260625_001621]] | Phase-C | `-` | 14 | ⬜ |
+| 2026-06-25 | [[PHASE_C_N96_LONGT_CONTROL_20260625_083731]] | Phase-C | `-` | 7 | ⬜ |
+| 2026-06-25 | [[PHASE_C_N96_OVERNIGHT_20260625_014313]] | Phase-C | `PHASE_C_N96_OVERNIGHT_20260625_014313` | 4 | ⬜ |
+| 2026-06-25 | [[PHASE_C_STABILITY_GATE_CALIB_20260625_121731]] | Phase-C | `-` | 1 | ⬜ |
+| 2026-06-26 | [[FEB_BASIN_POSTHOC_VALIDATION_20260626_122835]] | Feb-basin | `-` | 4 | ⬜ |
+| 2026-06-26 | [[FEB_JOINT_BASIN_20260626_224056]] | Feb-basin | `-` | 2 | ⬜ |
+| 2026-06-26 | [[FEB_OBSERVABLE_EXTRACTION_20260626_220710]] | Feb-basin | `-` | 2 | ⬜ |
+| 2026-06-26 | [[FEB_PARAM_BASIN_20260626_004039]] | Feb-basin | `-` | 2 | ⬜ |
+| 2026-06-27 | [[FEB_CORE_DELINEATION_T24000_20260627_175050]] | Feb-basin | `-` | 2 | ⬜ |
+| 2026-07-03 | [[A5_PROD_20260703_192713]] | Stability | `-` |  | — |
 
 ## Open threads
 

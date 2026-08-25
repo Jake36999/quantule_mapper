@@ -1,18 +1,18 @@
 ---
 run_id: "PHASE_C_STABILITY_GATE_CALIB_20260625_121731"
 date: 2026-06-25
-family: "other"
-sector: "other"
+family: "Phase-C"
+sector: "stability"
 verdict: null
 complete: false
 source: derived
 n_csv: 0
 n_plots: 0
-tags: [run, other, other]
+tags: [run, stability, Phase_C]
 ---
 # PHASE_C_STABILITY_GATE_CALIB_20260625_121731
 
-*Unclassified run* &middot; **other** &middot; `2026-06-25`
+*Phase C closure / visual analysis / gates* &middot; **Phase-C** &middot; `2026-06-25`
 
 > [!note] No verdict recorded
 > This run's summary carries no `verdict` key.
@@ -36,7 +36,7 @@ tags: [run, other, other]
 
 ## Previous experiments
 
-*Auto-derived: the preceding runs in the same family (`other`). Correct by hand if the lineage is wrong — edits here survive rebuilds only if you move the link below the Review notes marker.*
+*Auto-derived: the preceding runs in the same family (`Phase-C`). Correct by hand if the lineage is wrong — edits here survive rebuilds only if you move the link below the Review notes marker.*
 
 - [[PHASE_C_N96_OVERNIGHT_20260625_014313]] &middot; `2026-06-25`
 - [[PHASE_C_N96_LONGT_CONTROL_20260625_083731]] &middot; `2026-06-25`
@@ -44,19 +44,19 @@ tags: [run, other, other]
 
 ## Associated docs
 
-- [[Branch - Unsorted - Index]]
+- [[Branch - Stability - Index]]
 - [[EVIDENCE_INVENTORY]]
 - [[EXPERIMENT_TRACKER]]
 - [[PHASE_C_STABILITY_GATE_CALIBRATION]]
 
 ## Next experiment
 
-- [[FEB_BASIN_POSTHOC_VALIDATION_20260626_122835]] &middot; `2026-06-26`
+*None yet — this is the most recent run in the `Phase-C` family.*
 
 ## Branches
 
-- [[Main branch]] &larr; via [[Branch - Unsorted - Index|other sector index]]
-- Sector: `other` &middot; family: `other`
+- [[Main branch]] &larr; via [[Branch - Stability - Index|stability sector index]]
+- Sector: `stability` &middot; family: `Phase-C`
 
 ---
 

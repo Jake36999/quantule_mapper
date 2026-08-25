@@ -1,8 +1,8 @@
 ---
 run_id: "CORRECTED_PHYSICS_JAX_SCOUT_20260619_005700"
 date: 2026-06-19
-family: "other"
-sector: "other"
+family: "Baseline"
+sector: "infra"
 verdict: null
 complete: false
 source: derived
@@ -12,11 +12,11 @@ dt: 0.005
 seed: 20260619
 n_csv: 4
 n_plots: 4
-tags: [run, other, other]
+tags: [run, infra, Baseline]
 ---
 # CORRECTED_PHYSICS_JAX_SCOUT_20260619_005700
 
-*Unclassified run* &middot; **other** &middot; `2026-06-19`
+*Corrected-physics baseline scout* &middot; **Baseline** &middot; `2026-06-19`
 
 > [!note] No verdict recorded
 > This run's summary carries no `verdict` key.
@@ -67,23 +67,23 @@ tags: [run, other, other]
 
 ## Previous experiments
 
-*Auto-derived: the preceding runs in the same family (`other`). Correct by hand if the lineage is wrong — edits here survive rebuilds only if you move the link below the Review notes marker.*
+*Auto-derived: the preceding runs in the same family (`Baseline`). Correct by hand if the lineage is wrong — edits here survive rebuilds only if you move the link below the Review notes marker.*
 
 - [[CORRECTED_PHYSICS_JAX_SCOUT_20260619_001030]] &middot; `2026-06-19`
 
 ## Associated docs
 
-- [[Branch - Unsorted - Index]]
+- [[Branch - Validation - Index]]
 - [[EXPERIMENT_TRACKER]]
 
 ## Next experiment
 
-- [[STABLE_COLLAPSE_multiseed_20260619_132254]] &middot; `2026-06-19`
+*None yet — this is the most recent run in the `Baseline` family.*
 
 ## Branches
 
-- [[Main branch]] &larr; via [[Branch - Unsorted - Index|other sector index]]
-- Sector: `other` &middot; family: `other`
+- [[Main branch]] &larr; via [[Branch - Validation - Index|infra sector index]]
+- Sector: `infra` &middot; family: `Baseline`
 
 ---
 

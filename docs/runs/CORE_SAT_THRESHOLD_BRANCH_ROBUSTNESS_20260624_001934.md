@@ -69,12 +69,13 @@ tags: [run, stability, Stability]
 ## Associated docs
 
 - [[Branch - Stability - Index]]
+- [[Branch - Stability - Review Checklist]]
 - [[EXPERIMENT_TRACKER]]
 - [[codex_conservative_c2_campaign_archive/candidate_2node_3node_search/candidate_2node_3node_report]]
 
 ## Next experiment
 
-*None yet — this is the most recent run in the `Stability` family.*
+- [[A5_PROD_20260703_192713]] &middot; `2026-07-03`
 
 ## Branches
 

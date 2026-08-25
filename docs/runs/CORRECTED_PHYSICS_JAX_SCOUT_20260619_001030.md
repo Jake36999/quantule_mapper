@@ -1,8 +1,8 @@
 ---
 run_id: "CORRECTED_PHYSICS_JAX_SCOUT_20260619_001030"
 date: 2026-06-19
-family: "other"
-sector: "other"
+family: "Baseline"
+sector: "infra"
 verdict: null
 complete: false
 source: derived
@@ -12,11 +12,11 @@ dt: 0.005
 seed: 20260619
 n_csv: 3
 n_plots: 3
-tags: [run, other, other]
+tags: [run, infra, Baseline]
 ---
 # CORRECTED_PHYSICS_JAX_SCOUT_20260619_001030
 
-*Unclassified run* &middot; **other** &middot; `2026-06-19`
+*Corrected-physics baseline scout* &middot; **Baseline** &middot; `2026-06-19`
 
 > [!note] No verdict recorded
 > This run's summary carries no `verdict` key.
@@ -63,11 +63,11 @@ tags: [run, other, other]
 
 ## Previous experiments
 
-*None — this is the first catalogued run in the `other` family.*
+*None — this is the first catalogued run in the `Baseline` family.*
 
 ## Associated docs
 
-- [[Branch - Unsorted - Index]]
+- [[Branch - Validation - Index]]
 - [[EXPERIMENT_TRACKER]]
 
 ## Next experiment
@@ -76,8 +76,8 @@ tags: [run, other, other]
 
 ## Branches
 
-- [[Main branch]] &larr; via [[Branch - Unsorted - Index|other sector index]]
-- Sector: `other` &middot; family: `other`
+- [[Main branch]] &larr; via [[Branch - Validation - Index|infra sector index]]
+- Sector: `infra` &middot; family: `Baseline`
 
 ---
 

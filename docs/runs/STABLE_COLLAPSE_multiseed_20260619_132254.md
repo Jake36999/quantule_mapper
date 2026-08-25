@@ -1,18 +1,18 @@
 ---
 run_id: "STABLE_COLLAPSE_multiseed_20260619_132254"
 date: 2026-06-19
-family: "other"
-sector: "other"
+family: "Stability"
+sector: "stability"
 verdict: null
 complete: false
 source: derived
 n_csv: 1
 n_plots: 1
-tags: [run, other, other]
+tags: [run, stability, Stability]
 ---
 # STABLE_COLLAPSE_multiseed_20260619_132254
 
-*Unclassified run* &middot; **other** &middot; `2026-06-19`
+*Phase C stability production* &middot; **Stability** &middot; `2026-06-19`
 
 > [!note] No verdict recorded
 > This run's summary carries no `verdict` key.
@@ -36,24 +36,21 @@ tags: [run, other, other]
 
 ## Previous experiments
 
-*Auto-derived: the preceding runs in the same family (`other`). Correct by hand if the lineage is wrong — edits here survive rebuilds only if you move the link below the Review notes marker.*
-
-- [[CORRECTED_PHYSICS_JAX_SCOUT_20260619_005700]] &middot; `2026-06-19`
-- [[CORRECTED_PHYSICS_JAX_SCOUT_20260619_001030]] &middot; `2026-06-19`
+*None — this is the first catalogued run in the `Stability` family.*
 
 ## Associated docs
 
-- [[Branch - Unsorted - Index]]
+- [[Branch - Stability - Index]]
 - [[EXPERIMENT_TRACKER]]
 
 ## Next experiment
 
-- [[SUBSTRATE_HUNT_20260621_161557]] &middot; `2026-06-21`
+- [[CORE_SAT_CALIB_20260622_185337]] &middot; `2026-06-22`
 
 ## Branches
 
-- [[Main branch]] &larr; via [[Branch - Unsorted - Index|other sector index]]
-- Sector: `other` &middot; family: `other`
+- [[Main branch]] &larr; via [[Branch - Stability - Index|stability sector index]]
+- Sector: `stability` &middot; family: `Stability`
 
 ---
 

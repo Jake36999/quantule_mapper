@@ -52,7 +52,6 @@ tags: [run, transport, C2_NLS]
 - [[evidence_package/00_project_timeline/PROJECT_MATURITY_TIMELINE]]
 - [[evidence_package/03_phase_d_c2_instrument_correction/evidence_index]]
 - [[evidence_package/04_phase_d_c2_transport_and_two_body/evidence_index]]
-- [[template - draft]]
 
 ## Next experiment
 

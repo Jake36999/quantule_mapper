@@ -1,18 +1,18 @@
 ---
 run_id: "PHASE_C_VISUAL_ANALYSIS_V2_20260624_185426"
 date: 2026-06-24
-family: "other"
-sector: "other"
+family: "Phase-C"
+sector: "stability"
 verdict: null
 complete: false
 source: derived
 n_csv: 0
 n_plots: 0
-tags: [run, other, other]
+tags: [run, stability, Phase_C]
 ---
 # PHASE_C_VISUAL_ANALYSIS_V2_20260624_185426
 
-*Unclassified run* &middot; **other** &middot; `2026-06-24`
+*Phase C closure / visual analysis / gates* &middot; **Phase-C** &middot; `2026-06-24`
 
 > [!note] No verdict recorded
 > This run's summary carries no `verdict` key.
@@ -175,26 +175,25 @@ tags: [run, other, other]
 
 ## Previous experiments
 
-*Auto-derived: the preceding runs in the same family (`other`). Correct by hand if the lineage is wrong — edits here survive rebuilds only if you move the link below the Review notes marker.*
+*Auto-derived: the preceding runs in the same family (`Phase-C`). Correct by hand if the lineage is wrong — edits here survive rebuilds only if you move the link below the Review notes marker.*
 
 - [[PHASE_C_VISUAL_ANALYSIS_20260624_161650]] &middot; `2026-06-24`
-- [[CORE_BASIN_REFINE_20260622_095451]] &middot; `2026-06-22`
-- [[CORE_BASIN_CALIB_20260622_022504]] &middot; `2026-06-22`
 
 ## Associated docs
 
-- [[Branch - Unsorted - Index]]
+- [[Branch - Stability - Index]]
+- [[Branch - Stability - Review Checklist]]
 - [[EXPERIMENT_TRACKER]]
 - [[evidence_package/02_phase_c_stability/evidence_index]]
 
 ## Next experiment
 
-- [[FEB_BASIN_TOPOLOGY_20260625_154619]] &middot; `2026-06-25`
+- [[PHASE_C_N96_CLOSURE_DYNAMICS_20260625_013018]] &middot; `2026-06-25`
 
 ## Branches
 
-- [[Main branch]] &larr; via [[Branch - Unsorted - Index|other sector index]]
-- Sector: `other` &middot; family: `other`
+- [[Main branch]] &larr; via [[Branch - Stability - Index|stability sector index]]
+- Sector: `stability` &middot; family: `Phase-C`
 
 ---
 

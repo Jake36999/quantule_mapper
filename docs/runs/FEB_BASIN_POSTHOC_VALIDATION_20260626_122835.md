@@ -1,18 +1,18 @@
 ---
 run_id: "FEB_BASIN_POSTHOC_VALIDATION_20260626_122835"
 date: 2026-06-26
-family: "other"
-sector: "other"
+family: "Feb-basin"
+sector: "stability"
 verdict: null
 complete: false
 source: derived
 n_csv: 3
 n_plots: 3
-tags: [run, other, other]
+tags: [run, stability, Feb_basin]
 ---
 # FEB_BASIN_POSTHOC_VALIDATION_20260626_122835
 
-*Unclassified run* &middot; **other** &middot; `2026-06-26`
+*Feb-external basin / observable extraction* &middot; **Feb-basin** &middot; `2026-06-26`
 
 > [!note] No verdict recorded
 > This run's summary carries no `verdict` key.
@@ -53,15 +53,13 @@ tags: [run, other, other]
 
 ## Previous experiments
 
-*Auto-derived: the preceding runs in the same family (`other`). Correct by hand if the lineage is wrong — edits here survive rebuilds only if you move the link below the Review notes marker.*
+*Auto-derived: the preceding runs in the same family (`Feb-basin`). Correct by hand if the lineage is wrong — edits here survive rebuilds only if you move the link below the Review notes marker.*
 
-- [[PHASE_C_STABILITY_GATE_CALIB_20260625_121731]] &middot; `2026-06-25`
-- [[PHASE_C_N96_OVERNIGHT_20260625_014313]] &middot; `2026-06-25`
-- [[PHASE_C_N96_LONGT_CONTROL_20260625_083731]] &middot; `2026-06-25`
+- [[FEB_BASIN_TOPOLOGY_20260625_154619]] &middot; `2026-06-25`
 
 ## Associated docs
 
-- [[Branch - Unsorted - Index]]
+- [[Branch - Stability - Index]]
 - [[EVIDENCE_INVENTORY]]
 - [[EXPERIMENT_TRACKER]]
 - [[PHASE_C_VALIDATION_STACK_AUDIT]]
@@ -72,8 +70,8 @@ tags: [run, other, other]
 
 ## Branches
 
-- [[Main branch]] &larr; via [[Branch - Unsorted - Index|other sector index]]
-- Sector: `other` &middot; family: `other`
+- [[Main branch]] &larr; via [[Branch - Stability - Index|stability sector index]]
+- Sector: `stability` &middot; family: `Feb-basin`
 
 ---
 

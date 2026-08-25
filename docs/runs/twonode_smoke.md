@@ -24,11 +24,7 @@ tags: [run, other, other]
 
 ## Previous experiments
 
-*Auto-derived: the preceding runs in the same family (`other`). Correct by hand if the lineage is wrong — edits here survive rebuilds only if you move the link below the Review notes marker.*
-
-- [[A5_PROD_20260703_192713]] &middot; `2026-07-03`
-- [[FEB_CORE_DELINEATION_T24000_20260627_175050]] &middot; `2026-06-27`
-- [[FEB_PARAM_BASIN_20260626_004039]] &middot; `2026-06-26`
+*None — this is the first catalogued run in the `other` family.*
 
 ## Associated docs
 

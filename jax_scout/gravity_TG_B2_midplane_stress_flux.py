@@ -124,6 +124,30 @@ def stress_diag(state, cfg, g, a_sign, feedback):
     dxA = jnp.real(b1s.deriv_x(A, g))
     F_R = -c * c * jnp.sum(jnp.where(X > 0, dxA * grad2, 0.0)) * dV
 
+    # --- P1-a: per-half-space ENERGY decomposition ----------------------------------------------
+    # P1 found that F_R weights the GRADIENT energy only, while the available "mass" observable is
+    # the charge-like Int rho dV -- so F/M_p is not an acceleration and no UFF statement can rest on
+    # it. The KG energy density for this Lagrangian is
+    #     E = |pi|^2 + c^2 A |grad phi|^2 + m^2 rho - U(rho)
+    # (the A=1 case matches phase_d_c3_wave.py:80). Splitting it exposes (i) E_R, giving F/E_R as
+    # the first dimensionally coherent acceleration-like quantity, and (ii) the GRADIENT FRACTION
+    # E_grad/E -- the quantity P1 identified as the likely reason the force looks mass-flat, since
+    # only that fraction couples to F_R and it depends on node profile.
+    RM = X > 0
+    LM = X < 0
+    e_kin = jnp.abs(pi) ** 2
+    e_grad = c * c * A * grad2
+    e_mass = m * m * rho
+    e_pot = -U
+    e_tot = e_kin + e_grad + e_mass + e_pot
+    E_R = jnp.sum(jnp.where(RM, e_tot, 0.0)) * dV
+    E_L = jnp.sum(jnp.where(LM, e_tot, 0.0)) * dV
+    E_grad_R = jnp.sum(jnp.where(RM, e_grad, 0.0)) * dV
+    E_kin_R = jnp.sum(jnp.where(RM, e_kin, 0.0)) * dV
+    E_mass_R = jnp.sum(jnp.where(RM, e_mass, 0.0)) * dV
+    E_pot_R = jnp.sum(jnp.where(RM, e_pot, 0.0)) * dV
+    M_R = jnp.sum(jnp.where(RM, rho, 0.0)) * dV        # the charge-like "mass" F/M_p uses today
+
     # --- momentum in the half space, and its density ---------------------------------------------
     px = -2.0 * jnp.real(jnp.conj(pi) * gx)
     P_R = jnp.sum(jnp.where(X > 0, px, 0.0)) * dV
@@ -147,6 +171,8 @@ def stress_diag(state, cfg, g, a_sign, feedback):
     flux_div = jnp.sum(jnp.where(X > 0, dS, 0.0)) * dV
 
     return {"F_R": F_R, "P_R": P_R,
+            "E_R": E_R, "E_L": E_L, "E_grad_R": E_grad_R, "E_kin_R": E_kin_R,
+            "E_mass_R": E_mass_R, "E_pot_R": E_pot_R, "M_R": M_R,
             "S_mid": S_mid, "S_far": S_far, "S_in": S_in, "S_out": S_out,
             "flux_plane": flux_plane, "flux_div": flux_div,
             "charge": jnp.imag(jnp.sum(jnp.conj(phi) * pi)) * dV,
@@ -155,6 +181,7 @@ def stress_diag(state, cfg, g, a_sign, feedback):
 
 
 FIELDS = ["t", "F_R", "P_R", "S_mid", "S_far", "S_in", "S_out", "flux_plane", "flux_div",
+          "E_R", "E_L", "E_grad_R", "E_kin_R", "E_mass_R", "E_pot_R", "M_R",
           "charge", "amp", "A_min", "A_max"]
 
 
@@ -206,6 +233,41 @@ def series(rows, f_discard, which="flux_plane"):
     msk = ti >= f_discard * ti[-1]
     return {"t": ti[msk], "F_flux": (dPdt - Q[1:-1])[msk], "F_R": F[1:-1][msk],
             "dPdt": dPdt[msk]}
+
+
+def energetics(rows, f_discard):
+    """P1-a: settled-window energy decomposition and the normalized force ratios.
+
+    F/E_R is the first dimensionally coherent acceleration-like quantity available in this
+    sector; F/M_R is the ratio previously in use, retained only so the two can be compared.
+    grad_fraction is the diagnostic P1 asked for.
+    """
+    t = np.array([r["t"] for r in rows])
+    m = t >= f_discard * t[-1]
+    if m.sum() < 2:
+        return None
+    col = lambda k: np.array([r[k] for r in rows])[m]
+    E_R, M_R, F_R = col("E_R"), col("M_R"), col("F_R")
+    Eg = col("E_grad_R")
+    out = {
+        "E_R": float(E_R.mean()), "E_L": float(col("E_L").mean()),
+        "E_grad_R": float(Eg.mean()), "E_kin_R": float(col("E_kin_R").mean()),
+        "E_mass_R": float(col("E_mass_R").mean()), "E_pot_R": float(col("E_pot_R").mean()),
+        "M_R": float(M_R.mean()),
+        "grad_fraction": float((Eg / E_R).mean()),
+        "grad_fraction_std": float((Eg / E_R).std()),
+        "F_over_E_R": float((F_R / E_R).mean()),
+        "F_over_M_R": float((F_R / M_R).mean()),
+        "E_R_drift_rel": float(abs(E_R[-1] - E_R[0]) / (abs(E_R[0]) + 1e-300)),
+        "left_right_energy_asym": float(abs(col("E_R").mean() - col("E_L").mean())
+                                        / (abs(col("E_R").mean()) + 1e-300)),
+    }
+    out["note"] = ("F_over_E_R has dimensions of an inverse length (force per unit energy) and is "
+                   "the acceleration-like ratio; F_over_M_R divides a gradient-energy-weighted "
+                   "force by a charge-like Int rho dV and is NOT an acceleration -- reported only "
+                   "for comparison with the historical rows. grad_fraction = E_grad/E is the "
+                   "fraction of the half-space energy that F_R can actually couple to.")
+    return out
 
 
 def stat(x):
@@ -338,6 +400,7 @@ def main():
             rows = run_arm(out / f"stress_{name}.csv", psi, pi, cfgv, refsv, g,
                            flags, a_sign, fb, nchunk, chunk_steps, args.dt)
         res = {v: ledger(rows, args.f_discard, v) for v in ("flux_plane", "flux_div")}
+        res["energetics"] = energetics(rows, args.f_discard)
         results[name] = res
         series_by_arm[name] = series(rows, args.f_discard, "flux_plane")
         lp = res["flux_plane"]

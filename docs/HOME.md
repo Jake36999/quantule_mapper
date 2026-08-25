@@ -47,8 +47,11 @@ or broad sweep.
 > `P1-b` frozen-reference mass sweep). P1 downgraded several earlier framings: `F/M_p` is **not** an
 > acceleration, and the mass-scaling exponents are **not interpretable as mass scaling** (the mass axis
 > also varies node morphology by 25%).
-> **P2's midplane stress-flux force is now the strongest outstanding instrument check** — every force
-> number we have comes from a single estimator that has never been independently cross-checked.
+> **P2 is CLOSED (2026-08-25):** the midplane stress-flux estimator is implemented and confirms the
+> body force to **0.340%** — see [[gravity_maturity/TG_P2_MIDPLANE_STRESS_FLUX_RESULTS]]. `F_R`
+> measures what it was believed to measure. Every P1 downgrade still stands, and with the instrument
+> now trusted, **GAP-4 (the non-variational loop) is the sharpest open problem**: the force's sign is
+> still a runtime flag rather than a derived result.
 
 ## The document layers
 

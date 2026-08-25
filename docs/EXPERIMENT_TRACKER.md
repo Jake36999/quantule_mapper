@@ -21,9 +21,9 @@ Every catalogued run in **chronological order**: what was run, what came out, an
 
 | | count |
 |---|---:|
-| experiments tracked | 181 |
-| with visual output | 96 |
-| **awaiting a second reading** | **96** |
+| experiments tracked | 182 |
+| with visual output | 102 |
+| **awaiting a second reading** | **102** |
 | second reading recorded | 0 |
 
 ## Visual review queue
@@ -32,6 +32,12 @@ Every catalogued run in **chronological order**: what was run, what came out, an
 
 | date | run | family | verdict | figures |
 |---|---|---|---|---:|
+| 2026-08-25 | [[TG_B2_MIDPLANE_FLUX_N64]] | TG-B2 | `TG_B2_MIDPLANE_FLUX_CONFIRMS_BODY_FORCE` | 3 |
+| 2026-08-25 | [[TG_B2_MIDPLANE_SMOKE]] | TG-B2 | `TG_B2_MIDPLANE_FLUX_STRESS_TENSOR_INVALID__OFF_ARM_LEDGER_OPEN` | 1 |
+| 2026-08-25 | [[TG_B2_MID_S25]] | TG-B2 | `TG_B2_MIDPLANE_FLUX_STRESS_TENSOR_INVALID__OFF_ARM_LEDGER_OPEN` | 1 |
+| 2026-08-25 | [[TG_B2_MID_conv_0.05]] | TG-B2 | `TG_B2_MIDPLANE_FLUX_INCONCLUSIVE` | 1 |
+| 2026-08-25 | [[TG_B2_MID_conv_0.10]] | TG-B2 | `TG_B2_MIDPLANE_FLUX_INCONCLUSIVE` | 1 |
+| 2026-08-25 | [[TG_B2_MID_conv_0.25]] | TG-B2 | `TG_B2_MIDPLANE_FLUX_STRESS_TENSOR_INVALID__OFF_ARM_LEDGER_OPEN` | 1 |
 | 2026-08-24 | [[TG_B2_CONV_SEP3_20260824_221915]] | TG-B2 | `TG_B2_DEFINITIVE_AWELL_ATTRACTION_CONFIRMED` | 1 |
 | 2026-08-22 | [[TG_B1S_D4_DISCREPANCY_REVIEW_20260822_205725]] | TG-B1S | `D4_LARGER_BOX_DISCREPANCY_REVIEWED` | 2 |
 | 2026-07-18 | [[TG_B2_CHARACTERIZATION_20260718_121223]] | TG-B2 | `TG_B2_CHARACTERIZATION_COMPLETE` | 5 |
@@ -66,14 +72,8 @@ Every catalogued run in **chronological order**: what was run, what came out, an
 | 2026-07-13 | [[GRAVITY_D_ROBUSTNESS_CLOSURE_GPU_20260713_204559]] | Gravity-D | `-` | 2 |
 | 2026-07-13 | [[GRAVITY_D_ROBUSTNESS_GPU_20260713_195713]] | Gravity-D | `-` | 6 |
 | 2026-07-09 | [[C25_SCOUT_T1]] | C2-NLS | `C2_5_NO_TRUE_BRANCH_IN_GRID` | 1 |
-| 2026-07-09 | [[C25_SCOUT_T1B]] | C2-NLS | `C2_5_TRUE_BRANCHES_NO_TRANSPORT` | 1 |
-| 2026-07-09 | [[C25_SCOUT_T1B_FIXED]] | C2-NLS | `C2_5_MOVING_SOLITON_FAMILY_FOUND` | 1 |
-| 2026-07-09 | [[C25_SCOUT_T1_FIXED]] | C2-NLS | `C2_5_NO_TRUE_BRANCH_IN_GRID` | 1 |
-| 2026-07-09 | [[PHASE_D_C2_8_TWONODE_CODEX_20260709_123611]] | Phase-D | `-` | 13 |
-| 2026-07-09 | [[PHASE_D_CODEX_REPRODUCTION_20260709_233433]] | Phase-D | `-` | 7 |
-| 2026-07-04 | [[PHASE_D_C2_SCOUT_20260704_200154]] | Phase-D | `C2_LOCALIZED_CANDIDATES_FOUND` | 1 |
 
-*...and 56 more.*
+*...and 62 more.*
 
 ## Chronology
 
@@ -255,11 +255,12 @@ Every catalogued run in **chronological order**: what was run, what came out, an
 | 2026-08-22 | [[TG_B1S_D4_DISCREPANCY_REVIEW_20260822_205725]] | [[Branch - Gravity - Index\|gravity]] | `D4_LARGER_BOX_DISCREPANCY_REVIEWED` | 2 | ⬜ |
 | 2026-08-22 | [[TG_B2_FARFIELD_20260822_205537]] | [[Branch - Gravity - Index\|gravity]] | `-` |  | — |
 | 2026-08-24 | [[TG_B2_CONV_SEP3_20260824_221915]] | [[Branch - Gravity - Index\|gravity]] | `TG_B2_DEFINITIVE_AWELL_ATTRACTION_CONFIRMED` | 1 | ⬜ |
-| 2026-08-25 | [[TG_B2_MIDPLANE_SMOKE]] | [[Branch - Gravity - Index\|gravity]] | `TG_B2_MIDPLANE_FLUX_STRESS_TENSOR_INVALID__OFF_ARM_LEDGER_OPEN` |  | — |
-| 2026-08-25 | [[TG_B2_MID_S25]] | [[Branch - Gravity - Index\|gravity]] | `TG_B2_MIDPLANE_FLUX_STRESS_TENSOR_INVALID__OFF_ARM_LEDGER_OPEN` |  | — |
-| 2026-08-25 | [[TG_B2_MID_conv_0.05]] | [[Branch - Gravity - Index\|gravity]] | `TG_B2_MIDPLANE_FLUX_INCONCLUSIVE` |  | — |
-| 2026-08-25 | [[TG_B2_MID_conv_0.10]] | [[Branch - Gravity - Index\|gravity]] | `TG_B2_MIDPLANE_FLUX_INCONCLUSIVE` |  | — |
-| 2026-08-25 | [[TG_B2_MID_conv_0.25]] | [[Branch - Gravity - Index\|gravity]] | `TG_B2_MIDPLANE_FLUX_STRESS_TENSOR_INVALID__OFF_ARM_LEDGER_OPEN` |  | — |
+| 2026-08-25 | [[TG_B2_MIDPLANE_FLUX_N64]] | [[Branch - Gravity - Index\|gravity]] | `TG_B2_MIDPLANE_FLUX_CONFIRMS_BODY_FORCE` | 3 | ⬜ |
+| 2026-08-25 | [[TG_B2_MIDPLANE_SMOKE]] | [[Branch - Gravity - Index\|gravity]] | `TG_B2_MIDPLANE_FLUX_STRESS_TENSOR_INVALID__OFF_ARM_LEDGER_OPEN` | 1 | ⬜ |
+| 2026-08-25 | [[TG_B2_MID_S25]] | [[Branch - Gravity - Index\|gravity]] | `TG_B2_MIDPLANE_FLUX_STRESS_TENSOR_INVALID__OFF_ARM_LEDGER_OPEN` | 1 | ⬜ |
+| 2026-08-25 | [[TG_B2_MID_conv_0.05]] | [[Branch - Gravity - Index\|gravity]] | `TG_B2_MIDPLANE_FLUX_INCONCLUSIVE` | 1 | ⬜ |
+| 2026-08-25 | [[TG_B2_MID_conv_0.10]] | [[Branch - Gravity - Index\|gravity]] | `TG_B2_MIDPLANE_FLUX_INCONCLUSIVE` | 1 | ⬜ |
+| 2026-08-25 | [[TG_B2_MID_conv_0.25]] | [[Branch - Gravity - Index\|gravity]] | `TG_B2_MIDPLANE_FLUX_STRESS_TENSOR_INVALID__OFF_ARM_LEDGER_OPEN` | 1 | ⬜ |
 
 ---
 

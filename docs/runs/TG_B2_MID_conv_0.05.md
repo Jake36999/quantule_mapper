@@ -12,7 +12,7 @@ T: 6.0
 dt: 0.002
 elapsed_h: 0.01410250273015764
 n_csv: 1
-n_plots: 0
+n_plots: 1
 tags: [run, gravity, TG_B2]
 ---
 # TG_B2_MID_conv_0.05
@@ -73,6 +73,14 @@ tags: [run, gravity, TG_B2]
 | `absorb_strength` | 0.02 |
 | `core_radius` | 2 |
 
+## Plots
+
+*Generated from this run's CSVs by `tools/build_run_catalogue.py`. Regenerable — delete and rebuild to refresh.*
+
+![[_plots/TG_B2_MID_conv_0.05/stress_off.png]]
+
+*stress off*
+
 ## Artifacts
 
 - **Run directory** (gitignored, local only): `sweep_runs/TG_B2_MID_conv_0.05/`
@@ -84,7 +92,7 @@ tags: [run, gravity, TG_B2]
 
 - [[TG_B2_MID_S25]] &middot; `2026-08-25`
 - [[TG_B2_MIDPLANE_SMOKE]] &middot; `2026-08-25`
-- [[TG_B2_CONV_SEP3_20260824_221915]] &middot; `2026-08-24`
+- [[TG_B2_MIDPLANE_FLUX_N64]] &middot; `2026-08-25`
 
 ## Associated docs
 
@@ -105,4 +113,30 @@ tags: [run, gravity, TG_B2]
 ## Review notes
 
 *(Preserved across catalogue rebuilds - everything above this line is regenerated.)*
+
+> [!important] Paired reading - fill your block before reading the other one.
+> A disagreement here is the point, not a problem. Record the resolution; do not
+> overwrite the disagreement.
+
+### Reading - Claude
+
+- **Observation:**
+- **Reading:**
+- **Confidence:**
+- **What would change my mind:**
+
+### Reading - Jake
+
+- **Observation:**
+- **Reading:**
+- **Confidence:**
+- **What would change my mind:**
+
+### Comparison
+
+**Agree on:**
+
+**Disagree on:**
+
+**Resolution:**
 

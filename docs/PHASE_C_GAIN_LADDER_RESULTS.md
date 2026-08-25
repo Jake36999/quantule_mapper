@@ -15,14 +15,14 @@ sits at a gain **above** feb-center. This run tests that by climbing param_a and
 
 ## Result — late slope → 0 at a ≈ ×1.15
 
-| param_a (×feb) | er peak | er_fin | late slope /1k (last 50%) | reading |
-|---|--:|--:|--:|---|
-| ×1.00 (feb-center) | 1.596 | 0.416 | −0.0126 | decays (breathing run) |
-| ×1.05 | 1.734 | 0.812 | −0.0120 | decays (breathing run) |
-| ×1.075 | 1.808 | 1.066 | −0.0105 | slow decay |
-| ×1.10 | 1.888 | 1.358 | −0.0081 | slow decay |
-| ×1.125 | 1.975 | 1.681 | −0.0047 | slow decay |
-| **×1.15** | **2.075** | **2.038** | **−0.0006** | **flat — stationary** |
+| param_a (×feb)     |   er peak |    er_fin | late slope /1k (last 50%) | reading                |
+| ------------------ | --------: | --------: | ------------------------: | ---------------------- |
+| ×1.00 (feb-center) |     1.596 |     0.416 |                   −0.0126 | decays (breathing run) |
+| ×1.05              |     1.734 |     0.812 |                   −0.0120 | decays (breathing run) |
+| ×1.075             |     1.808 |     1.066 |                   −0.0105 | slow decay             |
+| ×1.10              |     1.888 |     1.358 |                   −0.0081 | slow decay             |
+| ×1.125             |     1.975 |     1.681 |                   −0.0047 | slow decay             |
+| **×1.15**          | **2.075** | **2.038** |               **−0.0006** | **flat — stationary**  |
 
 - The late slope is a **clean monotonic function of gain**, crossing ~0 at **a ≈ ×1.15** (param_a ≈ 0.55;
   feb param_a = 0.4802). Linear extrapolation of the last three points puts the exact zero at ≈ ×1.15–1.16.

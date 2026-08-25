@@ -4,7 +4,7 @@ tags: [index, runs, triage]
 
 # Triage - runs with no `summary.json`
 
-97 run directories under `sweep_runs/` carry no `summary.json` and are therefore **not**
+96 run directories under `sweep_runs/` carry no `summary.json` and are therefore **not**
 catalogued as notes.
 
 > [!success] The 57 **substantive** no-summary runs have been promoted
@@ -13,14 +13,13 @@ catalogued as notes.
 
 | class | n | meaning |
 |---|---:|---|
-| `minor` | 89 | smoke tests, aborted launches, single-file dirs |
+| `minor` | 88 | smoke tests, aborted launches, single-file dirs |
 | `empty` | 8 | no files at all; safe to delete |
 
 To promote any of these, give the run a `summary.json` (or write the note by hand) and rebuild.
 
 | class | run | date | files | csv | contents |
 |---|---|---|---:|---:|---|
-| `minor` | `TG_B2_MIDPLANE_FLUX_N64` | 2026-08-25 | 2 | 1 | config.json, stress_off.csv |
 | `minor` | `TG_B2_CONVERGENCE_N80_L20_20260822_205815` | 2026-08-22 | 3 | 1 | ROW_sep3.00_STARTED.json, config.json, scalars_sep3.00_off.csv |
 | `empty` | `TG_B2_STATIC_FORCE_20260715_235113` | 2026-07-15 | 0 | 0 |  |
 | `minor` | `TG_B1S_D4_D5_CLOSURE_GPU_20260715_002840` | 2026-07-15 | 11 | 1 | PID, TMUX_SESSION, baseline_reproduction.csv, environment_versions.json, git_state_before.txt, gpu_preflight.json ... |

@@ -188,6 +188,34 @@ def run_arm(csv_path, psi, pi, cfgv, refsv, g, flags, a_sign, feedback,
     return rows
 
 
+def series(rows, f_discard, which="flux_plane"):
+    """Per-sample F_flux and F_R on the settled window, aligned to the interior samples.
+
+    Returned so arms can be differenced SAMPLE BY SAMPLE. The absolute F_flux is a ~1700:1
+    cancellation between dP/dt and the flux, so its scatter dwarfs its mean; but that scatter is
+    almost entirely common mode across arms (identical ICs), and cancels in the difference.
+    """
+    t = np.array([r["t"] for r in rows])
+    P = np.array([r["P_R"] for r in rows])
+    F = np.array([r["F_R"] for r in rows])
+    Q = np.array([r[which] for r in rows])
+    if len(t) < 5:
+        return None
+    dPdt = (P[2:] - P[:-2]) / (t[2:] - t[:-2])
+    ti = t[1:-1]
+    msk = ti >= f_discard * ti[-1]
+    return {"t": ti[msk], "F_flux": (dPdt - Q[1:-1])[msk], "F_R": F[1:-1][msk],
+            "dPdt": dPdt[msk]}
+
+
+def stat(x):
+    x = np.asarray(x, dtype=float)
+    n = max(len(x), 1)
+    sem = float(x.std() / np.sqrt(n))
+    return {"mean": float(x.mean()), "std": float(x.std()), "sem": sem, "n": int(n),
+            "sigma": float(abs(x.mean()) / sem) if sem > 0 else None}
+
+
 def ledger(rows, f_discard, which="flux_plane"):
     """Form the momentum-ledger residual for one arm.
 
@@ -238,10 +266,13 @@ def main():
     ap.add_argument("--sample-dt", type=float, default=0.05)
     ap.add_argument("--f-discard", type=float, default=0.4)
     ap.add_argument("--arms", default="off,well,hill")
+    ap.add_argument("--reanalyze", action="store_true",
+                    help="skip simulation; re-derive summary.json from the CSVs already in --out "
+                         "(use after a gate/analysis fix, so a completed run need not be repeated)")
     ap.add_argument("--resid-tol", type=float, default=0.05,
                     help="G1/G2 pass if relative ledger residual is below this")
-    ap.add_argument("--agree-tol", type=float, default=0.25,
-                    help="G3 pass if |F_flux-F_R|/|F_R| is below this")
+    ap.add_argument("--agree-tol", type=float, default=0.05,
+                    help="G3 pass if |(F_flux-F_flux_off)-F_R|/|F_R| is below this")
     for k, v in dict(c=0.5477, m=1.0, a=0.8, s=-0.5, f=-0.1, w=0.964, alpha_T=0.35,
                      omega_T=1.25, omega_G=0.85, gamma_T=0.08, gamma_G=0.06, kappa_TG=0.55,
                      epsilon_G=0.06, cT=0.7, cG=0.55, absorb_width=1.6, absorb_strength=0.02,
@@ -266,18 +297,22 @@ def main():
                   "G4": "<F_flux> reverses sign between well and hill"},
         "boundary": "mirror-only; frozen TG-B1S dynamics untouched (observation only); "
                     "no gravity/UFF/IRER claim"})
-    if not pf["gpu_ok"]:
+    if not pf["gpu_ok"] and not args.reanalyze:
         write_json(out / "RUN_FAILED.json", {"status": "GPU_PREFLIGHT_FAILED", **pf})
         print("GPU_PREFLIGHT_FAILED")
         return
 
     cfg = vars(args).copy()
-    phi, prof = b1s.solve_qball(cfg)
-    op = build_kg(cfg["N"], cfg["L"], cfg["c"], cfg["m"], cfg["dt"])
-    refs = b1s.ref_source_norms(phi, cfg, op)
-    g = b1s.make_grid(op)
-    cfgv = b1s.cfg_array(cfg)
-    refsv = b1s.refs_array(refs)
+    phi, prof = ((None, {"residual": float("nan")}) if args.reanalyze
+                 else b1s.solve_qball(cfg))
+    if args.reanalyze:
+        op = refs = g = cfgv = refsv = None
+    else:
+        op = build_kg(cfg["N"], cfg["L"], cfg["c"], cfg["m"], cfg["dt"])
+        refs = b1s.ref_source_norms(phi, cfg, op)
+        g = b1s.make_grid(op)
+        cfgv = b1s.cfg_array(cfg)
+        refsv = b1s.refs_array(refs)
     chunk_steps = max(1, int(round(args.sample_dt / args.dt)))
     nchunk = max(8, int(round(args.T / args.dt / chunk_steps)))
     print(f"[setup] resid={prof['residual']:.1e}; sep={args.sep}; T={args.T} "
@@ -288,15 +323,23 @@ def main():
     ARM = {"off": (OFF, -1.0, 0.0), "well": (FULL, +1.0, 1.0), "hill": (FULL, -1.0, 1.0)}
     want = [a.strip() for a in args.arms.split(",") if a.strip()]
 
-    psi, pi, sc = b2.place_two(phi, cfg, args.sep, 0.0)
+    psi, pi, sc = (b2.place_two(phi, cfg, args.sep, 0.0) if not args.reanalyze else (None, None, None))
     results = {}
+    series_by_arm = {}
     for name in want:
         flags, a_sign, fb = ARM[name]
-        print(f"[arm {name}] ...", flush=True)
-        rows = run_arm(out / f"stress_{name}.csv", psi, pi, cfgv, refsv, g,
-                       flags, a_sign, fb, nchunk, chunk_steps, args.dt)
+        if args.reanalyze:
+            path = out / f"stress_{name}.csv"
+            with open(path, newline="") as fh:
+                rows = [{k: float(v) for k, v in r.items()} for r in csv.DictReader(fh)]
+            print(f"[arm {name}] re-analysed {len(rows)} samples from {path.name}", flush=True)
+        else:
+            print(f"[arm {name}] ...", flush=True)
+            rows = run_arm(out / f"stress_{name}.csv", psi, pi, cfgv, refsv, g,
+                           flags, a_sign, fb, nchunk, chunk_steps, args.dt)
         res = {v: ledger(rows, args.f_discard, v) for v in ("flux_plane", "flux_div")}
         results[name] = res
+        series_by_arm[name] = series(rows, args.f_discard, "flux_plane")
         lp = res["flux_plane"]
         if lp:
             gap = lp["estimator_rel_gap"]
@@ -312,14 +355,46 @@ def main():
 
     g1 = rel("off") < args.resid_tol if "off" in results else None
     g2 = all(rel(n) < args.resid_tol for n in results if n != "off") or None
+    # G3/G4 must compare LIKE WITH LIKE. F_R is a DIFFERENTIAL quantity: it is identically zero
+    # when A=1, so it measures only the A-mediated force. F_flux is a TOTAL: it also contains any
+    # bare KG two-body force, which F_R cannot see. The correct comparison is therefore
+    #     F_flux(arm) - F_flux(off)   against   F_R(arm)
+    # -- the same "isolate the loop force as F_full - F_off" convention the two-node harness uses.
+    # Differencing is done SAMPLE BY SAMPLE: the arms share initial conditions, so the large
+    # dP/dt and flux terms are common mode and cancel, which is what makes the differential
+    # resolvable at all (the absolute F_flux is not).
     live = [n for n in ("well", "hill") if n in results]
-    g3 = (all(results[n]["flux_plane"]["estimator_rel_gap"] < args.agree_tol for n in live)
-          if live else None)
-    g4 = None
-    if "well" in results and "hill" in results:
-        fw = results["well"]["flux_plane"]["F_flux_mean"]
-        fh = results["hill"]["flux_plane"]["F_flux_mean"]
-        g4 = bool(fw * fh < 0)
+    diff_stats = {}
+    if "off" in results and series_by_arm.get("off") is not None:
+        so = series_by_arm["off"]
+        for n in live:
+            sn = series_by_arm[n]
+            k = min(len(so["F_flux"]), len(sn["F_flux"]))
+            d = stat(sn["F_flux"][:k] - so["F_flux"][:k])
+            fr = stat(sn["F_R"][:k])
+            d["F_R_mean"] = fr["mean"]
+            d["rel_gap"] = abs(d["mean"] - fr["mean"]) / (abs(fr["mean"]) + 1e-300)
+            d["sem_frac"] = d["sem"] / (abs(d["mean"]) + 1e-300)
+            d["gap_within_error"] = bool(d["rel_gap"] <= max(d["sem_frac"], 1e-12))
+            d["corr_per_sample"] = float(np.corrcoef(sn["F_flux"][:k] - so["F_flux"][:k],
+                                                     sn["F_R"][:k])[0, 1])
+            diff_stats[n] = d
+            results[n]["differential"] = d
+
+    g3 = (all(diff_stats[n]["rel_gap"] < args.agree_tol for n in live)
+          if diff_stats and len(diff_stats) == len(live) else None)
+    g4 = (bool(diff_stats["well"]["mean"] * diff_stats["hill"]["mean"] < 0)
+          if {"well", "hill"} <= set(diff_stats) else None)
+
+    # Is the BARE (A-independent) two-body force resolved at this run length? Report honestly.
+    bare = None
+    if "off" in results and series_by_arm.get("off") is not None:
+        b = stat(series_by_arm["off"]["F_flux"])
+        b["resolved_at_2sigma"] = bool(b["sigma"] is not None and b["sigma"] >= 2.0)
+        b["note"] = ("absolute F_flux is a ~1700:1 cancellation between dP/dt and the plane flux; "
+                     "its per-sample scatter is orders of magnitude above its mean, so a small "
+                     "|sigma| here means NOT MEASURED, not 'measured to be zero'")
+        bare = {"bare_kg_two_body_force": b}
 
     if g1 is False:
         verdict = "TG_B2_MIDPLANE_FLUX_STRESS_TENSOR_INVALID__OFF_ARM_LEDGER_OPEN"
@@ -338,6 +413,8 @@ def main():
                   "G3_estimators_agree": g3, "G4_flux_sign_reverses": g4},
         "tolerances": {"resid_rel": args.resid_tol, "estimator_rel_gap": args.agree_tol},
         "arms": results,
+        "force_decomposition": bare,
+        "differential": diff_stats,
         "sep": args.sep, "N": args.N, "L": args.L, "T": args.T, "dt": args.dt,
         "elapsed_hours": (time.time() - t0) / 3600.0,
         "config": {k: v for k, v in vars(args).items()},

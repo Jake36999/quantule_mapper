@@ -71,6 +71,11 @@ topology; flat across TRUE/SPIN/GROW/BLOW. These diagnostics do **not** discrimi
 support** for the log-prime or topological hypotheses. The states are smooth dissipative solitons. Prime-SSE /
 TDA are exploratory post-hoc only; the v3 energy-stability gate is the promotion criterion.
 
+> [!NOTE] Point six "log prime"
+> This hypothesis, was a rough estimation for the effect of indivisibility due to the subsequent states from deviding at that time would lead to unstable states, increasing the rate of decay, and as a result increasing the number of potential outcomes as it chaotically decays. 
+> 
+> Instead, this hypothesis, evolved into one of under indivisibility. This is the prediction that a stable structure will avoid more chaotic outcomes as it will lead to higher rates of entropy. or as the original theorising framed it. "an increase in entropic load due to its final state being more chaotic if it allowed the division"
+
 ## 7. Kick / inertia null — NOT SUPPORTED (with operator reason)
 Galilean phase-kick on a×1.15: velocity kick-independent at the noise floor, mobility ≈ 0, structure coherent
 (nodes 4→4). Operator audit: `L_k = −D·k² − η + i·ω₀`, ω₀=0 ⇒ purely real/diffusive, no advective channel ⇒
@@ -89,6 +94,12 @@ Default-off drag variant (baseline bit-identical), V0 ladder 0.075→0.40 across
 No coherent relocation in any morphology; the field responds to a gain preference by **local accretion /
 nucleation of new structure**, never by moving the existing structure. `..._GENERALIZED_ACROSS_MORPHOLOGIES`.
 Docs: `PHASE_C_ADIABATIC_DRAG_DESIGN.md`, `PHASE_C_ADIABATIC_DRAG_MORPHOLOGY_RESULTS.md`.
+
+
+> [!NOTE] expansion this sector.
+> Depending on the substrate that these seeds were ran on, may affect whether this result closes this section. 
+> The dual substrate feedback loop is the final substrate state, as the expresion of geometry can now effect time, and vise versa. This is because IRER predicts, that following the sequential time may hold the method of which to avoid this issue. 
+
 
 ## 9. Final SUPPORTED claims
 1. Reproducible long-time standing bound attractors exist in the corrected dissipative solver.

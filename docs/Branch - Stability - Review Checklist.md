@@ -25,8 +25,13 @@ status: open
 The claim: a real attractor at ×1.15 cubic gain (`param_a ≈ 0.55`), bracketed to ±0.5%, confirmed
 across seed, N=128 and T=144k, and explained as a **gain/loss balance** rather than a topological object.
 
-- [ ] **A1** — Read the closure argument end to end: [[PHASE_C_FINAL_DOSSIER]] (then [[PHASE_C_DOSSIER]] for the earlier state).
+- [x] **A1** — Read the closure argument end to end: [[PHASE_C_FINAL_DOSSIER]] (then [[PHASE_C_DOSSIER]] for the earlier state).
 - [ ] **A2** — Check the bracketing actually brackets: [[PHASE_C_GAIN_LADDER_RESULTS]]. Is ±0.5% a resolved bracket or the sampling step?
+
+> [!NOTE] Request
+> need visual analysis including vector maps, density maps, heatmaps for energy, with different frames throughout the runs at different T for A2. also, we should schedual a longer run for this test as we need to confirm the breathing state and the spin down trend stopping isnt just a energy or time artefact. 
+> also, we are working in 3d space, so top down visuals arent enough, please also render a 3d animation i can view and rotate of the run. 
+
 - [ ] **A3** — Seed independence: [[PHASE_C_OPTION_B_N96_STAGE1_RESULTS]], [[PHASE_C_N96_OVERNIGHT_REVIEW]].
 - [ ] **A4** — Resolution independence: [[PHASE_C_MASS_THRESHOLD_N96_VALIDATION]] and [[PHASE_C_MASS_THRESHOLD_N96_SCALED_VALIDATION]]. Do the scaled and unscaled N96 validations agree?
 - [ ] **A5** — Long-time survival: [[PHASE_C_T24000_CORE_DELINEATION]], [[runs/PHASE_C_N96_LONGT_CONTROL_20260625_083731]] (7 figures).

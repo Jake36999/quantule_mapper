@@ -22,6 +22,7 @@ Vault root is `docs/`. Everything below is a note; wikilinks and backlinks work 
 | [[EXPERIMENT_TRACKER]] | **Chronological experiment → result tracker**, and the visual-review queue. |
 | [[DOCUMENTATION_METHODOLOGY]] | How this vault is built: note kinds, branch discipline, backlink categories, image rules. |
 | [[DOC_LINEAGE]] | **What changed after each document** — review queue of dead-end and untracked docs. |
+| [[SYSTEM_PRESSURE_TEST_AND_METHOD_REVIEW]] | **Adversarial review of the method** — dependency graph, threat register, what the data could mean. |
 | [[META_ANALYSIS_BRANCH_PROGRESS]] | **Where every branch stands and whether the goals still hold** (2026-08-25). |
 
 ## Current campaign
@@ -124,7 +125,12 @@ Safe to re-run: hand-written **Review notes** sections in each run note are pres
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `292fc96` (2026-08-25) — *Obsidian vault: run catalogue, experiment tracker, documentation methodology*
-**Revised since:** 2 commit(s), most recently `5a19e60` (2026-08-25)
+**Revised since:** 3 commit(s), most recently `616fe31` (2026-08-25)
+
+**Harness code changed since it was written:** 3 commit(s) to `jax_scout/`.
+  - `b4e0613` 2026-08-25 — P1-a: per-half-space energy observable closes the P1 checklist
+  - `5a19e60` 2026-08-25 — P2 CONFIRMED: midplane stress-flux estimator validates the body force 
+  - `eeb8f6d` 2026-08-25 — P2: midplane stress-flux estimator, stability review checklist, refine
 
 **Later documents that cite this one:** none. *Either this line of work stopped here, or the consequence was never written down — both are worth knowing when reviewing it.*
 

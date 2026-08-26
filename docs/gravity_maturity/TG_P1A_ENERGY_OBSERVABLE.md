@@ -151,6 +151,12 @@ ratio in the sector, and it is now recorded rather than reconstructed after the 
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `b4e0613` (2026-08-25) — *P1-a: per-half-space energy observable closes the P1 checklist*
+**Revised since:** 1 commit(s), most recently `616fe31` (2026-08-25)
+
+**Harness code changed since it was written:** 3 commit(s) to `jax_scout/`.
+  - `b4e0613` 2026-08-25 — P1-a: per-half-space energy observable closes the P1 checklist
+  - `5a19e60` 2026-08-25 — P2 CONFIRMED: midplane stress-flux estimator validates the body force 
+  - `eeb8f6d` 2026-08-25 — P2: midplane stress-flux estimator, stability review checklist, refine
 
 **Later documents that cite this one:** none. *Either this line of work stopped here, or the consequence was never written down — both are worth knowing when reviewing it.*
 

@@ -52,6 +52,7 @@ D4 numerical validation did not close. The state-load frequency shift remained s
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `25020bf` (2026-07-22) — *dual substrate*
+**Revised since:** 1 commit(s), most recently `616fe31` (2026-08-25)
 
 **Harness code changed since it was written:** 3 commit(s) to `jax_scout/`.
   - `b4e0613` 2026-08-25 — P1-a: per-half-space energy observable closes the P1 checklist

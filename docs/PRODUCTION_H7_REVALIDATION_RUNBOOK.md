@@ -95,7 +95,7 @@ production-validated re-aim. Until then: `HUNTER_PRODUCTION_DEPLOYMENT_PENDING`.
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `706f6bd` (2026-07-03) — *A5 prep: production H7 re-validation harness + runbook (evaluator tested; run is*
-**Revised since:** 2 commit(s), most recently `5cbbb1a` (2026-07-03)
+**Revised since:** 3 commit(s), most recently `616fe31` (2026-08-25)
 
 **Harness code changed since it was written:** 36 commit(s) to `jax_scout/`.
   - `b4e0613` 2026-08-25 — P1-a: per-half-space energy observable closes the P1 checklist

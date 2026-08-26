@@ -60,6 +60,7 @@ validated a\* case top on real data (offline, `HUNTER_REAIM_OFFLINE_RESCORE.md`)
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `4396890` (2026-07-03) — *H7.1 wire stability objective into aste_hunter (flag-gated; default prime path u*
+**Revised since:** 1 commit(s), most recently `616fe31` (2026-08-25)
 
 **Harness code changed since it was written:** 36 commit(s) to `jax_scout/`.
   - `b4e0613` 2026-08-25 — P1-a: per-half-space energy observable closes the P1 checklist

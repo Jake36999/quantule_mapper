@@ -79,6 +79,7 @@ frozen geometry `e8d6a78ea` (see `BASELINE_REPRODUCTION_RUNBOOK.md`).
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `b3445d7` (2026-07-03) — *Stage 2 hardening foundation: runbook, gate summary, validation reconciliation, *
+**Revised since:** 1 commit(s), most recently `616fe31` (2026-08-25)
 
 **Harness code changed since it was written:** 36 commit(s) to `jax_scout/`.
   - `b4e0613` 2026-08-25 — P1-a: per-half-space energy observable closes the P1 checklist

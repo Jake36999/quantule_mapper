@@ -360,7 +360,7 @@ self-metrization) remains novel-but-delicate and, on the gravity side, paused be
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `a81b494` (2026-07-10) — *Future Work & External Validation Plan: quantitative-faithfulness roadmap*
-**Revised since:** 1 commit(s), most recently `25020bf` (2026-07-22)
+**Revised since:** 2 commit(s), most recently `616fe31` (2026-08-25)
 
 **Harness code changed since it was written:** 4 commit(s) to `jax_scout/`.
   - `b4e0613` 2026-08-25 — P1-a: per-half-space energy observable closes the P1 checklist
@@ -371,6 +371,7 @@ self-metrization) remains novel-but-delicate and, on the gravity side, paused be
 **Later documents that cite this one** — the downstream consequences:
 
 - [[Main branch]] &middot; `2026-08-25`
+- [[SYSTEM_PRESSURE_TEST_AND_METHOD_REVIEW]] &middot; `2026-08-25`
 - [[external_validation/CODEX_EXTERNAL_VALIDATION_REPORT]] &middot; `2026-07-22`
 
 **Master catalog:** neither this document nor any verdict it reports appears in the catalog. Its status is **not tracked centrally** — treat anything inside as historical until confirmed.

@@ -207,13 +207,16 @@ limb) are in `docs/theory_synthesis/irer_archive/CROSSMAP_CONCEPTS_VS_RESULTS.md
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `25020bf` (2026-07-22) — *dual substrate*
+**Revised since:** 1 commit(s), most recently `616fe31` (2026-08-25)
 
 **Harness code changed since it was written:** 3 commit(s) to `jax_scout/`.
   - `b4e0613` 2026-08-25 — P1-a: per-half-space energy observable closes the P1 checklist
   - `5a19e60` 2026-08-25 — P2 CONFIRMED: midplane stress-flux estimator validates the body force 
   - `eeb8f6d` 2026-08-25 — P2: midplane stress-flux estimator, stability review checklist, refine
 
-**Later documents that cite this one:** none. *Either this line of work stopped here, or the consequence was never written down — both are worth knowing when reviewing it.*
+**Later documents that cite this one** — the downstream consequences:
+
+- [[SYSTEM_PRESSURE_TEST_AND_METHOD_REVIEW]] &middot; `2026-08-25`
 
 **Also referenced by (same date or earlier):** [[RUN_QUEUE]], [[gravity_maturity/CONCEPT_IMPLEMENTATION_AND_GAP_ANALYSIS_CODEX_CONTINUATION_20260717]], [[gravity_maturity/TG_RECOVERED_CONCEPTS_INTEGRATION_AND_REPRIORITIZATION]]
 

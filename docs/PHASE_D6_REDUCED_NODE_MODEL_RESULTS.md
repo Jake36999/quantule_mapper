@@ -62,14 +62,15 @@ stable-network / isolated) is predictable from spacing + the merge/couple radii,
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `2af9a4c` (2026-07-04) — *Phase D.6 reduced node-network model: validated coarse-graining of the dissipati*
+**Revised since:** 1 commit(s), most recently `616fe31` (2026-08-25)
 
-**Harness code changed since it was written:** 25 commit(s) to `jax_scout/`.
+**Harness code changed since it was written:** 30 commit(s) to `jax_scout/`.
   - `b4e0613` 2026-08-25 — P1-a: per-half-space energy observable closes the P1 checklist
   - `5a19e60` 2026-08-25 — P2 CONFIRMED: midplane stress-flux estimator validates the body force 
   - `eeb8f6d` 2026-08-25 — P2: midplane stress-flux estimator, stability review checklist, refine
   - `25020bf` 2026-07-22 — dual substrate
   - `9a839c4` 2026-07-10 — Phase D C3 collision ladder: add relative-phase (--dphi) + BOUNCE clas
-  - *…and 20 more.*
+  - *…and 25 more.*
 
 **Later documents that cite this one:** none. *Either this line of work stopped here, or the consequence was never written down — both are worth knowing when reviewing it.*
 

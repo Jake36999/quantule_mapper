@@ -117,7 +117,7 @@ trend, the residual is reported as a bounded open item, and mobility is asserted
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `ad38757` (2026-07-05) — *Phase D C2.2: loss-source isolation -> geometry ruled out, loss is numerical (bo*
-**Revised since:** 2 commit(s), most recently `616fe31` (2026-08-25)
+**Revised since:** 3 commit(s), most recently `3eb93af` (2026-08-26)
 
 **Harness code changed since it was written:** 24 commit(s) to `jax_scout/`.
   - `b4e0613` 2026-08-25 — P1-a: per-half-space energy observable closes the P1 checklist

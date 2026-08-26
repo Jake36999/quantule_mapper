@@ -62,7 +62,7 @@ current channel is a **null** to be reported, not forced.
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `e2cfbc8` (2026-07-04) — *Phase D.3 node-library harvest: 162 configs + key finding (stable nodes near-cur*
-**Revised since:** 1 commit(s), most recently `616fe31` (2026-08-25)
+**Revised since:** 2 commit(s), most recently `3eb93af` (2026-08-26)
 
 **Harness code changed since it was written:** 30 commit(s) to `jax_scout/`.
   - `b4e0613` 2026-08-25 — P1-a: per-half-space energy observable closes the P1 checklist

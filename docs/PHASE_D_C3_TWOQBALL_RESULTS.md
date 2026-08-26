@@ -69,7 +69,7 @@ observables. The π/2-crossover MERGE-label caveat is corrected above.
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `b14c928` (2026-07-10) — *Phase D C3 two-Q-ball results: same pi/2 phase-force law as C2.9 -> cross-substr*
-**Revised since:** 1 commit(s), most recently `616fe31` (2026-08-25)
+**Revised since:** 2 commit(s), most recently `3eb93af` (2026-08-26)
 
 **Harness code changed since it was written:** 4 commit(s) to `jax_scout/`.
   - `b4e0613` 2026-08-25 — P1-a: per-half-space energy observable closes the P1 checklist

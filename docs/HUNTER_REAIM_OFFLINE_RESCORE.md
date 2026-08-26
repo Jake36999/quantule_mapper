@@ -67,7 +67,7 @@ reject disqualifies).
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `10b238b` (2026-07-03) — *H7.1/H7.2 offline stability objective + re-score; H4 CuPy step env-blocked (oper*
-**Revised since:** 1 commit(s), most recently `616fe31` (2026-08-25)
+**Revised since:** 2 commit(s), most recently `3eb93af` (2026-08-26)
 
 **Harness code changed since it was written:** 36 commit(s) to `jax_scout/`.
   - `b4e0613` 2026-08-25 — P1-a: per-half-space energy observable closes the P1 checklist

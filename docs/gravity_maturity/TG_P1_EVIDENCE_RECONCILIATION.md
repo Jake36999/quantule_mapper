@@ -240,7 +240,7 @@ it would be an independent estimator that does *not* inherit the gradient-only w
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `292fc96` (2026-08-25) — *Obsidian vault: run catalogue, experiment tracker, documentation methodology*
-**Revised since:** 1 commit(s), most recently `616fe31` (2026-08-25)
+**Revised since:** 2 commit(s), most recently `3eb93af` (2026-08-26)
 
 **Harness code changed since it was written:** 3 commit(s) to `jax_scout/`.
   - `b4e0613` 2026-08-25 — P1-a: per-half-space energy observable closes the P1 checklist

@@ -67,7 +67,7 @@ matter-like claims; the stress tensor remains a diagnostic, never an active sour
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `353a1d3` (2026-07-04) — *Phase D.4 first pass: short-range density/geometry node coupling (radius ~0.5 bo*
-**Revised since:** 1 commit(s), most recently `616fe31` (2026-08-25)
+**Revised since:** 2 commit(s), most recently `3eb93af` (2026-08-26)
 
 **Harness code changed since it was written:** 30 commit(s) to `jax_scout/`.
   - `b4e0613` 2026-08-25 — P1-a: per-half-space energy observable closes the P1 checklist

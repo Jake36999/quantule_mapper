@@ -112,7 +112,7 @@ reported with its lossiness, motion asserted only from v/k + r² + mass metrics.
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `087660a` (2026-07-04) — *Phase D C2.1 final report: native conservative solitons found, weak lossy transp*
-**Revised since:** 3 commit(s), most recently `616fe31` (2026-08-25)
+**Revised since:** 4 commit(s), most recently `3eb93af` (2026-08-26)
 
 **Harness code changed since it was written:** 30 commit(s) to `jax_scout/`.
   - `b4e0613` 2026-08-25 — P1-a: per-half-space energy observable closes the P1 checklist

@@ -330,7 +330,7 @@ the first one.
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `96b324c` (2026-08-25) — *Meta-analysis: branch progress and goal validation*
-**Revised since:** 1 commit(s), most recently `616fe31` (2026-08-25)
+**Revised since:** 2 commit(s), most recently `3eb93af` (2026-08-26)
 
 **Harness code changed since it was written:** 3 commit(s) to `jax_scout/`.
   - `b4e0613` 2026-08-25 — P1-a: per-half-space energy observable closes the P1 checklist
@@ -339,7 +339,7 @@ the first one.
 
 **Later documents that cite this one:** none. *Either this line of work stopped here, or the consequence was never written down — both are worth knowing when reviewing it.*
 
-**Also referenced by (same date or earlier):** [[Main branch]], [[SYSTEM_PRESSURE_TEST_AND_METHOD_REVIEW]], [[gravity_maturity/TG_P2_MIDPLANE_STRESS_FLUX_RESULTS]]
+**Also referenced by (same date or earlier):** [[INFRASTRUCTURE_AND_ORCHESTRATION_ASSESSMENT]], [[Main branch]], [[SYSTEM_PRESSURE_TEST_AND_METHOD_REVIEW]], [[gravity_maturity/TG_P2_MIDPLANE_STRESS_FLUX_RESULTS]]
 
 **Master catalog:** neither this document nor any verdict it reports appears in the catalog. Its status is **not tracked centrally** — treat anything inside as historical until confirmed.
 

@@ -111,7 +111,7 @@ production implement a true non-local splash and/or any imaginary kinetic term t
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `cb347a9` (2026-07-03) — *Phase C closure + Stage 0-1 baseline audit + provenance kinetic audit*
-**Revised since:** 1 commit(s), most recently `616fe31` (2026-08-25)
+**Revised since:** 2 commit(s), most recently `3eb93af` (2026-08-26)
 
 **Harness code changed since it was written:** 36 commit(s) to `jax_scout/`.
   - `b4e0613` 2026-08-25 — P1-a: per-half-space energy observable closes the P1 checklist

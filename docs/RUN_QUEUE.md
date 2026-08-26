@@ -280,7 +280,7 @@ The table is deliberately wider than a normal planning table. Fill enough column
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `25020bf` (2026-07-22) — *dual substrate*
-**Revised since:** 4 commit(s), most recently `616fe31` (2026-08-25)
+**Revised since:** 5 commit(s), most recently `3eb93af` (2026-08-26)
 
 **Harness code changed since it was written:** 3 commit(s) to `jax_scout/`.
   - `b4e0613` 2026-08-25 — P1-a: per-half-space energy observable closes the P1 checklist
@@ -289,6 +289,7 @@ The table is deliberately wider than a normal planning table. Fill enough column
 
 **Later documents that cite this one** — the downstream consequences:
 
+- [[INFRASTRUCTURE_AND_ORCHESTRATION_ASSESSMENT]] &middot; `2026-08-25`
 - [[gravity_maturity/TG_B2_FARFIELD_KERNEL_RESULTS]] &middot; `2026-08-25`
 - [[gravity_maturity/TG_P1A_ENERGY_OBSERVABLE]] &middot; `2026-08-25`
 - [[gravity_maturity/TG_P2_MIDPLANE_STRESS_FLUX_RESULTS]] &middot; `2026-08-25`

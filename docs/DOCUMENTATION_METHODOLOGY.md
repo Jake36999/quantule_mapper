@@ -253,11 +253,76 @@ It reports **that** later work exists, never **why**. The semantic half above ca
 > cannot tell you its own status — the link from evidence to status was never made.** Adding a doc
 > reference to each catalog row would close it.
 
+---
+
+## 12. The results index and the identity guard
+
+Two build artifacts, both regenerable from disk, neither a service.
+
+### `docs/runs/_index.sqlite` — the manifest index
+
+A queryable projection of the vault: 183 runs, 576 documents, 404 artifacts, 6,187 edges.
+
+> [!info] Why this shape, and why the last one failed
+> The previous store (`orchestrator/` + `queue_runtime.db`, 1,850 rows, March 2026) was hardcoded
+> for a **finalised** system: numbered results plus a config hash and nothing else. It could
+> describe exactly one variant of the model, so mixing runs from different variants, eras or goals
+> polluted it. The failure was a **missing dimension**, not bad storage.
+
+The schema carries the context the old one lacked:
+
+| field | purpose |
+|---|---|
+| **`substrate`** | which physical model a run exercises — `dissipative-S-NCGL`, `NLS-conservative`, `KG-conservative`, `TG-dual-substrate`, `gravity-D-spatial-mirror`. **The anti-pollution key.** |
+| **`code_epoch`** | git sha, or `pre-clean-slate` where git cannot say |
+| **`branch`** | the research pathway, matching the main/side branch discipline (§3) |
+| **`dof_free`** | parameters free in this run — threat **T2** made structural |
+
+`run_params` and `run_metrics` are stored **long** (`run_id, key, value`) rather than as fixed
+columns. Fixed columns are what forced the old store to assume one variant; long format absorbs
+heterogeneous configs with no migration.
+
+**The headline query** — everything associated with a research pathway:
+
+```sql
+SELECT * FROM v_branch_contents WHERE branch = 'Branch - Gravity - Index';
+```
+
+Other views: `v_substrate_summary` (runs grouped by the anti-pollution key),
+`v_docs_needing_consequences` (documents with no *What changed as a result* section).
+
+A cross-substrate verdict check is one query, and it already found one:
+
+```sql
+SELECT verdict, GROUP_CONCAT(DISTINCT substrate) FROM runs
+ WHERE verdict IS NOT NULL GROUP BY verdict HAVING COUNT(DISTINCT substrate) > 1;
+```
+
+### `tests/test_physics_identities.py` — the instrument guard
+
+Eleven assertions, ~4 seconds, CPU-only, run on every push by
+`.github/workflows/physics-identities.yml`. They encode the identities that caught all three bugs
+in the integrity ledger: spectral-derivative exactness, `div_A_grad(A=1) == laplacian` (the C2.6
+class), `F_R == 0` exactly when feedback is off, energy-split closure, `M_R == E_mass_R` at `m=1`,
+flux-variant agreement, sign reversal, U(1) charge conservation, and finiteness.
+
+> [!warning] The design rule that makes them worth anything
+> **A test must never re-implement the physics it checks** — a test that recomputes an operator can
+> agree with a bug in it. Every assertion exercises the *same code path the harnesses use* and
+> asserts a mathematical identity true independently of how that code is written.
+
 ## 10. Rebuilding
 
 ```bash
 .venv/Scripts/python.exe tools/build_run_catalogue.py   # run notes, tracker, branch indexes
 .venv/Scripts/python.exe tools/build_doc_lineage.py     # lineage blocks + DOC_LINEAGE.md
+.venv/Scripts/python.exe tools/build_results_index.py   # docs/runs/_index.sqlite
+```
+
+Physics identities (needs JAX; use the WSL env locally, CI installs its own):
+
+```bash
+JAX_PLATFORMS=cpu python -m pytest tests/test_physics_identities.py -q
 ```
 
 Rebuilds run notes, branch indexes, the tracker, the index, and the triage note; imports any new

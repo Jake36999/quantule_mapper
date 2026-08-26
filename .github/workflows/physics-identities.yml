@@ -1,0 +1,53 @@
+# Physics-identity regression guard.
+#
+# Every bug in the instrument-integrity ledger was caught by a result contradicting an
+# identity that must hold regardless of implementation. Those checks used to be run by hand,
+# occasionally. This runs them on every push.
+#
+# Deliberately narrow: ONLY tests/test_physics_identities.py. The wider suite needs CuPy, a
+# GPU and repo-local data, none of which belong in a fast pre-merge gate.
+name: physics identities
+
+on:
+  push:
+    paths:
+      - 'jax_scout/**'
+      - 'tests/test_physics_identities.py'
+      - '.github/workflows/physics-identities.yml'
+  pull_request:
+    paths:
+      - 'jax_scout/**'
+      - 'tests/test_physics_identities.py'
+  workflow_dispatch:
+
+jobs:
+  identities:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      JAX_PLATFORMS: cpu          # no GPU on the runner; x64 CPU is what the identities need
+      JAX_ENABLE_X64: '1'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Install CPU JAX and pytest
+        run: |
+          python -m pip install --upgrade pip
+          pip install "jax[cpu]" numpy pytest
+
+      - name: Run physics identities
+        run: pytest tests/test_physics_identities.py -v --no-header -p no:cacheprovider
+
+      - name: Explain a failure
+        if: failure()
+        run: |
+          echo "::error::A physics identity failed."
+          echo "These assert mathematics that holds regardless of implementation, so a failure"
+          echo "means the code changed in a way that breaks a conservation law, a null, or an"
+          echo "operator identity. Treat it as an instrument fault until proven otherwise --"
+          echo "see docs/IRER_MASTER_HYPOTHESIS_CATALOG.md section 10."

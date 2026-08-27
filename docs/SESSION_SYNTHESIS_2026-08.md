@@ -99,10 +99,28 @@ second reading. That review is [[Branch - Stability - Review Checklist|open]].*
   anti-phase and `v ≤ 0.45c`.
 - **The same two-body law appears in both NLS and KG.**
 
-> [!important] Cross-substrate universality is the most physically interesting thing here
-> A result that reproduces across two structurally different conservative field theories is the
-> signature of something **structural rather than fitted**. This is the project's best evidence that
-> it has found a property of a *class* of nonlinear field theories, not an artefact of one.
+> [!important] Cross-substrate universality — what it is, and what it is not
+> NLS and KG differ at the level of their symmetry groups: first vs second order in time, Galilean
+> vs Lorentz invariance, instantaneous vs finite propagation speed, norm vs energy conservation,
+> focusing balance vs Vakhitov–Kolokolov stability. A result surviving that transfer cannot be a
+> property of either equation — only of what they **share**, which is narrow: a complex field with a
+> global U(1) phase, an attractive self-interaction, and exponentially-localized solutions carrying
+> that phase.
+>
+> So the π/2 crossover is a statement about **phase-coherent localized objects interacting through
+> overlapping tails**, and that is precisely why it transfers.
+>
+> **But it is not new physics.** Karpman–Solov'ev (1981) and Gordon (1983) derive the two-soliton
+> interaction analytically as `e^{−Δx}·cos(Δφ)`, and `cos(Δφ)` changes sign at exactly π/2 — this
+> project's own [[FUTURE_WORK_AND_EXTERNAL_VALIDATION_PLAN|external validation plan]] already names
+> them as the "V1 target law". The universality is **understood**, not mysterious, which is stronger
+> than an unexplained coincidence *and* means it recovers established soliton physics rather than
+> supporting IRER.
+>
+> **Correct filing: a first-rate verification result.** The simulation independently reproduces a
+> known analytic law it was never fitted to, in two substrates, including the full collision
+> structure. It belongs beside `v = 2Dk` (0.9999) and conservation to 1e-13 — on the verification
+> scoreboard, where it is genuinely strong.
 
 ### TG dual-substrate — **real, converged, and its direction is an input**
 
@@ -156,11 +174,18 @@ Three shifts follow:
    not an obstacle on the road to a gravity analogue — **it is a goal in its own right, and it is that
    analogue's precondition.** Promoting it makes closing the drift a result rather than a chore.
 
-3. **The most valuable unexploited asset is in the transport branch, which has been dormant for six
-   weeks.** The **π/2 phase-force crossover** is dimensionless, parameter-free, substrate-independent,
-   and has published experimental data against it (Mitschke & Mollenauer 1987, sign law 7/7 on the
-   usable series). It is the strongest candidate the project has for a *parameter-free quantitative
-   prediction* — the one thing that would convert any of this into evidence about nature.
+3. **A parameter-free prediction is not enough — it must also DISCRIMINATE.** An earlier draft of
+   this synthesis named the π/2 crossover as the project's best shot at converting the work into
+   evidence about nature, because it is dimensionless, parameter-free, substrate-independent and has
+   published data against it. That was wrong in the way that matters: **standard soliton
+   perturbation theory already predicts π/2** (Karpman–Solov'ev, Gordon). Matching it would confirm
+   the simulation is correct; it would not distinguish IRER from a fibre-optics textbook. A
+   prediction is evidence only if the theory **could have been caught being wrong**.
+
+   A candidate must therefore be dimensionless, parameter-free, measured, **and not already predicted
+   by standard nonlinear field theory**. By construction that points at the one part of the model
+   with no standard counterpart: **the temporal↔geometric coupling** — which is also the sector whose
+   force sign is currently an input. See [[ACTION_PLAN_2026-08]] Phase 2.
 
 > [!important] The single sentence that captures the change
 > The project spent this session discovering that its instrument is sound, its most-worked branch is
@@ -191,8 +216,9 @@ honestly enough.
 
 Per [[ACTION_PLAN_2026-08]]: close Phase 0 (~1 day), then **the sign problem** — a perturbative
 hand-derivation in the `ε_G → 0` limit, which is cheap, needs no GPU, and is essentially exact
-because the system is strictly in linear response. Then **the π/2 crossover as a parameter-free
-prediction**. And in parallel, the one threat that cannot be fixed from inside: **an external
+because the system is strictly in linear response. Then **a discriminating dimensionless
+quantity** — which, per the correction above, must come from the TG sector rather than from the
+conservative substrates. And in parallel, the one threat that cannot be fixed from inside: **an external
 reviewer**.
 
 ---
@@ -235,7 +261,7 @@ reviewer**.
 > It reports *that* later work exists, not *why* it happened. The reasoning belongs in
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
-**Version written against:** unknown — this document predates the clean-slate commit `909e6e2` (2026-07-01), so git carries no history for it. Use the citation and succession signals below instead.
+**Version written against:** `09f47d8` (2026-08-27) — *Session synthesis: where the project actually stands*
 
 **Later documents that cite this one:** none. *Either this line of work stopped here, or the consequence was never written down — both are worth knowing when reviewing it.*
 

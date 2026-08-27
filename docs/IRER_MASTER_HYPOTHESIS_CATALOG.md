@@ -267,6 +267,15 @@ contradicting the label.
 (non-peak-tracking) observable, and conservation telemetry; a null that contradicts a symmetry identity is treated as
 an instrument fault until proven physical.
 
+> [!note] Interpretation note on cross-substrate universality (2026-08-25)
+> The NLS≡KG two-body law and collision-diagram universality is a **verification** result, not
+> support for IRER. Karpman–Solov'ev (1981) / Gordon (1983) derive the two-soliton interaction as
+> `e^{−Δx}·cos(Δφ)`, whose sign change is at exactly π/2, so standard soliton perturbation theory
+> predicts it. Reproducing it across two substrates with different symmetry groups is strong evidence
+> the solver is doing real soliton physics — file it beside `v=2Dk` (0.9999) and conservation to
+> 1e-13. It is **not** a discriminating prediction. See
+> `docs/ACTION_PLAN_2026-08.md` Phase 2 and `docs/SYSTEM_PRESSURE_TEST_AND_METHOD_REVIEW.md` §5.
+
 ## 11. Current frontier & open threads (none blocking)
 | thread | status | next |
 |---|---|---|

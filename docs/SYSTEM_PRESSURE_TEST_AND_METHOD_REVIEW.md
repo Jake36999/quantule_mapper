@@ -237,7 +237,19 @@ failed.
 The strongest achievable claim, and it is genuinely achievable:
 
 > *This substrate, with parameters fixed by [independent constraints], predicts dimensionless quantity
-> R = [value]. The measured value is [value]. The prediction had no freedom to be adjusted.*
+> R = [value]. The measured value is [value]. The prediction had no freedom to be adjusted,* **and no
+> standard nonlinear field theory predicts it.**
+
+> [!danger] The discrimination clause is not optional (added 2026-08-25)
+> A dimensionless, parameter-free quantity that **standard theory already predicts** is a verification
+> benchmark, not evidence for the theory under test. The project's own π/2 phase-force crossover is
+> exactly this case: it is dimensionless, parameter-free and substrate-independent — and it is also
+> the textbook Karpman–Solov'ev / Gordon result `e^{−Δx}·cos(Δφ)`, whose sign change sits at π/2.
+> Reproducing it validates the *simulation*; it says nothing about IRER.
+>
+> A prediction is evidence only if **the theory could have been caught being wrong**. That restricts
+> candidates to the part of the model with no standard counterpart — here, the temporal↔geometric
+> coupling.
 
 **One such number is worth more than a thousand runs of characterisation.** That is goal **L1**, and
 this analysis promotes it from "long-horizon" to **the load-bearing goal of the entire programme** —
@@ -329,15 +341,17 @@ entirely in what it changes.*
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `3eb93af` (2026-08-26) — *System pressure test: method review, dependency graph, threat register*
-**Revised since:** 2 commit(s), most recently `60093e5` (2026-08-27)
+**Revised since:** 3 commit(s), most recently `09f47d8` (2026-08-27)
 
 **Harness code changed since it was written:** 1 commit(s) to `jax_scout/`.
   - `06edae5` 2026-08-27 — Fix run provenance: 30% -> 86% of runs now dated
 
 **Later documents that cite this one:** none. *Either this line of work stopped here, or the consequence was never written down — both are worth knowing when reviewing it.*
 
-**Also referenced by (same date or earlier):** [[ACTION_PLAN_2026-08]], [[INFRASTRUCTURE_AND_ORCHESTRATION_ASSESSMENT]], [[SESSION_SYNTHESIS_2026-08]]
+**Also referenced by (same date or earlier):** [[ACTION_PLAN_2026-08]], [[INFRASTRUCTURE_AND_ORCHESTRATION_ASSESSMENT]], [[IRER_MASTER_HYPOTHESIS_CATALOG]], [[SESSION_SYNTHESIS_2026-08]]
 
-**Master catalog:** neither this document nor any verdict it reports appears in the catalog. Its status is **not tracked centrally** — treat anything inside as historical until confirmed.
+**The master catalog references this document** — the catalog is the authority on whether its verdict is still live:
+
+> > `docs/ACTION_PLAN_2026-08.md` Phase 2 and `docs/SYSTEM_PRESSURE_TEST_AND_METHOD_REVIEW.md` §5.
 
 <!-- LINEAGE:END -->

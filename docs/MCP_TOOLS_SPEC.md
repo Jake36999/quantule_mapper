@@ -728,7 +728,7 @@ Write tools (`run_smoke_simulation`, `stage_simulation_manifest`, `run_simulatio
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `909e6e2` (2026-07-01) — *Clean-slate repository: source, docs, and configs only*
-**Revised since:** 4 commit(s), most recently `60093e5` (2026-08-27)
+**Revised since:** 5 commit(s), most recently `09f47d8` (2026-08-27)
 
 **Harness code changed since it was written:** 41 commit(s) to `jax_scout/`.
   - `06edae5` 2026-08-27 — Fix run provenance: 30% -> 86% of runs now dated

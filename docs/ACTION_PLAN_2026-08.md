@@ -77,37 +77,63 @@ sign, the reformulation becomes a nice-to-have rather than a necessity.
 
 ---
 
-## Phase 2 — name a dimensionless ratio (L1)
+## Phase 2 — name a *discriminating* dimensionless quantity (L1)
 
 The pressure test promoted this from long-horizon to **the load-bearing goal of the programme**,
 because it is the only thing that converts simulation into evidence about nature.
 
-> [!important] There is already a strong candidate, and it has been hiding in plain sight
-> **The π/2 phase-force crossover.**
+> [!danger] Correction, 2026-08-25 — parameter-free is not enough; it must also DISCRIMINATE
+> An earlier version of this plan named the **π/2 phase-force crossover** as the leading candidate,
+> on the grounds that it is dimensionless, parameter-free and substrate-independent. That was wrong
+> in the way that matters.
 >
-> - It is **dimensionless** — a pure angle.
-> - It is **parameter-free** — π/2 is not tuned, it falls out of the two-body structure.
-> - It is **substrate-independent** — the catalog records the same two-body law in *both* NLS and
->   KG, which is exactly the signature of something structural rather than fitted.
-> - **There is published data.** [[external_validation/empirical_comparison_branch/EMP-V1-MM_CLAUDE_REVIEW|Mitschke & Mollenauer 1987]]
->   measured the phase-dependent soliton interaction and the wide series follows the sign law 7/7.
+> **π/2 is what standard soliton perturbation theory already predicts.** Karpman–Solov'ev (1981) and
+> Gordon (1983) derive the two-soliton interaction analytically as `e^{−Δx}·cos(Δφ)`, and `cos(Δφ)`
+> changes sign at exactly π/2. This project's own [[FUTURE_WORK_AND_EXTERNAL_VALIDATION_PLAN|external
+> validation plan]] already names them as the "V1 target law".
 >
-> That comparison currently carries `WEAK_CLOSE_ANALOGUE_SIGN_LAW_SUPPORTED_NO_QUANTITATIVE_CLAIM`.
-> The upgrade path is to stop asking "does the sign match" and start asking **"where exactly is the
-> crossover, in our model and in their data, and do the two numbers agree?"** A crossover *angle*
-> is a quantitative, parameter-free prediction. That is a different class of claim from a sign law.
+> So matching Mitschke & Mollenauer on the crossover **angle** would confirm that the simulation is
+> correct. It would **not** distinguish IRER from a fibre-optics textbook. **A prediction is evidence
+> only if the theory could have been caught being wrong**, and ordinary nonlinear optics gets to π/2
+> first.
 
-**Concrete steps:**
+### The criterion
+
+A candidate quantity must be **all four**:
+
+1. **Dimensionless** — the model has no units, so only pure numbers can be compared.
+2. **Parameter-free** — no freedom left to adjust after the fact.
+3. **Measured** — a real experimental counterpart exists.
+4. **Discriminating** — **standard nonlinear field theory does not already predict it.**
+
+The fourth is the one that was missing, and it is the one that does the work.
+
+### Where discriminating candidates must live
+
+By construction, in **the part of the model with no standard counterpart** — the temporal↔geometric
+coupling. Everything in the conservative substrates is, on current evidence, recovering known
+nonlinear-field-theory phenomenology.
 
 | # | action | effort |
 |---|---|---|
-| 2.1 | Enumerate every dimensionless, parameter-free quantity the model produces. Candidates: the π/2 crossover; the anti-phase transmission threshold (`v ≤ 0.45c`); `E_grad/E` at the attractor; the VK boundary `dQ/dω = 0`; the capture threshold bracket (0.565, 0.660) | half a day |
-| 2.2 | For each, ask: *is there a measured counterpart, and can we predict it without tuning?* Rank by riskiness — the most falsifiable first | half a day |
-| 2.3 | Run the crossover measurement precisely in both substrates, with error bars | 1 short GPU run |
-| 2.4 | Re-open the M&M comparison against the crossover **angle**, not the sign | 1 day |
+| 2.1 | Enumerate every dimensionless, parameter-free quantity the model produces, and **for each, ask whether standard theory already predicts it**. Expect most of the conservative-substrate results to fail criterion 4. | half a day |
+| 2.2 | Focus on TG-sector quantities with no standard analogue: the **saturation cliff** onset, the **screened mediator's falloff shape**, the **long-time drift** structure. Check each against the literature *before* running anything. | 1 day |
+| 2.3 | For any survivor, state the prediction and its uncertainty **in advance**, then test it | varies |
 
-**This is the highest-value work in the entire plan.** One parameter-free number that matches is
-worth more than every characterisation run to date.
+### π/2 is still worth measuring — as a verification benchmark
+
+Reclassified, not discarded. The simulation reproducing an analytic law it was never fitted to, in
+**two substrates with different symmetry groups**, is first-rate evidence that the code is doing real
+soliton physics. File it with `v = 2Dk` (0.9999) and conservation to 1e-13 — the verification
+scoreboard, where it belongs and where it is genuinely strong.
+
+> [!important] This raises the stakes on Phase 1
+> If the TG force's sign is **derivable**, the temporal↔geometric sector produces something
+> structural and non-standard — and that is where a discriminating prediction would come from.
+> If it is **not** derivable, the sector's one distinguishing feature is a chosen input, and the
+> project's defensible content is the conservative-substrate verification work.
+>
+> Phase 1 therefore decides whether Phase 2 has anywhere to go.
 
 ---
 
@@ -167,16 +193,17 @@ flowchart TD
     P0["Phase 0 — close what is open<br/><i>~1 day</i>"]:::now
     P1A["1a — perturbative sign derivation<br/><i>1–2 days, no compute</i>"]:::crit
     P1B["1b — variational reformulation<br/><i>only if 1a inconclusive</i>"]:::opt
-    P2["Phase 2 — dimensionless ratio (L1)<br/><i>the pi/2 crossover</i>"]:::crit
+    P2["Phase 2 — a DISCRIMINATING<br/>dimensionless quantity (L1)"]:::crit
     P3["Phase 3 — close transport<br/><i>decide, do not drift</i>"]:::soon
     P4["Phase 4 — external reviewer<br/><i>ask this week</i>"]:::soon
     F2["F2 triggered:<br/>sign is an input<br/><b>real negative result</b>"]:::fail
 
     P0 --> P1A
-    P1A -->|sign derived| P2
+    P1A -->|"sign derived → TG sector is<br/>structural, so it can host<br/>a discriminating test"| P2
     P1A -->|ambiguous| P1B
     P1A -->|cannot be fixed| F2
     P1B --> P2
+    F2 -.->|"defensible content becomes<br/>the verification work"| VER["Conservative-substrate verification<br/><i>publishable as computational field theory</i>"]:::soon
     P2 --> P3
     P0 --> P4
 
@@ -187,9 +214,12 @@ flowchart TD
     classDef fail fill:#4a3d6b,stroke:#8a7db8,color:#fff
 ```
 
-**Phase 1a before Phase 2** because if the sign turns out to be an unavoidable input, that changes
-what the crossover comparison *means*. **Phase 4 in parallel** because asking costs an hour and the
-answer may take weeks.
+**Phase 1a before Phase 2** because Phase 1 decides whether Phase 2 has anywhere to go. A
+discriminating prediction has to come from the part of the model that standard nonlinear field
+theory does not already cover — the temporal↔geometric sector — and that sector only counts as
+structural if its force sign is *derived* rather than set by a flag.
+
+**Phase 4 in parallel** because asking costs an hour and the answer may take weeks.
 
 ---
 
@@ -231,11 +261,14 @@ answer may take weeks.
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `60093e5` (2026-08-27) — *Action plan: instrument phase closed, the sign problem is next*
+**Revised since:** 1 commit(s), most recently `09f47d8` (2026-08-27)
 
 **Later documents that cite this one:** none. *Either this line of work stopped here, or the consequence was never written down — both are worth knowing when reviewing it.*
 
-**Also referenced by (same date or earlier):** [[SESSION_SYNTHESIS_2026-08]]
+**Also referenced by (same date or earlier):** [[IRER_MASTER_HYPOTHESIS_CATALOG]], [[SESSION_SYNTHESIS_2026-08]]
 
-**Master catalog:** neither this document nor any verdict it reports appears in the catalog. Its status is **not tracked centrally** — treat anything inside as historical until confirmed.
+**The master catalog references this document** — the catalog is the authority on whether its verdict is still live:
+
+> > `docs/ACTION_PLAN_2026-08.md` Phase 2 and `docs/SYSTEM_PRESSURE_TEST_AND_METHOD_REVIEW.md` §5.
 
 <!-- LINEAGE:END -->

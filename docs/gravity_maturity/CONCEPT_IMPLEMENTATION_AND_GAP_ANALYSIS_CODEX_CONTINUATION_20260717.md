@@ -199,7 +199,7 @@ as an accidental failure. Some of those behaviours are exactly what the recovere
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `25020bf` (2026-07-22) — *dual substrate*
-**Revised since:** 4 commit(s), most recently `60093e5` (2026-08-27)
+**Revised since:** 5 commit(s), most recently `09f47d8` (2026-08-27)
 
 **Harness code changed since it was written:** 4 commit(s) to `jax_scout/`.
   - `06edae5` 2026-08-27 — Fix run provenance: 30% -> 86% of runs now dated

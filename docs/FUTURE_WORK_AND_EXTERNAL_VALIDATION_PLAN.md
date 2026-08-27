@@ -360,7 +360,7 @@ self-metrization) remains novel-but-delicate and, on the gravity side, paused be
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `a81b494` (2026-07-10) — *Future Work & External Validation Plan: quantitative-faithfulness roadmap*
-**Revised since:** 5 commit(s), most recently `60093e5` (2026-08-27)
+**Revised since:** 6 commit(s), most recently `09f47d8` (2026-08-27)
 
 **Harness code changed since it was written:** 5 commit(s) to `jax_scout/`.
   - `06edae5` 2026-08-27 — Fix run provenance: 30% -> 86% of runs now dated
@@ -371,7 +371,9 @@ self-metrization) remains novel-but-delicate and, on the gravity side, paused be
 
 **Later documents that cite this one** — the downstream consequences:
 
+- [[ACTION_PLAN_2026-08]] &middot; `2026-08-25`
 - [[Main branch]] &middot; `2026-08-25`
+- [[SESSION_SYNTHESIS_2026-08]] &middot; `2026-08-25`
 - [[SYSTEM_PRESSURE_TEST_AND_METHOD_REVIEW]] &middot; `2026-08-25`
 - [[external_validation/CODEX_EXTERNAL_VALIDATION_REPORT]] &middot; `2026-07-22`
 

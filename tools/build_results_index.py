@@ -46,7 +46,71 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
+import subprocess
+import datetime as _dt
+
 import build_run_catalogue as brc  # reuse the extractors; do not duplicate them
+
+
+_TS = re.compile(r"_(\d{8})_(\d{6})$")
+
+
+def commit_timeline():
+    """[(unix_time, short_sha, subject)] oldest-first, for retro-dating runs."""
+    try:
+        raw = subprocess.run(["git", "log", "--reverse", "--format=%at|%h|%s"],
+                             cwd=REPO, capture_output=True, text=True, timeout=30).stdout
+    except Exception:
+        return []
+    out = []
+    for line in raw.splitlines():
+        parts = line.split("|", 2)
+        if len(parts) == 3:
+            try:
+                out.append((float(parts[0]), parts[1], parts[2]))
+            except ValueError:
+                pass
+    return out
+
+
+def run_start_time(run_id, run_dir):
+    """Best available start/finish time for a run, and how it was obtained."""
+    m = _TS.search(run_id)
+    if m:
+        try:
+            return _dt.datetime.strptime(m.group(1) + m.group(2), "%Y%m%d%H%M%S").timestamp(), "run-id"
+        except ValueError:
+            pass
+    # no timestamp in the name: fall back to the mtime of the summary, i.e. when it finished.
+    for cand in ("summary.json", "RUN_COMPLETE.json", ""):
+        p = os.path.join(run_dir, cand) if cand else run_dir
+        try:
+            return os.path.getmtime(p), "mtime"
+        except OSError:
+            continue
+    return None, None
+
+
+def infer_epoch(run_id, timeline, run_dir=None):
+    """Which commit was HEAD when this run started?
+
+    Run ids carry a local-time start stamp (…_YYYYMMDD_HHMMSS). Mapping it to the latest
+    commit at or before that moment gives the code the run MOST LIKELY used.
+
+    This is an INFERENCE, not a record. It can be wrong if the working tree was dirty, if the
+    run used an older checkout, or if the clock/timezone differed. It is therefore stored with
+    code_epoch_source='inferred' and must never be treated as equivalent to a recorded commit.
+    Commits here are days apart, so an hour of timezone ambiguity does not change the answer.
+    """
+    if not timeline:
+        return None, None
+    t, how = run_start_time(run_id, run_dir or "")
+    if t is None:
+        return None, None
+    prior = [c for c in timeline if c[0] <= t]
+    if not prior:
+        return None, None
+    return prior[-1][1], "inferred" if how == "run-id" else "inferred-mtime"
 
 REPO = brc.REPO
 VAULT = brc.VAULT
@@ -108,6 +172,7 @@ CREATE TABLE runs (
     harness     TEXT,
     git_commit  TEXT,
     code_epoch  TEXT,                  -- git sha, or 'pre-clean-slate'
+    code_epoch_source TEXT,            -- recorded | inferred | unavailable
     verdict     TEXT,
     complete    INTEGER,
     source      TEXT,                  -- summary.json | derived
@@ -166,6 +231,13 @@ CREATE VIEW v_substrate_summary AS
            SUM(verdict IS NOT NULL) AS n_with_verdict,
            MIN(date) AS first_run, MAX(date) AS last_run
       FROM runs GROUP BY substrate;
+
+-- Provenance quality. An inferred epoch is a best guess from the run's start time; it must
+-- never be read as equivalent to a commit the harness actually recorded.
+CREATE VIEW v_provenance AS
+    SELECT code_epoch_source, COUNT(*) AS n_runs,
+           SUM(verdict IS NOT NULL) AS n_with_verdict, MIN(date) AS first_run, MAX(date) AS last_run
+      FROM runs GROUP BY code_epoch_source;
 
 -- Documents with no recorded consequence: the review queue.
 CREATE VIEW v_docs_needing_consequences AS
@@ -231,6 +303,8 @@ def main():
             os.remove(args.out + suffix)
     con = sqlite3.connect(args.out)
     con.executescript(SCHEMA)
+    TIMELINE = commit_timeline()
+    print('  git timeline: %d commits' % len(TIMELINE))
 
     # ---- documents -------------------------------------------------------------
     docs = {}
@@ -262,14 +336,23 @@ def main():
     for r in recs:
         fam = r["family"]
         gc = r.get("git_commit")
-        epoch = str(gc)[:12] if gc else ("pre-clean-slate" if r["date"] < CLEAN_SLATE_DATE else "unknown")
+        if gc:
+            epoch, epoch_src = str(gc)[:12], "recorded"
+        else:
+            inferred, how = infer_epoch(r["run_id"], TIMELINE, r["run_dir"])
+            if inferred:
+                epoch, epoch_src = inferred, how
+            elif r["date"] < CLEAN_SLATE_DATE:
+                epoch, epoch_src = "pre-clean-slate", "unavailable"
+            else:
+                epoch, epoch_src = "unknown", "unavailable"
         cfg = r["summary"].get("config") if isinstance(r["summary"].get("config"), dict) else {}
         free = [k for k in cfg if k in brc_phys_params()]
         con.execute(
-            "INSERT OR REPLACE INTO runs VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+            "INSERT OR REPLACE INTO runs VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
             (r["run_id"], r["date"], r["band"], fam, SUBSTRATE.get(fam, "unclassified"),
              brc.SECTOR_INDEX.get(r["band"], ""), r["summary"].get("config", {}).get("out", "") or "",
-             gc, epoch, r["verdict"], 1 if r["complete"] else 0,
+             gc, epoch, epoch_src, r["verdict"], 1 if r["complete"] else 0,
              "derived" if r.get("derived") else "summary.json",
              r.get("elapsed_h"), len(r["csvs"]), len(brc.find_images(r["run_dir"])),
              len(free), None, r["run_dir"]))

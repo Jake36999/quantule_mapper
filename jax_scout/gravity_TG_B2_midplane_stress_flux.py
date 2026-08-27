@@ -84,6 +84,7 @@ import jax.numpy as jnp  # noqa: E402
 from jax_scout import gravity_TG_B1S_state_load_feedback_gpu as b1s  # noqa: E402
 from jax_scout import gravity_TG_B2_two_node_awell as b2  # noqa: E402
 from jax_scout.phase_d_c3_wave import build_kg  # noqa: E402
+from jax_scout.provenance import flat_stamp  # noqa: E402
 
 
 def write_json(p, o):
@@ -350,7 +351,7 @@ def main():
     print("=== TG-B2 midplane stress-flux (P2 independent estimator) | "
           f"{pf['backend']} {pf['devices']} x64={pf['x64']} | out={out} ===", flush=True)
     write_json(out / "config.json", {
-        "args": vars(args), "preflight": pf,
+        "args": vars(args), "preflight": pf, "provenance": flat_stamp(),
         "observable": "F_flux = dP_x/dt - Int_plane S dA, S = c^2 A|grad phi|^2 - 2c^2 A|d_x phi|^2 "
                       "- |pi|^2 + m^2 rho - U(rho); compared against F_R = -c^2 Int_{x>0}(d_x A)|grad phi|^2 dV",
         "gates": {"G1": "off arm (A=1, F_R=0): ledger closes on flux alone",
@@ -472,6 +473,8 @@ def main():
 
     summary = {
         "verdict": verdict,
+        # git_commit etc, so the results index dates this run as recorded not inferred
+        **flat_stamp(),
         "gates": {"G1_off_ledger_closes": g1, "G2_live_ledger_closes": g2,
                   "G3_estimators_agree": g3, "G4_flux_sign_reverses": g4},
         "tolerances": {"resid_rel": args.resid_tol, "estimator_rel_gap": args.agree_tol},

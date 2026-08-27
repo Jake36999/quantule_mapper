@@ -151,7 +151,7 @@ ratio in the sector, and it is now recorded rather than reconstructed after the 
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `b4e0613` (2026-08-25) — *P1-a: per-half-space energy observable closes the P1 checklist*
-**Revised since:** 3 commit(s), most recently `9517d9f` (2026-08-26)
+**Revised since:** 4 commit(s), most recently `60093e5` (2026-08-27)
 
 **Harness code changed since it was written:** 4 commit(s) to `jax_scout/`.
   - `06edae5` 2026-08-27 — Fix run provenance: 30% -> 86% of runs now dated
@@ -161,7 +161,7 @@ ratio in the sector, and it is now recorded rather than reconstructed after the 
 
 **Later documents that cite this one:** none. *Either this line of work stopped here, or the consequence was never written down — both are worth knowing when reviewing it.*
 
-**Also referenced by (same date or earlier):** [[ACTION_PLAN_2026-08]], [[IRER_MASTER_HYPOTHESIS_CATALOG]], [[RUN_QUEUE]], [[gravity_maturity/TG_P2_MIDPLANE_STRESS_FLUX_RESULTS]]
+**Also referenced by (same date or earlier):** [[ACTION_PLAN_2026-08]], [[IRER_MASTER_HYPOTHESIS_CATALOG]], [[RUN_QUEUE]], [[SESSION_SYNTHESIS_2026-08]], [[gravity_maturity/TG_P2_MIDPLANE_STRESS_FLUX_RESULTS]]
 
 **The master catalog references this document** — the catalog is the authority on whether its verdict is still live:
 

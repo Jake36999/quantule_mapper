@@ -81,7 +81,7 @@ geometry, gate, and the vmap sweep/Hunter path all unchanged (sweep stays at `D_
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `2b8b6ea` (2026-07-04) — *Phase D C1 transport probe + results: dispersion opens weak mobility but a*/cohe*
-**Revised since:** 4 commit(s), most recently `9517d9f` (2026-08-26)
+**Revised since:** 5 commit(s), most recently `60093e5` (2026-08-27)
 
 **Harness code changed since it was written:** 35 commit(s) to `jax_scout/`.
   - `06edae5` 2026-08-27 — Fix run provenance: 30% -> 86% of runs now dated

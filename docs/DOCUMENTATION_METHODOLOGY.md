@@ -339,7 +339,7 @@ figures and renders. **Safe to run at any time** — everything below the Review
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `292fc96` (2026-08-25) — *Obsidian vault: run catalogue, experiment tracker, documentation methodology*
-**Revised since:** 4 commit(s), most recently `050a832` (2026-08-26)
+**Revised since:** 5 commit(s), most recently `60093e5` (2026-08-27)
 
 **Harness code changed since it was written:** 4 commit(s) to `jax_scout/`.
   - `06edae5` 2026-08-27 — Fix run provenance: 30% -> 86% of runs now dated

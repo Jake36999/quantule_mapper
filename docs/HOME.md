@@ -23,6 +23,7 @@ Vault root is `docs/`. Everything below is a note; wikilinks and backlinks work 
 | [[DOCUMENTATION_METHODOLOGY]] | How this vault is built: note kinds, branch discipline, backlink categories, image rules. |
 | [[DOC_LINEAGE]] | **What changed after each document** — review queue of dead-end and untracked docs. |
 | [[SYSTEM_PRESSURE_TEST_AND_METHOD_REVIEW]] | **Adversarial review of the method** — dependency graph, threat register, what the data could mean. |
+| [[SESSION_SYNTHESIS_2026-08]] | **Where the project stands** — what changed, what it revealed, and the physics as now understood. |
 | [[ACTION_PLAN_2026-08]] | **What to do next, in order** — the instrument phase is closed; the sign problem is the priority. |
 | [[INFRASTRUCTURE_AND_ORCHESTRATION_ASSESSMENT]] | Orchestration, CI, results storage and RAG — what to build and what not to. |
 | [[META_ANALYSIS_BRANCH_PROGRESS]] | **Where every branch stands and whether the goals still hold** (2026-08-25). |
@@ -127,7 +128,7 @@ Safe to re-run: hand-written **Review notes** sections in each run note are pres
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `292fc96` (2026-08-25) — *Obsidian vault: run catalogue, experiment tracker, documentation methodology*
-**Revised since:** 5 commit(s), most recently `9517d9f` (2026-08-26)
+**Revised since:** 6 commit(s), most recently `60093e5` (2026-08-27)
 
 **Harness code changed since it was written:** 4 commit(s) to `jax_scout/`.
   - `06edae5` 2026-08-27 — Fix run provenance: 30% -> 86% of runs now dated

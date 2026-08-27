@@ -67,7 +67,7 @@ matter-like claims; the stress tensor remains a diagnostic, never an active sour
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `353a1d3` (2026-07-04) — *Phase D.4 first pass: short-range density/geometry node coupling (radius ~0.5 bo*
-**Revised since:** 3 commit(s), most recently `9517d9f` (2026-08-26)
+**Revised since:** 4 commit(s), most recently `60093e5` (2026-08-27)
 
 **Harness code changed since it was written:** 35 commit(s) to `jax_scout/`.
   - `06edae5` 2026-08-27 — Fix run provenance: 30% -> 86% of runs now dated

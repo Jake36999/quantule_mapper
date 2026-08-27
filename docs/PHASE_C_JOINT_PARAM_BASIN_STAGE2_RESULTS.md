@@ -98,7 +98,7 @@ No charge / topology-proof / log-prime-proof / matter / ground-state / molecule 
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `909e6e2` (2026-07-01) — *Clean-slate repository: source, docs, and configs only*
-**Revised since:** 3 commit(s), most recently `9517d9f` (2026-08-26)
+**Revised since:** 4 commit(s), most recently `60093e5` (2026-08-27)
 
 **Harness code changed since it was written:** 41 commit(s) to `jax_scout/`.
   - `06edae5` 2026-08-27 — Fix run provenance: 30% -> 86% of runs now dated

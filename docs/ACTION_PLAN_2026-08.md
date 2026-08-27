@@ -230,9 +230,11 @@ answer may take weeks.
 > It reports *that* later work exists, not *why* it happened. The reasoning belongs in
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
-**Version written against:** unknown — this document predates the clean-slate commit `909e6e2` (2026-07-01), so git carries no history for it. Use the citation and succession signals below instead.
+**Version written against:** `60093e5` (2026-08-27) — *Action plan: instrument phase closed, the sign problem is next*
 
 **Later documents that cite this one:** none. *Either this line of work stopped here, or the consequence was never written down — both are worth knowing when reviewing it.*
+
+**Also referenced by (same date or earlier):** [[SESSION_SYNTHESIS_2026-08]]
 
 **Master catalog:** neither this document nor any verdict it reports appears in the catalog. Its status is **not tracked centrally** — treat anything inside as historical until confirmed.
 

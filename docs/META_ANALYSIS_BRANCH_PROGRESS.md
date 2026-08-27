@@ -330,7 +330,7 @@ the first one.
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `96b324c` (2026-08-25) — *Meta-analysis: branch progress and goal validation*
-**Revised since:** 3 commit(s), most recently `9517d9f` (2026-08-26)
+**Revised since:** 4 commit(s), most recently `60093e5` (2026-08-27)
 
 **Harness code changed since it was written:** 4 commit(s) to `jax_scout/`.
   - `06edae5` 2026-08-27 — Fix run provenance: 30% -> 86% of runs now dated
@@ -340,7 +340,7 @@ the first one.
 
 **Later documents that cite this one:** none. *Either this line of work stopped here, or the consequence was never written down — both are worth knowing when reviewing it.*
 
-**Also referenced by (same date or earlier):** [[ACTION_PLAN_2026-08]], [[INFRASTRUCTURE_AND_ORCHESTRATION_ASSESSMENT]], [[Main branch]], [[SYSTEM_PRESSURE_TEST_AND_METHOD_REVIEW]], [[gravity_maturity/TG_P2_MIDPLANE_STRESS_FLUX_RESULTS]]
+**Also referenced by (same date or earlier):** [[ACTION_PLAN_2026-08]], [[INFRASTRUCTURE_AND_ORCHESTRATION_ASSESSMENT]], [[Main branch]], [[SESSION_SYNTHESIS_2026-08]], [[SYSTEM_PRESSURE_TEST_AND_METHOD_REVIEW]], [[gravity_maturity/TG_P2_MIDPLANE_STRESS_FLUX_RESULTS]]
 
 **Master catalog:** neither this document nor any verdict it reports appears in the catalog. Its status is **not tracked centrally** — treat anything inside as historical until confirmed.
 

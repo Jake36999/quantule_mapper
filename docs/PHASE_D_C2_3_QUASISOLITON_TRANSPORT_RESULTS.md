@@ -88,7 +88,7 @@ matter claims; peak-velocity over-read explicitly retracted.
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `6c8eea1` (2026-07-09) — *Phase D C2.3 final: quasi-soliton confirmed, kick-loss fully numerical, winding-*
-**Revised since:** 3 commit(s), most recently `9517d9f` (2026-08-26)
+**Revised since:** 4 commit(s), most recently `60093e5` (2026-08-27)
 
 **Harness code changed since it was written:** 19 commit(s) to `jax_scout/`.
   - `06edae5` 2026-08-27 — Fix run provenance: 30% -> 86% of runs now dated

@@ -119,16 +119,17 @@ the point of this exercise — write them down even when unresolved.*
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `eeb8f6d` (2026-08-25) — *P2: midplane stress-flux estimator, stability review checklist, refined goals*
-**Revised since:** 3 commit(s), most recently `3eb93af` (2026-08-26)
+**Revised since:** 4 commit(s), most recently `9517d9f` (2026-08-26)
 
-**Harness code changed since it was written:** 3 commit(s) to `jax_scout/`.
+**Harness code changed since it was written:** 4 commit(s) to `jax_scout/`.
+  - `06edae5` 2026-08-27 — Fix run provenance: 30% -> 86% of runs now dated
   - `b4e0613` 2026-08-25 — P1-a: per-half-space energy observable closes the P1 checklist
   - `5a19e60` 2026-08-25 — P2 CONFIRMED: midplane stress-flux estimator validates the body force 
   - `eeb8f6d` 2026-08-25 — P2: midplane stress-flux estimator, stability review checklist, refine
 
 **Later documents that cite this one:** none. *Either this line of work stopped here, or the consequence was never written down — both are worth knowing when reviewing it.*
 
-**Also referenced by (same date or earlier):** [[Main branch]], [[SYSTEM_PRESSURE_TEST_AND_METHOD_REVIEW]]
+**Also referenced by (same date or earlier):** [[ACTION_PLAN_2026-08]], [[Main branch]], [[SYSTEM_PRESSURE_TEST_AND_METHOD_REVIEW]]
 
 **Master catalog:** neither this document nor any verdict it reports appears in the catalog. Its status is **not tracked centrally** — treat anything inside as historical until confirmed.
 

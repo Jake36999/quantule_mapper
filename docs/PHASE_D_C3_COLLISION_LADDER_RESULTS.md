@@ -119,9 +119,10 @@ change; no gravity work; **C3 higher-speed collision results only, not a general
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `e53c31c` (2026-07-10) — *Phase D C3 higher-speed collision ladder: capture-dominated up to 0.75c (no pass*
-**Revised since:** 4 commit(s), most recently `3eb93af` (2026-08-26)
+**Revised since:** 5 commit(s), most recently `9517d9f` (2026-08-26)
 
-**Harness code changed since it was written:** 4 commit(s) to `jax_scout/`.
+**Harness code changed since it was written:** 5 commit(s) to `jax_scout/`.
+  - `06edae5` 2026-08-27 — Fix run provenance: 30% -> 86% of runs now dated
   - `b4e0613` 2026-08-25 — P1-a: per-half-space energy observable closes the P1 checklist
   - `5a19e60` 2026-08-25 — P2 CONFIRMED: midplane stress-flux estimator validates the body force 
   - `eeb8f6d` 2026-08-25 — P2: midplane stress-flux estimator, stability review checklist, refine

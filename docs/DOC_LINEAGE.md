@@ -15,7 +15,7 @@ review worklist.
 > **Issues raised** sections. See [[DOCUMENTATION_METHODOLOGY]] §11.
 
 > [!danger] Coverage limit — the June-era docs have no git history
-> The repository was clean-slated in `909e6e2` (2026-07-01). **1 of 218** documents predate it, so git
+> The repository was clean-slated in `909e6e2` (2026-07-01). **0 of 218** documents predate it, so git
 > can say nothing about what changed for them. That includes the whole stability sector
 > currently under review ([[Branch - Stability - Review Checklist]]). For those, the
 > citation graph and the catalog are the only signals.
@@ -28,7 +28,7 @@ review worklist.
 | **dead ends** — nothing later cites them | **192** |
 | **untracked** — neither the doc nor its verdict appears in the catalog | **212** |
 | **both dead-end and untracked** | **187** |
-| no usable git history (pre clean-slate) | 1 |
+| no usable git history (pre clean-slate) | 0 |
 | carry a hand-written *What changed as a result* | 6 |
 
 > [!warning] 'Dead end' is a flag, not a verdict
@@ -71,7 +71,7 @@ for a `What changed as a result` section.*
 | [[Previous experiment]] | 2026-08-25 | yes |
 | [[SESSION_SYNTHESIS_2026-08]] | 2026-08-25 | yes |
 | [[Side branch]] | 2026-08-25 | yes |
-| [[VISUAL_HUD_SCOPE_RFC]] | 2026-08-25 | none (pre clean-slate) |
+| [[VISUAL_HUD_SCOPE_RFC]] | 2026-08-25 | yes |
 | [[gravity_maturity/TG_B2_CONVERGENCE_N80_L20_RESULTS]] | 2026-08-25 | yes |
 | [[gravity_maturity/TG_B2_FARFIELD_KERNEL_RESULTS]] | 2026-08-25 | yes |
 | [[AUTHOR_RESEARCH_TIMELINE_AND_METHOD]] | 2026-07-22 | yes |

@@ -118,15 +118,15 @@ agreed; (c) a bounded first-campaign scope is agreed (suggested: N=96, dt per RK
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `d4ae0d0` (2026-07-09) — *Phase D C2.4 local-boost harness + C2' canonical-geometry RFC (design-only)*
-**Revised since:** 6 commit(s), most recently `f2b0527` (2026-08-27)
+**Revised since:** 7 commit(s), most recently `3877db6` (2026-08-31)
 
-**Harness code changed since it was written:** 22 commit(s) to `jax_scout/`.
+**Harness code changed since it was written:** 21 commit(s) to `jax_scout/`.
   - `06edae5` 2026-08-27 — Fix run provenance: 30% -> 86% of runs now dated
   - `b4e0613` 2026-08-25 — P1-a: per-half-space energy observable closes the P1 checklist
   - `5a19e60` 2026-08-25 — P2 CONFIRMED: midplane stress-flux estimator validates the body force 
   - `eeb8f6d` 2026-08-25 — P2: midplane stress-flux estimator, stability review checklist, refine
   - `25020bf` 2026-07-22 — dual substrate
-  - *…and 17 more.*
+  - *…and 16 more.*
 
 **Later documents that cite this one** — the downstream consequences:
 

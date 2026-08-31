@@ -135,17 +135,53 @@ Two cheap options, both fine:
 **Recommendation: slices every sample, plus a downsampled volume every ~20 samples.** Slices catch
 translation, breathing, merging and asymmetry — which covers every failure mode in the table above.
 
-### 4d. On CuPy for live rendering
+### 4d. GPU allocation — measured, not assumed
 
-Jake suggests using CuPy for the live path. One caution worth weighing: **the `jax_scout` harnesses
-are JAX, not CuPy**, and running both on one GTX 1080 means two runtimes competing for the same VRAM
-inside a multi-hour job. Given three runs already died to environment/lifecycle issues, adding a
-second GPU runtime to the *simulation process* is the risky version.
+Hardware present: **GTX 1080 (8 GB)** and **Radeon RX 5500 XT**, two monitors attached.
 
-The low-risk version keeps the split at 4a: the sim downsamples **on-device in JAX** (a slice is
-nearly free) and writes; the monitor is a **separate process** that may use CuPy, matplotlib or
-anything else, because it cannot affect the run. CuPy is then genuinely useful for the *renderer's*
-own work — 3-D volume compositing over many frames — without ever touching the simulation.
+> [!important] The split Jake wanted already exists, in its most useful form
+> `nvidia-smi` reports the 1080 at **0 MiB used / 8059 MiB free** with two displays connected — so
+> **the AMD card is already driving both monitors** and the 1080 is already a dedicated compute
+> device with its full 8 GB available to JAX. Desktop compositing is not eating simulation VRAM.
+
+**On running the renderer as ROCm/CuPy compute on the AMD card: blocked, and unnecessary.**
+
+*Blocked* — the RX 5500 XT is **Navi 14 / gfx1012, RDNA 1**, which ROCm has never supported. ROCm
+covers CDNA (MI series) and selected RDNA 2+ (gfx1030 and later, often needing
+`HSA_OVERRIDE_GFX_VERSION`); ROCm-in-WSL2 is narrower again and does not include RDNA 1. This is an
+unsupported-architecture wall, not a configuration difficulty. (It is probably also why
+`docs/external research/ROCM_hip/` exists and went nowhere.)
+
+*Unnecessary* — the renderer is not compute-bound:
+
+| workload | size |
+|---|---|
+| 3 orthogonal slices at 80² | 19,200 pixels |
+| full volume at 96³ | 884k voxels — CPU raycast well under 1 s |
+| matplotlib PNG write | ~50–100 ms |
+| **measured cadence, P2 run** | 2,403 samples in 2,473 s ≈ **1.0 s/sample** |
+
+The renderer has ~1 s per frame and needs ~0.1 s. It is idle roughly 90% of the time at full
+sampling rate. GPU compute buys nothing.
+
+**Where the AMD card does earn its place: graphics, not compute.** An interactive 3-D viewer —
+rotate the volume, scrub time, threshold live — is an OpenGL/Direct3D workload that the RX 5500 XT
+handles through its ordinary graphics driver. PyVista/VTK or napari would run on it today with no
+ROCm involvement. Graphics and compute are different paths; only the compute path is walled off.
+
+**Resulting allocation:**
+
+| device | role |
+|---|---|
+| GTX 1080 | JAX simulation, full 8 GB, untouched |
+| RX 5500 XT | both displays (already) + interactive 3-D viewing |
+| CPU | slice compositing and PNG writing — all the offline renderer needs |
+
+> [!note] Device separation is not what protects the run
+> The isolation that actually matters for a 5.68-hour job is **process separation** (§4a). A renderer
+> in its own process cannot touch the simulation regardless of which chip it executed on. Splitting
+> across devices is a bonus, not the safety mechanism — and pursuing it via an unsupported ROCm stack
+> would trade a real day of work for a benefit the workload does not need.
 
 ## 5. What this does and does not do for the open questions
 
@@ -174,7 +210,7 @@ and that sector's distinguishing behaviours are all *dynamical and spatial*:
 | 6.1 | **Snapshot writer** — shared helper; wire into the TG harnesses | half a day | **unblocks everything else** |
 | 6.2 | **Adapter + offline renderer** — shape rule, name table, reuse `plots.py` | 1 day | renders the 1,410 existing fields |
 | 6.3 | **Overlay layer** — centroids, midplane, mask edge, absorber, scalars | half a day | where the bug-catching happens |
-| 6.4 | **Live monitor** — separate process, tails the run dir | half a day | Jake's live-grid request |
+| 6.4 | **Live monitor** — separate process, tails the run dir (CPU; optional VTK/PyVista viewer on the AMD card) | half a day | Jake's live-grid request |
 | 6.5 | Retire or wrap the five `phase_c*` renderers | half a day | removes the rebuild-per-campaign tax |
 
 **~3 days total.** 6.1 and 6.2 deliver most of the value and are independent of the rest.
@@ -225,7 +261,7 @@ and that sector's distinguishing behaviours are all *dynamical and spatial*:
 > It reports *that* later work exists, not *why* it happened. The reasoning belongs in
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
-**Version written against:** unknown — this document predates the clean-slate commit `909e6e2` (2026-07-01), so git carries no history for it. Use the citation and succession signals below instead.
+**Version written against:** `3877db6` (2026-08-31) — *RFC: universal field HUD - offline renderer + live monitor*
 
 **Later documents that cite this one:** none. *Either this line of work stopped here, or the consequence was never written down — both are worth knowing when reviewing it.*
 

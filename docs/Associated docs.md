@@ -13,7 +13,7 @@ An associated document is defined similarly to a [[Previous experiment]] But is 
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `292fc96` (2026-08-25) — *Obsidian vault: run catalogue, experiment tracker, documentation methodology*
-**Revised since:** 5 commit(s), most recently `09f47d8` (2026-08-27)
+**Revised since:** 6 commit(s), most recently `f2b0527` (2026-08-27)
 
 **Harness code changed since it was written:** 4 commit(s) to `jax_scout/`.
   - `06edae5` 2026-08-27 — Fix run provenance: 30% -> 86% of runs now dated
@@ -23,7 +23,7 @@ An associated document is defined similarly to a [[Previous experiment]] But is 
 
 **Later documents that cite this one:** none. *Either this line of work stopped here, or the consequence was never written down — both are worth knowing when reviewing it.*
 
-**Also referenced by (same date or earlier):** [[ACTION_PLAN_2026-08]], [[INFRASTRUCTURE_AND_ORCHESTRATION_ASSESSMENT]], [[Main branch]], [[SESSION_SYNTHESIS_2026-08]], [[SYSTEM_PRESSURE_TEST_AND_METHOD_REVIEW]], [[gravity_maturity/TG_P1A_ENERGY_OBSERVABLE]], [[gravity_maturity/TG_P2_MIDPLANE_STRESS_FLUX_RESULTS]]
+**Also referenced by (same date or earlier):** [[ACTION_PLAN_2026-08]], [[INFRASTRUCTURE_AND_ORCHESTRATION_ASSESSMENT]], [[Main branch]], [[SESSION_SYNTHESIS_2026-08]], [[SYSTEM_PRESSURE_TEST_AND_METHOD_REVIEW]], [[VISUAL_HUD_SCOPE_RFC]], [[gravity_maturity/TG_P1A_ENERGY_OBSERVABLE]], [[gravity_maturity/TG_P2_MIDPLANE_STRESS_FLUX_RESULTS]]
 
 **Master catalog:** neither this document nor any verdict it reports appears in the catalog. Its status is **not tracked centrally** — treat anything inside as historical until confirmed.
 

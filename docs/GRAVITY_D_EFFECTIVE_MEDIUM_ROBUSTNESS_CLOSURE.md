@@ -116,13 +116,14 @@ Bounded conclusion: `D_SPATIAL_EFFECTIVE_MEDIUM_ROBUSTNESS_FIRST_PASS_CLOSED`.
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `25020bf` (2026-07-22) — *dual substrate*
-**Revised since:** 5 commit(s), most recently `09f47d8` (2026-08-27)
+**Revised since:** 6 commit(s), most recently `f2b0527` (2026-08-27)
 
-**Harness code changed since it was written:** 4 commit(s) to `jax_scout/`.
+**Harness code changed since it was written:** 5 commit(s) to `jax_scout/`.
   - `06edae5` 2026-08-27 — Fix run provenance: 30% -> 86% of runs now dated
   - `b4e0613` 2026-08-25 — P1-a: per-half-space energy observable closes the P1 checklist
   - `5a19e60` 2026-08-25 — P2 CONFIRMED: midplane stress-flux estimator validates the body force 
   - `eeb8f6d` 2026-08-25 — P2: midplane stress-flux estimator, stability review checklist, refine
+  - `25020bf` 2026-07-22 — dual substrate
 
 **Later documents that cite this one:** none. *Either this line of work stopped here, or the consequence was never written down — both are worth knowing when reviewing it.*
 

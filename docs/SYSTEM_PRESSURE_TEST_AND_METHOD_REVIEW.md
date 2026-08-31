@@ -341,14 +341,14 @@ entirely in what it changes.*
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `3eb93af` (2026-08-26) — *System pressure test: method review, dependency graph, threat register*
-**Revised since:** 3 commit(s), most recently `09f47d8` (2026-08-27)
+**Revised since:** 4 commit(s), most recently `f2b0527` (2026-08-27)
 
 **Harness code changed since it was written:** 1 commit(s) to `jax_scout/`.
   - `06edae5` 2026-08-27 — Fix run provenance: 30% -> 86% of runs now dated
 
 **Later documents that cite this one:** none. *Either this line of work stopped here, or the consequence was never written down — both are worth knowing when reviewing it.*
 
-**Also referenced by (same date or earlier):** [[ACTION_PLAN_2026-08]], [[INFRASTRUCTURE_AND_ORCHESTRATION_ASSESSMENT]], [[IRER_MASTER_HYPOTHESIS_CATALOG]], [[SESSION_SYNTHESIS_2026-08]]
+**Also referenced by (same date or earlier):** [[ACTION_PLAN_2026-08]], [[INFRASTRUCTURE_AND_ORCHESTRATION_ASSESSMENT]], [[IRER_MASTER_HYPOTHESIS_CATALOG]], [[SESSION_SYNTHESIS_2026-08]], [[VISUAL_HUD_SCOPE_RFC]]
 
 **The master catalog references this document** — the catalog is the authority on whether its verdict is still live:
 

@@ -117,7 +117,7 @@ trajectory-flux measurements (~−3.9e-4 fractional at t=0.75, zero at t=0 for s
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `968073e` (2026-07-08) — *Phase D C2: contract review answering the Codex adjointness escalation*
-**Revised since:** 5 commit(s), most recently `09f47d8` (2026-08-27)
+**Revised since:** 6 commit(s), most recently `f2b0527` (2026-08-27)
 
 **Harness code changed since it was written:** 25 commit(s) to `jax_scout/`.
   - `06edae5` 2026-08-27 — Fix run provenance: 30% -> 86% of runs now dated

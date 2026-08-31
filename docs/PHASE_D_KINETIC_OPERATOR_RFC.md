@@ -145,15 +145,15 @@ redirects flow" (`physics.py:232-235`).
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `8003b71` (2026-07-04) — *Phase D kickoff: kinetic-operator RFC (design-only, C1 recommended)*
-**Revised since:** 6 commit(s), most recently `09f47d8` (2026-08-27)
+**Revised since:** 7 commit(s), most recently `f2b0527` (2026-08-27)
 
-**Harness code changed since it was written:** 31 commit(s) to `jax_scout/`.
+**Harness code changed since it was written:** 37 commit(s) to `jax_scout/`.
   - `06edae5` 2026-08-27 — Fix run provenance: 30% -> 86% of runs now dated
   - `b4e0613` 2026-08-25 — P1-a: per-half-space energy observable closes the P1 checklist
   - `5a19e60` 2026-08-25 — P2 CONFIRMED: midplane stress-flux estimator validates the body force 
   - `eeb8f6d` 2026-08-25 — P2: midplane stress-flux estimator, stability review checklist, refine
   - `25020bf` 2026-07-22 — dual substrate
-  - *…and 26 more.*
+  - *…and 32 more.*
 
 **Later documents that cite this one** — the downstream consequences:
 

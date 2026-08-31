@@ -235,14 +235,14 @@ including a future agent — into thinking it is live.
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `9517d9f` (2026-08-26) — *Infrastructure assessment: build three small things, not a platform*
-**Revised since:** 2 commit(s), most recently `09f47d8` (2026-08-27)
+**Revised since:** 3 commit(s), most recently `f2b0527` (2026-08-27)
 
 **Harness code changed since it was written:** 1 commit(s) to `jax_scout/`.
   - `06edae5` 2026-08-27 — Fix run provenance: 30% -> 86% of runs now dated
 
 **Later documents that cite this one:** none. *Either this line of work stopped here, or the consequence was never written down — both are worth knowing when reviewing it.*
 
-**Also referenced by (same date or earlier):** [[ACTION_PLAN_2026-08]], [[SESSION_SYNTHESIS_2026-08]]
+**Also referenced by (same date or earlier):** [[ACTION_PLAN_2026-08]], [[SESSION_SYNTHESIS_2026-08]], [[VISUAL_HUD_SCOPE_RFC]]
 
 **Master catalog:** neither this document nor any verdict it reports appears in the catalog. Its status is **not tracked centrally** — treat anything inside as historical until confirmed.
 

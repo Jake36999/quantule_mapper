@@ -261,11 +261,14 @@ structural if its force sign is *derived* rather than set by a flag.
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `60093e5` (2026-08-27) — *Action plan: instrument phase closed, the sign problem is next*
-**Revised since:** 1 commit(s), most recently `09f47d8` (2026-08-27)
+**Revised since:** 2 commit(s), most recently `f2b0527` (2026-08-27)
+
+**Harness code changed since it was written:** 1 commit(s) to `jax_scout/`.
+  - `06edae5` 2026-08-27 — Fix run provenance: 30% -> 86% of runs now dated
 
 **Later documents that cite this one:** none. *Either this line of work stopped here, or the consequence was never written down — both are worth knowing when reviewing it.*
 
-**Also referenced by (same date or earlier):** [[IRER_MASTER_HYPOTHESIS_CATALOG]], [[SESSION_SYNTHESIS_2026-08]]
+**Also referenced by (same date or earlier):** [[IRER_MASTER_HYPOTHESIS_CATALOG]], [[SESSION_SYNTHESIS_2026-08]], [[VISUAL_HUD_SCOPE_RFC]]
 
 **The master catalog references this document** — the catalog is the authority on whether its verdict is still live:
 

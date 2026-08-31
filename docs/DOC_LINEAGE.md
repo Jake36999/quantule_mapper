@@ -15,7 +15,7 @@ review worklist.
 > **Issues raised** sections. See [[DOCUMENTATION_METHODOLOGY]] §11.
 
 > [!danger] Coverage limit — the June-era docs have no git history
-> The repository was clean-slated in `909e6e2` (2026-07-01). **0 of 217** documents predate it, so git
+> The repository was clean-slated in `909e6e2` (2026-07-01). **1 of 218** documents predate it, so git
 > can say nothing about what changed for them. That includes the whole stability sector
 > currently under review ([[Branch - Stability - Review Checklist]]). For those, the
 > citation graph and the catalog are the only signals.
@@ -24,12 +24,12 @@ review worklist.
 
 | | count |
 |---|---:|
-| live working documents | 217 |
-| **dead ends** — nothing later cites them | **191** |
-| **untracked** — neither the doc nor its verdict appears in the catalog | **211** |
-| **both dead-end and untracked** | **186** |
-| no usable git history (pre clean-slate) | 0 |
-| carry a hand-written *What changed as a result* | 5 |
+| live working documents | 218 |
+| **dead ends** — nothing later cites them | **192** |
+| **untracked** — neither the doc nor its verdict appears in the catalog | **212** |
+| **both dead-end and untracked** | **187** |
+| no usable git history (pre clean-slate) | 1 |
+| carry a hand-written *What changed as a result* | 6 |
 
 > [!warning] 'Dead end' is a flag, not a verdict
 > Cross-referencing is sparse: 56% of documents name another document, at a mean of 1.6
@@ -40,7 +40,7 @@ review worklist.
 > [!danger] The catalog does not reference documents
 > `IRER_MASTER_HYPOTHESIS_CATALOG` names only a handful of documents explicitly; it refers
 > to results by **verdict string** and prose instead. This tool therefore also matches on
-> verdicts — and even so, **211 of 217** documents have neither their name nor any verdict
+> verdicts — and even so, **212 of 218** documents have neither their name nor any verdict
 > they report appearing in the catalog. **That is the structural reason a document cannot
 > tell you its own current status: the link from evidence to status was never made.**
 
@@ -71,6 +71,7 @@ for a `What changed as a result` section.*
 | [[Previous experiment]] | 2026-08-25 | yes |
 | [[SESSION_SYNTHESIS_2026-08]] | 2026-08-25 | yes |
 | [[Side branch]] | 2026-08-25 | yes |
+| [[VISUAL_HUD_SCOPE_RFC]] | 2026-08-25 | none (pre clean-slate) |
 | [[gravity_maturity/TG_B2_CONVERGENCE_N80_L20_RESULTS]] | 2026-08-25 | yes |
 | [[gravity_maturity/TG_B2_FARFIELD_KERNEL_RESULTS]] | 2026-08-25 | yes |
 | [[AUTHOR_RESEARCH_TIMELINE_AND_METHOD]] | 2026-07-22 | yes |
@@ -112,9 +113,8 @@ for a `What changed as a result` section.*
 | [[gravity_maturity/TG_B1S_BOX_DEPENDENCE_RESULTS]] | 2026-07-22 | yes |
 | [[gravity_maturity/TG_B1S_D4_BOX_DISCREPANCY_CODEX_NOTE_20260715]] | 2026-07-22 | yes |
 | [[gravity_maturity/TG_B1S_D4_DOCUMENTATION_INPUTS]] | 2026-07-22 | yes |
-| [[gravity_maturity/TG_B1S_D4_FINAL_ANALYSIS]] | 2026-07-22 | yes |
 
-*…and 126 more.*
+*…and 127 more.*
 
 ## Dead ends that the catalog does track
 

@@ -117,7 +117,7 @@ trend, the residual is reported as a bounded open item, and mobility is asserted
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `ad38757` (2026-07-05) — *Phase D C2.2: loss-source isolation -> geometry ruled out, loss is numerical (bo*
-**Revised since:** 6 commit(s), most recently `09f47d8` (2026-08-27)
+**Revised since:** 7 commit(s), most recently `f2b0527` (2026-08-27)
 
 **Harness code changed since it was written:** 25 commit(s) to `jax_scout/`.
   - `06edae5` 2026-08-27 — Fix run provenance: 30% -> 86% of runs now dated

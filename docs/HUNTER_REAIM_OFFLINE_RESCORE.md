@@ -67,7 +67,7 @@ reject disqualifies).
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `10b238b` (2026-07-03) — *H7.1/H7.2 offline stability objective + re-score; H4 CuPy step env-blocked (oper*
-**Revised since:** 7 commit(s), most recently `3877db6` (2026-08-31)
+**Revised since:** 8 commit(s), most recently `bc5b54c` (2026-08-31)
 
 **Harness code changed since it was written:** 38 commit(s) to `jax_scout/`.
   - `06edae5` 2026-08-27 — Fix run provenance: 30% -> 86% of runs now dated

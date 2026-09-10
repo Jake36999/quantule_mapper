@@ -59,7 +59,7 @@ read-only; it is not, and will not be, an active source term on this evidence.**
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `40907f3` (2026-07-04) — *Phase D.2 stress-tensor bridge: read-only diagnostic + first-pass (INCONCLUSIVE,*
-**Revised since:** 7 commit(s), most recently `3877db6` (2026-08-31)
+**Revised since:** 8 commit(s), most recently `bc5b54c` (2026-08-31)
 
 **Harness code changed since it was written:** 36 commit(s) to `jax_scout/`.
   - `06edae5` 2026-08-27 — Fix run provenance: 30% -> 86% of runs now dated

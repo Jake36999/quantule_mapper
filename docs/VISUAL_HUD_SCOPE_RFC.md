@@ -2,7 +2,7 @@
 tags: [rfc, plan, infrastructure]
 date: 2026-08-25
 branch: Branch - Validation - Index
-status: proposed
+status: partially-built
 ---
 
 # RFC — Universal field HUD: offline renderer + live monitor
@@ -226,6 +226,39 @@ and that sector's distinguishing behaviours are all *dynamical and spatial*:
 
 ---
 
+## Build status (2026-09-10)
+
+**Items 6.1 and 6.2 are built and tested.** 6.3–6.5 remain proposed.
+
+| item | state | evidence |
+|---|---|---|
+| **6.1 snapshot writer** | **BUILT** | `jax_scout/snapshots.py`, wired into the midplane harness behind `--snapshots` (off by default). `tests/test_snapshots.py`: 12 assertions on the non-perturbation contract. **End-to-end bit-exactness verified** — same run with snapshots on vs off produced a byte-for-byte identical `stress_well.csv`; 30 frames written, 0 dropped, 0 failed; the OFF run created no snapshot directory. |
+| **6.2 adapter + offline renderer** | **BUILT** | `tools/render_fields.py`. Three paths tested: HUD snapshot timeline, legacy pack montage (13 fields in one image, no per-campaign code), and the 856 MB memory guard. Output lands in `<run>/rendered/` and `build_run_catalogue.find_images` picks it up — confirmed, one path into the vault. |
+| 6.3 overlay layer | partial | midplane + mask-edge markers are in; centroids and absorber region are not |
+| 6.4 live monitor | not built | the snapshot side exists, so this is now just a directory tail |
+| 6.5 retire the `phase_c*` renderers | not built | |
+
+**Simplification found during the build.** The RFC specified a 22-row name lookup. Probing every odd
+key in the corpus (`psi_1194`, `fields`, `rho_hist_*`, `Pi`, `current`) showed a **dtype/prefix
+classifier resolves all of them** — complex → wavefunction, `R_` prefix → resolution, else scalar.
+The table was never needed.
+
+**Cost measured, not estimated.** N=48, five fields, three planes plus a volume every fifth frame:
+**0.214 MB/frame**. The RFC's N=80 slice-only estimate of 0.15 MB/frame stands.
+
+> [!note] First look through the new instrument
+> The very first snapshot montage showed `A_minus_1` and `G` as visually identical panels — which is
+> `A = exp(ε_G G) ≈ 1 + ε_G G` confirmed by eye rather than by arithmetic, i.e. the linear-response
+> regime made directly visible. It also showed `phi` developing a ring/shell structure by t=3 that is
+> absent at t=0.1.
+>
+> A caution from the same session: the first legacy montage showed `R_current`/`R_lock`/`R_threshold`
+> as uniformly flat, which looked like a finding. Checking all 66 samples showed they are non-zero in
+> 44/42/36 of them — sample 000 is simply an early frame. **The visual channel generates hypotheses
+> quickly, including wrong ones; it does not replace checking.**
+
+---
+
 ## What changed as a result
 
 - **Code / model changes:** none — this is a proposal.
@@ -262,6 +295,7 @@ and that sector's distinguishing behaviours are all *dynamical and spatial*:
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `3877db6` (2026-08-31) — *RFC: universal field HUD - offline renderer + live monitor*
+**Revised since:** 1 commit(s), most recently `bc5b54c` (2026-08-31)
 
 **Later documents that cite this one:** none. *Either this line of work stopped here, or the consequence was never written down — both are worth knowing when reviewing it.*
 

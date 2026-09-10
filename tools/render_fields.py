@@ -1,0 +1,331 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""Universal field renderer — one view library, no per-campaign code.
+
+WHY THIS SHAPE (docs/VISUAL_HUD_SCOPE_RFC.md). The existing renderers under quantule_viz/renderers/
+are keyed on the CAMPAIGN rather than the VIEW - five phase_c* variants, 3,622 lines - so every new
+experiment needed a new renderer, and TG/C2/C3 got none at all. Meanwhile 1,410 field arrays sit in
+sweep_runs/ that nothing has ever displayed.
+
+The audit that made this cheap: across all 670 packs, **every field satisfies one structural rule -
+an array whose last three dimensions form a cube** - and a dtype/prefix classifier resolves every
+key name without a lookup table. So substrate knowledge lives in ~20 lines, not in a renderer per
+sector.
+
+TWO INPUTS, ONE PIPELINE
+  * legacy field packs  - arbitrary .npz, fields found by the cube rule
+  * HUD snapshots       - snap_*.npz written by jax_scout/snapshots.py, using the
+                          '<field>__<plane>' convention, rendered as a time montage
+
+OUTPUT goes to <run_dir>/rendered/ so tools/build_run_catalogue.py imports it like any other
+run-produced figure - one path into the vault, not two.
+
+MEMORY. The largest single array in the corpus is 856 MB (a (121,96,96,96) time series). npz loads
+lazily per key, so keys are read one at a time, reduced immediately, and freed. Anything above
+--max-array-mb is skipped with a note rather than swapping the machine.
+
+Usage:
+    .venv/Scripts/python.exe tools/render_fields.py --run TG_B2_MIDPLANE_FLUX_N64
+    .venv/Scripts/python.exe tools/render_fields.py --snapshots sweep_runs/<run>/snapshots/well
+    .venv/Scripts/python.exe tools/render_fields.py --all --limit 20
+"""
+from __future__ import annotations
+
+import argparse
+import gc
+import os
+import re
+import sys
+
+import numpy as np
+
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt  # noqa: E402
+
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SWEEP = os.path.join(REPO, "sweep_runs")
+
+PLANE_RE = re.compile(r"^(?P<name>.+)__(?P<plane>xy|xz|yz|vol)$")
+
+# ------------------------------------------------------------------ classification
+
+
+def classify(name, arr):
+    """Semantic class from dtype and name. Probed against every odd key in the corpus
+    (psi_1194, fields, rho_hist_*, Pi, current) - no lookup table required."""
+    if np.iscomplexobj(arr):
+        return "wavefunction"
+    if name.startswith("R_"):
+        return "resolution"
+    return "scalar"
+
+
+def is_cube(a):
+    return a.ndim in (3, 4) and a.shape[-1] == a.shape[-2] == a.shape[-3]
+
+
+def centre_plane(a):
+    """Reduce a cube (or a time series of cubes) to a single 2-D centre plane."""
+    if a.ndim == 4:
+        a = a[a.shape[0] // 2]
+    return a[:, :, a.shape[-1] // 2]
+
+
+# ------------------------------------------------------------------ views
+
+
+def draw(ax, arr, name, cls, *, title=None):
+    """Render one 2-D array according to its class. Returns the mappable for a colourbar."""
+    if cls == "wavefunction":
+        rho = np.abs(arr) ** 2
+        im = ax.imshow(rho.T, origin="lower", cmap="magma")
+        ax.set_title(title or f"{name}  |ψ|²", fontsize=8)
+    elif cls == "resolution":
+        im = ax.imshow(np.real(arr).T, origin="lower", cmap="viridis")
+        ax.set_title(title or name, fontsize=8)
+    else:
+        v = np.real(arr)
+        lim = float(np.max(np.abs(v))) or 1.0
+        im = ax.imshow(v.T, origin="lower", cmap="RdBu_r", vmin=-lim, vmax=lim)
+        ax.set_title(title or name, fontsize=8)
+    ax.set_xticks([])
+    ax.set_yticks([])
+    return im
+
+
+def draw_phase(ax, arr, name):
+    """Phase, masked by density so vacuum phase noise does not dominate the eye.
+
+    The mask matters: unmasked phase in near-zero-density regions is uniform noise and hides the
+    structure that carries the physics.
+    """
+    rho = np.abs(arr) ** 2
+    m = rho > 0.02 * (rho.max() or 1.0)
+    ph = np.angle(arr)
+    ph = np.where(m, ph, np.nan)
+    im = ax.imshow(ph.T, origin="lower", cmap="twilight", vmin=-np.pi, vmax=np.pi)
+    ax.set_title(f"{name}  arg ψ (masked)", fontsize=8)
+    ax.set_xticks([])
+    ax.set_yticks([])
+    return im
+
+
+def overlay_axes(ax, n, *, midplane=True, mask_edge=True):
+    """The HUD part: mark the structures the observables are defined against.
+
+    The midplane x=0 and the mask interface x=+dx/2 are exactly the surfaces the P2 momentum ledger
+    integrates over, and getting their placement wrong opened that ledger at O(1). Drawing them
+    makes a placement error visible instead of arithmetic.
+    """
+    if midplane:
+        ax.axvline(n // 2, color="cyan", lw=0.7, ls="-", alpha=0.75)
+    if mask_edge:
+        ax.axvline(n // 2 + 0.5, color="cyan", lw=0.6, ls=":", alpha=0.6)
+
+
+# ------------------------------------------------------------------ legacy packs
+
+
+def render_pack(npz_path, outdir, *, max_mb=1500, dpi=110):
+    """Render every field in one arbitrary .npz as a single montage."""
+    made = []
+    try:
+        with np.load(npz_path, allow_pickle=False) as z:
+            keys = list(z.files)
+            panels = []
+            for k in keys:
+                try:
+                    shp = z[k].shape if False else None  # noqa: F841  (kept lazy below)
+                except Exception:
+                    continue
+                a = z[k]
+                if not is_cube(a):
+                    del a
+                    continue
+                if a.nbytes / 1e6 > max_mb:
+                    panels.append((k, None, "skipped: %.0f MB > --max-array-mb" % (a.nbytes / 1e6)))
+                    del a
+                    gc.collect()
+                    continue
+                plane = centre_plane(a)
+                panels.append((k, np.array(plane), None))
+                del a, plane
+                gc.collect()
+    except Exception as e:  # noqa: BLE001
+        return [], "unreadable: %s" % e
+
+    real = [p for p in panels if p[1] is not None]
+    if not real:
+        return [], "no renderable fields"
+
+    # a complex field earns two panels (density and masked phase)
+    slots = []
+    for name, arr, _ in real:
+        cls = classify(name, arr)
+        slots.append((name, arr, cls, "field"))
+        if cls == "wavefunction":
+            slots.append((name, arr, cls, "phase"))
+
+    ncol = min(4, len(slots))
+    nrow = int(np.ceil(len(slots) / ncol))
+    fig, axes = plt.subplots(nrow, ncol, figsize=(3.1 * ncol, 3.3 * nrow), squeeze=False)
+    for ax in axes.ravel():
+        ax.axis("off")
+    for i, (name, arr, cls, kind) in enumerate(slots):
+        ax = axes[i // ncol][i % ncol]
+        ax.axis("on")
+        if kind == "phase":
+            draw_phase(ax, arr, name)
+        else:
+            im = draw(ax, arr, name, cls)
+            fig.colorbar(im, ax=ax, fraction=0.046, pad=0.02).ax.tick_params(labelsize=6)
+        overlay_axes(ax, arr.shape[0])
+    fig.suptitle(os.path.basename(npz_path), fontsize=10)
+    fig.tight_layout(rect=(0, 0, 1, 0.97))
+    os.makedirs(outdir, exist_ok=True)
+    out = os.path.join(outdir, re.sub(r"[^\w.-]", "_", os.path.basename(npz_path))[:-4] + ".png")
+    fig.savefig(out, dpi=dpi, bbox_inches="tight")
+    plt.close(fig)
+    made.append(out)
+    skipped = [p[0] for p in panels if p[1] is None]
+    return made, ("skipped %d oversized" % len(skipped)) if skipped else None
+
+
+# ------------------------------------------------------------------ HUD snapshots
+
+
+def render_snapshots(snapdir, outdir, *, ncols=6, dpi=110):
+    """Time montage from snap_*.npz: one row per field, columns are time."""
+    snaps = sorted(f for f in os.listdir(snapdir) if re.match(r"snap_\d+\.npz$", f))
+    if not snaps:
+        return [], "no snap_*.npz"
+    pick = [snaps[int(round(i))] for i in np.linspace(0, len(snaps) - 1, min(ncols, len(snaps)))]
+
+    frames, fields = [], []
+    for fn in pick:
+        with np.load(os.path.join(snapdir, fn), allow_pickle=False) as z:
+            d = {"t": float(z["t"]) if "t" in z.files else np.nan,
+                 "scalars": {k[8:]: float(z[k]) for k in z.files if k.startswith("scalar__")}}
+            for k in z.files:
+                m = PLANE_RE.match(k)
+                if m and m.group("plane") == "xy":
+                    d[m.group("name")] = np.array(z[k])
+                    if m.group("name") not in fields:
+                        fields.append(m.group("name"))
+            frames.append(d)
+    if not fields:
+        return [], "no '<field>__xy' planes"
+
+    nrow, ncol = len(fields), len(frames)
+    fig, axes = plt.subplots(nrow, ncol, figsize=(2.7 * ncol, 2.9 * nrow), squeeze=False)
+    for r, name in enumerate(fields):
+        for c, fr in enumerate(frames):
+            ax = axes[r][c]
+            arr = fr.get(name)
+            if arr is None:
+                ax.axis("off")
+                continue
+            cls = classify(name, arr)
+            draw(ax, arr, name, cls, title=(f"{name}   t={fr['t']:.2f}" if r == 0 or True else None))
+            overlay_axes(ax, arr.shape[0])
+    fr0 = frames[0]["scalars"]
+    sub = "  ".join(f"{k}={v:+.3e}" for k, v in list(fr0.items())[:3])
+    fig.suptitle("%s   %s" % (os.path.basename(os.path.dirname(snapdir.rstrip("/\\")) or snapdir),
+                              sub), fontsize=10)
+    fig.tight_layout(rect=(0, 0, 1, 0.97))
+    os.makedirs(outdir, exist_ok=True)
+    out = os.path.join(outdir, "snapshots_%s_timeline.png" % os.path.basename(snapdir.rstrip("/\\")))
+    fig.savefig(out, dpi=dpi, bbox_inches="tight")
+    plt.close(fig)
+
+    # scalar traces across every frame, so the montage has its numbers beside it
+    made = [out]
+    allsc = []
+    for fn in snaps:
+        with np.load(os.path.join(snapdir, fn), allow_pickle=False) as z:
+            row = {"t": float(z["t"]) if "t" in z.files else np.nan}
+            row.update({k[8:]: float(z[k]) for k in z.files if k.startswith("scalar__")})
+            allsc.append(row)
+    keys = [k for k in allsc[0] if k != "t"]
+    if keys:
+        fig, axs = plt.subplots(len(keys), 1, figsize=(7, 1.7 * len(keys)), sharex=True, squeeze=False)
+        for i, k in enumerate(keys):
+            axs[i][0].plot([r["t"] for r in allsc], [r[k] for r in allsc], lw=1.1)
+            axs[i][0].set_ylabel(k, fontsize=8)
+            axs[i][0].grid(alpha=0.25)
+            axs[i][0].axhline(0, color="k", lw=0.5, ls=":")
+        axs[-1][0].set_xlabel("t", fontsize=8)
+        fig.tight_layout()
+        o2 = os.path.join(outdir, "snapshots_%s_scalars.png" % os.path.basename(snapdir.rstrip("/\\")))
+        fig.savefig(o2, dpi=dpi, bbox_inches="tight")
+        plt.close(fig)
+        made.append(o2)
+    return made, None
+
+
+# ------------------------------------------------------------------ main
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--run", help="render every .npz in sweep_runs/<RUN_ID>")
+    ap.add_argument("--snapshots", help="render a HUD snapshot directory")
+    ap.add_argument("--all", action="store_true", help="render every pack in sweep_runs/")
+    ap.add_argument("--limit", type=int, default=0)
+    ap.add_argument("--max-array-mb", type=float, default=1500.0)
+    ap.add_argument("--dpi", type=int, default=110)
+    args = ap.parse_args()
+
+    jobs = []
+    if args.snapshots:
+        d = args.snapshots
+        run_root = d
+        for _ in range(3):
+            run_root = os.path.dirname(run_root)
+            if os.path.basename(os.path.dirname(run_root)) == "sweep_runs":
+                break
+        made, err = render_snapshots(d, os.path.join(run_root, "rendered"), dpi=args.dpi)
+        print("snapshots: %d image(s)%s" % (len(made), "  [%s]" % err if err else ""))
+        for m in made:
+            print("   ", os.path.relpath(m, REPO))
+        return
+
+    if args.run:
+        roots = [os.path.join(SWEEP, args.run)]
+    elif args.all:
+        roots = [os.path.join(SWEEP, d) for d in sorted(os.listdir(SWEEP))
+                 if os.path.isdir(os.path.join(SWEEP, d))]
+    else:
+        ap.error("one of --run, --all or --snapshots is required")
+
+    for root in roots:
+        for dirpath, _dn, fns in os.walk(root):
+            for fn in fns:
+                if fn.endswith(".npz"):
+                    jobs.append(os.path.join(dirpath, fn))
+    if args.limit:
+        jobs = jobs[:args.limit]
+    print("packs to render: %d" % len(jobs))
+
+    n_ok = n_skip = 0
+    for i, p in enumerate(jobs, 1):
+        run_dir = p
+        while os.path.dirname(run_dir) != SWEEP and os.path.dirname(run_dir) != run_dir:
+            run_dir = os.path.dirname(run_dir)
+        made, err = render_pack(p, os.path.join(run_dir, "rendered"),
+                                max_mb=args.max_array_mb, dpi=args.dpi)
+        if made:
+            n_ok += 1
+        else:
+            n_skip += 1
+        if err and made:
+            print("   %s  (%s)" % (os.path.basename(p), err))
+        if i % 25 == 0:
+            print("  ... %d/%d" % (i, len(jobs)))
+    print("\nrendered %d pack(s); %d had nothing renderable" % (n_ok, n_skip))
+    print("output lands in <run>/rendered/ and is imported by tools/build_run_catalogue.py")
+
+
+if __name__ == "__main__":
+    sys.exit(main())

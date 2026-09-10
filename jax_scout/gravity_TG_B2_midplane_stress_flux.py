@@ -85,6 +85,7 @@ from jax_scout import gravity_TG_B1S_state_load_feedback_gpu as b1s  # noqa: E40
 from jax_scout import gravity_TG_B2_two_node_awell as b2  # noqa: E402
 from jax_scout.phase_d_c3_wave import build_kg  # noqa: E402
 from jax_scout.provenance import flat_stamp  # noqa: E402
+from jax_scout.snapshots import SnapshotWriter  # noqa: E402
 
 
 def write_json(p, o):
@@ -181,13 +182,27 @@ def stress_diag(state, cfg, g, a_sign, feedback):
             "A_min": jnp.min(A), "A_max": jnp.max(A)}
 
 
+@jax.jit
+def view_fields(state, cfg, a_sign, feedback):
+    """Pure read: the fields worth looking at, including A itself.
+
+    A is the 7e-5 propagation-coefficient well that the whole TG force rests on and that nobody has
+    ever rendered. Returned as (A - 1) so a viewer can amplify it without losing precision to the
+    leading 1.
+    """
+    phi, pi, T, VT, G, VG = state
+    eps_G = cfg[12]
+    A = jnp.exp(a_sign * eps_G * G * feedback)
+    return {"phi": phi, "pi": pi, "T": T, "G": G, "A_minus_1": A - 1.0}
+
+
 FIELDS = ["t", "F_R", "P_R", "S_mid", "S_far", "S_in", "S_out", "flux_plane", "flux_div",
           "E_R", "E_L", "E_grad_R", "E_kin_R", "E_mass_R", "E_pot_R", "M_R",
           "charge", "amp", "A_min", "A_max"]
 
 
 def run_arm(csv_path, psi, pi, cfgv, refsv, g, flags, a_sign, feedback,
-            nchunk, chunk_steps, dt):
+            nchunk, chunk_steps, dt, snap=None):
     state = b2.to_dev(psi, pi, g)
     a_j = jnp.asarray(a_sign, dtype=jnp.float64)
     fb_j = jnp.asarray(feedback, dtype=jnp.float64)
@@ -211,6 +226,10 @@ def run_arm(csv_path, psi, pi, cfgv, refsv, g, flags, a_sign, feedback,
             rows.append(row)
             wr.writerow(row)
             fh.flush()
+            if snap is not None:
+                # Pure read, riding the device->host sync the line above already paid for.
+                snap.capture(t, view_fields(state, cfgv, a_j, fb_j),
+                             dx=g["dx"], extra={"F_R": row["F_R"], "P_R": row["P_R"]})
             if not np.isfinite(row["F_R"]):
                 break
     return rows
@@ -329,6 +348,13 @@ def main():
     ap.add_argument("--sample-dt", type=float, default=0.05)
     ap.add_argument("--f-discard", type=float, default=0.4)
     ap.add_argument("--arms", default="off,well,hill")
+    ap.add_argument("--snapshots", action="store_true",
+                    help="write field snapshots for the visual HUD (OFF by default; the run is "
+                         "bit-identical either way -- see tests/test_snapshots.py)")
+    ap.add_argument("--snapshot-every", type=int, default=1,
+                    help="capture every Nth sample")
+    ap.add_argument("--snapshot-volume-every", type=int, default=0,
+                    help="also store a downsampled full volume every Nth captured frame (0=never)")
     ap.add_argument("--reanalyze", action="store_true",
                     help="skip simulation; re-derive summary.json from the CSVs already in --out "
                          "(use after a gate/analysis fix, so a completed run need not be repeated)")
@@ -398,8 +424,15 @@ def main():
             print(f"[arm {name}] re-analysed {len(rows)} samples from {path.name}", flush=True)
         else:
             print(f"[arm {name}] ...", flush=True)
+            snap = SnapshotWriter(out / "snapshots" / name, enabled=args.snapshots,
+                                  every=args.snapshot_every,
+                                  volume_every=args.snapshot_volume_every)
             rows = run_arm(out / f"stress_{name}.csv", psi, pi, cfgv, refsv, g,
-                           flags, a_sign, fb, nchunk, chunk_steps, args.dt)
+                           flags, a_sign, fb, nchunk, chunk_steps, args.dt, snap=snap)
+            st = snap.close()
+            if st:
+                print(f"[arm {name}] snapshots: {st['frames_written']} written, "
+                      f"{st['frames_dropped']} dropped, {st['frames_failed']} failed", flush=True)
         res = {v: ledger(rows, args.f_discard, v) for v in ("flux_plane", "flux_div")}
         res["energetics"] = energetics(rows, args.f_discard)
         results[name] = res

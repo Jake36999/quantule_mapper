@@ -151,7 +151,7 @@ ratio in the sector, and it is now recorded rather than reconstructed after the 
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `b4e0613` (2026-08-25) — *P1-a: per-half-space energy observable closes the P1 checklist*
-**Revised since:** 7 commit(s), most recently `3877db6` (2026-08-31)
+**Revised since:** 8 commit(s), most recently `bc5b54c` (2026-08-31)
 
 **Harness code changed since it was written:** 4 commit(s) to `jax_scout/`.
   - `06edae5` 2026-08-27 — Fix run provenance: 30% -> 86% of runs now dated

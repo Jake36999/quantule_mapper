@@ -207,7 +207,7 @@ limb) are in `docs/theory_synthesis/irer_archive/CROSSMAP_CONCEPTS_VS_RESULTS.md
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `25020bf` (2026-07-22) — *dual substrate*
-**Revised since:** 7 commit(s), most recently `3877db6` (2026-08-31)
+**Revised since:** 8 commit(s), most recently `bc5b54c` (2026-08-31)
 
 **Harness code changed since it was written:** 5 commit(s) to `jax_scout/`.
   - `06edae5` 2026-08-27 — Fix run provenance: 30% -> 86% of runs now dated

@@ -78,7 +78,7 @@ verify every entry points to an existing file; flag broken/stale/duplicate links
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `2f6ad05` (2026-07-10) — *Evidence package: curated, traceable record of claims -> artifacts -> verdicts (*
-**Revised since:** 7 commit(s), most recently `3877db6` (2026-08-31)
+**Revised since:** 8 commit(s), most recently `bc5b54c` (2026-08-31)
 
 **Harness code changed since it was written:** 6 commit(s) to `jax_scout/`.
   - `06edae5` 2026-08-27 — Fix run provenance: 30% -> 86% of runs now dated

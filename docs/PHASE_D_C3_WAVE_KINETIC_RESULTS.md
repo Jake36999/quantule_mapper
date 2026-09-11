@@ -83,15 +83,15 @@ from measured density co-motion + mass retention; IC-bug fix documented; no matt
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `e820857` (2026-07-09) — *Phase D C3 first results: KG substrate conservative + Q-ball inertial transport *
-**Revised since:** 9 commit(s), most recently `bc5b54c` (2026-08-31)
+**Revised since:** 10 commit(s), most recently `caf61af` (2026-09-10)
 
-**Harness code changed since it was written:** 22 commit(s) to `jax_scout/`.
+**Harness code changed since it was written:** 15 commit(s) to `jax_scout/`.
+  - `caf61af` 2026-09-10 — Build HUD items 1+2: snapshot writer and universal field renderer
   - `06edae5` 2026-08-27 — Fix run provenance: 30% -> 86% of runs now dated
   - `b4e0613` 2026-08-25 — P1-a: per-half-space energy observable closes the P1 checklist
   - `5a19e60` 2026-08-25 — P2 CONFIRMED: midplane stress-flux estimator validates the body force 
   - `eeb8f6d` 2026-08-25 — P2: midplane stress-flux estimator, stability review checklist, refine
-  - `25020bf` 2026-07-22 — dual substrate
-  - *…and 17 more.*
+  - *…and 10 more.*
 
 **Later documents that cite this one:** none. *Either this line of work stopped here, or the consequence was never written down — both are worth knowing when reviewing it.*
 

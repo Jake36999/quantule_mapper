@@ -295,9 +295,14 @@ The table was never needed.
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `3877db6` (2026-08-31) — *RFC: universal field HUD - offline renderer + live monitor*
-**Revised since:** 1 commit(s), most recently `bc5b54c` (2026-08-31)
+**Revised since:** 2 commit(s), most recently `caf61af` (2026-09-10)
 
-**Later documents that cite this one:** none. *Either this line of work stopped here, or the consequence was never written down — both are worth knowing when reviewing it.*
+**Harness code changed since it was written:** 1 commit(s) to `jax_scout/`.
+  - `caf61af` 2026-09-10 — Build HUD items 1+2: snapshot writer and universal field renderer
+
+**Later documents that cite this one** — the downstream consequences:
+
+- [[RESOURCE_LIBRARY_ASSESSMENT_2026-09]] &middot; `2026-09-11`
 
 **Master catalog:** neither this document nor any verdict it reports appears in the catalog. Its status is **not tracked centrally** — treat anything inside as historical until confirmed.
 

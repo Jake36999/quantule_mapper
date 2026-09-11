@@ -235,12 +235,15 @@ including a future agent — into thinking it is live.
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `9517d9f` (2026-08-26) — *Infrastructure assessment: build three small things, not a platform*
-**Revised since:** 5 commit(s), most recently `bc5b54c` (2026-08-31)
+**Revised since:** 6 commit(s), most recently `caf61af` (2026-09-10)
 
-**Harness code changed since it was written:** 1 commit(s) to `jax_scout/`.
+**Harness code changed since it was written:** 2 commit(s) to `jax_scout/`.
+  - `caf61af` 2026-09-10 — Build HUD items 1+2: snapshot writer and universal field renderer
   - `06edae5` 2026-08-27 — Fix run provenance: 30% -> 86% of runs now dated
 
-**Later documents that cite this one:** none. *Either this line of work stopped here, or the consequence was never written down — both are worth knowing when reviewing it.*
+**Later documents that cite this one** — the downstream consequences:
+
+- [[RESOURCE_LIBRARY_ASSESSMENT_2026-09]] &middot; `2026-09-11`
 
 **Also referenced by (same date or earlier):** [[ACTION_PLAN_2026-08]], [[SESSION_SYNTHESIS_2026-08]], [[VISUAL_HUD_SCOPE_RFC]]
 

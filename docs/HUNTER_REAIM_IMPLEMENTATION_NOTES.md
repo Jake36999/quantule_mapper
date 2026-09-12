@@ -60,7 +60,7 @@ validated a\* case top on real data (offline, `HUNTER_REAIM_OFFLINE_RESCORE.md`)
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `4396890` (2026-07-03) — *H7.1 wire stability objective into aste_hunter (flag-gated; default prime path u*
-**Revised since:** 10 commit(s), most recently `e42b5bb` (2026-09-11)
+**Revised since:** 11 commit(s), most recently `bd93089` (2026-09-12)
 
 **Harness code changed since it was written:** 39 commit(s) to `jax_scout/`.
   - `caf61af` 2026-09-10 — Build HUD items 1+2: snapshot writer and universal field renderer

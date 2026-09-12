@@ -268,9 +268,11 @@ Reciprocating the records' own "what the catalogue should learn" discipline:
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `e42b5bb` (2026-09-11) — *Assess the external resource sprint: take three, decline most*
+**Revised since:** 1 commit(s), most recently `bd93089` (2026-09-12)
 
 **Later documents that cite this one** — the downstream consequences:
 
+- [[INTEGRATED_PLAN_2026-09]] &middot; `2026-09-12`
 - [[gravity_maturity/DERRICK_SCALING_AND_TARGET_TRIAGE]] &middot; `2026-09-12`
 
 **Master catalog:** neither this document nor any verdict it reports appears in the catalog. Its status is **not tracked centrally** — treat anything inside as historical until confirmed.

@@ -192,11 +192,11 @@ kind of cheap analytic check [[../ACTION_PLAN_2026-08|the action plan]] argues s
 > It reports *that* later work exists, not *why* it happened. The reasoning belongs in
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
-**Version written against:** unknown — this document predates the clean-slate commit `909e6e2` (2026-07-01), so git carries no history for it. Use the citation and succession signals below instead.
+**Version written against:** `bd93089` (2026-09-12) — *Derrick scaling for C2-prime and Townes-target triage: two open items closed*
 
 **Later documents that cite this one:** none. *Either this line of work stopped here, or the consequence was never written down — both are worth knowing when reviewing it.*
 
-**Also referenced by (same date or earlier):** [[ACTION_PLAN_2026-08]]
+**Also referenced by (same date or earlier):** [[ACTION_PLAN_2026-08]], [[INTEGRATED_PLAN_2026-09]]
 
 **Master catalog:** neither this document nor any verdict it reports appears in the catalog. Its status is **not tracked centrally** — treat anything inside as historical until confirmed.
 

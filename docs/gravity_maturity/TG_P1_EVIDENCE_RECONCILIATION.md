@@ -240,7 +240,7 @@ it would be an independent estimator that does *not* inherit the gradient-only w
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `292fc96` (2026-08-25) — *Obsidian vault: run catalogue, experiment tracker, documentation methodology*
-**Revised since:** 10 commit(s), most recently `e42b5bb` (2026-09-11)
+**Revised since:** 11 commit(s), most recently `bd93089` (2026-09-12)
 
 **Harness code changed since it was written:** 5 commit(s) to `jax_scout/`.
   - `caf61af` 2026-09-10 — Build HUD items 1+2: snapshot writer and universal field renderer
@@ -251,6 +251,7 @@ it would be an independent estimator that does *not* inherit the gradient-only w
 
 **Later documents that cite this one** — the downstream consequences:
 
+- [[INTEGRATED_PLAN_2026-09]] &middot; `2026-09-12`
 - [[gravity_maturity/DERRICK_SCALING_AND_TARGET_TRIAGE]] &middot; `2026-09-12`
 
 **Also referenced by (same date or earlier):** [[ACTION_PLAN_2026-08]], [[IRER_MASTER_HYPOTHESIS_CATALOG]], [[Main branch]], [[RUN_QUEUE]], [[SESSION_SYNTHESIS_2026-08]], [[SYSTEM_PRESSURE_TEST_AND_METHOD_REVIEW]], [[gravity_maturity/TG_P1A_ENERGY_OBSERVABLE]], [[gravity_maturity/TG_P2_MIDPLANE_STRESS_FLUX_RESULTS]]

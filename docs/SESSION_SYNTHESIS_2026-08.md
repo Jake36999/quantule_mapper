@@ -262,7 +262,7 @@ reviewer**.
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `09f47d8` (2026-08-27) — *Session synthesis: where the project actually stands*
-**Revised since:** 5 commit(s), most recently `e42b5bb` (2026-09-11)
+**Revised since:** 6 commit(s), most recently `bd93089` (2026-09-12)
 
 **Harness code changed since it was written:** 2 commit(s) to `jax_scout/`.
   - `caf61af` 2026-09-10 — Build HUD items 1+2: snapshot writer and universal field renderer

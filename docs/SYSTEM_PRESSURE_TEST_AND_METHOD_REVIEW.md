@@ -341,7 +341,7 @@ entirely in what it changes.*
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `3eb93af` (2026-08-26) — *System pressure test: method review, dependency graph, threat register*
-**Revised since:** 8 commit(s), most recently `e42b5bb` (2026-09-11)
+**Revised since:** 9 commit(s), most recently `bd93089` (2026-09-12)
 
 **Harness code changed since it was written:** 2 commit(s) to `jax_scout/`.
   - `caf61af` 2026-09-10 — Build HUD items 1+2: snapshot writer and universal field renderer
@@ -349,6 +349,7 @@ entirely in what it changes.*
 
 **Later documents that cite this one** — the downstream consequences:
 
+- [[INTEGRATED_PLAN_2026-09]] &middot; `2026-09-12`
 - [[RESOURCE_LIBRARY_ASSESSMENT_2026-09]] &middot; `2026-09-11`
 
 **Also referenced by (same date or earlier):** [[ACTION_PLAN_2026-08]], [[INFRASTRUCTURE_AND_ORCHESTRATION_ASSESSMENT]], [[IRER_MASTER_HYPOTHESIS_CATALOG]], [[SESSION_SYNTHESIS_2026-08]], [[VISUAL_HUD_SCOPE_RFC]]

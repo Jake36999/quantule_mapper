@@ -24,7 +24,7 @@ No new packages were installed.
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `25020bf` (2026-07-22) — *dual substrate*
-**Revised since:** 10 commit(s), most recently `e42b5bb` (2026-09-11)
+**Revised since:** 11 commit(s), most recently `bd93089` (2026-09-12)
 
 **Harness code changed since it was written:** 6 commit(s) to `jax_scout/`.
   - `caf61af` 2026-09-10 — Build HUD items 1+2: snapshot writer and universal field renderer

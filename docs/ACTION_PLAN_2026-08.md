@@ -6,6 +6,13 @@ status: proposed
 
 # Action Plan — from instrument work to validation
 
+> [!warning] Superseded 2026-09-12
+> **[[INTEGRATED_PLAN_2026-09]] is the operative plan.** This document remains valid as the record of
+> *why* the phases are ordered as they are, and its Phase 1/2 reasoning is carried forward unchanged.
+> What it lacks is the September research pass, the Derrick constraint on GAP-4, the retirement of the
+> Townes target, and the promotion of V7 to a structure-transfer candidate.
+
+
 Author: Claude, 2026-08-25. Synthesises [[SYSTEM_PRESSURE_TEST_AND_METHOD_REVIEW|the pressure
 test]], [[META_ANALYSIS_BRANCH_PROGRESS|the meta-analysis]],
 [[INFRASTRUCTURE_AND_ORCHESTRATION_ASSESSMENT|the infrastructure assessment]] and the P1/P1-a/P2
@@ -284,7 +291,7 @@ structural if its force sign is *derived* rather than set by a flag.
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `60093e5` (2026-08-27) — *Action plan: instrument phase closed, the sign problem is next*
-**Revised since:** 6 commit(s), most recently `e42b5bb` (2026-09-11)
+**Revised since:** 7 commit(s), most recently `bd93089` (2026-09-12)
 
 **Harness code changed since it was written:** 2 commit(s) to `jax_scout/`.
   - `caf61af` 2026-09-10 — Build HUD items 1+2: snapshot writer and universal field renderer
@@ -292,6 +299,7 @@ structural if its force sign is *derived* rather than set by a flag.
 
 **Later documents that cite this one** — the downstream consequences:
 
+- [[INTEGRATED_PLAN_2026-09]] &middot; `2026-09-12`
 - [[RESOURCE_LIBRARY_ASSESSMENT_2026-09]] &middot; `2026-09-11`
 - [[gravity_maturity/DERRICK_SCALING_AND_TARGET_TRIAGE]] &middot; `2026-09-12`
 

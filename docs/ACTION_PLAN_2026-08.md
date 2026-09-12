@@ -42,6 +42,29 @@ would be wrong.
 
 ---
 
+> [!important] Update 2026-09-12 — external research answered, two items closed
+> A literature pass (`D:\Resource-Library\RESEARCH FINDINGS - Quantule Mapper Discriminating
+> Evidence.md`) answered all five science questions, and two follow-ups were settled immediately in
+> [[gravity_maturity/DERRICK_SCALING_AND_TARGET_TRIAGE]]:
+>
+> - **Phase 1a is corroborated from the outside.** In the nearest known relative (analogue-gravity
+>   acoustic metrics) the metric's sign is **derived** from the fluid's equations of motion, not
+>   chosen. The literature shows no case where a sign was legitimately left free after a proper
+>   derivation. The project's free `a_sign` is anomalous relative to its closest analogue — which is
+>   evidence that the derivation will resolve it rather than confirm the freedom.
+> - **Phase 1b now has a constraint.** Derrick's theorem applies to C2′ unchanged — the density-
+>   dependent kinetic weight `Ω(ρ)` contributes no factor under dilation (verified numerically to
+>   5 d.p.). **A variational reformulation must use a Q-ball ansatz, not a static one.**
+> - **Phase 2 gained a concrete first target and lost one.** The saturation cliff should be checked
+>   for a **critical exponent** against Choptuik universality (γ≈0.37 for a massless real scalar) —
+>   a critical exponent is dimensionless and parameter-free, which is exactly criterion 1+2. The
+>   Townes critical-power target is **disqualified**: all 33 catalogued runs carry `s = −0.5`
+>   (self-defocusing), placing the project on the cubic-quintic stable branch rather than near a
+>   marginal collapse threshold.
+> - **The secular drift has a cheap discriminating test:** does the drift rate scale down under
+>   dt-halving and resolution-doubling (numerical) or not (physical phase-detuning)? The integrator
+>   is RK4, which is not structure-preserving, so there is a real prior for the numerical answer.
+
 ## Phase 1 — the sign problem (the scientific priority)
 
 > [!danger] This is the single question that decides whether there is a result here
@@ -261,14 +284,16 @@ structural if its force sign is *derived* rather than set by a flag.
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `60093e5` (2026-08-27) — *Action plan: instrument phase closed, the sign problem is next*
-**Revised since:** 5 commit(s), most recently `caf61af` (2026-09-10)
+**Revised since:** 6 commit(s), most recently `e42b5bb` (2026-09-11)
 
-**Harness code changed since it was written:** 1 commit(s) to `jax_scout/`.
+**Harness code changed since it was written:** 2 commit(s) to `jax_scout/`.
   - `caf61af` 2026-09-10 — Build HUD items 1+2: snapshot writer and universal field renderer
+  - `06edae5` 2026-08-27 — Fix run provenance: 30% -> 86% of runs now dated
 
 **Later documents that cite this one** — the downstream consequences:
 
 - [[RESOURCE_LIBRARY_ASSESSMENT_2026-09]] &middot; `2026-09-11`
+- [[gravity_maturity/DERRICK_SCALING_AND_TARGET_TRIAGE]] &middot; `2026-09-12`
 
 **Also referenced by (same date or earlier):** [[IRER_MASTER_HYPOTHESIS_CATALOG]], [[SESSION_SYNTHESIS_2026-08]], [[VISUAL_HUD_SCOPE_RFC]]
 

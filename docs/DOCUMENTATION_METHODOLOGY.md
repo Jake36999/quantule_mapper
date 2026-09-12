@@ -339,7 +339,7 @@ figures and renders. **Safe to run at any time** — everything below the Review
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `292fc96` (2026-08-25) — *Obsidian vault: run catalogue, experiment tracker, documentation methodology*
-**Revised since:** 10 commit(s), most recently `caf61af` (2026-09-10)
+**Revised since:** 11 commit(s), most recently `e42b5bb` (2026-09-11)
 
 **Harness code changed since it was written:** 5 commit(s) to `jax_scout/`.
   - `caf61af` 2026-09-10 — Build HUD items 1+2: snapshot writer and universal field renderer

@@ -341,7 +341,7 @@ entirely in what it changes.*
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `3eb93af` (2026-08-26) — *System pressure test: method review, dependency graph, threat register*
-**Revised since:** 7 commit(s), most recently `caf61af` (2026-09-10)
+**Revised since:** 8 commit(s), most recently `e42b5bb` (2026-09-11)
 
 **Harness code changed since it was written:** 2 commit(s) to `jax_scout/`.
   - `caf61af` 2026-09-10 — Build HUD items 1+2: snapshot writer and universal field renderer

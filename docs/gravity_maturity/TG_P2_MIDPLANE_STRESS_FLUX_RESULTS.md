@@ -192,7 +192,7 @@ catch any future error in the momentum sector the way the C2.6 identity check ca
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `5a19e60` (2026-08-25) — *P2 CONFIRMED: midplane stress-flux estimator validates the body force to 0.34%*
-**Revised since:** 9 commit(s), most recently `caf61af` (2026-09-10)
+**Revised since:** 10 commit(s), most recently `e42b5bb` (2026-09-11)
 
 **Harness code changed since it was written:** 5 commit(s) to `jax_scout/`.
   - `caf61af` 2026-09-10 — Build HUD items 1+2: snapshot writer and universal field renderer
@@ -201,7 +201,9 @@ catch any future error in the momentum sector the way the C2.6 identity check ca
   - `5a19e60` 2026-08-25 — P2 CONFIRMED: midplane stress-flux estimator validates the body force 
   - `eeb8f6d` 2026-08-25 — P2: midplane stress-flux estimator, stability review checklist, refine
 
-**Later documents that cite this one:** none. *Either this line of work stopped here, or the consequence was never written down — both are worth knowing when reviewing it.*
+**Later documents that cite this one** — the downstream consequences:
+
+- [[gravity_maturity/DERRICK_SCALING_AND_TARGET_TRIAGE]] &middot; `2026-09-12`
 
 **Also referenced by (same date or earlier):** [[ACTION_PLAN_2026-08]], [[IRER_MASTER_HYPOTHESIS_CATALOG]], [[RUN_QUEUE]], [[SESSION_SYNTHESIS_2026-08]], [[SYSTEM_PRESSURE_TEST_AND_METHOD_REVIEW]], [[gravity_maturity/TG_P1A_ENERGY_OBSERVABLE]]
 

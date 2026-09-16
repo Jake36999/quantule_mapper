@@ -108,3 +108,10 @@ docs/runs/_figures/
 # rebuild added another ~2.6 MB to history permanently. Rebuild it with:
 #   python tools/build_results_index.py
 docs/runs/_index.sqlite
+
+# Disposable orchestrator runtime state (readme.json: "Treat queue_runtime.db as disposable
+# runtime state"). Never belonged in git; 2.8 MB of dead March-2026 queue rows with G:\ paths.
+# queue_manager.py recreates it if the orchestrator is ever run.
+queue_runtime.db
+queue_runtime.db-shm
+queue_runtime.db-wal

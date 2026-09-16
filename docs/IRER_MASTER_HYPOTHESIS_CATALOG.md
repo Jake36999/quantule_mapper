@@ -59,7 +59,7 @@ Two of the three IRER simulation sectors are answered; the third is scoped and p
 |---|---|---|---|
 | I1 | DC-v1.0 data contract can be hardened to compliance | CONFIRMED | 16/16 compliant; test-bench scanner |
 | I2 | There is a separate "CuPy box" for production | FALSIFIED | CuPy runs on this PC via repo `.venv` (cupy 14.0.1, GTX 1080); PATH-python's cupy was just ABI-broken |
-| I3 | CuPy (FP64) and jax_scout mirror share the identical operator | CONFIRMED | H4/A1 parity rel-L2 1.7e-12; C1 parity byte-exact |
+| I3 | CuPy (FP64) and jax_scout mirror share the identical operator | CONFIRMED **(re-verified 2026-09-16)** | H4/A1 parity rel-L2 1.7e-12; C1 parity byte-exact. **Re-run 2026-09-16 against current code: rel-L2 1.735e-12, max\|Δ\| 4.58e-13, `PARITY_WITHIN_TOL` — reproduces the original to two significant figures across 38 commits to `jax_scout/`.** Procedure and artifact: `docs/SOLVER_PARITY_ARTIFACT.md`, `tools/solver_parity_check.py`. |
 | I4 | Production stability_metrics reach the provenance/validation path | CONFIRMED | A3/A4/A4b wiring accepted |
 
 ## 3. Phase C — stability sector (CLOSED)

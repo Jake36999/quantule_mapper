@@ -12,7 +12,7 @@ research pass into one ordered list:
 
 - [[ACTION_PLAN_2026-08]] — phases 0–4 (the scientific spine; still correct, now better supported)
 - [[RESOURCE_LIBRARY_ASSESSMENT_2026-09]] — R1–R8 (tooling triage)
-- [[VISUAL_HUD_SCOPE_RFC]] — items 6.1–6.5 (6.1 and 6.2 built)
+- [[VISUAL_HUD_SCOPE_RFC]] — items 6.1–6.5; **6.1 and 6.2 built and verified in `caf61af`** (see §2a), 6.3 is H4 below, 6.4 now nearly free
 - [[gravity_maturity/DERRICK_SCALING_AND_TARGET_TRIAGE]] — two items closed 2026-09-12
 - The literature pass at `D:\Resource-Library\RESEARCH FINDINGS - Quantule Mapper Discriminating Evidence.md`
 
@@ -91,6 +91,54 @@ something considerably more useful than that:
 
 ---
 
+## 2a. Instrument state — what is already built, and what it now enables
+
+The plan above repeatedly asks questions about the **spatial and dynamical behaviour** of `A`, `G`
+and `φ`. As of `caf61af` there is an instrument for exactly that, and the plan should be using it
+rather than treating it as leftover backlog.
+
+### Built and verified (2026-09-10, commit `caf61af`)
+
+| component | state | evidence |
+|---|---|---|
+| `jax_scout/snapshots.py` | **BUILT** — wired into the midplane harness behind `--snapshots`, **off by default** | `tests/test_snapshots.py`, 12 assertions on the non-perturbation contract. **End-to-end bit-exactness verified**: the same run with snapshots on vs off produced a byte-for-byte identical `stress_well.csv`; 30 frames written, 0 dropped, 0 failed; the OFF run created no snapshot directory. |
+| `tools/render_fields.py` | **BUILT** — one view library, no per-campaign code | Three paths tested: HUD snapshot timeline, legacy pack montage (13 fields in one image), and the 856 MB memory guard. Output lands in `<run>/rendered/` and `build_run_catalogue.find_images` imports it — one path into the vault. |
+| HUD 6.3 centroid overlay | **not built** → **H4** | `scikit-image` already installed |
+| HUD 6.4 live monitor | **not built, now nearly free** | The snapshot side exists, so this is a directory tail plus the renderer that already works |
+
+Two design facts worth carrying forward because they de-risked the build: the harnesses **already**
+force a device→host sync every sample (`float(d[k])` on jitted diagnostics), so capture rides an
+existing sync rather than adding one; and measured cost is **0.214 MB/frame** at N=48 with five
+fields, three planes and a volume every fifth frame.
+
+### Where it plugs into this plan
+
+> [!important] Four items below should be using the HUD, and the plan did not say so
+>
+> | plan item | what the HUD supplies |
+> |---|---|
+> | **S2** — acoustic-metric mapping | The snapshot writer **already captures `A_minus_1`** — the 7e-5 propagation-coefficient well the whole TG force rests on, stored offset from 1 so it can be amplified without losing precision to the leading digit. **Nobody has ever rendered it.** If `c²A` is an effective metric, this *is* the metric, and its geometry is directly viewable. |
+> | **H2** — secular drift | A secular effect is a dynamical phenomenon; a movie is its natural instrument, as the RFC argued. The drift's *spatial structure* distinguishes a numerical pathology from phase detuning between T and G. |
+> | **D1** — critical exponent of the saturation cliff | Threshold onset is a spatial event. Whether the approach is a smooth power law or a genuine discontinuity has a visual signature as well as a fitted one. |
+> | **D3** — which screening mechanism | The question is literally about the **spatial shape** of `G` and `A`. The renderer already displays both. |
+>
+> None of these replaces the quantitative test. Each gives a second, independent channel on the same
+> data — which is the entire justification for having built it.
+
+> [!warning] The standing caution from the build itself
+> **The visual channel generates hypotheses fast, including wrong ones.** The first legacy montage
+> showed `R_current`/`R_lock`/`R_threshold` as uniformly flat, which looked like a real finding;
+> checking all 66 samples showed them non-zero in 44/42/36 — sample 000 was simply an early frame.
+>
+> It also confirmed real physics in the same sitting: `A_minus_1` and `G` render as visually identical
+> panels, which is `A = exp(ε_G G) ≈ 1 + ε_G G` seen by eye rather than derived — the linear-response
+> regime made directly visible.
+>
+> Both belong in the record. **A visual read is a hypothesis, not a result**, and the same rule that
+> governs a scalar contradiction governs a visual one: check it before reporting it.
+
+---
+
 ## 3. The plan
 
 ### Tier 0 — hygiene, this week (~half a day, near-zero install)
@@ -100,7 +148,7 @@ Each closes an item that has been open longer than it should have been, and none
 | # | action | install | closes |
 |---|---|---|---|
 | **H1** | **Backend-parity check.** Save one state array from CuPy and one from the JAX mirror on a matched short run; compare with `cupy.testing.assert_array_almost_equal_nulp` and `jnp.allclose`. | **none** | A residual open since the baseline audit. Verified present. |
-| **H2** | **Secular-drift discriminator.** Does the drift rate scale down under dt-halving and resolution-doubling (→ numerical) or not (→ physical phase-detuning)? **The integrator is RK4, which is not structure-preserving, so there is a real prior for "numerical."** | none | `TG_STATE_LOAD_LONG_TIME_DRIFT_UNRESOLVED` — reclassified out of Phase 2 and into hygiene |
+| **H2** | **Secular-drift discriminator.** Does the drift rate scale down under dt-halving and resolution-doubling (→ numerical) or not (→ physical phase-detuning)? **The integrator is RK4, which is not structure-preserving, so there is a real prior for "numerical."** Run with `--snapshots` so the drift's spatial structure is visible alongside the scaling (§2a). | none | `TG_STATE_LOAD_LONG_TIME_DRIFT_UNRESOLVED` — reclassified out of Phase 2 and into hygiene |
 | **H3** | **`mutmut` on `tests/test_physics_identities.py`.** Do C2.6/C2.8b/C3-class mutations survive? | `mutmut` | Tests a claim already in the record. |
 | **H4** | **HUD 6.3** — centroid overlay via `skimage.feature.peak_local_max`. | none (installed) | The RFC item most likely to have caught C2.8b. |
 
@@ -111,7 +159,7 @@ Each closes an item that has been open longer than it should have been, and none
 | # | action | install | notes |
 |---|---|---|---|
 | **S1** | **Phase 1a — perturbative hand derivation.** Linearise `A = 1 + ε_G G`, solve the screened T/G sector for a static source, evaluate `F_R`. | `sympy` | Confirmed by the literature as the only available path. Jakobsen 2013 is the method reference. `A_well_min ≈ 0.99993` means linear response is essentially exact here. |
-| **S2** | **V7 — test whether the acoustic-metric mapping is exact.** Can `c²A` be written as a genuine effective metric? If so, does the force sign follow from the metric gradient? | none | **Do alongside S1, not after.** Same algebra, and it is the project's only structure-transfer candidate. |
+| **S2** | **V7 — test whether the acoustic-metric mapping is exact.** Can `c²A` be written as a genuine effective metric? If so, does the force sign follow from the metric gradient? **`A_minus_1` is already captured by the snapshot writer and has never been rendered** (§2a). | none | **Do alongside S1, not after.** Same algebra, and it is the project's only structure-transfer candidate. |
 | **S3** | If S1/S2 are inconclusive → **GAP-4 via `cadabra2`**, **with a Q-ball ansatz** (Derrick rules out static). | `cadabra2` | The Derrick constraint is now a design input, not a surprise. |
 | **S4** | Once a reduced ODE exists → integrate with `diffrax`, batched over separations and phases. | `diffrax` | JAX-native; shares the substrate. |
 
@@ -138,7 +186,7 @@ Each closes an item that has been open longer than it should have been, and none
 | `Hypothesis` property tests | after H3 reports |
 | MMS / dt-convergence via `sympy` | when `sympy` arrives for S1 |
 | `svirl` / `exponax` / `py-pde` solver cross-check | if H1 shows a parity gap |
-| HUD 6.4 (PyVista interactive viewer) | when a genuinely 3-D question needs it — e.g. D3 |
+| HUD 6.4 (PyVista interactive viewer) | when a genuinely 3-D question needs it — e.g. **D3**, which is explicitly about spatial shape. Now nearly free: the snapshot side is built, so this is a directory tail plus the existing renderer. |
 | `cplot` / `complexplorer` domain colouring | opportunistic |
 | `dynesty` / `UltraNest` | only once Phase 2 names a measurable to form a likelihood against |
 | `pixi`, `Orbax` | if reproducibility or run-resilience becomes blocking again |
@@ -209,7 +257,9 @@ exponent would even mean.
 
 ## What changed as a result
 
-- **Code / model changes:** none yet — this is a plan.
+- **Code / model changes:** none from this document. The instrument it now schedules against —
+  `jax_scout/snapshots.py`, `tools/render_fields.py`, `tests/test_snapshots.py` — was built and
+  verified in `caf61af` (§2a).
 - **Verdicts changed:** none. Two open questions closed on 2026-09-12 (Derrick, Townes).
 - **What was done next, and why:** pending Jake's decision on Tier 0.
 
@@ -225,6 +275,8 @@ exponent would even mean.
 | 6 | Identity-CI bug-catching power unmeasured | OPEN | H3 |
 | 7 | Is the secular drift numerical or physical? | OPEN | H2 |
 | 8 | No independent human reviewer (T10) | OPEN | unchanged — cannot be fixed internally |
+| 9 | `A_minus_1` captured but never rendered | OPEN | S2 (§2a) |
+| 10 | HUD 6.4 live monitor unbuilt, now nearly free | OPEN | deferred, trigger in Tier 3 |
 
 ## Associated docs
 
@@ -247,7 +299,7 @@ exponent would even mean.
 > It reports *that* later work exists, not *why* it happened. The reasoning belongs in
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
-**Version written against:** unknown — this document predates the clean-slate commit `909e6e2` (2026-07-01), so git carries no history for it. Use the citation and succession signals below instead.
+**Version written against:** `59b7ec3` (2026-09-12) — *Integrated plan: fold the research pass into one operative plan*
 
 **Later documents that cite this one:** none. *Either this line of work stopped here, or the consequence was never written down — both are worth knowing when reviewing it.*
 

@@ -117,7 +117,7 @@ trend, the residual is reported as a bounded open item, and mobility is asserted
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `ad38757` (2026-07-05) — *Phase D C2.2: loss-source isolation -> geometry ruled out, loss is numerical (bo*
-**Revised since:** 12 commit(s), most recently `bd93089` (2026-09-12)
+**Revised since:** 13 commit(s), most recently `59b7ec3` (2026-09-12)
 
 **Harness code changed since it was written:** 26 commit(s) to `jax_scout/`.
   - `caf61af` 2026-09-10 — Build HUD items 1+2: snapshot writer and universal field renderer

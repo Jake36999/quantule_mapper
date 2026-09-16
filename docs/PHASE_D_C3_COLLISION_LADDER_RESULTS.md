@@ -119,7 +119,7 @@ change; no gravity work; **C3 higher-speed collision results only, not a general
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `e53c31c` (2026-07-10) — *Phase D C3 higher-speed collision ladder: capture-dominated up to 0.75c (no pass*
-**Revised since:** 13 commit(s), most recently `bd93089` (2026-09-12)
+**Revised since:** 14 commit(s), most recently `59b7ec3` (2026-09-12)
 
 **Harness code changed since it was written:** 6 commit(s) to `jax_scout/`.
   - `caf61af` 2026-09-10 — Build HUD items 1+2: snapshot writer and universal field renderer

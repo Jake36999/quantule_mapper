@@ -15,7 +15,7 @@ review worklist.
 > **Issues raised** sections. See [[DOCUMENTATION_METHODOLOGY]] §11.
 
 > [!danger] Coverage limit — the June-era docs have no git history
-> The repository was clean-slated in `909e6e2` (2026-07-01). **1 of 221** documents predate it, so git
+> The repository was clean-slated in `909e6e2` (2026-07-01). **0 of 221** documents predate it, so git
 > can say nothing about what changed for them. That includes the whole stability sector
 > currently under review ([[Branch - Stability - Review Checklist]]). For those, the
 > citation graph and the catalog are the only signals.
@@ -28,7 +28,7 @@ review worklist.
 | **dead ends** — nothing later cites them | **183** |
 | **untracked** — neither the doc nor its verdict appears in the catalog | **215** |
 | **both dead-end and untracked** | **182** |
-| no usable git history (pre clean-slate) | 1 |
+| no usable git history (pre clean-slate) | 0 |
 | carry a hand-written *What changed as a result* | 9 |
 
 > [!warning] 'Dead end' is a flag, not a verdict
@@ -53,7 +53,7 @@ for a `What changed as a result` section.*
 
 | document | date | git history? |
 |---|---|---|
-| [[INTEGRATED_PLAN_2026-09]] | 2026-09-12 | none (pre clean-slate) |
+| [[INTEGRATED_PLAN_2026-09]] | 2026-09-12 | yes |
 | [[gravity_maturity/DERRICK_SCALING_AND_TARGET_TRIAGE]] | 2026-09-12 | yes |
 | [[Branch - Stability - Index]] | 2026-08-25 | yes |
 | [[Branch - Stability - Review Checklist]] | 2026-08-25 | yes |

@@ -268,7 +268,7 @@ Reciprocating the records' own "what the catalogue should learn" discipline:
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `e42b5bb` (2026-09-11) — *Assess the external resource sprint: take three, decline most*
-**Revised since:** 1 commit(s), most recently `bd93089` (2026-09-12)
+**Revised since:** 2 commit(s), most recently `59b7ec3` (2026-09-12)
 
 **Later documents that cite this one** — the downstream consequences:
 

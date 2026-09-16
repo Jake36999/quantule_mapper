@@ -295,7 +295,7 @@ The table was never needed.
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `3877db6` (2026-08-31) — *RFC: universal field HUD - offline renderer + live monitor*
-**Revised since:** 4 commit(s), most recently `bd93089` (2026-09-12)
+**Revised since:** 5 commit(s), most recently `59b7ec3` (2026-09-12)
 
 **Harness code changed since it was written:** 1 commit(s) to `jax_scout/`.
   - `caf61af` 2026-09-10 — Build HUD items 1+2: snapshot writer and universal field renderer

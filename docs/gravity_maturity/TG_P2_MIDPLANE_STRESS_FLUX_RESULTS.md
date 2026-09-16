@@ -192,7 +192,7 @@ catch any future error in the momentum sector the way the C2.6 identity check ca
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `5a19e60` (2026-08-25) — *P2 CONFIRMED: midplane stress-flux estimator validates the body force to 0.34%*
-**Revised since:** 11 commit(s), most recently `bd93089` (2026-09-12)
+**Revised since:** 12 commit(s), most recently `59b7ec3` (2026-09-12)
 
 **Harness code changed since it was written:** 5 commit(s) to `jax_scout/`.
   - `caf61af` 2026-09-10 — Build HUD items 1+2: snapshot writer and universal field renderer

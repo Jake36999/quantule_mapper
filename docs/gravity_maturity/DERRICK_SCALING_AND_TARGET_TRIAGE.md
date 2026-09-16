@@ -193,6 +193,7 @@ kind of cheap analytic check [[../ACTION_PLAN_2026-08|the action plan]] argues s
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `bd93089` (2026-09-12) — *Derrick scaling for C2-prime and Townes-target triage: two open items closed*
+**Revised since:** 1 commit(s), most recently `59b7ec3` (2026-09-12)
 
 **Later documents that cite this one:** none. *Either this line of work stopped here, or the consequence was never written down — both are worth knowing when reviewing it.*
 

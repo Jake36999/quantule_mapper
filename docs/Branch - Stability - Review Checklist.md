@@ -119,7 +119,7 @@ the point of this exercise — write them down even when unresolved.*
 > the **What changed as a result** and **Issues raised** sections above, written by hand.
 
 **Version written against:** `eeb8f6d` (2026-08-25) — *P2: midplane stress-flux estimator, stability review checklist, refined goals*
-**Revised since:** 12 commit(s), most recently `bd93089` (2026-09-12)
+**Revised since:** 13 commit(s), most recently `59b7ec3` (2026-09-12)
 
 **Harness code changed since it was written:** 5 commit(s) to `jax_scout/`.
   - `caf61af` 2026-09-10 — Build HUD items 1+2: snapshot writer and universal field renderer

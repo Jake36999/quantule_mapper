@@ -132,14 +132,14 @@ live in documents, which is exactly the seam these fell through.
 
 | stranded | reality | fix |
 |---|---|---|
-| **670 field packs, 0 rendered** | `render_fields.py` works, but the 1,410-array backlog that justified building it has never been touched. | **C1** below |
+| ~~670 field packs, 0 rendered~~ | **CLEARED 2026-09-16.** 445 montages rendered and imported. Looking at them is also what exposed two centroid-detector defects the two-node test could not reach — a node near the boundary was invisible, and speckle fields were given six invented nodes (`39d486a`). | **C1 — done** |
 | **102 paired-reading blocks seeded, 0 filled** | The protocol exists and has never once been used. The plan did not mention it at all. | **C2** below |
 | `jax_scout/provenance.py` | **Wired into one harness only.** 29/183 runs carry recorded provenance, and those 29 are old CORE_SAT runs that stamped by coincidence. Every new run from the other ~125 harnesses still lands as `inferred`. A partial build that read as done. | **C3** below |
 | `tools/build_results_index.py` | Unreferenced, yet **D1 and D2 both need to query it** — the `param_s` check that retired the Townes target was one of its queries. | referenced now |
 
 | # | action | effort |
 |---|---|---|
-| **C1** | **Unblocked — HUD 6.3 landed 2026-09-16.** Run `render_fields.py --all` over the corpus so the overlays are present in the output. Expect ~445 montages. | 1 h, mostly unattended |
+| ~~**C1**~~ | **DONE 2026-09-16.** 445 montages from 670 packs, 0 failures; 225 packs hold nothing renderable. Catalogue rebuilt — 203 run notes, **35 of them new**, because runs whose only artifact was imagery now classify as substantive. Figures stay local (36.5 MB, `docs/runs/_figures/` gitignored) until the project shifts from exploration to presentation. | done |
 | **C2** | Work the paired-reading queue, newest first — it is the second channel [[SYSTEM_PRESSURE_TEST_AND_METHOD_REVIEW\|T10]] cannot otherwise supply. | ongoing |
 | **C3** | Add `flat_stamp()` to the harnesses that actually produce catalogued runs (not all 126 — the ~6 that generate results). | 1 h |
 

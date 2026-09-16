@@ -36,6 +36,7 @@ import gc
 import os
 import re
 import sys
+import time
 
 import numpy as np
 
@@ -186,7 +187,19 @@ def overlay_axes(ax, arr, *, midplane=True, mask_edge=True, centroids=True):
 # ------------------------------------------------------------------ legacy packs
 
 
-def render_pack(npz_path, outdir, *, max_mb=1500, dpi=110):
+def pack_stem(npz_path, run_dir=None):
+    """A filesystem-safe montage name that is unique WITHIN the run.
+
+    Runs nest packs in subdirectories and reuse names across them (a `fields.npz` per case
+    directory), so a basename-derived output silently overwrites. In a corpus-wide pass that
+    yields montages quietly showing the wrong pack, and an image that lies about its source is
+    worse than no image at all.
+    """
+    rel = os.path.relpath(npz_path, run_dir) if run_dir else os.path.basename(npz_path)
+    return re.sub(r"[^\w.-]", "_", rel)[:-4][:120]
+
+
+def render_pack(npz_path, outdir, *, max_mb=1500, dpi=110, stem=None):
     """Render every field in one arbitrary .npz as a single montage."""
     made = []
     try:
@@ -243,7 +256,7 @@ def render_pack(npz_path, outdir, *, max_mb=1500, dpi=110):
     fig.suptitle(os.path.basename(npz_path), fontsize=10)
     fig.tight_layout(rect=(0, 0, 1, 0.97))
     os.makedirs(outdir, exist_ok=True)
-    out = os.path.join(outdir, re.sub(r"[^\w.-]", "_", os.path.basename(npz_path))[:-4] + ".png")
+    out = os.path.join(outdir, pack_stem(npz_path, stem) + ".png")
     fig.savefig(out, dpi=dpi, bbox_inches="tight")
     plt.close(fig)
     made.append(out)
@@ -346,6 +359,8 @@ def main():
     ap.add_argument("--snapshots", help="render a HUD snapshot directory")
     ap.add_argument("--all", action="store_true", help="render every pack in sweep_runs/")
     ap.add_argument("--limit", type=int, default=0)
+    ap.add_argument("--skip-existing", action="store_true",
+                    help="resume a corpus pass: leave packs that already have a montage")
     ap.add_argument("--max-array-mb", type=float, default=1500.0)
     ap.add_argument("--dpi", type=int, default=110)
     args = ap.parse_args()
@@ -373,7 +388,11 @@ def main():
         ap.error("one of --run, --all or --snapshots is required")
 
     for root in roots:
-        for dirpath, _dn, fns in os.walk(root):
+        for dirpath, dn, fns in os.walk(root):
+            # `rendered/` is output; `snapshots/` belongs to render_snapshots -- rendering
+            # each snap_*.npz standalone would make thousands of near-identical single-frame
+            # images instead of one timeline.
+            dn[:] = [d for d in dn if d not in ("rendered", "snapshots")]
             for fn in fns:
                 if fn.endswith(".npz"):
                     jobs.append(os.path.join(dirpath, fn))
@@ -381,13 +400,24 @@ def main():
         jobs = jobs[:args.limit]
     print("packs to render: %d" % len(jobs))
 
-    n_ok = n_skip = 0
+    n_ok = n_skip = n_have = n_err = 0
+    t0 = time.time()
     for i, p in enumerate(jobs, 1):
         run_dir = p
         while os.path.dirname(run_dir) != SWEEP and os.path.dirname(run_dir) != run_dir:
             run_dir = os.path.dirname(run_dir)
-        made, err = render_pack(p, os.path.join(run_dir, "rendered"),
-                                max_mb=args.max_array_mb, dpi=args.dpi)
+        outdir = os.path.join(run_dir, "rendered")
+        if args.skip_existing and os.path.exists(
+                os.path.join(outdir, pack_stem(p, run_dir) + ".png")):
+            n_have += 1
+            continue
+        try:
+            made, err = render_pack(p, outdir, max_mb=args.max_array_mb,
+                                    dpi=args.dpi, stem=run_dir)
+        except Exception as exc:      # one bad pack must not end a corpus pass
+            print("   FAILED %s: %s" % (os.path.relpath(p, SWEEP), exc))
+            n_err += 1
+            continue
         if made:
             n_ok += 1
         else:
@@ -395,8 +425,12 @@ def main():
         if err and made:
             print("   %s  (%s)" % (os.path.basename(p), err))
         if i % 25 == 0:
-            print("  ... %d/%d" % (i, len(jobs)))
-    print("\nrendered %d pack(s); %d had nothing renderable" % (n_ok, n_skip))
+            el = time.time() - t0
+            done = max(1, i - n_have)
+            print("  ... %d/%d   %.0fs elapsed, ~%.0fs left"
+                  % (i, len(jobs), el, el / done * (len(jobs) - i)))
+    print(chr(10) + "rendered %d pack(s); %d nothing renderable; %d already present; %d failed"
+          % (n_ok, n_skip, n_have, n_err))
     print("output lands in <run>/rendered/ and is imported by tools/build_run_catalogue.py")
 
 

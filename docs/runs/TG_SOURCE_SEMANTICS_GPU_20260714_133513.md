@@ -239,10 +239,51 @@ Do not rerun TG-B1 feedback unless a reviewer accepts one supported source famil
 
 ### Reading - Claude
 
+*(filled 2026-09-17, plan item C2, from the rendered montages plus measurement of the packs)*
+
 - **Observation:**
-- **Reading:**
-- **Confidence:**
-- **What would change my mind:**
+  - **`S_state` is spatially almost indistinguishable from `energy_density`.** Within every one of
+    the nine arms, `corr(S_state, energy_density) >= 0.9977`; `corr` with `charge_density` is
+    `-0.9997` (they are collinear here). By contrast `corr(S_state, phase_coherence)` swings from
+    `-0.91` to `+0.50` across arms, so it tracks nothing about phase *spatially*.
+  - **But the arm-to-arm normalisation does carry state information.** `int_S / int_E` varies
+    **73%** across the nine arms. High spatial correlation and state-sensitivity are not in
+    conflict: the shape follows the energy, the *amplitude* does not.
+  - **The density-matched control works, and only at `sample000`.** There
+    `int_rho(scrambled)/int_rho(stationary) = 1.000000` exactly -- matched as designed -- with
+    `int_E` ratio **1.3979** (scrambling adds gradient energy) and `int_S` ratio **0.8676**.
+    *Identical density, 40% more energy, 13% less state-load.*
+  - **The gap widens with time:** `int_S` ratio 0.868 -> 0.478 -> 0.289 at samples 000/020/040,
+    while the scrambled arm's density has already stopped matching by `sample020` (ratio 0.710).
+  - **Instrument check, passed incidentally:** the `int_E` ratio is `1.397874` at all three samples,
+    identical to six decimals, i.e. energy is separately conserved in each arm. Worth recording
+    because it is free evidence that the conservative sector is behaving.
+  - `global_phase_rotation` and `translated_node` give ratios of exactly `1.000000` for both `rho`
+    and `S` against `stationary_node` -- the source is exactly invariant under global phase and
+    translation, as it must be.
+
+- **Reading:** The verdict `TG_NODE_STATE_LOAD_SOURCE_SUPPORTED` **holds, and the `sample000` row is
+  where it is actually earned.** At matched density and higher energy the scrambled node sources
+  *less*, so `S_state` is a function of neither density nor energy alone. That is the whole content
+  of the claim and it is a single number: **0.868 at matched density**.
+
+  The widening over time (0.868 -> 0.289) is a *different* and weaker statement, because the arms
+  stop being density-matched after `sample000`. It should not be quoted as the strength of the
+  effect.
+
+  I initially read the 0.998 spatial correlations as showing `S_state` was "just the energy density".
+  That was wrong, and the mistake is worth recording: within a single configuration the correlation
+  measures **shape**, and the state-dependence lives in the **amplitude**, which is invisible to it.
+
+- **Confidence:** Medium-high on "the source is state-sensitive, by 13% at matched density".
+  Low on any quantitative size beyond that: one sample, one separation, no error bars, and the
+  discriminating margin is 13% against arms that differ by 40% in energy.
+
+- **What would change my mind:** A repeat at several seeds showing the `sample000` `int_S` ratio
+  scattering across 1.0 -- that would make the 13% noise. Or a demonstration that `0.868` is
+  predictable from the extra gradient energy alone (i.e. that `S` is a function of energy *and*
+  density jointly but of nothing else), which would remove "state" from the claim while keeping the
+  numbers. That second test is cheap and is not in the record.
 
 ### Reading - Jake
 

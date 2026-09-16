@@ -115,7 +115,18 @@ class SnapshotWriter:
                 return
             path, payload = item
             try:
-                np.savez_compressed(path, **payload)
+                # Atomic publish. The live monitor (tools/hud_monitor.py) reads this directory
+                # WHILE the run is writing it; np.load on a half-written npz raises, and a reader
+                # that trips over torn files is a telemetry failure of exactly the kind that killed
+                # the previous HUD. Rename is atomic within a directory on both NTFS and ext4, so
+                # a frame is either absent or complete. Costs one rename on the writer thread,
+                # which is off the simulation's critical path by construction.
+                tmp = path + ".part"
+                # a file handle, not a name: np.savez_compressed appends '.npz' to a bare path
+                # and would turn 'snap_000000.npz.part' into 'snap_000000.npz.part.npz'.
+                with open(tmp, "wb") as fh:
+                    np.savez_compressed(fh, **payload)
+                os.replace(tmp, path)
                 self.n_written += 1
             except Exception:          # a failed write must never propagate into the run
                 self.n_failed += 1

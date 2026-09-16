@@ -1,4 +1,20 @@
-"""Time-resolved current-closure dynamics from N96 trace bundles (read-only, jax-free).
+"""RETIRED (HUD item 6.5, 2026-09-16) - kept for reproducibility, not for new work.
+
+Phase C is CLOSED (standing attractor confirmed, mobility negative). This module exists to
+regenerate the specific figures behind the closed Phase C documents, and it is bespoke to those
+runs' file layouts (`all_evals.csv`, shortlist JSONs, per-case `summary.json`). It is NOT a general
+field renderer and must not be extended into one -- five near-duplicate modules like this one, each
+rebuilt for a run layout, are precisely the friction that motivated the HUD.
+
+For any NEW field visualisation use `tools/render_fields.py`, which reads the pack schema rather
+than a campaign's directory convention, and `tools/hud_monitor.py` for a running simulation.
+
+Retiring rather than deleting: the closed Phase C documents cite these figures, so the code that
+made them stays reproducible. Nothing here has been changed.
+
+--- original module docstring follows ---
+
+Time-resolved current-closure dynamics from N96 trace bundles (read-only, jax-free).
 
 The static single-snapshot analysis was inconclusive because the instantaneous current of an
 oscillating soliton is not a persistent-transport signal. This renderer reads the focused-4

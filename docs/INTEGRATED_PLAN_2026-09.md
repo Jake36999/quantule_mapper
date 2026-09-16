@@ -12,7 +12,7 @@ research pass into one ordered list:
 
 - [[ACTION_PLAN_2026-08]] — phases 0–4 (the scientific spine; still correct, now better supported)
 - [[RESOURCE_LIBRARY_ASSESSMENT_2026-09]] — R1–R8 (tooling triage)
-- [[VISUAL_HUD_SCOPE_RFC]] — items 6.1–6.5; **6.1 and 6.2 built and verified in `caf61af`** (see §2a), 6.3 is H4 below, 6.4 now nearly free
+- [[VISUAL_HUD_SCOPE_RFC]] — items 6.1–6.5; **all five built and verified** — 6.1–6.2 in `caf61af`, 6.3–6.5 on 2026-09-16 (see §2a). H4 is closed. What remains is **C1**, the render backlog — a *use* item, not a build item.
 - [[gravity_maturity/DERRICK_SCALING_AND_TARGET_TRIAGE]] — two items closed 2026-09-12
 - The literature pass at `D:\Resource-Library\RESEARCH FINDINGS - Quantule Mapper Discriminating Evidence.md`
 
@@ -103,8 +103,8 @@ rather than treating it as leftover backlog.
 |---|---|---|
 | `jax_scout/snapshots.py` | **BUILT** — wired into the midplane harness behind `--snapshots`, **off by default** | `tests/test_snapshots.py`, 12 assertions on the non-perturbation contract. **End-to-end bit-exactness verified**: the same run with snapshots on vs off produced a byte-for-byte identical `stress_well.csv`; 30 frames written, 0 dropped, 0 failed; the OFF run created no snapshot directory. |
 | `tools/render_fields.py` | **BUILT** — one view library, no per-campaign code | Three paths tested: HUD snapshot timeline, legacy pack montage (13 fields in one image), and the 856 MB memory guard. Output lands in `<run>/rendered/` and `build_run_catalogue.find_images` imports it — one path into the vault. |
-| HUD 6.3 centroid overlay | **not built** → **H4** | `scikit-image` already installed |
-| HUD 6.4 live monitor | **not built, now nearly free** | The snapshot side exists, so this is a directory tail plus the renderer that already works |
+| HUD 6.3 centroid overlay | **BUILT 2026-09-16** (H4 closed) | `find_centroids` + count-instability banner in `tools/render_fields.py`. Standard detector (`peak_local_max`), not a bespoke tracker. |
+| HUD 6.4 live monitor | **BUILT 2026-09-16** | `tools/hud_monitor.py` — reader-only, no control path to the sim. Snapshot writes are now atomic. Verified against a live producer. |
 
 Two design facts worth carrying forward because they de-risked the build: the harnesses **already**
 force a device→host sync every sample (`float(d[k])` on jitted diagnostics), so capture rides an
@@ -124,6 +124,24 @@ fields, three planes and a volume every fifth frame.
 >
 > None of these replaces the quantitative test. Each gives a second, independent channel on the same
 > data — which is the entire justification for having built it.
+
+### Stranded capability — built, but not reaching the plan
+
+A systematic audit (2026-09-16) of what exists against what this plan references. Capability does not
+live in documents, which is exactly the seam these fell through.
+
+| stranded | reality | fix |
+|---|---|---|
+| **670 field packs, 0 rendered** | `render_fields.py` works, but the 1,410-array backlog that justified building it has never been touched. | **C1** below |
+| **102 paired-reading blocks seeded, 0 filled** | The protocol exists and has never once been used. The plan did not mention it at all. | **C2** below |
+| `jax_scout/provenance.py` | **Wired into one harness only.** 29/183 runs carry recorded provenance, and those 29 are old CORE_SAT runs that stamped by coincidence. Every new run from the other ~125 harnesses still lands as `inferred`. A partial build that read as done. | **C3** below |
+| `tools/build_results_index.py` | Unreferenced, yet **D1 and D2 both need to query it** — the `param_s` check that retired the Townes target was one of its queries. | referenced now |
+
+| # | action | effort |
+|---|---|---|
+| **C1** | **Unblocked — HUD 6.3 landed 2026-09-16.** Run `render_fields.py --all` over the corpus so the overlays are present in the output. Expect ~445 montages. | 1 h, mostly unattended |
+| **C2** | Work the paired-reading queue, newest first — it is the second channel [[SYSTEM_PRESSURE_TEST_AND_METHOD_REVIEW\|T10]] cannot otherwise supply. | ongoing |
+| **C3** | Add `flat_stamp()` to the harnesses that actually produce catalogued runs (not all 126 — the ~6 that generate results). | 1 h |
 
 > [!warning] The standing caution from the build itself
 > **The visual channel generates hypotheses fast, including wrong ones.** The first legacy montage
@@ -150,7 +168,7 @@ Each closes an item that has been open longer than it should have been, and none
 | **H1** | **Backend-parity check.** Save one state array from CuPy and one from the JAX mirror on a matched short run; compare with `cupy.testing.assert_array_almost_equal_nulp` and `jnp.allclose`. | **none** | A residual open since the baseline audit. Verified present. |
 | **H2** | **Secular-drift discriminator.** Does the drift rate scale down under dt-halving and resolution-doubling (→ numerical) or not (→ physical phase-detuning)? **The integrator is RK4, which is not structure-preserving, so there is a real prior for "numerical."** Run with `--snapshots` so the drift's spatial structure is visible alongside the scaling (§2a). | none | `TG_STATE_LOAD_LONG_TIME_DRIFT_UNRESOLVED` — reclassified out of Phase 2 and into hygiene |
 | **H3** | **`mutmut` on `tests/test_physics_identities.py`.** Do C2.6/C2.8b/C3-class mutations survive? | `mutmut` | Tests a claim already in the record. |
-| **H4** | **HUD 6.3** — centroid overlay via `skimage.feature.peak_local_max`. | none (installed) | The RFC item most likely to have caught C2.8b. |
+| ~~**H4**~~ | ~~**HUD 6.3** — centroid overlay via `skimage.feature.peak_local_max`.~~ **DONE 2026-09-16**, together with 6.4 and 6.5. | none | The RFC item most likely to have caught C2.8b. Built with a count-instability banner, so the C2.8b signature is reported rather than smoothed. |
 
 ### Tier 1 — the sign problem, and its newly-paired partner
 
@@ -186,7 +204,7 @@ Each closes an item that has been open longer than it should have been, and none
 | `Hypothesis` property tests | after H3 reports |
 | MMS / dt-convergence via `sympy` | when `sympy` arrives for S1 |
 | `svirl` / `exponax` / `py-pde` solver cross-check | if H1 shows a parity gap |
-| HUD 6.4 (PyVista interactive viewer) | when a genuinely 3-D question needs it — e.g. **D3**, which is explicitly about spatial shape. Now nearly free: the snapshot side is built, so this is a directory tail plus the existing renderer. |
+| HUD 6.4 **PyVista interactive 3-D viewer** | The 2-D live monitor is **built** (`tools/hud_monitor.py`); what stays deferred is only the *volumetric* viewer, for when a genuinely 3-D question needs it — e.g. **D3**, which is explicitly about spatial shape. It needs `--snapshot-volume-every`, which the writer already supports. |
 | `cplot` / `complexplorer` domain colouring | opportunistic |
 | `dynesty` / `UltraNest` | only once Phase 2 names a measurable to form a likelihood against |
 | `pixi`, `Orbax` | if reproducibility or run-resilience becomes blocking again |
@@ -276,7 +294,7 @@ exponent would even mean.
 | 7 | Is the secular drift numerical or physical? | OPEN | H2 |
 | 8 | No independent human reviewer (T10) | OPEN | unchanged — cannot be fixed internally |
 | 9 | `A_minus_1` captured but never rendered | OPEN | S2 (§2a) |
-| 10 | HUD 6.4 live monitor unbuilt, now nearly free | OPEN | deferred, trigger in Tier 3 |
+| 10 | HUD 6.4 live monitor unbuilt | **CLOSED 2026-09-16** | `tools/hud_monitor.py`; only the 3-D volumetric viewer stays deferred |
 
 ## Associated docs
 

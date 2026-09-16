@@ -111,17 +111,76 @@ def draw_phase(ax, arr, name):
     return im
 
 
-def overlay_axes(ax, n, *, midplane=True, mask_edge=True):
+def find_centroids(arr, *, max_nodes=6, rel_thresh=0.55):
+    """HUD item 6.3 — node centroids via a STANDARD detector, not a bespoke peak-tracker.
+
+    Why this specific choice. C2.8b was caused by a hand-rolled peak-tracker that failed when two
+    cores overlapped, producing an elasticity of 3.21 and violating energy conservation. The RFC
+    named the centroid overlay as the item most likely to have made that visible. Writing another
+    bespoke tracker to do it would reproduce the exact failure class.
+
+    `skimage.feature.peak_local_max` is the standard, maintained, sub-pixel-capable alternative.
+    `min_distance` is what handles the overlapping-core case that broke the original: peaks closer
+    than that are merged rather than reported as two, which is the honest answer when cores merge.
+
+    Known limitation, stated rather than tuned away. On a heavily overlapped pair the detector
+    reports n=2 early and n=1 once the cores merge, and on ring-structured fields (`pi`, `phi`)
+    it can latch onto ring maxima and report n=3-4. Both are surfaced by the count-instability
+    banner in `render_snapshots`, which is the intended behaviour: a flickering count IS the
+    C2.8b signature, so it is reported in red rather than smoothed into a plausible-looking
+    trajectory. Treat the overlay as a check on node observables, never as one.
+
+    Returns [(row, col, weight)] in array index order, or [] if scikit-image is unavailable -- the
+    overlay degrades rather than failing the render.
+    """
+    try:
+        from skimage.feature import peak_local_max  # noqa: PLC0415
+    except Exception:
+        return []
+    d = np.abs(arr) ** 2 if np.iscomplexobj(arr) else np.abs(np.real(arr))
+    peak = float(d.max())
+    if not np.isfinite(peak) or peak <= 0:
+        return []
+    try:
+        # min_distance must reflect the CORE scale, not the grid scale. Too small and a
+        # flat-topped overlapping pair reports phantom peaks on its own plateau -- which is the
+        # C2.8b failure reproduced in the detector meant to reveal it.
+        pk = peak_local_max(d, min_distance=max(3, d.shape[0] // 8),
+                            threshold_abs=rel_thresh * peak, num_peaks=max_nodes)
+    except Exception:
+        return []
+    return [(int(r), int(c), float(d[r, c] / peak)) for r, c in pk]
+
+
+def overlay_axes(ax, arr, *, midplane=True, mask_edge=True, centroids=True):
     """The HUD part: mark the structures the observables are defined against.
 
     The midplane x=0 and the mask interface x=+dx/2 are exactly the surfaces the P2 momentum ledger
     integrates over, and getting their placement wrong opened that ledger at O(1). Drawing them
     makes a placement error visible instead of arithmetic.
+
+    Centroids (6.3) mark where a node-tracking observable would say the nodes are -- so a tracker
+    that has jumped, merged or latched onto a lobe is visible at a glance rather than inferred from
+    an impossible scalar.
     """
+    n = arr.shape[0] if hasattr(arr, "shape") else int(arr)
     if midplane:
         ax.axvline(n // 2, color="cyan", lw=0.7, ls="-", alpha=0.75)
     if mask_edge:
         ax.axvline(n // 2 + 0.5, color="cyan", lw=0.6, ls=":", alpha=0.6)
+    if centroids and hasattr(arr, "shape"):
+        pts = find_centroids(arr)
+        for r, c, w in pts:
+            # images are drawn transposed (imshow(arr.T)), so array (r,c) -> plot (r,c) directly
+            ax.plot(r, c, marker="+", color="#39ff14", ms=7 + 5 * w, mew=1.3, alpha=0.95)
+        if len(pts) >= 2:
+            (r0, c0, _), (r1, c1, _) = pts[0], pts[1]
+            ax.plot([r0, r1], [c0, c1], color="#39ff14", lw=0.7, ls="--", alpha=0.6)
+            ax.text(0.02, 0.02, "sep=%.1f px  n=%d" % (np.hypot(r1 - r0, c1 - c0), len(pts)),
+                    transform=ax.transAxes, fontsize=6, color="#39ff14", va="bottom")
+        elif len(pts) == 1:
+            ax.text(0.02, 0.02, "n=1", transform=ax.transAxes, fontsize=6,
+                    color="#39ff14", va="bottom")
 
 
 # ------------------------------------------------------------------ legacy packs
@@ -180,7 +239,7 @@ def render_pack(npz_path, outdir, *, max_mb=1500, dpi=110):
         else:
             im = draw(ax, arr, name, cls)
             fig.colorbar(im, ax=ax, fraction=0.046, pad=0.02).ax.tick_params(labelsize=6)
-        overlay_axes(ax, arr.shape[0])
+        overlay_axes(ax, arr)
     fig.suptitle(os.path.basename(npz_path), fontsize=10)
     fig.tight_layout(rect=(0, 0, 1, 0.97))
     os.makedirs(outdir, exist_ok=True)
@@ -197,6 +256,8 @@ def render_pack(npz_path, outdir, *, max_mb=1500, dpi=110):
 
 def render_snapshots(snapdir, outdir, *, ncols=6, dpi=110):
     """Time montage from snap_*.npz: one row per field, columns are time."""
+    if not os.path.isdir(snapdir):
+        return [], "no such directory: %s" % snapdir
     snaps = sorted(f for f in os.listdir(snapdir) if re.match(r"snap_\d+\.npz$", f))
     if not snaps:
         return [], "no snap_*.npz"
@@ -228,11 +289,23 @@ def render_snapshots(snapdir, outdir, *, ncols=6, dpi=110):
                 continue
             cls = classify(name, arr)
             draw(ax, arr, name, cls, title=(f"{name}   t={fr['t']:.2f}" if r == 0 or True else None))
-            overlay_axes(ax, arr.shape[0])
+            overlay_axes(ax, arr)
+    # HUD 6.3 diagnostic: a node count that flickers across consecutive frames of a fixed-N run is
+    # the C2.8b signature. Whether it is the tracker or the physics, it must be SAID, not smoothed.
+    warn = []
+    for name in fields:
+        counts = [len(find_centroids(fr[name])) for fr in frames if fr.get(name) is not None]
+        if counts and (max(counts) != min(counts)):
+            warn.append("%s n=%s" % (name, "/".join(str(c) for c in counts)))
+
     fr0 = frames[0]["scalars"]
     sub = "  ".join(f"{k}={v:+.3e}" for k, v in list(fr0.items())[:3])
-    fig.suptitle("%s   %s" % (os.path.basename(os.path.dirname(snapdir.rstrip("/\\")) or snapdir),
-                              sub), fontsize=10)
+    title = "%s   %s" % (os.path.basename(os.path.dirname(snapdir.rstrip("/\\")) or snapdir), sub)
+    if warn:
+        title += (chr(10) + "UNSTABLE NODE COUNT (tracker or merge -- check before "
+                  "trusting any node observable):  " + "   ".join(warn[:3]))
+    fig.suptitle(title, fontsize=10,
+                 color=("#b00020" if warn else "black"))
     fig.tight_layout(rect=(0, 0, 1, 0.97))
     os.makedirs(outdir, exist_ok=True)
     out = os.path.join(outdir, "snapshots_%s_timeline.png" % os.path.basename(snapdir.rstrip("/\\")))

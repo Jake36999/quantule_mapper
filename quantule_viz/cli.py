@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import sys
 from pathlib import Path
 
 from .io import IncompleteRunError, guard_outputs
@@ -30,7 +31,21 @@ def _add_shared_run_options(parser: argparse.ArgumentParser, *, candidate: bool 
         parser.add_argument("--candidate", help="Optional candidate/config id to highlight.")
 
 
+_RETIRED_NOTE = (
+    "[RETIRED] This Phase C renderer is kept only to reproduce the figures behind the closed" + chr(10) +
+    "          Phase C documents. Phase C is closed; do not build new analysis on it." + chr(10) +
+    "          New field visualisation: tools/render_fields.py (offline) /"
+    " tools/hud_monitor.py (live)." + chr(10)
+)
+
+
+def _retired(name: str) -> None:
+    """Say it at the point of use. A banner in a docstring nobody opens is not a retirement."""
+    print(_RETIRED_NOTE.replace("[RETIRED]", "[RETIRED: %s]" % name), file=sys.stderr)
+
+
 def run_phase_c(args: argparse.Namespace) -> int:
+    _retired("phase-c")
     outputs = phase_c.render(
         args.run_dir,
         outdir=args.outdir,
@@ -120,6 +135,7 @@ def run_field_suite(args: argparse.Namespace) -> int:
 
 
 def run_phase_c_structured(args: argparse.Namespace) -> int:
+    _retired("phase-c-structured")
     outputs = phase_c_structured.render(
         args.summary_csv,
         outdir=args.outdir,
@@ -133,6 +149,7 @@ def run_phase_c_structured(args: argparse.Namespace) -> int:
 
 
 def run_phase_c_option_b(args: argparse.Namespace) -> int:
+    _retired("phase-c-option-b")
     outputs = phase_c_option_b.render(
         args.summary_csv,
         outdir=args.outdir,
@@ -146,6 +163,7 @@ def run_phase_c_option_b(args: argparse.Namespace) -> int:
 
 
 def run_phase_c_current_closure(args: argparse.Namespace) -> int:
+    _retired("phase-c-current-closure")
     outputs = phase_c_current_closure.render(
         args.stage1_root,
         outdir=args.outdir,
@@ -158,6 +176,7 @@ def run_phase_c_current_closure(args: argparse.Namespace) -> int:
 
 
 def run_phase_c_current_closure_dynamics(args: argparse.Namespace) -> int:
+    _retired("phase-c-current-closure-dynamics")
     outputs = phase_c_current_closure_dynamics.render(
         args.trace_root,
         outdir=args.outdir,
@@ -175,7 +194,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     sub = parser.add_subparsers(dest="command", required=True)
 
-    p_phase = sub.add_parser("phase-c", help="Render Phase C saved-result figures.")
+    p_phase = sub.add_parser("phase-c", help="[RETIRED] Render Phase C saved-result figures.")
     _add_shared_run_options(p_phase, candidate=True)
     p_phase.set_defaults(func=run_phase_c)
 
@@ -224,7 +243,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     p_structured = sub.add_parser(
         "phase-c-structured",
-        help="Render the structured Phase C discovery visual-analysis pack.",
+        help="[RETIRED] Render the structured Phase C discovery visual-analysis pack.",
     )
     p_structured.add_argument(
         "summary_csv",
@@ -243,7 +262,7 @@ def build_parser() -> argparse.ArgumentParser:
     p_structured.add_argument("--overwrite", action="store_true", help="Replace existing generated outputs.")
     p_structured.set_defaults(func=run_phase_c_structured)
 
-    p_optb = sub.add_parser("phase-c-option-b", help="Render the Phase C Option B v2 morphology/comparison/inspection pack.")
+    p_optb = sub.add_parser("phase-c-option-b", help="[RETIRED] Render the Phase C Option B v2 morphology/comparison/inspection pack.")
     p_optb.add_argument("summary_csv", nargs="?", help="Structured-discovery summary CSV. Defaults to docs/phase_c_structured_discovery_B_summary.csv.")
     p_optb.add_argument("--shortlist", help="Shortlist diagnostic metrics JSON.")
     p_optb.add_argument("--cases-root", help="Directory with per-case diagnostic bundles (frames.npz + diagnostic_summary.json).")
@@ -251,14 +270,14 @@ def build_parser() -> argparse.ArgumentParser:
     p_optb.add_argument("--overwrite", action="store_true", help="Replace existing generated outputs.")
     p_optb.set_defaults(func=run_phase_c_option_b)
 
-    p_close = sub.add_parser("phase-c-current-closure", help="Render the N96 current-closure / signed-vorticity static analysis.")
+    p_close = sub.add_parser("phase-c-current-closure", help="[RETIRED] Render the N96 current-closure / signed-vorticity static analysis.")
     p_close.add_argument("stage1_root", help="Stage 1 root with <case>/probe_data.npz (PHASE_C_OPTION_B_N96_STAGE1_*).")
     p_close.add_argument("--manifest", help="Stage 1 manifest JSON for class labels. Defaults to <stage1_root>/stage1_manifest.json.")
     p_close.add_argument("--outdir", required=True, help="Output root for the current-closure pack.")
     p_close.add_argument("--overwrite", action="store_true", help="Replace existing generated outputs.")
     p_close.set_defaults(func=run_phase_c_current_closure)
 
-    p_dyn = sub.add_parser("phase-c-current-closure-dynamics", help="Render time-resolved current-closure from N96 trace bundles.")
+    p_dyn = sub.add_parser("phase-c-current-closure-dynamics", help="[RETIRED] Render time-resolved current-closure from N96 trace bundles.")
     p_dyn.add_argument("trace_root", help="Trace root with <case>/frames.npz + diagnostic_summary.json (PHASE_C_OPTION_B_N96_TRACE_*).")
     p_dyn.add_argument("--outdir", required=True, help="Output root for the dynamics pack.")
     p_dyn.add_argument("--overwrite", action="store_true", help="Replace existing generated outputs.")

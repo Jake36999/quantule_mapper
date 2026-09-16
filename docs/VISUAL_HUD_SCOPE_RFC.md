@@ -226,17 +226,17 @@ and that sector's distinguishing behaviours are all *dynamical and spatial*:
 
 ---
 
-## Build status (2026-09-10)
+## Build status (updated 2026-09-16)
 
-**Items 6.1 and 6.2 are built and tested.** 6.3–6.5 remain proposed.
+**Items 6.1–6.5 are built and tested** (6.1–6.2 in `caf61af`, 6.3–6.5 on 2026-09-16). The scope item that remains is not a build item: **C1**, running the renderer over the 670-pack backlog that justified it.
 
 | item | state | evidence |
 |---|---|---|
 | **6.1 snapshot writer** | **BUILT** | `jax_scout/snapshots.py`, wired into the midplane harness behind `--snapshots` (off by default). `tests/test_snapshots.py`: 12 assertions on the non-perturbation contract. **End-to-end bit-exactness verified** — same run with snapshots on vs off produced a byte-for-byte identical `stress_well.csv`; 30 frames written, 0 dropped, 0 failed; the OFF run created no snapshot directory. |
 | **6.2 adapter + offline renderer** | **BUILT** | `tools/render_fields.py`. Three paths tested: HUD snapshot timeline, legacy pack montage (13 fields in one image, no per-campaign code), and the 856 MB memory guard. Output lands in `<run>/rendered/` and `build_run_catalogue.find_images` picks it up — confirmed, one path into the vault. |
-| 6.3 overlay layer | partial | midplane + mask-edge markers are in; centroids and absorber region are not |
-| 6.4 live monitor | not built | the snapshot side exists, so this is now just a directory tail |
-| 6.5 retire the `phase_c*` renderers | not built | |
+| **6.3 overlay layer** | **BUILT** | `find_centroids` in `tools/render_fields.py` wraps `skimage.feature.peak_local_max` — a *standard* detector, deliberately not another bespoke tracker, since a bespoke tracker is what caused C2.8b. Paired with a **count-instability banner**: if the node count changes across frames of a fixed-N run the montage says so in red rather than smoothing it, because a flickering count *is* the C2.8b signature. Verified on a two-node run where it correctly reported 2→1 through a merge, and correctly flagged its own ring-structure false positives on `pi`. Limitations are stated in the docstring rather than tuned away. |
+| **6.4 live monitor** | **BUILT** | `tools/hud_monitor.py`. Separate process, one channel (the filesystem), strictly reader-only, **no buttons** — there is no control path from the monitor to the simulation, so a UI fault cannot reach the run. That is the direct answer to the previous HUD's telemetry/button failures. `jax_scout/snapshots.py` now publishes frames by **atomic rename**, so a reader cannot catch a torn file. Verified against a concurrently-writing producer: re-rendered at 5→12→18→24 frames, no torn reads, clean exit on `RUN_COMPLETE.json`. |
+| **6.5 retire the `phase_c*` renderers** | **BUILT (retired, not deleted)** | All five carry a RETIRED banner, all five subcommands are `[RETIRED]` in `--help`, and each prints a notice to stderr **at the point of use** — a banner in a docstring nobody opens is not a retirement. Kept rather than deleted because closed Phase C documents cite their figures; not wrapped, because wrapping 2,093 lines of campaign-specific analysis into the universal renderer would re-implement closed work for no scientific gain. |
 
 **Simplification found during the build.** The RFC specified a 22-row name lookup. Probing every odd
 key in the corpus (`psi_1194`, `fields`, `rho_hist_*`, `Pi`, `current`) showed a **dtype/prefix
@@ -271,7 +271,7 @@ The table was never needed.
 |---|---|---|---|
 | 1 | TG force runs save no field snapshots | OPEN | 6.1 |
 | 2 | 1,410 field arrays on disk, none rendered | OPEN | 6.2 |
-| 3 | Five `phase_c*` renderers duplicate one view set | OPEN | 6.5 |
+| 3 | Five `phase_c*` renderers duplicate one view set | CLOSED 2026-09-16 | 6.5 |
 | 4 | Shared `plots.py` primitives bypassed by campaign renderers | OPEN | 6.2 |
 
 ## Associated docs

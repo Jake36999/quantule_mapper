@@ -156,24 +156,31 @@ def main():
     results = []
     for label, cls, rel, old, new in muts:
         path = os.path.join(ROOT, rel)
-        original = io.open(path, encoding="utf-8").read()
-        if old not in original:
+        # BINARY. Text-mode round-tripping rewrites CRLF as LF, which git reports as a modified
+        # file even though nothing changed -- a false "not restored cleanly" warning, which is
+        # worse than none because it teaches you to ignore the real one.
+        with io.open(path, "rb") as fh:
+            original = fh.read()
+        old_b, new_b = old.encode(), new.encode()
+        if old_b not in original:
             print("%-28s %-6s SKIP  anchor text not found (code moved?)" % (label, cls))
             results.append({"label": label, "bug_class": cls, "file": rel,
                             "outcome": "SKIPPED_ANCHOR_MISSING"})
             continue
-        if original.count(old) != 1:
+        if original.count(old_b) != 1:
             print("%-28s %-6s SKIP  anchor is not unique (%d matches)"
-                  % (label, cls, original.count(old)))
+                  % (label, cls, original.count(old_b)))
             results.append({"label": label, "bug_class": cls, "file": rel,
                             "outcome": "SKIPPED_ANCHOR_AMBIGUOUS"})
             continue
         t0 = time.time()
         try:
-            io.open(path, "w", encoding="utf-8").write(original.replace(old, new, 1))
+            with io.open(path, "wb") as fh:
+                fh.write(original.replace(old_b, new_b, 1))
             rc, out = run_suite(args.timeout)
         finally:
-            io.open(path, "w", encoding="utf-8").write(original)
+            with io.open(path, "wb") as fh:
+                fh.write(original)
         caught = rc != 0
         dt = time.time() - t0
         print("%-28s %-6s %s   (%.0fs)"

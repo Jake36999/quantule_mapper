@@ -44,16 +44,14 @@ from jax_scout import gravity_TG_B1S_long_time_gpu as lt  # noqa: E402
 from jax_scout import gravity_TG_B1S_state_load_feedback_gpu as b1s  # noqa: E402
 
 
+from jax_scout.provenance import write_json  # noqa: E402  (shared: stamps run metadata)
+
 REFERENCE_DELTA_OMEGA_DEFAULT = -2.150936882840006e-06
 ORIGINAL_MAKE_INITIAL_STATE_LT = lt.make_initial_state_lt
 
 
 def now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
-
-
-def write_json(path: Path, payload: Any) -> None:
-    path.write_text(json.dumps(payload, indent=2, sort_keys=True, default=float), encoding="utf-8")
 
 
 def write_csv(path: Path, rows: list[dict[str, Any]]) -> None:

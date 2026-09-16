@@ -45,11 +45,9 @@ sys.path.insert(0, str(ROOT_FOR_IMPORT))
 from jax_scout.gravity_D_neutral_probe_gpu import ROOT, build_grid, deriv, git_commit, preflight  # noqa: E402
 
 
+from jax_scout.provenance import write_json  # noqa: E402  (shared: stamps run metadata)
+
 SOURCE_SIGMA = 1.5
-
-
-def write_json(path: Path, payload: Any) -> None:
-    path.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
 
 
 def write_csv(path: Path, rows: list[dict[str, Any]]) -> None:

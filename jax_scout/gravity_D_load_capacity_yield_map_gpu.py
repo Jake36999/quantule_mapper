@@ -25,9 +25,7 @@ sys.path.insert(0, str(ROOT))
 from jax_scout import gravity_D_dynamics_characterization_gpu as gd  # noqa: E402
 
 
-def write_json(path: Path, payload: Any) -> None:
-    path.write_text(json.dumps(payload, indent=2, sort_keys=True, default=str), encoding="utf-8")
-
+from jax_scout.provenance import write_json  # noqa: E402  (shared: stamps run metadata)
 
 def write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
     keys: list[str] = []

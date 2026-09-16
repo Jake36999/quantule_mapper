@@ -58,6 +58,7 @@ from jax_scout.gravity_D_neutral_probe_gpu import (  # noqa: E402
     rhs,
     rk4_step,
 )
+from jax_scout.provenance import write_json  # noqa: E402  (shared: stamps run metadata)
 
 
 BASE_N = 96
@@ -101,10 +102,6 @@ def environment_record(preflight_record: dict[str, Any]) -> dict[str, Any]:
         "working_directory": str(ROOT),
         "operating_environment": "WSL/JAX GPU mirror expected",
     }
-
-
-def write_json(path: Path, payload: Any) -> None:
-    path.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
 
 
 def write_csv(path: Path, rows: list[dict[str, Any]], fieldnames: list[str] | None = None) -> None:

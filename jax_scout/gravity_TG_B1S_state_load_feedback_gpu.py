@@ -45,6 +45,7 @@ from jax_scout.phase_d_c3_wave import (  # noqa: E402
     invariants,
     qball_petviashvili,
 )
+from jax_scout.provenance import write_json  # noqa: E402  (shared: stamps run metadata)
 
 S0_AUTHORITATIVE = 135.6862187684289
 
@@ -65,10 +66,6 @@ def git_state() -> str:
 
 def command_line() -> str:
     return " ".join([sys.executable, *sys.argv])
-
-
-def write_json(path: Path, payload: Any) -> None:
-    path.write_text(json.dumps(payload, indent=2, sort_keys=True, default=float), encoding="utf-8")
 
 
 def write_csv(path: Path, rows: list[dict[str, Any]]) -> None:

@@ -38,12 +38,10 @@ from jax_scout import gravity_TG_B1S_drift_decomposition_gpu as dec  # noqa: E40
 from jax_scout import gravity_TG_B1S_state_load_feedback_gpu as b1s  # noqa: E402
 
 
+from jax_scout.provenance import write_json  # noqa: E402  (shared: stamps run metadata)
+
 def now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
-
-
-def write_json(path: Path, payload: Any) -> None:
-    path.write_text(json.dumps(payload, indent=2, sort_keys=True, default=float), encoding="utf-8")
 
 
 def write_csv(path: Path, rows: list[dict[str, Any]]) -> None:

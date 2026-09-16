@@ -97,3 +97,9 @@ quantule_viz/outputs/
 docs/.obsidian/workspace*.json
 docs/.obsidian/cache
 docs/.trash/
+
+# HUD montages (C1, 2026-09-16): 445 renders, 36.5 MB. Kept local while the project is in
+# exploration rather than presentation -- regenerate with:
+#   python tools/render_fields.py --all && python tools/build_run_catalogue.py
+# The 204 figures already tracked before this point stay tracked; revisit as a set later.
+docs/runs/_figures/

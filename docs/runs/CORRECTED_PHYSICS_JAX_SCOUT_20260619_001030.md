@@ -56,6 +56,14 @@ tags: [run, infra, Baseline]
 
 *sweep results*
 
+## Figures (produced by the run itself)
+
+*Copied from the run directory so Obsidian can display them. These are the run's own rendered output, not regenerated here.*
+
+![[_figures/CORRECTED_PHYSICS_JAX_SCOUT_20260619_001030/rendered__sweep_fields_top.png]]
+
+*`rendered/sweep_fields_top.png`*
+
 ## Artifacts
 
 - **Run directory** (gitignored, local only): `sweep_runs/CORRECTED_PHYSICS_JAX_SCOUT_20260619_001030/`
@@ -63,7 +71,9 @@ tags: [run, infra, Baseline]
 
 ## Previous experiments
 
-*None — this is the first catalogued run in the `Baseline` family.*
+*Auto-derived: the preceding runs in the same family (`Baseline`). Correct by hand if the lineage is wrong — edits here survive rebuilds only if you move the link below the Review notes marker.*
+
+- [[CORRECTED_PHYSICS_JAX_SCOUT_20260619_000932]] &middot; `2026-06-19`
 
 ## Associated docs
 
@@ -72,7 +82,7 @@ tags: [run, infra, Baseline]
 
 ## Next experiment
 
-- [[CORRECTED_PHYSICS_JAX_SCOUT_20260619_005700]] &middot; `2026-06-19`
+- [[CORRECTED_PHYSICS_JAX_SCOUT_20260619_005639]] &middot; `2026-06-19`
 
 ## Branches
 

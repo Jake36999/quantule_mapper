@@ -40,7 +40,10 @@ tags: [run, stability, Feb_basin]
 
 ## Previous experiments
 
-*None — this is the first catalogued run in the `Feb-basin` family.*
+*Auto-derived: the preceding runs in the same family (`Feb-basin`). Correct by hand if the lineage is wrong — edits here survive rebuilds only if you move the link below the Review notes marker.*
+
+- [[FEB_BASIN_CONFIRM_20260625_154503]] &middot; `2026-06-25`
+- [[FEB_BASIN_20260625_122824]] &middot; `2026-06-25`
 
 ## Associated docs
 

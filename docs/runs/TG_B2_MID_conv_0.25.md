@@ -101,7 +101,7 @@ tags: [run, gravity, TG_B2]
 
 ## Next experiment
 
-*None yet — this is the most recent run in the `TG-B2` family.*
+- [[TG_B2_P1A_SMOKE]] &middot; `2026-08-25`
 
 ## Branches
 

@@ -173,6 +173,38 @@ tags: [run, stability, Phase_C]
 
 *`population/phase_c_true_rate_heatmap.png`*
 
+![[_figures/PHASE_C_VISUAL_ANALYSIS_20260624_161650/rendered__cases_feb56dc7_control_frames.png]]
+
+*`rendered/cases_feb56dc7_control_frames.png`*
+
+![[_figures/PHASE_C_VISUAL_ANALYSIS_20260624_161650/rendered__cases_k1_high_mass_failure_frames.png]]
+
+*`rendered/cases_k1_high_mass_failure_frames.png`*
+
+![[_figures/PHASE_C_VISUAL_ANALYSIS_20260624_161650/rendered__cases_k1_low_mass_true_frames.png]]
+
+*`rendered/cases_k1_low_mass_true_frames.png`*
+
+![[_figures/PHASE_C_VISUAL_ANALYSIS_20260624_161650/rendered__cases_k2_intermediate_true_frames.png]]
+
+*`rendered/cases_k2_intermediate_true_frames.png`*
+
+![[_figures/PHASE_C_VISUAL_ANALYSIS_20260624_161650/rendered__cases_k4_intermediate_true_frames.png]]
+
+*`rendered/cases_k4_intermediate_true_frames.png`*
+
+![[_figures/PHASE_C_VISUAL_ANALYSIS_20260624_161650/rendered__cases_k6_high_mass_true_frames.png]]
+
+*`rendered/cases_k6_high_mass_true_frames.png`*
+
+![[_figures/PHASE_C_VISUAL_ANALYSIS_20260624_161650/rendered__cases_k6_mid_mass_true_frames.png]]
+
+*`rendered/cases_k6_mid_mass_true_frames.png`*
+
+![[_figures/PHASE_C_VISUAL_ANALYSIS_20260624_161650/rendered__cases_k6_near_threshold_near_frames.png]]
+
+*`rendered/cases_k6_near_threshold_near_frames.png`*
+
 ![[_figures/PHASE_C_VISUAL_ANALYSIS_20260624_161650/shortlist__phase_c_shortlist_diagnostic_summary.png]]
 
 *`shortlist/phase_c_shortlist_diagnostic_summary.png`*
@@ -203,7 +235,10 @@ tags: [run, stability, Phase_C]
 
 ## Previous experiments
 
-*None — this is the first catalogued run in the `Phase-C` family.*
+*Auto-derived: the preceding runs in the same family (`Phase-C`). Correct by hand if the lineage is wrong — edits here survive rebuilds only if you move the link below the Review notes marker.*
+
+- [[PHASE_C_OPTION_B_N96_STAGE1_20260624_223147]] &middot; `2026-06-24`
+- [[PHASE_C_OPTION_B_N96_STAGE1_20260624_222203]] &middot; `2026-06-24`
 
 ## Associated docs
 

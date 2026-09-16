@@ -178,6 +178,8 @@ tags: [run, stability, Phase_C]
 *Auto-derived: the preceding runs in the same family (`Phase-C`). Correct by hand if the lineage is wrong — edits here survive rebuilds only if you move the link below the Review notes marker.*
 
 - [[PHASE_C_VISUAL_ANALYSIS_20260624_161650]] &middot; `2026-06-24`
+- [[PHASE_C_OPTION_B_N96_STAGE1_20260624_223147]] &middot; `2026-06-24`
+- [[PHASE_C_OPTION_B_N96_STAGE1_20260624_222203]] &middot; `2026-06-24`
 
 ## Associated docs
 

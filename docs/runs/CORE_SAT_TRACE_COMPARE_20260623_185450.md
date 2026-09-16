@@ -49,6 +49,22 @@ tags: [run, stability, Stability]
 
 *`ref_feb56dc7/trace_panel.png`*
 
+![[_figures/CORE_SAT_TRACE_COMPARE_20260623_185450/rendered__CORE_SAT_HUNT_20260623_171758_idx_4_frames.png]]
+
+*`rendered/CORE_SAT_HUNT_20260623_171758_idx_4_frames.png`*
+
+![[_figures/CORE_SAT_TRACE_COMPARE_20260623_185450/rendered__CORE_SAT_HUNT_20260623_173417_idx_10_frames.png]]
+
+*`rendered/CORE_SAT_HUNT_20260623_173417_idx_10_frames.png`*
+
+![[_figures/CORE_SAT_TRACE_COMPARE_20260623_185450/rendered__CORE_SAT_HUNT_20260623_173417_idx_2_frames.png]]
+
+*`rendered/CORE_SAT_HUNT_20260623_173417_idx_2_frames.png`*
+
+![[_figures/CORE_SAT_TRACE_COMPARE_20260623_185450/rendered__ref_feb56dc7_frames.png]]
+
+*`rendered/ref_feb56dc7_frames.png`*
+
 ![[_figures/CORE_SAT_TRACE_COMPARE_20260623_185450/trace_overlay.png]]
 
 *`trace_overlay.png`*
@@ -63,9 +79,9 @@ tags: [run, stability, Stability]
 
 *Auto-derived: the preceding runs in the same family (`Stability`). Correct by hand if the lineage is wrong — edits here survive rebuilds only if you move the link below the Review notes marker.*
 
-- [[CORE_SAT_HUNT_20260623_175018]] &middot; `2026-06-23`
-- [[CORE_SAT_HUNT_20260623_174215]] &middot; `2026-06-23`
-- [[CORE_SAT_HUNT_20260623_173417]] &middot; `2026-06-23`
+- [[CORE_SAT_TRACE_COMPARE_20260623_185302]] &middot; `2026-06-23`
+- [[CORE_SAT_MASS_THRESHOLD_N96_SCALED_20260623_222546]] &middot; `2026-06-23`
+- [[CORE_SAT_MASS_THRESHOLD_N96_20260623_202328]] &middot; `2026-06-23`
 
 ## Associated docs
 

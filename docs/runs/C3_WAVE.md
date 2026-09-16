@@ -55,10 +55,10 @@ tags: [run, transport, C3_KG]
 - [[EXPERIMENT_TRACKER]]
 - [[FUTURE_WORK_AND_EXTERNAL_VALIDATION_PLAN]]
 - [[PHASE_D_C3_WAVE_KINETIC_RESULTS]]
+- [[PHASE_D_C3_WAVE_KINETIC_RFC]]
 - [[PHASE_D_CLOSEOUT_CONSOLIDATION]]
+- [[PHASE_D_KINETIC_OPERATOR_RFC]]
 - [[evidence_package/00_project_timeline/PROJECT_MATURITY_TIMELINE]]
-- [[evidence_package/05_phase_d_c3_kg_qball/evidence_index]]
-- [[evidence_package/07_instrument_integrity_ledger/evidence_index]]
 
 ## Next experiment
 

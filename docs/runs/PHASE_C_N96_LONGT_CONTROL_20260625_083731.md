@@ -37,6 +37,26 @@ tags: [run, stability, Phase_C]
 
 *`closure_dynamics/morphology_over_time.png`*
 
+![[_figures/PHASE_C_N96_LONGT_CONTROL_20260625_083731/rendered__feb56dc7_T24000_frames.png]]
+
+*`rendered/feb56dc7_T24000_frames.png`*
+
+![[_figures/PHASE_C_N96_LONGT_CONTROL_20260625_083731/rendered__feb56dc7_T24000_probe_data.png]]
+
+*`rendered/feb56dc7_T24000_probe_data.png`*
+
+![[_figures/PHASE_C_N96_LONGT_CONTROL_20260625_083731/rendered__k2_T24000_probe_data.png]]
+
+*`rendered/k2_T24000_probe_data.png`*
+
+![[_figures/PHASE_C_N96_LONGT_CONTROL_20260625_083731/rendered__k4_T24000_frames.png]]
+
+*`rendered/k4_T24000_frames.png`*
+
+![[_figures/PHASE_C_N96_LONGT_CONTROL_20260625_083731/rendered__k4_T24000_probe_data.png]]
+
+*`rendered/k4_T24000_probe_data.png`*
+
 ## Visualiser renders
 
 *From `quantule_viz/outputs/`, matched to this run by the render directory name.*

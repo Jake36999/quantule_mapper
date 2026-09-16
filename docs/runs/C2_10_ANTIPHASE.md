@@ -55,6 +55,7 @@ tags: [run, transport, C2_NLS]
 ## Associated docs
 
 - [[Branch - Transport - Index]]
+- [[DOC_LINEAGE]]
 - [[EXPERIMENT_TRACKER]]
 - [[evidence_package/04_phase_d_c2_transport_and_two_body/evidence_index]]
 - [[evidence_package/EVIDENCE_GAPS]]

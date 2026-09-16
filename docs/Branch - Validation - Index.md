@@ -16,12 +16,14 @@ branch_kind: side
 - Methodology: [[DOCUMENTATION_METHODOLOGY]]
 - All runs: [[runs/_INDEX|Run Catalogue]] &middot; tracker: [[EXPERIMENT_TRACKER]]
 
-## Chronology (2 runs)
+## Chronology (4 runs)
 
 | date | run | family | verdict | figures | reading |
 |---|---|---|---|---:|---|
-| 2026-06-19 | [[CORRECTED_PHYSICS_JAX_SCOUT_20260619_001030]] | Baseline | `-` | 3 | ⬜ |
-| 2026-06-19 | [[CORRECTED_PHYSICS_JAX_SCOUT_20260619_005700]] | Baseline | `-` | 4 | ⬜ |
+| 2026-06-19 | [[CORRECTED_PHYSICS_JAX_SCOUT_20260619_000932]] | Baseline | `-` | 2 | ⬜ |
+| 2026-06-19 | [[CORRECTED_PHYSICS_JAX_SCOUT_20260619_001030]] | Baseline | `-` | 4 | ⬜ |
+| 2026-06-19 | [[CORRECTED_PHYSICS_JAX_SCOUT_20260619_005639]] | Baseline | `-` | 2 | ⬜ |
+| 2026-06-19 | [[CORRECTED_PHYSICS_JAX_SCOUT_20260619_005700]] | Baseline | `-` | 5 | ⬜ |
 
 ## Open threads
 

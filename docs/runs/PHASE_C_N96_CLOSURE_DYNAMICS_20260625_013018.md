@@ -61,6 +61,7 @@ tags: [run, stability, Phase_C]
 
 - [[PHASE_C_VISUAL_ANALYSIS_V2_20260624_185426]] &middot; `2026-06-24`
 - [[PHASE_C_VISUAL_ANALYSIS_20260624_161650]] &middot; `2026-06-24`
+- [[PHASE_C_OPTION_B_N96_STAGE1_20260624_223147]] &middot; `2026-06-24`
 
 ## Associated docs
 

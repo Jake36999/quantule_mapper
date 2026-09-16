@@ -21,9 +21,9 @@ Every catalogued run in **chronological order**: what was run, what came out, an
 
 | | count |
 |---|---:|
-| experiments tracked | 182 |
-| with visual output | 102 |
-| **awaiting a second reading** | **102** |
+| experiments tracked | 203 |
+| with visual output | 123 |
+| **awaiting a second reading** | **123** |
 | second reading recorded | 0 |
 
 ## Visual review queue
@@ -32,12 +32,16 @@ Every catalogued run in **chronological order**: what was run, what came out, an
 
 | date | run | family | verdict | figures |
 |---|---|---|---|---:|
+| 2026-09-16 | [[CORE_SAT_MASS_THRESHOLD_N96_SCALED_PRELIM_20260623]] | Stability | `-` | 2 |
+| 2026-09-16 | [[CORE_SAT_VALIDATE_BATCH_20260623]] | Stability | `-` | 5 |
+| 2026-09-16 | [[CORE_SAT_VALIDATE_FEB_CONTROL]] | Stability | `-` | 2 |
 | 2026-08-25 | [[TG_B2_MIDPLANE_FLUX_N64]] | TG-B2 | `TG_B2_MIDPLANE_FLUX_CONFIRMS_BODY_FORCE` | 3 |
 | 2026-08-25 | [[TG_B2_MIDPLANE_SMOKE]] | TG-B2 | `TG_B2_MIDPLANE_FLUX_STRESS_TENSOR_INVALID__OFF_ARM_LEDGER_OPEN` | 1 |
 | 2026-08-25 | [[TG_B2_MID_S25]] | TG-B2 | `TG_B2_MIDPLANE_FLUX_STRESS_TENSOR_INVALID__OFF_ARM_LEDGER_OPEN` | 1 |
 | 2026-08-25 | [[TG_B2_MID_conv_0.05]] | TG-B2 | `TG_B2_MIDPLANE_FLUX_INCONCLUSIVE` | 1 |
 | 2026-08-25 | [[TG_B2_MID_conv_0.10]] | TG-B2 | `TG_B2_MIDPLANE_FLUX_INCONCLUSIVE` | 1 |
 | 2026-08-25 | [[TG_B2_MID_conv_0.25]] | TG-B2 | `TG_B2_MIDPLANE_FLUX_STRESS_TENSOR_INVALID__OFF_ARM_LEDGER_OPEN` | 1 |
+| 2026-08-25 | [[TG_B2_P1A_SMOKE]] | TG-B2 | `TG_B2_MIDPLANE_FLUX_INCONCLUSIVE` | 2 |
 | 2026-08-24 | [[TG_B2_CONV_SEP3_20260824_221915]] | TG-B2 | `TG_B2_DEFINITIVE_AWELL_ATTRACTION_CONFIRMED` | 1 |
 | 2026-08-22 | [[TG_B1S_D4_DISCREPANCY_REVIEW_20260822_205725]] | TG-B1S | `D4_LARGER_BOX_DISCREPANCY_REVIEWED` | 2 |
 | 2026-07-18 | [[TG_B2_CHARACTERIZATION_20260718_121223]] | TG-B2 | `TG_B2_CHARACTERIZATION_COMPLETE` | 5 |
@@ -64,31 +68,31 @@ Every catalogued run in **chronological order**: what was run, what came out, an
 | 2026-07-14 | [[TG_B1S_STATE_LOAD_GPU_20260714_135157]] | TG-B1S | `TG_STATE_LOAD_GEOMETRIC_BACKREACTION_DETECTED` | 5 |
 | 2026-07-14 | [[TG_B1S_STATE_LOAD_GPU_20260714_140157]] | TG-B1S | `TG_STATE_LOAD_GEOMETRIC_BACKREACTION_DETECTED` | 5 |
 | 2026-07-14 | [[TG_B1_FEEDBACK_GPU_20260714_115402]] | TG-other | `TG_B1_FEEDBACK_GPU_20260714_115402` | 5 |
-| 2026-07-14 | [[TG_SOURCE_SEMANTICS_GPU_20260714_133207]] | TG-S | `TG_NODE_STATE_LOAD_SOURCE_SUPPORTED` | 5 |
-| 2026-07-14 | [[TG_SOURCE_SEMANTICS_GPU_20260714_133513]] | TG-S | `TG_NODE_STATE_LOAD_SOURCE_SUPPORTED` | 5 |
+| 2026-07-14 | [[TG_SOURCE_SEMANTICS_GPU_20260714_133207]] | TG-S | `TG_NODE_STATE_LOAD_SOURCE_SUPPORTED` | 38 |
+| 2026-07-14 | [[TG_SOURCE_SEMANTICS_GPU_20260714_133513]] | TG-S | `TG_NODE_STATE_LOAD_SOURCE_SUPPORTED` | 38 |
 | 2026-07-13 | [[GRAVITY_D_DYNAMICS_CHARACTERIZATION_GPU_20260713_221727]] | Gravity-D | `D_REDUCED_MODEL_PARTIAL` | 18 |
 | 2026-07-13 | [[GRAVITY_D_DYNAMICS_CHARACTERIZATION_GPU_E0_SMOKE_20260713_220905]] | Gravity-D | `-` | 1 |
-| 2026-07-13 | [[GRAVITY_D_EFFECTIVE_MEDIUM_CODEX_20260713]] | Gravity-D | `D_EFFECTIVE_MEDIUM_ATTRACTION_UNCLEAR` | 1 |
-| 2026-07-13 | [[GRAVITY_D_ROBUSTNESS_CLOSURE_GPU_20260713_204559]] | Gravity-D | `-` | 2 |
-| 2026-07-13 | [[GRAVITY_D_ROBUSTNESS_GPU_20260713_195713]] | Gravity-D | `-` | 6 |
-| 2026-07-09 | [[C25_SCOUT_T1]] | C2-NLS | `C2_5_NO_TRUE_BRANCH_IN_GRID` | 1 |
 
-*...and 62 more.*
+*...and 83 more.*
 
 ## Chronology
 
 | date | experiment | branch | result | figs | reading |
 |---|---|---|---|---:|---|
-| 2026-06-19 | [[CORRECTED_PHYSICS_JAX_SCOUT_20260619_001030]] | [[Branch - Validation - Index\|infra]] | `-` | 3 | ⬜ |
-| 2026-06-19 | [[CORRECTED_PHYSICS_JAX_SCOUT_20260619_005700]] | [[Branch - Validation - Index\|infra]] | `-` | 4 | ⬜ |
+| 2026-06-19 | [[CORRECTED_PHYSICS_JAX_SCOUT_20260619_000932]] | [[Branch - Validation - Index\|infra]] | `-` | 2 | ⬜ |
+| 2026-06-19 | [[CORRECTED_PHYSICS_JAX_SCOUT_20260619_001030]] | [[Branch - Validation - Index\|infra]] | `-` | 4 | ⬜ |
+| 2026-06-19 | [[CORRECTED_PHYSICS_JAX_SCOUT_20260619_005639]] | [[Branch - Validation - Index\|infra]] | `-` | 2 | ⬜ |
+| 2026-06-19 | [[CORRECTED_PHYSICS_JAX_SCOUT_20260619_005700]] | [[Branch - Validation - Index\|infra]] | `-` | 5 | ⬜ |
 | 2026-06-19 | [[STABLE_COLLAPSE_multiseed_20260619_132254]] | [[Branch - Stability - Index\|stability]] | `-` | 1 | ⬜ |
-| 2026-06-21 | [[SUBSTRATE_HUNT_20260621_161557]] | [[Branch - Stability - Index\|stability]] | `-` | 48 | ⬜ |
-| 2026-06-22 | [[CORE_BASIN_20260622_023759]] | [[Branch - Stability - Index\|stability]] | `-` | 6 | ⬜ |
+| 2026-06-21 | [[SUBSTRATE_HUNT_20260621_161557]] | [[Branch - Stability - Index\|stability]] | `-` | 54 | ⬜ |
+| 2026-06-22 | [[CORE_BASIN_20260622_023759]] | [[Branch - Stability - Index\|stability]] | `-` | 7 | ⬜ |
 | 2026-06-22 | [[CORE_BASIN_CALIB_20260622_022504]] | [[Branch - Stability - Index\|stability]] | `-` | 1 | ⬜ |
 | 2026-06-22 | [[CORE_BASIN_REFINE_20260622_095451]] | [[Branch - Stability - Index\|stability]] | `-` | 2 | ⬜ |
 | 2026-06-22 | [[CORE_SAT_CALIB_20260622_185337]] | [[Branch - Stability - Index\|stability]] | `-` | 1 | ⬜ |
 | 2026-06-22 | [[CORE_SAT_CALIB_20260622_185907]] | [[Branch - Stability - Index\|stability]] | `-` | 1 | ⬜ |
 | 2026-06-22 | [[CORE_SAT_PILOT_20260622_190340]] | [[Branch - Stability - Index\|stability]] | `-` | 7 | ⬜ |
+| 2026-06-23 | [[CORE_SAT_COLLAPSE_DIAG_20260623_160000]] | [[Branch - Stability - Index\|stability]] | `-` | 32 | ⬜ |
+| 2026-06-23 | [[CORE_SAT_HIGH_MASS_COMPARE_20260623_170000]] | [[Branch - Stability - Index\|stability]] | `-` | 6 | ⬜ |
 | 2026-06-23 | [[CORE_SAT_HUNT_20260623_004605]] | [[Branch - Stability - Index\|stability]] | `-` | 7 | ⬜ |
 | 2026-06-23 | [[CORE_SAT_HUNT_20260623_113318]] | [[Branch - Stability - Index\|stability]] | `-` | 1 | ⬜ |
 | 2026-06-23 | [[CORE_SAT_HUNT_20260623_120758]] | [[Branch - Stability - Index\|stability]] | `-` | 1 | ⬜ |
@@ -99,7 +103,10 @@ Every catalogued run in **chronological order**: what was run, what came out, an
 | 2026-06-23 | [[CORE_SAT_HUNT_20260623_173417]] | [[Branch - Stability - Index\|stability]] | `-` | 1 | ⬜ |
 | 2026-06-23 | [[CORE_SAT_HUNT_20260623_174215]] | [[Branch - Stability - Index\|stability]] | `-` | 1 | ⬜ |
 | 2026-06-23 | [[CORE_SAT_HUNT_20260623_175018]] | [[Branch - Stability - Index\|stability]] | `-` | 1 | ⬜ |
-| 2026-06-23 | [[CORE_SAT_TRACE_COMPARE_20260623_185450]] | [[Branch - Stability - Index\|stability]] | `-` | 6 | ⬜ |
+| 2026-06-23 | [[CORE_SAT_MASS_THRESHOLD_N96_20260623_202328]] | [[Branch - Stability - Index\|stability]] | `-` | 11 | ⬜ |
+| 2026-06-23 | [[CORE_SAT_MASS_THRESHOLD_N96_SCALED_20260623_222546]] | [[Branch - Stability - Index\|stability]] | `-` | 11 | ⬜ |
+| 2026-06-23 | [[CORE_SAT_TRACE_COMPARE_20260623_185302]] | [[Branch - Stability - Index\|stability]] | `-` | 1 | ⬜ |
+| 2026-06-23 | [[CORE_SAT_TRACE_COMPARE_20260623_185450]] | [[Branch - Stability - Index\|stability]] | `-` | 10 | ⬜ |
 | 2026-06-24 | [[CORE_SAT_HUNT_20260624_093948]] | [[Branch - Stability - Index\|stability]] | `-` | 1 | ⬜ |
 | 2026-06-24 | [[CORE_SAT_HUNT_20260624_094432]] | [[Branch - Stability - Index\|stability]] | `-` | 1 | ⬜ |
 | 2026-06-24 | [[CORE_SAT_HUNT_20260624_100311]] | [[Branch - Stability - Index\|stability]] | `-` | 1 | ⬜ |
@@ -119,21 +126,31 @@ Every catalogued run in **chronological order**: what was run, what came out, an
 | 2026-06-24 | [[CORE_SAT_HUNT_20260624_142152]] | [[Branch - Stability - Index\|stability]] | `-` | 1 | ⬜ |
 | 2026-06-24 | [[CORE_SAT_HUNT_20260624_144135]] | [[Branch - Stability - Index\|stability]] | `-` | 1 | ⬜ |
 | 2026-06-24 | [[CORE_SAT_HUNT_20260624_150101]] | [[Branch - Stability - Index\|stability]] | `-` | 1 | ⬜ |
-| 2026-06-24 | [[CORE_SAT_HUNT_20260624_152029]] | [[Branch - Stability - Index\|stability]] | `-` | 1 | ⬜ |
-| 2026-06-24 | [[CORE_SAT_THRESHOLD_BRANCH_ROBUSTNESS_20260624_001934]] | [[Branch - Stability - Index\|stability]] | `-` | 6 | ⬜ |
-| 2026-06-24 | [[PHASE_C_VISUAL_ANALYSIS_20260624_161650]] | [[Branch - Stability - Index\|stability]] | `-` | 42 | ⬜ |
+| 2026-06-24 | [[CORE_SAT_HUNT_20260624_152029]] | [[Branch - Stability - Index\|stability]] | `-` | 7 | ⬜ |
+| 2026-06-24 | [[CORE_SAT_THRESHOLD_BRANCH_ROBUSTNESS_20260624_001934]] | [[Branch - Stability - Index\|stability]] | `-` | 80 | ⬜ |
+| 2026-06-24 | [[PHASE_C_OPTION_B_N96_STAGE1_20260624_222203]] | [[Branch - Stability - Index\|stability]] | `-` | 1 | ⬜ |
+| 2026-06-24 | [[PHASE_C_OPTION_B_N96_STAGE1_20260624_223147]] | [[Branch - Stability - Index\|stability]] | `-` | 8 | ⬜ |
+| 2026-06-24 | [[PHASE_C_VISUAL_ANALYSIS_20260624_161650]] | [[Branch - Stability - Index\|stability]] | `-` | 50 | ⬜ |
 | 2026-06-24 | [[PHASE_C_VISUAL_ANALYSIS_V2_20260624_185426]] | [[Branch - Stability - Index\|stability]] | `-` | 36 | ⬜ |
+| 2026-06-25 | [[FEB_BASIN_20260625_122824]] | [[Branch - Stability - Index\|stability]] | `-` | 9 | ⬜ |
+| 2026-06-25 | [[FEB_BASIN_CONFIRM_20260625_154503]] | [[Branch - Stability - Index\|stability]] | `-` | 13 | ⬜ |
 | 2026-06-25 | [[FEB_BASIN_TOPOLOGY_20260625_154619]] | [[Branch - Stability - Index\|stability]] | `-` | 2 | ⬜ |
 | 2026-06-25 | [[PHASE_C_N96_CLOSURE_DYNAMICS_20260625_013018]] | [[Branch - Stability - Index\|stability]] | `-` | 5 | ⬜ |
 | 2026-06-25 | [[PHASE_C_N96_CURRENT_CLOSURE_20260625_001621]] | [[Branch - Stability - Index\|stability]] | `-` | 14 | ⬜ |
-| 2026-06-25 | [[PHASE_C_N96_LONGT_CONTROL_20260625_083731]] | [[Branch - Stability - Index\|stability]] | `-` | 7 | ⬜ |
-| 2026-06-25 | [[PHASE_C_N96_OVERNIGHT_20260625_014313]] | [[Branch - Stability - Index\|stability]] | `PHASE_C_N96_OVERNIGHT_20260625_014313` | 4 | ⬜ |
+| 2026-06-25 | [[PHASE_C_N96_LONGT_CONTROL_20260625_083731]] | [[Branch - Stability - Index\|stability]] | `-` | 12 | ⬜ |
+| 2026-06-25 | [[PHASE_C_N96_OVERNIGHT_20260625_014313]] | [[Branch - Stability - Index\|stability]] | `PHASE_C_N96_OVERNIGHT_20260625_014313` | 32 | ⬜ |
+| 2026-06-25 | [[PHASE_C_OPTION_B_N96_TRACE_20260625_003926]] | [[Branch - Stability - Index\|stability]] | `-` | 8 | ⬜ |
 | 2026-06-25 | [[PHASE_C_STABILITY_GATE_CALIB_20260625_121731]] | [[Branch - Stability - Index\|stability]] | `-` | 1 | ⬜ |
 | 2026-06-26 | [[FEB_BASIN_POSTHOC_VALIDATION_20260626_122835]] | [[Branch - Stability - Index\|stability]] | `-` | 4 | ⬜ |
-| 2026-06-26 | [[FEB_JOINT_BASIN_20260626_224056]] | [[Branch - Stability - Index\|stability]] | `-` | 2 | ⬜ |
+| 2026-06-26 | [[FEB_CENTER_RESOLUTION_N128_20260626_195449]] | [[Branch - Stability - Index\|stability]] | `-` | 2 | ⬜ |
+| 2026-06-26 | [[FEB_JOINT_BASIN_20260626_224056]] | [[Branch - Stability - Index\|stability]] | `-` | 47 | ⬜ |
 | 2026-06-26 | [[FEB_OBSERVABLE_EXTRACTION_20260626_220710]] | [[Branch - Stability - Index\|stability]] | `-` | 2 | ⬜ |
-| 2026-06-26 | [[FEB_PARAM_BASIN_20260626_004039]] | [[Branch - Stability - Index\|stability]] | `-` | 2 | ⬜ |
-| 2026-06-27 | [[FEB_CORE_DELINEATION_T24000_20260627_175050]] | [[Branch - Stability - Index\|stability]] | `-` | 2 | ⬜ |
+| 2026-06-26 | [[FEB_PARAM_BASIN_20260626_004039]] | [[Branch - Stability - Index\|stability]] | `-` | 54 | ⬜ |
+| 2026-06-27 | [[FEB_CORE_DELINEATION_T24000_20260627_175050]] | [[Branch - Stability - Index\|stability]] | `-` | 17 | ⬜ |
+| 2026-06-27 | [[FEB_JOINT_STAGE2_20260627_123235]] | [[Branch - Stability - Index\|stability]] | `-` | 20 | ⬜ |
+| 2026-06-28 | [[FEB_BREATHING_LONGT_T72000_20260628_003032]] | [[Branch - Stability - Index\|stability]] | `-` | 2 | ⬜ |
+| 2026-07-01 | [[FEB_GAIN_LADDER_LONGT_T72000_20260701_175708]] | [[Branch - Stability - Index\|stability]] | `-` | 5 | ⬜ |
+| 2026-07-02 | [[FEB_ASTAR_CONFIRM_20260702_003055]] | [[Branch - Stability - Index\|stability]] | `-` | 8 | ⬜ |
 | 2026-07-03 | [[A5_PROD_20260703_192713]] | [[Branch - Stability - Index\|stability]] | `-` |  | — |
 | 2026-07-04 | [[PHASE_D_C2_2_LOSS_20260704_231230]] | [[Branch - Transport - Index\|transport]] | `C2_INTRINSIC_LOSSY_TRANSPORT` |  | — |
 | 2026-07-04 | [[PHASE_D_C2_CONFIRM_20260704_210543]] | [[Branch - Transport - Index\|transport]] | `C2_NATIVE_SOLITON_FOUND_NO_TRANSPORT` |  | — |
@@ -228,8 +245,8 @@ Every catalogued run in **chronological order**: what was run, what came out, an
 | 2026-07-14 | [[TG_B1_FEEDBACK_GPU_20260714_114249]] | [[Branch - Gravity - Index\|gravity]] | `-` |  | — |
 | 2026-07-14 | [[TG_B1_FEEDBACK_GPU_20260714_115219]] | [[Branch - Gravity - Index\|gravity]] | `-` |  | — |
 | 2026-07-14 | [[TG_B1_FEEDBACK_GPU_20260714_115402]] | [[Branch - Gravity - Index\|gravity]] | `TG_B1_FEEDBACK_GPU_20260714_115402` | 5 | ⬜ |
-| 2026-07-14 | [[TG_SOURCE_SEMANTICS_GPU_20260714_133207]] | [[Branch - Gravity - Index\|gravity]] | `TG_NODE_STATE_LOAD_SOURCE_SUPPORTED` | 5 | ⬜ |
-| 2026-07-14 | [[TG_SOURCE_SEMANTICS_GPU_20260714_133513]] | [[Branch - Gravity - Index\|gravity]] | `TG_NODE_STATE_LOAD_SOURCE_SUPPORTED` | 5 | ⬜ |
+| 2026-07-14 | [[TG_SOURCE_SEMANTICS_GPU_20260714_133207]] | [[Branch - Gravity - Index\|gravity]] | `TG_NODE_STATE_LOAD_SOURCE_SUPPORTED` | 38 | ⬜ |
+| 2026-07-14 | [[TG_SOURCE_SEMANTICS_GPU_20260714_133513]] | [[Branch - Gravity - Index\|gravity]] | `TG_NODE_STATE_LOAD_SOURCE_SUPPORTED` | 38 | ⬜ |
 | 2026-07-15 | [[TG_B1S_BOX_DEPENDENCE_20260715_222213]] | [[Branch - Gravity - Index\|gravity]] | `BOX_DEPENDENCE_PARTIAL__LOCAL_MECHANISM_EXPLAINS_SOME_NOT_ALL` |  | — |
 | 2026-07-15 | [[TG_B1S_D4_D5_CLOSURE_GPU_20260715_003411]] | [[Branch - Gravity - Index\|gravity]] | `-` | 3 | ⬜ |
 | 2026-07-15 | [[TG_B1S_D4_ROWS_GPU_20260715_080446]] | [[Branch - Gravity - Index\|gravity]] | `-` | 1 | ⬜ |
@@ -261,6 +278,10 @@ Every catalogued run in **chronological order**: what was run, what came out, an
 | 2026-08-25 | [[TG_B2_MID_conv_0.05]] | [[Branch - Gravity - Index\|gravity]] | `TG_B2_MIDPLANE_FLUX_INCONCLUSIVE` | 1 | ⬜ |
 | 2026-08-25 | [[TG_B2_MID_conv_0.10]] | [[Branch - Gravity - Index\|gravity]] | `TG_B2_MIDPLANE_FLUX_INCONCLUSIVE` | 1 | ⬜ |
 | 2026-08-25 | [[TG_B2_MID_conv_0.25]] | [[Branch - Gravity - Index\|gravity]] | `TG_B2_MIDPLANE_FLUX_STRESS_TENSOR_INVALID__OFF_ARM_LEDGER_OPEN` | 1 | ⬜ |
+| 2026-08-25 | [[TG_B2_P1A_SMOKE]] | [[Branch - Gravity - Index\|gravity]] | `TG_B2_MIDPLANE_FLUX_INCONCLUSIVE` | 2 | ⬜ |
+| 2026-09-16 | [[CORE_SAT_MASS_THRESHOLD_N96_SCALED_PRELIM_20260623]] | [[Branch - Stability - Index\|stability]] | `-` | 2 | ⬜ |
+| 2026-09-16 | [[CORE_SAT_VALIDATE_BATCH_20260623]] | [[Branch - Stability - Index\|stability]] | `-` | 5 | ⬜ |
+| 2026-09-16 | [[CORE_SAT_VALIDATE_FEB_CONTROL]] | [[Branch - Stability - Index\|stability]] | `-` | 2 | ⬜ |
 
 ---
 

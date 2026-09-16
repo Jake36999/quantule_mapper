@@ -48,8 +48,8 @@ tags: [run, stability, Feb_basin]
 *Auto-derived: the preceding runs in the same family (`Feb-basin`). Correct by hand if the lineage is wrong — edits here survive rebuilds only if you move the link below the Review notes marker.*
 
 - [[FEB_JOINT_BASIN_20260626_224056]] &middot; `2026-06-26`
+- [[FEB_CENTER_RESOLUTION_N128_20260626_195449]] &middot; `2026-06-26`
 - [[FEB_BASIN_POSTHOC_VALIDATION_20260626_122835]] &middot; `2026-06-26`
-- [[FEB_BASIN_TOPOLOGY_20260625_154619]] &middot; `2026-06-25`
 
 ## Associated docs
 

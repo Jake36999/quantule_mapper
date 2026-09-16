@@ -38,9 +38,9 @@ tags: [run, stability, Phase_C]
 
 *Auto-derived: the preceding runs in the same family (`Phase-C`). Correct by hand if the lineage is wrong — edits here survive rebuilds only if you move the link below the Review notes marker.*
 
+- [[PHASE_C_OPTION_B_N96_TRACE_20260625_003926]] &middot; `2026-06-25`
 - [[PHASE_C_N96_OVERNIGHT_20260625_014313]] &middot; `2026-06-25`
 - [[PHASE_C_N96_LONGT_CONTROL_20260625_083731]] &middot; `2026-06-25`
-- [[PHASE_C_N96_CURRENT_CLOSURE_20260625_001621]] &middot; `2026-06-25`
 
 ## Associated docs
 

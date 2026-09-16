@@ -177,8 +177,8 @@ Each closes an item that has been open longer than it should have been, and none
 | # | action | install | notes |
 |---|---|---|---|
 | **S1** | **Phase 1a — perturbative hand derivation.** Linearise `A = 1 + ε_G G`, solve the screened T/G sector for a static source, evaluate `F_R`. | `sympy` | Confirmed by the literature as the only available path. Jakobsen 2013 is the method reference. `A_well_min ≈ 0.99993` means linear response is essentially exact here. |
-| **S2** | **V7 — test whether the acoustic-metric mapping is exact.** Can `c²A` be written as a genuine effective metric? If so, does the force sign follow from the metric gradient? **`A_minus_1` is already captured by the snapshot writer and has never been rendered** (§2a). | none | **Do alongside S1, not after.** Same algebra, and it is the project's only structure-transfer candidate. |
-| **S3** | If S1/S2 are inconclusive → **GAP-4 via `cadabra2`**, **with a Q-ball ansatz** (Derrick rules out static). | `cadabra2` | The Derrick constraint is now a design input, not a surprise. |
+| ~~**S2**~~ | **DONE 2026-09-17.** Mapping is **EXACT** and the metric is *determined*, not fitted. The Gravity-D force law turns out to be **derived** (a geodesic), not a postulate — the project's first structure transfer. The **sign is not** derived: it is restated as "does a load lower the lapse" and lives in the non-variational part of the loop. See [[gravity_maturity/S2_V7_ACOUSTIC_METRIC_RESULTS]]. | none | Also closes **D3** negatively: none of chameleon / symmetron / Vainshtein. |
+| **S3** | **PROMOTED 2026-09-17 — no longer conditional.** GAP-4 via `cadabra2`, with a Q-ball ansatz (Derrick rules out static). S2 showed the wave operator has given everything it has and the sign lives in the non-variational T–G coupling, so making that coupling variational is **the only remaining route**. | `cadabra2` | The Derrick constraint is a design input, not a surprise. |
 | **S4** | Once a reduced ODE exists → integrate with `diffrax`, batched over separations and phases. | `diffrax` | JAX-native; shares the substrate. |
 
 > [!danger] The decision point that governs everything after

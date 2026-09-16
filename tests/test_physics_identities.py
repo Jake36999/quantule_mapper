@@ -325,3 +325,112 @@ def test_kg_dispersion_and_propagator_match_the_analytic_relation():
         # That is the existing (correct) implementation; the warning is noise, not a defect.
         massless = build_kg(16, 8.0, c, 0.0, dt)
     assert abs(float(np.asarray(massless["Sw"]).ravel()[0]) - dt) < 1e-12
+
+
+# -----------------------------------------------------------------------------------
+# The dynamics module, pinned directly.
+#
+# The value tests above all go through `mid.stress_diag`, and the mutation probe showed that is
+# not enough: `A = exp(a_sign * eps_G * G * ...)` is written TWICE, once in `rhs_2n` (the
+# dynamics) and once in `stress_diag` (the observer that watches it). Pinning the observer leaves
+# the dynamics free to change underneath, and the observer cannot report a discrepancy it is not
+# computing from the same source. These pin `rhs_2n` itself.
+# -----------------------------------------------------------------------------------
+
+def _refs():
+    return b1s.refs_array({"reference_energy_max": 1.0, "reference_charge_max": 1.0,
+                           "source_global_norm_S0": 1.0})
+
+
+def test_dynamics_A_coupling_matches_linear_response(grid, cfgv):
+    """The A-mediated part of the force in the DYNAMICS, against a closed-form estimate.
+
+    Turning feedback off removes A entirely, so the difference between the two arms isolates
+    exactly the A-mediated term of `kg_force`. In linear response A = 1 + a*eps*G, so
+
+        delta(kg_force) = c^2 * grad . ((A - 1) grad phi) -> c^2 * a * eps * grad . (G grad phi)
+
+    evaluated here with explicit spectral derivatives. Scaling the coupling by any constant (the
+    `D_eff = D/151` shape) or flipping its polarity breaks this, and neither is visible to any
+    test that only compares the two polarity arms against each other.
+    """
+    st = synthetic_state(grid)
+    phi = st[0]
+    c, eps = BASE["c"], BASE["epsilon_G"]
+    G = st[4]
+
+    def dd(arr, key):
+        return jnp.fft.ifftn(grid[key] * jnp.fft.fftn(arr))
+
+    # c^2 * div( (a*eps*G) grad phi ), all spectral, no exponential anywhere
+    lin = (c * c) * sum(dd((eps * G) * dd(phi, k), k) for k in ("ikx", "iky", "ikz"))
+
+    for a_sign in (+1.0, -1.0):
+        on = b2.rhs_2n(st, cfgv, _refs(), grid, jnp.asarray(FULL, dtype=jnp.float64),
+                       jnp.asarray(a_sign))[1]
+        off = b2.rhs_2n(st, cfgv, _refs(), grid, jnp.asarray(OFF, dtype=jnp.float64),
+                        jnp.asarray(a_sign))[1]
+        got = on - off
+        want = a_sign * lin
+        scale = float(jnp.max(jnp.abs(want)))
+        assert scale > 0.0, "linear-response reference is degenerate; test would be vacuous"
+        err = float(jnp.max(jnp.abs(got - want))) / scale
+        assert err < 2e-2, ("dynamics A-coupling deviates from linear response by %.3g "
+                            "(a_sign=%+.0f)" % (err, a_sign))
+
+
+def test_free_kg_force_matches_the_closed_form_operator(grid):
+    """With the self-interaction switched off, the KG force is `c^2 lap(phi) - m^2 phi`.
+
+    That is the Klein-Gordon equation, not a second implementation of it, so it pins both terms
+    including the SIGN of the mass term -- which charge conservation and the finiteness canary
+    both survive.
+    """
+    free = dict(BASE)
+    free.update(a=0.0, s=0.0, f=0.0)
+    cfg_free = b1s.cfg_array(free)
+    st = synthetic_state(grid)
+    phi = st[0]
+    c, m = BASE["c"], BASE["m"]
+    # the grid dict carries ikx/iky/ikz but not k_sq, so build the Laplacian from them:
+    # (ik)^2 summed over axes is exactly -k^2.
+    lap = sum(jnp.fft.ifftn(grid[k] ** 2 * jnp.fft.fftn(phi)) for k in ("ikx", "iky", "ikz"))
+    want = c * c * lap - m * m * phi
+    got = b2.rhs_2n(st, cfg_free, _refs(), grid, jnp.asarray(OFF, dtype=jnp.float64),
+                    jnp.asarray(1.0))[1]
+    scale = float(jnp.max(jnp.abs(want)))
+    assert float(jnp.max(jnp.abs(got - want))) < 1e-10 * scale
+
+
+def test_T_G_coupling_is_reciprocal(grid, cfgv):
+    """The T and G equations must carry the SAME coupling coefficient, or the pair is not
+    derivable from a potential.
+
+    `VT_t` contains `-kappa * G` and `VG_t` contains `-kappa * T`: both from the single term
+    `kappa*T*G`, which is why the coefficients match. Flipping one of them leaves a system that
+    still conserves U(1) charge and still stays finite -- so every existing dynamics test passes
+    -- while no longer coming from any potential at all.
+
+    Measured by finite difference, so it reads the coefficients out of the code rather than
+    restating them.
+    """
+    st = list(synthetic_state(grid))
+    fl = jnp.asarray(FULL, dtype=jnp.float64)
+    h = 1e-4
+    base = b2.rhs_2n(tuple(st), cfgv, _refs(), grid, fl, jnp.asarray(1.0))
+
+    bumped_G = list(st)
+    bumped_G[4] = st[4] + h
+    dVT_dG = float(jnp.mean(
+        b2.rhs_2n(tuple(bumped_G), cfgv, _refs(), grid, fl, jnp.asarray(1.0))[3] - base[3]) / h)
+
+    bumped_T = list(st)
+    bumped_T[2] = st[2] + h
+    dVG_dT = float(jnp.mean(
+        b2.rhs_2n(tuple(bumped_T), cfgv, _refs(), grid, fl, jnp.asarray(1.0))[5] - base[5]) / h)
+
+    kappa = BASE["kappa_TG"]
+    assert abs(dVT_dG - dVG_dT) < 1e-6 * abs(kappa), (
+        "T<-G coefficient %.6f != G<-T coefficient %.6f: the coupling is not reciprocal and the "
+        "pair does not come from a potential" % (dVT_dG, dVG_dT))
+    assert abs(dVT_dG + kappa) < 1e-5, "coupling coefficient is not -kappa (got %.6f)" % dVT_dG

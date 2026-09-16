@@ -112,7 +112,7 @@ def draw_phase(ax, arr, name):
     return im
 
 
-def find_centroids(arr, *, max_nodes=6, rel_thresh=0.55):
+def find_centroids(arr, *, max_nodes=6, rel_thresh=0.55, max_blobs=8):
     """HUD item 6.3 — node centroids via a STANDARD detector, not a bespoke peak-tracker.
 
     Why this specific choice. C2.8b was caused by a hand-rolled peak-tracker that failed when two
@@ -142,12 +142,27 @@ def find_centroids(arr, *, max_nodes=6, rel_thresh=0.55):
     peak = float(d.max())
     if not np.isfinite(peak) or peak <= 0:
         return []
+    # A speckle field has no nodes, so naming six of its specks is a lie the overlay must not
+    # tell. Discriminator, measured on the corpus rather than guessed: fragment the
+    # above-threshold mask and count components. A localised core gives 1-3; noise gives 45-67.
+    try:
+        from scipy import ndimage  # noqa: PLC0415
+    except ImportError:            # narrow on purpose: a blanket except here once hid a NameError
+        ndimage = None
+    blobs = 1 if ndimage is None else int(ndimage.label(d >= rel_thresh * peak)[1])
+    if blobs > max_blobs:
+        return []
     try:
         # min_distance must reflect the CORE scale, not the grid scale. Too small and a
         # flat-topped overlapping pair reports phantom peaks on its own plateau -- which is the
         # C2.8b failure reproduced in the detector meant to reveal it.
+        #
+        # exclude_border=False is REQUIRED. The default excludes a min_distance-wide margin, so a
+        # node that has drifted near the boundary silently vanishes from the overlay -- and a node
+        # approaching the boundary is exactly when you most want to see it.
         pk = peak_local_max(d, min_distance=max(3, d.shape[0] // 8),
-                            threshold_abs=rel_thresh * peak, num_peaks=max_nodes)
+                            threshold_abs=rel_thresh * peak, num_peaks=max_nodes,
+                            exclude_border=False)
     except Exception:
         return []
     return [(int(r), int(c), float(d[r, c] / peak)) for r, c in pk]

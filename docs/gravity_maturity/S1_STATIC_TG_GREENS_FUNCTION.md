@@ -98,6 +98,40 @@ Combining with [[S2_V7_ACOUSTIC_METRIC_RESULTS|S2]], the whole chain is now acco
 > that the sign was hiding somewhere else in the chain, and it confirms S2's conclusion that the
 > only route is **S3 — make the T–G coupling variational**.
 
+## 3a. Verified against the code, exactly — and it corrects a recorded number
+
+`gravity_TG_B2_static_force.static_G` implements
+
+```python
+D  = (cT**2 * k2 + omega_T**2) * (cG**2 * k2 + omega_G**2) - kappa_TG**2
+Gk = -kappa_TG * alpha_T * Sk / D
+```
+
+which is **term for term** the $\hat G(k)$ derived in §1. The derivation is not merely consistent with
+the implementation; it is the implementation.
+
+That makes one recorded number checkable. [[../runs/TG_B2_FARFIELD_20260822_205537]] reports
+`kernel_screening_length = 0.9221`, obtained by fitting $\ln|G(r)|$ over $r\in(3,\,0.42L)$ on a
+solved Q-ball source. Recomputing it with the real source reproduces **0.9221 to four decimals**, and
+pushing the fit band outward shows what it is made of:
+
+| fit band | $\lambda$ |
+|---|---:|
+| $r\in(2,11.76)$ | 0.9275 |
+| $r\in(3,11.76)$ | **0.9221** ← the recorded value |
+| $r\in(5,11.76)$ | 0.9137 |
+| $r\in(7,11.00)$ | 0.9099 |
+
+> [!warning] 0.9221 is not the mediator's range, and should not be read as one
+> The kernel has **two exact ranges, 0.8754 and 0.4838**. The recorded 0.9221 is a *single*-exponential
+> fit to a *two*-scale kernel convolved with an *extended* source, over a finite band — it drifts with
+> the band and never reaches the pole. It sits ~4% above 0.8754 because the Q-ball's own tail (decay
+> length 1.88 for the energy-like source, against the mediator's 0.875) is still contributing at these
+> radii.
+>
+> The number is reproducible and useful as an effective length. It is not a constant of the model,
+> and the constants of the model are now known exactly.
+
 ## 4. A parameter-free prediction that is checkable now
 
 With $G$ a two-scale screened field and $F_R = -c^2 a_\text{sign}\varepsilon_G\int_{x>0}(\partial_x G)|\nabla\phi|^2dV$

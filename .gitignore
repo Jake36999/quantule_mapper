@@ -103,3 +103,8 @@ docs/.trash/
 #   python tools/render_fields.py --all && python tools/build_run_catalogue.py
 # The 204 figures already tracked before this point stay tracked; revisit as a set later.
 docs/runs/_figures/
+
+# Generated manifest index (2026-09-16): regenerated in full on every catalogue build, so each
+# rebuild added another ~2.6 MB to history permanently. Rebuild it with:
+#   python tools/build_results_index.py
+docs/runs/_index.sqlite

@@ -259,6 +259,13 @@ It reports **that** later work exists, never **why**. The semantic half above ca
 
 Two build artifacts, both regenerable from disk, neither a service.
 
+> [!warning] Neither is committed, and that is deliberate
+> `_index.sqlite` is regenerated **in full** on every catalogue build, so each rebuild wrote a
+> fresh ~2.6 MB binary into history — eight copies had accumulated before this was noticed.
+> It is gitignored as of 2026-09-16 and rebuilt on demand. Treat it as a **cache of the vault**,
+> never as a source: if the index and the notes disagree, the notes are right and the index is
+> stale. The same reasoning applies to `docs/runs/_figures/` (the rendered montages, 36.5 MB).
+
 ### `docs/runs/_index.sqlite` — the manifest index
 
 A queryable projection of the vault: 183 runs, 576 documents, 404 artifacts, 6,187 edges.

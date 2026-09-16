@@ -61,6 +61,7 @@ Two of the three IRER simulation sectors are answered; the third is scoped and p
 | I2 | There is a separate "CuPy box" for production | FALSIFIED | CuPy runs on this PC via repo `.venv` (cupy 14.0.1, GTX 1080); PATH-python's cupy was just ABI-broken |
 | I3 | CuPy (FP64) and jax_scout mirror share the identical operator | CONFIRMED **(re-verified 2026-09-16)** | H4/A1 parity rel-L2 1.7e-12; C1 parity byte-exact. **Re-run 2026-09-16 against current code: rel-L2 1.735e-12, max\|Δ\| 4.58e-13, `PARITY_WITHIN_TOL` — reproduces the original to two significant figures across 38 commits to `jax_scout/`.** Procedure and artifact: `docs/SOLVER_PARITY_ARTIFACT.md`, `tools/solver_parity_check.py`. |
 | I4 | Production stability_metrics reach the provenance/validation path | CONFIRMED | A3/A4/A4b wiring accepted |
+| I5 | The physics-identity CI guards the C2.6 / C2.8b / C3 failure classes | **FALSIFIED then REPAIRED (2026-09-16)** | `tools/mutation_probe.py`: 10 mutations shaped like the ledger's own bugs. **7 of 10 survived**, incl. all three sign flips and the `D_eff = D/151` shape. The suite pinned symmetries (off-is-off, antisymmetry, charge conservation, finiteness) and never a value, and every survivor preserved a symmetry. Two structural causes: no test ever set `geom_en = 0`, and `A` is written twice (dynamics + observer) so pinning the observer left the dynamics free. Six value-pinning tests → **10/10 caught**. `docs/gravity_maturity/H3_MUTATION_PROBE_RESULTS.md` |
 
 ## 3. Phase C — stability sector (CLOSED)
 | # | hypothesis | verdict | evidence |

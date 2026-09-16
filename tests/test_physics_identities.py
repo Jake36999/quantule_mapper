@@ -200,3 +200,128 @@ def test_evolution_stays_finite(grid, cfgv):
                       jnp.asarray(1.0), 50)
     for field in ev:
         assert bool(jnp.all(jnp.isfinite(field)))
+
+
+# ===================================================================================
+# Value-pinning identities (added 2026-09-16, plan item H3)
+#
+# WHY THESE EXIST. tools/mutation_probe.py injected ten mutations shaped like the bugs in this
+# project's own integrity ledger, and SEVEN survived the suite above -- including a global flip of
+# the coupling polarity, in a sector whose single largest open problem IS a sign.
+#
+# The cause was structural, not an oversight. Every test above pins a SYMMETRY: off-is-off,
+# antisymmetry in a_sign, charge conservation, finiteness. A symmetry is invariant under exactly
+# the mutations that matter here -- flipping a_sign globally swaps the well and hill arms, so
+# "well * hill < 0" still holds; scaling the coupling by 1/151 preserves antisymmetry and charge
+# conservation both.
+#
+# These tests pin VALUES against independently-derived expressions, which is the missing half.
+# ===================================================================================
+
+GEOM_OFF = [1.0, 1.0, 0.0, 1.0]   # geometry disabled while feedback stays ON -- the C2.6 shape
+
+
+def test_positive_polarity_is_a_well_and_negative_is_a_hill(grid, cfgv):
+    """The ABSOLUTE polarity, which the antisymmetry test above cannot see.
+
+    `A = exp(a_sign * eps_G * G)`, and the module's whole naming rests on which way that bends:
+    a_sign=+1 is the A-WELL (theory-faithful, predicts attraction), a_sign=-1 the A-HILL (the
+    frozen TG-B1S polarity, the sign control). A well has A <= 1 everywhere and a hill A >= 1,
+    so `A_max == 1` and `A_min == 1` are exact statements about which one we built.
+
+    Flipping the coupling globally swaps these and is caught here, where
+    `test_force_reverses_sign_with_coupling_polarity` passes regardless because it only ever
+    compares the two arms against each other.
+    """
+    st = synthetic_state(grid)
+    well = mid.stress_diag(st, cfgv, grid, jnp.asarray(+1.0), jnp.asarray(1.0))
+    hill = mid.stress_diag(st, cfgv, grid, jnp.asarray(-1.0), jnp.asarray(1.0))
+    # `<= 1 + tiny` rather than `== 1`: the synthetic G is non-positive but its maximum is a few
+    # times 1e-13 below zero, so A_max is 1 - 3e-13 rather than exactly 1. The physical claim is
+    # one-sidedness, and the depth assertions below are what make it non-vacuous.
+    tiny = 1e-9
+    assert float(well["A_max"]) <= 1.0 + tiny, "a_sign=+1 must be a WELL: A never exceeds 1"
+    assert float(well["A_min"]) < 1.0 - tiny, "a_sign=+1 must actually dip below 1"
+    assert float(hill["A_min"]) >= 1.0 - tiny, "a_sign=-1 must be a HILL: A never falls below 1"
+    assert float(hill["A_max"]) > 1.0 + tiny, "a_sign=-1 must actually rise above 1"
+
+
+def test_geometry_flag_off_keeps_polarity_out_of_the_dynamics(grid, cfgv):
+    """The C2.6 shape proper: a flag that does not take effect.
+
+    Every other test that varies the flags uses OFF = [1,1,1,0], which disables FEEDBACK and
+    leaves the geometry flag at 1 -- so nothing above ever exercises geom_en = 0, and dropping it
+    from the A expression changes no result in the suite. C2.6 was precisely a geometry switch
+    that did not switch, and it cost five campaigns of retracted verdicts.
+    """
+    st = synthetic_state(grid)
+    refsv = b1s.refs_array({"reference_energy_max": 1.0, "reference_charge_max": 1.0,
+                            "source_global_norm_S0": 1.0})
+    fl = jnp.asarray(GEOM_OFF, dtype=jnp.float64)
+    r_p = b2.rhs_2n(st, cfgv, refsv, grid, fl, jnp.asarray(+1.0))
+    r_m = b2.rhs_2n(st, cfgv, refsv, grid, fl, jnp.asarray(-1.0))
+    for x, y in zip(r_p, r_m):
+        assert float(jnp.max(jnp.abs(x - y))) == 0.0, (
+            "geometry is off, so the coupling polarity cannot reach the dynamics")
+    # and with geometry off the G sector must not evolve at all
+    _phi_t, _pi_t, _T_t, _VT_t, G_t, VG_t = r_p
+    assert float(jnp.max(jnp.abs(G_t))) == 0.0
+    assert float(jnp.max(jnp.abs(VG_t))) == 0.0
+
+
+def test_force_matches_an_independent_linear_response_estimate(grid, cfgv):
+    """Pins the MAGNITUDE, which nothing above does.
+
+    `A_well_min ~ 0.99993` means this sector is deep in linear response, so
+    `A = exp(a*eps*G) = 1 + a*eps*G` to five digits and therefore
+
+        F_R = -c^2 ∫_{x>0} (dA/dx) |grad phi|^2 dV  ->  -c^2 * a * eps * ∫_{x>0} (dG/dx) |grad phi|^2 dV
+
+    The right-hand side contains no exponential and is evaluated here from the raw fields, so it
+    is an independent expression rather than a re-run of the same code -- which is what the design
+    rule for this file requires. Agreement is ~0.03%, the size of the neglected quadratic term.
+
+    Any constant rescaling of the coupling (the C2.6 `D_eff = D/151` shape) breaks this by that
+    same constant, and a polarity flip breaks the sign.
+    """
+    st = synthetic_state(grid)
+    phi, _pi, _T, _VT, G, _VG = st
+    c, eps = BASE["c"], BASE["epsilon_G"]
+    dGdx = jnp.real(jnp.fft.ifftn(grid["ikx"] * jnp.fft.fftn(G + 0j)))
+    grad2 = sum(jnp.abs(jnp.fft.ifftn(grid[k] * jnp.fft.fftn(phi))) ** 2
+                for k in ("ikx", "iky", "ikz"))
+    half = grid["X"] > 0
+    for a_sign in (+1.0, -1.0):
+        got = float(mid.stress_diag(st, cfgv, grid, jnp.asarray(a_sign),
+                                    jnp.asarray(1.0))["F_R"])
+        want = float(-c * c * a_sign * eps
+                     * jnp.sum(jnp.where(half, dGdx * grad2, 0.0)) * grid["dx"] ** 3)
+        assert got * want > 0.0, "linear-response estimate disagrees in SIGN"
+        assert abs(got - want) <= 1e-2 * abs(want), (
+            "F_R=%.6e vs linear response %.6e" % (got, want))
+
+
+def test_kg_dispersion_and_propagator_match_the_analytic_relation():
+    """`build_kg` is used by every harness here and was pinned by nothing.
+
+    The Klein-Gordon dispersion is omega_k^2 = c^2 k^2 + m^2 and the exact free propagator over one
+    step is cos(omega dt) -- both closed-form, so this is a statement of the physics rather than a
+    second implementation of it. Dropping the mass term or detuning the step passes everything
+    above.
+    """
+    c, m, dt = 0.5477, 1.0, DT
+    kg = build_kg(16, 8.0, c, m, dt)
+    w = np.asarray(kg["w"])
+    k_sq = np.asarray(kg["k_sq"])
+    assert np.max(np.abs(w ** 2 - (c * c * k_sq + m * m))) < 1e-12, "omega^2 != c^2 k^2 + m^2"
+    assert np.max(np.abs(np.asarray(kg["C"]) - np.cos(w * dt))) < 1e-14, "C != cos(omega dt)"
+    assert np.max(np.abs(np.asarray(kg["wS"]) - w * np.sin(w * dt))) < 1e-14
+    assert np.max(np.abs(np.asarray(kg["Sw"]) - np.sin(w * dt) / w)) < 1e-14
+    # The w -> 0 limit of sin(w dt)/w is dt, and getting it wrong is a silent zero-mode bug.
+    # It needs m = 0 to reach: at k = 0 with m = 1 the frequency is 1, not 0, which is why the
+    # k=0 entry of the massive grid is sin(dt)/1 and not dt.
+    with np.errstate(invalid="ignore", divide="ignore"):
+        # np.where evaluates both branches, so the k=0 entry computes 0/0 before being discarded.
+        # That is the existing (correct) implementation; the warning is noise, not a defect.
+        massless = build_kg(16, 8.0, c, 0.0, dt)
+    assert abs(float(np.asarray(massless["Sw"]).ravel()[0]) - dt) < 1e-12

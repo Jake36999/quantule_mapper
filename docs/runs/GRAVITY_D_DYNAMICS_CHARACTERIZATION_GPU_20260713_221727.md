@@ -206,10 +206,57 @@ The confirmed divergence-form spatial operator is best interpreted as a finite-w
 
 ### Reading - Claude
 
-- **Observation:**
-- **Reading:**
-- **Confidence:**
-- **What would change my mind:**
+*(filled 2026-09-17, plan item C2. Read from the run's CSV tables and `REDUCED_MODEL_SIGN_ERROR_ANALYSIS.md`
+rather than primarily from the plots -- the substance here is tabular. Flagged so the reading is not
+taken as a visual review it is not.)*
+
+- **Observation:** The run's own sign analysis reports **6 sign errors in 193 non-flat atlas rows**
+  for the coarse-grained reduced model `F_cg = c * (-K_grad * grad_N_at_COM)`. They are not
+  scattered: every one is a **far-tail or near-null** case, concentrated in compact-width
+  super-Gaussian far-field rows plus one shell far-exterior and one Gaussian far-tail row. The exact
+  forces involved are tiny (2.4e-05 down to 1.5e-09) and in several rows the predicted magnitude is
+  *smaller* than the exact one by one to two orders (e.g. shell far-exterior: exact 7.61e-07,
+  predicted -2.27e-08).
+
+- **Reading:** This is a **locality failure, not a sign ambiguity**, and today's
+  [[../gravity_maturity/S2_V7_ACOUSTIC_METRIC_RESULTS|S2]] result says why in structural terms.
+
+  S2 showed the exact body force is the **geodesic** of the reconstructed acoustic metric, with
+  acceleration `-(3/4) grad A / A` -- a *pointwise* law. The reduced model evaluates exactly that
+  kind of local gradient, but **at the centre of mass**, while the exact force is an *integral over
+  the extended body* weighted by `|grad phi|^2`. Wherever the body is wide compared with the scale
+  over which the gradient varies, sampling the gradient at one point is not the same as integrating
+  it -- and in the far tail the integrand changes sign across the body, so the COM sample can land
+  on the wrong side.
+
+  That predicts exactly the observed pattern: failures confined to far-field and weak-gradient rows,
+  worst for **compact-width super-Gaussian** sources, which have the sharpest profile edges and so
+  the most gradient variation across the body.
+
+  It also means the reduced model is not rescuable by fixing a coefficient. The correct local law
+  would need the weighted centroid of `|grad phi|^2`, not the COM of the density -- and
+  [[../gravity_maturity/TG_P1A_ENERGY_OBSERVABLE|P1-a]] already established those differ, since the
+  gradient term is only **4.5%** of the node's energy and its fraction varies 29% non-monotonically
+  across the mass axis.
+
+  The verdict `D_REDUCED_MODEL_PARTIAL` and the instruction "do not promote the local coarse-grained
+  law as universal" are both correct and should stand.
+
+- **Confidence:** High that the failures are a locality/weighting artefact rather than a sign
+  ambiguity in the physics -- the pattern (far-tail only, sharp-edged sources worst) is what that
+  explanation predicts, and it was recorded before S2 gave the reason. Medium on the specific claim
+  that a `|grad phi|^2`-weighted centroid would fix it; that is a prediction, not a measurement.
+
+- **What would change my mind:** Sign errors appearing in **resolved-gradient, near-field** rows,
+  which locality cannot explain. Or a demonstration that re-deriving `F_cg` about the
+  `|grad phi|^2`-weighted centroid leaves the 6 failures intact -- that would mean the discrepancy
+  is not about where the gradient is sampled.
+
+> [!note] Cheap follow-up this suggests
+> Recompute the 6 failing rows with the gradient sampled at the `|grad phi|^2`-weighted centroid
+> instead of the density COM. The atlas already exists, so this is a re-analysis with no new
+> simulation -- the same shape as [[../gravity_maturity/TG_P1A_ENERGY_OBSERVABLE|P1-a]] and the
+> [[../gravity_maturity/P1B_FROZEN_REFERENCE_REANALYSIS|P1-b reanalysis]].
 
 ### Reading - Jake
 

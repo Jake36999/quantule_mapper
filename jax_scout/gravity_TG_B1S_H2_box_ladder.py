@@ -180,13 +180,46 @@ def main():
         # a straight power law in L is the falsifiable form: |delta_omega| ~ L**p
         p = float(np.polyfit(np.log(Ls), np.log(ds), 1)[0])
         shrink = float(ds[-1] / ds[0])
-        if shrink < 0.5 and p < -0.5:
+
+        # "It shrank a lot" does NOT mean "it goes to zero". The first version of this test used
+        # only shrink and a log-log slope, and called a 3.4x decrease a finite-box effect when the
+        # sequence was in fact levelling off at ~30% of its starting value. Decaying TO ZERO and
+        # decaying TO A NON-ZERO ASYMPTOTE look identical to a power-law slope and are opposite
+        # physics: the first makes the drift an artefact, the second makes it real.
+        #
+        # So fit both and let the residuals decide.
+        # Fit |d| = a + b*exp(-c L) DETERMINISTICALLY. A seeded optimiser is the wrong tool here:
+        # three parameters against four points, and curve_fit with a plausible-looking p0 landed in
+        # a local minimum giving c = 37.6 and a 58% residual, against 0.9% for the true optimum.
+        # For FIXED c the model is linear in (a, b), so scan c and solve (a, b) exactly. One
+        # dimension, no starting guess, no local minima.
+        asym, asym_rel_rms = None, None
+        if len(good) >= 4:
+            best = None
+            for c_try in np.linspace(0.02, 5.0, 20000):
+                X = np.column_stack([np.ones_like(Ls), np.exp(-c_try * Ls)])
+                coef, *_ = np.linalg.lstsq(X, ds, rcond=None)
+                rr = float(np.sqrt(np.mean((ds - X @ coef) ** 2)) / np.mean(ds))
+                if best is None or rr < best[0]:
+                    best = (rr, c_try, float(coef[0]), float(coef[1]))
+            asym_rel_rms, c_fit, asym, b_fit = best
+            extra_fit = {"asymptote_decay_rate_c": c_fit, "asymptote_b": b_fit}
+        pure = ds - np.exp(np.polyval(np.polyfit(np.log(Ls), np.log(ds), 1), np.log(Ls)))
+        pure_rel_rms = float(np.sqrt(np.mean(pure ** 2)) / np.mean(ds))
+
+        if asym is not None and asym_rel_rms < 0.5 * pure_rel_rms and asym > 0.05 * ds[0]:
+            verdict = "H2_DRIFT_CONVERGES_TO_A_NONZERO_ASYMPTOTE__PARTLY_BOX_PARTLY_REAL"
+        elif shrink < 0.5 and p < -0.5:
             verdict = "H2_DRIFT_IS_FINITE_BOX_EFFECT"
         elif 0.8 < shrink < 1.25:
             verdict = "H2_DRIFT_BOX_INDEPENDENT__NOT_A_BOUNDARY_EFFECT"
         else:
             verdict = "H2_DRIFT_BOX_DEPENDENT_NO_CLEAN_POWER_LAW"
-        extra = {"power_law_exponent_in_L": p, "shrink_factor_largest_over_smallest": shrink}
+        extra = {"power_law_exponent_in_L": p, "shrink_factor_largest_over_smallest": shrink,
+                 "asymptote_L_to_inf": asym, "asymptote_fit_rel_rms": asym_rel_rms,
+                 "decay_to_zero_fit_rel_rms": pure_rel_rms,
+                 "asymptote_fraction_of_smallest_box": (asym / ds[0]) if asym else None}
+        extra.update(locals().get("extra_fit", {}))
     clo.write_json(outdir / "summary.json",
                    dict(verdict=verdict, rows=rows, provenance=flat_stamp(), **extra))
     clo.write_json(outdir / "RUN_COMPLETE.json", {"verdict": verdict, "n_rows": len(rows)})

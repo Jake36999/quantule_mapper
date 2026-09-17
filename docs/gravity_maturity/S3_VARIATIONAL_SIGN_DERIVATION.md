@@ -86,17 +86,41 @@ from it; the coded loop escapes it only by routing $\phi\to G$ through a **separ
 channel** (`α_T·S_state` → T → G), which permits the source polarity to be chosen independently of
 the modulation polarity. **Two independent signs is one more than an action allows.**
 
-## 4. What must actually change — and it is not "add the missing term"
+## 4. What must actually change
 
-> [!danger] Adding the term is not sufficient. The other channel has to go.
+> [!danger] Adding the term is not sufficient for a *clean* derivation -- but it is far from marginal
 > If the `α_T·S_state → T → G` channel is retained alongside the restored variation, then
-> $G = G_\text{variational} + G_\text{coded}$, and the coded part does **not** carry `a_sign`. The
-> freedom returns in proportion to how much of $G$ that channel supplies — and at present it
-> supplies almost all of it: in the test above the coded route produces $G\approx-0.52$ against the
-> variational route's $-4.7\times10^{-3}$, a factor of **~110**.
+> $G = G_\text{variational} + G_\text{coded}$, and the coded part does **not** carry `a_sign`, so
+> residual sign freedom survives in proportion to its share of $G$.
 >
-> To derive the sign, the project must **replace** the state-load channel with the variational
-> coupling, not supplement it.
+> **Measured on solved Q-ball profiles**, using the coupled static system -- a source entering G's
+> equation propagates with $d_T/D$, not $1/d_G$:
+>
+> | `w` | \|G\| coded | \|G\| variational | variational / coded |
+> |---|---:|---:|---:|
+> | 0.945 | 1.108e-03 | 2.802e-03 | **2.53** |
+> | 0.955 | 9.396e-04 | 2.669e-03 | **2.84** |
+> | 0.964 | 8.293e-04 | 2.418e-03 | **2.92** |
+> | 0.972 | 7.685e-04 | 2.041e-03 | **2.66** |
+> | 0.980 | 7.552e-04 | 1.459e-03 | **1.93** |
+>
+> The coded column reproduces the recorded `|G_min|` of the charge-audit rows (8.293e-04 at
+> w = 0.964), so the comparison is anchored to measured data rather than to a toy.
+>
+> **The variational term is the LARGER of the two, by 1.9-2.9x.** Simply adding it makes the loop
+> majority-variational: attraction becomes the dominant behaviour, with roughly a **26-34% residual
+> contamination** from the non-variational channel rather than the flag deciding the outcome.
+>
+> For a derivation with *no* free sign, the state-load channel must still be **replaced**. But the
+> distance to "attraction dominates" is one added term, not a rewrite.
+
+> [!warning] Correction to an earlier figure in this document
+> A first pass put this ratio at **~110x the other way** -- that the variational coupling was
+> negligible and would make an already-tiny effect ~100x tinier. That was wrong in both magnitude
+> and direction. It compared an arbitrarily normalised Gaussian `phi**2` against the real
+> `S_state`, which carries a division by `S0 = 135.686` and by per-configuration peak normalisers,
+> and it used the wrong propagator for a source entering G's equation. A ratio taken from a toy
+> profile is worth nothing when the real source carries normalisers the toy does not.
 
 The deeper reason the loop is not variational is worth stating plainly: **`S_state` is an
 *observable*, not a field-theoretic source.** It is built from energy and charge densities and then
@@ -117,9 +141,10 @@ $\mathcal{L}$.
 **Does not establish:**
 - That the variational model reproduces anything else the project has measured. **This changes the
   equations of motion**, and the modified model has not been simulated.
-- That the effect survives at a useful size. The variational coupling is ~110× weaker here, and the
-  existing effect is already $A-1\approx7\times10^{-5}$. A variational loop plausibly makes an
-  already-tiny effect ~100× tinier.
+- That the effect survives at a useful size -- though here the news is *good*: the variational
+  coupling is **2-3x stronger** than the coded one on real profiles, so a variational loop would
+  make the effect larger rather than smaller. It stays small in absolute terms
+  ($A-1 \approx 7\times10^{-5}$ at present).
 - Anything about nature. Deriving the sign removes the project's worst internal problem; it does not
   supply a discriminating prediction, and falsification condition **F2** is about whether the sector
   is structural, which this addresses, not about evidence.
@@ -139,7 +164,7 @@ $\mathcal{L}$.
   information. **That may be the more important consequence than the sign.**
 - The T field has no variational role in the replacement as analysed. If `α_T·S_state` goes, it is
   worth asking what T is for.
-- The ~110× weakening should be checked properly rather than from one Gaussian.
+- ~~The ~110x weakening should be checked properly rather than from one Gaussian.~~ **Done, and it reversed the conclusion** (§4 correction box).
 
 ## Previous experiments
 

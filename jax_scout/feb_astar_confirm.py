@@ -16,6 +16,18 @@ result three ways:
 e8d6a78ea. Verdict-first, full er(t) saved, resumable (per-cell CSV). Read-only physics.
 WSL2 jax venv:  python jax_scout/feb_astar_confirm.py [--out DIR]
 """
+
+# Harness manifest (docs/research_infrastructure/HARNESS_REGISTRY.md). Read by AST, never imported;
+# descriptive only -- nothing consults it before this script runs.
+HARNESS = {
+    'id': 'feb_astar_confirm',
+    'branch': 'Branch - Stability - Index',
+    'status': 'ACTIVE',
+    'superseded_by': None,
+    'invariants': [],
+    'produces': ['FEB_ASTAR_CONFIRM'],
+    'summary': 'Confirms a*: longer-T, seed-robustness and bracket cells.',
+}
 import os, sys, csv, json, time, argparse
 import numpy as np
 

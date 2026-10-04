@@ -29,15 +29,46 @@ bookkeeping, telemetry or tests.
 
 | date | id | summary | output-changing? | commit |
 |---|---|---|---|---|
-| 2026-10-04 | CL-004 | Telemetry stream (`TelemetryWriter`), live HUD invariants, TG-B1S/B2-midplane wiring | no (observer only) | phase-c |
+| 2026-10-04 | CL-005 | Component-hash provenance; harness manifests + registry; content-level staleness | no (stamp + inert manifests) | phase-d |
+| 2026-10-04 | CL-004 | Telemetry stream (`TelemetryWriter`), live HUD invariants, TG-B1S/B2-midplane wiring | no (observer only) | `2185d9f` |
 | 2026-10-04 | CL-003 | Provenance `steppers`; stale-run view; `--dt`/`--cells` for the a\* harnesses; re-validation driver | no (default paths byte-identical) | `d3d87fd` |
 | 2026-10-04 | CL-002 | Stepper order + MMS gates, stepper mutations, CI extension | no (tests/tooling) | `0419ff9` |
 | 2026-10-02 | CL-001 | ETDRK4: complex-safe contour coefficients + stage-c `N_n` | **YES** | `e270cdc` |
 
 ---
 
+## CL-005 — Component-hash provenance and harness registry (Phase D)
+- **Branch:** `phase-d/provenance-manifest`, developed in a separate worktree (`F:\quantule_mapper_dev`)
+  so the running B4 replay's tree stayed fixed.
+- **Files:**
+  - `jax_scout/provenance.py`: `git_blob_hash`, `component_hashes`; `stamp()` gains
+    `component_hashes` / `dirty_components`; `flat_stamp()` gains `dirty_components` / `n_components`
+  - `tools/stepper_staleness.py`: `blob_contains_fix`, `hash_verdict`, content-first staleness
+  - `docs/registry/COMPONENT_FIXES.json`: `affects_files`
+  - `tools/build_harness_registry.py` (new); `docs/registry/harness_registry.json` and
+    `docs/research_infrastructure/HARNESS_REGISTRY.md` (generated)
+  - `tools/build_results_index.py`: `harnesses` table, `runs.harness` = harness id, `produced_by` edges
+  - `HARNESS = {...}` manifests added to 8 harnesses: `feb_gain_ladder_longt`, `feb_astar_confirm`,
+    `core_saturation_search`, `phase_d_c1_transport`, `phase_d_c2_7_rederivation`,
+    `gravity_TG_B2_midplane_stress_flux`, `gravity_TG_B1S_state_load_feedback_gpu`,
+    `gravity_TG_B1S_H2_box_ladder`
+  - `.github/workflows/harness-manifest.yml` (new)
+  - `tests/test_harness_registry.py` (new); `tests/test_stepper_staleness.py` (git-history skip marker)
+- **Why:** to pin runs to exact file contents and to give harnesses a lifecycle record. See
+  [[PROVENANCE_AND_HARNESS_REGISTRY]].
+- **Output-changing?** **No.** The manifests are inert literals. The stamp adds keys to the summary
+  JSON: `component_hashes` (one entry per imported repo module) and `dirty_components`.
+- **Verified:**
+  - Blob hashes equal `git hash-object`.
+  - 21/21 Phase D and staleness tests pass on Windows. In WSL, 62 pass across identities, order
+    gates, snapshots, registry and staleness, with 6 git-history tests skipped.
+  - The full-suite failure set is unchanged.
+  - Every manifested script passes `compile()`.
+
+---
+
 ## CL-004 — Telemetry stream (Phase C)
-- **Branch:** `phase-c/telemetry`
+- **Commit:** `2185d9f` · branch `phase-c/telemetry`
 - **Files:**
   - `jax_scout/snapshots.py`: `TelemetryWriter`, `read_telemetry`, `invariant_breaches`
   - `tools/hud_monitor.py`: renders `telemetry*.png` per arm and prints breaches with the harness note

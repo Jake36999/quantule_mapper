@@ -39,6 +39,18 @@ Usage (WSL jax_irer venv):
 """
 from __future__ import annotations
 
+# Harness manifest (docs/research_infrastructure/HARNESS_REGISTRY.md). Read by AST, never imported;
+# descriptive only -- nothing consults it before this script runs.
+HARNESS = {
+    'id': 'gravity_TG_B1S_H2_box_ladder',
+    'branch': 'Branch - Gravity - Index',
+    'status': 'ACTIVE',
+    'superseded_by': None,
+    'invariants': [],
+    'produces': ['TG_H2_BOX_LADDER'],
+    'summary': 'H2: is the long-time drift real? dt, dx and box-size convergence ladder.',
+}
+
 import argparse
 import json
 import os

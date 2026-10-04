@@ -154,14 +154,62 @@ def _contains(fix_commit: str, epoch: str):
     return None
 
 
-def staleness(run_id: str, steppers, epoch: str, run_date: str, fix: dict):
-    """-> (status, reason) for one run against one fix, or None if the fix does not apply."""
+@lru_cache(maxsize=None)
+def blob_contains_fix(path: str, blob: str, fix_commit: str):
+    """Did this exact file content come from code that already had the fix?
+
+    Finds the commits that introduced `blob` at `path` (git log --find-object) and asks whether the fix
+    is an ancestor of any of them. True / False, or None when git has never seen the blob (an
+    uncommitted edit) -- which the caller treats as unknown, i.e. stale.
+    """
+    try:
+        r = subprocess.run(["git", "log", "--all", "--format=%H", "--find-object=" + blob, "--", path],
+                           cwd=ROOT, capture_output=True, text=True, timeout=60)
+    except Exception:
+        return None
+    # --find-object lists commits that ADD or REMOVE the blob; keep only those after which the file
+    # holds it (introductions). Otherwise the fix commit itself, which removes the old blob, would
+    # make pre-fix content look "fixed".
+    commits = []
+    for c in (c for c in r.stdout.split() if c):
+        try:
+            q = subprocess.run(["git", "rev-parse", "%s:%s" % (c, path)], cwd=ROOT,
+                               capture_output=True, text=True, timeout=30)
+        except Exception:
+            continue
+        if q.returncode == 0 and q.stdout.strip() == blob:
+            commits.append(c)
+    if not commits:
+        return None
+    return any(_contains(fix_commit, c) for c in commits)
+
+
+def hash_verdict(component_hashes: dict, fix: dict):
+    """Exact staleness from recorded file contents, or None if the run recorded none of the fixed files."""
+    files = [f for f in fix.get("affects_files", []) if f in (component_hashes or {})]
+    if not files:
+        return None
+    verdicts = [blob_contains_fix(f, component_hashes[f], fix["fix_commit"]) for f in files]
+    if all(v is True for v in verdicts):
+        return True
+    return False
+
+
+def staleness(run_id: str, steppers, epoch: str, run_date: str, fix: dict, component_hashes=None):
+    """-> (status, reason) for one run against one fix, or None if the fix does not apply.
+
+    Order of evidence: recorded component hashes of the fixed files (exact, Phase D) > git ancestry of
+    the run's commit > run date."""
     if not set(steppers) & set(fix.get("affects_steppers", [])):
         return None
     if run_id in fix.get("revalidated", {}):
         return "REVALIDATED", "revalidated by %s" % fix["revalidated"][run_id]
     if run_id in fix.get("not_affected", {}):
         return "NOT_AFFECTED", fix["not_affected"][run_id]
+    hv = hash_verdict(component_hashes, fix)
+    if hv is not None:
+        return (("CURRENT", "fixed files' content contains %s (hash)" % fix["fix_commit"]) if hv else
+                ("STALE_PENDING_REVALIDATION", "fixed files' content predates %s (hash)" % fix["fix_commit"]))
     has_fix = None
     if epoch and epoch not in ("pre-clean-slate", "unknown"):
         has_fix = _contains(fix["fix_commit"], epoch)

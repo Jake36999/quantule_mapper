@@ -8,6 +8,7 @@
       "fix_commit": "e270cdc",
       "fix_date": "2026-10-02",
       "affects_steppers": ["ETDRK4", "ETDRK4-cupy"],
+      "affects_files": ["jax_scout/physics.py", "solver/core.py", "solver/kernels.py"],
       "doc": "instrument_integrity/ETDRK4_INTEGRATOR_BUGS_2026-10.md",
       "summary": "Order ~0.6 instead of 4; psi error 8.5% at dt=0.005, T=2 (N=48). Quantitative pre-fix ETDRK4 results need re-validation.",
       "revalidated": {},

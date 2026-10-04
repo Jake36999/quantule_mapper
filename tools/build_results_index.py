@@ -170,7 +170,7 @@ CREATE TABLE runs (
     family      TEXT,
     substrate   TEXT,                  -- ANTI-POLLUTION KEY: which model this run exercises
     branch      TEXT,
-    harness     TEXT,
+    harness     TEXT,                  -- harness id: recorded in provenance, else registry prefix match
     git_commit  TEXT,
     code_epoch  TEXT,                  -- git sha, or 'pre-clean-slate'
     code_epoch_source TEXT,            -- recorded | inferred | unavailable
@@ -192,6 +192,12 @@ CREATE TABLE runs (
 CREATE TABLE component_fixes (
     fix_id TEXT PRIMARY KEY, component TEXT, fix_commit TEXT, fix_date TEXT,
     affects_steppers TEXT, doc TEXT, summary TEXT
+);
+-- Harness registry (docs/registry/harness_registry.json, tools/build_harness_registry.py). Added
+-- 2026-10-04 (IMPLEMENTATION_PLAN_2026-10 D3). Descriptive only.
+CREATE TABLE harnesses (
+    harness_id TEXT PRIMARY KEY, file TEXT, status TEXT, branch TEXT, superseded_by TEXT,
+    produces TEXT, invariants TEXT, summary TEXT, has_manifest INTEGER
 );
 CREATE TABLE run_staleness (
     run_id TEXT, fix_id TEXT, status TEXT, reason TEXT,
@@ -354,6 +360,29 @@ def main():
         catalog = open(cpath, encoding="utf-8", errors="replace").read()
 
     FIXES = stal.load_fixes()
+    HARN = []
+    try:
+        HARN = json.load(open(os.path.join(VAULT, "registry", "harness_registry.json"),
+                              encoding="utf-8")).get("harnesses", [])
+    except (OSError, ValueError):
+        pass
+    con.executemany("INSERT OR REPLACE INTO harnesses VALUES (?,?,?,?,?,?,?,?,?)",
+                    [(h["id"], h["file"], h["status"], h.get("branch"), h.get("superseded_by"),
+                      ",".join(h.get("produces") or []), ",".join(h.get("invariants") or []),
+                      h.get("summary"), 1 if h.get("manifest") else 0) for h in HARN])
+    by_file = {os.path.basename(h["file"]): h["id"] for h in HARN}
+    prefixes = sorted(((p, h["id"]) for h in HARN for p in (h.get("produces") or [])),
+                      key=lambda x: -len(x[0]))
+
+    def harness_of(run_id, summary):
+        prov = summary.get("provenance") if isinstance(summary.get("provenance"), dict) else {}
+        name = prov.get("harness") or summary.get("harness")
+        if name and os.path.basename(name) in by_file:
+            return by_file[os.path.basename(name)], "recorded"
+        for p, hid in prefixes:
+            if run_id.startswith(p):
+                return hid, "prefix"
+        return None, None
     con.executemany("INSERT OR REPLACE INTO component_fixes VALUES (?,?,?,?,?,?,?)",
                     [(f["id"], f.get("component"), f.get("fix_commit"), f.get("fix_date"),
                       ",".join(f.get("affects_steppers", [])), f.get("doc"), f.get("summary"))
@@ -378,16 +407,22 @@ def main():
         free = [k for k in cfg if k in brc_phys_params()]
         substrate = SUBSTRATE.get(fam, "unclassified")
         steppers, step_src = stal.resolve_steppers(r["summary"], substrate, r["run_id"])
+        hid, hsrc = harness_of(r["run_id"], r["summary"])
+        if hid:
+            con.execute("INSERT OR REPLACE INTO edges VALUES (?,?,?,?,?)",
+                        ("run", r["run_id"], "produced_by", "harness", hid))
         con.execute(
             "INSERT OR REPLACE INTO runs VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
             (r["run_id"], r["date"], r["band"], fam, substrate,
-             brc.SECTOR_INDEX.get(r["band"], ""), r["summary"].get("config", {}).get("out", "") or "",
+             brc.SECTOR_INDEX.get(r["band"], ""), hid or "",
              gc, epoch, epoch_src, r["verdict"], 1 if r["complete"] else 0,
              "derived" if r.get("derived") else "summary.json",
              r.get("elapsed_h"), len(r["csvs"]), len(brc.find_images(r["run_dir"])),
              len(free), None, r["run_dir"], ",".join(steppers), step_src))
         for fx in FIXES:
-            st = stal.staleness(r["run_id"], steppers, epoch, r["date"], fx)
+            prov = r["summary"].get("provenance") if isinstance(r["summary"].get("provenance"), dict) else {}
+            st = stal.staleness(r["run_id"], steppers, epoch, r["date"], fx,
+                                component_hashes=prov.get("component_hashes"))
             if st:
                 con.execute("INSERT OR REPLACE INTO run_staleness VALUES (?,?,?,?)",
                             (r["run_id"], fx["id"], st[0], st[1]))

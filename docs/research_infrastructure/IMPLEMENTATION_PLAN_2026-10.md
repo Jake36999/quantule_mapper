@@ -16,7 +16,7 @@ status: running
 | A order gates | **complete** 2026-10-04 | [[STEPPER_ORDER_GATES]] |
 | B stale flags + re-validation | B1–B3 complete; **B4 replay running** (launched 2026-10-04 13:58) | [[REVALIDATION_E270CDC_RESULTS]] |
 | C telemetry | **complete** (feb/C2.7 wiring deferred until the replay ends) | [[TELEMETRY_STREAM]] |
-| D provenance + manifest | pending | |
+| D provenance + manifest | **complete** | [[PROVENANCE_AND_HARNESS_REGISTRY]] |
 | E specs / MCP / UI | pending | |
 | F basin mapping | pending | |
 

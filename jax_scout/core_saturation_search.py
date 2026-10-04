@@ -11,6 +11,18 @@ Records final node count of saturators (1/2/3/4/multi). Time-boxed; incremental 
 
 WSL2 jax venv:  python /mnt/f/quantule_mapper/jax_scout/core_saturation_search.py --hours 2
 """
+
+# Harness manifest (docs/research_infrastructure/HARNESS_REGISTRY.md). Read by AST, never imported;
+# descriptive only -- nothing consults it before this script runs.
+HARNESS = {
+    'id': 'core_saturation_search',
+    'branch': 'Branch - Stability - Index',
+    'status': 'ACTIVE',
+    'superseded_by': None,
+    'invariants': [],
+    'produces': ['CORE_SAT_HUNT', 'CORE_SAT_PILOT', 'CORE_SAT_CALIB'],
+    'summary': 'Batched Phase C core search and the v3 stable-collapse classifier (also a library: run_probe).',
+}
 import os, sys, csv, json, time, argparse, subprocess
 import numpy as np
 os.environ.setdefault("XLA_PYTHON_CLIENT_PREALLOCATE", "false")

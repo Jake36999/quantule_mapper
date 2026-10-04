@@ -21,6 +21,18 @@ accumulation artifact (slope ~ a-independent) over the ~15M FP64 steps at T=7200
 v3, K=6/per-blob/N=96/seed 20260619; verdict-first, full er(t) saved, resumable. Read-only physics.
 WSL2 jax venv:  python jax_scout/feb_gain_ladder_longt.py [--out DIR] [--T 72000]
 """
+
+# Harness manifest (docs/research_infrastructure/HARNESS_REGISTRY.md). Read by AST, never imported;
+# descriptive only -- nothing consults it before this script runs.
+HARNESS = {
+    'id': 'feb_gain_ladder_longt',
+    'branch': 'Branch - Stability - Index',
+    'status': 'ACTIVE',
+    'superseded_by': None,
+    'invariants': [],
+    'produces': ['FEB_GAIN_LADDER_LONGT'],
+    'summary': 'Late-window er slope vs cubic gain at T=72000: locates the a* gain/loss balance.',
+}
 import os, sys, csv, json, time, argparse
 import numpy as np
 

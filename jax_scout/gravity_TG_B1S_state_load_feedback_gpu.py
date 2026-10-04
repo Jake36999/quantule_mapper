@@ -11,6 +11,18 @@ not modify or import the older TG-B1 feedback driver.
 
 from __future__ import annotations
 
+# Harness manifest (docs/research_infrastructure/HARNESS_REGISTRY.md). Read by AST, never imported;
+# descriptive only -- nothing consults it before this script runs.
+HARNESS = {
+    'id': 'gravity_TG_B1S_state_load_feedback_gpu',
+    'branch': 'Branch - Gravity - Index',
+    'status': 'ACTIVE',
+    'superseded_by': None,
+    'invariants': [],
+    'produces': ['TG_B1S_STATE_LOAD_GPU'],
+    'summary': 'TG-B1S dual-substrate state-load feedback: arms S0-S9 with frozen S0 source.',
+}
+
 import argparse
 import csv
 import hashlib

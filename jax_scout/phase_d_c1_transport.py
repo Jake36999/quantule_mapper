@@ -5,6 +5,18 @@ D_imag>0 is the test. jax_scout mirror only (WSL jax); NO production/CuPy change
 
   wsl:  python jax_scout/phase_d_c1_transport.py [--tkick 8000 --out DIR]
 """
+
+# Harness manifest (docs/research_infrastructure/HARNESS_REGISTRY.md). Read by AST, never imported;
+# descriptive only -- nothing consults it before this script runs.
+HARNESS = {
+    'id': 'phase_d_c1_transport',
+    'branch': 'Branch - Transport - Index',
+    'status': 'ACTIVE',
+    'superseded_by': None,
+    'invariants': [],
+    'produces': ['PHASE_D_C1_TRANSPORT'],
+    'summary': 'Does the dispersive channel (D_imag>0) give the a* attractor mobility?',
+}
 import os, sys, csv, json, time, argparse
 from functools import partial
 import numpy as np

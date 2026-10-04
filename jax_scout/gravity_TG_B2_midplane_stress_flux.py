@@ -64,6 +64,18 @@ Mirror-only. Frozen TG-B1S dynamics untouched - this module only OBSERVES. No gr
 """
 from __future__ import annotations
 
+# Harness manifest (docs/research_infrastructure/HARNESS_REGISTRY.md). Read by AST, never imported;
+# descriptive only -- nothing consults it before this script runs.
+HARNESS = {
+    'id': 'gravity_TG_B2_midplane_stress_flux',
+    'branch': 'Branch - Gravity - Index',
+    'status': 'ACTIVE',
+    'superseded_by': None,
+    'invariants': ['ledger_resid_rel'],
+    'produces': ['TG_B2_MIDPLANE'],
+    'summary': 'P2: independent midplane stress-flux estimator of the two-node body force.',
+}
+
 import argparse
 import csv
 import json

@@ -1,0 +1,42 @@
+# Harness manifest check (IMPLEMENTATION_PLAN_2026-10 Phase D4).
+#
+# A script in jax_scout/ or tools/ that writes to sweep_runs/ must declare a HARNESS = {...} manifest
+# (see tools/build_harness_registry.py). Only CHANGED files are checked, so the ~115 legacy harnesses
+# stay listed as UNREVIEWED rather than failing every build.
+#
+# This checks the DECLARATION. It never stops anyone running a harness locally -- the registry is
+# descriptive, and the previous prescriptive attempt (orchestrator/) died because it gated work.
+name: harness manifest
+
+on:
+  push:
+    paths: ['jax_scout/**', 'tools/**', '.github/workflows/harness-manifest.yml']
+  pull_request:
+    paths: ['jax_scout/**', 'tools/**']
+  workflow_dispatch:
+
+jobs:
+  manifest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Check manifests on changed harnesses
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BASE="${{ github.event.pull_request.base.sha }}"
+          else
+            BASE="${{ github.event.before }}"
+          fi
+          if [ -z "$BASE" ] || ! git cat-file -e "$BASE" 2>/dev/null; then BASE="HEAD~1"; fi
+          CHANGED=$(git diff --name-only --diff-filter=AM "$BASE" HEAD -- jax_scout tools | grep '\.py$' || true)
+          echo "changed: $CHANGED"
+          if [ -z "$CHANGED" ]; then echo "no harness changes"; exit 0; fi
+          python tools/build_harness_registry.py --check $CHANGED

@@ -15,6 +15,14 @@ sys.path.insert(0, ROOT)
 import stepper_staleness as stal  # noqa: E402
 from jax_scout import provenance  # noqa: E402
 
+import subprocess  # noqa: E402
+import pytest  # noqa: E402
+
+# git history is unreadable from WSL inside a Windows-created worktree; skip rather than fail there.
+needs_git = pytest.mark.skipif(
+    subprocess.run(["git", "rev-parse", "e270cdc"], cwd=ROOT, capture_output=True).returncode != 0,
+    reason="git history not readable from this environment")
+
 FIX = {"id": "etdrk4-2026-10", "fix_commit": "e270cdc", "fix_date": "2026-10-02",
        "affects_steppers": ["ETDRK4", "ETDRK4-cupy"], "revalidated": {"OLD_RUN": "NEW_RUN"},
        "not_affected": {"EXEMPT_RUN": "reason given"}}
@@ -50,6 +58,7 @@ def test_fix_does_not_apply_to_other_steppers():
     assert stal.staleness("R", ["KG-strang", "TG-RK4"], "dda7bd2", "2026-07-01", FIX) is None
 
 
+@needs_git
 def test_pre_fix_commit_is_stale_and_post_fix_is_current():
     stale = stal.staleness("R", ["ETDRK4"], "dda7bd2", "2026-10-01", FIX)
     assert stale[0] == "STALE_PENDING_REVALIDATION" and "ancestry" in stale[1]

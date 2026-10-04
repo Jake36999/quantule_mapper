@@ -25,6 +25,8 @@ It is kept apart from earlier infrastructure documents such as [[INFRASTRUCTURE_
 | [[PROCESS_PLAN_2026-10]] | process plan (why) | complete |
 | [[IMPLEMENTATION_PLAN_2026-10]] | phased implementation plan (what/how) | running |
 | [[TELEMETRY_STREAM]] | Phase C build record | complete |
+| [[PROVENANCE_AND_HARNESS_REGISTRY]] | Phase D build record | complete |
+| [[HARNESS_REGISTRY]] | generated registry of every run-writing script | generated |
 
 Phase records are added here as each phase closes. A change to a solver or the runtime is recorded in
 [[SOLVER_AND_RUNTIME_CHANGELOG]] (`docs/instrument_integrity/`).

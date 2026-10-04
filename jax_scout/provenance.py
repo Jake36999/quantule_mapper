@@ -18,6 +18,13 @@ WHAT TO RECORD, AND WHY EACH FIELD MATTERS
                   by a numpy-ABI mismatch between two local environments.
     steppers      which time-steppers were loaded (STEPPER_MODULES). Lets a stepper fix flag the
                   runs it affects -- see docs/instrument_integrity/SOLVER_AND_RUNTIME_CHANGELOG.md.
+    component_hashes
+                  {repo-relative path: git blob hash} for EVERY repo module imported when the stamp is
+                  taken. This pins the run to the exact file contents it ran with, which a commit
+                  hash alone cannot do when the tree is dirty or when only some files differ.
+    dirty_components
+                  the subset whose content differs from HEAD (or is untracked). Empty = the run is
+                  reproducible from `commit` alone.
 
 Usage in a harness, right before writing config.json or summary.json:
 
@@ -67,6 +74,72 @@ def _git(*args: str) -> str | None:
         return None
 
 
+# ------------------------------------------------------------- component (import) hashes
+# Added 2026-10-04 (IMPLEMENTATION_PLAN_2026-10 Phase D1). No subprocess per file: blob hashes are
+# computed in-process, and HEAD's tree is read once per process.
+
+_SKIP_DIRS = (".venv", "venv", "site-packages", "__pycache__", "external research")
+_HEAD_TREE = None
+
+
+def git_blob_hash(path: str) -> str:
+    """The hash `git hash-object <path>` would print, computed in-process.
+
+    The repo uses `* text=auto` with core.autocrlf, so text files are stored with LF and git hashes the
+    LF form. A file is treated as text when it has no NUL byte (git's own heuristic), and CRLF is
+    normalised to LF before hashing. Binary files are hashed as-is.
+    """
+    import hashlib
+    with open(path, "rb") as fh:
+        data = fh.read()
+    if b"\x00" not in data:
+        data = data.replace(b"\r\n", b"\n")
+    return hashlib.sha1(b"blob %d\x00" % len(data) + data).hexdigest()
+
+
+def _head_tree() -> dict:
+    global _HEAD_TREE
+    if _HEAD_TREE is None:
+        out = _git("ls-tree", "-r", "HEAD") or ""
+        tree = {}
+        for line in out.splitlines():
+            try:
+                meta, rel = line.split("\t", 1)
+                tree[rel] = meta.split()[2]
+            except (ValueError, IndexError):
+                continue
+        _HEAD_TREE = tree
+    return _HEAD_TREE
+
+
+def component_hashes() -> tuple:
+    """-> ({relpath: blob}, [dirty relpaths]) for every repo module currently imported. Never raises."""
+    hashes, dirty = {}, []
+    try:
+        root = os.path.normcase(os.path.abspath(_REPO))
+        tree = _head_tree()
+        for mod in list(sys.modules.values()):
+            f = getattr(mod, "__file__", None)
+            if not f or not f.endswith(".py"):
+                continue
+            af = os.path.abspath(f)
+            if not os.path.normcase(af).startswith(root + os.sep):
+                continue
+            rel = os.path.relpath(af, _REPO).replace(os.sep, "/")
+            if any(part in _SKIP_DIRS for part in rel.split("/")):
+                continue
+            try:
+                h = git_blob_hash(af)
+            except OSError:
+                continue
+            hashes[rel] = h
+            if tree.get(rel) != h:
+                dirty.append(rel)
+    except Exception:
+        pass
+    return dict(sorted(hashes.items())), sorted(dirty)
+
+
 def stamp() -> dict:
     """Provenance for the run about to start. Never raises."""
     commit = _git("rev-parse", "HEAD")
@@ -91,6 +164,7 @@ def stamp() -> dict:
         "argv": sys.argv[1:] if len(sys.argv) > 1 else [],
         "steppers": steppers_loaded(),
     }
+    out["component_hashes"], out["dirty_components"] = component_hashes()
     try:
         import jax  # noqa: PLC0415
         out["jax"] = jax.__version__
@@ -122,6 +196,10 @@ def flat_stamp() -> dict:
         "numpy_version": s.get("numpy"),
         "harness": s.get("harness"),
         "steppers": ",".join(s.get("steppers") or []),
+        # flat summaries keep one scalar per key: the full map lives in stamp(); here only the count
+        # of dirty components (0 = reproducible from git_commit alone) and their names.
+        "dirty_components": ",".join(s.get("dirty_components") or []),
+        "n_components": len(s.get("component_hashes") or {}),
     }
 
 

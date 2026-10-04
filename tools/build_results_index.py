@@ -38,6 +38,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import glob
 import json
 import os
 import re
@@ -198,6 +199,12 @@ CREATE TABLE component_fixes (
 CREATE TABLE harnesses (
     harness_id TEXT PRIMARY KEY, file TEXT, status TEXT, branch TEXT, superseded_by TEXT,
     produces TEXT, invariants TEXT, summary TEXT, has_manifest INTEGER
+);
+-- Experiment specs (specs/{drafts,proposed,approved}/*.json, irer_specs). Added 2026-10-04 (Phase E1).
+-- status = the folder the spec sits in. Edges: spec -instantiates-> run, spec -requires-> spec.
+CREATE TABLE specs (
+    spec_id TEXT PRIMARY KEY, title TEXT, status TEXT, substrate TEXT, ic TEXT, branch TEXT,
+    prediction TEXT, n_requires INTEGER, path TEXT
 );
 CREATE TABLE run_staleness (
     run_id TEXT, fix_id TEXT, status TEXT, reason TEXT,
@@ -370,6 +377,21 @@ def main():
                     [(h["id"], h["file"], h["status"], h.get("branch"), h.get("superseded_by"),
                       ",".join(h.get("produces") or []), ",".join(h.get("invariants") or []),
                       h.get("summary"), 1 if h.get("manifest") else 0) for h in HARN])
+    specs_root = os.path.join(os.path.dirname(VAULT), "specs")
+    for status in ("drafts", "proposed", "approved"):
+        for sp in sorted(glob.glob(os.path.join(specs_root, status, "*.json"))):
+            try:
+                spec = json.load(open(sp, encoding="utf-8"))
+            except (OSError, ValueError):
+                continue
+            con.execute("INSERT OR REPLACE INTO specs VALUES (?,?,?,?,?,?,?,?,?)",
+                        (spec.get("id"), spec.get("title"), status, (spec.get("substrate") or {}).get("name"),
+                         ((spec.get("protocol") or {}).get("ic") or {}).get("name"), spec.get("branch"),
+                         (spec.get("prediction") or {}).get("statement"), len(spec.get("requires") or []),
+                         os.path.relpath(sp, os.path.dirname(VAULT)).replace(os.sep, "/")))
+            for r in spec.get("requires") or []:
+                con.execute("INSERT OR REPLACE INTO edges VALUES (?,?,?,?,?)",
+                            ("spec", spec.get("id"), "requires", "spec", r.get("spec_id")))
     by_file = {os.path.basename(h["file"]): h["id"] for h in HARN}
     prefixes = sorted(((p, h["id"]) for h in HARN for p in (h.get("produces") or [])),
                       key=lambda x: -len(x[0]))
@@ -408,6 +430,9 @@ def main():
         substrate = SUBSTRATE.get(fam, "unclassified")
         steppers, step_src = stal.resolve_steppers(r["summary"], substrate, r["run_id"])
         hid, hsrc = harness_of(r["run_id"], r["summary"])
+        if r["summary"].get("spec_id"):
+            con.execute("INSERT OR REPLACE INTO edges VALUES (?,?,?,?,?)",
+                        ("spec", r["summary"]["spec_id"], "instantiates", "run", r["run_id"]))
         if hid:
             con.execute("INSERT OR REPLACE INTO edges VALUES (?,?,?,?,?)",
                         ("run", r["run_id"], "produced_by", "harness", hid))

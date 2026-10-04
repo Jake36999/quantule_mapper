@@ -29,7 +29,8 @@ bookkeeping, telemetry or tests.
 
 | date | id | summary | output-changing? | commit |
 |---|---|---|---|---|
-| 2026-10-04 | CL-005 | Component-hash provenance; harness manifests + registry; content-level staleness | no (stamp + inert manifests) | phase-d |
+| 2026-10-04 | CL-006 | Spec layer: `irer_specs`, `jax_scout/registry.py`, `tools/run_spec.py`, `specs/`, index `specs` table | no (new path; harness-equivalent to <1e-10) | phase-e |
+| 2026-10-04 | CL-005 | Component-hash provenance; harness manifests + registry; content-level staleness | no (stamp + inert manifests) | `333f17f` |
 | 2026-10-04 | CL-004 | Telemetry stream (`TelemetryWriter`), live HUD invariants, TG-B1S/B2-midplane wiring | no (observer only) | `2185d9f` |
 | 2026-10-04 | CL-003 | Provenance `steppers`; stale-run view; `--dt`/`--cells` for the a\* harnesses; re-validation driver | no (default paths byte-identical) | `d3d87fd` |
 | 2026-10-04 | CL-002 | Stepper order + MMS gates, stepper mutations, CI extension | no (tests/tooling) | `0419ff9` |
@@ -37,8 +38,28 @@ bookkeeping, telemetry or tests.
 
 ---
 
+## CL-006 — Spec layer (Phase E1)
+- **Branch:** `phase-e/specs-mcp-ui` (dev worktree)
+- **Files:**
+  - `irer_specs/__init__.py` (new): the schema, a dependency-free validator, sweep expansion and
+    prediction scoring
+  - `schemas/experiment_spec.schema.json` (generated)
+  - `jax_scout/registry.py` (new): three substrates (`etdrk4-sncgl`, `kg-strang`, `tg-rk4`), ICs
+    (`gaussian`, `multiseed`, `qball`, `nls_soliton`, `load_npz`) and observers (`mass`, `amp`,
+    `centroid`, `nodes`, `kg_invariants`, `tg_diagnostics`, `energy_ratio`). All of them wrap
+    existing gated code; nothing is re-implemented.
+  - `tools/run_spec.py` (new): the generic executor
+  - `specs/approved/{astar-probe-pilot, c27-r3-soliton-transport-n1}.json`
+  - `tools/build_results_index.py`: `specs` table plus `instantiates` / `requires` edges
+  - `tests/test_spec_layer.py` (new, 16 tests); the CI workflow runs it
+- **Output-changing?** **No.** This is a new execution path. **Equivalence:** the a\* probe run as a
+  spec reproduces `core_saturation_search.run_probe`'s er(t) to < 1e-10 (tested).
+- **Verified:** 16/16 tests in WSL; 12 pass with 4 skipped in `.venv`, which has no JAX.
+
+---
+
 ## CL-005 — Component-hash provenance and harness registry (Phase D)
-- **Branch:** `phase-d/provenance-manifest`, developed in a separate worktree (`F:\quantule_mapper_dev`)
+- **Commit:** `333f17f` · **Branch:** `phase-d/provenance-manifest`, developed in a separate worktree (`F:\quantule_mapper_dev`)
   so the running B4 replay's tree stayed fixed.
 - **Files:**
   - `jax_scout/provenance.py`: `git_blob_hash`, `component_hashes`; `stamp()` gains

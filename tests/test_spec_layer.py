@@ -1,0 +1,164 @@
+"""Experiment specs (irer_specs), component registry (jax_scout/registry.py), executor (tools/run_spec.py).
+
+Phase E1 of docs/research_infrastructure/IMPLEMENTATION_PLAN_2026-10.md. The key acceptance test is
+EQUIVALENCE: a spec run must reproduce the harness it replaces to round-off, otherwise "experiments as
+data" would silently be a different experiment.
+"""
+from __future__ import annotations
+
+import copy
+import glob
+import json
+import os
+import sys
+
+import pytest
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, ROOT)
+sys.path.insert(0, os.path.join(ROOT, "tools"))
+
+import irer_specs  # noqa: E402
+
+MINI = {
+    "spec_version": 1, "id": "kg-mini", "title": "tiny KG check",
+    "substrate": {"name": "kg-strang", "version": 1, "params": {"c": 1.0, "m": 1.0, "a": 0.8, "s": -0.5, "f": -0.1}},
+    "protocol": {"ic": {"name": "gaussian", "params": {"A": 1.0, "sigma": 1.0, "omega": 0.9}},
+                 "grid": {"N": 12, "L": 10.0}, "dt": 0.02, "T": 0.4, "sample_every": 0.1},
+    "observers": [{"name": "kg_invariants"}, {"name": "centroid", "params": {"slopes": ["x"]}}],
+    "invariants": {"Q_rel_drift": 1e-8},
+    "prediction": {"statement": "U(1) charge is conserved by the Strang flow.",
+                   "quantities": [{"key": "Q_rel_drift", "expected": 0.0, "tolerance": 1e-8}]},
+}
+
+
+# ------------------------------------------------------------------ schema / validator (no JAX)
+
+def test_schema_file_is_in_sync_with_the_code():
+    on_disk = json.load(open(irer_specs.SCHEMA_PATH, encoding="utf-8"))
+    assert on_disk == json.loads(json.dumps(irer_specs.SCHEMA)), "run irer_specs.write_schema()"
+
+
+def test_minimal_spec_is_valid():
+    assert irer_specs.validate(MINI) == []
+
+
+@pytest.mark.parametrize("mutate,needle", [
+    (lambda s: s.pop("prediction"), "prediction"),
+    (lambda s: s.update(id="Bad ID!"), "does not match"),
+    (lambda s: s["protocol"].update(dt=0), "dt"),
+    (lambda s: s.update(extra=1), "unknown key"),
+    (lambda s: s["prediction"]["quantities"][0].update(kind="approx"), "not in"),
+    (lambda s: s["protocol"]["grid"].update(N="12"), "expected integer"),
+])
+def test_invalid_specs_are_reported_not_raised(mutate, needle):
+    s = copy.deepcopy(MINI)
+    mutate(s)
+    errs = irer_specs.validate(s)
+    assert any(needle in e for e in errs), errs
+
+
+def test_sweep_expansion_grid_and_zip():
+    s = copy.deepcopy(MINI)
+    s["sweep"] = {"axes": {"substrate.params.a": [0.7, 0.8], "protocol.dt": [0.02, 0.01]}}
+    pts = irer_specs.expand(s)
+    assert len(pts) == 4 and all("sweep" not in p for _, p in pts)
+    assert pts[-1][1]["substrate"]["params"]["a"] == 0.8 and pts[-1][1]["protocol"]["dt"] == 0.01
+    s["sweep"]["mode"] = "zip"
+    assert [p["protocol"]["dt"] for _, p in irer_specs.expand(s)] == [0.02, 0.01]
+
+
+def test_prediction_scoring_kinds():
+    pred = {"quantities": [{"key": "a", "expected": 1.0, "tolerance": 0.01, "kind": "rel"},
+                           {"key": "b", "expected": 3.0, "kind": "le"},
+                           {"key": "c", "expected": 0.0, "tolerance": 1e-3}]}
+    ok = irer_specs.check_prediction(pred, {"a": 1.005, "b": 2.0, "c": 5e-4})
+    assert ok["status"] == "PREDICTION_MET"
+    bad = irer_specs.check_prediction(pred, {"a": 1.05, "b": 2.0})
+    assert bad["status"] == "PREDICTION_MISSED" and not bad["quantities"][2]["ok"]
+
+
+def test_requires_is_a_warning_not_a_gate(tmp_path):
+    import run_spec
+    s = dict(MINI, requires=[{"spec_id": "never-run", "verdict": "PASS"}])
+    assert run_spec.requires_warnings(s, str(tmp_path))
+    (tmp_path / "r1").mkdir()
+    (tmp_path / "r1" / "verdict.json").write_text(json.dumps({"spec_id": "never-run", "verdict": "PASS"}))
+    assert run_spec.requires_warnings(s, str(tmp_path)) == []
+
+
+def test_every_spec_in_the_repo_is_schema_valid():
+    files = glob.glob(os.path.join(ROOT, "specs", "*", "*.json"))
+    assert files
+    for f in files:
+        spec = irer_specs.load(f)
+        assert irer_specs.validate(spec) == [], f
+        assert os.path.basename(f)[:-5] == spec["id"], "file name must equal the spec id: %s" % f
+
+
+# ------------------------------------------------------------------ registry + executor (JAX)
+
+import importlib.util  # noqa: E402
+
+needs_jax = pytest.mark.skipif(importlib.util.find_spec("jax") is None, reason="registry/executor need JAX")
+
+
+@needs_jax
+def test_registry_rejects_unknown_components_and_version_drift():
+    from jax_scout import registry
+    s = copy.deepcopy(MINI)
+    s["substrate"]["name"] = "no-such-stepper"
+    s["observers"][0]["version"] = 99
+    errs = registry.check_spec(s)
+    assert any("unknown component" in e for e in errs) and any("pins 99" in e for e in errs)
+    assert registry.check_spec(MINI) == []
+
+
+@needs_jax
+def test_describe_lists_every_component():
+    from jax_scout import registry
+    d = registry.describe()
+    assert {"etdrk4-sncgl", "kg-strang", "tg-rk4"} <= {r["name"] for r in d["substrates"]}
+    assert {"centroid", "mass", "kg_invariants", "energy_ratio"} <= {r["name"] for r in d["observers"]}
+
+
+@needs_jax
+def test_end_to_end_run_writes_the_contracted_files(tmp_path):
+    import run_spec
+    from jax_scout.snapshots import read_telemetry
+    p = tmp_path / "kg-mini.json"
+    p.write_text(json.dumps(MINI))
+    rc = run_spec.main([str(p), "--out", str(tmp_path / "run"), "--sweep-root", str(tmp_path)])
+    assert rc == 0
+    run = tmp_path / "run"
+    for f in ("spec.json", "summary.json", "verdict.json", "RUN_COMPLETE.json", "telemetry.jsonl"):
+        assert (run / f).exists(), f
+    summ = json.load(open(run / "summary.json"))
+    assert summ["prediction_check"]["status"] == "PREDICTION_MET"
+    assert "steppers" in summ["provenance"] and "KG-strang" in summ["provenance"]["steppers"]
+    assert "component_hashes" in summ["provenance"]
+    assert json.load(open(run / "verdict.json"))["verdict"] == "PENDING_REVIEW"
+    meta, rows = read_telemetry(str(run))
+    assert meta["invariants"] == {"Q_rel_drift": 1e-8} and len(rows) == 5
+
+
+@needs_jax
+def test_spec_run_reproduces_the_astar_harness_to_round_off(tmp_path):
+    """Equivalence: the a* probe as a spec vs core_saturation_search.run_probe, same everything."""
+    from jax_scout import core_saturation_search as css, registry
+    import numpy as np
+    N, T_steps = 16, 40
+    params = dict(css.FEB)
+    params["param_a"] = float(css.FEB["param_a"]) * 1.15
+    ref = css.run_probe(params, N, T_steps, 6, seed=20260619, ic_norm=css.IC_NORM_PER_BLOB_FIXED)
+    spec = irer_specs.load(os.path.join(ROOT, "specs", "approved", "astar-probe-pilot.json"))
+    spec["substrate"]["params"] = params
+    spec["protocol"]["grid"]["N"] = N
+    spec["protocol"]["T"] = T_steps * spec["protocol"]["dt"]
+    sim, obs = registry.build(spec)
+    energy = []
+    for _ in range(T_steps):          # run_probe records sum|psi|^2 after EVERY step
+        sim.advance(1)
+        energy.append(float(np.sum(np.abs(sim.fields()["psi"]) ** 2)))
+    er = np.asarray(energy) / ref["ic_e"]
+    assert np.max(np.abs(er - np.asarray(ref["er"]))) < 1e-10

@@ -84,20 +84,24 @@ def run_point(spec, point_dir, *, log=print):
     tel = TelemetryWriter(point_dir, invariants=spec.get("invariants") or {},
                           meta={"harness": "run_spec.py", "spec_id": spec["id"]})
 
-    def sample():
+    final_only = {o["name"] for o in spec["observers"] if (o.get("params") or {}).get("final_only")}
+
+    def sample(last=False):
         row = {}
         for name, fn, params in observers:
+            if name in final_only and not last:
+                continue
             row.update(fn(sim, **params))
         tel.record(sim.t, **row)
         return row
 
-    history = [(sim.t, sample())]
+    history = [(sim.t, sample(last=n_total == 0))]
     done, stop_reason = 0, "completed"
     while done < n_total:
         n = min(every, n_total - done)
         sim.advance(n)
         done += n
-        row = sample()
+        row = sample(last=done >= n_total)
         history.append((sim.t, row))
         if stop_nonfinite and any(isinstance(v, float) and not math.isfinite(v) for v in row.values()):
             stop_reason = "nonfinite"
@@ -105,6 +109,8 @@ def run_point(spec, point_dir, *, log=print):
         if time.time() - t0 > max_wall:
             stop_reason = "max_wall_h"
             break
+    if final_only and stop_reason != "completed":
+        history.append((sim.t, sample(last=True)))      # an early stop still gets its final descriptors
     stats = tel.close()
 
     final = dict(history[-1][1])

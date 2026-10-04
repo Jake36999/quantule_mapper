@@ -315,8 +315,10 @@ def build(spec):
     fields = ICS[pr["ic"]["name"]]["fn"](sim, **(pr["ic"].get("params") or {}))
     sim.init(fields)
     # `slopes` is an executor-level option (tools/run_spec.py fits d(key)/dt); it is not an observer argument
+    # `slopes` and `final_only` are executor-level options (tools/run_spec.py), not observer arguments
     obs = [(o["name"], OBSERVERS[o["name"]]["fn"],
-            {k: v for k, v in (o.get("params") or {}).items() if k != "slopes"}) for o in spec["observers"]]
+            {k: v for k, v in (o.get("params") or {}).items() if k not in ("slopes", "final_only")})
+           for o in spec["observers"]]
     return sim, obs
 
 
@@ -357,3 +359,53 @@ if __name__ == "__main__":
     else:
         import json
         print(json.dumps(describe(), indent=2))
+
+
+@observer("state_descriptors", 2, """Final-state descriptor vector for basin clustering (Phase F).
+v2 (2026-10-04): adds d_contrast = max(rho)/mean(rho); node-based descriptors are zeroed when the field
+is not localised (contrast < contrast_min, default 20), because a dispersed field always has speckle
+above the node threshold and its "nodes" are noise (seen in the first KG ensemble demo).
+Permutation-invariant by construction (no node ordering): mass, amp, n_nodes, mean/std node size,
+periodic node-node distance mean/std/min, periodic radius of gyration, power-weighted spectral |k|,
+and the anisotropy of the density inertia tensor (min/max eigenvalue). Use with params
+{"final_only": true}: it is too expensive to sample every chunk on large grids.""", {"type": "object"})
+def _descriptors(sim, field="psi", contrast_min=20.0):
+    from jax_scout import transfer_diag as td
+    g = sim.grid
+    psi = sim.fields()[field]
+    rho = np.abs(psi) ** 2
+    mass = float(rho.sum() * g.dV)
+    contrast = float(rho.max() / (rho.mean() + 1e-300))
+    nodes = td.detect_nodes(psi, g.dx) if contrast >= contrast_min else []
+    out = {"d_mass": mass, "d_amp": float(np.sqrt(rho.max())), "d_contrast": contrast,
+           "d_n_nodes": float(len(nodes))}
+    sizes = [float(n.get("size", 0)) for n in nodes]
+    out["d_node_size_mean"] = float(np.mean(sizes)) if sizes else 0.0
+    out["d_node_size_std"] = float(np.std(sizes)) if sizes else 0.0
+    cents = np.array([np.asarray(n["centroid"], dtype=float) * g.dx for n in nodes]) if nodes else np.zeros((0, 3))
+    if len(cents) >= 2:
+        d = cents[:, None, :] - cents[None, :, :]
+        d -= g.L * np.round(d / g.L)                      # minimum image
+        r = np.sqrt((d ** 2).sum(-1))[np.triu_indices(len(cents), 1)]
+        out.update(d_pair_mean=float(r.mean()), d_pair_std=float(r.std()), d_pair_min=float(r.min()))
+    else:
+        out.update(d_pair_mean=0.0, d_pair_std=0.0, d_pair_min=0.0)
+    w = rho / (rho.sum() + 1e-300)
+    rg2 = 0.0
+    for ax, X in enumerate((g.X, g.Y, g.Z)):
+        th = 2 * np.pi * (X + g.L / 2) / g.L
+        R = abs(np.sum(w * np.exp(1j * th)))              # circular concentration: 1 = point, 0 = uniform
+        rg2 += (g.L / (2 * np.pi)) ** 2 * (-2.0 * np.log(max(R, 1e-12)))
+    out["d_rgyr"] = float(np.sqrt(rg2))
+    P = np.abs(np.fft.fftn(psi)) ** 2
+    k1 = 2 * np.pi * np.fft.fftfreq(g.N, d=g.dx)
+    KX, KY, KZ = np.meshgrid(k1, k1, k1, indexing="ij")
+    out["d_k_mean"] = float(np.sum(P * np.sqrt(KX ** 2 + KY ** 2 + KZ ** 2)) / (P.sum() + 1e-300))
+    if len(cents) >= 3:
+        c = cents - cents.mean(0)
+        c -= g.L * np.round(c / g.L)
+        ev = np.linalg.eigvalsh(c.T @ c / len(c))
+        out["d_aniso"] = float(ev[0] / (ev[-1] + 1e-300))
+    else:
+        out["d_aniso"] = 0.0
+    return out

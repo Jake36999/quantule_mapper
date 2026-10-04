@@ -1,0 +1,31 @@
+{
+  "spec_version": 1,
+  "id": "astar-basin-ensemble",
+  "title": "a* basin ensemble: do seeds 619/620/621 land in distinct basins (4 vs 6 nodes)?",
+  "description": "Phase F1 verification target. Forward ensemble at a* (FEB, param_a x1.15) over the three seeds whose end states differed in the original confirm run (n_fin 4 at seed 619, 6 at 620/621), at the harness resolution (N=96, L=10, dt=0.005, 72000 steps = T 360). Cluster with tools/basin_cluster.py --group-by param_a.",
+  "branch": "Branch - Stability - Index",
+  "substrate": {"name": "etdrk4-sncgl", "version": 1, "params": {
+    "param_D": 2.7329, "param_eta": 0.0704, "param_rho_vac": 1.1866, "param_omega0": 0.0,
+    "param_a_coupling": 2.3098, "param_s": 0.0129, "param_f": -0.4861, "param_a": 0.55223}},
+  "protocol": {
+    "ic": {"name": "multiseed", "version": 1, "params": {"K": 6, "seed": 20260619}},
+    "grid": {"N": 96, "L": 10.0},
+    "dt": 0.005,
+    "T": 360.0,
+    "sample_every": 7.2,
+    "stop": {"nonfinite": true}
+  },
+  "observers": [
+    {"name": "energy_ratio", "version": 1},
+    {"name": "nodes", "version": 1},
+    {"name": "state_descriptors", "version": 2, "params": {"final_only": true}}
+  ],
+  "sweep": {"mode": "grid", "axes": {"protocol.ic.params.seed": [20260619, 20260620, 20260621]}},
+  "prediction": {
+    "statement": "From the pre-fix confirm run: all three seeds settle to a bounded standing state (er stays below the 3.0 growth bound); seed 619 ends with 4 nodes and seeds 620/621 with 6, i.e. at least two basins at a*. If the fixed integrator changes the node counts, that is itself a re-validation finding.",
+    "quantities": [{"key": "er", "expected": 3.0, "kind": "le"}]
+  },
+  "requires": [{"spec_id": "revalidation-e270cdc", "verdict": "A_STAR_UNCHANGED"}],
+  "budget_h": 3.5,
+  "tags": ["phase-F", "basins", "a*"]
+}

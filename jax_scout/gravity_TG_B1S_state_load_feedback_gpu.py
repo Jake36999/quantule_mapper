@@ -516,7 +516,16 @@ def summarize_run(run_id: str, arm: str, cfg: dict[str, Any], rows: list[dict[st
     }
 
 
-def run_arm(run_id: str, arm: str, cfg: dict[str, Any], phi: np.ndarray, refs: dict[str, float], kind: str = "base", T_override: float | None = None) -> tuple[dict[str, Any], list[dict[str, float]]]:
+def run_arm(run_id: str, arm: str, cfg: dict[str, Any], phi: np.ndarray, refs: dict[str, float], kind: str = "base", T_override: float | None = None, telemetry_dir: str | None = None) -> tuple[dict[str, Any], list[dict[str, float]]]:
+    # telemetry_dir (2026-10-04, Phase C): stream every diagnostic row live for tools/hud_monitor.py. No
+    # invariant is declared: TG is an OPEN system (source, damping, absorbing boundary), so neither charge
+    # nor energy is conserved here -- the energy ledger is checked offline. Pure observer; default None.
+    tel = None
+    if telemetry_dir is not None:
+        from jax_scout.snapshots import TelemetryWriter  # noqa: PLC0415
+        tel = TelemetryWriter(telemetry_dir, meta={"harness": "gravity_TG_B1S_state_load_feedback_gpu",
+                                                   "run_id": run_id, "arm": arm,
+                                                   "note": "open system: no exact invariant declared"})
     op = build_kg(cfg["N"], cfg["L"], cfg["c"], cfg["m"], cfg["dt"])
     g = make_grid(op)
     psi, pi = initial_state(kind, phi, cfg)
@@ -541,13 +550,19 @@ def run_arm(run_id: str, arm: str, cfg: dict[str, Any], phi: np.ndarray, refs: d
     jax.tree_util.tree_map(lambda x: x.block_until_ready(), d0)
     compile_s = time.time() - compile_start
     rows.append({"t": 0.0, **{k: float(np.asarray(v)) for k, v in d0.items()}})
+    if tel is not None:
+        tel.record(0.0, **{k: v for k, v in rows[-1].items() if k != "t"})
     exec_start = time.time()
     for idx in range(chunks):
         state = evolve_n(state, cfgv, refv, g, flags, every)
         d = diagnostics(state, cfgv, refv, g)
         jax.tree_util.tree_map(lambda x: x.block_until_ready(), d)
         rows.append({"t": (idx + 1) * every * cfg["dt"], **{k: float(np.asarray(v)) for k, v in d.items()}})
+        if tel is not None:
+            tel.record(rows[-1]["t"], **{k: v for k, v in rows[-1].items() if k != "t"})
     exec_s = time.time() - exec_start
+    if tel is not None:
+        tel.close()
     summary = summarize_run(run_id, arm, cfg, rows, state, psi)
     summary["compile_time_s"] = compile_s
     summary["execution_time_s"] = exec_s
@@ -770,7 +785,8 @@ def main() -> None:
     summaries: list[dict[str, Any]] = []
     trajectories: dict[str, list[dict[str, float]]] = {}
     for run_id, arm, kind in arms:
-        summary, rows = run_arm(run_id, arm, cfg, phi, refs, kind=kind)
+        summary, rows = run_arm(run_id, arm, cfg, phi, refs, kind=kind,
+                                telemetry_dir=str(outdir / "telemetry" / run_id))
         summaries.append(summary)
         trajectories[run_id] = rows
         write_csv(outdir / f"{run_id}_trajectory.csv", rows)

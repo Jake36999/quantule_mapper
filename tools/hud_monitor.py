@@ -16,6 +16,11 @@ strictly reader-only:
 Killing this process at any moment is safe. Starting it against a finished run just renders it
 once and exits.
 
+TELEMETRY (2026-10-04). If the run writes <run>/telemetry.jsonl (jax_scout.snapshots.TelemetryWriter),
+each pass also redraws <run>/rendered/telemetry.png: every scalar against t, and every DECLARED invariant
+as |value| on a log axis with its tolerance drawn as a line. Breaches are printed once each. Still
+reader-only: a breach is reported, never acted on.
+
 Usage:
     python tools/hud_monitor.py --run sweep_runs/MY_RUN
     python tools/hud_monitor.py --latest --interval 20
@@ -30,7 +35,9 @@ import sys
 import time
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import render_fields  # noqa: E402
+from jax_scout.snapshots import read_telemetry, invariant_breaches, TELEMETRY_FILE  # noqa: E402
 
 SWEEPS = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "sweep_runs")
 SNAP_RE = re.compile(r"snap_\d+\.npz$")
@@ -61,13 +68,74 @@ def run_is_finished(run):
     return os.path.exists(os.path.join(run, "RUN_COMPLETE.json"))
 
 
+def telemetry_dirs(run):
+    """Every directory under <run> holding a telemetry.jsonl (multi-arm harnesses write one per arm)."""
+    out = []
+    for dirpath, dirnames, filenames in os.walk(run):
+        dirnames[:] = [d for d in dirnames if d not in ("rendered", "snapshots")]
+        if TELEMETRY_FILE in filenames:
+            out.append(dirpath)
+    return sorted(out)
+
+
+def has_telemetry(run):
+    return bool(telemetry_dirs(run))
+
+
+def render_telemetry(run, *, dpi=90, tel_dir=None):
+    """Redraw rendered/telemetry[_<arm>].png from tel_dir (default: run). -> (path or None, breaches)."""
+    tel_dir = tel_dir or run
+    meta, rows = read_telemetry(tel_dir)
+    if not rows:
+        return None, []
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    inv = meta.get("invariants") or {}
+    keys = [k for k in rows[-1] if k not in ("t", "wall_s") and isinstance(rows[-1][k], (int, float))]
+    inv_keys = [k for k in keys if k in inv]
+    other = [k for k in keys if k not in inv]
+    panels = inv_keys + other[:max(0, 8 - len(inv_keys))]
+    if not panels:
+        return None, []
+    n = len(panels)
+    fig, axes = plt.subplots(n, 1, figsize=(8, 1.8 * n), sharex=True, squeeze=False)
+    t = [r.get("t") for r in rows]
+    for ax, k in zip(axes[:, 0], panels):
+        ys = [r.get(k) for r in rows]
+        if k in inv:
+            ax.semilogy(t, [abs(y) if isinstance(y, (int, float)) and y != 0 else float("nan") for y in ys], lw=1)
+            ax.axhline(inv[k], color="crimson", ls="--", lw=1)
+            ax.set_ylabel("|%s|" % k, fontsize=7)
+        else:
+            ax.plot(t, ys, lw=1)
+            ax.set_ylabel(k, fontsize=7)
+        ax.tick_params(labelsize=7)
+    axes[-1, 0].set_xlabel("t")
+    breaches = invariant_breaches(meta, rows)
+    rel = os.path.relpath(tel_dir, run)
+    parts = [] if rel == "." else [x for x in rel.split(os.sep) if x != "telemetry"]
+    tag = "".join("_" + x for x in parts)
+    fig.suptitle("%s%s  (%d samples, %d invariant breaches)" % (os.path.basename(run), tag, len(rows),
+                                                              len(breaches)), fontsize=8)
+    fig.tight_layout()
+    out_dir = os.path.join(run, "rendered")
+    os.makedirs(out_dir, exist_ok=True)
+    path = os.path.join(out_dir, "telemetry%s.png" % tag)
+    tmp = path + ".part.png"
+    fig.savefig(tmp, dpi=dpi)
+    plt.close(fig)
+    os.replace(tmp, path)
+    return path, breaches
+
+
 def latest_run():
     if not os.path.isdir(SWEEPS):
         return None
     cands = []
     for name in os.listdir(SWEEPS):
         p = os.path.join(SWEEPS, name)
-        if os.path.isdir(p) and snapshot_dirs(p):
+        if os.path.isdir(p) and (snapshot_dirs(p) or has_telemetry(p)):
             cands.append((os.path.getmtime(p), p))
     return max(cands)[1] if cands else None
 
@@ -90,6 +158,27 @@ def tick(run, *, seen, dpi):
         for p in paths:
             print("  %3d frames -> %s" % (n, os.path.relpath(p, run)))
         made += paths
+    for tdir in telemetry_dirs(run):
+        tel = os.path.join(tdir, TELEMETRY_FILE)
+        size = os.path.getsize(tel)
+        if size != seen.get(tel):
+            try:
+                path, breaches = render_telemetry(run, dpi=dpi, tel_dir=tdir)
+            except Exception as exc:             # a render fault must not end the watch
+                print("  telemetry render failed: %s" % exc)
+                path, breaches = None, []
+            seen[tel] = size
+            reported = seen.setdefault("_breaches", set())
+            for name, t, v, tol in breaches:
+                if (tdir, name) not in reported:
+                    reported.add((tdir, name))
+                    print("  INVARIANT BREACH  %s/%s = %.3e at t=%s (tolerance %.1e)"
+                          % (os.path.relpath(tdir, run), name, v, t, tol))
+                    note = (read_telemetry(tdir)[0] or {}).get("note")
+                    if note:
+                        print("      harness note: %s" % note)
+            if path:
+                made.append(path)
     return made
 
 
@@ -98,7 +187,7 @@ def main():
     src = ap.add_mutually_exclusive_group(required=True)
     src.add_argument("--run", help="run directory to watch (contains snapshots/)")
     src.add_argument("--latest", action="store_true",
-                     help="watch the most recently modified run under sweep_runs/ that has snapshots")
+                     help="watch the most recently modified run under sweep_runs/ with snapshots or telemetry")
     ap.add_argument("--interval", type=float, default=30.0, help="seconds between passes")
     ap.add_argument("--once", action="store_true", help="render once and exit")
     ap.add_argument("--idle-exit", type=float, default=900.0,
@@ -115,8 +204,8 @@ def main():
         print("no such run: %s" % run)
         return 2
     print("watching %s" % run)
-    if not snapshot_dirs(run):
-        print("  (no snapshots yet - the harness needs --snapshots; waiting)")
+    if not snapshot_dirs(run) and not has_telemetry(run):
+        print("  (no snapshots or telemetry yet - waiting)")
 
     seen, last_change = {}, time.time()
     while True:

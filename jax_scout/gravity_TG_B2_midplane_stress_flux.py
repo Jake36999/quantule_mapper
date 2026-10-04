@@ -85,7 +85,7 @@ from jax_scout import gravity_TG_B1S_state_load_feedback_gpu as b1s  # noqa: E40
 from jax_scout import gravity_TG_B2_two_node_awell as b2  # noqa: E402
 from jax_scout.phase_d_c3_wave import build_kg  # noqa: E402
 from jax_scout.provenance import flat_stamp  # noqa: E402
-from jax_scout.snapshots import SnapshotWriter  # noqa: E402
+from jax_scout.snapshots import SnapshotWriter, TelemetryWriter  # noqa: E402
 
 
 def write_json(p, o):
@@ -201,8 +201,30 @@ FIELDS = ["t", "F_R", "P_R", "S_mid", "S_far", "S_in", "S_out", "flux_plane", "f
           "charge", "amp", "A_min", "A_max"]
 
 
+def _live_ledger(rows):
+    """Momentum-ledger residual at the PREVIOUS sample, as soon as the next one exists.
+
+    Same centred difference as ledger() below, one sample at a time, for the live telemetry stream. The
+    residual is normalised by the RUNNING MEAN of |dP/dt|, |flux| and |F_R| over all interior samples so
+    far -- not by the terms at that one sample, which cross zero and would turn round-off into false
+    breaches (seen in the first smoke run, 2026-10-04). This matches ledger()'s window-mean scale.
+    """
+    if len(rows) < 3:
+        return None
+    t = np.array([r["t"] for r in rows])
+    P = np.array([r["P_R"] for r in rows])
+    dPdt = (P[2:] - P[:-2]) / (t[2:] - t[:-2])
+    Q = np.array([r["flux_plane"] for r in rows[1:-1]])
+    F = np.array([r["F_R"] for r in rows[1:-1]])
+    scale = float(np.mean(np.abs(np.stack([dPdt, Q, F])))) + 1e-300
+    return float(t[-2]), float((dPdt[-1] - (Q[-1] + F[-1])) / scale)
+
+
 def run_arm(csv_path, psi, pi, cfgv, refsv, g, flags, a_sign, feedback,
-            nchunk, chunk_steps, dt, snap=None):
+            nchunk, chunk_steps, dt, snap=None, tel=None):
+    # tel (2026-10-04, Phase C): optional jax_scout.snapshots.TelemetryWriter. Streams each row plus
+    # `ledger_resid_rel`, the per-sample relative momentum-ledger residual (invariant: should sit below the
+    # harness's own G1/G2 tolerance once settled). Pure observer of values already on the host.
     state = b2.to_dev(psi, pi, g)
     a_j = jnp.asarray(a_sign, dtype=jnp.float64)
     fb_j = jnp.asarray(feedback, dtype=jnp.float64)
@@ -226,6 +248,10 @@ def run_arm(csv_path, psi, pi, cfgv, refsv, g, flags, a_sign, feedback,
             rows.append(row)
             wr.writerow(row)
             fh.flush()
+            if tel is not None:
+                lr = _live_ledger(rows)
+                tel.record(t, **{k: v for k, v in row.items() if k != "t"},
+                           **({"ledger_resid_rel": lr[1], "ledger_resid_t": lr[0]} if lr else {}))
             if snap is not None:
                 # Pure read, riding the device->host sync the line above already paid for.
                 snap.capture(t, view_fields(state, cfgv, a_j, fb_j),
@@ -427,8 +453,15 @@ def main():
             snap = SnapshotWriter(out / "snapshots" / name, enabled=args.snapshots,
                                   every=args.snapshot_every,
                                   volume_every=args.snapshot_volume_every)
+            tel = TelemetryWriter(out / "telemetry" / name,
+                                  invariants={"ledger_resid_rel": args.resid_tol},
+                                  meta={"harness": "gravity_TG_B2_midplane_stress_flux", "arm": name,
+                                        "note": "per-sample residual; breaches during the initial "
+                                                "transient (t < f_discard*T) are expected -- the "
+                                                "G1/G2 gates use the settled window only"})
             rows = run_arm(out / f"stress_{name}.csv", psi, pi, cfgv, refsv, g,
-                           flags, a_sign, fb, nchunk, chunk_steps, args.dt, snap=snap)
+                           flags, a_sign, fb, nchunk, chunk_steps, args.dt, snap=snap, tel=tel)
+            tel.close()
             st = snap.close()
             if st:
                 print(f"[arm {name}] snapshots: {st['frames_written']} written, "

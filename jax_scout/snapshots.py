@@ -206,3 +206,166 @@ class SnapshotWriter:
         except OSError:
             pass
         return stats
+
+
+# =============================================================================================
+# Telemetry stream (added 2026-10-04, IMPLEMENTATION_PLAN_2026-10 Phase C)
+# =============================================================================================
+#
+# WHY. The harnesses already compute their invariant scalars (charge, energy, ledger residuals,
+# profile overlap) every sample, then throw them away until the run ends. During a 12-hour run you
+# could not see an identity break at hour 3 (docs/SESSION_SYNTHESIS_2026-09-17.md section 5). This
+# streams them to <run>/telemetry.jsonl, one JSON object per line, for tools/hud_monitor.py to plot
+# live with the tolerances each harness declares.
+#
+# SAME CONTRACT AS SnapshotWriter: pure observer, bounded queue, never blocks, every failure swallowed
+# and counted. Nothing new is computed -- only scalars the harness already holds are recorded.
+#
+# READER CONTRACT: each line is written with a single write() of `json + "\n"`, so a reader can see at
+# most one torn line, always the last; read_telemetry() skips anything that does not parse.
+#
+#     tel = TelemetryWriter(out, invariants={"charge_rel_drift": 1e-10, "ledger_residual_abs": 1e-6})
+#     ...
+#     tel.record(t, charge=q, charge_rel_drift=abs(q - q0) / abs(q0), energy=E)
+#     ...
+#     tel.close()
+
+TELEMETRY_FILE = "telemetry.jsonl"
+TELEMETRY_META = "telemetry_meta.json"
+
+
+class TelemetryWriter:
+    """Bounded, async, crash-safe JSONL stream of per-sample scalars.
+
+    `invariants` maps a scalar name to its tolerance: a value whose magnitude exceeds the tolerance is
+    a BREACH. Declaring it here (rather than in the monitor) keeps the claim next to the code that
+    makes it. Breaches are reported, never acted on -- this has no control path into the run.
+    """
+
+    def __init__(self, outdir, *, enabled=True, invariants=None, meta=None, maxqueue=4096):
+        self.enabled = bool(enabled)
+        self.outdir = str(outdir)
+        self.invariants = {str(k): float(v) for k, v in (invariants or {}).items()}
+        self.n_seen = self.n_written = self.n_dropped = self.n_failed = 0
+        self._q = None
+        self._thread = None
+        self._t0 = time.time()
+        self._meta = dict(meta or {})
+        if not self.enabled:
+            return
+        try:
+            os.makedirs(self.outdir, exist_ok=True)
+            self._write_meta(status="running")
+        except Exception:
+            self.n_failed += 1
+        self._q = queue.Queue(maxsize=int(maxqueue))
+        self._thread = threading.Thread(target=self._drain, name="telemetry-writer", daemon=True)
+        self._thread.start()
+
+    def _write_meta(self, **extra):
+        meta = {"invariants": self.invariants, "file": TELEMETRY_FILE,
+                "started_unix": self._t0, **self._meta, **extra}
+        tmp = os.path.join(self.outdir, TELEMETRY_META + ".part")
+        with open(tmp, "w", encoding="utf-8") as fh:
+            json.dump(meta, fh, indent=2, default=str)
+        os.replace(tmp, os.path.join(self.outdir, TELEMETRY_META))
+
+    def _drain(self):
+        path = os.path.join(self.outdir, TELEMETRY_FILE)
+        try:
+            fh = open(path, "a", encoding="utf-8")
+        except Exception:
+            self.n_failed += 1
+            fh = None
+        while True:
+            item = self._q.get()
+            try:
+                if item is None:
+                    return
+                if fh is not None:
+                    fh.write(json.dumps(item, default=float) + "\n")   # one write per line
+                    fh.flush()
+                    self.n_written += 1
+                else:
+                    self.n_failed += 1
+            except Exception:
+                self.n_failed += 1
+            finally:
+                self._q.task_done()
+                if item is None and fh is not None:
+                    try:
+                        fh.close()
+                    except Exception:
+                        pass
+
+    def record(self, t, **scalars):
+        """Queue one sample. Values must already be host scalars (or cheaply float()-able)."""
+        if not self.enabled:
+            return False
+        self.n_seen += 1
+        try:
+            row = {"t": float(t), "wall_s": round(time.time() - self._t0, 3)}
+            for k, v in scalars.items():
+                try:
+                    row[k] = float(v)
+                except (TypeError, ValueError):
+                    row[k] = str(v)
+        except Exception:
+            self.n_failed += 1
+            return False
+        try:
+            self._q.put_nowait(row)
+            return True
+        except queue.Full:
+            self.n_dropped += 1
+            return False
+
+    def close(self, timeout=60.0):
+        if not self.enabled:
+            return {}
+        try:
+            self._q.put(None, timeout=5.0)
+            self._thread.join(timeout=timeout)
+        except Exception:
+            pass
+        stats = {"samples_seen": self.n_seen, "samples_written": self.n_written,
+                 "samples_dropped": self.n_dropped, "samples_failed": self.n_failed,
+                 "elapsed_s": round(time.time() - self._t0, 3)}
+        try:
+            self._write_meta(status="closed", **stats)
+        except Exception:
+            pass
+        return stats
+
+
+def read_telemetry(run_dir):
+    """-> (meta_dict, [rows]). Tolerates a missing file, a torn last line and junk lines."""
+    meta, rows = {}, []
+    try:
+        with open(os.path.join(run_dir, TELEMETRY_META), encoding="utf-8") as fh:
+            meta = json.load(fh)
+    except (OSError, ValueError):
+        pass
+    try:
+        with open(os.path.join(run_dir, TELEMETRY_FILE), encoding="utf-8") as fh:
+            for line in fh:
+                try:
+                    r = json.loads(line)
+                except ValueError:
+                    continue
+                if isinstance(r, dict):
+                    rows.append(r)
+    except OSError:
+        pass
+    return meta, rows
+
+
+def invariant_breaches(meta, rows):
+    """[(name, t, value, tol)] for every sample where |value| > declared tolerance."""
+    out = []
+    for name, tol in (meta.get("invariants") or {}).items():
+        for r in rows:
+            v = r.get(name)
+            if isinstance(v, (int, float)) and abs(v) > tol:
+                out.append((name, r.get("t"), v, tol))
+    return out

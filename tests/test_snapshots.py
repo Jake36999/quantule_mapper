@@ -154,3 +154,75 @@ def test_snapshot_payload_matches_what_the_renderer_expects(tmp_path):
         assert float(z["scalar__F_R"]) == pytest.approx(-5.7e-5)
         assert z["phi__xy"].dtype == np.complex64
         assert z["A_minus_1__xy"].dtype == np.float32
+
+
+# ---------------------------------------------------------------- telemetry stream (Phase C, 2026-10-04)
+
+from jax_scout.snapshots import (TelemetryWriter, read_telemetry, invariant_breaches,  # noqa: E402
+                                 TELEMETRY_FILE, TELEMETRY_META)
+
+
+def test_telemetry_round_trip_and_line_count(tmp_path):
+    tel = TelemetryWriter(tmp_path, invariants={"q_drift": 1e-8})
+    for i in range(50):
+        tel.record(0.1 * i, q_drift=1e-12 * i, energy=np.float64(2.0 + i))
+    stats = tel.close()
+    meta, rows = read_telemetry(tmp_path)
+    assert stats["samples_written"] == 50 and stats["samples_dropped"] == 0
+    assert len(rows) == 50 and rows[-1]["energy"] == 51.0
+    assert meta["invariants"] == {"q_drift": 1e-8} and meta["status"] == "closed"
+
+
+def test_telemetry_disabled_is_inert(tmp_path):
+    tel = TelemetryWriter(tmp_path / "x", enabled=False)
+    assert tel.record(0.0, a=1.0) is False
+    assert tel.close() == {}
+    assert not (tmp_path / "x").exists()
+
+
+def test_telemetry_full_queue_drops_and_never_blocks(tmp_path):
+    tel = TelemetryWriter(tmp_path, maxqueue=1)
+    tel._q.put_nowait({"t": -1})              # occupy the only slot; the drain thread may take it
+    t0 = time.time()
+    results = [tel.record(i, a=i) for i in range(2000)]
+    assert time.time() - t0 < 2.0             # never blocked
+    tel.close()
+    assert tel.n_dropped >= 1 or all(results)
+
+
+def test_reader_tolerates_a_torn_last_line_and_junk(tmp_path):
+    with open(tmp_path / TELEMETRY_FILE, "w", encoding="utf-8") as fh:
+        fh.write('{"t": 0.0, "a": 1.0}\n')
+        fh.write("not json\n")
+        fh.write('{"t": 1.0, "a": 2.0}\n')
+        fh.write('{"t": 2.0, "a": 3')           # torn: the writer was mid-line
+    meta, rows = read_telemetry(tmp_path)
+    assert meta == {} and [r["t"] for r in rows] == [0.0, 1.0]
+
+
+def test_breaches_are_reported_against_declared_tolerances(tmp_path):
+    meta = {"invariants": {"q": 1e-6}}
+    rows = [{"t": 0.0, "q": 1e-9}, {"t": 1.0, "q": -5e-6}, {"t": 2.0, "other": 1e9}]
+    assert invariant_breaches(meta, rows) == [("q", 1.0, -5e-6, 1e-6)]
+
+
+def test_unserialisable_value_is_recorded_as_text_not_crashed(tmp_path):
+    tel = TelemetryWriter(tmp_path)
+    assert tel.record(0.0, label="phase-A", x=object()) is True
+    tel.close()
+    _, rows = read_telemetry(tmp_path)
+    assert rows[0]["label"] == "phase-A" and isinstance(rows[0]["x"], str)
+
+
+def test_hud_monitor_renders_telemetry_and_flags_breach(tmp_path):
+    pytest.importorskip("matplotlib")
+    import sys
+    sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "tools"))
+    import hud_monitor
+    tel = TelemetryWriter(tmp_path, invariants={"q": 1e-6})
+    for i in range(10):
+        tel.record(i, q=1e-9 if i < 7 else 1e-3, energy=1.0)
+    tel.close()
+    path, breaches = hud_monitor.render_telemetry(str(tmp_path))
+    assert path and os.path.exists(path)
+    assert {b[0] for b in breaches} == {"q"} and len(breaches) == 3

@@ -29,14 +29,36 @@ bookkeeping, telemetry or tests.
 
 | date | id | summary | output-changing? | commit |
 |---|---|---|---|---|
-| 2026-10-04 | CL-003 | Provenance `steppers`; stale-run view; `--dt`/`--cells` for the a\* harnesses; re-validation driver | no (default paths byte-identical) | phase-b |
+| 2026-10-04 | CL-004 | Telemetry stream (`TelemetryWriter`), live HUD invariants, TG-B1S/B2-midplane wiring | no (observer only) | phase-c |
+| 2026-10-04 | CL-003 | Provenance `steppers`; stale-run view; `--dt`/`--cells` for the a\* harnesses; re-validation driver | no (default paths byte-identical) | `d3d87fd` |
 | 2026-10-04 | CL-002 | Stepper order + MMS gates, stepper mutations, CI extension | no (tests/tooling) | `0419ff9` |
 | 2026-10-02 | CL-001 | ETDRK4: complex-safe contour coefficients + stage-c `N_n` | **YES** | `e270cdc` |
 
 ---
 
+## CL-004 — Telemetry stream (Phase C)
+- **Branch:** `phase-c/telemetry`
+- **Files:**
+  - `jax_scout/snapshots.py`: `TelemetryWriter`, `read_telemetry`, `invariant_breaches`
+  - `tools/hud_monitor.py`: renders `telemetry*.png` per arm and prints breaches with the harness note
+  - `jax_scout/gravity_TG_B2_midplane_stress_flux.py`: `_live_ledger()`, `run_arm(..., tel=None)`,
+    a per-arm writer in `main()`
+  - `jax_scout/gravity_TG_B1S_state_load_feedback_gpu.py`: `run_arm(..., telemetry_dir=None)`, wired
+    in `main()`
+  - `tests/test_snapshots.py`: 7 new tests
+- **Why:** to watch the invariants of long runs live. See [[TELEMETRY_STREAM]].
+- **Output-changing?** **No.** It only records scalars that are already on the host. The midplane
+  smoke run's gates (G1/G2/G3) are unchanged with telemetry on. Each harness run now also writes
+  `telemetry/<arm>/telemetry.jsonl` and `telemetry_meta.json`.
+- **Verified:**
+  - `test_snapshots.py` 19/19, identities 36/36 (CPU).
+  - Midplane GPU smoke run: 0 breaches with the running-mean scale. The per-sample scale gave 8
+    false breaches and was replaced.
+
+---
+
 ## CL-003 — Stepper provenance, stale-run view, re-validation options (Phase B1–B3)
-- **Branch:** `phase-b/stale-flags-revalidation`
+- **Commit:** `d3d87fd` · branch `phase-b/stale-flags-revalidation`
 - **Files:**
   - `jax_scout/provenance.py`: `STEPPER_MODULES` and `steppers_loaded()`. `stamp()` gains
     `steppers`; `flat_stamp()` gains `steppers` as a comma string.

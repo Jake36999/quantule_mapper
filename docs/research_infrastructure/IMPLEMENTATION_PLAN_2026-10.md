@@ -18,7 +18,7 @@ status: running
 | C telemetry | **complete** (feb/C2.7 wiring deferred until the replay ends) | [[TELEMETRY_STREAM]] |
 | D provenance + manifest | **complete** | [[PROVENANCE_AND_HARNESS_REGISTRY]] |
 | E specs / MCP / UI | **complete** (C2.7 pilot run pending GPU) | [[EXPERIMENT_SPECS_MCP_UI]] |
-| F basin mapping | pending | |
+| F basin mapping | tools **complete** + validated; a\* GPU runs queued behind B4 | [[BASIN_MAPPING]] |
 
 
 ## Context

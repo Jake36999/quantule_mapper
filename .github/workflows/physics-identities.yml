@@ -20,6 +20,7 @@ on:
       - 'tests/test_stepper_order_jax.py'
       - 'tests/test_etdrk4_order.py'
       - 'tests/test_spec_layer.py'
+      - 'tests/test_continuation.py'
       - 'irer_specs/**'
       - 'specs/**'
       - '.github/workflows/physics-identities.yml'
@@ -58,7 +59,7 @@ jobs:
       - name: Run stepper order gates
         # tests/test_etdrk4_order.py: the NumPy coefficient gates run here; its CuPy test skips
         # without a GPU and is run locally from .venv instead.
-        run: pytest tests/test_stepper_order_jax.py tests/test_etdrk4_order.py tests/test_spec_layer.py -v --no-header -p no:cacheprovider
+        run: pytest tests/test_stepper_order_jax.py tests/test_etdrk4_order.py tests/test_spec_layer.py tests/test_continuation.py -v --no-header -p no:cacheprovider
 
       - name: Explain a failure
         if: failure()

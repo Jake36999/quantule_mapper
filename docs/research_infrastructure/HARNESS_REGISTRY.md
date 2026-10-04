@@ -10,13 +10,14 @@ status: running
 
 | status | count |
 |---|---|
-| ACTIVE | 8 |
-| UNREVIEWED | 108 |
+| ACTIVE | 9 |
+| UNREVIEWED | 109 |
 
 ## ACTIVE
 
 | id | file | branch | produces | invariants | summary | issues |
 |---|---|---|---|---|---|---|
+| astar_continuation_pilot | `jax_scout/astar_continuation_pilot.py` | [[Branch - Stability - Index]] | `ASTAR_CONTINUATION_PILOT` | — | Is a* a relative equilibrium of the fixed flow, and does its param_a branch change stability across the bracket? |  |
 | core_saturation_search | `jax_scout/core_saturation_search.py` | [[Branch - Stability - Index]] | `CORE_SAT_HUNT`, `CORE_SAT_PILOT`, `CORE_SAT_CALIB` | — | Batched Phase C core search and the v3 stable-collapse classifier (also a library: run_probe). |  |
 | feb_astar_confirm | `jax_scout/feb_astar_confirm.py` | [[Branch - Stability - Index]] | `FEB_ASTAR_CONFIRM` | — | Confirms a*: longer-T, seed-robustness and bracket cells. |  |
 | feb_gain_ladder_longt | `jax_scout/feb_gain_ladder_longt.py` | [[Branch - Stability - Index]] | `FEB_GAIN_LADDER_LONGT` | — | Late-window er slope vs cubic gain at T=72000: locates the a* gain/loss balance. |  |
@@ -139,4 +140,5 @@ Scripts that write to `sweep_runs/` but declare no manifest. `produces` is infer
 | `tools/conservative_geometry_campaign.py` | — |
 | `tools/hud_monitor.py` | — |
 | `tools/render_fields.py` | — |
+| `tools/run_spec.py` | — |
 | `tools/triangle_layout_diagnostic.py` | — |

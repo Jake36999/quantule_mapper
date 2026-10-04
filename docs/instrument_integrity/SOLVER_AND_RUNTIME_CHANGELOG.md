@@ -29,7 +29,8 @@ bookkeeping, telemetry or tests.
 
 | date | id | summary | output-changing? | commit |
 |---|---|---|---|---|
-| 2026-10-04 | CL-007 | MCP research tools (11, fenced writes, no launch); local spec editor; `prune_empty` | no | phase-e |
+| 2026-10-04 | CL-008 | Basin mapping: `state_descriptors`, `basin_cluster.py`, `continuation.py` (Newton–Krylov + arclength + Floquet), a\* pilot, post-replay queue | no (new analysis path) | phase-f |
+| 2026-10-04 | CL-007 | MCP research tools (11, fenced writes, no launch); local spec editor; `prune_empty` | no | `4ddff4d` |
 | 2026-10-04 | CL-006 | Spec layer: `irer_specs`, `jax_scout/registry.py`, `tools/run_spec.py`, `specs/`, index `specs` table | no (new path; harness-equivalent to <1e-10) | `a3cb757` |
 | 2026-10-04 | CL-005 | Component-hash provenance; harness manifests + registry; content-level staleness | no (stamp + inert manifests) | `333f17f` |
 | 2026-10-04 | CL-004 | Telemetry stream (`TelemetryWriter`), live HUD invariants, TG-B1S/B2-midplane wiring | no (observer only) | `2185d9f` |
@@ -39,8 +40,31 @@ bookkeeping, telemetry or tests.
 
 ---
 
+## CL-008 — Basin mapping tools (Phase F)
+- **Branch:** `phase-f/basin-mapping`
+- **Files:**
+  - `jax_scout/registry.py`: `state_descriptors` v2
+  - `tools/run_spec.py`: `final_only`
+  - `tools/basin_cluster.py` (new)
+  - `jax_scout/continuation.py` (new)
+  - `jax_scout/astar_continuation_pilot.py` (new, with a `HARNESS` manifest)
+  - `specs/approved/astar-basin-ensemble.json`
+  - `tools/revalidation/post_replay_queue.sh`, `tools/revalidation/compare_e270cdc.py`
+  - tests: `test_basin_cluster.py` (3), `test_continuation.py` (1, now in CI)
+- **Why:** to find distinct basins by forward ensembles and continuation instead of the blending
+  GA. See [[BASIN_MAPPING]].
+- **Output-changing?** No. These are new analysis tools, and the solver is untouched.
+- **Verified:**
+  - Continuation converges quadratically to the uniform S-NCGL state (ρ\* to 1e-12, θ to 1e-14).
+  - The clusterer recovers the planted basins on synthetic data, and the KG demo gives the predicted
+    2 basins.
+  - Limits found and documented: trivial-solution attraction; a singular family Jacobian for
+    conservative solitons.
+
+---
+
 ## CL-007 — MCP research tools and spec editor (Phase E2–E3)
-- **Branch:** `phase-e/specs-mcp-ui`
+- **Commit:** `4ddff4d` · **Branch:** `phase-e/specs-mcp-ui`
 - **Files:**
   - `mcp_server/research_tools.py` (new); `mcp_server/server.py` (11 `research_*` tools registered)
   - `jax_scout/registry.py` (`export()`, `__main__`); `docs/registry/components.json` (generated)

@@ -28,6 +28,20 @@
       "error": null
     },
     {
+      "id": "astar_continuation_pilot",
+      "file": "jax_scout/astar_continuation_pilot.py",
+      "status": "ACTIVE",
+      "branch": "Branch - Stability - Index",
+      "superseded_by": null,
+      "invariants": [],
+      "produces": [
+        "ASTAR_CONTINUATION_PILOT"
+      ],
+      "summary": "Is a* a relative equilibrium of the fixed flow, and does its param_a branch change stability across the bracket?",
+      "manifest": true,
+      "error": null
+    },
+    {
       "id": "candidate_deepdive",
       "file": "jax_scout/candidate_deepdive.py",
       "status": "UNREVIEWED",
@@ -1559,6 +1573,18 @@
     {
       "id": "render_fields",
       "file": "tools/render_fields.py",
+      "status": "UNREVIEWED",
+      "branch": null,
+      "superseded_by": null,
+      "invariants": [],
+      "produces": [],
+      "summary": null,
+      "manifest": false,
+      "error": null
+    },
+    {
+      "id": "run_spec",
+      "file": "tools/run_spec.py",
       "status": "UNREVIEWED",
       "branch": null,
       "superseded_by": null,

@@ -16,6 +16,8 @@ WHAT TO RECORD, AND WHY EACH FIELD MATTERS
                   makes cross-machine ordering ambiguous.
     python/jax    the runtime that produced the numbers. The project has already been bitten
                   by a numpy-ABI mismatch between two local environments.
+    steppers      which time-steppers were loaded (STEPPER_MODULES). Lets a stepper fix flag the
+                  runs it affects -- see docs/instrument_integrity/SOLVER_AND_RUNTIME_CHANGELOG.md.
 
 Usage in a harness, right before writing config.json or summary.json:
 
@@ -32,6 +34,26 @@ import sys
 import time
 
 _REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+#: Module -> time-stepper it defines. Added 2026-10-04 (Phase B of
+#: docs/research_infrastructure/IMPLEMENTATION_PLAN_2026-10.md) so that when a stepper is fixed, the
+#: runs it touched can be listed by query (tools/build_results_index.py -> v_stale_runs) instead of by
+#: reading every harness. It records which steppers were LOADED, which can over-include (a harness that
+#: imports a module for a helper is flagged too). Over-flagging a run for re-validation is the safe
+#: direction; under-flagging is the failure this exists to prevent.
+STEPPER_MODULES = {
+    "solver.core": "ETDRK4-cupy",
+    "jax_scout.physics": "ETDRK4",
+    "jax_scout.phase_d_c3_wave": "KG-strang",
+    "jax_scout.gravity_TG_B1S_state_load_feedback_gpu": "TG-RK4",
+    "jax_scout.gravity_TG_B2_two_node_awell": "TG-RK4",
+    "jax_scout.gravity_D_neutral_probe_gpu": "GravityD-RK4",
+}
+
+
+def steppers_loaded() -> list:
+    """Sorted, de-duplicated steppers whose defining module is imported in this process."""
+    return sorted({v for k, v in STEPPER_MODULES.items() if k in sys.modules})
 
 
 def _git(*args: str) -> str | None:
@@ -67,6 +89,7 @@ def stamp() -> dict:
         # POINT, which is the question you actually ask when reproducing a row.
         "harness": os.path.basename(sys.argv[0]) if sys.argv and sys.argv[0] else None,
         "argv": sys.argv[1:] if len(sys.argv) > 1 else [],
+        "steppers": steppers_loaded(),
     }
     try:
         import jax  # noqa: PLC0415
@@ -98,6 +121,7 @@ def flat_stamp() -> dict:
         "jax_version": s.get("jax"),
         "numpy_version": s.get("numpy"),
         "harness": s.get("harness"),
+        "steppers": ",".join(s.get("steppers") or []),
     }
 
 

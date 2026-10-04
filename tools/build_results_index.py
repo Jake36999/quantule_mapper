@@ -50,6 +50,7 @@ import subprocess
 import datetime as _dt
 
 import build_run_catalogue as brc  # reuse the extractors; do not duplicate them
+import stepper_staleness as stal  # Phase B: which runs used a stepper that was later fixed
 
 
 _TS = re.compile(r"_(\d{8})_(\d{6})$")
@@ -181,7 +182,20 @@ CREATE TABLE runs (
     n_visual    INTEGER,
     dof_free    INTEGER,               -- threat T2: parameters free in this run
     dof_fixed   INTEGER,               -- parameters pinned before it
-    run_dir     TEXT                   -- gitignored local path
+    run_dir     TEXT,                  -- gitignored local path
+    steppers    TEXT,                  -- comma list: ETDRK4 | ETDRK4-cupy | KG-strang | TG-RK4 | GravityD-RK4
+    stepper_source TEXT                -- recorded | harness | substrate | run_id | unknown (tools/stepper_staleness.py)
+);
+
+-- Instrument fixes (docs/registry/COMPONENT_FIXES.json) and, per run, whether its code had the fix.
+-- DESCRIPTIVE ONLY: a label for review, never a gate. Added 2026-10-04 (IMPLEMENTATION_PLAN_2026-10 B2).
+CREATE TABLE component_fixes (
+    fix_id TEXT PRIMARY KEY, component TEXT, fix_commit TEXT, fix_date TEXT,
+    affects_steppers TEXT, doc TEXT, summary TEXT
+);
+CREATE TABLE run_staleness (
+    run_id TEXT, fix_id TEXT, status TEXT, reason TEXT,
+    PRIMARY KEY (run_id, fix_id)
 );
 
 -- LONG format: heterogeneous configs across variants without a schema migration.
@@ -209,6 +223,12 @@ CREATE TABLE verdicts (
     verdict TEXT PRIMARY KEY, n_runs INTEGER, first_seen TEXT, last_seen TEXT,
     catalog_tracked INTEGER
 );
+
+CREATE VIEW v_stale_runs AS
+    SELECT s.run_id, s.fix_id, s.reason, r.date, r.substrate, r.family, r.steppers, r.stepper_source,
+           r.code_epoch, r.verdict
+      FROM run_staleness s JOIN runs r USING (run_id)
+     WHERE s.status = 'STALE_PENDING_REVALIDATION';
 
 CREATE INDEX idx_runs_branch    ON runs(branch);
 CREATE INDEX idx_runs_substrate ON runs(substrate);
@@ -333,9 +353,17 @@ def main():
     if os.path.exists(cpath):
         catalog = open(cpath, encoding="utf-8", errors="replace").read()
 
+    FIXES = stal.load_fixes()
+    con.executemany("INSERT OR REPLACE INTO component_fixes VALUES (?,?,?,?,?,?,?)",
+                    [(f["id"], f.get("component"), f.get("fix_commit"), f.get("fix_date"),
+                      ",".join(f.get("affects_steppers", [])), f.get("doc"), f.get("summary"))
+                     for f in FIXES])
+
     for r in recs:
         fam = r["family"]
         gc = r.get("git_commit")
+        if not gc and isinstance(r["summary"].get("provenance"), dict):
+            gc = r["summary"]["provenance"].get("commit")   # write_json nests the stamp
         if gc:
             epoch, epoch_src = str(gc)[:12], "recorded"
         else:
@@ -348,14 +376,25 @@ def main():
                 epoch, epoch_src = "unknown", "unavailable"
         cfg = r["summary"].get("config") if isinstance(r["summary"].get("config"), dict) else {}
         free = [k for k in cfg if k in brc_phys_params()]
+        substrate = SUBSTRATE.get(fam, "unclassified")
+        steppers, step_src = stal.resolve_steppers(r["summary"], substrate, r["run_id"])
         con.execute(
-            "INSERT OR REPLACE INTO runs VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-            (r["run_id"], r["date"], r["band"], fam, SUBSTRATE.get(fam, "unclassified"),
+            "INSERT OR REPLACE INTO runs VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+            (r["run_id"], r["date"], r["band"], fam, substrate,
              brc.SECTOR_INDEX.get(r["band"], ""), r["summary"].get("config", {}).get("out", "") or "",
              gc, epoch, epoch_src, r["verdict"], 1 if r["complete"] else 0,
              "derived" if r.get("derived") else "summary.json",
              r.get("elapsed_h"), len(r["csvs"]), len(brc.find_images(r["run_dir"])),
-             len(free), None, r["run_dir"]))
+             len(free), None, r["run_dir"], ",".join(steppers), step_src))
+        for fx in FIXES:
+            st = stal.staleness(r["run_id"], steppers, epoch, r["date"], fx)
+            if st:
+                con.execute("INSERT OR REPLACE INTO run_staleness VALUES (?,?,?,?)",
+                            (r["run_id"], fx["id"], st[0], st[1]))
+                if st[0] == "REVALIDATED":
+                    con.execute("INSERT OR REPLACE INTO edges VALUES (?,?,?,?,?)",
+                                ("run", r["run_id"], "revalidated_by", "run",
+                                 fx["revalidated"][r["run_id"]]))
 
         rows = []
         flatten("", cfg, rows)
@@ -446,6 +485,11 @@ def main():
     print("\n  by substrate (the anti-pollution key):")
     for s, n, nv, f, l in q("SELECT * FROM v_substrate_summary ORDER BY n_runs DESC"):
         print("    %-26s %3d runs (%2d with verdict)  %s .. %s" % (s, n, nv, f, l))
+
+    print("\n  stepper fixes (docs/registry/COMPONENT_FIXES.json) -- descriptive, never a gate:")
+    for fid, st, n in q("SELECT fix_id, status, COUNT(*) FROM run_staleness GROUP BY fix_id, status "
+                        "ORDER BY fix_id, status"):
+        print("    %-18s %-28s %3d runs" % (fid, st, n))
 
     if args.parquet:
         try:

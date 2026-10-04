@@ -1,0 +1,17 @@
+{
+  "_about": "Hand-maintained registry of instrument fixes. tools/build_results_index.py reads it and marks every run that loaded an affected stepper on code WITHOUT the fix as STALE_PENDING_REVALIDATION (view v_stale_runs). Descriptive only: it never blocks a run. Add one entry per fix; record re-validations under `revalidated` as {old_run_id: new_run_id_or_doc}. Runs listed in `not_affected` are exempted with a reason. See docs/instrument_integrity/SOLVER_AND_RUNTIME_CHANGELOG.md.",
+  "fixes": [
+    {
+      "id": "etdrk4-2026-10",
+      "changelog": "CL-001",
+      "component": "ETDRK4 time-stepper (contour coefficients + stage c)",
+      "fix_commit": "e270cdc",
+      "fix_date": "2026-10-02",
+      "affects_steppers": ["ETDRK4", "ETDRK4-cupy"],
+      "doc": "instrument_integrity/ETDRK4_INTEGRATOR_BUGS_2026-10.md",
+      "summary": "Order ~0.6 instead of 4; psi error 8.5% at dt=0.005, T=2 (N=48). Quantitative pre-fix ETDRK4 results need re-validation.",
+      "revalidated": {},
+      "not_affected": {}
+    }
+  ]
+}

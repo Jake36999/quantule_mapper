@@ -29,13 +29,44 @@ bookkeeping, telemetry or tests.
 
 | date | id | summary | output-changing? | commit |
 |---|---|---|---|---|
-| 2026-10-04 | CL-002 | Stepper order + MMS gates, stepper mutations, CI extension | no (tests/tooling) | phase-a |
+| 2026-10-04 | CL-003 | Provenance `steppers`; stale-run view; `--dt`/`--cells` for the a\* harnesses; re-validation driver | no (default paths byte-identical) | phase-b |
+| 2026-10-04 | CL-002 | Stepper order + MMS gates, stepper mutations, CI extension | no (tests/tooling) | `0419ff9` |
 | 2026-10-02 | CL-001 | ETDRK4: complex-safe contour coefficients + stage-c `N_n` | **YES** | `e270cdc` |
 
 ---
 
+## CL-003 — Stepper provenance, stale-run view, re-validation options (Phase B1–B3)
+- **Branch:** `phase-b/stale-flags-revalidation`
+- **Files:**
+  - `jax_scout/provenance.py`: `STEPPER_MODULES` and `steppers_loaded()`. `stamp()` gains
+    `steppers`; `flat_stamp()` gains `steppers` as a comma string.
+  - `tools/stepper_staleness.py` (new): resolves each run's steppers (recorded → harness AST scan →
+    substrate → run-id prefix) and its staleness per fix (git ancestry, falling back to date).
+  - `tools/build_results_index.py`: `runs.steppers` / `runs.stepper_source`, the `component_fixes`
+    and `run_staleness` tables, the `v_stale_runs` view and `revalidated_by` edges. It also now reads
+    the commit from a nested `provenance` stamp.
+  - `docs/registry/COMPONENT_FIXES.json` (new): one entry, `etdrk4-2026-10`.
+  - `jax_scout/core_saturation_search.py`: `run_probe(..., dt=None)` and `dt_ratio()`.
+  - `jax_scout/feb_gain_ladder_longt.py`, `jax_scout/feb_astar_confirm.py`: `--dt`, `--cells`, and a
+    provenance stamp in the summary JSON.
+  - `tools/revalidation/reval_e270cdc.sh` (new): the replay driver.
+  - `tests/test_stepper_staleness.py` (new, 11 tests).
+- **Why:** to flag runs touched by a fixed stepper by query rather than by reading harnesses, and to
+  run the full-replay re-validation. See [[REVALIDATION_E270CDC_RESULTS]].
+- **Output-changing?** **No.** With no `--dt`, run_probe uses the historical `DT`, and the harness
+  loops and keys are unchanged. The only addition to their output is the `provenance` / `dt` /
+  `dt_ratio` keys in the summary JSON.
+- **Verified:**
+  - 11/11 staleness tests pass.
+  - Results index: 102 ETDRK4 runs flagged stale, 0 KG/TG runs flagged.
+  - The full suite shows the same failing-test set as before.
+  - `--dt` smoke test: `er_fin` agrees to 1.4e-6 at dt/2.
+  - Parity: 1.7e-12 with real L, 2.1e-12 with complex L.
+
+---
+
 ## CL-002 — Stepper order gates (Phase A)
-- **Commit:** see `git log -- tests/test_stepper_order_jax.py` · branch `phase-a/stepper-order-gates`
+- **Commit:** `0419ff9` · branch `phase-a/stepper-order-gates`
 - **Files:**
   - `tests/test_stepper_order_jax.py` (new)
   - `tools/mutation_probe.py` (6 `stepper` mutations; `TESTS` is now a list; new `--tests` option)

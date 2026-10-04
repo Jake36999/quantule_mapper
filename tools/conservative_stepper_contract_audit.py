@@ -424,7 +424,7 @@ def run_one_step_case(N: int, L: float, dt: float, spacing: float) -> dict[str, 
     N_a = solver.N_op(a_k)
     b_k = solver.E2 * psi_k + solver.Q * N_a
     N_b = solver.N_op(b_k)
-    c_k = solver.E2 * a_k + solver.Q * (2.0 * N_b - N_a)
+    c_k = solver.E2 * a_k + solver.Q * (2.0 * N_b - N_n)
     N_c = solver.N_op(c_k)
     psi_next_k = solver.step(psi_k)
     psi_next = solver.ifft_single(psi_next_k)

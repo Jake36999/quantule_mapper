@@ -37,7 +37,7 @@ RHO_FLOOR = 1e-7
 OMEGA_SQ_MIN = 1e-9      # self.omega_sq_min
 OMEGA_SQ_MAX = 1e6       # self.omega_sq_max
 D_SPATIAL = 3.0
-KT_CONTOUR_M = 64        # M >= 64 (ALETHEIA V4.4 Directive 4)
+KT_CONTOUR_M = 128       # full-circle points (was 64 on a half circle; ALETHEIA V4.4 Directive 4)
 GEOM_EPSILON = 1e-12     # derive_stable_conformal_factor default epsilon
 
 
@@ -279,7 +279,7 @@ def step(psi_k, ops, rho_vac_eff=None, omega_sq_mult=None, a_vec=None, q_tensor=
     n_a = n_op(a_k, ops, rho_vac_eff, omega_sq_mult, a_vec, q_tensor, drag_field)
     b_k = ops.E2 * psi_k + ops.Q * n_a
     n_b = n_op(b_k, ops, rho_vac_eff, omega_sq_mult, a_vec, q_tensor, drag_field)
-    c_k = ops.E2 * a_k + ops.Q * (2.0 * n_b - n_a)
+    c_k = ops.E2 * a_k + ops.Q * (2.0 * n_b - n_n)  # Cox-Matthews: N(u_n), not N(a)
     n_c = n_op(c_k, ops, rho_vac_eff, omega_sq_mult, a_vec, q_tensor, drag_field)
     psi_next_k = ops.E * psi_k + ops.f1 * n_n + 2.0 * ops.f2 * (n_a + n_b) + ops.f3 * n_c
     psi_next_k = psi_next_k * ops.dealias_mask
@@ -328,7 +328,9 @@ def _construct_ops(N, L, dt, D_diff, eta, rho_vac, omega0, a, s, f,
 
     # --- Kassam-Trefethen contour-integral coefficients (M points) ---
     M = KT_CONTOUR_M
-    theta = jnp.exp(1j * jnp.pi * (jnp.arange(1, M + 1, dtype=jnp.float64) - 0.5) / M).astype(jnp.complex128)
+    # FULL circle, complex result: L_k is complex, so the half-circle + real() shortcut is invalid
+    # (it made ETDRK4 1st-order). Mirrors solver/etdrk4_coeffs.py.
+    theta = jnp.exp(2j * jnp.pi * (jnp.arange(1, M + 1, dtype=jnp.float64) - 0.5) / M).astype(jnp.complex128)
     r = 1.0
     w = (L_k * dt).astype(jnp.complex128)
 
@@ -347,10 +349,10 @@ def _construct_ops(N, L, dt, D_diff, eta, rho_vac, omega0, a, s, f,
     z0 = jnp.zeros_like(w)
     Q_acc, f1_acc, f2_acc, f3_acc = lax.fori_loop(0, M, body, (z0, z0, z0, z0))
 
-    Q = (dt * jnp.real(Q_acc / M)).astype(rd)
-    f1 = (dt * jnp.real(f1_acc / M)).astype(rd)
-    f2 = (dt * jnp.real(f2_acc / M)).astype(rd)
-    f3 = (dt * jnp.real(f3_acc / M)).astype(rd)
+    Q = (dt * Q_acc / M).astype(cd)
+    f1 = (dt * f1_acc / M).astype(cd)
+    f2 = (dt * f2_acc / M).astype(cd)
+    f3 = (dt * f3_acc / M).astype(cd)
     E = jnp.exp(w).astype(cd)
     E2 = jnp.exp(w / 2.0).astype(cd)
 

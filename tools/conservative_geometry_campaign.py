@@ -253,27 +253,9 @@ class ConservativeCupySolver:
                 self._rebuild_etdrk4_coefficients()
 
             def _rebuild_etdrk4_coefficients(self) -> None:
-                M = 64
-                theta = cp.exp(1j * cp.pi * (cp.arange(1, M + 1, dtype=cp.float64) - 0.5) / M).astype(cp.complex128)
-                w = (self.L_k * self.dt).astype(cp.complex128, copy=False)
-                Q_acc = cp.zeros_like(w, dtype=cp.complex128)
-                f1_acc = cp.zeros_like(w, dtype=cp.complex128)
-                f2_acc = cp.zeros_like(w, dtype=cp.complex128)
-                f3_acc = cp.zeros_like(w, dtype=cp.complex128)
-                for i in range(M):
-                    we = w + theta[i]
-                    ew = cp.exp(we)
-                    we3 = we**3
-                    Q_acc += (cp.exp(we / 2.0) - 1.0) / we
-                    f1_acc += (-4.0 - we + ew * (4.0 - 3.0 * we + we**2)) / we3
-                    f2_acc += (2.0 + we + ew * (we - 2.0)) / we3
-                    f3_acc += (-4.0 - 3.0 * we - we**2 + ew * (4.0 - we)) / we3
-                self.Q = self.dt * cp.real(Q_acc / M)
-                self.f1 = self.dt * cp.real(f1_acc / M)
-                self.f2 = self.dt * cp.real(f2_acc / M)
-                self.f3 = self.dt * cp.real(f3_acc / M)
-                self.E = cp.exp(w)
-                self.E2 = cp.exp(w / 2.0)
+                # Complex-safe full-circle contour (see solver/etdrk4_coeffs.py).
+                from solver.etdrk4_coeffs import etdrk4_coefficients
+                self.E, self.E2, self.Q, self.f1, self.f2, self.f3 = etdrk4_coefficients(self.L_k, self.dt, cp)
 
             def N_op(self, psi_k):  # noqa: N802 - inherited public API
                 if not self.nonlinear_enabled:
@@ -288,7 +270,7 @@ class ConservativeCupySolver:
                 b_k = compute_kt_stage_base(self.E2, psi_k, self.Q, N_a)
                 N_b = self.N_op(b_k)
                 self.last_N_b = N_b
-                c_k = compute_kt_stage_c(self.E2, a_k, self.Q, N_b, N_a)
+                c_k = compute_kt_stage_c(self.E2, a_k, self.Q, N_b, N_n)
                 N_c = self.N_op(c_k)
                 self.last_N_c = N_c
                 psi_next_k = combine_kt_etdrk4(psi_k, N_n, N_a, N_b, N_c, self.E, self.f1, self.f2, self.f3)

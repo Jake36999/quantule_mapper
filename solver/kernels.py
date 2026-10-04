@@ -75,8 +75,10 @@ def compute_kt_stage_base(E2, psi_k, Q, N_k):
     return E2 * psi_k + Q * N_k
 
 @cp.fuse()
-def compute_kt_stage_c(E2, a_k, Q, N_b, N_a):
-    return E2 * a_k + Q * (2.0 * N_b - N_a)
+def compute_kt_stage_c(E2, a_k, Q, N_b, N_n):
+    # Cox-Matthews / Kassam-Trefethen: c = E2*a + Q*(2*N(b) - N(u_n)). N_n is the START-of-step
+    # nonlinearity, not N(a); using N(a) here made the scheme 2nd-order.
+    return E2 * a_k + Q * (2.0 * N_b - N_n)
 
 @cp.fuse()
 def combine_kt_etdrk4(psi_k, N_n, N_a, N_b, N_c, E, f1, f2, f3):

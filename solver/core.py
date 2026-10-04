@@ -19,6 +19,7 @@ from .kernels import (
     combine_kt_etdrk4,
 )
 
+from .etdrk4_coeffs import etdrk4_coefficients
 from orchestrator.contracts import DEFAULT_PARAM_RHO_VAC, DEFAULT_PARAM_OMEGA0
 
 sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'gravity'))
@@ -96,34 +97,9 @@ class ETDRK4Solver:
         # N_op carries only the geometry correction D(Δ_g - Δ)ψ plus the polynomial nonlinearity.
         self.L_k = (-self.D_diff * self.k_sq + (-self.eta + 1j * self.omega0)).astype(cp.complex128)
 
-        # [ALETHEIA V4.4] Directive 4: Adaptive ETDRK4 Contour (M >= 64)
-        M = 64
-        theta = cp.exp(1j * cp.pi * (cp.arange(1, M + 1, dtype=cp.float64) - 0.5) / M).astype(cp.complex128)
-        r = cp.float64(1.0)
-
-        w = (self.L_k * dt).astype(cp.complex128, copy=False)
-
-        Q_acc = cp.zeros_like(w, dtype=cp.complex128)
-        f1_acc = cp.zeros_like(w, dtype=cp.complex128)
-        f2_acc = cp.zeros_like(w, dtype=cp.complex128)
-        f3_acc = cp.zeros_like(w, dtype=cp.complex128)
-
-        for i in range(M):
-            z = r * theta[i]
-            w_exp = w + z
-            Q_acc += (cp.exp(w_exp / 2.0) - 1.0) / w_exp
-            exp_w = cp.exp(w_exp)
-            f1_acc += (-4.0 - w_exp + exp_w * (4.0 - 3.0 * w_exp + w_exp**2)) / (w_exp**3)
-            f2_acc += (2.0 + w_exp + exp_w * (w_exp - 2.0)) / (w_exp**3)
-            f3_acc += (-4.0 - 3.0 * w_exp - w_exp**2 + exp_w * (4.0 - w_exp)) / (w_exp**3)
-
-        self.Q = dt * cp.real(Q_acc / M)
-        self.f1 = dt * cp.real(f1_acc / M)
-        self.f2 = dt * cp.real(f2_acc / M)
-        self.f3 = dt * cp.real(f3_acc / M)
-
-        self.E = cp.exp(w)
-        self.E2 = cp.exp(w / 2.0)
+        # Kassam-Trefethen contour coefficients, full circle, kept COMPLEX (L_k is complex: the old
+        # half-circle + real() shortcut is only valid for real L and made ETDRK4 1st-order). See etdrk4_coeffs.py.
+        self.E, self.E2, self.Q, self.f1, self.f2, self.f3 = etdrk4_coefficients(self.L_k, dt, cp)
 
         # param_dealias_fraction lets the refinement ladder vary the anti-aliasing cutoff
         # without touching the solver physics.  Default 0.5 preserves existing behaviour.
@@ -423,7 +399,7 @@ class ETDRK4Solver:
         self.last_N_b = N_b  # zero-copy reference
         
         # --- Stage D (c) ---
-        c_k = compute_kt_stage_c(self.E2, a_k, self.Q, N_b, N_a)
+        c_k = compute_kt_stage_c(self.E2, a_k, self.Q, N_b, N_n)
         N_c = self.N_op(c_k)
         self.last_N_c = N_c  # zero-copy reference
 

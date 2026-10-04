@@ -29,7 +29,23 @@ bookkeeping, telemetry or tests.
 
 | date | id | summary | output-changing? | commit |
 |---|---|---|---|---|
+| 2026-10-04 | CL-002 | Stepper order + MMS gates, stepper mutations, CI extension | no (tests/tooling) | phase-a |
 | 2026-10-02 | CL-001 | ETDRK4: complex-safe contour coefficients + stage-c `N_n` | **YES** | `e270cdc` |
+
+---
+
+## CL-002 — Stepper order gates (Phase A)
+- **Commit:** see `git log -- tests/test_stepper_order_jax.py` · branch `phase-a/stepper-order-gates`
+- **Files:**
+  - `tests/test_stepper_order_jax.py` (new)
+  - `tools/mutation_probe.py` (6 `stepper` mutations; `TESTS` is now a list; new `--tests` option)
+  - `.github/workflows/physics-identities.yml` (also triggers on `solver/**`; runs the order gates)
+- **Why:** to give accuracy a guard, since identity tests cannot see it. See [[STEPPER_ORDER_GATES]].
+- **Output-changing?** No. No solver or harness code was modified.
+- **Verified:**
+  - 10/10 new tests pass in WSL `~/jax_irer` on CPU (about 40 s).
+  - Mutation probe: 16/16 caught. With identities only, all 6 stepper mutations survive.
+  - First execution of the JAX ETDRK4 fix: order 4.0–4.08.
 
 ---
 

@@ -1,0 +1,155 @@
+{
+  "tests": [
+    "tests/test_physics_identities.py",
+    "tests/test_stepper_order_jax.py"
+  ],
+  "results": [
+    {
+      "label": "geom_flag_ignored",
+      "bug_class": "C2.6",
+      "file": "jax_scout/gravity_TG_B2_two_node_awell.py",
+      "outcome": "CAUGHT",
+      "returncode": 1,
+      "seconds": 3.9,
+      "tail": "1 failed, 12 passed in 3.50s"
+    },
+    {
+      "label": "coupling_scaled_by_151",
+      "bug_class": "C2.6",
+      "file": "jax_scout/gravity_TG_B2_two_node_awell.py",
+      "outcome": "CAUGHT",
+      "returncode": 1,
+      "seconds": 4.0,
+      "tail": "1 failed, 15 passed in 3.63s"
+    },
+    {
+      "label": "feedback_flag_ignored",
+      "bug_class": "C2.6",
+      "file": "jax_scout/gravity_TG_B2_two_node_awell.py",
+      "outcome": "CAUGHT",
+      "returncode": 1,
+      "seconds": 2.7,
+      "tail": "1 failed, 8 passed in 2.37s"
+    },
+    {
+      "label": "a_sign_polarity_flipped",
+      "bug_class": "sign",
+      "file": "jax_scout/gravity_TG_B2_two_node_awell.py",
+      "outcome": "CAUGHT",
+      "returncode": 1,
+      "seconds": 4.1,
+      "tail": "1 failed, 15 passed in 3.67s"
+    },
+    {
+      "label": "mass_term_sign_flipped",
+      "bug_class": "sign",
+      "file": "jax_scout/gravity_TG_B2_two_node_awell.py",
+      "outcome": "CAUGHT",
+      "returncode": 1,
+      "seconds": 4.2,
+      "tail": "1 failed, 16 passed in 3.76s"
+    },
+    {
+      "label": "kappa_backreaction_sign",
+      "bug_class": "sign",
+      "file": "jax_scout/gravity_TG_B2_two_node_awell.py",
+      "outcome": "CAUGHT",
+      "returncode": 1,
+      "seconds": 4.2,
+      "tail": "1 failed, 17 passed in 3.84s"
+    },
+    {
+      "label": "kg_dispersion_drops_mass",
+      "bug_class": "C3",
+      "file": "jax_scout/phase_d_c3_wave.py",
+      "outcome": "CAUGHT",
+      "returncode": 1,
+      "seconds": 5.8,
+      "tail": "1 failed, 14 passed, 2 warnings in 3.78s"
+    },
+    {
+      "label": "kg_propagator_detuned",
+      "bug_class": "C3",
+      "file": "jax_scout/phase_d_c3_wave.py",
+      "outcome": "CAUGHT",
+      "returncode": 1,
+      "seconds": 4.1,
+      "tail": "1 failed, 14 passed in 3.71s"
+    },
+    {
+      "label": "energy_drops_gradient_term",
+      "bug_class": "C2.8b",
+      "file": "jax_scout/gravity_TG_B2_midplane_stress_flux.py",
+      "outcome": "CAUGHT",
+      "returncode": 1,
+      "seconds": 2.6,
+      "tail": "1 failed, 5 passed in 2.20s"
+    },
+    {
+      "label": "energy_kinetic_double_counted",
+      "bug_class": "C2.8b",
+      "file": "jax_scout/gravity_TG_B2_midplane_stress_flux.py",
+      "outcome": "CAUGHT",
+      "returncode": 1,
+      "seconds": 2.5,
+      "tail": "1 failed, 5 passed in 2.13s"
+    },
+    {
+      "label": "etdrk4_stage_c_uses_Na",
+      "bug_class": "stepper",
+      "file": "jax_scout/physics.py",
+      "outcome": "CAUGHT",
+      "returncode": 1,
+      "seconds": 8.4,
+      "tail": "1 failed, 18 passed in 7.95s"
+    },
+    {
+      "label": "etdrk4_contour_real_part",
+      "bug_class": "stepper",
+      "file": "jax_scout/physics.py",
+      "outcome": "CAUGHT",
+      "returncode": 1,
+      "seconds": 9.0,
+      "tail": "1 failed, 18 passed in 8.56s"
+    },
+    {
+      "label": "kg_strang_kick_asymmetric",
+      "bug_class": "stepper",
+      "file": "jax_scout/phase_d_c3_wave.py",
+      "outcome": "CAUGHT",
+      "returncode": 1,
+      "seconds": 22.4,
+      "tail": "1 failed, 22 passed in 20.14s"
+    },
+    {
+      "label": "tg_b1s_rk4_stage3_uses_k1",
+      "bug_class": "stepper",
+      "file": "jax_scout/gravity_TG_B1S_state_load_feedback_gpu.py",
+      "outcome": "CAUGHT",
+      "returncode": 1,
+      "seconds": 28.4,
+      "tail": "1 failed, 24 passed in 26.21s"
+    },
+    {
+      "label": "tg_b2_rk4_stage3_uses_k1",
+      "bug_class": "stepper",
+      "file": "jax_scout/gravity_TG_B2_two_node_awell.py",
+      "outcome": "CAUGHT",
+      "returncode": 1,
+      "seconds": 33.4,
+      "tail": "1 failed, 25 passed in 31.10s"
+    },
+    {
+      "label": "gravity_d_rk4_stage3_uses_k1",
+      "bug_class": "stepper",
+      "file": "jax_scout/gravity_D_neutral_probe_gpu.py",
+      "outcome": "CAUGHT",
+      "returncode": 1,
+      "seconds": 38.2,
+      "tail": "1 failed, 27 passed in 35.89s"
+    }
+  ],
+  "n_caught": 16,
+  "n_survived": 0,
+  "restored_clean": true
+}

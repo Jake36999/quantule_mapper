@@ -138,3 +138,8 @@ it answers a different question from this one.
 ## Branches
 
 - [[../Branch - Validation - Index]]
+
+> [!note] Addendum 2026-10-04 — stepper class
+> Six `stepper` mutations were added after the October ETDRK4 bugs. The identity suite alone
+> catches **0 of 6**; with the new order gates, all 16 mutations are caught. The record lives in the
+> new-era folder: [[STEPPER_ORDER_GATES]].

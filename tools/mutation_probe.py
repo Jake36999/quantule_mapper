@@ -49,7 +49,9 @@ import sys
 import time
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-TESTS = "tests/test_physics_identities.py"
+#: Identity tests guard conservation laws and nulls; stepper-order tests guard accuracy. Both run
+#: against every mutation, so a stepper bug that keeps the identities green is still caught.
+TESTS = ["tests/test_physics_identities.py", "tests/test_stepper_order_jax.py"]
 
 #: (label, bug-class, relative path, exact text to find, replacement)
 MUTATIONS = [
@@ -100,6 +102,35 @@ MUTATIONS = [
      "jax_scout/gravity_TG_B2_midplane_stress_flux.py",
      "    E_kin_R = jnp.sum(jnp.where(RM, e_kin, 0.0)) * dV",
      "    E_kin_R = jnp.sum(jnp.where(RM, e_kin, 0.0)) * dV * 2.0"),
+
+    # --- stepper class (added 2026-10-04): the equation is right, the integrator is inaccurate --
+    # The two ETDRK4 bugs of October 2026 (docs/instrument_integrity/ETDRK4_INTEGRATOR_BUGS_2026-10.md)
+    # kept every identity green. These reproduce their shapes, plus the analogous slips in the
+    # other active steppers, and must be caught by tests/test_stepper_order_jax.py.
+    ("etdrk4_stage_c_uses_Na", "stepper",
+     "jax_scout/physics.py",
+     "ops.Q * (2.0 * n_b - n_n)",
+     "ops.Q * (2.0 * n_b - n_a)"),
+    ("etdrk4_contour_real_part", "stepper",
+     "jax_scout/physics.py",
+     "    Q = (dt * Q_acc / M).astype(cd)",
+     "    Q = (dt * jnp.real(Q_acc / M)).astype(cd)"),
+    ("kg_strang_kick_asymmetric", "stepper",
+     "jax_scout/phase_d_c3_wave.py",
+     "        pi_new = kick_half(psi_new, pi_new)",
+     "        pi_new = kick_half(psi_k, pi_new)"),
+    ("tg_b1s_rk4_stage3_uses_k1", "stepper",
+     "jax_scout/gravity_TG_B1S_state_load_feedback_gpu.py",
+     "    s3 = tuple(y + 0.5 * dt * dy for y, dy in zip(state, k2))",
+     "    s3 = tuple(y + 0.5 * dt * dy for y, dy in zip(state, k1))"),
+    ("tg_b2_rk4_stage3_uses_k1", "stepper",
+     "jax_scout/gravity_TG_B2_two_node_awell.py",
+     "    s3 = tuple(y + 0.5 * dt * dy for y, dy in zip(state, k2))",
+     "    s3 = tuple(y + 0.5 * dt * dy for y, dy in zip(state, k1))"),
+    ("gravity_d_rk4_stage3_uses_k1", "stepper",
+     "jax_scout/gravity_D_neutral_probe_gpu.py",
+     "    k3 = rhs(psi + 0.5 * dt * k2, Nf, grid)",
+     "    k3 = rhs(psi + 0.5 * dt * k1, Nf, grid)"),
 ]
 
 
@@ -109,11 +140,11 @@ def git_dirty(paths):
     return [ln for ln in r.stdout.splitlines() if ln.strip()]
 
 
-def run_suite(timeout):
+def run_suite(timeout, tests=None):
     env = dict(os.environ)
     env.setdefault("JAX_PLATFORMS", "cpu")
     try:
-        r = subprocess.run([sys.executable, "-m", "pytest", TESTS, "-q", "-x", "--no-header"],
+        r = subprocess.run([sys.executable, "-m", "pytest", *(tests or TESTS), "-q", "-x", "--no-header", "-p", "no:cacheprovider"],
                            cwd=ROOT, capture_output=True, text=True, timeout=timeout, env=env)
         return r.returncode, (r.stdout or "") + (r.stderr or "")
     except subprocess.TimeoutExpired:
@@ -125,6 +156,8 @@ def main():
     ap.add_argument("--list", action="store_true", help="print the mutations and exit")
     ap.add_argument("--only", help="substring filter on the label")
     ap.add_argument("--timeout", type=int, default=900)
+    ap.add_argument("--tests", nargs="+", default=None,
+                    help="override the test files (e.g. identities only, to measure what they miss)")
     ap.add_argument("--out", default="runtime_logs/mutation_probe.json")
     args = ap.parse_args()
 
@@ -146,7 +179,7 @@ def main():
         return 2
 
     print("baseline (unmutated) suite ...", flush=True)
-    rc, out = run_suite(args.timeout)
+    rc, out = run_suite(args.timeout, args.tests)
     if rc != 0:
         print("refusing to run: the suite is not green before mutation.")
         print(out[-2000:])
@@ -177,7 +210,7 @@ def main():
         try:
             with io.open(path, "wb") as fh:
                 fh.write(original.replace(old_b, new_b, 1))
-            rc, out = run_suite(args.timeout)
+            rc, out = run_suite(args.timeout, args.tests)
         finally:
             with io.open(path, "wb") as fh:
                 fh.write(original)
@@ -211,7 +244,7 @@ def main():
     outp = os.path.join(ROOT, args.out)
     os.makedirs(os.path.dirname(outp), exist_ok=True)
     with io.open(outp, "w", encoding="utf-8") as fh:
-        json.dump({"tests": TESTS, "results": results,
+        json.dump({"tests": args.tests or TESTS, "results": results,
                    "n_caught": len(tested) - len(survived), "n_survived": len(survived),
                    "restored_clean": not left}, fh, indent=2)
     print("\nwrote %s" % args.out)

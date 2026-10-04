@@ -13,8 +13,8 @@ status: running
 
 | phase | status | record |
 |---|---|---|
-| A order gates | in progress | [[STEPPER_ORDER_GATES]] |
-| B stale flags + re-validation | pending | [[REVALIDATION_E270CDC_RESULTS]] |
+| A order gates | **complete** 2026-10-04 | [[STEPPER_ORDER_GATES]] |
+| B stale flags + re-validation | in progress | [[REVALIDATION_E270CDC_RESULTS]] |
 | C telemetry | pending | |
 | D provenance + manifest | pending | |
 | E specs / MCP / UI | pending | |

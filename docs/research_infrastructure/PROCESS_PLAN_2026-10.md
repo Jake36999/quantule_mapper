@@ -2,13 +2,13 @@
 tags: [plan, process, verification, infrastructure]
 date: 2026-10-04
 branch: Main branch
-status: planning
+status: complete
 ---
 
 # Process Plan — October 2026
 
-**Status: planning only.** The project is partly shelved. Nothing here is scheduled until it comes
-back off the shelf, except the solver fix (§1), which is already committed.
+**Status: superseded by the scheduled [[IMPLEMENTATION_PLAN_2026-10]] (2026-10-04).** This document
+keeps the reasoning; the implementation plan has the schedule.
 
 This plan adds steps to the process. It does not replace [[INTEGRATED_PLAN_2026-09]] or
 [[SESSION_SYNTHESIS_2026-09-17]] §5–8; it builds on them. It came out of an audit of the
@@ -31,7 +31,7 @@ solver, the JAX mirror and two tools:
 | **0.005** (production) | **8.5%** | **0.27%** |
 | 0.0025 | 5.5% | 0.025% |
 
-The observed order went from about 0.6 to about 3.5–4. Evidence: `F:\Maths_exploration\solver_fix\`.
+The observed order went from about 0.6 to about 3.5–4. Evidence: `docs/instrument_integrity/evidence/etdrk4_2026-10/`; full record [[ETDRK4_INTEGRATOR_BUGS_2026-10]].
 
 **Scope.** Affected: everything that ran through ETDRK4 — Phase C, the C1 dispersive runs and the
 C2 NLS conservative branch. **Not affected:** C3 KG and the whole TG/gravity stack, which uses the

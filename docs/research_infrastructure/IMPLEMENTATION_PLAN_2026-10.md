@@ -17,7 +17,7 @@ status: running
 | B stale flags + re-validation | B1–B3 complete; **B4 replay running** (launched 2026-10-04 13:58) | [[REVALIDATION_E270CDC_RESULTS]] |
 | C telemetry | **complete** (feb/C2.7 wiring deferred until the replay ends) | [[TELEMETRY_STREAM]] |
 | D provenance + manifest | **complete** | [[PROVENANCE_AND_HARNESS_REGISTRY]] |
-| E specs / MCP / UI | pending | |
+| E specs / MCP / UI | **complete** (C2.7 pilot run pending GPU) | [[EXPERIMENT_SPECS_MCP_UI]] |
 | F basin mapping | pending | |
 
 

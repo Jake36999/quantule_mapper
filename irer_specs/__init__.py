@@ -157,6 +157,18 @@ def _validate(v, s, path, errs):
                 _validate(x, extra, p, errs)
 
 
+def prune_empty(obj):
+    """Drop empty optional containers/strings ({} [] "" None), recursively. Form libraries fill optional
+    objects with empty defaults (e.g. sweep: {axes: {}}), which would then fail validation; pruning
+    turns them back into 'absent'. A required field that prunes away is still reported as missing."""
+    if isinstance(obj, dict):
+        out = {k: prune_empty(v) for k, v in obj.items()}
+        return {k: v for k, v in out.items() if v not in ({}, [], "", None)}
+    if isinstance(obj, list):
+        return [prune_empty(v) for v in obj]
+    return obj
+
+
 def validate(spec: dict, *, registry=None) -> list:
     """-> list of error strings (empty = valid). With `registry`, also checks component names exist."""
     errs = []

@@ -29,7 +29,8 @@ bookkeeping, telemetry or tests.
 
 | date | id | summary | output-changing? | commit |
 |---|---|---|---|---|
-| 2026-10-04 | CL-006 | Spec layer: `irer_specs`, `jax_scout/registry.py`, `tools/run_spec.py`, `specs/`, index `specs` table | no (new path; harness-equivalent to <1e-10) | phase-e |
+| 2026-10-04 | CL-007 | MCP research tools (11, fenced writes, no launch); local spec editor; `prune_empty` | no | phase-e |
+| 2026-10-04 | CL-006 | Spec layer: `irer_specs`, `jax_scout/registry.py`, `tools/run_spec.py`, `specs/`, index `specs` table | no (new path; harness-equivalent to <1e-10) | `a3cb757` |
 | 2026-10-04 | CL-005 | Component-hash provenance; harness manifests + registry; content-level staleness | no (stamp + inert manifests) | `333f17f` |
 | 2026-10-04 | CL-004 | Telemetry stream (`TelemetryWriter`), live HUD invariants, TG-B1S/B2-midplane wiring | no (observer only) | `2185d9f` |
 | 2026-10-04 | CL-003 | Provenance `steppers`; stale-run view; `--dt`/`--cells` for the a\* harnesses; re-validation driver | no (default paths byte-identical) | `d3d87fd` |
@@ -38,8 +39,25 @@ bookkeeping, telemetry or tests.
 
 ---
 
+## CL-007 — MCP research tools and spec editor (Phase E2–E3)
+- **Branch:** `phase-e/specs-mcp-ui`
+- **Files:**
+  - `mcp_server/research_tools.py` (new); `mcp_server/server.py` (11 `research_*` tools registered)
+  - `jax_scout/registry.py` (`export()`, `__main__`); `docs/registry/components.json` (generated)
+  - `irer_specs.prune_empty`
+  - `tools/serve_spec_ui.py` (new); `ui/spec_editor/index.html` (new)
+  - `tests/test_mcp_research_tools.py` (10 tests); `tests/test_spec_ui.py` (5 tests)
+- **Why:** agent oversight through a fenced channel, and a schema-driven editor. See
+  [[EXPERIMENT_SPECS_MCP_UI]].
+- **Output-changing?** No. There is no new compute path and no launch path.
+- **Verified:**
+  - 27 pass, 4 skipped (JAX) in `.venv`.
+  - In-browser test: open, validate, new spec, save draft. It found and fixed the empty-default bug.
+
+---
+
 ## CL-006 — Spec layer (Phase E1)
-- **Branch:** `phase-e/specs-mcp-ui` (dev worktree)
+- **Commit:** `a3cb757` · **Branch:** `phase-e/specs-mcp-ui` (dev worktree)
 - **Files:**
   - `irer_specs/__init__.py` (new): the schema, a dependency-free validator, sweep expansion and
     prediction scoring

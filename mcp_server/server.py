@@ -16,6 +16,7 @@ from mcp.server.fastmcp import FastMCP
 from mcp_server.config import default_config
 from mcp_server import data_access as da
 from mcp_server import write_tools as wt
+from mcp_server import research_tools as rt
 
 CFG = default_config()
 mcp = FastMCP("quantule-mapper")
@@ -184,6 +185,86 @@ def validate_artifact(
     if not CFG.is_path_allowed(artifact_path) or not CFG.is_path_allowed(params_path):
         return {"status": "SKIPPED", "errors": ["path outside project root"]}
     return wt.validate_artifact(CFG, artifact_path, params_path, output_dir, force)
+
+
+# ============================================================================
+# Research-platform tools (2026-10-04, IMPLEMENTATION_PLAN_2026-10 Phase E2).
+# Read-only, except propose_spec / draft_reading, which write only into fenced folders.
+# There is deliberately no tool that launches a run.
+# ============================================================================
+
+@mcp.tool()
+def research_list_runs(substrate: Optional[str] = None, branch: Optional[str] = None,
+                       stepper: Optional[str] = None, harness: Optional[str] = None,
+                       stale_only: bool = False, limit: int = 50) -> Dict[str, Any]:
+    """READ. Runs from the results index (docs/runs/_index.sqlite), newest first. Filters: substrate
+    (e.g. 'dissipative-S-NCGL', 'TG-dual-substrate'), branch, stepper ('ETDRK4', 'KG-strang', 'TG-RK4'),
+    harness id, stale_only (runs that used a since-fixed component)."""
+    return rt.list_runs(CFG.root, substrate, branch, stepper, harness, stale_only, limit)
+
+
+@mcp.tool()
+def research_get_run(run_id: str) -> Dict[str, Any]:
+    """READ. One run: index row, params, metrics, staleness against component fixes, edges, summary.json."""
+    return rt.get_run(CFG.root, run_id)
+
+
+@mcp.tool()
+def research_tail_telemetry(run_id: str, n: int = 50) -> Dict[str, Any]:
+    """READ. Last n live-telemetry samples per arm, the declared invariants, and every breach so far.
+    Use this to watch a running simulation."""
+    return rt.tail_telemetry(CFG.root, run_id, n)
+
+
+@mcp.tool()
+def research_list_stale_runs(fix_id: Optional[str] = None) -> Dict[str, Any]:
+    """READ. Runs flagged STALE_PENDING_REVALIDATION by docs/registry/COMPONENT_FIXES.json."""
+    return rt.list_stale_runs(CFG.root, fix_id)
+
+
+@mcp.tool()
+def research_list_components() -> Dict[str, Any]:
+    """READ. Substrates, initial conditions and observers an experiment spec can name."""
+    return rt.list_components(CFG.root)
+
+
+@mcp.tool()
+def research_get_schema() -> Dict[str, Any]:
+    """READ. The experiment-spec JSON Schema (irer_specs.SCHEMA)."""
+    return rt.get_schema(CFG.root)
+
+
+@mcp.tool()
+def research_list_specs(status: Optional[str] = None) -> Dict[str, Any]:
+    """READ. Experiment specs by folder: drafts, proposed (agent suggestions awaiting review), approved."""
+    return rt.list_specs(CFG.root, status)
+
+
+@mcp.tool()
+def research_get_spec(spec_id: str) -> Dict[str, Any]:
+    """READ. One spec by id."""
+    return rt.get_spec(CFG.root, spec_id)
+
+
+@mcp.tool()
+def research_harness_registry(status: Optional[str] = None) -> Dict[str, Any]:
+    """READ. Harness lifecycle registry (ACTIVE / SUPERSEDED / RETIRED / PROPOSED / UNREVIEWED)."""
+    return rt.harness_registry(CFG.root, status)
+
+
+@mcp.tool()
+def research_propose_spec(spec: Dict[str, Any], author: str = "agent") -> Dict[str, Any]:
+    """WRITE (fenced). Validate an experiment spec and file it in specs/proposed/. Never overwrites and
+    NEVER launches: a human reviews, moves it to specs/approved/, and runs tools/run_spec.py. The spec
+    must include a `prediction` written before any run (what the equations say should happen)."""
+    return rt.propose_spec(CFG.root, spec, author)
+
+
+@mcp.tool()
+def research_draft_reading(run_id: str, text: str, author: str = "agent") -> Dict[str, Any]:
+    """WRITE (fenced). Append a MACHINE-DRAFTED reading of a run to docs/runs/_machine_drafts/<run_id>.md.
+    Never edits the human paired-reading blocks."""
+    return rt.draft_reading(CFG.root, run_id, text, author)
 
 
 def main() -> None:

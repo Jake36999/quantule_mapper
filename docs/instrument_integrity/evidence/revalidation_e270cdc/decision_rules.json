@@ -1,0 +1,51 @@
+{
+  "a_star": {
+    "verdict": "A_STAR_PENDING",
+    "checks": {
+      "missing": [
+        "a1.15_ladder_T72000",
+        "a1.15_longT",
+        "a1.15_seed620",
+        "a1.15_seed621",
+        "a1.16",
+        "dt2 cell"
+      ]
+    }
+  },
+  "c27": {
+    "verdict": "C2_7_UNCHANGED",
+    "checks": {
+      "new": [
+        {
+          "n": 1,
+          "v_frac": 0.999999999999962,
+          "mass_ret": 0.9999999999989677,
+          "r2": 1.0
+        },
+        {
+          "n": 2,
+          "v_frac": 1.000000000000005,
+          "mass_ret": 0.9999999999990389,
+          "r2": 1.0
+        }
+      ],
+      "old": [
+        {
+          "n": 1,
+          "v_frac": 0.999890907982625,
+          "mass_ret": 0.999875274532852,
+          "r2": 0.9999999997491904
+        },
+        {
+          "n": 2,
+          "v_frac": 0.999890947716754,
+          "mass_ret": 0.9996329889054258,
+          "r2": 0.9999999997492246
+        }
+      ],
+      "verdict_new": "CLEAN_TRANSPORT_N96_CONFIRMED",
+      "verdict_old": "CLEAN_TRANSPORT_N96_CONFIRMED"
+    }
+  },
+  "cells": {}
+}

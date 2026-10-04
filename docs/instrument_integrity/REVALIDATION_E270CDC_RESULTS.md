@@ -55,7 +55,48 @@ recorded as an issue and the rule stays as written.
    relative to the pre-fix runs; no pass/fail threshold is set.
 
 ## Results
-*Pending — the replay was launched on 2026-10-04 and takes about 18 h.*
+
+The decision rules are evaluated mechanically by `tools/revalidation/compare_e270cdc.py`; output in
+`evidence/revalidation_e270cdc/decision_rules.json`. **Raw evidence:** `r0_cfl.json`, `r2_feb.json`
+and `r3_n96.json` in the same folder.
+
+### C2.7 — `C2_7_UNCHANGED`, and now exact (step finished 2026-10-04 15:12, 74 min)
+
+| R3 boost | v/2Dk pre-fix | v/2Dk fixed | mass pre-fix | mass fixed |
+|---|---|---|---|---|
+| n=1 | 0.999891 | **1.000000000000** (−3.8e-14) | 0.999875 | **0.999999999999** |
+| n=2 | 0.999891 | **1.000000000000** (+5e-15) | 0.999633 | **0.999999999999** |
+
+The verdict is unchanged (`CLEAN_TRANSPORT_N96_CONFIRMED`). The 1e-4 shortfall in the pre-fix numbers
+was integrator error: on the fixed solver, Galilean invariance holds to round-off. R2 (no localized
+native soliton for feb/a\*) is also unchanged: 0/6.
+
+### C2 "quasi-conservative" norm drift — **explained: it was the integrator**
+R0 measures mass retained after T=1 on the conservative, geometry-off branch:
+
+| N, dt, D | pre-fix mass_ret | fixed mass_ret |
+|---|---|---|
+| 48, 1e-3, 2.73 | 0.998081 | 0.99824184 |
+| 48, 5e-4, 1.0 | 0.998185 | 0.99824184 |
+| 96, 1e-3, 2.73 | 0.998077 | 0.99824776 |
+| 96, 2.5e-4, 1.0 | 0.998218 | 0.99824776 |
+
+Pre-fix, the value **moved with dt and D**: this is the "nonlinear ETDRK4 norm loss was timestep
+sensitive" that Codex recorded. Fixed, it is **identical to 10 digits across every dt and D** at a
+given N. The remaining 0.18% does not depend on dt, so it is not dynamics. It is the t=0 projection
+of the initial condition onto the dealiased band, and it changes only with N, as expected. So the
+conservative flat substrate conserves norm. The "quasi-conservative" label for the
+**geometry-on** C2 branch, which comes from the Ω³ self-adjointness argument, is a separate question
+that this replay does not test.
+
+### a\* — note before the result
+`core_saturation_search.FEB` pins `param_omega0 = 0.0`, so every a\* run had a **real** linear
+operator. Bug 1 (the contour) therefore did not affect a\*. **Only Bug 2 (stage c) did**, which on its own
+makes the scheme second-order instead of fourth-order (the combined order-0.6 figure applies to complex L). The expected size of any change to the a\* bracket is
+correspondingly smaller than for C2.
+
+*a\*, dt/2 and C1: pending (ladder, dt/2 cell and confirm are running; the full replay ends around
+2026-10-05 09:00).*
 
 ## What changed as a result
 *Pending.*
@@ -67,6 +108,8 @@ recorded as an issue and the rule stays as written.
 | 1 | `C27_REDERIVE` has no `summary.json`, so the results index does not list it | OPEN — tracked by hand here |
 | 2 | C1's initial state (`DEFAULT_STATE`) is a saved pre-fix a\* field; it is used only as the starting state | NOTED |
 | 3 | `feb_breathing_longt` (×1.0, ×1.05 at T=72000) is not replayed; the a\* rules do not depend on it | NOTED |
+| 4 | a\* runs used ω0 = 0 (real L), so only Bug 2 applies to them | NOTED |
+| 5 | Is the geometry-ON C2 branch still "quasi-conservative" on the fixed solver? | OPEN — not covered by R0 (geometry off) |
 
 ## Associated docs
 - [[ETDRK4_INTEGRATOR_BUGS_2026-10]] · [[STEPPER_ORDER_GATES]] · [[SOLVER_AND_RUNTIME_CHANGELOG]]

@@ -29,6 +29,7 @@ bookkeeping, telemetry or tests.
 
 | date | id | summary | output-changing? | commit |
 |---|---|---|---|---|
+| 2026-10-05 | CL-010 | Continuation: jvp matvec replaces `jax.linearize` (N³ memory → constant) | no | `4a482df` |
 | 2026-10-05 | CL-009 | Retired 3 launch-capable legacy MCP tools; pinned `mcp<2` | no | main |
 | 2026-10-04 | CL-008 | Basin mapping: `state_descriptors`, `basin_cluster.py`, `continuation.py` (Newton–Krylov + arclength + Floquet), a\* pilot, post-replay queue | no (new analysis path) | phase-f |
 | 2026-10-04 | CL-007 | MCP research tools (11, fenced writes, no launch); local spec editor; `prune_empty` | no | `4ddff4d` |
@@ -38,6 +39,19 @@ bookkeeping, telemetry or tests.
 | 2026-10-04 | CL-003 | Provenance `steppers`; stale-run view; `--dt`/`--cells` for the a\* harnesses; re-validation driver | no (default paths byte-identical) | `d3d87fd` |
 | 2026-10-04 | CL-002 | Stepper order + MMS gates, stepper mutations, CI extension | no (tests/tooling) | `0419ff9` |
 | 2026-10-02 | CL-001 | ETDRK4: complex-safe contour coefficients + stage-c `N_n` | **YES** | `e270cdc` |
+
+---
+
+## CL-010 — Continuation memory fix
+- **Commit:** `4a482df`, merged to main
+- **Files:** `jax_scout/continuation.py` (`direction` uses a `jax.jvp` matvec);
+  `tests/test_continuation.py` (memory regression test)
+- **Why:** `jax.linearize` through a 1000-step `fori_loop` keeps every step's intermediates. The
+  compiled scratch memory was 1.3 GiB at N=8, 10.5 GiB at N=16 and about 86 GiB at N=32, which is
+  why the a\* pilot hit an 81 GiB OOM. With the jvp matvec it is 0.8 MiB at N=8 and 6.2 MiB at N=16.
+- **Output-changing?** No. It is the same Jacobian-vector product, computed by forward mode.
+- **Verified:** 2/2 continuation tests pass. The a\* pilot at N=32 now runs at about 265 MiB of GPU
+  memory.
 
 ---
 

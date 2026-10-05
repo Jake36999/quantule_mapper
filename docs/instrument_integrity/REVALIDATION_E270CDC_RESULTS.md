@@ -148,8 +148,9 @@ D_imag > 0 cells are incoherent (mass grows, node count rises).
     contrast and gyration radius. So there are at least two basins at a\* (by node count), and
     possibly three. Separating "a different basin" from "the same basin at a different breathing
     phase" needs more replicates per seed.
-- **a\* continuation pilot:** crashed with out-of-memory inside Newton (an 81 GiB allocation). This is
-  being debugged; see [[BASIN_MAPPING]].
+- **a\* continuation pilot:** the first run crashed with out-of-memory. The cause was `jax.linearize`
+  through 1000 steps (fixed in `4a482df`, CL-010). The rerun is in progress
+  (`sweep_runs/ASTAR_CONTINUATION_PILOT_RERUN.log`); its verdict will be added to [[BASIN_MAPPING]].
 
 ## What changed as a result
 - **Catalog** ([[IRER_MASTER_HYPOTHESIS_CATALOG]]):

@@ -152,7 +152,12 @@ def _make_solver(prob: RelEqProblem, psi_ref, p_fixed, arclength: bool, gmres_to
 
     @jax.jit
     def direction(x, t, x_prev, ds):
-        r, lin = jax.linearize(lambda z: F(z, t, x_prev, ds), x)
+        # OOM BUG (fixed): jax.linearize stores every ETDRK4 step's intermediates (n_steps = T/dt = 1000
+        # of them) as residuals and GMRES then replays the linear map -- ~86 GiB at N=32, growing as N^3.
+        # A forward-mode jvp matvec carries only (primal, tangent) through the time loop: O(1) in steps.
+        Fz = lambda z: F(z, t, x_prev, ds)  # noqa: E731
+        r = Fz(x)
+        lin = lambda v: jax.jvp(Fz, (x,), (v,))[1]  # noqa: E731
         dx, _ = gmres(lin, -r, tol=gmres_tol, restart=restart, maxiter=maxiter, solve_method="incremental")
         return r, dx
 

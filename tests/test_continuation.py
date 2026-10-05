@@ -41,3 +41,17 @@ def test_newton_krylov_recovers_the_uniform_state_quadratically():
     # quadratic tail: each of the last steps roughly squares the residual
     tail = [x for x in r.residuals if x > 1e-14][-3:]
     assert np.log10(tail[-1]) < 1.6 * np.log10(tail[-2]) or tail[-1] < 1e-12, r.residuals
+
+
+def test_newton_direction_memory_does_not_scale_with_step_count():
+    """Regression: jax.linearize stored per-step residuals (n_steps=1000 at T=5, dt=0.005): 1.3 GB at N=8 and
+    ~86 GiB at N=32 (OOM on an 8 GB GPU). The jvp-based direction needs only O(few vectors) of scratch."""
+    N = 8
+    prob = C.RelEqProblem(N=N, L=10.0, dt=0.005, T=5.0, params=P)
+    psi = jnp.ones((N, N, N), dtype=jnp.complex128)
+    x0 = prob.pack(psi, 0.0, jnp.zeros(3))
+    assert prob.equations(x0, psi).shape == (2 * N ** 3 + 4,)         # residual stays 1-D
+    _, direction = C._make_solver(prob, psi, None, False, 1e-6, 40, 4)
+    z = jnp.zeros_like(x0)
+    mem = direction.lower(x0, z, z, 0.0).compile().memory_analysis()
+    assert mem.temp_size_in_bytes < 64 * 2 ** 20, mem.temp_size_in_bytes

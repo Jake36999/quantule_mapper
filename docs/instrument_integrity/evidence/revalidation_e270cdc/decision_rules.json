@@ -1,15 +1,22 @@
 {
   "a_star": {
-    "verdict": "A_STAR_PENDING",
+    "verdict": "A_STAR_SHIFTED",
     "checks": {
-      "missing": [
-        "a1.15_ladder_T72000",
-        "a1.15_longT",
-        "a1.15_seed620",
-        "a1.15_seed621",
-        "a1.16",
-        "dt2 cell"
-      ]
+      "crossing_bracket": [
+        1.15,
+        1.16
+      ],
+      "crossing_in_1.15_1.16": true,
+      "a1.15_T144k_slope": -0.0004063268582307476,
+      "a1.15_T144k_flat": true,
+      "seed_slopes": [
+        -0.0026201487676523884,
+        -0.0010246520992525454
+      ],
+      "seeds_flat": false,
+      "dt2_slope": -0.0006219405777424374,
+      "base_slope": -0.0006418354041456635,
+      "dt_converged": true
     }
   },
   "c27": {
@@ -47,5 +54,127 @@
       "verdict_old": "CLEAN_TRANSPORT_N96_CONFIRMED"
     }
   },
-  "cells": {}
+  "cells": {
+    "a1.075_ladder_T72000": {
+      "a_factor": 1.075,
+      "T": "72000",
+      "seed": "20260619",
+      "old_slope50": -0.01102595516901866,
+      "new_slope50": -0.011274115099656971,
+      "old_klass": "TRUE_SATURATED_BOUND_STATE",
+      "new_klass": "TRUE_SATURATED_BOUND_STATE",
+      "old_n_fin": "4",
+      "new_n_fin": "4"
+    },
+    "a1.10_ladder_T72000": {
+      "a_factor": 1.1,
+      "T": "72000",
+      "seed": "20260619",
+      "old_slope50": -0.008140848918375574,
+      "new_slope50": -0.008384368005783552,
+      "old_klass": "TRUE_SATURATED_BOUND_STATE",
+      "new_klass": "TRUE_SATURATED_BOUND_STATE",
+      "old_n_fin": "4",
+      "new_n_fin": "4"
+    },
+    "a1.125_ladder_T72000": {
+      "a_factor": 1.125,
+      "T": "72000",
+      "seed": "20260619",
+      "old_slope50": -0.004874409534164161,
+      "new_slope50": -0.005021741380805813,
+      "old_klass": "TRUE_SATURATED_BOUND_STATE",
+      "new_klass": "TRUE_SATURATED_BOUND_STATE",
+      "old_n_fin": "4",
+      "new_n_fin": "4"
+    },
+    "a1.15_ladder_T72000": {
+      "a_factor": 1.15,
+      "T": "72000",
+      "seed": "20260619",
+      "old_slope50": -0.0006383360636547388,
+      "new_slope50": -0.0006418354041456635,
+      "old_klass": "TRUE_SATURATED_BOUND_STATE",
+      "new_klass": "TRUE_SATURATED_BOUND_STATE",
+      "old_n_fin": "4",
+      "new_n_fin": "4"
+    },
+    "a1.15_longT": {
+      "a_factor": 1.15,
+      "T": "144000",
+      "seed": "20260619",
+      "old_slope50": -0.0003584747484221996,
+      "new_slope50": -0.0004063268582307476,
+      "old_klass": "TRUE_SATURATED_BOUND_STATE",
+      "new_klass": "TRUE_SATURATED_BOUND_STATE",
+      "old_n_fin": "4",
+      "new_n_fin": "4"
+    },
+    "a1.125_longT": {
+      "a_factor": 1.125,
+      "T": "144000",
+      "seed": "20260619",
+      "old_slope50": -0.004715886042286083,
+      "new_slope50": -0.004926225067651981,
+      "old_klass": "TRUE_SATURATED_BOUND_STATE",
+      "new_klass": "TRUE_SATURATED_BOUND_STATE",
+      "old_n_fin": "4",
+      "new_n_fin": "4"
+    },
+    "a1.15_seed620": {
+      "a_factor": 1.15,
+      "T": "72000",
+      "seed": "20260620",
+      "old_slope50": -0.002466019313429415,
+      "new_slope50": -0.0026201487676523884,
+      "old_klass": "TRUE_SATURATED_BOUND_STATE",
+      "new_klass": "TRUE_SATURATED_BOUND_STATE",
+      "old_n_fin": "6",
+      "new_n_fin": "6"
+    },
+    "a1.15_seed621": {
+      "a_factor": 1.15,
+      "T": "72000",
+      "seed": "20260621",
+      "old_slope50": -0.000906298511777042,
+      "new_slope50": -0.0010246520992525454,
+      "old_klass": "TRUE_SATURATED_BOUND_STATE",
+      "new_klass": "TRUE_SATURATED_BOUND_STATE",
+      "old_n_fin": "6",
+      "new_n_fin": "6"
+    },
+    "a1.16": {
+      "a_factor": 1.16,
+      "T": "72000",
+      "seed": "20260619",
+      "old_slope50": 0.001169543328854634,
+      "new_slope50": 0.0010323852869331483,
+      "old_klass": "TRUE_SATURATED_BOUND_STATE",
+      "new_klass": "TRUE_SATURATED_BOUND_STATE",
+      "old_n_fin": "4",
+      "new_n_fin": "4"
+    },
+    "a1.175": {
+      "a_factor": 1.175,
+      "T": "72000",
+      "seed": "20260619",
+      "old_slope50": 0.0035996849045895137,
+      "new_slope50": 0.003596273796913735,
+      "old_klass": "TRUE_SATURATED_BOUND_STATE",
+      "new_klass": "TRUE_SATURATED_BOUND_STATE",
+      "old_n_fin": "4",
+      "new_n_fin": "4"
+    },
+    "a1.20": {
+      "a_factor": 1.2,
+      "T": "72000",
+      "seed": "20260619",
+      "old_slope50": 0.008066131590228775,
+      "new_slope50": 0.008256244139380208,
+      "old_klass": "TRANSIENT_GROWER_REJECT",
+      "new_klass": "TRANSIENT_GROWER_REJECT",
+      "old_n_fin": "4",
+      "new_n_fin": "4"
+    }
+  }
 }

@@ -14,7 +14,7 @@ status: running
 | phase | status | record |
 |---|---|---|
 | A order gates | **complete** 2026-10-04 | [[STEPPER_ORDER_GATES]] |
-| B stale flags + re-validation | B1–B3 complete; **B4 replay running** (launched 2026-10-04 13:58) | [[REVALIDATION_E270CDC_RESULTS]] |
+| B stale flags + re-validation | **complete** 2026-10-05 (C2.7/C1 unchanged; a\* bracket unchanged, seed claim corrected) | [[REVALIDATION_E270CDC_RESULTS]] |
 | C telemetry | **complete** (feb/C2.7 wiring deferred until the replay ends) | [[TELEMETRY_STREAM]] |
 | D provenance + manifest | **complete** | [[PROVENANCE_AND_HARNESS_REGISTRY]] |
 | E specs / MCP / UI | **complete** (C2.7 pilot run pending GPU) | [[EXPERIMENT_SPECS_MCP_UI]] |

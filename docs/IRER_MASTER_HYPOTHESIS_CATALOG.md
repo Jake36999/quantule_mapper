@@ -66,7 +66,7 @@ Two of the three IRER simulation sectors are answered; the third is scoped and p
 ## 3. Phase C — stability sector (CLOSED)
 | # | hypothesis | verdict | evidence |
 |---|---|---|---|
-| C-1 | a\*≈×1.15 cubic gain is a genuine long-time stable attractor | **CONFIRMED** | bracketed ±0.5%, seed/N128/T144k; er-slope→0 |
+| C-1 | a\*≈×1.15 cubic gain is a genuine long-time stable attractor | **CONFIRMED** (re-validated 2026-10-05) | bracketed ±0.5%, N128/T144k; er-slope→0. **Fixed-solver replay:** bracket unchanged (crossing ×1.15–×1.16), dt/2 agrees to 2e-5. **Correction:** seed robustness was overstated — seeds 620/621 slopes −0.0026/−0.0010 (pre-fix −0.0025/−0.0009), i.e. slow decay, not flat; node count is IC-dependent (4 vs 6) → ≥2 basins at a\*. [[REVALIDATION_E270CDC_RESULTS]] |
 | C-2 | a\* is mobile — a kick imparts net motion | **FALSIFIED** | kick null; L_k=−Dk²−η real → no inertial channel |
 | C-3 | a static potential well relocates a\* | **FALSIFIED** | response = accretion/nucleation, not migration (3 morphologies) |
 | C-4 | log-prime resonance (prime-SSE) predicts stability | **NULL** | 0/60; objective retired |
@@ -104,7 +104,7 @@ incompatible in this sector. Every non-stability structural hypothesis (prime/TD
 | C2.3b | the velocity anomaly = topological ring-winding drag | **RETRACTED** | (C2.6 bug) |
 | C2.4 | a local (zero-winding) boost moves the soliton; else "flow-through pinning" | **RETRACTED** | (C2.6 bug) the pinning was an artifact |
 | **C2.6** | **`param_a_coupling=0` turns geometry OFF** | **FALSIFIED (THE BUG)** | soft-clip squash maps Ω²=1→~151 → D_eff=D/151; the "drag" μ=2·D_eff exactly |
-| C2.7 | on the fixed substrate, a true soliton translates at v=2Dk | **CONFIRMED** | v/2Dk=0.9999, mass 0.9999 at N=96 |
+| C2.7 | on the fixed substrate, a true soliton translates at v=2Dk | **CONFIRMED** (re-validated 2026-10-05) | fixed ETDRK4: v/2Dk = 1−4e-14, mass 1−1e-12 at N=96 (pre-fix 0.9999 was integrator error); reproduced independently by the spec path |
 | C2.7b | feb/a\* has native conservative solitons | **FALSIFIED** | structureless (g_max 0.23 ≪ box binding floor 0.44) |
 | C2.7c | moving-soliton families exist for some (a,s,f,D) | **CONFIRMED** | 2 GALILEAN families (s<0 saturation + box-compatible D) |
 | C2.8/8b | two-node elasticity from projected-density peak-tracking | **INCONCLUSIVE** | fragile tracker (unphysical e=3.21; false-repel static) |
@@ -123,7 +123,7 @@ itself is structureless there.
 |---|---|---|---|
 | G-1 | the C2 covariant correction is norm-conserving / self-adjoint (flat) | **FALSIFIED** | it is Laplace–Beltrami of Ω²δ — self-adjoint w.r.t. Ω³, not flat (mismatch 1.09e-1) |
 | G-2 | a simple Ω-power weighted norm is the conserved invariant | **NULL (NO_WEIGHTED_INVARIANT_FOUND)** | live Ω(ρ) → no fixed weight conserved; sqrt_g near-pass 2.15e-4 |
-| G-3 | C2 is "conservative" as labelled | **REVISED** | linear-conservative / nonlinear quasi-conservative (geometry-exchange) |
+| G-3 | C2 is "conservative" as labelled | **REVISED** | linear-conservative / nonlinear quasi-conservative (geometry-exchange). **2026-10-05:** the *timestep-sensitive* norm loss on the geometry-off branch was the ETDRK4 bug (now dt-independent to 10 digits); the geometry-ON quasi-conservation claim is not yet re-tested |
 | G-4 | C2′ canonical (divergence-form + metric-variation) would conserve exactly | **DESIGN-ONLY** | RFC; not implemented |
 
 ## 7. Phase D — wave-kinetic KG sub-sector (C3)
@@ -271,12 +271,14 @@ controlled test, not a confirmation. This tempers MC-1 and several cross-maps, a
 
 ## 10. Instrument-integrity ledger (the meta-catalog)
 Three bugs were caught by chasing a contradiction against a known identity, not by accepting a convenient null.
+A fourth (2026-10, ETDRK4) passed every identity and was caught only by a convergence-order test — which is now a standing CI gate.
 Recording them because they reshaped several verdicts:
 | bug | symptom | root cause | how caught | fix |
 |---|---|---|---|---|
 | **C2.6 geometry-off** | "pinning", "flow-through", μ≈0.04 drag | soft-clip squash → `a_coupling=0` gave D_eff=D/151 | a linear packet failed to translate (violates Galilean identity) | `Ops.geom_fac` + `param_geom_off` (default byte-identical; Codex RK4-reaudited) |
 | **C2.8b tracker** | unphysical elasticity e=3.21; false-repel static | projected-density peak-tracking fails when cores overlap/breathe | e>1 violates energy conservation | momentum-density observable v=2D·∫Im(ψ*∂ψ)/∫ρ (C2.9) |
 | **C3 boost IC** | Q-ball density barely moved (v_frac~0.04) | naive kick lacked the carrier phase that IS the momentum | constant v_frac independent of v | ψ₀=φe^{ikx}, k=γωv/c² → density co-moves |
+| **ETDRK4 integrator (2026-10)** | none visible: every identity and CuPy↔JAX parity passed; Codex noted "timestep-sensitive norm loss" | (1) contour coefficients took real() of a half-circle mean — invalid for complex L; (2) stage c used N(a) not N(u_n) → order ≈0.6 | a dt-halving convergence test during an optimiser audit | `e270cdc`; order gates in CI (identities alone catch 0/6 stepper bugs). Affected: Phase C/C1/C2 only; replay: C2.7/C1/a\*-bracket unchanged, C2 norm drift explained. [[ETDRK4_INTEGRATOR_BUGS_2026-10]] |
 **Retractions triggered:** C2.1b, C2.2b, C2.3b, C2.4 (all "conservative pinning/flow-through"); C2.8 "n=4 survives";
 "the repulsive channel transmits" → refined to the anti-phase node.
 **Same discipline in RUN-2 (caught in-flight, before any verdict was published — so not verdict-reshaping bugs):**

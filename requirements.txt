@@ -248,3 +248,6 @@ wrapt==2.1.2
 # The following packages are considered to be unsafe in a requirements file:
 # pip
 # setuptools
+
+# MCP server (mcp_server/). Pinned below 2.0: mcp 2.x renamed FastMCP -> MCPServer and mcp_server/server.py uses the 1.x API.
+mcp>=1.20,<2

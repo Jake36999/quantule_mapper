@@ -29,6 +29,7 @@ bookkeeping, telemetry or tests.
 
 | date | id | summary | output-changing? | commit |
 |---|---|---|---|---|
+| 2026-10-05 | CL-009 | Retired 3 launch-capable legacy MCP tools; pinned `mcp<2` | no | main |
 | 2026-10-04 | CL-008 | Basin mapping: `state_descriptors`, `basin_cluster.py`, `continuation.py` (Newton–Krylov + arclength + Floquet), a\* pilot, post-replay queue | no (new analysis path) | phase-f |
 | 2026-10-04 | CL-007 | MCP research tools (11, fenced writes, no launch); local spec editor; `prune_empty` | no | `4ddff4d` |
 | 2026-10-04 | CL-006 | Spec layer: `irer_specs`, `jax_scout/registry.py`, `tools/run_spec.py`, `specs/`, index `specs` table | no (new path; harness-equivalent to <1e-10) | `a3cb757` |
@@ -37,6 +38,22 @@ bookkeeping, telemetry or tests.
 | 2026-10-04 | CL-003 | Provenance `steppers`; stale-run view; `--dt`/`--cells` for the a\* harnesses; re-validation driver | no (default paths byte-identical) | `d3d87fd` |
 | 2026-10-04 | CL-002 | Stepper order + MMS gates, stepper mutations, CI extension | no (tests/tooling) | `0419ff9` |
 | 2026-10-02 | CL-001 | ETDRK4: complex-safe contour coefficients + stage-c `N_n` | **YES** | `e270cdc` |
+
+---
+
+## CL-009 — Legacy MCP launch tools retired; MCP dependency pinned
+- **Branch:** `main` (after merge `c646dd5`)
+- **Files:**
+  - `mcp_server/server.py`: the `run_simulation_manifest`, `run_smoke_simulation` and
+    `validate_artifact` MCP registrations are removed and replaced by a note explaining why
+  - `tests/test_mcp_write_tools.py`: now asserts that no launch tool is registered (20 tools)
+  - `requirements.txt`: `mcp>=1.20,<2`
+- **Why:**
+  - Agents may read and propose but never launch (PROCESS_PLAN P6). These tools could start GPU/CPU
+    work, and they targeted the retired orchestrator pipeline.
+  - mcp 2.x renamed `FastMCP` → `MCPServer`, which breaks `server.py`. The `.venv` now has mcp 1.30.0.
+- **Output-changing?** No. The implementations remain in `write_tools.py` for direct human use.
+- **Verified:** 50/50 MCP tests pass; the server imports and lists 20 tools.
 
 ---
 

@@ -260,11 +260,16 @@ class TestValidate:
 # server wiring
 # ---------------------------------------------------------------------------
 
-def test_server_registers_twelve_tools():
+def test_server_registers_no_launch_tools():
+    """The three launch-capable legacy tools were retired 2026-10-05 (see the note in
+    mcp_server/server.py): agents may read and propose, never launch. Their implementations remain
+    in write_tools.py for direct human use and are still tested above."""
     import asyncio
     import mcp_server.server as srv
     tools = asyncio.run(srv.mcp.list_tools())
     names = {t.name for t in tools}
-    for w in ("stage_simulation_manifest", "run_simulation_manifest", "run_smoke_simulation", "validate_artifact"):
-        assert w in names
-    assert len(names) == 12  # 8 read + 4 write
+    for retired in ("run_simulation_manifest", "run_smoke_simulation", "validate_artifact"):
+        assert retired not in names
+    assert "stage_simulation_manifest" in names          # stages a file for review; runs nothing
+    assert sum(n.startswith("research_") for n in names) == 11
+    assert len(names) == 20  # 8 legacy read + 1 stage + 11 research

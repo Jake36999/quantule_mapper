@@ -11,7 +11,10 @@
       "affects_files": ["jax_scout/physics.py", "solver/core.py", "solver/kernels.py"],
       "doc": "instrument_integrity/ETDRK4_INTEGRATOR_BUGS_2026-10.md",
       "summary": "Order ~0.6 instead of 4; psi error 8.5% at dt=0.005, T=2 (N=48). Quantitative pre-fix ETDRK4 results need re-validation.",
-      "revalidated": {},
+      "revalidated": {
+        "FEB_GAIN_LADDER_LONGT_T72000_20260701_175708": "FEB_GAIN_LADDER_LONGT_T72000_REVAL_e270cdc",
+        "FEB_ASTAR_CONFIRM_20260702_003055": "FEB_ASTAR_CONFIRM_REVAL_e270cdc"
+      },
       "not_affected": {}
     }
   ]

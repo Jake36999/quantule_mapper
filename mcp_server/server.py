@@ -152,39 +152,23 @@ def stage_simulation_manifest(
     )
 
 
-@mcp.tool()
-def run_simulation_manifest(staged_manifest_path: str, confirm: bool = False) -> Dict[str, Any]:
-    """WRITE (GPU). Execute a previously staged manifest. Requires confirm=true and a staged
-    manifest < 30 min old; the output path is taken from the staged manifest and cannot be
-    redirected. Launches worker_cupy.py and writes dispatch/h5_write audit events."""
-    return wt.run_simulation_manifest(CFG, staged_manifest_path, confirm)
-
-
-@mcp.tool()
-def run_smoke_simulation(
-    params: Dict[str, Any],
-    seed: int = 0,
-    N_grid: int = 16,
-    T_steps: int = 50,
-    L_domain: float = 10.0,
-) -> Dict[str, Any]:
-    """WRITE (GPU). Low-cost smoke test (hard caps N_grid<=32, T_steps<=100). Output under
-    runs/_smoke/; never written to the ledger. Appends a smoke_run audit event."""
-    return wt.run_smoke_simulation(CFG, params, seed, N_grid, T_steps, L_domain)
-
-
-@mcp.tool()
-def validate_artifact(
-    artifact_path: str,
-    params_path: str,
-    output_dir: Optional[str] = None,
-    force: bool = False,
-) -> Dict[str, Any]:
-    """WRITE (CPU). Run the validation pipeline on an artifact and write provenance. Will not
-    overwrite existing provenance unless force=true. Appends a validation_write audit event."""
-    if not CFG.is_path_allowed(artifact_path) or not CFG.is_path_allowed(params_path):
-        return {"status": "SKIPPED", "errors": ["path outside project root"]}
-    return wt.validate_artifact(CFG, artifact_path, params_path, output_dir, force)
+# ----------------------------------------------------------------------------
+# RETIRED 2026-10-05: run_simulation_manifest, run_smoke_simulation, validate_artifact.
+#
+# These three were MCP tools that let a connected agent START work: two launched worker_cupy.py on the
+# GPU, and one ran the CPU validation pipeline and wrote provenance. That contradicts the rule adopted for
+# agent oversight in docs/research_infrastructure/PROCESS_PLAN_2026-10.md (P6) and
+# EXPERIMENT_SPECS_MCP_UI.md: an agent may READ everything and PROPOSE work (research_propose_spec ->
+# specs/proposed/), but never LAUNCH it. A human approves a spec and runs tools/run_spec.py. It is the same
+# no-control-path rule as tools/hud_monitor.py and tools/serve_spec_ui.py.
+#
+# They also targeted the legacy orchestrator pipeline (simulation_ledger.db, config_hash runs), which is
+# no longer how experiments are run.
+#
+# The implementations are NOT deleted: mcp_server/write_tools.py still provides run_simulation_manifest,
+# run_smoke_simulation and validate_artifact for a person to call directly. stage_simulation_manifest
+# (above) stays as a tool, because it only validates and stages a file for human review and runs nothing.
+# ----------------------------------------------------------------------------
 
 
 # ============================================================================

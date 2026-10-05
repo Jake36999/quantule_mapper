@@ -101,8 +101,8 @@ observer: `A_real` never feeds back into N(ψ). It does not limit ψ's accuracy.
 |---|---|---|
 | 1 | Coefficients invalid for complex L | RESOLVED (`e270cdc`) |
 | 2 | Stage c uses N_a | RESOLVED (`e270cdc`) |
-| 3 | JAX mirror edit not yet executed | OPEN → Phase B3 |
-| 4 | Pre-fix ETDRK4 results not re-validated | OPEN → Phase B4 |
+| 3 | JAX mirror edit not yet executed | RESOLVED — order 4.0 ([[STEPPER_ORDER_GATES]]) |
+| 4 | Pre-fix ETDRK4 results not re-validated | RESOLVED for the cited results (C2.7, C1, a\*) — [[REVALIDATION_E270CDC_RESULTS]]; exploratory runs stay flagged |
 
 ## Associated docs
 - [[SOLVER_AND_RUNTIME_CHANGELOG]] · [[SEARCH_STACK_AUDIT_2026-10]] · [[BASELINE_AUDIT_NUMERICAL]]

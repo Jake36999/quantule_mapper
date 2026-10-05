@@ -1,0 +1,20 @@
+{
+  "backend": "gpu",
+  "command_line": "/usr/bin/python3 jax_scout/gravity_TG_B1S_drift_decomposition_gpu.py --out /content/qm_job/results/tg_b1s_d_100p_reproduction/simulation --matrix primary --sample-dt 1.0",
+  "devices": [
+    "cuda:0"
+  ],
+  "env": {
+    "CUDA_VISIBLE_DEVICES": null,
+    "XLA_PYTHON_CLIENT_MEM_FRACTION": "0.45",
+    "XLA_PYTHON_CLIENT_PREALLOCATE": "false"
+  },
+  "git_commit": "UNKNOWN",
+  "jax_version": "0.7.2",
+  "jaxlib_version": "0.7.2",
+  "platform": "Linux-6.6.122+-x86_64-with-glibc2.35",
+  "python": "3.12.13",
+  "selected_device": "cuda:0",
+  "stage": "TG-B1S-D_DRIFT_DECOMPOSITION",
+  "x64_enabled": true
+}

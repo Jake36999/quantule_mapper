@@ -1,0 +1,221 @@
+{
+  "job_name": "TG-B1S-D 100P Reproduction Capsule",
+  "job_id": "tg_b1s_d_100p_reproduction",
+  "job_root": "/content/qm_job",
+  "workflow": {
+    "mode": "manual_colab_upload",
+    "agent_plans_run": true,
+    "manual_upload_to_colab": true,
+    "manual_colab_execution": true,
+    "drive_persistence_required": true,
+    "local_results_dir": "F:\\quantule_mapper\\colab_jobs\\results",
+    "review_prompt_after_download": true,
+    "intended_use": "Targeted TG-B1S-D numerical reproduction on Colab A100; not a long-form hunt.",
+    "analogy": "Sometimes it is quicker to send the car to the shop than fix it yourself."
+  },
+  "result_policy": {
+    "ideal_archive_bytes": 1000000000,
+    "hard_archive_bytes": 5000000000
+  },
+  "control_panel": {
+    "schema_version": "qm-colab-controls/1.0",
+    "reserved_test_slots": [
+      "T1",
+      "T2",
+      "T3"
+    ],
+    "tail_lines": 800,
+    "actions": [
+      {
+        "action_id": "T1",
+        "kind": "system_test",
+        "label": "Run Preflight",
+        "handler": "runtime_preflight",
+        "output_channel": "terminal_T1",
+        "required": true,
+        "fixed": true
+      },
+      {
+        "action_id": "T2",
+        "kind": "system_test",
+        "label": "Run Smoke Test",
+        "handler": "numeric_smoke_test",
+        "output_channel": "terminal_T2",
+        "requires_pass": [
+          "T1"
+        ],
+        "required": true,
+        "fixed": true
+      },
+      {
+        "action_id": "T3",
+        "kind": "system_test",
+        "label": "Test Persistence",
+        "handler": "persistence_test",
+        "output_channel": "terminal_T3",
+        "requires_pass": [
+          "T1",
+          "T2"
+        ],
+        "required": true,
+        "fixed": true
+      },
+      {
+        "action_id": "J1",
+        "kind": "job",
+        "label": "Run TG-B1S-D Reproduction",
+        "handler": "run_registered_job",
+        "job_id": "tg_b1s_d_100p_reproduction",
+        "row_id": "tg_b1s_d_100p_primary",
+        "output_channel": "terminal_J1",
+        "requires_pass": [
+          "T1",
+          "T2",
+          "T3"
+        ],
+        "confirmation_required": true
+      }
+    ]
+  },
+  "entrypoint": {
+    "path": "colab_jobs/tg_b1s_d_reproduce_and_compare.py"
+  },
+  "arguments": [
+    "--out",
+    "/content/qm_job/results/tg_b1s_d_100p_reproduction",
+    "--baseline-manifest",
+    "colab_jobs/baselines/tg_b1s_d_20260714_184736_baseline_manifest.json",
+    "--simulation-entrypoint",
+    "jax_scout/gravity_TG_B1S_drift_decomposition_gpu.py",
+    "--analysis-entrypoint",
+    "colab_jobs/tg_b1s_d_reproduction_compare.py",
+    "--matrix",
+    "primary",
+    "--sample-dt",
+    "1.0"
+  ],
+  "rows": [
+    {
+      "row_id": "tg_b1s_d_100p_primary",
+      "arguments": [
+        "--out",
+        "/content/qm_job/results/tg_b1s_d_100p_reproduction",
+        "--baseline-manifest",
+        "colab_jobs/baselines/tg_b1s_d_20260714_184736_baseline_manifest.json",
+        "--simulation-entrypoint",
+        "jax_scout/gravity_TG_B1S_drift_decomposition_gpu.py",
+        "--analysis-entrypoint",
+        "colab_jobs/tg_b1s_d_reproduction_compare.py",
+        "--matrix",
+        "primary",
+        "--sample-dt",
+        "1.0"
+      ],
+      "expected_outputs": [
+        "results/tg_b1s_d_100p_reproduction/baseline_manifest.json",
+        "results/tg_b1s_d_100p_reproduction/reproduction_manifest.json",
+        "results/tg_b1s_d_100p_reproduction/environment_report.json",
+        "results/tg_b1s_d_100p_reproduction/gpu_preflight_before.json",
+        "results/tg_b1s_d_100p_reproduction/gpu_preflight_final.json",
+        "results/tg_b1s_d_100p_reproduction/simulation_command.json",
+        "results/tg_b1s_d_100p_reproduction/analysis_command.json",
+        "results/tg_b1s_d_100p_reproduction/logs/simulation_stdout_stderr.log",
+        "results/tg_b1s_d_100p_reproduction/logs/analysis_stdout_stderr.log",
+        "results/tg_b1s_d_100p_reproduction/simulation/baseline_node_contract.csv",
+        "results/tg_b1s_d_100p_reproduction/simulation/preregistered_matrix.json",
+        "results/tg_b1s_d_100p_reproduction/simulation/source_spec.json",
+        "results/tg_b1s_d_100p_reproduction/simulation/environment_versions.json",
+        "results/tg_b1s_d_100p_reproduction/simulation/gpu_preflight.json",
+        "results/tg_b1s_d_100p_reproduction/simulation/orbital_distance.csv",
+        "results/tg_b1s_d_100p_reproduction/simulation/phase_alignment.csv",
+        "results/tg_b1s_d_100p_reproduction/simulation/drift_channel_fits.csv",
+        "results/tg_b1s_d_100p_reproduction/simulation/asymptotic_frequency.csv",
+        "results/tg_b1s_d_100p_reproduction/simulation/long_time_100_period.csv",
+        "results/tg_b1s_d_100p_reproduction/simulation/energy_ledger.csv",
+        "results/tg_b1s_d_100p_reproduction/simulation/numerical_validation.csv",
+        "results/tg_b1s_d_100p_reproduction/simulation/basin_orbital_stability.csv",
+        "results/tg_b1s_d_100p_reproduction/simulation/falsification_results.csv",
+        "results/tg_b1s_d_100p_reproduction/simulation/artifact_hashes.csv",
+        "results/tg_b1s_d_100p_reproduction/observable_comparison.csv",
+        "results/tg_b1s_d_100p_reproduction/observable_comparison.json",
+        "results/tg_b1s_d_100p_reproduction/comparison_summary.json",
+        "results/tg_b1s_d_100p_reproduction/completion_status.json",
+        "results/tg_b1s_d_100p_reproduction/artifact_hashes.json"
+      ]
+    }
+  ],
+  "source_files": [
+    "jax_scout/__init__.py",
+    "jax_scout/phase_d_c3_wave.py",
+    "jax_scout/gravity_TG_B1S_state_load_feedback_gpu.py",
+    "jax_scout/gravity_TG_B1S_backreaction_robustness_gpu.py",
+    "jax_scout/gravity_TG_B1S_long_time_gpu.py",
+    "jax_scout/gravity_TG_B1S_drift_decomposition_gpu.py",
+    "colab_jobs/tg_b1s_d_reproduce_and_compare.py",
+    "colab_jobs/tg_b1s_d_reproduction_compare.py"
+  ],
+  "config_files": [
+    "colab_jobs/baselines/tg_b1s_d_20260714_184736_baseline_manifest.json"
+  ],
+  "external_inputs": [],
+  "expected_outputs": [
+    "results/tg_b1s_d_100p_reproduction/baseline_manifest.json",
+    "results/tg_b1s_d_100p_reproduction/reproduction_manifest.json",
+    "results/tg_b1s_d_100p_reproduction/environment_report.json",
+    "results/tg_b1s_d_100p_reproduction/gpu_preflight_before.json",
+    "results/tg_b1s_d_100p_reproduction/gpu_preflight_final.json",
+    "results/tg_b1s_d_100p_reproduction/simulation_command.json",
+    "results/tg_b1s_d_100p_reproduction/analysis_command.json",
+    "results/tg_b1s_d_100p_reproduction/logs/simulation_stdout_stderr.log",
+    "results/tg_b1s_d_100p_reproduction/logs/analysis_stdout_stderr.log",
+    "results/tg_b1s_d_100p_reproduction/observable_comparison.csv",
+    "results/tg_b1s_d_100p_reproduction/observable_comparison.json",
+    "results/tg_b1s_d_100p_reproduction/comparison_summary.json",
+    "results/tg_b1s_d_100p_reproduction/completion_status.json",
+    "results/tg_b1s_d_100p_reproduction/artifact_hashes.json"
+  ],
+  "precision": {
+    "jax_enable_x64": true
+  },
+  "environment_policy": {
+    "require_gpu": true,
+    "accepted_gpu_names": [
+      "A100"
+    ]
+  },
+  "runtime_environment": {
+    "env": {
+      "XLA_PYTHON_CLIENT_PREALLOCATE": "false",
+      "XLA_PYTHON_CLIENT_MEM_FRACTION": "0.90"
+    },
+    "notes": "Applied by notebook setup before JAX imports. The TG-B1S-D source uses os.environ.setdefault, so these manifest values override the packaged script defaults without editing source."
+  },
+  "install_policy": {
+    "allow_pip_install": false
+  },
+  "seed": null,
+  "drive_results_dir": "/content/drive/MyDrive/QuantuleMapperRuns/tg_b1s_d_100p_reproduction",
+  "drive_checkpoint_dir": "/content/drive/MyDrive/QuantuleMapperRuns/tg_b1s_d_100p_reproduction/checkpoints",
+  "simulation_entrypoint": {
+    "path": "jax_scout/gravity_TG_B1S_drift_decomposition_gpu.py",
+    "arguments": [
+      "--out",
+      "/content/qm_job/results/tg_b1s_d_100p_reproduction/simulation",
+      "--matrix",
+      "primary",
+      "--sample-dt",
+      "1.0"
+    ]
+  },
+  "analysis_entrypoint": {
+    "path": "colab_jobs/tg_b1s_d_reproduction_compare.py",
+    "arguments": [
+      "--baseline-manifest",
+      "colab_jobs/baselines/tg_b1s_d_20260714_184736_baseline_manifest.json",
+      "--reproduction-run",
+      "/content/qm_job/results/tg_b1s_d_100p_reproduction/simulation",
+      "--out",
+      "/content/qm_job/results/tg_b1s_d_100p_reproduction"
+    ]
+  }
+}

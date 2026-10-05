@@ -1,0 +1,5 @@
+source_family,classification,passes_semantics_gate,supported_label,admissible_for_future_feedback,reason
+S_state,NODE_STATE_LOAD,True,TG_NODE_STATE_LOAD_SOURCE_SUPPORTED,False,stable nonzero stationary load; global phase and translation invariant
+L_lock,DENSITY_OR_BREATHING_ACTIVITY,False,,False,does not cleanly separate locking from null/breathing/unlocking controls
+R_relax,PHASE_TENSION_RELAXATION,True,TG_PHASE_TENSION_RELAXATION_SOURCE_SUPPORTED,True,"detects mismatch relaxation, including scrambled relaxation, and is quiet on the stationary node"
+P_threshold,DENSITY_OR_BREATHING_ACTIVITY,False,,False,comparison-only threshold source; cannot promote feedback by itself

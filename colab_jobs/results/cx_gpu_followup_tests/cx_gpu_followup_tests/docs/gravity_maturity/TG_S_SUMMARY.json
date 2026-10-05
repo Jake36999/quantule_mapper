@@ -1,0 +1,51 @@
+{
+  "baseline_node_gate_passed": true,
+  "classifications": [
+    {
+      "classification": "NODE_STATE_LOAD",
+      "passes_semantics_gate": true,
+      "reason": "stable nonzero stationary load; global phase and translation invariant",
+      "source_family": "S_state",
+      "stationary_integral": 135.68621876842886,
+      "supported_label": "TG_NODE_STATE_LOAD_SOURCE_SUPPORTED"
+    },
+    {
+      "breathing_integral": 8.761642130536283e-09,
+      "classification": "DENSITY_OR_BREATHING_ACTIVITY",
+      "locking_integral": 0.056050745178278655,
+      "passes_semantics_gate": false,
+      "reason": "does not cleanly separate locking from null/breathing/unlocking controls",
+      "source_family": "L_lock",
+      "stationary_integral": 6.789296826382856e-13,
+      "supported_label": "",
+      "unlocking_integral": 0.0698724467771426
+    },
+    {
+      "classification": "PHASE_TENSION_RELAXATION",
+      "passes_semantics_gate": true,
+      "phase_perturb_integral": 0.8258800645783477,
+      "reason": "detects mismatch relaxation, including scrambled relaxation, and is quiet on the stationary node",
+      "scrambled_integral": 113.06178974634594,
+      "source_family": "R_relax",
+      "stationary_integral": 3.1209779432407664e-14,
+      "supported_label": "TG_PHASE_TENSION_RELAXATION_SOURCE_SUPPORTED",
+      "unlocking_integral": 0.6186836463570462
+    },
+    {
+      "breathing_integral": 0.24584049419953785,
+      "classification": "DENSITY_OR_BREATHING_ACTIVITY",
+      "passes_semantics_gate": false,
+      "reason": "comparison-only threshold source; cannot promote feedback by itself",
+      "source_family": "P_threshold",
+      "stationary_integral": 2.937765055596418e-07,
+      "supported_label": ""
+    }
+  ],
+  "feedback_rerun_allowed": true,
+  "labels": [
+    "TG_NODE_STATE_LOAD_SOURCE_SUPPORTED",
+    "TG_PHASE_TENSION_RELAXATION_SOURCE_SUPPORTED"
+  ],
+  "run_directory": "/content/qm_job/results/cx_tg_rate_source_semantics_bridge/tg_s_semantics",
+  "status": "TG_NODE_STATE_LOAD_SOURCE_SUPPORTED"
+}

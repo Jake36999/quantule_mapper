@@ -316,6 +316,28 @@ def test_system_telemetry_snapshot_includes_worker_health_and_claims(app_client:
     assert "worker_stale" in payload["stale_workers"]
     assert any(worker["state"] == "active" for worker in payload["workers"])
     assert any(worker["state"] == "stale" for worker in payload["workers"])
+    assert payload["historical_workers"] == []
+
+
+def test_system_telemetry_hides_historical_workers_by_default(app_client: TestClient, sandbox: Path):
+    queue_manager = QueueManager(str(sandbox / "backlog_queue.json"), str(sandbox / "result_queue.json"))
+    queue_manager.set_worker_heartbeat("worker_current_stale", time.time() - 300.0)
+    queue_manager.set_worker_heartbeat("worker_historical", time.time() - 7200.0)
+
+    default_response = app_client.get("/api/system/telemetry?ttl_seconds=90")
+    assert default_response.status_code == 200
+    default_payload = default_response.json()
+    assert "worker_current_stale" in default_payload["stale_workers"]
+    assert "worker_historical" in default_payload["historical_workers"]
+    assert all(worker["worker_id"] != "worker_historical" for worker in default_payload["workers"])
+
+    historical_response = app_client.get("/api/system/telemetry?ttl_seconds=90&include_historical=true")
+    assert historical_response.status_code == 200
+    historical_payload = historical_response.json()
+    assert any(
+        worker["worker_id"] == "worker_historical" and worker["state"] == "historical"
+        for worker in historical_payload["workers"]
+    )
 
 
 def test_system_telemetry_rejects_invalid_ttl(app_client: TestClient):
@@ -335,6 +357,16 @@ def test_data_endpoints_fail_fast_without_active_pointer(app_client: TestClient)
     download_resp = app_client.get("/api/data/download/gen_0/missing.h5")
     assert download_resp.status_code == 409
     assert download_resp.json().get("status") == "error"
+
+
+def test_run_status_reports_idle_without_active_pointer(app_client: TestClient):
+    clear_active_run_pointer()
+
+    response = app_client.get("/api/run/status")
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["status"] == "idle"
+    assert payload["active_run"] is None
 
 
 def test_worker_daemon_claims_and_executes_job(monkeypatch: pytest.MonkeyPatch, sandbox: Path):
@@ -466,7 +498,7 @@ def test_dropdown_error_propagation(
     assert "Backend unreachable [503]" in payload["message"]
 
 
-def test_ws_missing_log_broadcast(
+def test_ws_missing_log_source_stays_quiet(
     monkeypatch: pytest.MonkeyPatch,
     sandbox: Path,
 ):
@@ -487,15 +519,15 @@ def test_ws_missing_log_broadcast(
     while not app_module.telemetry_queue.empty():
         events.append(app_module.telemetry_queue.get_nowait())
 
-    assert any(
-        evt.get("type") == "terminal_log"
-        and "Awaiting Worker GPU0 creation" in str(evt.get("line", ""))
-        for evt in events
-    )
+    assert not any(evt.get("type") == "terminal_log" for evt in events)
 
 
 def test_websocket_connects_and_receives_broadcasts(app_client: TestClient):
     with app_client.websocket_connect("/ws/telemetry") as ws:
+        hello = ws.receive_json()
+        assert hello["type"] == "hello"
+        assert hello["severity"] == "INFO"
+
         ws.send_text(json.dumps({"event": "START_HUNT"}))
         first = ws.receive_json()
         second = ws.receive_json()
@@ -506,6 +538,7 @@ def test_websocket_connects_and_receives_broadcasts(app_client: TestClient):
         asyncio.run(app_module._broadcast_payload({"type": "metrics", "sse": 1.23, "pcs": 0.6, "ic": 0.4}))
         third = ws.receive_json()
         assert third["type"] == "metrics"
+        assert third["severity"] == "INFO"
         assert float(third["sse"]) == 1.23
 
 
@@ -673,6 +706,7 @@ def test_e2e_ui_to_worker_to_dashboard(
     assert download.content
 
     with app_client.websocket_connect("/ws/telemetry") as ws:
+        assert ws.receive_json()["type"] == "hello"
         ws.send_text(json.dumps({"event": "START_HUNT"}))
         assert ws.receive_json()["type"] == "log"
 

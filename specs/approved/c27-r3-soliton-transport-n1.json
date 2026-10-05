@@ -1,0 +1,35 @@
+{
+  "spec_version": 1,
+  "id": "c27-r3-soliton-transport-n1",
+  "title": "C2.7 R3 as a spec: boosted NLS soliton translates at v = 2Dk",
+  "description": "Re-expression of jax_scout/phase_d_c2_7_rederivation.py R3 (boost n=1) as data. Same operator (_ops_flat: FEB with kinetic_mode=conservative, a_coupling=0, geom_off, D=1, a=0.8, s=-0.2, f=0), same Petviashvili soliton (A=1, sig=0.08, mu=0.2), same dt=2.5e-4 and T=3.",
+  "branch": "Branch - Transport - Index",
+  "substrate": {"name": "etdrk4-sncgl", "version": 1, "params": {
+    "param_D": 1.0, "param_eta": 0.0704, "param_rho_vac": 1.1866, "param_omega0": 0.0,
+    "param_a_coupling": 0.0, "param_s": -0.2, "param_f": 0.0, "param_a": 0.8,
+    "kinetic_mode": "conservative", "param_geom_off": true}},
+  "protocol": {
+    "ic": {"name": "nls_soliton", "version": 1, "params": {"mu": 0.2, "A": 1.0, "sig": 0.08, "boost_n": 1}},
+    "grid": {"N": 96, "L": 10.0},
+    "dt": 0.00025,
+    "T": 3.0,
+    "sample_every": 0.25
+  },
+  "observers": [
+    {"name": "centroid", "version": 1, "params": {"slopes": ["x"]}},
+    {"name": "mass", "version": 1},
+    {"name": "amp", "version": 1}
+  ],
+  "invariants": {},
+  "prediction": {
+    "statement": "A Galilean boost exp(ikx) of an exact NLS soliton translates it rigidly at v = 2Dk (Galilean invariance of the conservative branch with flat geometry). With D=1, k=2*pi/10: v = 1.25664. Mass is conserved by the unitary flow.",
+    "derivation": "i psi_t = -D lap psi - g(|psi|^2) psi is Galilean invariant: psi(x - 2Dkt) exp(i(kx - Dk^2 t)) solves it if psi does.",
+    "quantities": [
+      {"key": "x__slope", "expected": 1.2566370614359172, "tolerance": 0.001, "kind": "rel"},
+      {"key": "mass_ratio", "expected": 1.0, "tolerance": 0.001, "kind": "abs"}
+    ]
+  },
+  "requires": [{"spec_id": "stepper-order-gates", "verdict": "PASS"}],
+  "budget_h": 0.5,
+  "tags": ["pilot", "phase-E", "C2.7"]
+}

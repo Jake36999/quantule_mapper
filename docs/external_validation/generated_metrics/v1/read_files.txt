@@ -1,0 +1,13 @@
+sweep_runs/C29_ROBUST/track_static_0.00.npz
+sweep_runs/C29_ROBUST/track_static_0.79.npz
+sweep_runs/C29_ROBUST/track_static_1.57.npz
+sweep_runs/C29_ROBUST/track_static_2.36.npz
+sweep_runs/C29_ROBUST/track_static_3.14.npz
+sweep_runs/C29_ROBUST/summary.json
+sweep_runs/C29_VALIDATE/summary.json
+sweep_runs/C3_TWOQBALL_FULL/pair_static_0.00.npz
+sweep_runs/C3_TWOQBALL_FULL/pair_static_0.79.npz
+sweep_runs/C3_TWOQBALL_FULL/pair_static_1.57.npz
+sweep_runs/C3_TWOQBALL_FULL/pair_static_2.36.npz
+sweep_runs/C3_TWOQBALL_FULL/pair_static_3.14.npz
+sweep_runs/C3_TWOQBALL_FULL/summary.json

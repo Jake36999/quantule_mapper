@@ -1,0 +1,20 @@
+{
+  "stage": "G1",
+  "status": "TEMPORAL_CLOCK_CALIBRATION_FAILED",
+  "maturity_status": "CHARACTERIZED_NEGATIVE",
+  "run_path": "sweep_runs/GRAVITY_MATURITY_G1_CLOCK_20260714_100527/",
+  "labels": [
+    "TEMPORAL_CLOCK_CALIBRATION_FAILED"
+  ],
+  "passed_checks": [
+    "near_far_shift_detected",
+    "near_flat_shift_detected",
+    "measured_amplitude_invariance"
+  ],
+  "failed_checks": [
+    "eigen_time_contract_core",
+    "two_clock_family_shift_same_direction"
+  ],
+  "primary_failure_boundary": "The local eigenmode did not stay localized at the intended far clock position; localization error exceeded 4 length units in the N64 far cases.",
+  "next_smallest_experiment": "Redesign the probe-independent localization trap and rerun only the flat/near/far eigen-time contract."
+}

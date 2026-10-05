@@ -1,0 +1,18 @@
+observable,baseline_value,reproduced_value,absolute_difference,relative_difference,declared_absolute_tolerance,declared_relative_tolerance,comparison_status,source_table_field,gate_source,declared_threshold,threshold_direction
+delta_omega_infty,-2.150936882840006e-06,-2.150936882856951e-06,1.6944894109822278e-17,7.877913222314299e-12,,0.5,PASS,asymptotic_frequency.csv:delta_omega_infty,D4 validation relative_slope_difference < 0.50,,
+full_profile_overlap,0.9999999987895385,0.9999999987895382,3.3306690738754696e-16,3.3306690779071163e-16,,,PASS,long_time_100_period.csv:full_profile_overlap,D4/D5 full_profile_overlap > 0.999,0.999,min
+full_modal_leakage_max,9.15831330478709e-05,9.158313304799448e-05,1.2357194260903537e-16,1.3492871284964344e-12,,,PASS,long_time_100_period.csv:full_modal_leakage_max,D4/D5 full_modal_leakage_max < 1e-3,0.001,max
+ledger_residual_abs,1.0817746070755172e-05,1.081774605654435e-05,1.4210820833884114e-14,1.3136582002328398e-09,,,PASS,long_time_100_period.csv:ledger_residual_abs,D4 ledger_residual_abs < 1e-4,0.0001,max
+early_late_relative_difference,0.0584210752588697,0.0584210752527291,6.140601915838317e-12,1.051093614526725e-10,,,PASS,asymptotic_frequency.csv:early_late_relative_difference,constant_slope_supported threshold < 0.35,0.35,max
+constant_slope_supported,True,True,,,0,0,PASS,asymptotic_frequency.csv:constant_slope_supported,constant_slope_supported exact status,,
+delta_theta_classification,LINEAR_SECULAR,LINEAR_SECULAR,,,0,0,PASS,drift_channel_fits.csv:delta_theta.classification,phase channel required classification LINEAR_SECULAR,,
+d_orbital_classification,BOUNDED_OSCILLATORY,BOUNDED_OSCILLATORY,,,0,0,PASS,drift_channel_fits.csv:d_orbital.classification,structural channels must not become secular/accelerating,,
+modal_leakage_classification,BOUNDED_OSCILLATORY,BOUNDED_OSCILLATORY,,,0,0,PASS,drift_channel_fits.csv:modal_leakage.classification,structural channels must not become secular/accelerating,,
+delta_A_core_classification,BOUNDED_OSCILLATORY,BOUNDED_OSCILLATORY,,,0,0,PASS,drift_channel_fits.csv:delta_A_core.classification,structural channels must not become secular/accelerating,,
+delta_width_classification,BOUNDED_OSCILLATORY,BOUNDED_OSCILLATORY,,,0,0,PASS,drift_channel_fits.csv:delta_width.classification,structural channels must not become secular/accelerating,,
+delta_E_core_classification,BOUNDED_OSCILLATORY,BOUNDED_OSCILLATORY,,,0,0,PASS,drift_channel_fits.csv:delta_E_core.classification,structural channels must not become secular/accelerating,,
+delta_Q_classification,BELOW_NUMERICAL_FLOOR,BELOW_NUMERICAL_FLOOR,,,0,0,PASS,drift_channel_fits.csv:delta_Q.classification,structural channels must not become secular/accelerating,,
+structural_channels,,,,,0,0,PASS,falsification_results.csv:phase_aligned_structure_bounded.structural_channels,no structural secular/accelerating channels,,
+final_delta_theta,-0.0013329967322306402,-0.0013329967322306402,0.0,0.0,,,PASS,long_time_100_period.csv:final_delta_theta,informational only; no declared numeric cross-device tolerance in baseline contract,,
+final_orbital_distance,4.9140079664143094e-05,4.9140079664587915e-05,4.448210463164903e-16,9.05210266960646e-12,,,PASS,long_time_100_period.csv:final_orbital_distance,informational only; no declared numeric cross-device tolerance in baseline contract,,
+final_phase_aligned_distance,4.9140079664143094e-05,4.9140079664587915e-05,4.448210463164903e-16,9.05210266960646e-12,,,PASS,long_time_100_period.csv:final_phase_aligned_distance,informational only; no declared numeric cross-device tolerance in baseline contract,,

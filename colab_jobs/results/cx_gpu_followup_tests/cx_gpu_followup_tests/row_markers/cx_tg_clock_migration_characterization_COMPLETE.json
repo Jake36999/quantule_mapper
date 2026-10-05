@@ -1,0 +1,27 @@
+{
+  "row_id": "cx_tg_clock_migration_characterization",
+  "return_code": 0,
+  "duration_seconds": 5.180905818939209,
+  "finished_utc": "2026-07-18T00:01:35Z",
+  "log_path": "/content/qm_job/run_cx_tg_clock_migration_characterization.log",
+  "log_sha256": "5b873f95a16fd7076e73ce9534202b0b272b730d4f14889c24dd28f982282c3b",
+  "stages": [
+    {
+      "stage_id": "main",
+      "command": [
+        "/usr/bin/python3",
+        "-u",
+        "jax_scout/gravity_TG_clock_migration_characterization_gpu.py",
+        "--out",
+        "/content/qm_job/results/cx_tg_clock_migration_characterization",
+        "--matrix",
+        "pilot",
+        "--time-domain",
+        "selected"
+      ],
+      "return_code": 0,
+      "duration_seconds": 5.180188417434692,
+      "finished_utc": "2026-07-18T00:01:35Z"
+    }
+  ]
+}

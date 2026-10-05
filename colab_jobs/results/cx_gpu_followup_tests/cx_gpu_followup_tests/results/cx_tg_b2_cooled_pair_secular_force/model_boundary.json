@@ -1,0 +1,6 @@
+{
+  "bounded_claims_only": true,
+  "frozen_model_edits": "none",
+  "primary_question": "Does quieter/cooler two-node preparation reduce bare breathing enough for body-force and secular impulse/separation signs to agree?",
+  "source": "Wrapper around gravity_TG_B2_definitive_force.py"
+}

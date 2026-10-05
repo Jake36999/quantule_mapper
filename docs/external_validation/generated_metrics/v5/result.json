@@ -1,0 +1,66 @@
+{
+  "behavioural_result": "PASS",
+  "caveats": [
+    "Uses existing outcome labels only; no collision reinterpretation is performed."
+  ],
+  "created_utc": "2026-07-12T00:34:08+00:00",
+  "data_sources": [
+    "sweep_runs/C3_COLLISION_LADDER_FULL",
+    "sweep_runs/C3_ANTIPHASE_LADDER",
+    "sweep_runs/C3_PHASE_pi2",
+    "sweep_runs/C3_PHASE_3pi4",
+    "sweep_runs/C3_PHASE_7pi8"
+  ],
+  "files_read": [
+    "sweep_runs/C3_COLLISION_LADDER_FULL/summary.json",
+    "sweep_runs/C3_ANTIPHASE_LADDER/summary.json",
+    "sweep_runs/C3_PHASE_pi2/summary.json",
+    "sweep_runs/C3_PHASE_3pi4/summary.json",
+    "sweep_runs/C3_PHASE_7pi8/summary.json"
+  ],
+  "fit_parameters": {
+    "phase_count": 5,
+    "speed_count": 5
+  },
+  "fit_quality": {
+    "anti_phase_transmission_cells": 3,
+    "max_charge_drift": 1.489717348076215e-06,
+    "max_dE_rel": 6.588342536583086e-06,
+    "max_dQ_rel": 1.489717348076215e-06,
+    "max_energy_drift": 6.588342536583086e-06,
+    "missing_phase_speed_cells": 9,
+    "n_cells": 16,
+    "n_missing_cells": 9,
+    "non_antiphase_capture_fraction": 1.0,
+    "outcome_counts": {
+      "CAPTURE": 13,
+      "PASS_THROUGH": 3
+    },
+    "outcomes": [
+      "CAPTURE",
+      "PASS_THROUGH"
+    ],
+    "phase_values": [
+      "0.00",
+      "1.57",
+      "2.36",
+      "2.75",
+      "3.14"
+    ],
+    "rows": 16,
+    "speed_values": [
+      "0.15",
+      "0.3",
+      "0.45",
+      "0.6",
+      "0.75"
+    ]
+  },
+  "formula_target": "phase x speed collision outcome grid with conservation/radiation telemetry where available",
+  "match_level_candidate": "CLOSE ANALOGUE",
+  "metric_id": "v5",
+  "no_new_simulation": true,
+  "provisional_until_claude_review": true,
+  "status": "RAN",
+  "validation_depth": "INTERNAL_DATA_BEHAVIOUR_CHECK"
+}

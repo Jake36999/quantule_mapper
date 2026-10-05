@@ -1,0 +1,50 @@
+{
+  "baseline_id": "tg_b2_definitive_force_20260716_113033",
+  "source": {
+    "capsule_dir": "colab_jobs/Colab_runs/cl_tg_b2_definitive_force_20260716_113033",
+    "archive_sha256": "f678d77ec5e02382005148ccab5a84d5fae4df3c6dc8a71482f433514ab4180e",
+    "first_pass_review": "colab_jobs/Colab_runs/cl_tg_b2_definitive_force_20260716_113033/FIRST_PASS_REVIEW_20260716.md",
+    "results_doc": "docs/gravity_maturity/TG_B2_TWO_NODE_FORCE_RESULTS.md"
+  },
+  "command": "python jax_scout/gravity_TG_B2_definitive_force.py --seps 3.0,4.0 --T 180 --out /content/qm_job/results/cl_tg_b2_definitive",
+  "config": {
+    "N": 64,
+    "L": 16.0,
+    "T": 180.0,
+    "dt": 0.002,
+    "sample_dt": 0.5,
+    "f_discard": 0.4,
+    "epsilon_G": 0.06,
+    "cool_T": 0.0
+  },
+  "baseline_rows": [
+    {
+      "sep": 3.0,
+      "F_R_well_avg": -5.4501234166498155e-05,
+      "F_R_hill_avg": 5.4500159344052916e-05,
+      "F_R_off_avg": 0.0,
+      "F_R_well_std": 7.950322869780782e-06,
+      "well_attracts": true,
+      "sign_reverses": true,
+      "off_null_ok": true,
+      "charge_ok": true,
+      "nodes_distinct": true,
+      "gates_pass": true
+    },
+    {
+      "sep": 4.0,
+      "F_R_well_avg": -4.852570312000416e-05,
+      "F_R_hill_avg": 4.852472172424024e-05,
+      "F_R_off_avg": 0.0,
+      "F_R_well_std": 8.38309624534848e-06,
+      "well_attracts": true,
+      "sign_reverses": true,
+      "off_null_ok": true,
+      "charge_ok": true,
+      "nodes_distinct": true,
+      "gates_pass": true
+    }
+  ],
+  "reviewed_science_status": "TG_B2_DEFINITIVE_AWELL_ATTRACTION_CONFIRMED",
+  "boundary": "Mirror-only TG-B2 A-well branch; frozen TG-B1S untouched; near-field screened result; not gravity, UFF, or IRER validation."
+}

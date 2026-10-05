@@ -11,10 +11,15 @@ gate, numeric match, or IRER-framing change.
     - in_phase: `0.0`  (0/2 decisive)
     - anti_phase: `1.0`  (2/2 decisive)
 - Ambiguous rows dropped: `0`; decisive rows used: `4`
+- Coverage scope: **`coarse_inphase_vs_antiphase_only`** (off-phase: `False`, speed axis: `False`, distinct phase points: `2`)
+- Untested C3 features (NOT corroborated by this dataset):
+    - anti-phase channel NARROWNESS (no off-phase points; C3 finds off-phase captures)
+    - speed dependence (no speed axis; C3 finds anti-phase transmits only below ~0.5c)
 
 Caveats:
 - Qualitative phase-direction comparison only; no numeric, rate, or speed-boundary match.
-- COLLAPSE grouped as not-transmitted; its density-spike destruction mechanism differs from C3 CAPTURE (binding) — a CLOSE ANALOGUE mechanism difference.
+- IN-PHASE side is phenomenological only: COLLAPSE (density-spike destruction) is grouped as not-transmitted but its mechanism differs from C3 CAPTURE (binding). The ANTI-PHASE side is the stronger correspondence (destructive-interference node protects the solitons in both).
+- Corroborates coarse direction only; does NOT test: anti-phase channel NARROWNESS (no off-phase points; C3 finds off-phase captures); speed dependence (no speed axis; C3 finds anti-phase transmits only below ~0.5c).
 
 The test asks only whether transmission is concentrated at anti-phase (same *direction* as the
 C3 phase×speed grid), not whether speeds, boundaries, or rates match. Interpretation deferred to

@@ -1,0 +1,8 @@
+{
+  "backend": "gpu",
+  "devices": [
+    "cuda:0"
+  ],
+  "gpu_ok": true,
+  "x64_enabled": true
+}

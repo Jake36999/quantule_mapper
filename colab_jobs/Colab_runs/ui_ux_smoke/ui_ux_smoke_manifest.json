@@ -1,0 +1,155 @@
+{
+  "job_name": "Colab UI/UX Smoke Test",
+  "job_id": "ui_ux_smoke_test",
+  "job_root": "/content/qm_job",
+  "workflow": {
+    "mode": "manual_colab_upload",
+    "agent_plans_run": true,
+    "manual_upload_to_colab": true,
+    "manual_colab_execution": true,
+    "drive_persistence_required": true,
+    "local_results_dir": "F:\\quantule_mapper\\colab_jobs\\results",
+    "review_prompt_after_download": true,
+    "intended_use": "Lightweight UI/UX validation for the Colab control panel; not a scientific simulation."
+  },
+  "result_policy": {
+    "ideal_archive_bytes": 1000000000,
+    "hard_archive_bytes": 5000000000
+  },
+  "control_panel": {
+    "schema_version": "qm-colab-controls/1.0",
+    "reserved_test_slots": [
+      "T1",
+      "T2",
+      "T3"
+    ],
+    "tail_lines": 200,
+    "actions": [
+      {
+        "action_id": "T1",
+        "kind": "system_test",
+        "label": "Run Preflight",
+        "handler": "runtime_preflight",
+        "output_channel": "terminal_T1",
+        "required": true,
+        "fixed": true
+      },
+      {
+        "action_id": "T2",
+        "kind": "system_test",
+        "label": "Run Smoke Test",
+        "handler": "numeric_smoke_test",
+        "output_channel": "terminal_T2",
+        "requires_pass": [
+          "T1"
+        ],
+        "required": true,
+        "fixed": true
+      },
+      {
+        "action_id": "T3",
+        "kind": "system_test",
+        "label": "Test Persistence",
+        "handler": "persistence_test",
+        "output_channel": "terminal_T3",
+        "requires_pass": [
+          "T1",
+          "T2"
+        ],
+        "required": true,
+        "fixed": true
+      },
+      {
+        "action_id": "J1",
+        "kind": "job",
+        "label": "Run UI Smoke",
+        "handler": "run_registered_job",
+        "job_id": "ui_ux_smoke_test",
+        "row_id": "ui_ux_smoke_row",
+        "output_channel": "terminal_J1",
+        "requires_pass": [
+          "T1",
+          "T2",
+          "T3"
+        ],
+        "confirmation_required": false
+      }
+    ]
+  },
+  "source_files": [
+    "colab_jobs/ui_ux_smoke_job.py"
+  ],
+  "config_files": [],
+  "external_inputs": [],
+  "expected_outputs": [
+    "results/ui_ux_smoke_test/preflight_marker.json",
+    "results/ui_ux_smoke_test/ui_smoke_metrics.csv",
+    "results/ui_ux_smoke_test/ui_event_log.json",
+    "results/ui_ux_smoke_test/completion_status.json"
+  ],
+  "rows": [
+    {
+      "row_id": "ui_ux_smoke_row",
+      "expected_outputs": [
+        "results/ui_ux_smoke_test/preflight_marker.json",
+        "results/ui_ux_smoke_test/ui_smoke_metrics.csv",
+        "results/ui_ux_smoke_test/ui_event_log.json",
+        "results/ui_ux_smoke_test/completion_status.json"
+      ],
+      "stages": [
+        {
+          "stage_id": "prepare",
+          "entrypoint": {
+            "path": "colab_jobs/ui_ux_smoke_job.py"
+          },
+          "arguments": [
+            "--phase",
+            "prepare",
+            "--out",
+            "{job_root}/results/ui_ux_smoke_test",
+            "--steps",
+            "3",
+            "--sleep",
+            "0.4"
+          ],
+          "expected_outputs": [
+            "results/ui_ux_smoke_test/preflight_marker.json"
+          ]
+        },
+        {
+          "stage_id": "run",
+          "entrypoint": {
+            "path": "colab_jobs/ui_ux_smoke_job.py"
+          },
+          "arguments": [
+            "--phase",
+            "run",
+            "--out",
+            "{job_root}/results/ui_ux_smoke_test",
+            "--steps",
+            "8",
+            "--sleep",
+            "0.4"
+          ],
+          "expected_outputs": [
+            "results/ui_ux_smoke_test/ui_smoke_metrics.csv",
+            "results/ui_ux_smoke_test/ui_event_log.json",
+            "results/ui_ux_smoke_test/completion_status.json"
+          ]
+        }
+      ]
+    }
+  ],
+  "precision": {
+    "jax_enable_x64": true
+  },
+  "environment_policy": {
+    "require_gpu": false,
+    "accepted_gpu_names": []
+  },
+  "install_policy": {
+    "allow_pip_install": false
+  },
+  "drive_results_dir": "/content/drive/MyDrive/QuantuleMapperRuns/ui_ux_smoke_test",
+  "drive_checkpoint_dir": "/content/drive/MyDrive/QuantuleMapperRuns/ui_ux_smoke_test/checkpoints"
+}

@@ -1,0 +1,20 @@
+{
+  "bounded_feedback_promoted": false,
+  "delta_omega_infty": -2.150936882856951e-06,
+  "final_delta_theta": -0.0013329967322306402,
+  "final_orbital_distance": 4.9140079664587915e-05,
+  "final_phase_aligned_distance": 4.9140079664587915e-05,
+  "interpretation": "The audit separates phase drift from profile drift, but the available gates do not yet distinguish stable frequency shift, structural drift and numerical accumulation robustly enough for promotion.",
+  "labels": [
+    "TG_STATE_LOAD_LONG_TIME_DRIFT_UNRESOLVED"
+  ],
+  "preserved_prior_labels": [
+    "TG_STATE_LOAD_BACKREACTION_ROBUST",
+    "TG_STATE_LOAD_BACKREACTION_ROBUST_BUT_WEAK",
+    "TG_STATE_LOAD_CONTINUOUS_SLOW_DRIFT"
+  ],
+  "run_directory": "/content/qm_job/results/tg_b1s_d_100p_reproduction/simulation",
+  "status": "TG_STATE_LOAD_LONG_TIME_DRIFT_UNRESOLVED",
+  "structural_channels": "",
+  "target_run": "D3_100P_lam1"
+}

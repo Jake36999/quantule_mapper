@@ -1,0 +1,209 @@
+{
+  "bundle_sha256": "3b8d5ed1acd7cf68f5807f38e3fb7ac46b5bd431bfbf4c849adaa5cfc08cfe54",
+  "control_panel": {
+    "actions": [
+      {
+        "action_id": "T1",
+        "fixed": true,
+        "handler": "runtime_preflight",
+        "kind": "system_test",
+        "label": "Run Preflight",
+        "output_channel": "terminal_T1",
+        "required": true
+      },
+      {
+        "action_id": "T2",
+        "fixed": true,
+        "handler": "numeric_smoke_test",
+        "kind": "system_test",
+        "label": "Run Smoke Test",
+        "output_channel": "terminal_T2",
+        "required": true,
+        "requires_pass": [
+          "T1"
+        ]
+      },
+      {
+        "action_id": "T3",
+        "fixed": true,
+        "handler": "persistence_test",
+        "kind": "system_test",
+        "label": "Test Persistence",
+        "output_channel": "terminal_T3",
+        "required": true,
+        "requires_pass": [
+          "T1",
+          "T2"
+        ]
+      },
+      {
+        "action_id": "J1",
+        "confirmation_required": true,
+        "handler": "run_registered_job",
+        "job_id": "cx_gpu_followup_tests",
+        "kind": "job",
+        "label": "Cooled Pair Secular Force",
+        "output_channel": "terminal_J1",
+        "requires_pass": [
+          "T1",
+          "T2",
+          "T3"
+        ],
+        "row_id": "cx_tg_b2_cooled_pair_secular_force"
+      },
+      {
+        "action_id": "J2",
+        "confirmation_required": true,
+        "handler": "run_registered_job",
+        "job_id": "cx_gpu_followup_tests",
+        "kind": "job",
+        "label": "Clock Migration Pilot",
+        "output_channel": "terminal_J2",
+        "requires_pass": [
+          "T1",
+          "T2",
+          "T3"
+        ],
+        "row_id": "cx_tg_clock_migration_characterization"
+      },
+      {
+        "action_id": "J3",
+        "confirmation_required": true,
+        "handler": "run_registered_job",
+        "job_id": "cx_gpu_followup_tests",
+        "kind": "job",
+        "label": "Rate Source Semantics",
+        "output_channel": "terminal_J3",
+        "requires_pass": [
+          "T1",
+          "T2",
+          "T3"
+        ],
+        "row_id": "cx_tg_rate_source_semantics_bridge"
+      },
+      {
+        "action_id": "J4",
+        "confirmation_required": true,
+        "handler": "run_registered_job",
+        "job_id": "cx_gpu_followup_tests",
+        "kind": "job",
+        "label": "Gravity-D Yield Map",
+        "output_channel": "terminal_J4",
+        "requires_pass": [
+          "T1",
+          "T2",
+          "T3"
+        ],
+        "row_id": "cx_gravity_d_load_capacity_yield_map"
+      }
+    ],
+    "log_root": "/content/qm_colab/jobs/cx_gpu_followup_tests/run/logs",
+    "reserved_test_slots": [
+      "T1",
+      "T2",
+      "T3"
+    ],
+    "schema_version": "qm-colab-controls/1.0",
+    "status_root": "/content/qm_colab/jobs/cx_gpu_followup_tests/run/status",
+    "tail_lines": 1200
+  },
+  "files": [
+    {
+      "path": "jax_scout/__init__.py",
+      "sha256": "ed23112aa9afa87ff78171fa36b063a296cb786354053562117b7fb2e605ebc5",
+      "size_bytes": 94
+    },
+    {
+      "path": "jax_scout/gravity_D_dynamics_characterization_gpu.py",
+      "sha256": "f1898c837b6cbb565873051eb9d18bdfcfe49f6be30167988be9933ce77822e1",
+      "size_bytes": 64309
+    },
+    {
+      "path": "jax_scout/gravity_D_load_capacity_yield_map_gpu.py",
+      "sha256": "a0338c2011ad90c8accd655815829482f9240a14460490876dad0939c755003f",
+      "size_bytes": 6037
+    },
+    {
+      "path": "jax_scout/gravity_D_neutral_probe_gpu.py",
+      "sha256": "68476b717d2d2351efe4d492ed303c28697c34ef645c2d07edc89532fd68ac40",
+      "size_bytes": 19454
+    },
+    {
+      "path": "jax_scout/gravity_G1_clock_calibration_gpu.py",
+      "sha256": "43177001a602b057c2f3935c30f6f4b81b6cbefff68abb9da81ba5bce628e3a7",
+      "size_bytes": 28559
+    },
+    {
+      "path": "jax_scout/gravity_TG_B1S_state_load_feedback_gpu.py",
+      "sha256": "85215ef2f634820aae806dcd799d4fcb78ececab3224b994f696fb817bdeebf1",
+      "size_bytes": 39939
+    },
+    {
+      "path": "jax_scout/gravity_TG_B2_cooled_pair_secular_force_gpu.py",
+      "sha256": "b7c5e4e68b07baf3f791277fff90245e065d781e4023a633be0c52c6b7deee63",
+      "size_bytes": 11354
+    },
+    {
+      "path": "jax_scout/gravity_TG_B2_definitive_force.py",
+      "sha256": "b000cc031d9fc7f088bbafac60da02cd3b3c9ee5609d87bde6619d53178ec19c",
+      "size_bytes": 12784
+    },
+    {
+      "path": "jax_scout/gravity_TG_B2_two_node_awell.py",
+      "sha256": "6f6b9f0fad2bf5e27378c3efc3620ee6d79a577978a9c0a7533c0648e38012be",
+      "size_bytes": 12975
+    },
+    {
+      "path": "jax_scout/gravity_TG_S_source_semantics_gpu.py",
+      "sha256": "7725f0d95d5def3cd08c792bf04252b4f09021976ca9a1af165090256760d8bf",
+      "size_bytes": 42398
+    },
+    {
+      "path": "jax_scout/gravity_TG_clock_migration_characterization_gpu.py",
+      "sha256": "960c705b880e7d064db41ec2fed10dba732179d8806f4032379c27825a53c05e",
+      "size_bytes": 7880
+    },
+    {
+      "path": "jax_scout/gravity_TG_rate_source_semantics_bridge_gpu.py",
+      "sha256": "fa96d17e228a6b569b36e4b362992b1bed1d80e7ddfdf746b4d67ad3ec064b22",
+      "size_bytes": 5339
+    },
+    {
+      "path": "jax_scout/phase_d_c3_wave.py",
+      "sha256": "aacc2c709c1eefe98b9fed2a8ef9aa9b2ca2c439d8d982717a96aeb8bee2ccff",
+      "size_bytes": 16850
+    }
+  ],
+  "generated_at_utc": "2026-07-17T22:09:14.061453+00:00",
+  "job_id": "cx_gpu_followup_tests",
+  "manifest_path": "cx_gpu_followup_tests_manifest.json",
+  "packager_version": "4.6",
+  "project_root_name": "quantule_mapper",
+  "resource_profile": {
+    "autotune_before_j1": true,
+    "autotune_max_seconds": 30,
+    "autotune_target_mb": 2048,
+    "class": "a100_aggressive",
+    "launch_env": {},
+    "notes": "Use A100 resources for selected queued follow-up rows. Run one job button at a time unless deliberately dispatching multiple archives.",
+    "push_level": "aggressive",
+    "warn_if_gpu_memory_used_fraction_below": 0.15,
+    "xla_mem_fraction": "0.90",
+    "xla_preallocate": "false"
+  },
+  "workflow": {
+    "agent_plans_run": true,
+    "analogy": "Sometimes it is quicker to send the car to the shop than fix it yourself.",
+    "drive_persistence_required": true,
+    "intended_use": "Targeted Colab A100 execution for queued GPU follow-up tests; not a broad hunt.",
+    "local_results_dir": "F:\\quantule_mapper\\colab_jobs\\results",
+    "manual_colab_execution": true,
+    "manual_upload_to_colab": true,
+    "mode": "manual_colab_upload",
+    "result_policy": {
+      "hard_archive_bytes": 5000000000,
+      "ideal_archive_bytes": 1000000000
+    },
+    "review_prompt_after_download": true
+  }
+}

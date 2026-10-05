@@ -1,0 +1,18 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "-u",
+    "jax_scout/gravity_TG_B2_definitive_force.py",
+    "--seps",
+    "3.0",
+    "--L",
+    "20",
+    "--N",
+    "96",
+    "--T",
+    "180",
+    "--out",
+    "/content/qm_job/results/cl_tg_r_robustness_v2/rows/r1_box_L20_N96_sep3"
+  ],
+  "row_id": "r1_box_L20_N96_sep3"
+}

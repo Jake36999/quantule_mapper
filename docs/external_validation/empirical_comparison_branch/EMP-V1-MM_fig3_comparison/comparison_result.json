@@ -1,0 +1,40 @@
+{
+  "status": "PROVISIONAL_UNTIL_CLAUDE_REVIEW",
+  "created_utc": "2026-07-11T08:08:51.196670+00:00",
+  "data_source": "docs\\external_validation\\empirical_comparison_branch\\EMP-V1-MM_fig3.csv",
+  "provenance": "docs\\external_validation\\empirical_comparison_branch\\provenance_EMP-V1-MM.md",
+  "comparison": {
+    "metric": "v1",
+    "internal_lambda": 1.9810732125316175,
+    "internal_lambda_source": "generated_metrics/v1 (C2 fit)",
+    "experimental_lambda": null,
+    "experimental_lambda_raw_unreliable": 1.5659581268806286,
+    "lambda_ratio_exp_over_internal": null,
+    "decay_fit_r_squared": 0.025356114954638298,
+    "decay_fit_reliable": false,
+    "decay_fit_reason": "only 2 distinct q value(s); need >= 3",
+    "n_distinct_q": 2,
+    "phase_sign_accuracy": 0.7272727272727273,
+    "phase_sign_accuracy_by_q": {
+      "0.765": {
+        "hits": 9,
+        "n": 15,
+        "accuracy": 0.6
+      },
+      "1.91": {
+        "hits": 7,
+        "n": 7,
+        "accuracy": 1.0
+      }
+    },
+    "n_sign_rows": 22,
+    "n_rows": 26,
+    "match_level": "CLOSE ANALOGUE"
+  },
+  "guardrails": {
+    "match_level_ceiling": "CLOSE ANALOGUE",
+    "promotes_verdict": false,
+    "gates_production": false,
+    "feeds_hunter": false
+  }
+}

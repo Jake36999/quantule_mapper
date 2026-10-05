@@ -1,0 +1,115 @@
+{
+  "completed_rows": [
+    "cx_tg_b2_cooled_pair_secular_force",
+    "cx_tg_clock_migration_characterization",
+    "cx_tg_rate_source_semantics_bridge",
+    "cx_gravity_d_load_capacity_yield_map"
+  ],
+  "failed_rows": [],
+  "rows": [
+    {
+      "duration_seconds": 5860.1317484378815,
+      "finished_utc": "2026-07-18T00:01:26Z",
+      "log_path": "/content/qm_job/run_cx_tg_b2_cooled_pair_secular_force.log",
+      "log_sha256": "aa6bbfd856ed80f4abd9f4ffed8ff05974efd2e409745fcab8cded7c8e59e394",
+      "return_code": 0,
+      "row_id": "cx_tg_b2_cooled_pair_secular_force",
+      "stages": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-u",
+            "jax_scout/gravity_TG_B2_cooled_pair_secular_force_gpu.py",
+            "--out",
+            "/content/qm_job/results/cx_tg_b2_cooled_pair_secular_force",
+            "--seps",
+            "3.0,4.0",
+            "--cool-T-values",
+            "0,40",
+            "--T",
+            "180"
+          ],
+          "duration_seconds": 5860.131207942963,
+          "finished_utc": "2026-07-18T00:01:26Z",
+          "return_code": 0,
+          "stage_id": "main"
+        }
+      ]
+    },
+    {
+      "duration_seconds": 5.180905818939209,
+      "finished_utc": "2026-07-18T00:01:35Z",
+      "log_path": "/content/qm_job/run_cx_tg_clock_migration_characterization.log",
+      "log_sha256": "5b873f95a16fd7076e73ce9534202b0b272b730d4f14889c24dd28f982282c3b",
+      "return_code": 0,
+      "row_id": "cx_tg_clock_migration_characterization",
+      "stages": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-u",
+            "jax_scout/gravity_TG_clock_migration_characterization_gpu.py",
+            "--out",
+            "/content/qm_job/results/cx_tg_clock_migration_characterization",
+            "--matrix",
+            "pilot",
+            "--time-domain",
+            "selected"
+          ],
+          "duration_seconds": 5.180188417434692,
+          "finished_utc": "2026-07-18T00:01:35Z",
+          "return_code": 0,
+          "stage_id": "main"
+        }
+      ]
+    },
+    {
+      "duration_seconds": 83.59157729148865,
+      "finished_utc": "2026-07-18T00:02:59Z",
+      "log_path": "/content/qm_job/run_cx_tg_rate_source_semantics_bridge.log",
+      "log_sha256": "e34afa3941d99b3e281814288ad4b8fe61d709fe8dd09fe78c5e41569a55ba24",
+      "return_code": 0,
+      "row_id": "cx_tg_rate_source_semantics_bridge",
+      "stages": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-u",
+            "jax_scout/gravity_TG_rate_source_semantics_bridge_gpu.py",
+            "--out",
+            "/content/qm_job/results/cx_tg_rate_source_semantics_bridge"
+          ],
+          "duration_seconds": 83.59097480773926,
+          "finished_utc": "2026-07-18T00:02:59Z",
+          "return_code": 0,
+          "stage_id": "main"
+        }
+      ]
+    },
+    {
+      "duration_seconds": 8.247223138809204,
+      "finished_utc": "2026-07-18T00:03:07Z",
+      "log_path": "/content/qm_job/run_cx_gravity_d_load_capacity_yield_map.log",
+      "log_sha256": "e0b0711036a2a276996a14b7fbcdc4c8f14989e78a0bb265b3c60c82159f070f",
+      "return_code": 0,
+      "row_id": "cx_gravity_d_load_capacity_yield_map",
+      "stages": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-u",
+            "jax_scout/gravity_D_load_capacity_yield_map_gpu.py",
+            "--out",
+            "/content/qm_job/results/cx_gravity_d_load_capacity_yield_map",
+            "--matrix",
+            "pilot"
+          ],
+          "duration_seconds": 8.246538400650024,
+          "finished_utc": "2026-07-18T00:03:07Z",
+          "return_code": 0,
+          "stage_id": "main"
+        }
+      ]
+    }
+  ]
+}

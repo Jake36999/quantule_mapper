@@ -1,0 +1,11 @@
+{
+  "S0_authoritative_TG_S": 135.6862187684289,
+  "casewise_normalization": false,
+  "disabled_sources": [
+    "R_relax",
+    "L_lock",
+    "P_threshold"
+  ],
+  "enabled_source": "S_state",
+  "source_hypothesis": "STATE_LOAD_FEEDBACK"
+}

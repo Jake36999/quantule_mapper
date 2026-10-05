@@ -1,6 +1,6 @@
 {
   "status": "PROVISIONAL_UNTIL_CLAUDE_REVIEW",
-  "created_utc": "2026-07-12T00:12:53.183166+00:00",
+  "created_utc": "2026-07-12T00:33:12.316659+00:00",
   "data_source": "docs\\external_validation\\empirical_comparison_branch\\EMP-V5-NG_fig2_fig3.csv",
   "provenance": "docs\\external_validation\\empirical_comparison_branch\\provenance_EMP-V5-NG.md",
   "comparison": {
@@ -34,10 +34,21 @@
     "direction_verdict": "DIRECTION_CONSISTENT",
     "direction_consistent_with_c3": true,
     "n_rows_used": 4,
+    "coverage": {
+      "scope": "coarse_inphase_vs_antiphase_only",
+      "has_off_phase": false,
+      "has_speed_axis": false,
+      "n_distinct_phase_points": 2,
+      "untested_c3_features": [
+        "anti-phase channel NARROWNESS (no off-phase points; C3 finds off-phase captures)",
+        "speed dependence (no speed axis; C3 finds anti-phase transmits only below ~0.5c)"
+      ]
+    },
     "match_level": "CLOSE ANALOGUE",
     "caveats": [
       "Qualitative phase-direction comparison only; no numeric, rate, or speed-boundary match.",
-      "COLLAPSE grouped as not-transmitted; its density-spike destruction mechanism differs from C3 CAPTURE (binding) \u2014 a CLOSE ANALOGUE mechanism difference."
+      "IN-PHASE side is phenomenological only: COLLAPSE (density-spike destruction) is grouped as not-transmitted but its mechanism differs from C3 CAPTURE (binding). The ANTI-PHASE side is the stronger correspondence (destructive-interference node protects the solitons in both).",
+      "Corroborates coarse direction only; does NOT test: anti-phase channel NARROWNESS (no off-phase points; C3 finds off-phase captures); speed dependence (no speed axis; C3 finds anti-phase transmits only below ~0.5c)."
     ]
   },
   "guardrails": {

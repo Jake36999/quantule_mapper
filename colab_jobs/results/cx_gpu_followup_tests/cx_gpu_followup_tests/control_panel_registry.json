@@ -1,0 +1,107 @@
+{
+  "actions": [
+    {
+      "action_id": "T1",
+      "fixed": true,
+      "handler": "runtime_preflight",
+      "kind": "system_test",
+      "label": "Run Preflight",
+      "output_channel": "terminal_T1",
+      "required": true
+    },
+    {
+      "action_id": "T2",
+      "fixed": true,
+      "handler": "numeric_smoke_test",
+      "kind": "system_test",
+      "label": "Run Smoke Test",
+      "output_channel": "terminal_T2",
+      "required": true,
+      "requires_pass": [
+        "T1"
+      ]
+    },
+    {
+      "action_id": "T3",
+      "fixed": true,
+      "handler": "persistence_test",
+      "kind": "system_test",
+      "label": "Test Persistence",
+      "output_channel": "terminal_T3",
+      "required": true,
+      "requires_pass": [
+        "T1",
+        "T2"
+      ]
+    },
+    {
+      "action_id": "J1",
+      "confirmation_required": true,
+      "handler": "run_registered_job",
+      "job_id": "cx_gpu_followup_tests",
+      "kind": "job",
+      "label": "Cooled Pair Secular Force",
+      "output_channel": "terminal_J1",
+      "requires_pass": [
+        "T1",
+        "T2",
+        "T3"
+      ],
+      "row_id": "cx_tg_b2_cooled_pair_secular_force"
+    },
+    {
+      "action_id": "J2",
+      "confirmation_required": true,
+      "handler": "run_registered_job",
+      "job_id": "cx_gpu_followup_tests",
+      "kind": "job",
+      "label": "Clock Migration Pilot",
+      "output_channel": "terminal_J2",
+      "requires_pass": [
+        "T1",
+        "T2",
+        "T3"
+      ],
+      "row_id": "cx_tg_clock_migration_characterization"
+    },
+    {
+      "action_id": "J3",
+      "confirmation_required": true,
+      "handler": "run_registered_job",
+      "job_id": "cx_gpu_followup_tests",
+      "kind": "job",
+      "label": "Rate Source Semantics",
+      "output_channel": "terminal_J3",
+      "requires_pass": [
+        "T1",
+        "T2",
+        "T3"
+      ],
+      "row_id": "cx_tg_rate_source_semantics_bridge"
+    },
+    {
+      "action_id": "J4",
+      "confirmation_required": true,
+      "handler": "run_registered_job",
+      "job_id": "cx_gpu_followup_tests",
+      "kind": "job",
+      "label": "Gravity-D Yield Map",
+      "output_channel": "terminal_J4",
+      "requires_pass": [
+        "T1",
+        "T2",
+        "T3"
+      ],
+      "row_id": "cx_gravity_d_load_capacity_yield_map"
+    }
+  ],
+  "log_root": "/content/qm_colab/jobs/cx_gpu_followup_tests/run/logs",
+  "reserved_test_slots": [
+    "T1",
+    "T2",
+    "T3"
+  ],
+  "schema_version": "qm-colab-controls/1.0",
+  "status_root": "/content/qm_colab/jobs/cx_gpu_followup_tests/run/status",
+  "tail_lines": 1200
+}

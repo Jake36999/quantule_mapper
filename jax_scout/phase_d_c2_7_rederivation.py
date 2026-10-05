@@ -11,6 +11,18 @@ Stages (checkpointed, one bounded run):
 
   wsl:  python jax_scout/phase_d_c2_7_rederivation.py [--out DIR]
 """
+
+# Harness manifest (docs/research_infrastructure/HARNESS_REGISTRY.md). Read by AST, never imported;
+# descriptive only -- nothing consults it before this script runs.
+HARNESS = {
+    'id': 'phase_d_c2_7_rederivation',
+    'branch': 'Branch - Transport - Index',
+    'status': 'ACTIVE',
+    'superseded_by': None,
+    'invariants': [],
+    'produces': ['C27_REDERIVE'],
+    'summary': 'C2.7: CFL re-baseline, feb pure-NLS scout, N=96 moving-family transport (v=2Dk).',
+}
 import os, sys, json, time, argparse
 import numpy as np
 os.environ.setdefault("XLA_PYTHON_CLIENT_PREALLOCATE", "false")

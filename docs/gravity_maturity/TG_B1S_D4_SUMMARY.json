@@ -1,0 +1,71 @@
+{
+  "author": "Codex",
+  "timestamp": "2026-07-15",
+  "run_directory": "sweep_runs/TG_B1S_D4_ROWS_GPU_20260715_091558",
+  "status": "D4_ROW_WISE_COMPLETE",
+  "d4_passed": false,
+  "label": "TG_STATE_LOAD_D4_NUMERICAL_VALIDATION_FAILED",
+  "d5_allowed": false,
+  "completed_cases": [
+    "D4_baseline_50P",
+    "D4_output_cadence_50P",
+    "D4_dt_half_50P",
+    "D4_grid_refined_50P",
+    "D4_larger_box_50P",
+    "D4_absorber_wider_50P"
+  ],
+  "passed_cases": [
+    "D4_baseline_50P",
+    "D4_output_cadence_50P",
+    "D4_dt_half_50P",
+    "D4_grid_refined_50P",
+    "D4_absorber_wider_50P"
+  ],
+  "failed_cases": [
+    "D4_larger_box_50P"
+  ],
+  "failure_reason": "frequency_scale",
+  "reference_delta_omega_infty": -2.150936882840006e-06,
+  "frequency_relative_tolerance": 0.6,
+  "rows": {
+    "D4_baseline_50P": {
+      "pass": true,
+      "delta_omega_infty": -2.162695983559886e-06,
+      "relative_frequency_difference": 0.005466966889494886,
+      "early_late_relative_difference": 0.300788079666371
+    },
+    "D4_output_cadence_50P": {
+      "pass": true,
+      "delta_omega_infty": -2.1611703237875384e-06,
+      "relative_frequency_difference": 0.00475766677728843,
+      "early_late_relative_difference": 0.30653728059865926
+    },
+    "D4_dt_half_50P": {
+      "pass": true,
+      "delta_omega_infty": -2.162695983550959e-06,
+      "relative_frequency_difference": 0.005466966885344657,
+      "early_late_relative_difference": 0.30078807962155246
+    },
+    "D4_grid_refined_50P": {
+      "pass": true,
+      "delta_omega_infty": -2.1626959888870264e-06,
+      "relative_frequency_difference": 0.00546696936615545,
+      "early_late_relative_difference": 0.30078807168936356
+    },
+    "D4_larger_box_50P": {
+      "pass": false,
+      "delta_omega_infty": -8.524302969263542e-07,
+      "relative_frequency_difference": 0.6036934864398061,
+      "early_late_relative_difference": 0.0014225347910343498,
+      "fail_reason": "frequency_scale"
+    },
+    "D4_absorber_wider_50P": {
+      "pass": true,
+      "delta_omega_infty": -2.162694528549176e-06,
+      "relative_frequency_difference": 0.005466290435098957,
+      "early_late_relative_difference": 0.30079046380316765
+    }
+  },
+  "interpretation": "D4 does not close because the larger-box row failed the preregistered frequency-scale tolerance. The failure appears localized to frequency-scale comparability rather than structural drift, boundary flux, ledger, modal leakage or T/G boundedness.",
+  "next_action": "Review D4_larger_box_50P discrepancy before D5. Claude's FC-box discriminator rules out resolution and the local quasi-static mechanism as explanations; Codex verified the row already uses same-geometry full/off subtraction, so the next audit should focus on row comparability, stationary-branch/source normalization, absorber-position coupling, transient dynamics, and modal-fit diagnostics."
+}

@@ -1,0 +1,60 @@
+---
+run_id: "GRAVITY_D_GPU_CODEX_20260713"
+date: 2026-07-13
+family: "Gravity-D"
+sector: "gravity"
+verdict: null
+complete: false
+source: derived
+n_csv: 0
+n_plots: 0
+tags: [run, gravity, Gravity_D]
+---
+# GRAVITY_D_GPU_CODEX_20260713
+
+*Spatial-geometry gravity mirror (non-Newtonian)* &middot; **Gravity-D** &middot; `2026-07-13`
+
+> [!note] No verdict recorded
+> This run's summary carries no `verdict` key.
+
+> [!info] Derived note - no `summary.json`
+> This run predates or bypasses the `summary.json` convention. Fields below are reconstructed from: .
+> The verdict shown is `RUN_COMPLETE.json.status` where present, otherwise the first verdict-shaped token found in the run's own report - **treat it as indicative and confirm against the source document.**
+
+## Artifacts
+
+- **Run directory** (gitignored, local only): `sweep_runs/GRAVITY_D_GPU_CODEX_20260713/`
+
+## Previous experiments
+
+*Auto-derived: the preceding runs in the same family (`Gravity-D`). Correct by hand if the lineage is wrong — edits here survive rebuilds only if you move the link below the Review notes marker.*
+
+- [[GRAVITY_D_EXISTING_REPRO_CODEX_SHORT_20260713]] &middot; `2026-07-13`
+- [[GRAVITY_D_EFFECTIVE_MEDIUM_CODEX_20260713]] &middot; `2026-07-13`
+- [[GRAVITY_D_DYNAMICS_CHARACTERIZATION_GPU_E0_SMOKE_20260713_220905]] &middot; `2026-07-13`
+
+## Associated docs
+
+- [[Branch - Gravity - Index]]
+- [[EXPERIMENT_TRACKER]]
+- [[GRAVITY_D_EFFECTIVE_MEDIUM_CODEX_REPLICATION]]
+- [[evidence_package/00_project_timeline/PROJECT_MATURITY_TIMELINE]]
+- [[external_validation/GRAVITY_D_EFFECTIVE_MEDIUM_EXTERNAL_VALIDATION_PACKAGE]]
+- [[external_validation/artifact_bundles/gravity_d_effective_medium_characterization/docs/GRAVITY_D_EFFECTIVE_MEDIUM_CODEX_REPLICATION]]
+- [[external_validation/artifact_bundles/gravity_d_effective_medium_characterization/docs/GRAVITY_D_EFFECTIVE_MEDIUM_EXTERNAL_VALIDATION_PACKAGE]]
+
+## Next experiment
+
+- [[GRAVITY_D_PROBE_20260713_105944]] &middot; `2026-07-13`
+
+## Branches
+
+- [[Main branch]] &larr; via [[Branch - Gravity - Index|gravity sector index]]
+- Sector: `gravity` &middot; family: `Gravity-D`
+
+---
+
+## Review notes
+
+*(Preserved across catalogue rebuilds - everything above this line is regenerated.)*
+

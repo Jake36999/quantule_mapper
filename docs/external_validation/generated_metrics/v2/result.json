@@ -1,0 +1,41 @@
+{
+  "behavioural_result": "PASS",
+  "caveats": [
+    "sweep_runs/C27_REDERIVE/r3_n96.json lacks explicit D; using project C2.7 convention D=1.0.",
+    "Uses corrected C2.7 data only; old C2.6 bugged geometry-off data are excluded."
+  ],
+  "created_utc": "2026-07-12T00:34:08+00:00",
+  "data_sources": [
+    "sweep_runs/C27_REDERIVE"
+  ],
+  "files_read": [
+    "sweep_runs/C27_REDERIVE/r3_n96.json"
+  ],
+  "fit_parameters": {
+    "expected_slope_2D": 2.0,
+    "intercept": -9.986275745059968e-08,
+    "r2": 1.0,
+    "slope": 1.9997819749017656,
+    "slope_relative_error": 0.00010901254911721558
+  },
+  "fit_quality": {
+    "D_used": 1.0,
+    "expected_slope_2D": 2.0,
+    "intercept": -9.986275745059968e-08,
+    "mass_retention_min": 0.9996329889054258,
+    "mean_mass_retention": 0.999754131719139,
+    "n_boosts": 2,
+    "n_points": 2,
+    "r_squared": 1.0,
+    "slope": 1.9997819749017656,
+    "slope_percent_error": 0.010901254911721558,
+    "source_of_D": "project C2.7 convention or explicit summary field if present"
+  },
+  "formula_target": "v = 2Dk for corrected flat-NLS C2 transport",
+  "match_level_candidate": "EXACT EQUATION",
+  "metric_id": "v2",
+  "no_new_simulation": true,
+  "provisional_until_claude_review": true,
+  "status": "RAN",
+  "validation_depth": "INTERNAL_DATA_BEHAVIOUR_CHECK"
+}

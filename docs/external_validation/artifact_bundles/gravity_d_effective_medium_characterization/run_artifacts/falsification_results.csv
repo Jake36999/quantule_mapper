@@ -1,0 +1,6 @@
+test,n,force_min,force_max,relative_spread,result,interior_max_abs_force,far_force,max_abs_force,note
+probe_structure_dependence,5,-0.010508342149979833,-0.006211596169843487,0.545667105716804,structure_dependent,,,,
+shell_interior,7,,,,LOCAL_MEDIUM_SHELL_RESPONSE,0.030907622228041737,,,
+newtonian_exterior_decay,3,,,,compact_tail_decay,,1.6622404314605333e-13,,
+source_free_background,3,,,,zero_force,,,0.0,
+weak_field_superposition,4,,,,quantified_not_promoted,,,,combined two-source force map computed; one-source additivity is approximated in model comparison

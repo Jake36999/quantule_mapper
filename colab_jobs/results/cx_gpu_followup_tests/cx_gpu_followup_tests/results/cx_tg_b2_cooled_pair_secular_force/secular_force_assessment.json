@@ -1,0 +1,6 @@
+{
+  "body_force_all_attractive": true,
+  "note": "A negative/partial verdict does not undo TG-R body-force robustness; it only reports the secular proxy state.",
+  "secular_impulse_and_separation_match": false,
+  "verdict": "TG_B2_COOLED_PAIR_SECULAR_SIGN_UNRESOLVED"
+}

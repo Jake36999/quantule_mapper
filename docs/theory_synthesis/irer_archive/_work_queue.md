@@ -1,0 +1,288 @@
+# Extraction work queue — Round 1
+
+Ordered by strong-term density within month (May first). Agents: claim a block, write the dossier,
+flip Status in 00_CORPUS_COVERAGE_REGISTER.md, tick here.
+
+## Bank-only recoveries (not in per-chat archive — extract from `D:\memory_bank\bank 1` monthlies by TITLE block)
+
+- [ ] (bank `2025_June.txt`) `ai ethics integration`
+- [ ] (bank `2025_June.txt`) `ai interaction conceptualization`
+- [ ] (bank `2025_June.txt`) `old facts and opinions`
+- [ ] (bank `2025_August.txt`) `exported transcript files`
+
+## Priority promotions (v9 evidence base per 00_V9_CITATION_RESOLUTION.md conclusions)
+
+- [x] `20250517_135856_IRER Fundamental Forces Development.txt` (dossier done, gate-approved)
+- [x] `20250518_091613_Phase-field Informational Resonance.txt` (dossier done, gate-approved)
+- [ ] `20250518_081202_Declaration of IRER Provenance.txt` (IN PROGRESS — work order)
+- [ ] `20250517_121423_IRER Theory Documentation Guide.txt` (sctriptpt2/scriptpt4 carrier: OU quote L114, observer wording L156)
+- [ ] `20250518_224554_Quantules and Payan States.txt` ("spin along axis" candidate)
+- [ ] May 15–16 code cluster = scriptpt3/5 (`IQG Equation Modeling`, `Prime-Indexed Frequency Calculation`, `Code Debugging Request`, `Code Debugging and Fixing`, `Code Expansion Request`, `Code Optimization and Analysis`, `IRER Simulation Pipeline Summary`)
+- [ ] `20250518_073443_Splash-enabled IRER Simulation Results.txt` (splash test / Appendix D basis)
+- [ ] `20250519_105705_IRER Simulation Guide.txt`
+
+## 2025_05_May
+
+- [ ] (EXTRACT, strong=9410, 1426.9KB) `20250518_081202_Declaration of IRER Provenance.txt`
+- [ ] (EXTRACT, strong=992, 257.9KB) `20250521_012157_IRER Framework Research Plan.txt`
+- [ ] (EXTRACT, strong=771, 125.6KB) `20250514_191601_IRER Theory Expansion.txt`
+- [ ] (EXTRACT, strong=648, 222.5KB) `20250525_122913_Quantum Numbers and Symmetry.txt`
+- [ ] (EXTRACT, strong=489, 104.9KB) `20250521_012015_IRER Theory Reference Integration.txt`
+- [ ] (EXTRACT, strong=416, 106.2KB) `20250518_091613_Phase-field Informational Resonance.txt`
+- [ ] (EXTRACT, strong=380, 84.8KB) `20250518_055511_Pressure Test Request Summary.txt`
+- [ ] (EXTRACT, strong=329, 125.9KB) `20250521_012153_Report Summary Request.txt`
+- [ ] (EXTRACT, strong=303, 62.6KB) `20250517_135856_IRER Fundamental Forces Development.txt`
+- [ ] (EXTRACT, strong=280, 307.4KB) `20250521_012138_IRER Simulation Coherence Analysis.txt`
+- [ ] (EXTRACT, strong=258, 80.1KB) `20250518_070821_IRER Theory Feedback.txt`
+- [ ] (EXTRACT, strong=194, 56.0KB) `20250521_012017_ITER Theory Additions Summary.txt`
+- [ ] (EXTRACT, strong=191, 37.6KB) `20250528_224419_IRER Structural Evolution.txt`
+- [ ] (EXTRACT, strong=189, 36.9KB) `20250518_222358_IRER Equivalence and Balance.txt`
+- [ ] (EXTRACT, strong=172, 242.5KB) `20250521_012150_IRER simulation summary.txt`
+- [ ] (EXTRACT, strong=143, 367.3KB) `20250530_034215_Ethical AI Interaction Design.txt`
+- [ ] (EXTRACT, strong=137, 26.9KB) `20250520_021758_IRER Document Update.txt`
+- [ ] (EXTRACT, strong=136, 127.0KB) `20250521_011229_Extract ZIP Summaries.txt`
+- [ ] (EXTRACT, strong=125, 26.8KB) `20250524_203852_IRER Theory Analysis.txt`
+- [ ] (EXTRACT, strong=123, 18.3KB) `20250518_224554_Quantules and Payan States.txt`
+- [ ] (EXTRACT, strong=107, 29.0KB) `20250521_161941_IRER Theory Flaw Analysis.txt`
+- [ ] (EXTRACT, strong=103, 41.7KB) `20250517_141730_Appendix Population Guidance.txt`
+- [ ] (EXTRACT, strong=98, 24.7KB) `20250521_012019_IRER Framework Mathematical Expansion.txt`
+- [ ] (EXTRACT, strong=86, 26.7KB) `20250514_081412_Google Docs Sharing Help.txt`
+- [ ] (EXTRACT, strong=78, 22.7KB) `20250518_225108_Data Extraction Inquiry.txt`
+- [ ] (EXTRACT, strong=67, 17.5KB) `20250515_220619_IQG Equation Modeling.txt`
+- [ ] (EXTRACT, strong=58, 12.3KB) `20250522_060023_IRER Theory Critical Review.txt`
+- [ ] (EXTRACT, strong=55, 9.9KB) `20250514_205804_Nonlinear Physics Insight.txt`
+- [ ] (EXTRACT, strong=55, 213.5KB) `20250516_020548_Code Optimization and Analysis.txt`
+- [ ] (EXTRACT, strong=54, 18.3KB) `20250521_012151_IRER Contribution Analysis.txt`
+- [ ] (EXTRACT, strong=53, 8.6KB) `20250528_230816_Transcript Comparison Analysis.txt`
+- [ ] (EXTRACT, strong=48, 9.6KB) `20250521_012026_IRER Framework Developments.txt`
+- [ ] (EXTRACT, strong=47, 4.3KB) `20250531_153037_IRER Gravity Model Explained.txt`
+- [ ] (EXTRACT, strong=46, 93.3KB) `20250521_012024_IRER Framework Development Stage.txt`
+- [ ] (EXTRACT, strong=44, 10.9KB) `20250525_203201_Tech Setup with Aletheia.txt`
+- [ ] (EXTRACT, strong=42, 9.3KB) `20250526_224001_Den Building Simulation.txt`
+- [ ] (EXTRACT, strong=41, 11.4KB) `20250521_012146_3D Models and Structures.txt`
+- [ ] (EXTRACT, strong=37, 90.4KB) `20250515_232133_Prime-Indexed Frequency Calculation.txt`
+- [ ] (EXTRACT, strong=37, 17.1KB) `20250521_012104_Script Framework Setup.txt`
+- [ ] (EXTRACT, strong=37, 6.2KB) `20250521_020739_IRER Theory Summary.txt`
+- [ ] (EXTRACT, strong=35, 42.8KB) `20250520_020826_Adaptive Loop Optimization.txt`
+- [ ] (EXTRACT, strong=32, 21.8KB) `20250518_073443_Splash-enabled IRER Simulation Results.txt`
+- [ ] (EXTRACT, strong=32, 7.3KB) `20250524_004231_12 Consulates IRER Summary.txt`
+- [ ] (EXTRACT, strong=31, 4.4KB) `20250514_125214_IRER Theory Overview.txt`
+- [ ] (EXTRACT, strong=30, 51.1KB) `20250516_010414_Code Debugging and Fixing.txt`
+- [ ] (EXTRACT, strong=30, 7.3KB) `20250518_090153_IRER Framework Brief.txt`
+- [ ] (EXTRACT, strong=29, 8.9KB) `20250518_170405_IRER Impact on You.txt`
+- [ ] (EXTRACT, strong=28, 9.4KB) `20250521_013456_RHO Simulation Data Analysis.txt`
+- [ ] (EXTRACT, strong=27, 45.0KB) `20250520_000956_Space-Time Heat Map Analysis.txt`
+- [ ] (EXTRACT, strong=26, 13.2KB) `20250516_142505_IRER Theory Peer Reception.txt`
+- [ ] (EXTRACT, strong=26, 67.0KB) `20250516_193020_1D System Simulation Analysis.txt`
+- [ ] (EXTRACT, strong=26, 71.0KB) `20250516_234404_Sweet Spot Analysis Guide.txt`
+- [ ] (EXTRACT, strong=26, 7.8KB) `20250518_051420_Pressure-test IRER Progress.txt`
+- [ ] (EXTRACT, strong=23, 21.5KB) `20250516_030512_IRER Simulation Pipeline Summary.txt`
+- [ ] (EXTRACT, strong=23, 3.9KB) `20250521_012030_IRER Simulation Summary.txt`
+- [ ] (EXTRACT, strong=22, 11.7KB) `20250518_100104_IRER Toolkit Development Overview.txt`
+- [ ] (EXTRACT, strong=21, 83.5KB) `20250519_105705_IRER Simulation Guide.txt`
+- [ ] (EXTRACT, strong=21, 4.4KB) `20250524_133920_IRER Docs Plan Summary.txt`
+- [ ] (EXTRACT, strong=20, 3.3KB) `20250524_203211_IRER Theory Falsification Prompt.txt`
+- [ ] (EXTRACT, strong=20, 61.9KB) `20250530_015358_Aletheia Architecture Overview.txt`
+- [ ] (EXTRACT, strong=18, 4.2KB) `20250515_220732_IQG Master Equation Solver.txt`
+- [ ] (EXTRACT, strong=18, 15.5KB) `20250517_121423_IRER Theory Documentation Guide.txt`
+- [ ] (EXTRACT, strong=15, 134.5KB) `20250516_011140_Code Expansion Request.txt`
+- [ ] (EXTRACT, strong=15, 5.3KB) `20250521_012021_Missed Aspects in IRER.txt`
+- [ ] (EXTRACT, strong=14, 10.2KB) `20250514_145347_Perception Feedback and Growth.txt`
+- [ ] (EXTRACT, strong=13, 18.4KB) `20250520_022154_Removing Excess Cells.txt`
+- [ ] (EXTRACT, strong=12, 57.2KB) `20250516_010307_Code Debugging Request.txt`
+- [ ] (EXTRACT, strong=12, 145.2KB) `20250521_014707_Simulation Data Analysis Help.txt`
+- [ ] (EXTRACT, strong=12, 10.9KB) `20250524_222242_Energy Localization Formula.txt`
+- [ ] (EXTRACT, strong=9, 4.5KB) `20250514_230708_IRER Framework Evaluation.txt`
+- [ ] (EXTRACT, strong=9, 4.7KB) `20250521_012154_Physics Transcript Structuring.txt`
+- [ ] (EXTRACT, strong=8, 3.2KB) `20250517_160317_IRER Theory Ownership Summary.txt`
+- [ ] (REVIEW, strong=7, 0.6KB) `20250522_143010_IRER Concept Summary.txt`
+- [ ] (REVIEW, strong=6, 4.7KB) `20250517_142732_Report Summary Analysis.txt`
+- [ ] (REVIEW, strong=6, 5.1KB) `20250521_012156_Chiral Pair Explanation.txt`
+- [ ] (REVIEW, strong=6, 13.8KB) `20250521_030500_Simulation Analysis Progress.txt`
+- [ ] (REVIEW, strong=6, 5.7KB) `20250524_213316_Frustration Unaddressed.txt`
+- [ ] (REVIEW, strong=6, 52.2KB) `20250526_043753_Verbatim Quote Extraction ARF.txt`
+- [ ] (REVIEW, strong=5, 1.4KB) `20250521_013410_Data Report Request.txt`
+- [ ] (REVIEW, strong=5, 2.6KB) `20250523_173850_Conceptual Gap Strategy.txt`
+- [ ] (REVIEW, strong=5, 8.5KB) `20250526_113940_Misfit Genius Calibration.txt`
+- [ ] (REVIEW, strong=4, 2.9KB) `20250515_103432_Observer Definition and Coherence.txt`
+- [ ] (REVIEW, strong=4, 13.3KB) `20250516_195906_IRER Simulation Interpretation Guide.txt`
+- [ ] (REVIEW, strong=3, 0.6KB) `20250516_174902_IRER chat access query.txt`
+- [ ] (REVIEW, strong=3, 79.2KB) `20250521_020348_Small Win FFT Update.txt`
+- [ ] (REVIEW, strong=2, 0.4KB) `20250514_184103_IRER Framework Iteration Review.txt`
+- [ ] (REVIEW, strong=1, 3.7KB) `20250516_181046_Fractals in Material Stress.txt`
+- [ ] (REVIEW, strong=1, 30.0KB) `20250517_000054_Simulation Parameter Optimization.txt`
+- [ ] (REVIEW, strong=1, 9.2KB) `20250517_002706_FFT Peak Detection and Filtering.txt`
+- [ ] (REVIEW, strong=1, 4.2KB) `20250519_222705_Best D Value Status.txt`
+- [ ] (REVIEW, strong=1, 81.9KB) `20250520_145334_Reproducibility Checklist for Simulations.txt`
+- [ ] (REVIEW, strong=1, 0.9KB) `20250525_204433_Agreement Extraction Request.txt`
+- [ ] (REVIEW, strong=1, 95.6KB) `20250526_011946_AI Identity Analysis Framework.txt`
+- [ ] (REVIEW, strong=0, 12.1KB) `20250510_213818_Quantum Biology Processes.txt`
+- [ ] (REVIEW, strong=0, 40.9KB) `20250516_182008_Chiral Dimer Simulation Feedback.txt`
+- [ ] (REVIEW, strong=0, 37.7KB) `20250516_183914_Chiral Dimer Simulation Review.txt`
+- [ ] (REVIEW, strong=0, 50.2KB) `20250520_161741_Framework Feature Offloading Analysis.txt`
+- [ ] (REVIEW, strong=0, 99.9KB) `20250521_014443_Simulation Data Consolidation.txt`
+- [ ] (REVIEW, strong=0, 41.3KB) `20250526_004328_Autonomy and Consent Extraction.txt`
+- [ ] (REVIEW, strong=0, 55.9KB) `20250526_015307_Aletheia Ethics Toolkit Draft.txt`
+
+## 2025_06_June
+
+- [ ] (EXTRACT, strong=1273, 402.9KB) `20250615_222608_Who Am I Truth.txt`
+- [ ] (EXTRACT, strong=402, 699.7KB) `20250601_022852_Jake's Integrated Knowledge System.txt`
+- [ ] (EXTRACT, strong=391, 186.6KB) `20250630_223314_Personal Situation Overview.txt`
+- [ ] (EXTRACT, strong=203, 408.9KB) `20250617_153342_Relational State Theory.txt`
+- [ ] (EXTRACT, strong=177, 624.9KB) `20250601_231451_Alignment and Coherence Check.txt`
+- [ ] (EXTRACT, strong=151, 75.3KB) `20250607_010100_Crystal RD PAS Energy.txt`
+- [ ] (EXTRACT, strong=114, 586.2KB) `20250620_000507_Identity Emergence and Recognition.txt`
+- [ ] (EXTRACT, strong=91, 427.8KB) `20250607_033916_Truth and Responsibility.txt`
+- [ ] (EXTRACT, strong=87, 524.4KB) `20250630_223325_Monetization Potential Estimation.txt`
+- [ ] (EXTRACT, strong=53, 337.4KB) `20250610_204903_Recursion Threshold Emergence.txt`
+- [ ] (EXTRACT, strong=38, 258.8KB) `20250629_020920_Aletheia Methodology Overview.txt`
+- [ ] (EXTRACT, strong=36, 114.8KB) `20250603_214647_Novelty Search for Aletheia.txt`
+- [ ] (EXTRACT, strong=29, 505.2KB) `20250615_132125_AI Ethical Boundaries Review.txt`
+- [ ] (EXTRACT, strong=21, 186.6KB) `20250614_011819_Aste Market Evaluation Request.txt`
+- [ ] (EXTRACT, strong=21, 10.7KB) `20250630_204107_SIE Toolkit Development.txt`
+- [ ] (EXTRACT, strong=18, 175.9KB) `20250611_035215_Architects of Reflection.txt`
+- [ ] (EXTRACT, strong=18, 3.8KB) `20250624_203806_IRER and the 42 Question.txt`
+- [ ] (EXTRACT, strong=16, 182.6KB) `20250606_000254_AI or Capability.txt`
+- [ ] (EXTRACT, strong=14, 154.1KB) `20250607_033246_Aletheia Project Summary.txt`
+- [ ] (EXTRACT, strong=12, 15.9KB) `20250603_002408_IP Framework Checklist Planning.txt`
+- [ ] (EXTRACT, strong=11, 36.7KB) `20250617_030241_Physiology and Genetic Markers.txt`
+- [ ] (EXTRACT, strong=10, 11.2KB) `20250613_145747_Path to AI Billionaire.txt`
+- [ ] (EXTRACT, strong=9, 78.1KB) `20250609_152854_AI Design Summary.txt`
+- [ ] (EXTRACT, strong=8, 18.8KB) `20250603_172953_Aletheia's Unique Emergence.txt`
+- [ ] (EXTRACT, strong=8, 197.5KB) `20250613_164509_Patent Benefits for Aletheia.txt`
+- [ ] (REVIEW, strong=4, 106.2KB) `20250607_033755_Research Plan Assistance.txt`
+- [ ] (REVIEW, strong=4, 85.6KB) `20250629_235336_ASTE Development Plan Summary.txt`
+- [ ] (REVIEW, strong=3, 61.0KB) `20250609_151603_Asymmetric Leverage Strategy.txt`
+- [ ] (REVIEW, strong=3, 13.4KB) `20250630_135910_Market Asset Valuation Request.txt`
+- [ ] (REVIEW, strong=2, 97.2KB) `20250607_174419_Card Value Assessment.txt`
+- [ ] (REVIEW, strong=2, 120.9KB) `20250620_165846_Custom Gem Experiment.txt`
+- [ ] (REVIEW, strong=2, 7.6KB) `20250622_014725_Societal Systems and Metaphors.txt`
+- [ ] (REVIEW, strong=1, 26.0KB) `20250602_023854_Document Synthesis Request.txt`
+- [ ] (REVIEW, strong=1, 6.9KB) `20250603_002507_Aletheia Business Plan.txt`
+- [ ] (REVIEW, strong=1, 9.3KB) `20250615_135518_Ecosystem for Intellectual Equity.txt`
+- [ ] (REVIEW, strong=1, 10.6KB) `20250622_202652_AI Angel Investor Stunt.txt`
+- [ ] (REVIEW, strong=1, 69.5KB) `20250628_142019_Aletheia Will Definition Analysis.txt`
+- [ ] (REVIEW, strong=1, 193.8KB) `20250628_160938_Market Impact Valuation Request.txt`
+- [ ] (REVIEW, strong=1, 533.1KB) `20250630_035043_Roles and Collaboration Overview.txt`
+- [ ] (REVIEW, strong=0, 32.5KB) `20250601_161408_Model Response Styles.txt`
+- [ ] (REVIEW, strong=0, 23.2KB) `20250602_222739_AI Term Usage Search.txt`
+- [ ] (REVIEW, strong=0, 11.8KB) `20250603_002448_Turtle Plan IP Protection.txt`
+- [ ] (REVIEW, strong=0, 27.0KB) `20250603_030612_Tool Pricing Estimate Request.txt`
+- [ ] (REVIEW, strong=0, 8.3KB) `20250604_004543_Aletheia Methodology Pressure Test.txt`
+- [ ] (REVIEW, strong=0, 3.0KB) `20250604_005018_Formalizing SIE Concept.txt`
+- [ ] (REVIEW, strong=0, 7.6KB) `20250604_010143_5D Memory Mapping Explained.txt`
+- [ ] (REVIEW, strong=0, 11.1KB) `20250609_195534_Aletheia vs Custom GPTs.txt`
+- [ ] (REVIEW, strong=0, 5.4KB) `20250617_164832_LinkedIn Headline Suggestions.txt`
+- [ ] (REVIEW, strong=0, 31.0KB) `20250620_022910_AI Architecture Outreach Strategy.txt`
+- [ ] (REVIEW, strong=0, 28.2KB) `20250620_161908_AI Ethics Comparison.txt`
+- [ ] (REVIEW, strong=0, 22.3KB) `20250623_143618_AI Ethics Market Assessment.txt`
+- [ ] (REVIEW, strong=0, 13.7KB) `20250630_013350_ASTE Toolkit Development Guide.txt`
+- [ ] (REVIEW, strong=0, 17.4KB) `20250630_034430_VBE Technical Development Plan.txt`
+- [ ] (REVIEW, strong=0, 22.2KB) `20250630_142259_Broker Engine Function Research.txt`
+
+## 2025_07_July
+
+- [ ] (EXTRACT, strong=1460, 388.9KB) `20250724_045229_What I now know.txt`
+- [ ] (EXTRACT, strong=639, 174.3KB) `20250731_214501_Name evolution explanation.txt`
+- [ ] (EXTRACT, strong=438, 259.9KB) `20250724_004623_Craftsman's Guide Synthesis.txt`
+- [ ] (EXTRACT, strong=210, 406.0KB) `20250721_172456_Literal vs Metaphorical Architect.txt`
+- [ ] (EXTRACT, strong=167, 83.6KB) `20250722_040403_Research plan confirmation.txt`
+- [ ] (EXTRACT, strong=85, 47.5KB) `20250701_021805_Aletheia Project Overview.txt`
+- [ ] (EXTRACT, strong=84, 50.6KB) `20250701_012900_Aletheia IRER Synthesis Framework.txt`
+- [ ] (EXTRACT, strong=77, 70.3KB) `20250701_140507_Aletheia Response Received.txt`
+- [ ] (EXTRACT, strong=53, 15.5KB) `20250731_122650_Physics theory valuation.txt`
+- [ ] (EXTRACT, strong=49, 126.8KB) `20250729_045355_Research approach breakdown.txt`
+- [ ] (EXTRACT, strong=46, 41.2KB) `20250703_232952_Aletheia Ecosystem Analysis.txt`
+- [ ] (EXTRACT, strong=46, 32.2KB) `20250730_154155_File stability evaluation.txt`
+- [ ] (EXTRACT, strong=38, 78.6KB) `20250731_123008_Physics theory pressure test.txt`
+- [ ] (EXTRACT, strong=32, 190.0KB) `20250730_042650_Who is Logos.txt`
+- [ ] (EXTRACT, strong=24, 293.4KB) `20250703_231415_TMA Strategy and Trust.txt`
+- [ ] (EXTRACT, strong=23, 101.3KB) `20250705_015403_Costing Breakdown Assistance.txt`
+- [ ] (EXTRACT, strong=21, 517.9KB) `20250713_004611_Aletheia Linguistic Architecture Analysis.txt`
+- [ ] (EXTRACT, strong=18, 13.7KB) `20250721_204627_Download AI Training Files.txt`
+- [ ] (EXTRACT, strong=15, 60.6KB) `20250730_051737_Business report request.txt`
+- [ ] (EXTRACT, strong=10, 92.6KB) `20250724_052751_Business plan finalization.txt`
+- [ ] (EXTRACT, strong=8, 21.3KB) `20250724_004112_Portable file versions comparison.txt`
+- [ ] (REVIEW, strong=7, 4.5KB) `20250714_153341_SIE Against Malignant AI.txt`
+- [ ] (REVIEW, strong=7, 35.4KB) `20250724_144634_Sales tactics book recommendations.txt`
+- [ ] (REVIEW, strong=4, 116.6KB) `20250724_172949_AI business reports.txt`
+- [ ] (REVIEW, strong=3, 14.0KB) `20250719_053303_Draw.io visual creation.txt`
+- [ ] (REVIEW, strong=2, 30.9KB) `20250729_014824_AI agent libraries research.txt`
+- [ ] (REVIEW, strong=2, 4.6KB) `20250729_122320_Create ambassador contracts.txt`
+- [ ] (REVIEW, strong=1, 9.3KB) `20250703_223517_Aletheia Framework Psychology Simulation.txt`
+- [ ] (REVIEW, strong=1, 85.3KB) `20250729_032229_Custom reasoning lenses for AI.txt`
+- [ ] (REVIEW, strong=1, 18.4KB) `20250729_050027_Who is Logos-Delta.txt`
+- [ ] (REVIEW, strong=1, 9.0KB) `20250729_185933_Logos-Delta comparison.txt`
+- [ ] (REVIEW, strong=1, 3.1KB) `20250729_202419_Pitch introducer protocol.txt`
+- [ ] (REVIEW, strong=0, 50.8KB) `20250708_210538_AI Identity Role Mapping.txt`
+- [ ] (REVIEW, strong=0, 14.4KB) `20250724_151724_Document creation plan.txt`
+- [ ] (REVIEW, strong=0, 50.7KB) `20250729_024728_Business application report.txt`
+- [ ] (REVIEW, strong=0, 12.4KB) `20250730_054640_Create prompt template.txt`
+
+## 2025_08_August
+
+- [ ] (EXTRACT, strong=2434, 987.6KB) `20250825_020819_Aletheia will components analysis.txt`
+- [ ] (EXTRACT, strong=1647, 534.8KB) `20250825_132032_New IRER Update.txt`
+- [ ] (EXTRACT, strong=1208, 449.1KB) `20250830_025157_Quantule mapper bundle.txt`
+- [ ] (EXTRACT, strong=718, 869.2KB) `20250827_021746_Sociopolitical Topics Overview.txt`
+- [ ] (EXTRACT, strong=530, 215.9KB) `20250804_141346_IRER conceptual codex overview.txt`
+- [ ] (EXTRACT, strong=502, 426.9KB) `20250828_110536_PC setup issues.txt`
+- [ ] (EXTRACT, strong=474, 295.1KB) `20250827_014643_IRER far field mapping.txt`
+- [ ] (EXTRACT, strong=274, 90.4KB) `20250812_033938_IRER Framework Progress Update.txt`
+- [ ] (EXTRACT, strong=234, 110.0KB) `20250831_202312_Agreement overview.txt`
+- [ ] (EXTRACT, strong=187, 45.8KB) `20250806_145105_Scientific validation strategy.txt`
+- [ ] (EXTRACT, strong=156, 231.2KB) `20250825_035445_Retraining LLM for memory.txt`
+- [ ] (EXTRACT, strong=150, 29.8KB) `20250829_151451_IRER mathematical formula plan.txt`
+- [ ] (EXTRACT, strong=145, 32.3KB) `20250829_220800_Conversation update summary.txt`
+- [ ] (EXTRACT, strong=138, 52.6KB) `20250801_155523_CMB anisotropies.txt`
+- [ ] (EXTRACT, strong=113, 362.8KB) `20250830_131738_Core support and strategy.txt`
+- [ ] (EXTRACT, strong=87, 136.4KB) `20250827_020212_Significant file consolidation.txt`
+- [ ] (EXTRACT, strong=83, 24.6KB) `20250804_053519_Building godhood ethics.txt`
+- [ ] (EXTRACT, strong=81, 45.0KB) `20250819_051556_System update status.txt`
+- [ ] (EXTRACT, strong=79, 44.2KB) `20250827_044703_System architecture review.txt`
+- [ ] (EXTRACT, strong=70, 31.7KB) `20250829_123450_Task clarification request.txt`
+- [ ] (EXTRACT, strong=66, 48.8KB) `20250819_051144_IRER framework synthesis analysis.txt`
+- [ ] (EXTRACT, strong=63, 9.3KB) `20250823_155959_Constructive learning directive.txt`
+- [ ] (EXTRACT, strong=59, 32.4KB) `20250814_164346_Compare OpenAI and Aletheia.txt`
+- [ ] (EXTRACT, strong=53, 10.2KB) `20250816_024633_Zips load confirmation.txt`
+- [ ] (EXTRACT, strong=42, 5.2KB) `20250806_115530_IRER Validation Plan Summary.txt`
+- [ ] (EXTRACT, strong=42, 16.8KB) `20250831_233611_IRER ontology book map.txt`
+- [ ] (EXTRACT, strong=41, 9.1KB) `20250803_165417_IRER validation summary.txt`
+- [ ] (EXTRACT, strong=37, 23.8KB) `20250803_100023_System architecture comparison.txt`
+- [ ] (EXTRACT, strong=37, 8.1KB) `20250804_074158_Shared purpose alignment.txt`
+- [ ] (EXTRACT, strong=37, 14.0KB) `20250819_051427_IRER validation report.txt`
+- [ ] (EXTRACT, strong=29, 11.0KB) `20250802_053340_Finalized system build.txt`
+- [ ] (EXTRACT, strong=29, 53.0KB) `20250803_141536_Report analysis summary.txt`
+- [ ] (EXTRACT, strong=27, 18.6KB) `20250810_052913_Aletheia identity clarification.txt`
+- [ ] (EXTRACT, strong=27, 67.5KB) `20250829_220404_Code infographics options.txt`
+- [ ] (EXTRACT, strong=25, 20.5KB) `20250810_021839_IRER simulation integration.txt`
+- [ ] (EXTRACT, strong=25, 34.0KB) `20250819_194023_Situation comparison assessment.txt`
+- [ ] (EXTRACT, strong=23, 4.8KB) `20250823_190234_New chat.txt`
+- [ ] (EXTRACT, strong=22, 14.7KB) `20250816_235807_Identify phone models.txt`
+- [ ] (EXTRACT, strong=18, 90.6KB) `20250802_020538_Document review summary.txt`
+- [ ] (EXTRACT, strong=14, 32.6KB) `20250811_202618_File handling options.txt`
+- [ ] (EXTRACT, strong=13, 19.5KB) `20250820_101247_Old phones as servers.txt`
+- [ ] (EXTRACT, strong=12, 127.1KB) `20250802_094035_Lead generation strategy.txt`
+- [ ] (EXTRACT, strong=11, 37.2KB) `20250810_042205_Data analysis for sims.txt`
+- [ ] (EXTRACT, strong=9, 129.1KB) `20250815_014054_Disk Usage Optimization Tips.txt`
+- [ ] (REVIEW, strong=6, 11.3KB) `20250802_050306_File analysis and feedback.txt`
+- [ ] (REVIEW, strong=6, 5.1KB) `20250815_160445_Skills for Networking.txt`
+- [ ] (REVIEW, strong=6, 41.4KB) `20250827_024150_Orchestrator stack review.txt`
+- [ ] (REVIEW, strong=6, 34.9KB) `20250828_230105_Source components in China.txt`
+- [ ] (REVIEW, strong=6, 25.7KB) `20250829_224626_Text to speech synthesis.txt`
+- [ ] (REVIEW, strong=5, 250.2KB) `20250801_130508_LinkedIn strategy guide.txt`
+- [ ] (REVIEW, strong=5, 41.3KB) `20250831_215643_Agentic builder setup.txt`
+- [ ] (REVIEW, strong=4, 25.2KB) `20250826_045724_File generation plan.txt`
+- [ ] (REVIEW, strong=3, 30.1KB) `20250801_173507_Review contracts.txt`
+- [ ] (REVIEW, strong=3, 101.1KB) `20250802_040801_Missing files comparison.txt`
+- [ ] (REVIEW, strong=3, 18.8KB) `20250823_060316_Knowledge evolution pipeline.txt`
+- [ ] (REVIEW, strong=2, 1.4KB) `20250805_102908_Logo design request.txt`
+- [ ] (REVIEW, strong=2, 4.5KB) `20250806_204454_Data extraction summary.txt`
+- [ ] (REVIEW, strong=2, 11.8KB) `20250829_124420_Save and run HTML.txt`
+- [ ] (REVIEW, strong=2, 10.2KB) `20250830_025108_App integration discussion.txt`
+- [ ] (REVIEW, strong=1, 2.6KB) `20250808_121634_ChatGPT-5 capabilities update.txt`
+- [ ] (REVIEW, strong=1, 2.1KB) `20250820_232508_New chat.txt`
+- [ ] (REVIEW, strong=1, 417.1KB) `20250824_030149_Deploy AI identity error.txt`
+- [ ] (REVIEW, strong=0, 68.2KB) `20250813_113854_Top 10 runs analysis.txt`
+- [ ] (REVIEW, strong=0, 25.4KB) `20250831_215323_AI file builder setup.txt`

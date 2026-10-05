@@ -1,4 +1,4 @@
-# Project Maturity Timeline
+# Project Maturity Timeline (may 2026 onwards)
 
 The Quantule Mapper arc, told as evidence. This is deliberately honest about the maturity path — exploratory models,
 a false baseline, three instrument bugs, and the corrections — because that path *is* the scientific record. Commit
@@ -106,6 +106,25 @@ gravity rung A+D → gravity PAUSED → catalog + theory synthesis + evidence pa
   `GRAVITY_DESAT_PILOT/`; `PHASE_D_CODEX_REPRODUCTION_.../gravity_geometry/` (geometry_law_curve.png, radial plots).
 - **Docs:** `docs/IRER_GRAVITY_RUNG_A_D_RESULTS.md`, `GRAVITY_LADDER_GEOMETRY_DECISION.md`,
   `IRER_GEOMETRY_DENSITY_GRAVITY_RFC.md`.
+
+## Stage 10B - Gravity D spatial effective-medium characterization
+- **What:** the standalone mirror branch tested the bounded spatial coefficient operator
+  `i d_t psi = -D div(N(x) grad psi)` as a spatial effective-medium mechanism. The sequence was: promising
+  attraction, independent CPU/GPU replication, exact force-contract closure, GPU convergence, robustness battery,
+  COM diagnostic closure, source-shape closure, dynamics characterization, coarse-grained model extraction, and
+  Newtonian/universality rejection.
+- **Evidence (local):** `sweep_runs/GRAVITY_D_GPU_CODEX_20260713/`,
+  `sweep_runs/GRAVITY_D_ROBUSTNESS_GPU_20260713_195713/`,
+  `sweep_runs/GRAVITY_D_ROBUSTNESS_CLOSURE_GPU_20260713_204559/`,
+  `sweep_runs/GRAVITY_D_DYNAMICS_CHARACTERIZATION_GPU_20260713_221727/`.
+- **Docs:** `docs/GRAVITY_D_EFFECTIVE_MEDIUM_CODEX_REPLICATION.md`,
+  `docs/GRAVITY_D_EFFECTIVE_MEDIUM_ROBUSTNESS_FIRST_PASS.md`,
+  `docs/GRAVITY_D_EFFECTIVE_MEDIUM_ROBUSTNESS_CLOSURE.md`,
+  `docs/GRAVITY_D_EFFECTIVE_MEDIUM_DYNAMICS_CHARACTERIZATION.md`.
+- **Verdict:** robust spatial effective-medium wave force characterized. The exact force is
+  `F = -D integral grad(N)|grad psi|^2 dV`, with useful coarse-grained approximation
+  `F_cg ~= -D K_grad grad N(R)`. Newtonian exterior field, shell-theorem behaviour, universal free fall, and a
+  global point-ray description are rejected for this model. Production gravity remains closed.
 
 ## Stage 11 — Consolidation (current)
 - **What:** master hypothesis catalog; theory synthesis bundle; this evidence package. Reproducibility/hygiene

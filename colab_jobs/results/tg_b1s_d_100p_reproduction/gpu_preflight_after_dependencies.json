@@ -1,0 +1,10 @@
+{
+  "float64_kernel_dtype": "float64",
+  "jax_backend": "gpu",
+  "jax_devices": [
+    "cuda:0"
+  ],
+  "jax_x64_enabled": true,
+  "numerical_gpu_smoke_finite": true,
+  "stage": "after_dependencies"
+}

@@ -1,0 +1,10 @@
+{
+  "comparison_only": [
+    "P_threshold"
+  ],
+  "future_admissible_sources": [
+    "R_relax",
+    "L_lock"
+  ],
+  "scope": "source semantics only; no T/G feedback evolution"
+}

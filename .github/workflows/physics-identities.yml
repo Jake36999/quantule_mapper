@@ -1,0 +1,71 @@
+# Physics-identity regression guard.
+#
+# Every bug in the instrument-integrity ledger was caught by a result contradicting an
+# identity that must hold regardless of implementation. Those checks used to be run by hand,
+# occasionally. This runs them on every push.
+#
+# Deliberately narrow: the identity tests plus the stepper ORDER gates (added 2026-10-04). Identities
+# check what the equations conserve; order gates check how accurately they are solved. The two
+# October 2026 ETDRK4 bugs kept every identity green (identities alone catch 0 of 6 stepper-bug
+# shapes; with the order gates, 6 of 6 -- see docs/instrument_integrity/STEPPER_ORDER_GATES.md).
+# The wider suite needs CuPy, a GPU and repo-local data, none of which belong in a fast gate.
+name: physics identities
+
+on:
+  push:
+    paths:
+      - 'jax_scout/**'
+      - 'solver/**'
+      - 'tests/test_physics_identities.py'
+      - 'tests/test_stepper_order_jax.py'
+      - 'tests/test_etdrk4_order.py'
+      - 'tests/test_spec_layer.py'
+      - 'tests/test_continuation.py'
+      - 'irer_specs/**'
+      - 'specs/**'
+      - '.github/workflows/physics-identities.yml'
+  pull_request:
+    paths:
+      - 'jax_scout/**'
+      - 'solver/**'
+      - 'tests/test_physics_identities.py'
+      - 'tests/test_stepper_order_jax.py'
+      - 'tests/test_etdrk4_order.py'
+  workflow_dispatch:
+
+jobs:
+  identities:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      JAX_PLATFORMS: cpu          # no GPU on the runner; x64 CPU is what the identities need
+      JAX_ENABLE_X64: '1'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Install CPU JAX and pytest
+        run: |
+          python -m pip install --upgrade pip
+          pip install "jax[cpu]" numpy pytest
+
+      - name: Run physics identities
+        run: pytest tests/test_physics_identities.py -v --no-header -p no:cacheprovider
+
+      - name: Run stepper order gates
+        # tests/test_etdrk4_order.py: the NumPy coefficient gates run here; its CuPy test skips
+        # without a GPU and is run locally from .venv instead.
+        run: pytest tests/test_stepper_order_jax.py tests/test_etdrk4_order.py tests/test_spec_layer.py tests/test_continuation.py -v --no-header -p no:cacheprovider
+
+      - name: Explain a failure
+        if: failure()
+        run: |
+          echo "::error::A physics identity or stepper order gate failed."
+          echo "These assert mathematics that holds regardless of implementation, so a failure"
+          echo "means the code changed in a way that breaks a conservation law, a null, or an"
+          echo "operator identity. Treat it as an instrument fault until proven otherwise --"
+          echo "see docs/IRER_MASTER_HYPOTHESIS_CATALOG.md section 10."

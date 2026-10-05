@@ -1,0 +1,5 @@
+source_family,classification,supported_label,passes_semantics_gate,reason,stationary_integral,locking_integral,breathing_integral,unlocking_integral,phase_perturb_integral,scrambled_integral
+S_state,NODE_STATE_LOAD,TG_NODE_STATE_LOAD_SOURCE_SUPPORTED,True,stable nonzero stationary load; global phase and translation invariant,135.68621876842886,,,,,
+L_lock,DENSITY_OR_BREATHING_ACTIVITY,,False,does not cleanly separate locking from null/breathing/unlocking controls,6.789296826382856e-13,0.056050745178278655,8.761642130536283e-09,0.0698724467771426,,
+R_relax,PHASE_TENSION_RELAXATION,TG_PHASE_TENSION_RELAXATION_SOURCE_SUPPORTED,True,"detects mismatch relaxation, including scrambled relaxation, and is quiet on the stationary node",3.1209779432407664e-14,,,0.6186836463570462,0.8258800645783477,113.06178974634594
+P_threshold,DENSITY_OR_BREATHING_ACTIVITY,,False,comparison-only threshold source; cannot promote feedback by itself,2.937765055596418e-07,,0.24584049419953785,,,

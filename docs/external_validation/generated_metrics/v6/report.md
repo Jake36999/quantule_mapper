@@ -1,0 +1,56 @@
+# V6 Old vs Corrected C2
+
+Status: provisional until Claude review.
+
+- Metric ID: `v6`
+- Status: `RAN`
+- Match-level candidate: `EXACT EQUATION`
+- Validation depth: `INTERNAL_DATA_BEHAVIOUR_CHECK`
+- Behavioural result: `PASS`
+- Formula target: `old effective mobility/D_eff regression evidence versus corrected v = 2Dk C2 transport`
+- No new simulation: `True`
+
+## Fit Parameters
+
+```json
+{
+  "corrected_interpretation_status": "CANONICAL",
+  "corrected_points": 2,
+  "corrected_v_over_2Dk": 0.9998909278496895,
+  "expected_bug_ratio_1_over_151": 0.006622516556291391,
+  "old_D_eff_ratio": 0.006511027642497719,
+  "old_interpretation_status": "RETRACTED",
+  "old_regression_points": 2
+}
+```
+
+## Fit Quality
+
+```json
+{
+  "clean_overlay_available": true,
+  "corrected_interpretation_status": "CANONICAL",
+  "corrected_mean_v_frac": 0.9998909278496895,
+  "corrected_v_over_2Dk": 0.9998909278496895,
+  "expected_bug_ratio_1_over_151": 0.006622516556291391,
+  "old_D_eff_ratio": 0.006511027642497719,
+  "old_interpretation_status": "RETRACTED"
+}
+```
+
+## Rows
+
+| source | class | k | v_measured | v_expected | ratio | mass_ret |
+| --- | --- | --- | --- | --- | --- | --- |
+| sweep_runs/C27_REDERIVE/r3_n96.json | corrected_C2 | 0.6283185307179586 | 1.256499972363777 | 1.2566370614359172 | 0.999890907982625 | 0.999875274532852 |
+| sweep_runs/C27_REDERIVE/r3_n96.json | corrected_C2 | 1.2566370614359172 | 2.5130000445903122 | 2.5132741228718345 | 0.999890947716754 | 0.9996329889054258 |
+| sweep_runs/PHASE_D_C2_6_CODEX_AUDIT_20260709/c2_6_independent_audit_summary.json | old_regression_D_eff | 0.6283185307179586 |  |  | 0.006511027642497719 |  |
+| sweep_runs/PHASE_D_CODEX_REPRODUCTION_20260709_233433/c2_6_reproduction_summary.json | old_regression_D_eff | 0.6283185307179586 |  |  | 0.006511027642497719 |  |
+| sweep_runs/C23_N96 | old_run_available_no_clean_overlay |  |  |  |  |  |
+| sweep_runs/C24_LOCAL_N96 | old_run_available_no_clean_overlay |  |  |  |  |  |
+
+## Warnings
+
+- None
+
+Guardrail: this report is a first-pass metric preparation artifact, not a verdict change or a physical-correspondence claim.

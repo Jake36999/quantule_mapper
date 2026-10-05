@@ -1,0 +1,7 @@
+test,pass,target_run,structural_channels
+phase_linear_constant_frequency,True,D3_100P_lam1,
+phase_aligned_structure_bounded,True,,
+numerical_validation_present,False,,
+numerical_validation_agrees,False,,
+basin_orbital_stability_present,False,,
+basin_orbital_stability_agrees,False,,

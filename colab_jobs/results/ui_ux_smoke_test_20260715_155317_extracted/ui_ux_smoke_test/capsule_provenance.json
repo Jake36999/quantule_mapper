@@ -1,0 +1,321 @@
+{
+  "completion_ledger": {
+    "completed_rows": [
+      "ui_ux_smoke_row"
+    ],
+    "failed_rows": [],
+    "rows": [
+      {
+        "duration_seconds": 4.543219327926636,
+        "finished_utc": "2026-07-15T15:53:14Z",
+        "log_path": "/content/qm_job/run_ui_ux_smoke_row.log",
+        "log_sha256": "8ae50ad55dc8b4881362543dba723977cbfae3ff03d51407cd4d01059d39087f",
+        "return_code": 0,
+        "row_id": "ui_ux_smoke_row",
+        "stages": [
+          {
+            "command": [
+              "/usr/bin/python3",
+              "-u",
+              "colab_jobs/ui_ux_smoke_job.py",
+              "--phase",
+              "prepare",
+              "--out",
+              "/content/qm_job/results/ui_ux_smoke_test",
+              "--steps",
+              "3",
+              "--sleep",
+              "0.4"
+            ],
+            "duration_seconds": 1.2731788158416748,
+            "finished_utc": "2026-07-15T15:53:10Z",
+            "return_code": 0,
+            "stage_id": "prepare"
+          },
+          {
+            "command": [
+              "/usr/bin/python3",
+              "-u",
+              "colab_jobs/ui_ux_smoke_job.py",
+              "--phase",
+              "run",
+              "--out",
+              "/content/qm_job/results/ui_ux_smoke_test",
+              "--steps",
+              "8",
+              "--sleep",
+              "0.4"
+            ],
+            "duration_seconds": 3.2687911987304688,
+            "finished_utc": "2026-07-15T15:53:14Z",
+            "return_code": 0,
+            "stage_id": "run"
+          }
+        ]
+      }
+    ]
+  },
+  "generated_utc": "2026-07-15T15:53:17Z",
+  "job_manifest": {
+    "config_files": [],
+    "control_panel": {
+      "actions": [
+        {
+          "action_id": "T1",
+          "fixed": true,
+          "handler": "runtime_preflight",
+          "kind": "system_test",
+          "label": "Run Preflight",
+          "output_channel": "terminal_T1",
+          "required": true
+        },
+        {
+          "action_id": "T2",
+          "fixed": true,
+          "handler": "numeric_smoke_test",
+          "kind": "system_test",
+          "label": "Run Smoke Test",
+          "output_channel": "terminal_T2",
+          "required": true,
+          "requires_pass": [
+            "T1"
+          ]
+        },
+        {
+          "action_id": "T3",
+          "fixed": true,
+          "handler": "persistence_test",
+          "kind": "system_test",
+          "label": "Test Persistence",
+          "output_channel": "terminal_T3",
+          "required": true,
+          "requires_pass": [
+            "T1",
+            "T2"
+          ]
+        },
+        {
+          "action_id": "J1",
+          "confirmation_required": false,
+          "handler": "run_registered_job",
+          "job_id": "ui_ux_smoke_test",
+          "kind": "job",
+          "label": "Run UI Smoke",
+          "output_channel": "terminal_J1",
+          "requires_pass": [
+            "T1",
+            "T2",
+            "T3"
+          ],
+          "row_id": "ui_ux_smoke_row"
+        }
+      ],
+      "reserved_test_slots": [
+        "T1",
+        "T2",
+        "T3"
+      ],
+      "schema_version": "qm-colab-controls/1.0",
+      "tail_lines": 200
+    },
+    "drive_checkpoint_dir": "/content/drive/MyDrive/QuantuleMapperRuns/ui_ux_smoke_test/checkpoints",
+    "drive_results_dir": "/content/drive/MyDrive/QuantuleMapperRuns/ui_ux_smoke_test",
+    "environment_policy": {
+      "accepted_gpu_names": [],
+      "require_gpu": false
+    },
+    "expected_outputs": [
+      "results/ui_ux_smoke_test/preflight_marker.json",
+      "results/ui_ux_smoke_test/ui_smoke_metrics.csv",
+      "results/ui_ux_smoke_test/ui_event_log.json",
+      "results/ui_ux_smoke_test/completion_status.json"
+    ],
+    "external_inputs": [],
+    "install_policy": {
+      "allow_pip_install": false
+    },
+    "job_id": "ui_ux_smoke_test",
+    "job_name": "Colab UI/UX Smoke Test",
+    "job_root": "/content/qm_job",
+    "precision": {
+      "jax_enable_x64": true
+    },
+    "result_policy": {
+      "hard_archive_bytes": 5000000000,
+      "ideal_archive_bytes": 1000000000
+    },
+    "rows": [
+      {
+        "expected_outputs": [
+          "results/ui_ux_smoke_test/preflight_marker.json",
+          "results/ui_ux_smoke_test/ui_smoke_metrics.csv",
+          "results/ui_ux_smoke_test/ui_event_log.json",
+          "results/ui_ux_smoke_test/completion_status.json"
+        ],
+        "row_id": "ui_ux_smoke_row",
+        "stages": [
+          {
+            "arguments": [
+              "--phase",
+              "prepare",
+              "--out",
+              "{job_root}/results/ui_ux_smoke_test",
+              "--steps",
+              "3",
+              "--sleep",
+              "0.4"
+            ],
+            "entrypoint": {
+              "path": "colab_jobs/ui_ux_smoke_job.py"
+            },
+            "expected_outputs": [
+              "results/ui_ux_smoke_test/preflight_marker.json"
+            ],
+            "stage_id": "prepare"
+          },
+          {
+            "arguments": [
+              "--phase",
+              "run",
+              "--out",
+              "{job_root}/results/ui_ux_smoke_test",
+              "--steps",
+              "8",
+              "--sleep",
+              "0.4"
+            ],
+            "entrypoint": {
+              "path": "colab_jobs/ui_ux_smoke_job.py"
+            },
+            "expected_outputs": [
+              "results/ui_ux_smoke_test/ui_smoke_metrics.csv",
+              "results/ui_ux_smoke_test/ui_event_log.json",
+              "results/ui_ux_smoke_test/completion_status.json"
+            ],
+            "stage_id": "run"
+          }
+        ]
+      }
+    ],
+    "source_files": [
+      "colab_jobs/ui_ux_smoke_job.py"
+    ],
+    "workflow": {
+      "agent_plans_run": true,
+      "drive_persistence_required": true,
+      "intended_use": "Lightweight UI/UX validation for the Colab control panel; not a scientific simulation.",
+      "local_results_dir": "F:\\quantule_mapper\\colab_jobs\\results",
+      "manual_colab_execution": true,
+      "manual_upload_to_colab": true,
+      "mode": "manual_colab_upload",
+      "review_prompt_after_download": true
+    }
+  },
+  "source_manifest": {
+    "bundle_sha256": "59f70ff26d2231dd2a3f582d3243473947ae5f90700d40f1570e2cd1be5ef0b2",
+    "control_panel": {
+      "actions": [
+        {
+          "action_id": "T1",
+          "fixed": true,
+          "handler": "runtime_preflight",
+          "kind": "system_test",
+          "label": "Run Preflight",
+          "output_channel": "terminal_T1",
+          "required": true
+        },
+        {
+          "action_id": "T2",
+          "fixed": true,
+          "handler": "numeric_smoke_test",
+          "kind": "system_test",
+          "label": "Run Smoke Test",
+          "output_channel": "terminal_T2",
+          "required": true,
+          "requires_pass": [
+            "T1"
+          ]
+        },
+        {
+          "action_id": "T3",
+          "fixed": true,
+          "handler": "persistence_test",
+          "kind": "system_test",
+          "label": "Test Persistence",
+          "output_channel": "terminal_T3",
+          "required": true,
+          "requires_pass": [
+            "T1",
+            "T2"
+          ]
+        },
+        {
+          "action_id": "J1",
+          "confirmation_required": false,
+          "handler": "run_registered_job",
+          "job_id": "ui_ux_smoke_test",
+          "kind": "job",
+          "label": "Run UI Smoke",
+          "output_channel": "terminal_J1",
+          "requires_pass": [
+            "T1",
+            "T2",
+            "T3"
+          ],
+          "row_id": "ui_ux_smoke_row"
+        }
+      ],
+      "log_root": "/content/qm_colab/jobs/ui_ux_smoke_test/run/logs",
+      "reserved_test_slots": [
+        "T1",
+        "T2",
+        "T3"
+      ],
+      "schema_version": "qm-colab-controls/1.0",
+      "status_root": "/content/qm_colab/jobs/ui_ux_smoke_test/run/status",
+      "tail_lines": 200
+    },
+    "files": [
+      {
+        "path": "colab_jobs/ui_ux_smoke_job.py",
+        "sha256": "5324046f0fd6091d415b8fc14ccb782075a2b59b75567c352a7eac1abec90ca3",
+        "size_bytes": 4070
+      }
+    ],
+    "generated_at_utc": "2026-07-15T15:51:24.936255+00:00",
+    "job_id": "ui_ux_smoke_test",
+    "manifest_path": "ui_ux_smoke_manifest.json",
+    "packager_version": "4.5",
+    "project_root_name": "quantule_mapper",
+    "workflow": {
+      "agent_plans_run": true,
+      "analogy": "Sometimes it is quicker to send the car to the shop than fix it yourself.",
+      "drive_persistence_required": true,
+      "intended_use": "Lightweight UI/UX validation for the Colab control panel; not a scientific simulation.",
+      "local_results_dir": "F:\\quantule_mapper\\colab_jobs\\results",
+      "manual_colab_execution": true,
+      "manual_upload_to_colab": true,
+      "mode": "manual_colab_upload",
+      "result_policy": {
+        "hard_archive_bytes": 5000000000,
+        "ideal_archive_bytes": 1000000000
+      },
+      "review_prompt_after_download": true
+    }
+  },
+  "workflow": {
+    "agent_plans_run": true,
+    "analogy": "Sometimes it is quicker to send the car to the shop than fix it yourself.",
+    "drive_persistence_required": true,
+    "intended_use": "Lightweight UI/UX validation for the Colab control panel; not a scientific simulation.",
+    "local_results_dir": "F:\\quantule_mapper\\colab_jobs\\results",
+    "manual_colab_execution": true,
+    "manual_upload_to_colab": true,
+    "mode": "manual_colab_upload",
+    "result_policy": {
+      "hard_archive_bytes": 5000000000,
+      "ideal_archive_bytes": 1000000000
+    },
+    "review_prompt_after_download": true
+  }
+}

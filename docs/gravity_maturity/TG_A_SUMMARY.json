@@ -1,0 +1,9 @@
+{
+  "linear_stability_pass": true,
+  "model_class": "explicitly_budgeted_dissipative_response",
+  "primary_source": "R_coh",
+  "run_directory": "F:\\quantule_mapper\\sweep_runs\\TG_A_CONTRACTS_20260714_114135",
+  "secondary_source": "R_thr",
+  "source_nulls_pass": true,
+  "status": "TG_A_ACTION_AND_SOURCE_AUDIT_CLOSED"
+}

@@ -1,0 +1,2 @@
+probe_width,radial_distance,max_force,max_force_N_min,strongest_force,weak_field_force_over_epsilon_mean,turnover_or_saturation_candidate,classification
+1.0,4.0,0.01067296715424421,0.35,0.01067296715424421,0.012421676666684783,False,MONOTONE_OR_UNRESOLVED

@@ -1,0 +1,23 @@
+{
+  "row_id": "cx_tg_rate_source_semantics_bridge",
+  "return_code": 0,
+  "duration_seconds": 83.59157729148865,
+  "finished_utc": "2026-07-18T00:02:59Z",
+  "log_path": "/content/qm_job/run_cx_tg_rate_source_semantics_bridge.log",
+  "log_sha256": "e34afa3941d99b3e281814288ad4b8fe61d709fe8dd09fe78c5e41569a55ba24",
+  "stages": [
+    {
+      "stage_id": "main",
+      "command": [
+        "/usr/bin/python3",
+        "-u",
+        "jax_scout/gravity_TG_rate_source_semantics_bridge_gpu.py",
+        "--out",
+        "/content/qm_job/results/cx_tg_rate_source_semantics_bridge"
+      ],
+      "return_code": 0,
+      "duration_seconds": 83.59097480773926,
+      "finished_utc": "2026-07-18T00:02:59Z"
+    }
+  ]
+}

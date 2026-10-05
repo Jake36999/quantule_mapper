@@ -1,0 +1,11 @@
+{
+  "feedback_core_energy_delta": -2.1152762264553537e-06,
+  "feedback_flux_delta": 3.37981978472935e-25,
+  "gpu_preflight_passed": true,
+  "intervention_controls_passed": true,
+  "pilot_completed": true,
+  "promoted_feedback_claim": false,
+  "run_directory": "sweep_runs\\TG_B1_FEEDBACK_GPU_20260714_115402",
+  "source_semantics_passed": false,
+  "status": "TG_SOURCE_SEMANTICS_FAILED_ON_KG_NODE"
+}

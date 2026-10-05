@@ -1,0 +1,37 @@
+{
+  "behavioural_result": "PASS",
+  "caveats": [
+    "VK sign depends on branch variable convention; this report uses omega/w."
+  ],
+  "created_utc": "2026-07-12T00:34:08+00:00",
+  "data_sources": [
+    "sweep_runs/C3_EXACT_VK2"
+  ],
+  "files_read": [
+    "sweep_runs/C3_EXACT_VK2/summary.json"
+  ],
+  "fit_parameters": {
+    "dQ_domega_fit": -849.138404192748,
+    "dQ_domega_reported": -849.1384041927649,
+    "intercept": 869.8962280490451
+  },
+  "fit_quality": {
+    "Q_max": 59.04310622445989,
+    "Q_min": 48.911713893680094,
+    "dQ_domega_fit": -849.138404192748,
+    "monotone_decreasing": true,
+    "monotonic_decreasing": true,
+    "n_points": 4,
+    "omega_max": 0.968,
+    "omega_min": 0.956,
+    "sign": "negative",
+    "sign_pass": true
+  },
+  "formula_target": "dQ/domega < 0 under the stated C3 Q-ball branch convention",
+  "match_level_candidate": "SAME FAMILY",
+  "metric_id": "v3",
+  "no_new_simulation": true,
+  "provisional_until_claude_review": true,
+  "status": "RAN",
+  "validation_depth": "INTERNAL_DATA_BEHAVIOUR_CHECK"
+}

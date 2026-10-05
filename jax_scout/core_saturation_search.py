@@ -11,6 +11,18 @@ Records final node count of saturators (1/2/3/4/multi). Time-boxed; incremental 
 
 WSL2 jax venv:  python /mnt/f/quantule_mapper/jax_scout/core_saturation_search.py --hours 2
 """
+
+# Harness manifest (docs/research_infrastructure/HARNESS_REGISTRY.md). Read by AST, never imported;
+# descriptive only -- nothing consults it before this script runs.
+HARNESS = {
+    'id': 'core_saturation_search',
+    'branch': 'Branch - Stability - Index',
+    'status': 'ACTIVE',
+    'superseded_by': None,
+    'invariants': [],
+    'produces': ['CORE_SAT_HUNT', 'CORE_SAT_PILOT', 'CORE_SAT_CALIB'],
+    'summary': 'Batched Phase C core search and the v3 stable-collapse classifier (also a library: run_probe).',
+}
 import os, sys, csv, json, time, argparse, subprocess
 import numpy as np
 os.environ.setdefault("XLA_PYTHON_CLIENT_PREALLOCATE", "false")
@@ -179,7 +191,21 @@ def evaluate_candidate(finite, energy_row, psi_mid, psi_fin, ic_e, dx):
     return klass, metrics, er
 
 
-def run_probe(params, N, T, K, seed=SEED, ic_norm=IC_NORM_PER_BLOB_FIXED, target_initial_mass=None):
+def dt_ratio(dt):
+    """Integer refinement factor DT/dt for a --dt override (None -> 1). Used by the re-validation
+    harnesses to run the same PHYSICAL time at a finer step and subsample er(t) back onto the base
+    grid, so late slopes stay in the historical 'per 1k base steps' units."""
+    if dt is None:
+        return 1
+    r = DT / float(dt)
+    if abs(r - round(r)) > 1e-9 or round(r) < 1:
+        raise ValueError(f"--dt must divide the base dt {DT} by a whole number (got {dt})")
+    return int(round(r))
+
+
+def run_probe(params, N, T, K, seed=SEED, ic_norm=IC_NORM_PER_BLOB_FIXED, target_initial_mass=None, dt=None):
+    """T is a step count at the probe's dt. dt=None keeps the historical base step DT (unchanged)."""
+    step_dt = DT if dt is None else float(dt)
     dx = L_ / N
     psi0, ic_stats = build_ic(N, K, seed, ic_norm=ic_norm, target_initial_mass=target_initial_mass)
     ic_e = ic_stats["initial_mass"] + 1e-30
@@ -189,7 +215,7 @@ def run_probe(params, N, T, K, seed=SEED, ic_norm=IC_NORM_PER_BLOB_FIXED, target
         jnp.asarray(psi0),
         N,
         L_,
-        DT,
+        step_dt,
         T,
         jnp.float64,
         jnp.complex128,

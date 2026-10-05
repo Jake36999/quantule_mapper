@@ -1,0 +1,32 @@
+{
+  "files": [
+    {
+      "actual_sha256": "aacc2c709c1eefe98b9fed2a8ef9aa9b2ca2c439d8d982717a96aeb8bee2ccff",
+      "expected_sha256": "aacc2c709c1eefe98b9fed2a8ef9aa9b2ca2c439d8d982717a96aeb8bee2ccff",
+      "ok": true,
+      "path": "jax_scout/phase_d_c3_wave.py",
+      "tier": "T0"
+    },
+    {
+      "actual_sha256": "85215ef2f634820aae806dcd799d4fcb78ececab3224b994f696fb817bdeebf1",
+      "expected_sha256": "85215ef2f634820aae806dcd799d4fcb78ececab3224b994f696fb817bdeebf1",
+      "ok": true,
+      "path": "jax_scout/gravity_TG_B1S_state_load_feedback_gpu.py",
+      "tier": "T0"
+    },
+    {
+      "actual_sha256": "6f6b9f0fad2bf5e27378c3efc3620ee6d79a577978a9c0a7533c0648e38012be",
+      "expected_sha256": "6f6b9f0fad2bf5e27378c3efc3620ee6d79a577978a9c0a7533c0648e38012be",
+      "ok": true,
+      "path": "jax_scout/gravity_TG_B2_two_node_awell.py",
+      "tier": "T1"
+    },
+    {
+      "actual_sha256": "b000cc031d9fc7f088bbafac60da02cd3b3c9ee5609d87bde6619d53178ec19c",
+      "expected_sha256": "b000cc031d9fc7f088bbafac60da02cd3b3c9ee5609d87bde6619d53178ec19c",
+      "ok": true,
+      "path": "jax_scout/gravity_TG_B2_definitive_force.py",
+      "tier": "T1"
+    }
+  ]
+}

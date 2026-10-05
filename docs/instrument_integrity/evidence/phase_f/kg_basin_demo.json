@@ -1,0 +1,11 @@
+{
+  "spec_version": 1, "id": "kg-basin-demo", "title": "KG amplitude ensemble: disperse vs localise",
+  "substrate": {"name": "kg-strang", "version": 1, "params": {"c": 1.0, "m": 1.0, "a": 0.8, "s": -0.5, "f": -0.1}},
+  "protocol": {"ic": {"name": "gaussian", "version": 1, "params": {"A": 1.0, "sigma": 1.5, "omega": 0.9}},
+               "grid": {"N": 16, "L": 16.0}, "dt": 0.05, "T": 20.0, "sample_every": 2.0},
+  "observers": [{"name": "kg_invariants"}, {"name": "state_descriptors", "version": 2, "params": {"final_only": true}}],
+  "sweep": {"mode": "grid", "axes": {"protocol.ic.params.A": [0.2, 0.3, 1.6, 2.0],
+                                      "protocol.ic.params.center": [[0, 0, 0], [1.0, 0, 0], [0, 1.5, 0]]}},
+  "prediction": {"statement": "Weak packets (A<=0.3) disperse; strong ones (A>=1.6) stay localised: two basins split by amplitude.",
+                 "quantities": [{"key": "Q_rel_drift", "expected": 0.0, "tolerance": 1e-8}]}
+}

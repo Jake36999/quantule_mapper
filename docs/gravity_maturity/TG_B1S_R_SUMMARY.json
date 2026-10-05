@@ -1,0 +1,42 @@
+{
+  "baseline_delta_core_amp_final": -7.330591547116683e-07,
+  "baseline_delta_modal_frequency": 3.434895534670801e-08,
+  "baseline_delta_modal_phase_final": -3.876371246214205e-08,
+  "best_snr": 131.65175529252588,
+  "best_snr_observable": "delta_core_amp_final",
+  "bounded_feedback_promoted": false,
+  "caveat": "Translated basin modal leakage is conservative because the diagnostic used the original stationary mode, not a translated modal reference. The robust-but-weak verdict does not depend on that row.",
+  "coupling_contract": {
+    "lambda_zero_vanished": true,
+    "lambda_ladder": [
+      0.0,
+      0.25,
+      0.5,
+      1.0,
+      1.5,
+      2.0
+    ],
+    "smooth_sign": true
+  },
+  "labels": [
+    "TG_STATE_LOAD_BACKREACTION_ROBUST",
+    "TG_STATE_LOAD_BACKREACTION_ROBUST_BUT_WEAK"
+  ],
+  "long_time": {
+    "max_periods": 10.0,
+    "promoted_bounded_gate_requires_25_or_50_periods": true,
+    "ten_period_attractor_class": "STABLE_SHIFTED_NODE",
+    "ten_period_modal_leakage_max": 6.889513350929407e-05,
+    "ten_period_modal_phase_drift": -9.114930590925496e-05,
+    "ten_period_profile_overlap": 0.9999999981230413
+  },
+  "max_long_periods": 10.0,
+  "snr": {
+    "delta_core_amp_final": 131.65175529252588,
+    "delta_modal_frequency": 5.520083225871324,
+    "delta_modal_phase_final": 5.498598847431243,
+    "delta_node_frequency": 10.920148801270711
+  },
+  "run_directory": "/mnt/f/quantule_mapper/sweep_runs/TG_B1S_BACKREACTION_ROBUSTNESS_GPU_20260714_142319",
+  "status": "TG_STATE_LOAD_BACKREACTION_ROBUST_BUT_WEAK"
+}

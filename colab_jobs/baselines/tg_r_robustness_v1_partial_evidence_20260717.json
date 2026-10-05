@@ -1,0 +1,79 @@
+{
+  "evidence_id": "tg_r_robustness_v1_partial_20260717_112558",
+  "source": {
+    "archive": "C:\\Users\\jakem\\Downloads\\cl_tg_r_robustness_capsule_20260717_112558.tar.gz",
+    "archive_sha256": "b679d5dde653aa767be923264a4b25284758b01289835a765908893920604cce",
+    "review_dir": "colab_jobs/Colab_runs/cl_tg_r_robustness_capsule_20260717_112558",
+    "first_pass_review": "colab_jobs/Colab_runs/cl_tg_r_robustness_capsule_20260717_112558/FIRST_PASS_REVIEW_20260717.md"
+  },
+  "baseline_sep3_F_R_well_avg": -5.4501234166498155e-05,
+  "rows": [
+    {
+      "row_id": "r1_grid_N96_sep3",
+      "phase": "R1_convergence",
+      "reason": "grid refinement sentinel from returned v1 capsule",
+      "status": "COMPLETE",
+      "source": "v1_returned_capsule",
+      "compare_to_baseline_sep": 3.0,
+      "drift_tolerance": 0.2,
+      "drift_vs_baseline_sep3": 0.0005151848662203447,
+      "drift_pass": true,
+      "metrics": {
+        "sep": 3.0,
+        "F_R_well_avg": -5.452931236310377e-05,
+        "F_R_hill_avg": 5.45282371341913e-05,
+        "F_R_off_avg": 0.0,
+        "F_R_well_std": 7.956136379591495e-06,
+        "well_hill_antisym_rel": 1.9718365515245898e-05,
+        "well_negative": true,
+        "sign_reverses": true,
+        "off_null_ok": true,
+        "charge_ok": true,
+        "nodes_distinct": true,
+        "gates_pass": true,
+        "sep_min": 2.9251837223243857
+      }
+    },
+    {
+      "row_id": "r1_dt_half_sep3",
+      "phase": "R1_convergence",
+      "reason": "timestep-halved sentinel from returned v1 capsule",
+      "status": "COMPLETE",
+      "source": "v1_returned_capsule",
+      "compare_to_baseline_sep": 3.0,
+      "drift_tolerance": 0.2,
+      "drift_vs_baseline_sep3": 1.1094980403251824e-12,
+      "drift_pass": true,
+      "metrics": {
+        "sep": 3.0,
+        "F_R_well_avg": -5.450123416655863e-05,
+        "F_R_hill_avg": 5.450015934412122e-05,
+        "F_R_off_avg": 0.0,
+        "F_R_well_std": 7.950322869774316e-06,
+        "well_hill_antisym_rel": 1.9721066024442024e-05,
+        "well_negative": true,
+        "sign_reverses": true,
+        "off_null_ok": true,
+        "charge_ok": true,
+        "nodes_distinct": true,
+        "gates_pass": true,
+        "sep_min": 2.982444806208853
+      }
+    }
+  ],
+  "incomplete_rows": [
+    {
+      "row_id": "r1_box_L20_sep3",
+      "reason": "Failed before force measurement with RuntimeError: validated Q-ball solve failed."
+    },
+    {
+      "row_id": "r2_eps_003_sep3",
+      "reason": "Not reached in v1."
+    },
+    {
+      "row_id": "r2_eps_012_sep3",
+      "reason": "Not reached in v1."
+    }
+  ],
+  "boundary": "Frozen returned evidence for v2 completion. These rows should not be rerun unless Jake requests a single all-new archive."
+}

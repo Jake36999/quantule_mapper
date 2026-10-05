@@ -1,0 +1,9 @@
+{
+  "package_version": "2.3.0",
+  "backend": "CPU",
+  "compatibility_shims": [
+    "pyfftw->numpy FFT",
+    "numba->plain Python decorators"
+  ],
+  "D_convention": "D = 1/(2*k0); wavelength=4*pi gives k0=0.5, D=1"
+}

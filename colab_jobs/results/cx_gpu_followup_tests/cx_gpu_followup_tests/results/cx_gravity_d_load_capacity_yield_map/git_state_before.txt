@@ -1,0 +1,1 @@
+COMMAND_FAILED ['git', 'status', '--short']: Command '['git', 'status', '--short']' returned non-zero exit status 128.

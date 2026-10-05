@@ -1,0 +1,94 @@
+{
+  "comparison_rows": [
+    {
+      "expected_v_2Dk": "1.2566370614359172",
+      "external_mass_ret": "1.0000000000000668",
+      "external_v_frac": "0.9999999986032352",
+      "external_v_measured": "1.2566370596806908",
+      "k": "0.6283185307179586",
+      "project_mass_ret": "0.999875274532852",
+      "project_v_frac": "0.999890907982625",
+      "project_v_measured": "1.256499972363777"
+    },
+    {
+      "expected_v_2Dk": "2.5132741228718345",
+      "external_mass_ret": "1.0000000000000513",
+      "external_v_frac": "0.9999999993016974",
+      "external_v_measured": "2.5132741211168086",
+      "k": "1.2566370614359172",
+      "project_mass_ret": "0.9996329889054258",
+      "project_v_frac": "0.999890947716754",
+      "project_v_measured": "2.5130000445903122"
+    }
+  ],
+  "created_utc": "2026-07-10T23:49:34+00:00",
+  "external_nlse_fit": {
+    "expected_slope_2D": 2.0,
+    "intercept": -1.755426704015259e-09,
+    "r2": 1.0,
+    "slope": 2.0000000000003184,
+    "slope_percent_error": 1.5920598173124745e-11
+  },
+  "external_nlse_only_no_quantule_simulations": true,
+  "final_decision": "NLSE_REDUCED_V2_COMPARISON_READY",
+  "no_physical_correspondence_claim": true,
+  "no_production_physics_changed": true,
+  "no_verdicts_changed": true,
+  "package_metadata": {
+    "license_file_first_line": "MIT License",
+    "package_version_from_setup": "2.3.0",
+    "requirements": [
+      "matplotlib==3.8.4",
+      "numba==0.59.1",
+      "numpy==1.26.4",
+      "pyFFTW==0.13.1",
+      "pyopencl==2024.2.1",
+      "pyvkfft==2024.1.2.post0",
+      "scipy==1.13.1",
+      "setuptools==68.1.2",
+      "tqdm==4.66.1"
+    ],
+    "run_mode": "import-from-unpacked-source with local child-process compatibility shims",
+    "source_root": "E:\\quantule_mapper_external_data\\DATA-NUM-001_nlse_package\\extracted\\source"
+  },
+  "package_source": "E:\\quantule_mapper_external_data\\DATA-NUM-001_nlse_package\\extracted\\source",
+  "project_c2_v2": {
+    "D_used": 1.0,
+    "expected_slope_2D": 2.0,
+    "intercept": -9.986275745059968e-08,
+    "mass_retention_min": 0.9996329889054258,
+    "mean_mass_retention": 0.999754131719139,
+    "n_boosts": 2,
+    "n_points": 2,
+    "r_squared": 1.0,
+    "slope": 1.9997819749017656,
+    "slope_percent_error": 0.010901254911721558,
+    "source_of_D": "project C2.7 convention or explicit summary field if present"
+  },
+  "provisional_until_claude_review": true,
+  "reduced_equation_method_sanity_only": true,
+  "summary_rows": [
+    {
+      "expected_slope_2D": 2.0,
+      "intercept": -9.986275745059968e-08,
+      "mass_retention_min": 0.9996329889054258,
+      "r_squared": 1.0,
+      "slope": 1.9997819749017656,
+      "slope_percent_error": 0.010901254911721558,
+      "source": "project_C2_V2"
+    },
+    {
+      "expected_slope_2D": 2.0,
+      "intercept": -1.755426704015259e-09,
+      "mass_retention_min": 1.0000000000000513,
+      "r_squared": 1.0,
+      "slope": 2.0000000000003184,
+      "slope_percent_error": 1.5920598173124745e-11,
+      "source": "external_NLSE_reduced"
+    }
+  ],
+  "warnings": [
+    "External NLSE package was run from archived source with local CPU compatibility shims because pyfftw/numba/tqdm were not installed in the active venv; CuPy was shadow-disabled inside the child process to keep the package on its CPU path without pyvkfft.",
+    "This is a reduced-equation method sanity check only, not empirical validation and not a full IRER comparison."
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "D0_phase_aligned_profile_comparison": true,
+  "D1_separate_drift_channels": true,
+  "D2_asymptotic_frequency_contract": true,
+  "D3_100_period_run": true,
+  "D4_numerical_validation": false,
+  "D5_basin_test": false,
+  "matrix": "primary",
+  "state_load_only": true
+}

@@ -1,0 +1,11 @@
+{
+  "completed_rows": [
+    "r1_grid_N96_sep3",
+    "r1_dt_half_sep3"
+  ],
+  "failed_rows": [
+    "r1_box_L20_sep3"
+  ],
+  "finished_utc": "2026-07-17T11:21:49Z",
+  "verdict": "TG_R_ROBUSTNESS_INCOMPLETE"
+}

@@ -1,0 +1,4 @@
+source,profile,omega_min,omega_max,cap_like_fraction,cap_fraction,graded_well,max_radial_jump,fit_available,a_effective,gamma_effective,log_intercept,n_fit,floor_fraction,graded_fraction
+sweep_runs/GRAVITY_AD_bg0/summary.json,radial_omega_only,711.498,935906.42,0.7083333333333334,,,,,,,,,,
+sweep_runs/GRAVITY_DESAT_PILOT/desat_pilot.json,production_desat_summary,,,,0.8622703552246094,False,54.633438036104444,,,,,,,
+sweep_runs/PHASE_D_CODEX_REPRODUCTION_20260709_233433/gravity_geometry/radial_profiles.csv,,,,,0.3090277777777778,,,True,2.9259806516213103,8.851961303242621,6.66156140796944,198,0.003472222222222222,0.6875

@@ -1,0 +1,27 @@
+{
+  "row_id": "tg_b2_definitive_force_seps_3_4",
+  "return_code": 0,
+  "duration_seconds": 2718.648396253586,
+  "finished_utc": "2026-07-16T11:30:33Z",
+  "log_path": "/content/qm_job/run_tg_b2_definitive_force_seps_3_4.log",
+  "log_sha256": "fd91bd5267d21fd1dd88e23e05eed00aa6ddc5448edbd8965c9bbdd65a44591b",
+  "stages": [
+    {
+      "stage_id": "main",
+      "command": [
+        "/usr/bin/python3",
+        "-u",
+        "jax_scout/gravity_TG_B2_definitive_force.py",
+        "--seps",
+        "3.0,4.0",
+        "--T",
+        "180",
+        "--out",
+        "/content/qm_job/results/cl_tg_b2_definitive"
+      ],
+      "return_code": 0,
+      "duration_seconds": 2718.6474556922913,
+      "finished_utc": "2026-07-16T11:30:33Z"
+    }
+  ]
+}

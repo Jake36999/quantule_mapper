@@ -1,0 +1,56 @@
+{
+  "completed_rows": [
+    "ui_ux_smoke_row"
+  ],
+  "failed_rows": [],
+  "rows": [
+    {
+      "duration_seconds": 4.543219327926636,
+      "finished_utc": "2026-07-15T15:53:14Z",
+      "log_path": "/content/qm_job/run_ui_ux_smoke_row.log",
+      "log_sha256": "8ae50ad55dc8b4881362543dba723977cbfae3ff03d51407cd4d01059d39087f",
+      "return_code": 0,
+      "row_id": "ui_ux_smoke_row",
+      "stages": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-u",
+            "colab_jobs/ui_ux_smoke_job.py",
+            "--phase",
+            "prepare",
+            "--out",
+            "/content/qm_job/results/ui_ux_smoke_test",
+            "--steps",
+            "3",
+            "--sleep",
+            "0.4"
+          ],
+          "duration_seconds": 1.2731788158416748,
+          "finished_utc": "2026-07-15T15:53:10Z",
+          "return_code": 0,
+          "stage_id": "prepare"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-u",
+            "colab_jobs/ui_ux_smoke_job.py",
+            "--phase",
+            "run",
+            "--out",
+            "/content/qm_job/results/ui_ux_smoke_test",
+            "--steps",
+            "8",
+            "--sleep",
+            "0.4"
+          ],
+          "duration_seconds": 3.2687911987304688,
+          "finished_utc": "2026-07-15T15:53:14Z",
+          "return_code": 0,
+          "stage_id": "run"
+        }
+      ]
+    }
+  ]
+}

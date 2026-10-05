@@ -1,0 +1,329 @@
+{
+  "files": [
+    {
+      "path": "RUN_COMPLETE_CAPSULE.json",
+      "sha256": "a138b88d1ec3b94e343bf5786d9ddbfd23e0999a717515c2712e39925d106bee",
+      "size_bytes": 135
+    },
+    {
+      "path": "artifact_hashes_extracted.json",
+      "sha256": "0d50298c925f675e38b3b5c4f19855eb0eab9184a7a8e60b978f29753d6e435b",
+      "size_bytes": 1775
+    },
+    {
+      "path": "capsule_provenance.json",
+      "sha256": "461fcdb4b2002641e78612a2f145bc639a3799980fa2c9e4afec92f3da29e290",
+      "size_bytes": 15062
+    },
+    {
+      "path": "colab_jobs/__pycache__/tg_b1s_d_reproduce_and_compare.cpython-312.pyc",
+      "sha256": "e62427bc29ae9589fd1a8a0776365c74ad19f956f9fd4ad0e99a1a5449730299",
+      "size_bytes": 7595
+    },
+    {
+      "path": "colab_jobs/baselines/tg_b1s_d_20260714_184736_baseline_manifest.json",
+      "sha256": "de7ae552df59481bb97c700537aef70cb8cf9d096875655d701b58919a42e468",
+      "size_bytes": 7791
+    },
+    {
+      "path": "colab_jobs/tg_b1s_d_reproduce_and_compare.py",
+      "sha256": "4dfbb10a38c8e1b40e7d0cd93566f12e4489834f17250152c54602110dafde90",
+      "size_bytes": 4861
+    },
+    {
+      "path": "colab_jobs/tg_b1s_d_reproduction_compare.py",
+      "sha256": "69fb4672e9c4fe73af3684a30a68713760483c5b627c261aa13174c14708107e",
+      "size_bytes": 16873
+    },
+    {
+      "path": "completion_ledger.json",
+      "sha256": "027ee2d0c0c53b075722ac7dfe79fddac3b76710755446f275bce934605e68a8",
+      "size_bytes": 1266
+    },
+    {
+      "path": "control_panel_registry.json",
+      "sha256": "a25de7df26265b3cc753c66c2fca8530dbc40306e7df4b8a3469be0886c2f086",
+      "size_bytes": 1456
+    },
+    {
+      "path": "control_panel_ui_bridge.json",
+      "sha256": "0e816f0e7219ba45dc02349689840512c38e34fea4ece6b7cb5018a803c440da",
+      "size_bytes": 3907
+    },
+    {
+      "path": "docs/gravity_maturity/TG_B1S_D_DOCUMENTATION_INPUTS.md",
+      "sha256": "5c4bebc845c982b188f015ea9f52e6202fa72e5c4c630c04a705ca6a4aed6d13",
+      "size_bytes": 875
+    },
+    {
+      "path": "docs/gravity_maturity/TG_B1S_D_RESULTS.md",
+      "sha256": "a118d9f8b6c7efa9cb173e7e1309cce0f657c918e0a6959d11d435c2e6b65789",
+      "size_bytes": 1096
+    },
+    {
+      "path": "docs/gravity_maturity/TG_B1S_D_SUMMARY.json",
+      "sha256": "be54df7a71c34a43ce10580c341e9d9f99011779eef26de2882ab009777511e2",
+      "size_bytes": 900
+    },
+    {
+      "path": "environment_pip_freeze.txt",
+      "sha256": "bc1e910d7ea64fdef2518f58d4c09fd819a60157f9b24e82fcf3e93962a1c3e1",
+      "size_bytes": 14056
+    },
+    {
+      "path": "external_inputs_staged.json",
+      "sha256": "e1a981b8c600eba0a543aea205051e96b21ab3514d67150f8aa49d1eed8aeb84",
+      "size_bytes": 27
+    },
+    {
+      "path": "gpu_preflight.json",
+      "sha256": "0872c1d41b16866693841ca2405bd99516dd1edfa6e741cea92ec71581ac3933",
+      "size_bytes": 17342
+    },
+    {
+      "path": "gpu_preflight_after_dependencies.json",
+      "sha256": "d95dd93b4b91247c5d5bd830a463ea163c221e83d487e4edbd465358e110ca37",
+      "size_bytes": 198
+    },
+    {
+      "path": "jax_scout/__init__.py",
+      "sha256": "ed23112aa9afa87ff78171fa36b063a296cb786354053562117b7fb2e605ebc5",
+      "size_bytes": 94
+    },
+    {
+      "path": "jax_scout/__pycache__/__init__.cpython-312.pyc",
+      "sha256": "4c00051682a1883f115fd22c4902d0795157a3441487f616969a307375b575b5",
+      "size_bytes": 236
+    },
+    {
+      "path": "jax_scout/__pycache__/gravity_TG_B1S_backreaction_robustness_gpu.cpython-312.pyc",
+      "sha256": "0564343f20c7599e2127bd40b3e79c1b8156578e424b3402942cbb796273bf8e",
+      "size_bytes": 55630
+    },
+    {
+      "path": "jax_scout/__pycache__/gravity_TG_B1S_long_time_gpu.cpython-312.pyc",
+      "sha256": "c6c1464d95e9680fdc475c3aa32a9335994053070d163fa7a601ae991ddaa2b2",
+      "size_bytes": 43647
+    },
+    {
+      "path": "jax_scout/__pycache__/gravity_TG_B1S_state_load_feedback_gpu.cpython-312.pyc",
+      "sha256": "f410aec186f795f6157053f6e4eda7f49336f282c01a1feeb18d4bff687a4ebb",
+      "size_bytes": 63973
+    },
+    {
+      "path": "jax_scout/__pycache__/phase_d_c3_wave.cpython-312.pyc",
+      "sha256": "4ca142470ee9c5671e0c5cccf8284a46d00c2c322a38d0344233c2903d059dd3",
+      "size_bytes": 30879
+    },
+    {
+      "path": "jax_scout/gravity_TG_B1S_backreaction_robustness_gpu.py",
+      "sha256": "5dee51919094afcb90b2a6c9d88ebd6e26fe787c0781f20ec331f3790e1495a2",
+      "size_bytes": 37359
+    },
+    {
+      "path": "jax_scout/gravity_TG_B1S_drift_decomposition_gpu.py",
+      "sha256": "478568c4a1d09d076637ab9d47580a19662616c70f5940bd4a79d1a49122335b",
+      "size_bytes": 39745
+    },
+    {
+      "path": "jax_scout/gravity_TG_B1S_long_time_gpu.py",
+      "sha256": "1c08bca7e2c214f3a0c6b2799ac2a290719b4c23626fca91f6d17ea16ab120a9",
+      "size_bytes": 32179
+    },
+    {
+      "path": "jax_scout/gravity_TG_B1S_state_load_feedback_gpu.py",
+      "sha256": "85215ef2f634820aae806dcd799d4fcb78ececab3224b994f696fb817bdeebf1",
+      "size_bytes": 39939
+    },
+    {
+      "path": "jax_scout/phase_d_c3_wave.py",
+      "sha256": "aacc2c709c1eefe98b9fed2a8ef9aa9b2ca2c439d8d982717a96aeb8bee2ccff",
+      "size_bytes": 16850
+    },
+    {
+      "path": "job_manifest.json",
+      "sha256": "a9b3a29120d997a7972a3c889a904711f105f430b909380cacb72126da1ccd90",
+      "size_bytes": 8095
+    },
+    {
+      "path": "results/tg_b1s_d_100p_reproduction/analysis_command.json",
+      "sha256": "73bf4bc04f78382381e725596c4dc2f4558255034b285eb65a2028e81d9808d1",
+      "size_bytes": 434
+    },
+    {
+      "path": "results/tg_b1s_d_100p_reproduction/artifact_hashes.json",
+      "sha256": "4870f5910e84b207a1a7b751e29062971e69004a3579d663c4265cfc59329025",
+      "size_bytes": 5239
+    },
+    {
+      "path": "results/tg_b1s_d_100p_reproduction/baseline_manifest.json",
+      "sha256": "de7ae552df59481bb97c700537aef70cb8cf9d096875655d701b58919a42e468",
+      "size_bytes": 7791
+    },
+    {
+      "path": "results/tg_b1s_d_100p_reproduction/comparison_summary.json",
+      "sha256": "35769f49e91ff0f544197b909d794d3fe6c5991e2f89380d3c757ad86d799ffc",
+      "size_bytes": 718
+    },
+    {
+      "path": "results/tg_b1s_d_100p_reproduction/completion_status.json",
+      "sha256": "e681ce058e31e9448f635b41201f784747d8dc9c83038e36314d9cacd9b68c37",
+      "size_bytes": 280
+    },
+    {
+      "path": "results/tg_b1s_d_100p_reproduction/environment_report.json",
+      "sha256": "77a34bab16f549c0ff42394b42e94d1c597d9e071e1d9ca8a11aa4997ded9a24",
+      "size_bytes": 252
+    },
+    {
+      "path": "results/tg_b1s_d_100p_reproduction/gpu_preflight_before.json",
+      "sha256": "0872c1d41b16866693841ca2405bd99516dd1edfa6e741cea92ec71581ac3933",
+      "size_bytes": 17342
+    },
+    {
+      "path": "results/tg_b1s_d_100p_reproduction/gpu_preflight_final.json",
+      "sha256": "d95dd93b4b91247c5d5bd830a463ea163c221e83d487e4edbd465358e110ca37",
+      "size_bytes": 198
+    },
+    {
+      "path": "results/tg_b1s_d_100p_reproduction/logs/analysis_stdout_stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "results/tg_b1s_d_100p_reproduction/logs/simulation_stdout_stderr.log",
+      "sha256": "982910f6e21396f68555bd9a7513c7f1f26ec91d4d112837147a20912def9a2a",
+      "size_bytes": 381
+    },
+    {
+      "path": "results/tg_b1s_d_100p_reproduction/observable_comparison.csv",
+      "sha256": "75c0e577f24ff2e46f9c5e371d5b200537219b7944f89a23ae5b938d59aa262c",
+      "size_bytes": 3617
+    },
+    {
+      "path": "results/tg_b1s_d_100p_reproduction/observable_comparison.json",
+      "sha256": "739585286406183d13129a35583241a8282fdc328a20462a25130eb7e8e236d7",
+      "size_bytes": 9008
+    },
+    {
+      "path": "results/tg_b1s_d_100p_reproduction/reproduction_manifest.json",
+      "sha256": "84957984087c2e09a62e5692c244f201027230ad34b390d9815c4dc9185cc791",
+      "size_bytes": 2929
+    },
+    {
+      "path": "results/tg_b1s_d_100p_reproduction/simulation/TECHNICAL_HANDOFF.md",
+      "sha256": "d098e552ec5c265a11a7fa22f340959ee2ab45d8cc8202aa168fcb516c7eb828",
+      "size_bytes": 577
+    },
+    {
+      "path": "results/tg_b1s_d_100p_reproduction/simulation/artifact_hashes.csv",
+      "sha256": "2cedfc1eaa23e4b1dad2c0e1f40fbac1439d6aea390e1f53904db050c4236732",
+      "size_bytes": 1437
+    },
+    {
+      "path": "results/tg_b1s_d_100p_reproduction/simulation/asymptotic_frequency.csv",
+      "sha256": "721018b0e8be9833a9847a7b617b19942bdfe06706b63cd21bc67768cda2b3b9",
+      "size_bytes": 772
+    },
+    {
+      "path": "results/tg_b1s_d_100p_reproduction/simulation/baseline_node_contract.csv",
+      "sha256": "47fd0fbe738334c71e168c8db05f040978b08f8ce2e4a5506c0f5fe74368020d",
+      "size_bytes": 328
+    },
+    {
+      "path": "results/tg_b1s_d_100p_reproduction/simulation/basin_orbital_stability.csv",
+      "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+      "size_bytes": 2
+    },
+    {
+      "path": "results/tg_b1s_d_100p_reproduction/simulation/drift_channel_fits.csv",
+      "sha256": "4e882f459e2dd38740ae2c5a074fa5d5f729b319ea0db99b6ef7cf9c2b30c844",
+      "size_bytes": 4995
+    },
+    {
+      "path": "results/tg_b1s_d_100p_reproduction/simulation/energy_ledger.csv",
+      "sha256": "c5b51595652d84fa039c126112ac7aceed74044dae067b72ff20e9f3e8edc8ff",
+      "size_bytes": 305
+    },
+    {
+      "path": "results/tg_b1s_d_100p_reproduction/simulation/environment_versions.json",
+      "sha256": "e563d6dd4078293207f7636d45ff9bad1034bc9b232af9fc9e7d991580cb8542",
+      "size_bytes": 643
+    },
+    {
+      "path": "results/tg_b1s_d_100p_reproduction/simulation/falsification_results.csv",
+      "sha256": "f15baab60cd6661428d3596ab75d9a4a10f2790d3999b93fef60b1990c9ee523",
+      "size_bytes": 290
+    },
+    {
+      "path": "results/tg_b1s_d_100p_reproduction/simulation/git_state_before.txt",
+      "sha256": "98554b6f9dd9121bec466a6c4cd78092065799e6bb108816473e7639319f341c",
+      "size_bytes": 93
+    },
+    {
+      "path": "results/tg_b1s_d_100p_reproduction/simulation/gpu_preflight.json",
+      "sha256": "27bf653c02408a1dd1ed5ef9216e23b33fd3af67e760fb51350339a8a8b87632",
+      "size_bytes": 600
+    },
+    {
+      "path": "results/tg_b1s_d_100p_reproduction/simulation/long_time_100_period.csv",
+      "sha256": "ff32bc8fab4ecc29d18320d8ab126654d3ba298fb3c110d55d90a1c64757b297",
+      "size_bytes": 1722
+    },
+    {
+      "path": "results/tg_b1s_d_100p_reproduction/simulation/numerical_validation.csv",
+      "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+      "size_bytes": 2
+    },
+    {
+      "path": "results/tg_b1s_d_100p_reproduction/simulation/orbital_distance.csv",
+      "sha256": "40a9e67edbc71c6cc2a479e49f6cfe16158cd804fb37b04144d67818efc3f32d",
+      "size_bytes": 649838
+    },
+    {
+      "path": "results/tg_b1s_d_100p_reproduction/simulation/phase_alignment.csv",
+      "sha256": "e9e00c9c7ec2d87dad9ab6cafdbd3262d14f6542a7b9106b7b08d5ef02638f91",
+      "size_bytes": 127654
+    },
+    {
+      "path": "results/tg_b1s_d_100p_reproduction/simulation/preregistered_matrix.json",
+      "sha256": "9deedcf7ef31647d80e3e8444b10522fbce7c06354f657e15c2c79b4ad75e745",
+      "size_bytes": 272
+    },
+    {
+      "path": "results/tg_b1s_d_100p_reproduction/simulation/source_spec.json",
+      "sha256": "ea2bb9104fc3ee48aeaa0d2d23c9a79c89036f8619fdf47332a36c2a3a136b41",
+      "size_bytes": 236
+    },
+    {
+      "path": "results/tg_b1s_d_100p_reproduction/simulation_command.json",
+      "sha256": "744540489cc029063191e9be154683591d8a48a7043f6e82b539eba3e153d1a4",
+      "size_bytes": 316
+    },
+    {
+      "path": "row_markers/tg_b1s_d_100p_primary_COMPLETE.json",
+      "sha256": "79d992b4a8611d9d6dd35e4df3d18b3dffb08c925de7dcb2bc14581580dbaa85",
+      "size_bytes": 1038
+    },
+    {
+      "path": "row_markers/tg_b1s_d_100p_primary_STARTED.json",
+      "sha256": "6740b75379f967f277518a8e41ae56d2b96ad160ac496271b5aa6598355e9b7b",
+      "size_bytes": 110
+    },
+    {
+      "path": "run_tg_b1s_d_100p_primary.log",
+      "sha256": "a847ddd4ab3125b9456b260064fb94325f1d862cb93ed08bca7c383c1c3dfba1",
+      "size_bytes": 787
+    },
+    {
+      "path": "source_manifest.json",
+      "sha256": "43b63e970a1c02f3922e7e97042cd0c6544c561e139cf9633294e1ef78b2e3c4",
+      "size_bytes": 4210
+    },
+    {
+      "path": "workflow_instructions.json",
+      "sha256": "a1c9183658d6c95a558f435f2c56b6d056f67087e57fafc8e5fdb4e46c83fd0f",
+      "size_bytes": 566
+    }
+  ]
+}

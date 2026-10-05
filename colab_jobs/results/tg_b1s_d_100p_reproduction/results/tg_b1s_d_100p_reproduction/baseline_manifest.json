@@ -1,0 +1,231 @@
+{
+  "schema_version": "qm-baseline/1.0",
+  "baseline_id": "tg_b1s_d_20260714_184736",
+  "selected_baseline": "F:\\quantule_mapper\\sweep_runs\\TG_B1S_DRIFT_DECOMPOSITION_GPU_20260714_184736",
+  "source_run_directory_recorded": "/mnt/f/quantule_mapper/sweep_runs/TG_B1S_DRIFT_DECOMPOSITION_GPU_20260714_184736",
+  "status": "TG_STATE_LOAD_LONG_TIME_DRIFT_UNRESOLVED",
+  "target_run": "D3_100P_lam1",
+  "simulation_command": [
+    "python",
+    "jax_scout/gravity_TG_B1S_drift_decomposition_gpu.py",
+    "--matrix",
+    "primary",
+    "--sample-dt",
+    "1.0"
+  ],
+  "simulation_arguments": {
+    "matrix": "primary",
+    "N": 48,
+    "L": 10.0,
+    "c": 0.5477,
+    "m": 1.0,
+    "a": 0.8,
+    "s": -0.5,
+    "f": -0.1,
+    "w": 0.964,
+    "dt": 0.002,
+    "T": 2.0,
+    "sample_dt": 1.0,
+    "validation_sample_dt": 1.5,
+    "alpha_T": 0.35,
+    "omega_T": 1.25,
+    "omega_G": 0.85,
+    "gamma_T": 0.08,
+    "gamma_G": 0.06,
+    "kappa_TG": 0.55,
+    "epsilon_G": 0.06,
+    "cT": 0.7,
+    "cG": 0.55,
+    "absorb_width": 1.6,
+    "absorb_strength": 0.02,
+    "core_radius": 2.0
+  },
+  "precision_policy": {
+    "jax_enable_x64": true,
+    "baseline_backend": "gpu",
+    "baseline_jax_version": "0.10.2",
+    "baseline_jaxlib_version": "0.10.2"
+  },
+  "seed": null,
+  "source_revision": {
+    "git_commit": "9fc7785df19d24f4be29e5d90bad59ed993da87b",
+    "git_state_file_sha256": "f0a514c96d95de8b1866e2fbac3c314daa19b3d2f0d03a276df8e4da6d1bff87"
+  },
+  "source_hashes": [
+    {
+      "path": "jax_scout/__init__.py",
+      "size_bytes": 94,
+      "sha256": "ed23112aa9afa87ff78171fa36b063a296cb786354053562117b7fb2e605ebc5"
+    },
+    {
+      "path": "jax_scout/phase_d_c3_wave.py",
+      "size_bytes": 16850,
+      "sha256": "aacc2c709c1eefe98b9fed2a8ef9aa9b2ca2c439d8d982717a96aeb8bee2ccff"
+    },
+    {
+      "path": "jax_scout/gravity_TG_B1S_state_load_feedback_gpu.py",
+      "size_bytes": 39939,
+      "sha256": "85215ef2f634820aae806dcd799d4fcb78ececab3224b994f696fb817bdeebf1"
+    },
+    {
+      "path": "jax_scout/gravity_TG_B1S_backreaction_robustness_gpu.py",
+      "size_bytes": 37359,
+      "sha256": "5dee51919094afcb90b2a6c9d88ebd6e26fe787c0781f20ec331f3790e1495a2"
+    },
+    {
+      "path": "jax_scout/gravity_TG_B1S_long_time_gpu.py",
+      "size_bytes": 32179,
+      "sha256": "1c08bca7e2c214f3a0c6b2799ac2a290719b4c23626fca91f6d17ea16ab120a9"
+    },
+    {
+      "path": "jax_scout/gravity_TG_B1S_drift_decomposition_gpu.py",
+      "size_bytes": 39745,
+      "sha256": "478568c4a1d09d076637ab9d47580a19662616c70f5940bd4a79d1a49122335b"
+    }
+  ],
+  "artifact_hashes": [
+    {
+      "path": "asymptotic_frequency.csv",
+      "size_bytes": 768,
+      "sha256": "fde2541677dede24726073cd78a912ff25f78a38f74cce707188d31054a5268a"
+    },
+    {
+      "path": "baseline_node_contract.csv",
+      "size_bytes": 326,
+      "sha256": "077111b999172d09003328de3d6158e2250d3629680815074de88b0a5fc37efc"
+    },
+    {
+      "path": "basin_orbital_stability.csv",
+      "size_bytes": 2,
+      "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+    },
+    {
+      "path": "drift_channel_fits.csv",
+      "size_bytes": 5036,
+      "sha256": "72338d48aaeb7706dc91fad2142fa1d8d0c26e42f08e2328b270d246d0bd7da6"
+    },
+    {
+      "path": "energy_ledger.csv",
+      "size_bytes": 300,
+      "sha256": "ae556414b400bc09255a76f4a0bb6e5df5604504343fcbc296026ce5b62f0b6d"
+    },
+    {
+      "path": "environment_versions.json",
+      "size_bytes": 659,
+      "sha256": "d7115001da43a7051c0bd443c0c47e7b58b57379fc4c6bfeabb19096efc3c050"
+    },
+    {
+      "path": "falsification_results.csv",
+      "size_bytes": 290,
+      "sha256": "f15baab60cd6661428d3596ab75d9a4a10f2790d3999b93fef60b1990c9ee523"
+    },
+    {
+      "path": "gpu_preflight.json",
+      "size_bytes": 616,
+      "sha256": "c562a310a91b980d8940c9957ab4bed30b506c51626371df9d4e37c76f0c9381"
+    },
+    {
+      "path": "long_time_100_period.csv",
+      "size_bytes": 1714,
+      "sha256": "6cf28074c8218359d69fc0f30fcff0ca295e00f23b12d6503f31355c9915854d"
+    },
+    {
+      "path": "numerical_validation.csv",
+      "size_bytes": 2,
+      "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+    },
+    {
+      "path": "orbital_distance.csv",
+      "size_bytes": 645591,
+      "sha256": "9f8d9a90cd5d4975b2b334b6f50614a3ba77448171a3e1fb33d10750bc7102f8"
+    },
+    {
+      "path": "phase_alignment.csv",
+      "size_bytes": 127800,
+      "sha256": "3afeac91394e4c5211b1a23bfd0a3e655dccd613ee978895d7a354450877451f"
+    },
+    {
+      "path": "preregistered_matrix.json",
+      "size_bytes": 272,
+      "sha256": "9deedcf7ef31647d80e3e8444b10522fbce7c06354f657e15c2c79b4ad75e745"
+    },
+    {
+      "path": "source_spec.json",
+      "size_bytes": 236,
+      "sha256": "ea2bb9104fc3ee48aeaa0d2d23c9a79c89036f8619fdf47332a36c2a3a136b41"
+    }
+  ],
+  "expected_result_files": [
+    "baseline_node_contract.csv",
+    "preregistered_matrix.json",
+    "source_spec.json",
+    "environment_versions.json",
+    "gpu_preflight.json",
+    "orbital_distance.csv",
+    "phase_alignment.csv",
+    "drift_channel_fits.csv",
+    "asymptotic_frequency.csv",
+    "long_time_100_period.csv",
+    "energy_ledger.csv",
+    "numerical_validation.csv",
+    "basin_orbital_stability.csv",
+    "falsification_results.csv",
+    "artifact_hashes.csv"
+  ],
+  "baseline_observables": {
+    "status": "TG_STATE_LOAD_LONG_TIME_DRIFT_UNRESOLVED",
+    "target_run": "D3_100P_lam1",
+    "delta_omega_infty": -2.150936882840006e-06,
+    "final_delta_theta": -0.0013329967322306402,
+    "final_orbital_distance": 4.9140079664143094e-05,
+    "final_phase_aligned_distance": 4.9140079664143094e-05,
+    "full_profile_overlap": 0.9999999987895385,
+    "full_modal_leakage_max": 9.15831330478709e-05,
+    "ledger_residual_abs": 1.0817746070755172e-05,
+    "delta_theta_classification": "LINEAR_SECULAR",
+    "d_orbital_classification": "BOUNDED_OSCILLATORY",
+    "modal_leakage_classification": "BOUNDED_OSCILLATORY",
+    "delta_A_core_classification": "BOUNDED_OSCILLATORY",
+    "delta_width_classification": "BOUNDED_OSCILLATORY",
+    "delta_E_core_classification": "BOUNDED_OSCILLATORY",
+    "delta_Q_classification": "BELOW_NUMERICAL_FLOOR",
+    "constant_slope_supported": true,
+    "early_late_relative_difference": 0.0584210752588697,
+    "structural_channels": ""
+  },
+  "declared_tolerances": {
+    "source": "jax_scout/gravity_TG_B1S_drift_decomposition_gpu.py gate logic",
+    "no_new_cross_device_tolerances_added": true,
+    "delta_omega_relative_difference_max": {
+      "value": 0.5,
+      "source_lines": "D4 numerical validation gate uses relative_slope_difference < 0.50"
+    },
+    "profile_overlap_min": {
+      "value": 0.999,
+      "source_lines": "D4/D5 validation gates require full_profile_overlap > 0.999"
+    },
+    "modal_leakage_max": {
+      "value": 0.001,
+      "source_lines": "D4/D5 validation gates require full_modal_leakage_max < 1e-3"
+    },
+    "ledger_residual_abs_max": {
+      "value": 0.0001,
+      "source_lines": "D4 validation gate requires ledger_residual_abs < 1e-4"
+    },
+    "constant_slope_early_late_relative_difference_max": {
+      "value": 0.35,
+      "source_lines": "asymptotic_frequency_row sets constant_slope_supported when early/late slope relative difference < 0.35"
+    },
+    "structural_secular_classes_disallowed": {
+      "value": [
+        "LINEAR_SECULAR",
+        "QUADRATIC_OR_ACCELERATING"
+      ],
+      "source_lines": "classify_interpretation treats structural channels with these classes as structural drift"
+    },
+    "phase_channel_required_classification": {
+      "value": "LINEAR_SECULAR",
+      "source_lines": "classify_interpretation requires delta_theta classification LINEAR_SECULAR for phase_linear_constant_frequency"
+    }
+  }
+}

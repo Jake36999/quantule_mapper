@@ -1,33 +1,45 @@
 run_folder,sector,contains,status,note
 sweep_runs/SUBSTRATE_HUNT_20260621_161557,exploratory,"hifi panels, chiral_viz, bound_state PNGs",historical,pre-Phase-C substrate hunting; vortex hypothesis falsified here
-sweep_runs/CORE_SAT_PILOT_20260622_190340,exploratory,"core-saturation panels",historical,prime-SSE era
-sweep_runs/CORE_SAT_HUNT_20260623_004605,phase_c,"832-row K-varied hunt",canonical,K confounded with total mass (see Codex catalog)
-sweep_runs/PHASE_C_OPTION_B_N96_TRACE_20260625_003926,phase_c,"a* trace + frames.npz",canonical,stability closure trace
-sweep_runs/PHASE_C_VISUAL_ANALYSIS_V2_20260624_185426,phase_c,"case panels (rendered PNG)",canonical,per-case stability panels
-sweep_runs/PHASE_C_N96_CURRENT_CLOSURE_20260625_001621,phase_c,"current-closure panels",canonical,near-current-free confirmation
-sweep_runs/PHASE_C_NODE_LIBRARY_20260704,phase_c,"162-config node library",canonical,D.3 harvest
-sweep_runs/PHASE_D_C1_TRANSPORT_20260704_105309,phase_d_dissipative,"C1 transport probe json",canonical,C1_NO_STABLE_TRANSPORT
-sweep_runs/PHASE_D6_REDUCED_MODEL,phase_d_dissipative,"reduced node-network model",canonical,D.6 pinned/merging network
-sweep_runs/PHASE_D_C2_CONFIRM_20260704_210543,phase_d_c2,"C2.1 confirm+boost json",retracted,pre-C2.6-fix; superseded
-sweep_runs/PHASE_D_C2_2_LOSS_20260704_231230,phase_d_c2,"C2.2 loss-source (geom on/off)",retracted,measured on bugged substrate
-sweep_runs/C23_N96,phase_d_c2,"C2.3 quasi-soliton",retracted,pre-fix
-sweep_runs/C24_LOCAL_N96,phase_d_c2,"C2.4 local boost",retracted,"flow-through pinning" artifact
-sweep_runs/C25_SCOUT_T1B_FIXED,phase_d_c2,"family scout on FIXED substrate",canonical,found 2 GALILEAN families
-sweep_runs/PHASE_D_C2_6_CODEX_AUDIT_20260709,phase_d_c2_instrument,"Codex C2.6 audit",canonical,independent bug re-audit
-sweep_runs/C27_REDERIVE,phase_d_c2,"R0/R2/R3 re-derivation json + r3_soliton_n96.npy",canonical,v=2Dk CONFIRMED
-sweep_runs/PHASE_D_C2_8_TWONODE_CODEX_20260709_123611,phase_d_c2,"C2.8 two-node (Codex) panels+npz+phi_iso.npy",canonical,first two-node; peak-tracker era
-sweep_runs/C28B_ELAS,phase_d_c2,"C2.8b elasticity",retracted,fragile tracker (e=3.21)
-sweep_runs/C29_ROBUST,phase_d_c2,"C2.9 robust two-node track_*.npz + summary",canonical,momentum-density observable
-sweep_runs/C3_WAVE_MAPPED,phase_d_c3,"C3 Q-ball at mapped point qball.npy",canonical,existence
-sweep_runs/C3_WAVE_BOOSTFIX2,phase_d_c3,"C3 corrected boost + G4/G6",canonical,inertial transport + VK
-sweep_runs/C3_EXACT_VK2,phase_d_c3,"exact-contraction boost + VK slope",canonical,dQ/dw=-849
-sweep_runs/C3_TWOQBALL_FULL,phase_d_c3,"two-Q-ball static+collision pair_*.npz",canonical,pi/2 universality
-sweep_runs/C3_COLLISION_LADDER_FULL,phase_d_c3,"in-phase ladder collide_*.npz",canonical,capture to 0.75c
-sweep_runs/C3_ANTIPHASE_LADDER,phase_d_c3,"anti-phase ladder collide_*.npz",canonical,transmission below 0.5c
-sweep_runs/C3_PHASE_pi2,phase_d_c3,"off-phase pi/2 collisions",canonical,all capture
-sweep_runs/C3_PHASE_3pi4,phase_d_c3,"off-phase 3pi/4 collisions",canonical,all capture
-sweep_runs/C3_PHASE_7pi8,phase_d_c3,"off-phase 7pi/8 collisions",canonical,localizes narrow transmission band
-sweep_runs/GRAVITY_AD_bg0,gravity,"rung A+D bg=0 radial profile + load_*.npy",paused,Omega^2 saturation cliff
-sweep_runs/GRAVITY_AD_bgvac,gravity,"rung A+D bg=rho_vac (load dissolves)",paused,no clean well
-sweep_runs/GRAVITY_DESAT_PILOT,gravity,"de-saturation pilot json",paused,de-sat makes cliff worse
-sweep_runs/PHASE_D_CODEX_REPRODUCTION_20260709_233433,reproduction,"Codex reproduction pass + gravity_geometry plots",canonical,PHASE_D_REPRODUCTION_PARTIAL
+sweep_runs/CORE_SAT_PILOT_20260622_190340,exploratory,core-saturation panels,historical,prime-SSE era
+sweep_runs/CORE_SAT_HUNT_20260623_004605,phase_c,832-row K-varied hunt,canonical,K confounded with total mass (see Codex catalog)
+sweep_runs/PHASE_C_OPTION_B_N96_TRACE_20260625_003926,phase_c,a* trace + frames.npz,canonical,stability closure trace
+sweep_runs/PHASE_C_VISUAL_ANALYSIS_V2_20260624_185426,phase_c,case panels (rendered PNG),canonical,per-case stability panels
+sweep_runs/PHASE_C_N96_CURRENT_CLOSURE_20260625_001621,phase_c,current-closure panels,canonical,near-current-free confirmation
+sweep_runs/PHASE_C_NODE_LIBRARY_20260704,phase_c,162-config node library,canonical,D.3 harvest
+sweep_runs/PHASE_D_C1_TRANSPORT_20260704_105309,phase_d_dissipative,C1 transport probe json,canonical,C1_NO_STABLE_TRANSPORT
+sweep_runs/PHASE_D6_REDUCED_MODEL,phase_d_dissipative,reduced node-network model,canonical,D.6 pinned/merging network
+sweep_runs/PHASE_D_C2_CONFIRM_20260704_210543,phase_d_c2,C2.1 confirm+boost json,retracted,pre-C2.6-fix; superseded
+sweep_runs/PHASE_D_C2_2_LOSS_20260704_231230,phase_d_c2,C2.2 loss-source (geom on/off),retracted,measured on bugged substrate
+sweep_runs/C23_N96,phase_d_c2,C2.3 quasi-soliton,retracted,pre-fix
+sweep_runs/C24_LOCAL_N96,phase_d_c2,C2.4 local boost,retracted,flow-through pinning artifact
+sweep_runs/C25_SCOUT_T1B_FIXED,phase_d_c2,family scout on FIXED substrate,canonical,found 2 GALILEAN families
+sweep_runs/PHASE_D_C2_6_CODEX_AUDIT_20260709,phase_d_c2_instrument,Codex C2.6 audit,canonical,independent bug re-audit
+sweep_runs/C27_REDERIVE,phase_d_c2,R0/R2/R3 re-derivation json + r3_soliton_n96.npy,canonical,v=2Dk CONFIRMED
+sweep_runs/PHASE_D_C2_8_TWONODE_CODEX_20260709_123611,phase_d_c2,C2.8 two-node (Codex) panels+npz+phi_iso.npy,canonical,first two-node; peak-tracker era
+sweep_runs/C28B_ELAS,phase_d_c2,C2.8b elasticity,retracted,fragile tracker (e=3.21)
+sweep_runs/C29_ROBUST,phase_d_c2,C2.9 robust two-node track_*.npz + summary,canonical,momentum-density observable
+sweep_runs/C3_WAVE_MAPPED,phase_d_c3,C3 Q-ball at mapped point qball.npy,canonical,existence
+sweep_runs/C3_WAVE_BOOSTFIX2,phase_d_c3,C3 corrected boost + G4/G6,canonical,inertial transport + VK
+sweep_runs/C3_EXACT_VK2,phase_d_c3,exact-contraction boost + VK slope,canonical,dQ/dw=-849
+sweep_runs/C3_TWOQBALL_FULL,phase_d_c3,two-Q-ball static+collision pair_*.npz,canonical,pi/2 universality
+sweep_runs/C3_COLLISION_LADDER_FULL,phase_d_c3,in-phase ladder collide_*.npz,canonical,capture to 0.75c
+sweep_runs/C3_ANTIPHASE_LADDER,phase_d_c3,anti-phase ladder collide_*.npz,canonical,transmission below 0.5c
+sweep_runs/C3_PHASE_pi2,phase_d_c3,off-phase pi/2 collisions,canonical,all capture
+sweep_runs/C3_PHASE_3pi4,phase_d_c3,off-phase 3pi/4 collisions,canonical,all capture
+sweep_runs/C3_PHASE_7pi8,phase_d_c3,off-phase 7pi/8 collisions,canonical,localizes narrow transmission band
+sweep_runs/GRAVITY_AD_bg0,gravity,rung A+D bg=0 radial profile + load_*.npy,paused,Omega^2 saturation cliff
+sweep_runs/GRAVITY_AD_bgvac,gravity,rung A+D bg=rho_vac (load dissolves),paused,no clean well
+sweep_runs/GRAVITY_DESAT_PILOT,gravity,de-saturation pilot json,paused,de-sat makes cliff worse
+sweep_runs/PHASE_D_CODEX_REPRODUCTION_20260709_233433,reproduction,Codex reproduction pass + gravity_geometry plots,canonical,PHASE_D_REPRODUCTION_PARTIAL
+sweep_runs/C2_10_ANTIPHASE,phase_d_c2,"RUN-2 anti-phase collide n=1,2 collide_*.npz",canonical,BOUNCE(n1)+CAPTURE(n2)
+sweep_runs/C2_10_ANTIPHASE_MID,phase_d_c2,"RUN-2 anti-phase collide n=1.25,1.5,1.75",canonical,PASS_THROUGH window + capture threshold
+sweep_runs/C2_10_INPHASE,phase_d_c2,"RUN-2 in-phase control collide n=1,2",canonical,capture at all speeds (phase contrast)
+sweep_runs/C2_10_SMOKE,phase_d_c2,RUN-2 anti-phase n=4 (high speed),canonical,CAPTURE
+sweep_runs/GRAVITY_D_GPU_CODEX_20260713,gravity_d_spatial_effective_medium,GPU replication and convergence artifacts,canonical,D_SPATIAL_EFFECTIVE_MEDIUM_ATTRACTION_GPU_CONVERGED
+sweep_runs/GRAVITY_D_ROBUSTNESS_GPU_20260713_195713,gravity_d_spatial_effective_medium,first-pass robustness battery artifacts,canonical,D_SPATIAL_EFFECTIVE_MEDIUM_ROBUSTNESS_FIRST_PASS
+sweep_runs/GRAVITY_D_ROBUSTNESS_CLOSURE_GPU_20260713_204559,gravity_d_spatial_effective_medium,COM-null/source-shape/translation closure artifacts,canonical,D_SPATIAL_EFFECTIVE_MEDIUM_ROBUSTNESS_FIRST_PASS_CLOSED
+sweep_runs/GRAVITY_D_DYNAMICS_CHARACTERIZATION_GPU_20260713_221727,gravity_d_spatial_effective_medium,"force atlas, trajectories, reduced model, falsification artifacts",canonical,D_EFFECTIVE_MEDIUM_DYNAMICS_CHARACTERIZED
+sweep_runs/GRAVITY_TS_BRIDGE_GPU_20260714_065422,gravity_ts_temporal_spatial_bridge,four-arm temporal/spatial decomposition GPU artifacts,canonical,TEMPORAL_SPATIAL_DECOMPOSITION_PASSED; labels tightened post-review
+sweep_runs/GRAVITY_TS_BRIDGE_REFINEMENT_GPU_20260714_085110,gravity_ts_temporal_spatial_bridge,N=128 L=40 dt=0.0005 bridge refinement artifacts,canonical,TEMPORAL_SPATIAL_DECOMPOSITION_PASSED
+sweep_runs/GRAVITY_TS_TEMPORAL_KG_GPU_20260714_084143,gravity_ts_temporal_spatial_bridge,static-lapse KG temporal-equation scout artifacts,canonical,TEMPORAL_KG_DIFFERENTIAL_RESPONSE_DETECTED; CLOCK_CALIBRATION_OPEN
+sweep_runs/GRAVITY_C_SERIES_PROVENANCE_20260714_092539,gravity_c_temporal_throttling,Claude C.1-C.3 provenance rerun artifacts,canonical,C1 shared-lapse consistency; C2/C3 reproduced; C3 monotonicity bug annotated

@@ -1,0 +1,21 @@
+{
+  "backend": "gpu",
+  "devices": [
+    "cuda:0"
+  ],
+  "selected_device": "cuda:0",
+  "jax_version": "0.10.2",
+  "jaxlib_version": "0.10.2",
+  "x64_enabled": true,
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "executable": "/home/jakemcintosh1324/jax_irer/bin/python",
+  "cwd": "/mnt/f/quantule_mapper",
+  "git_commit": "9fc7785df19d24f4be29e5d90bad59ed993da87b",
+  "env": {
+    "XLA_PYTHON_CLIENT_PREALLOCATE": "false",
+    "XLA_PYTHON_CLIENT_MEM_FRACTION": "0.5",
+    "CUDA_VISIBLE_DEVICES": null
+  },
+  "command_line": "jax_scout/gravity_D_dynamics_characterization_gpu.py --stages all --long-runs enabled --out sweep_runs/GRAVITY_D_DYNAMICS_CHARACTERIZATION_GPU_20260713_221727"
+}

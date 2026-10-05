@@ -1,0 +1,909 @@
+{
+  "files": [
+    {
+      "path": "RUN_COMPLETE_CAPSULE.json",
+      "sha256": "6d8ca2a9585994e2f01f9d0470b1004d856ce6b80f0ec97e4740e4ab69e636f3",
+      "size_bytes": 280
+    },
+    {
+      "path": "artifact_hashes_extracted.json",
+      "sha256": "e7bbb16e869e6c326e51181331b9370cf57a6fe4d8c3b38fc529daf530dbfa86",
+      "size_bytes": 2525
+    },
+    {
+      "path": "capsule_provenance.json",
+      "sha256": "dccf5af7509bc0b7ed198a007c57937fc5865315e94316cfc33d39bca212736b",
+      "size_bytes": 24325
+    },
+    {
+      "path": "completion_ledger.json",
+      "sha256": "36727266a2f15d95ab7acf078d577135e26846e8b53b95dfd1c28211cf2dff8e",
+      "size_bytes": 3749
+    },
+    {
+      "path": "control_panel_registry.json",
+      "sha256": "0965fbf876314d69ce27af174d2a498d6b5af6de09c30fa2cab12a0a66fb37d8",
+      "size_bytes": 2608
+    },
+    {
+      "path": "control_panel_ui_bridge.json",
+      "sha256": "73a5e020f7266700cd7994633919613ba8ad49b8c0d1865619ce6237299b8b08",
+      "size_bytes": 6274
+    },
+    {
+      "path": "docs/gravity_maturity/TG_S_DOCUMENTATION_INPUTS.md",
+      "sha256": "81b36a5ee1463f9c2fe8537892a704b8124ff0272fa1e72025ca89121014c390",
+      "size_bytes": 530
+    },
+    {
+      "path": "docs/gravity_maturity/TG_S_RESULTS.md",
+      "sha256": "3918a2ae4e95dcb7d5c72d6eab134a1cfa76bfbbec0ca9526b32fca55ec2bae3",
+      "size_bytes": 1245
+    },
+    {
+      "path": "docs/gravity_maturity/TG_S_SUMMARY.json",
+      "sha256": "add9be984041219f2334a7769c6164c47ee39d5856b2a6a6987c2999162e58cb",
+      "size_bytes": 2036
+    },
+    {
+      "path": "environment_pip_freeze.txt",
+      "sha256": "18b79ab1cf1aaeb2dcec50fda07da8cd7fd749d6c34775b534dd984ed08b8bf8",
+      "size_bytes": 14001
+    },
+    {
+      "path": "external_inputs_staged.json",
+      "sha256": "e1a981b8c600eba0a543aea205051e96b21ab3514d67150f8aa49d1eed8aeb84",
+      "size_bytes": 27
+    },
+    {
+      "path": "gpu_preflight.json",
+      "sha256": "a6152e8aea6776afded3609b6bb60eb8858f1e6a7850ae498fd8a8549206e85b",
+      "size_bytes": 18334
+    },
+    {
+      "path": "gpu_preflight_after_dependencies.json",
+      "sha256": "d95dd93b4b91247c5d5bd830a463ea163c221e83d487e4edbd465358e110ca37",
+      "size_bytes": 198
+    },
+    {
+      "path": "jax_scout/__init__.py",
+      "sha256": "ed23112aa9afa87ff78171fa36b063a296cb786354053562117b7fb2e605ebc5",
+      "size_bytes": 94
+    },
+    {
+      "path": "jax_scout/__pycache__/__init__.cpython-312.pyc",
+      "sha256": "e24c4efc3ed0eb42a713d0f95a957c12ac11c81aec12731e4469913118575b49",
+      "size_bytes": 236
+    },
+    {
+      "path": "jax_scout/__pycache__/gravity_D_dynamics_characterization_gpu.cpython-312.pyc",
+      "sha256": "b1df7fab29a7c46673cd7157feecfd8ae51db1a616a6b7b8cef4e63e1ebc4fa3",
+      "size_bytes": 97710
+    },
+    {
+      "path": "jax_scout/__pycache__/gravity_D_load_capacity_yield_map_gpu.cpython-312.pyc",
+      "sha256": "85cea17f752c1d07d4b751f168459537f07b6227d9a90a883c6eb0a880f16bbf",
+      "size_bytes": 10368
+    },
+    {
+      "path": "jax_scout/__pycache__/gravity_D_neutral_probe_gpu.cpython-312.pyc",
+      "sha256": "435794f9e227852e68fb979f9def43009ed04fb3eb0d7061f71819815881c147",
+      "size_bytes": 30473
+    },
+    {
+      "path": "jax_scout/__pycache__/gravity_G1_clock_calibration_gpu.cpython-312.pyc",
+      "sha256": "d0191b93780517d795d7b124d4ace59c3d3969420b78ef23503e7d6805832fec",
+      "size_bytes": 45665
+    },
+    {
+      "path": "jax_scout/__pycache__/gravity_TG_B1S_state_load_feedback_gpu.cpython-312.pyc",
+      "sha256": "54d2d43d30071485e6f70afbdaf8417d0409210be614ff58c1f380d18e077ee0",
+      "size_bytes": 63973
+    },
+    {
+      "path": "jax_scout/__pycache__/gravity_TG_B2_cooled_pair_secular_force_gpu.cpython-312.pyc",
+      "sha256": "2bdbbeae099fd6e0a9b7e22bcfa7ccd8433ce2d620d3a1c1af4fbe41e4fce31a",
+      "size_bytes": 18020
+    },
+    {
+      "path": "jax_scout/__pycache__/gravity_TG_B2_two_node_awell.cpython-312.pyc",
+      "sha256": "98361acc2dcc4f3eb7ea6a5b3e27b1d2c6fe738508dff9392c269f5b4f6cd008",
+      "size_bytes": 21585
+    },
+    {
+      "path": "jax_scout/__pycache__/gravity_TG_clock_migration_characterization_gpu.cpython-312.pyc",
+      "sha256": "a7fffa6dc350b8d377eb79c8c0fe8aba8496a228fae84e8c74c5f496c048a97d",
+      "size_bytes": 12948
+    },
+    {
+      "path": "jax_scout/__pycache__/gravity_TG_rate_source_semantics_bridge_gpu.cpython-312.pyc",
+      "sha256": "7ff38ea4921f0df384675a5813c3922cd1004e440a8c8847fcbb710763a14b71",
+      "size_bytes": 8610
+    },
+    {
+      "path": "jax_scout/__pycache__/phase_d_c3_wave.cpython-312.pyc",
+      "sha256": "bca07b4e3a9b3279f80d9aacb6669d8284d67e26c5a4d83a546c186ef82f23f5",
+      "size_bytes": 30879
+    },
+    {
+      "path": "jax_scout/gravity_D_dynamics_characterization_gpu.py",
+      "sha256": "f1898c837b6cbb565873051eb9d18bdfcfe49f6be30167988be9933ce77822e1",
+      "size_bytes": 64309
+    },
+    {
+      "path": "jax_scout/gravity_D_load_capacity_yield_map_gpu.py",
+      "sha256": "a0338c2011ad90c8accd655815829482f9240a14460490876dad0939c755003f",
+      "size_bytes": 6037
+    },
+    {
+      "path": "jax_scout/gravity_D_neutral_probe_gpu.py",
+      "sha256": "68476b717d2d2351efe4d492ed303c28697c34ef645c2d07edc89532fd68ac40",
+      "size_bytes": 19454
+    },
+    {
+      "path": "jax_scout/gravity_G1_clock_calibration_gpu.py",
+      "sha256": "43177001a602b057c2f3935c30f6f4b81b6cbefff68abb9da81ba5bce628e3a7",
+      "size_bytes": 28559
+    },
+    {
+      "path": "jax_scout/gravity_TG_B1S_state_load_feedback_gpu.py",
+      "sha256": "85215ef2f634820aae806dcd799d4fcb78ececab3224b994f696fb817bdeebf1",
+      "size_bytes": 39939
+    },
+    {
+      "path": "jax_scout/gravity_TG_B2_cooled_pair_secular_force_gpu.py",
+      "sha256": "b7c5e4e68b07baf3f791277fff90245e065d781e4023a633be0c52c6b7deee63",
+      "size_bytes": 11354
+    },
+    {
+      "path": "jax_scout/gravity_TG_B2_definitive_force.py",
+      "sha256": "b000cc031d9fc7f088bbafac60da02cd3b3c9ee5609d87bde6619d53178ec19c",
+      "size_bytes": 12784
+    },
+    {
+      "path": "jax_scout/gravity_TG_B2_two_node_awell.py",
+      "sha256": "6f6b9f0fad2bf5e27378c3efc3620ee6d79a577978a9c0a7533c0648e38012be",
+      "size_bytes": 12975
+    },
+    {
+      "path": "jax_scout/gravity_TG_S_source_semantics_gpu.py",
+      "sha256": "7725f0d95d5def3cd08c792bf04252b4f09021976ca9a1af165090256760d8bf",
+      "size_bytes": 42398
+    },
+    {
+      "path": "jax_scout/gravity_TG_clock_migration_characterization_gpu.py",
+      "sha256": "960c705b880e7d064db41ec2fed10dba732179d8806f4032379c27825a53c05e",
+      "size_bytes": 7880
+    },
+    {
+      "path": "jax_scout/gravity_TG_rate_source_semantics_bridge_gpu.py",
+      "sha256": "fa96d17e228a6b569b36e4b362992b1bed1d80e7ddfdf746b4d67ad3ec064b22",
+      "size_bytes": 5339
+    },
+    {
+      "path": "jax_scout/phase_d_c3_wave.py",
+      "sha256": "aacc2c709c1eefe98b9fed2a8ef9aa9b2ca2c439d8d982717a96aeb8bee2ccff",
+      "size_bytes": 16850
+    },
+    {
+      "path": "job_manifest.json",
+      "sha256": "5c8f00c5bf80ea41906dd36b88d46a89ffa3d6e78a1857c1354fdb5d916ad91c",
+      "size_bytes": 11420
+    },
+    {
+      "path": "resource_profile_resolved.json",
+      "sha256": "e2a3ca02096a5d07aebd91c49929e29b17f6238d9bcc07f77b6a4f17888e244b",
+      "size_bytes": 431
+    },
+    {
+      "path": "results/cx_gravity_d_load_capacity_yield_map/OPEN_QUESTIONS.md",
+      "sha256": "ada26a2645ebd933701a354cc6de7c4f96684dc369ddb01c1ec2565afea34bd3",
+      "size_bytes": 99
+    },
+    {
+      "path": "results/cx_gravity_d_load_capacity_yield_map/RUN_COMPLETE.json",
+      "sha256": "61d3c4d92f25455b6f3dfb2adc59002a295b14e8142a1810c8d1524bc5cf719b",
+      "size_bytes": 142
+    },
+    {
+      "path": "results/cx_gravity_d_load_capacity_yield_map/TECHNICAL_HANDOFF.md",
+      "sha256": "b5e606a17b2b828242cf3fb2011a7d76f037caae3cb44c27c5fc1f0303f761ff",
+      "size_bytes": 212
+    },
+    {
+      "path": "results/cx_gravity_d_load_capacity_yield_map/artifact_hashes.csv",
+      "sha256": "9abe6ac2c7d4fd7a449126a938dcf5fb3246e49e5893d324a64c0acbb324117b",
+      "size_bytes": 895
+    },
+    {
+      "path": "results/cx_gravity_d_load_capacity_yield_map/environment_versions.json",
+      "sha256": "2e05c1776b38492121b55d4c1986c9e82fbdc7b3f38ef757de1d799920aff8f0",
+      "size_bytes": 621
+    },
+    {
+      "path": "results/cx_gravity_d_load_capacity_yield_map/git_state_before.txt",
+      "sha256": "d245bbd00a2050a431e6007ed66bbc1ee29d6790e0d88ff726d544bd07f74717",
+      "size_bytes": 119
+    },
+    {
+      "path": "results/cx_gravity_d_load_capacity_yield_map/gpu_preflight.json",
+      "sha256": "0fa19926f5f07551cca5b79d97b800b0b6c59a88fbaf8b6dd6199169afd136b0",
+      "size_bytes": 644
+    },
+    {
+      "path": "results/cx_gravity_d_load_capacity_yield_map/instantaneous_force_atlas.csv",
+      "sha256": "1d29ad2004af2f6c43703c73feebe2b8cc5fdf55dae65607a907a69c5a13ac7a",
+      "size_bytes": 5378
+    },
+    {
+      "path": "results/cx_gravity_d_load_capacity_yield_map/preregistered_matrix.json",
+      "sha256": "3a3ee5d5f79f8ac1641fd156b022b84760c78c34e2fb57b305e5a7f226af6a75",
+      "size_bytes": 2430
+    },
+    {
+      "path": "results/cx_gravity_d_load_capacity_yield_map/run_manifest.csv",
+      "sha256": "658139f1479da67c7e06161fbf694b350ff9b5ba900f573d46220bc0f15846b4",
+      "size_bytes": 437
+    },
+    {
+      "path": "results/cx_gravity_d_load_capacity_yield_map/yield_classification.csv",
+      "sha256": "4d262ff69de98ee73dbb5b2e56823d2014b4c7196e7d31e7d4bcb4b44f7b77de",
+      "size_bytes": 258
+    },
+    {
+      "path": "results/cx_gravity_d_load_capacity_yield_map/yield_summary.json",
+      "sha256": "043dbf0b03e773b2984e5ffe5ce0b166a2714470d6dabd3bdb586d6b90818368",
+      "size_bytes": 770
+    },
+    {
+      "path": "results/cx_tg_b2_cooled_pair_secular_force/OPEN_QUESTIONS.md",
+      "sha256": "86ba7b19dc83271559f5b4dc0ecf41c38cac4bf691cb2527c8bbb1511df25325",
+      "size_bytes": 163
+    },
+    {
+      "path": "results/cx_tg_b2_cooled_pair_secular_force/RUN_COMPLETE.json",
+      "sha256": "734cf6a34999d0a17c6942323085c3557c8e9c4f8c3fa8db54e53759e84dfee4",
+      "size_bytes": 133
+    },
+    {
+      "path": "results/cx_tg_b2_cooled_pair_secular_force/TECHNICAL_HANDOFF.md",
+      "sha256": "794c4c026c4b56cefb6ef18625280cc456b2ce3c57c012e01e235d761564bf71",
+      "size_bytes": 222
+    },
+    {
+      "path": "results/cx_tg_b2_cooled_pair_secular_force/artifact_hashes.csv",
+      "sha256": "29f07789a046e3da7585e1321d04fb357590a14228b839cc0d9c68dadcd1e466",
+      "size_bytes": 3667
+    },
+    {
+      "path": "results/cx_tg_b2_cooled_pair_secular_force/coolT_0/ROW_sep3.00_COMPLETE.json",
+      "sha256": "f13e1b57424144bbcf6ec0a58b83b45f5535e0e7590fe15fdc41e95802be695d",
+      "size_bytes": 410
+    },
+    {
+      "path": "results/cx_tg_b2_cooled_pair_secular_force/coolT_0/ROW_sep3.00_STARTED.json",
+      "sha256": "9310933b85bfa8c9bb5e2757aa2be8c226b8d592a2952b27b90e36236745f4ff",
+      "size_bytes": 55
+    },
+    {
+      "path": "results/cx_tg_b2_cooled_pair_secular_force/coolT_0/ROW_sep4.00_COMPLETE.json",
+      "sha256": "86434acfd729d25c69c3e7f61ace9dd744d9042a31d21e5e5a6640853cd6936c",
+      "size_bytes": 407
+    },
+    {
+      "path": "results/cx_tg_b2_cooled_pair_secular_force/coolT_0/ROW_sep4.00_STARTED.json",
+      "sha256": "2fc6e948783c42bdbf3f9f2edcc6234172678c01c2fa241188bec52557ce58f8",
+      "size_bytes": 55
+    },
+    {
+      "path": "results/cx_tg_b2_cooled_pair_secular_force/coolT_0/RUN_COMPLETE.json",
+      "sha256": "8ef3911216d8a6ab869872995962f490e4d50c33a1fa30b481c2ca4ad8a604a9",
+      "size_bytes": 143
+    },
+    {
+      "path": "results/cx_tg_b2_cooled_pair_secular_force/coolT_0/config.json",
+      "sha256": "66b070a0a72ea333aa3c6f7df309386d02b387ea69310dbb319f1ffa6ecd9d99",
+      "size_bytes": 1066
+    },
+    {
+      "path": "results/cx_tg_b2_cooled_pair_secular_force/coolT_0/scalars_sep3.00_hill.csv",
+      "sha256": "dd38625d69edddb2930269cc13734d0cb3eef62bc1ad3bc4860b45124b5584cd",
+      "size_bytes": 37692
+    },
+    {
+      "path": "results/cx_tg_b2_cooled_pair_secular_force/coolT_0/scalars_sep3.00_off.csv",
+      "sha256": "9f44a9ff27cec89b8d63ec89062e736906c438d835666c5eb4ed9ddc0bc1e280",
+      "size_bytes": 31535
+    },
+    {
+      "path": "results/cx_tg_b2_cooled_pair_secular_force/coolT_0/scalars_sep3.00_well.csv",
+      "sha256": "5c99f220204c092c4638fcf608e35a290ad02a9ef6534d02a51ba5a13dd3f06c",
+      "size_bytes": 38098
+    },
+    {
+      "path": "results/cx_tg_b2_cooled_pair_secular_force/coolT_0/scalars_sep4.00_hill.csv",
+      "sha256": "617aa8bdaaa90bc8460a7a17ea3438bfa5a353b5631ec97422116d4c60d7d73a",
+      "size_bytes": 37686
+    },
+    {
+      "path": "results/cx_tg_b2_cooled_pair_secular_force/coolT_0/scalars_sep4.00_off.csv",
+      "sha256": "e7d8efcc92a3f09841a3c81bf352a9f431e5eec0b2458f961efa51bc31202e45",
+      "size_bytes": 31488
+    },
+    {
+      "path": "results/cx_tg_b2_cooled_pair_secular_force/coolT_0/scalars_sep4.00_well.csv",
+      "sha256": "814f6ac0036ce33d0ddd7fff17401b21372ff58bb59a0c07534b0850b2ed644c",
+      "size_bytes": 38012
+    },
+    {
+      "path": "results/cx_tg_b2_cooled_pair_secular_force/coolT_0/summary.json",
+      "sha256": "32fa992022a9c3f74a4afd6436fd3f8e70da26f576890b63b16d0fbe969d6612",
+      "size_bytes": 2003
+    },
+    {
+      "path": "results/cx_tg_b2_cooled_pair_secular_force/coolT_0.log",
+      "sha256": "64382979848a6f65b7a83cdac701290eda8b248a9434953412f60ab4b91ecf61",
+      "size_bytes": 782
+    },
+    {
+      "path": "results/cx_tg_b2_cooled_pair_secular_force/coolT_40/ROW_sep3.00_COMPLETE.json",
+      "sha256": "e76d8bf4e03bcc3895d9c0dd8e8cd5d8b4a64802a3e715d36a65485ea6fb5c79",
+      "size_bytes": 406
+    },
+    {
+      "path": "results/cx_tg_b2_cooled_pair_secular_force/coolT_40/ROW_sep3.00_STARTED.json",
+      "sha256": "c4e689bff465262522b89c7ea1b5c43628b94e5606374ac9d2342f2cb9f3d495",
+      "size_bytes": 55
+    },
+    {
+      "path": "results/cx_tg_b2_cooled_pair_secular_force/coolT_40/ROW_sep4.00_COMPLETE.json",
+      "sha256": "b8d4f078c70fcc8874040a6be24dca057cb3cd70e921200391c3777cb00e78cc",
+      "size_bytes": 406
+    },
+    {
+      "path": "results/cx_tg_b2_cooled_pair_secular_force/coolT_40/ROW_sep4.00_STARTED.json",
+      "sha256": "1d9d31645e5014b8c670dc79747f9242a057d126a25f6ceda767bc871d366be3",
+      "size_bytes": 55
+    },
+    {
+      "path": "results/cx_tg_b2_cooled_pair_secular_force/coolT_40/RUN_COMPLETE.json",
+      "sha256": "9c1c74b55efb054d8feba031ade1fa5bcfe1b8175c985e923e7814027c5f8ee9",
+      "size_bytes": 143
+    },
+    {
+      "path": "results/cx_tg_b2_cooled_pair_secular_force/coolT_40/config.json",
+      "sha256": "03f92e02e3a277b4fae322588ac703bbc78de4a56e659ce7a2c618d9c2bc217c",
+      "size_bytes": 1068
+    },
+    {
+      "path": "results/cx_tg_b2_cooled_pair_secular_force/coolT_40/scalars_sep3.00_hill.csv",
+      "sha256": "e0b39ddc40ede7e60ebc469e3473aad72ffd616baffea7a249d0e58264f08db0",
+      "size_bytes": 37704
+    },
+    {
+      "path": "results/cx_tg_b2_cooled_pair_secular_force/coolT_40/scalars_sep3.00_off.csv",
+      "sha256": "6d66729b1b7b4ab8531a64fbbf0849a27eff5f3cf5f4fb38a077f5bc9c00e63a",
+      "size_bytes": 31547
+    },
+    {
+      "path": "results/cx_tg_b2_cooled_pair_secular_force/coolT_40/scalars_sep3.00_well.csv",
+      "sha256": "986774f1769cdf549e7dfb008d9dc26db6a5bebcbf8b7674476f89ea3f6a6b30",
+      "size_bytes": 38088
+    },
+    {
+      "path": "results/cx_tg_b2_cooled_pair_secular_force/coolT_40/scalars_sep4.00_hill.csv",
+      "sha256": "8d15c78b17bb85942bb705d14a9874f677945fbcc88710c1f2870656b667b7af",
+      "size_bytes": 37686
+    },
+    {
+      "path": "results/cx_tg_b2_cooled_pair_secular_force/coolT_40/scalars_sep4.00_off.csv",
+      "sha256": "e24980331c0bc500930b4ef30fe99745b1471db15e3fc975adc57a24f7147924",
+      "size_bytes": 31467
+    },
+    {
+      "path": "results/cx_tg_b2_cooled_pair_secular_force/coolT_40/scalars_sep4.00_well.csv",
+      "sha256": "9ac825c64ef15ab353384914f30b6c756ea76ad325d78e2f8be5f4cb90dbee65",
+      "size_bytes": 38041
+    },
+    {
+      "path": "results/cx_tg_b2_cooled_pair_secular_force/coolT_40/summary.json",
+      "sha256": "2b222b159e14c6a6b97361d00638332a0460dd34df5c51a7d611ef6230ec1928",
+      "size_bytes": 2000
+    },
+    {
+      "path": "results/cx_tg_b2_cooled_pair_secular_force/coolT_40.log",
+      "sha256": "f4724710ff43a974f7c5ec4b87a55af14e1549564cfb166164adad11ab82eb4c",
+      "size_bytes": 784
+    },
+    {
+      "path": "results/cx_tg_b2_cooled_pair_secular_force/cooled_pair_metrics.csv",
+      "sha256": "71dafc7931c0da4ae439434d75b9a57ab01659d1a8e23ec3cd805c08167ab116",
+      "size_bytes": 1116
+    },
+    {
+      "path": "results/cx_tg_b2_cooled_pair_secular_force/cooled_pair_metrics_partial.csv",
+      "sha256": "71dafc7931c0da4ae439434d75b9a57ab01659d1a8e23ec3cd805c08167ab116",
+      "size_bytes": 1116
+    },
+    {
+      "path": "results/cx_tg_b2_cooled_pair_secular_force/git_state_after.txt",
+      "sha256": "98554b6f9dd9121bec466a6c4cd78092065799e6bb108816473e7639319f341c",
+      "size_bytes": 93
+    },
+    {
+      "path": "results/cx_tg_b2_cooled_pair_secular_force/git_state_before.txt",
+      "sha256": "98554b6f9dd9121bec466a6c4cd78092065799e6bb108816473e7639319f341c",
+      "size_bytes": 93
+    },
+    {
+      "path": "results/cx_tg_b2_cooled_pair_secular_force/gpu_preflight.json",
+      "sha256": "5dd2c561d0a1948957cecd43bc9b550b34742edb118615dd8b99b98ae43d31fb",
+      "size_bytes": 96
+    },
+    {
+      "path": "results/cx_tg_b2_cooled_pair_secular_force/model_boundary.json",
+      "sha256": "c9fa088edbc956e01734720233328c81c6c693be798d416ab3c8012ffa1b3546",
+      "size_bytes": 286
+    },
+    {
+      "path": "results/cx_tg_b2_cooled_pair_secular_force/preregistered_matrix.json",
+      "sha256": "3c341be0427e8b9afd7edbbb3d6b0ea536a72d52e1ac0f463f37ddad1b793b8a",
+      "size_bytes": 320
+    },
+    {
+      "path": "results/cx_tg_b2_cooled_pair_secular_force/run_manifest.csv",
+      "sha256": "f47aaee8dd90b2236774db2de9b0b9b527718464cc59fd9fefba02b788f24022",
+      "size_bytes": 860
+    },
+    {
+      "path": "results/cx_tg_b2_cooled_pair_secular_force/secular_force_assessment.json",
+      "sha256": "c4c26fd6a145624c23ad68a202294927a176fb0d9e4fd017d1a691df51931d0c",
+      "size_bytes": 269
+    },
+    {
+      "path": "results/cx_tg_clock_migration_characterization/OPEN_QUESTIONS.md",
+      "sha256": "6a22b824bdfd0202edc578595dab4276cb98a7a926183db6ef81b757cf0c018b",
+      "size_bytes": 92
+    },
+    {
+      "path": "results/cx_tg_clock_migration_characterization/RUN_COMPLETE.json",
+      "sha256": "fcc13d28081ff136d13d4a20249402fb2508ab7bc5793fa6562cbcf0758578ce",
+      "size_bytes": 132
+    },
+    {
+      "path": "results/cx_tg_clock_migration_characterization/TECHNICAL_HANDOFF.md",
+      "sha256": "62bae8a6b4f936cca1a882ce67ea57b2d0b71679a91e4620974b7e31e6049171",
+      "size_bytes": 218
+    },
+    {
+      "path": "results/cx_tg_clock_migration_characterization/artifact_hashes.csv",
+      "sha256": "a8ac70daa418c0bf8703ce736adf8bcca22769d1459f88cb4d6bb05d5d58b17f",
+      "size_bytes": 1420
+    },
+    {
+      "path": "results/cx_tg_clock_migration_characterization/clock_migration_metrics.csv",
+      "sha256": "9d47cdfa782207409eeec2691410c578558be807d747b53e214decddee7158a9",
+      "size_bytes": 2242
+    },
+    {
+      "path": "results/cx_tg_clock_migration_characterization/eigenfrequency_metrics.csv",
+      "sha256": "dcf2c6209461a892caef3b9fea6de69477ecf0ba4bbdaf5a68e8b8e037b030fb",
+      "size_bytes": 4525
+    },
+    {
+      "path": "results/cx_tg_clock_migration_characterization/environment_versions.json",
+      "sha256": "3b15b66e5e8a9f7d7a5fbe1aee44bd2ef80633640d6af4bf7c23a05b14311787",
+      "size_bytes": 837
+    },
+    {
+      "path": "results/cx_tg_clock_migration_characterization/git_state_after.txt",
+      "sha256": "98554b6f9dd9121bec466a6c4cd78092065799e6bb108816473e7639319f341c",
+      "size_bytes": 93
+    },
+    {
+      "path": "results/cx_tg_clock_migration_characterization/git_state_before.txt",
+      "sha256": "98554b6f9dd9121bec466a6c4cd78092065799e6bb108816473e7639319f341c",
+      "size_bytes": 93
+    },
+    {
+      "path": "results/cx_tg_clock_migration_characterization/gpu_preflight.json",
+      "sha256": "e5a05fcead9e36860cc4beadc2723885b7514ff4e30184d60cf224893ba9d3ef",
+      "size_bytes": 615
+    },
+    {
+      "path": "results/cx_tg_clock_migration_characterization/migration_summary.json",
+      "sha256": "c7ec77d73334d6acf42ca7763d962805f925d6b8c68078629a2480ac1d13750e",
+      "size_bytes": 151
+    },
+    {
+      "path": "results/cx_tg_clock_migration_characterization/preregistered_matrix.json",
+      "sha256": "b522bebfe9b1f002889ba268e3efe2d69e8d936165f8d0dea135f2ae0ec2fa80",
+      "size_bytes": 4740
+    },
+    {
+      "path": "results/cx_tg_clock_migration_characterization/time_domain_clock_metrics.csv",
+      "sha256": "fde2b180da3f80d54b4dfe7b5b89629ddf491ae1991d44c2068d05092ce1f75e",
+      "size_bytes": 1497
+    },
+    {
+      "path": "results/cx_tg_clock_migration_characterization/trajectories/trap0.05_far_m12_w15.json",
+      "sha256": "282dfa789a5c74d3111bef45f34ae871557a6f381e5c52976b3c8086ecb4af03",
+      "size_bytes": 27068
+    },
+    {
+      "path": "results/cx_tg_clock_migration_characterization/trajectories/trap0.05_flat_m12_w15.json",
+      "sha256": "106b0a247a3747398cc5fe98bbe76f1340958d8a7206150dec25895d886cd45a",
+      "size_bytes": 27000
+    },
+    {
+      "path": "results/cx_tg_clock_migration_characterization/trajectories/trap0.05_near_m12_w15.json",
+      "sha256": "fb0113bf7c97a661771d61ddb59d74ad59e4943a224c015650ca2955ace67b24",
+      "size_bytes": 27082
+    },
+    {
+      "path": "results/cx_tg_clock_migration_characterization/trajectories/trap0.1_near_m12_w15.json",
+      "sha256": "de8ac9e62442d36801dea4c01225a27c6a6127186a4e2200bd11c7f76dbc9e4b",
+      "size_bytes": 27099
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/OPEN_QUESTIONS.md",
+      "sha256": "c61d6ccc2b6134e59a61df3a9dc757fd5c054f5e06daccfa8066e0e27fc45aa1",
+      "size_bytes": 109
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/RUN_COMPLETE.json",
+      "sha256": "721c3fbe5e204035d5500181d5137b0f73e5a4796e55055f7feccdb90f9f77c2",
+      "size_bytes": 135
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/TECHNICAL_HANDOFF.md",
+      "sha256": "eb7c1dd0e7684d6fb27873cc5de1747888ab54adb0dbd3e61202c478dcb16604",
+      "size_bytes": 202
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/artifact_hashes.csv",
+      "sha256": "154cc27d4eab914612a27bccd33584970bd67e5b88cc7506b0938f25cf11f4f9",
+      "size_bytes": 6559
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/bridge_scope.json",
+      "sha256": "212943f3ebb82e5717cb34909de126c9972775938f1552a9405eed2ae0692a91",
+      "size_bytes": 177
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/rate_source_admissibility.csv",
+      "sha256": "13016cc9f3bafe221044455ff5a5fa7035a479d5d2ab66844cd97e92c33a8f22",
+      "size_bytes": 685
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/rate_source_bridge_summary.json",
+      "sha256": "b2cadc602b9ebab32e3785b3c25f7f80c08984b95105e2e59dcc6d63bb0cd80f",
+      "size_bytes": 234
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/OPEN_QUESTIONS.md",
+      "sha256": "dbf219b5e1b1ce0b4140d8a6ec49632e5802c5016776a5b9ef4508c2d5a0706c",
+      "size_bytes": 335
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/TECHNICAL_HANDOFF.md",
+      "sha256": "c054844089ecedc3a1b98d18486898a3c8c135d9737e781f78bbf3fb2b899e2e",
+      "size_bytes": 424
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/artifact_hashes.csv",
+      "sha256": "e1f1b792d9bcc2abcab89081dfe8780544b89b243fe14c5a4e436d3b402db1a1",
+      "size_bytes": 5291
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/baseline_node_contract.csv",
+      "sha256": "ce79cd342e8419ee4b6b84634d7e643d6e6af92f1a63d84b83e592864ba0e8d2",
+      "size_bytes": 691
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/density_contamination.csv",
+      "sha256": "03f9dbb143a64402ee71158c6f4ef60bf9b37515a5622b1c4de90d637255c3ad",
+      "size_bytes": 3993
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/derivative_convergence.csv",
+      "sha256": "2e954b793f682d8da77a66bd5d7a7d4a3d27e968db4069d58f86af4ea6c41edb",
+      "size_bytes": 1859
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/environment_versions.json",
+      "sha256": "3cd9c9405cf6359cf5fb789631a14f8200bc56e61b4e4de1014855f915fc42b3",
+      "size_bytes": 667
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/event_suite.csv",
+      "sha256": "b0b5695039e07c0f0d84bc9626e27d86f83cf78f462e65b918bc5885ba14b418",
+      "size_bytes": 2496
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/falsification_results.csv",
+      "sha256": "97d5e5663f4a9424044e51f83235fefb96791eacc75e0ef6812fe383a7583c77",
+      "size_bytes": 326
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/forward_reverse_comparison.csv",
+      "sha256": "938f7b06aee357743fdb3143c9cb89509e6d4a38e8ec411047b0877b1b4c3802",
+      "size_bytes": 1592
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/git_state_before.txt",
+      "sha256": "98554b6f9dd9121bec466a6c4cd78092065799e6bb108816473e7639319f341c",
+      "size_bytes": 93
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/gpu_preflight.json",
+      "sha256": "9ce2a4ef32ed53b93d703c37ef1613a7ae78e87f14325dfd61df5f2518feb2a2",
+      "size_bytes": 614
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/invariance_results.csv",
+      "sha256": "63556064c3aa268327cd2e9cd05523e78fc690ae64707a545edfc54d90a2e183",
+      "size_bytes": 5124
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/local_source_metrics.csv",
+      "sha256": "01495afa462d367421fa96bbfd999c974f0b5e5e8befefe27c3dbcac0d7d2d2b",
+      "size_bytes": 13686
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/source_family_definitions.json",
+      "sha256": "2a2e14e589be7477248aeded6f132bd4d873155dc27a09a52aba99cf0793c1a3",
+      "size_bytes": 334
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/source_semantics_classification.csv",
+      "sha256": "cbf0d3c7fa258a756f5ad6599570a14635d59743191a7482f0e8acba3b5b91cd",
+      "size_bytes": 986
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/source_snapshots/amplitude_breathing_sample000.npz",
+      "sha256": "491818a6c3ea246a596f11a0da30057ed0f2115858bc2c910d51bc80aaf8f42c",
+      "size_bytes": 5838652
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/source_snapshots/amplitude_breathing_sample020.npz",
+      "sha256": "83baa726d2bfa83b9e4384490d0daa5263188ed99bf2f7536c73ba03436fedfe",
+      "size_bytes": 4748620
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/source_snapshots/amplitude_breathing_sample040.npz",
+      "sha256": "f7b03b9385daa90ef0315a76ac75f73bb3d32497f90757569761ed58e1c508c7",
+      "size_bytes": 4732689
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/source_snapshots/boosted_node_sample000.npz",
+      "sha256": "607c708866c73230649d061bbfeafe707136f04261b56aace59dbd90a2edcec1",
+      "size_bytes": 4136242
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/source_snapshots/boosted_node_sample014.npz",
+      "sha256": "d76343fada44e999e9e477186346a7ed8678ea97f7b4e70affc67e29a754fe8e",
+      "size_bytes": 5115479
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/source_snapshots/boosted_node_sample028.npz",
+      "sha256": "3086eb1e253026c20f62d870eb52c98efd87ea9f13679c8e3485715915c0bfbe",
+      "size_bytes": 5010823
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/source_snapshots/density_matched_scrambled_sample000.npz",
+      "sha256": "476afdad88ed847c64a8a658ac4d894f6013566640b17cf2de221244a32f579b",
+      "size_bytes": 5820547
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/source_snapshots/density_matched_scrambled_sample020.npz",
+      "sha256": "7ef44677a34e8752266baeb3e4192377d4c8d27a98cf0b58e8c2db08099bf07d",
+      "size_bytes": 7447382
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/source_snapshots/density_matched_scrambled_sample040.npz",
+      "sha256": "d030b1df431c9cd6901a6a9145fabd2c88ab605858006e4698e4d0c525942636",
+      "size_bytes": 7562626
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/source_snapshots/dephasing_unlocking_sample000.npz",
+      "sha256": "f480a7e5d42302e371dd0688efed486ae5c627cd19c1575a30590331a550e388",
+      "size_bytes": 5111998
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/source_snapshots/dephasing_unlocking_sample020.npz",
+      "sha256": "5667539ba3a3e7c15206ceb6eaffff1849ef84885cb948803d251eae0da6de99",
+      "size_bytes": 6477648
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/source_snapshots/dephasing_unlocking_sample040.npz",
+      "sha256": "c6b98cceb213d1b0e4f24ab88b51ee3445224708d7f33afa682e5c4e16380b23",
+      "size_bytes": 5811649
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/source_snapshots/global_phase_rotation_sample000.npz",
+      "sha256": "d23b0898f085bdfb99c8109bcb2f428d41f4ff96bd4dbe7bf6c49d8761d9770b",
+      "size_bytes": 4810816
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/source_snapshots/global_phase_rotation_sample020.npz",
+      "sha256": "76acdbaeba7148a4141f41b641ed1d8db0eb54f9766af08026f7518faef77527",
+      "size_bytes": 6570295
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/source_snapshots/global_phase_rotation_sample040.npz",
+      "sha256": "fc120c4a1cfa6328dddf7e0fd6a638ffd9376cba496b40925793aea7106731bb",
+      "size_bytes": 5039106
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/source_snapshots/phase_perturb_relaxation_sample000.npz",
+      "sha256": "332abf420b28a4635a1d3c40b782c153deb8d126d8cbb4ef6ac5144589b3bf57",
+      "size_bytes": 5078347
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/source_snapshots/phase_perturb_relaxation_sample020.npz",
+      "sha256": "adb0d19d76cee74b5bfd9960db55d80c9a4363840894ad5a5ad24ffdf4cb192f",
+      "size_bytes": 5661026
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/source_snapshots/phase_perturb_relaxation_sample040.npz",
+      "sha256": "044da935cb2c2a0c4f7aa8c1c4f330183bd0d3c68d289b2be835b316484e7867",
+      "size_bytes": 5768832
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/source_snapshots/stationary_node_sample000.npz",
+      "sha256": "cb2e83e358ac873ce3384fa5ef0e7d2c138934724ebf562ab1efdd8367de75ad",
+      "size_bytes": 5833571
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/source_snapshots/stationary_node_sample020.npz",
+      "sha256": "be4117745651945587e9cf6800f2abc443a718e451afc6d4c3c563f6027d4f4e",
+      "size_bytes": 6486045
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/source_snapshots/stationary_node_sample040.npz",
+      "sha256": "8e4dabbb2ac232f7cc57bcce70273cedabac8e7751b8a86eb0aa3289851cc17c",
+      "size_bytes": 5104502
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/source_snapshots/time_forward_from_midpoint_sample000.npz",
+      "sha256": "e74e14eedfa266c74aa8d1ae9f837a11b2820c263afad92504aa1a846e4c5838",
+      "size_bytes": 5093212
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/source_snapshots/time_forward_from_midpoint_sample010.npz",
+      "sha256": "9240d961c2471f4669507b648bef15741c683b10c6edba5d1cadb64fe9cb2d62",
+      "size_bytes": 5747617
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/source_snapshots/time_forward_from_midpoint_sample020.npz",
+      "sha256": "31b5d40348b96da56f6e118fbc5e0c266f2aef14b3a3ffeb168a2244a341e4e9",
+      "size_bytes": 5836777
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/source_snapshots/time_reversed_from_midpoint_sample000.npz",
+      "sha256": "18a38decbd71fab1545f3927aa7018483a15715d3e6e3eb3a1acd927571b0527",
+      "size_bytes": 5093328
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/source_snapshots/time_reversed_from_midpoint_sample010.npz",
+      "sha256": "018e63716cc1a66dfeac9550edbf8233ec665d9fcddfa4c8214e9964300826b4",
+      "size_bytes": 5884962
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/source_snapshots/time_reversed_from_midpoint_sample020.npz",
+      "sha256": "1c1813f553ce043a776d7adc5db59db86e6412153bfaed20a01539d3bca45ffa",
+      "size_bytes": 5961364
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/source_snapshots/translated_node_sample000.npz",
+      "sha256": "650556438085a88d86050bd361598181e44c02e0ac9d3801764b7149ab4dedda",
+      "size_bytes": 5828905
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/source_snapshots/translated_node_sample020.npz",
+      "sha256": "b45b1bff7a562c7f34909487a2ce82287c8f144fb261ecfdb52ed2362d23bcc2",
+      "size_bytes": 6482296
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/source_snapshots/translated_node_sample040.npz",
+      "sha256": "a9b7ca3b74de2971a25be94170d2134a107ae03254b665f280a3dcadd7242044",
+      "size_bytes": 5161445
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/source_snapshots/two_packet_phase_locking_sample000.npz",
+      "sha256": "d0ef479bfde1c6070a82cc5a70de26267a49d839b1a6a12304db91c3d4f57e91",
+      "size_bytes": 4115813
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/source_snapshots/two_packet_phase_locking_sample030.npz",
+      "sha256": "c30cf1e1e63673f95a26fa0f032966198139b17947007b9b5a808b52963818e6",
+      "size_bytes": 4749642
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics/source_snapshots/two_packet_phase_locking_sample060.npz",
+      "sha256": "28ab162c9d8d9459a63f584f8550548f215cad66ac5b4cc22986ec881c51239f",
+      "size_bytes": 4888374
+    },
+    {
+      "path": "results/cx_tg_rate_source_semantics_bridge/tg_s_semantics_stdout_stderr.log",
+      "sha256": "7aee16f9a115cf8f7486fd09d8ed25c72e53d98acef24fde8dcd2e19a107017a",
+      "size_bytes": 435
+    },
+    {
+      "path": "row_markers/cx_gravity_d_load_capacity_yield_map_COMPLETE.json",
+      "sha256": "ee11bfb2648de7e8ec34dd29d99f89a0f4d76b2527bd6172630e52d453cb70d2",
+      "size_bytes": 747
+    },
+    {
+      "path": "row_markers/cx_gravity_d_load_capacity_yield_map_STARTED.json",
+      "sha256": "7b55b26b12e2d3284f9c0906d0b610c4636649408716c92494932780884637cf",
+      "size_bytes": 125
+    },
+    {
+      "path": "row_markers/cx_tg_b2_cooled_pair_secular_force_COMPLETE.json",
+      "sha256": "b60e9167f57850ef6d9e36aebd1b412d2dd0c0c0445360406cd625573b59c0b8",
+      "size_bytes": 821
+    },
+    {
+      "path": "row_markers/cx_tg_b2_cooled_pair_secular_force_STARTED.json",
+      "sha256": "cab8f0349d014a0fee1ba04cf8598ea15c61df3b0b32f37a83dc95c6ffe38a53",
+      "size_bytes": 123
+    },
+    {
+      "path": "row_markers/cx_tg_clock_migration_characterization_COMPLETE.json",
+      "sha256": "4b46dcde5ac33ee3abcad47cd1b2de3f76f1c356df56e77ed7d93643e8c04d4e",
+      "size_bytes": 808
+    },
+    {
+      "path": "row_markers/cx_tg_clock_migration_characterization_STARTED.json",
+      "sha256": "4cac329bdc832405adb81939cf9c0bdb93d8c407b656a573b67c6836677cbc94",
+      "size_bytes": 127
+    },
+    {
+      "path": "row_markers/cx_tg_rate_source_semantics_bridge_COMPLETE.json",
+      "sha256": "47dc67268505c227d89cd61195bbb876d068aa040d1dbc60b78cd5007992275e",
+      "size_bytes": 710
+    },
+    {
+      "path": "row_markers/cx_tg_rate_source_semantics_bridge_STARTED.json",
+      "sha256": "df88129edcdafe564b7a7b3bcfb3137e05b0613b7141c0473e3a1f173db3050a",
+      "size_bytes": 123
+    },
+    {
+      "path": "run_cx_gravity_d_load_capacity_yield_map.log",
+      "sha256": "e0b0711036a2a276996a14b7fbcdc4c8f14989e78a0bb265b3c60c82159f070f",
+      "size_bytes": 472
+    },
+    {
+      "path": "run_cx_tg_b2_cooled_pair_secular_force.log",
+      "sha256": "aa6bbfd856ed80f4abd9f4ffed8ff05974efd2e409745fcab8cded7c8e59e394",
+      "size_bytes": 478
+    },
+    {
+      "path": "run_cx_tg_clock_migration_characterization.log",
+      "sha256": "5b873f95a16fd7076e73ce9534202b0b272b730d4f14889c24dd28f982282c3b",
+      "size_bytes": 1021
+    },
+    {
+      "path": "run_cx_tg_rate_source_semantics_bridge.log",
+      "sha256": "e34afa3941d99b3e281814288ad4b8fe61d709fe8dd09fe78c5e41569a55ba24",
+      "size_bytes": 298
+    },
+    {
+      "path": "runtime_environment_overrides.json",
+      "sha256": "218cfefca1322ec2ea79d1471d7e1de32f68b27b6689a4a2e0a55e171458fd5a",
+      "size_bytes": 226
+    },
+    {
+      "path": "source_manifest.json",
+      "sha256": "1b7f5d353c962d384e1673f9d96cd62b432fe231e59c454f5729d83e7b3a6d58",
+      "size_bytes": 6676
+    },
+    {
+      "path": "workflow_instructions.json",
+      "sha256": "70d56392a3974bd5e49a2e5b7edd48a5e624ad7e876cb5c0ac59c5f63e6ceff3",
+      "size_bytes": 568
+    }
+  ]
+}

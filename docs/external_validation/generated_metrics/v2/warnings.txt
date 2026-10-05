@@ -1,0 +1,1 @@
+sweep_runs/C27_REDERIVE/r3_n96.json lacks explicit D; using project C2.7 convention D=1.0.

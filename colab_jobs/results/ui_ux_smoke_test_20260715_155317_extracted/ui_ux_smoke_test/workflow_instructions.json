@@ -1,0 +1,15 @@
+{
+  "agent_plans_run": true,
+  "analogy": "Sometimes it is quicker to send the car to the shop than fix it yourself.",
+  "drive_persistence_required": true,
+  "intended_use": "Lightweight UI/UX validation for the Colab control panel; not a scientific simulation.",
+  "local_results_dir": "F:\\quantule_mapper\\colab_jobs\\results",
+  "manual_colab_execution": true,
+  "manual_upload_to_colab": true,
+  "mode": "manual_colab_upload",
+  "result_policy": {
+    "hard_archive_bytes": 5000000000,
+    "ideal_archive_bytes": 1000000000
+  },
+  "review_prompt_after_download": true
+}

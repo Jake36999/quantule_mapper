@@ -23,6 +23,27 @@ mechanism · `NOT-IMPLEMENTED` = no code primitive yet · `TESTED-POSITIVE` / `T
 = carries a catalog verdict · `SPECULATIVE` = conceptual, no test path yet. A concept can carry two tags (e.g.
 `ACTIVE` + `TESTED-POSITIVE`).
 
+## IRER is deterministic (read this before the term table)
+Several IRER terms below use quantum-adjacent vocabulary — **"actualization"**, **"collapse"**, **"readiness to
+resolve"**, **Potential *Actualization* State**. These describe a **deterministic** process and must not be read as
+stochastic:
+
+- **The implemented models are deterministic, full stop.** Fixed equations (Ginzburg–Landau / NLS / KG), fixed
+  initial state, parameters, and seed → **bit-identical** evolution every run. This is exactly what the parity gates
+  rely on. Random *initial seeding* generates an *ensemble of initial conditions*; it does **not** make the dynamical
+  law stochastic.
+- **The wider theory proposes deterministic fundamental dynamics.** Any observed statistical behaviour would be
+  *emergent* — from unresolved microstates, complexity/chaos, or coarse-graining — **not** from a random fundamental
+  law. PAS is an **evolving deterministic state** (an effective potential / activation landscape), **not** a
+  fundamental probability; RFD "collapse" is **continuous deterministic relaxation** to an attractor, **not**
+  quantum-measurement collapse.
+- **Vocabulary caveat:** where older theory text uses "likelihood" or "actualization probability", read those as
+  *emergent / coarse-grained descriptors of a deterministic process*, not as a stochastic engine. The IRER law is
+  deterministic; probability is (at most) something that could *emerge* from it.
+
+*(This is the correct framing an AI reviewing agent previously got wrong by reading IRER as probability-driven; the
+implemented dynamics contain no stochastic term.)*
+
 ## Concept translation table
 Each row: IRER concept → original conceptual role (author) → closest standard-language analogue → simulation
 variable/observable → status → evidence → external-search keywords.
@@ -39,10 +60,10 @@ variable/observable → status → evidence → external-search keywords.
 ### Dynamics, action, and time
 | IRER concept | Original role | Standard analogue | Sim variable | Status | Evidence | Search keywords |
 |---|---|---|---|---|---|---|
-| **Potential Actualization State (PAS)** | a configuration's local "readiness to resolve" | an effective potential / activation landscape; in code, the gain–loss balance point of the dynamics | the cubic-quintic-septic nonlinearity g(ρ) + gain/loss η | PARTIAL (as effective potential) | Phase C a\* balance | "activation threshold", "effective potential", "bistable reaction term" |
-| **Resolution Field Dynamics (RFD) / Informational Collapse Duality** | continuous, gradient-driven "collapse" into stable structure or novelty | a nonlinear field evolution equation (Ginzburg–Landau / NLS / KG); relaxation to attractors vs. instability-driven novelty | `step()` / `kg_evolve()` | ACTIVE | Phase C stabilization; Phase D dynamics | "Ginzburg–Landau", "nonlinear Schrödinger", "gradient flow", "pattern formation" |
+| **Potential Actualization State (PAS)** | a configuration's local "readiness to resolve" (an evolving deterministic state — **not** a probability) | an effective potential / activation landscape; in code, the gain–loss balance point of the dynamics | the cubic-quintic-septic nonlinearity g(ρ) + gain/loss η | PARTIAL (as effective potential) | Phase C a\* balance | "activation threshold", "effective potential", "bistable reaction term" |
+| **Resolution Field Dynamics (RFD) / Informational Collapse Duality** | continuous, gradient-driven "collapse" into stable structure or novelty (**deterministic relaxation**, not quantum-measurement collapse) | a nonlinear field evolution equation (Ginzburg–Landau / NLS / KG); relaxation to attractors vs. instability-driven novelty | `step()` / `kg_evolve()` | ACTIVE | Phase C stabilization; Phase D dynamics | "Ginzburg–Landau", "nonlinear Schrödinger", "gradient flow", "pattern formation" |
 | **Fields of Minimal Informational Action (FMIA) / Axis of Least Effort / Coherent Manifold Channels** | structures follow paths of least mutual realization cost | the variational / least-action principle; gradient-flow along the energy functional; group-velocity transport | the Hamiltonian/energy functional H; boost group velocity v=2Dk | PARTIAL | C2.7 transport; C3 energy conservation | "principle of least action", "variational principle", "geodesic / least-cost path" |
-| **Time as Chronology of Resolution** | time = the ordered sequence of resolution events, not a background dimension | the causal ordering imposed by sequential time-stepping; finite propagation speed (light-cone in KG) | the time integrator; KG causal cone c | PARTIAL | C3 KG (finite c); sequential updates | "causal ordering", "retarded propagation", "light-cone / finite propagation speed" |
+| **Time as Chronology of Resolution** | time = the ordered sequence of resolution events; the local *rate* is **relational** — set by how a system's state couples to and is changed by its environment (the IRER reading of Einstein's rate-of-interaction / proper-time clock rate) | the causal ordering of sequential stepping + finite propagation (KG light-cone); the local resolution rate maps to a counterfactual `R_int = ‖F_full − F_isolated‖²` (interaction-conditioned), and to a lapse `dτ = N(R_int)dt` | time integrator; KG cone c; (proposed) `R_int` + lapse | PARTIAL | C3 KG (finite c); sequential updates | "proper time / clock rate", "relational time", "causal ordering", "finite propagation speed" |
 | **Gradient-Derived Informational Forces** | forces are emergent from informational gradients, never primitive | phase-gradient (mass-current) forces + density-gradient/stress forces; the two-body phase-force law | momentum density Im(ψ*∇ψ); the π/2 static force law | ACTIVE + TESTED-POSITIVE | C2.9 & C3 phase-force (crossover π/2) | "phase-gradient force", "soliton interaction force", "Peierls–Nabarro / interaction potential" |
 
 ### Internal structure, geometry, and topology

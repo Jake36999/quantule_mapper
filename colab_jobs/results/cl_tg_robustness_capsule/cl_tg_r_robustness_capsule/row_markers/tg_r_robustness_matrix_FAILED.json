@@ -1,0 +1,27 @@
+{
+  "row_id": "tg_r_robustness_matrix",
+  "return_code": 2,
+  "duration_seconds": 6372.992845773697,
+  "finished_utc": "2026-07-17T11:21:49Z",
+  "log_path": "/content/qm_job/run_tg_r_robustness_matrix.log",
+  "log_sha256": "8cd9b56d2edbe5098114704e6835f411b051c42821ab25ae2e3ef3fec0432353",
+  "stages": [
+    {
+      "stage_id": "main",
+      "command": [
+        "/usr/bin/python3",
+        "-u",
+        "colab_jobs/tg_r_robustness_driver.py",
+        "--out",
+        "/content/qm_job/results/cl_tg_r_robustness",
+        "--baseline-summary",
+        "colab_jobs/baselines/tg_b2_definitive_force_20260716_baseline_summary.json",
+        "--protected-registry",
+        "docs/gravity_maturity/TG_PROTECTED_REGISTRY.json"
+      ],
+      "return_code": 2,
+      "duration_seconds": 6372.992139816284,
+      "finished_utc": "2026-07-17T11:21:49Z"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "autotune_before_j1": true,
+  "autotune_max_seconds": 30,
+  "autotune_target_mb": 2048,
+  "class": "a100_aggressive",
+  "launch_env": {},
+  "notes": "Use A100 resources for selected queued follow-up rows. Run one job button at a time unless deliberately dispatching multiple archives.",
+  "push_level": "aggressive",
+  "warn_if_gpu_memory_used_fraction_below": 0.15,
+  "xla_mem_fraction": "0.90",
+  "xla_preallocate": "false"
+}

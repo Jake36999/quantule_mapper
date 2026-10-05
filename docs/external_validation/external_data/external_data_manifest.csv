@@ -1,0 +1,7 @@
+candidate,classification,allowed_use,comparison_status,reason
+JOSS NLSE package,MACHINE_READABLE_NOW,reduced-NLS numerical sanity only,SKIPPED_WITH_REASON,"External package comparison is method sanity, not empirical validation; not run in this existing-data pass."
+NIST dark soliton dataset,MACHINE_READABLE_NOW,morphology/image tasks only,SKIPPED_WITH_REASON,Dark-soliton image morphology is not directly comparable to current bright-collision/Q-ball dynamics metrics.
+Nguyen/Hulet BEC bright soliton collisions,DIGITIZATION_REQUIRED,future phase-dependent collision comparison,SKIPPED_WITH_REASON,No machine-readable trajectory/outcome table is present locally.
+Mitschke/Mollenauer optical soliton-force experiment,DIGITIZATION_REQUIRED,future V1 force-law companion,SKIPPED_WITH_REASON,No digitised separation/phase data are present locally.
+Q-ball/oscillon repositories,SOURCE_TRAIL_ONLY,future benchmark search,SKIPPED_WITH_REASON,No verified repository or machine-readable benchmark was located in the registry.
+Photon-fluid Bogoliubov dispersion,DIGITIZATION_REQUIRED,future analogue-fluid density/dispersion comparison,SKIPPED_WITH_REASON,No tabulated or machine-readable dispersion dataset is present locally.

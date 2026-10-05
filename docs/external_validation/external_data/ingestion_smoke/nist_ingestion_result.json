@@ -1,0 +1,139 @@
+{
+  "adapter_status": "INGESTED_MORPHOLOGY_DATASET",
+  "class_path_counts": {
+    "class-0": 1130,
+    "class-1": 3212,
+    "class-2": 1036,
+    "class-8": 879,
+    "class-9": 10221
+  },
+  "comparison_fields_available_now": [
+    "image array",
+    "class label",
+    "excitation position for labelled dark soliton rows",
+    "train/test split lists"
+  ],
+  "comparison_role": "Morphology/image tooling candidate only; not C2/C3 bright-collision or Q-ball dynamics validation.",
+  "created_utc": "2026-07-10T23:38:53+00:00",
+  "data_zip_inventory": {
+    "compressed_size_bytes": 4327841390,
+    "member_count": 16484,
+    "sample_members": [
+      {
+        "filename": "data_files/",
+        "size_bytes": 0
+      },
+      {
+        "filename": "data_files/class-2/",
+        "size_bytes": 0
+      },
+      {
+        "filename": "data_files/class-1/",
+        "size_bytes": 0
+      },
+      {
+        "filename": "data_files/class-8/",
+        "size_bytes": 0
+      },
+      {
+        "filename": "data_files/class-9/",
+        "size_bytes": 0
+      },
+      {
+        "filename": "data_files/class-0/",
+        "size_bytes": 0
+      },
+      {
+        "filename": "data_files/class-2/2019-07-15_0011_20190523_BEC_F1_NewODT_DMD_217.npy",
+        "size_bytes": 347268
+      },
+      {
+        "filename": "data_files/class-2/2019-07-09_0014_20190523_BEC_F1_NewODT_DMD_03.npy",
+        "size_bytes": 347268
+      },
+      {
+        "filename": "data_files/class-2/2019-08-26_0074_20190523_BEC_F1_NewODT_DMD_1.npy",
+        "size_bytes": 347268
+      },
+      {
+        "filename": "data_files/class-2/2019-07-15_0017_20190523_BEC_F1_NewODT_DMD_039.npy",
+        "size_bytes": 347268
+      },
+      {
+        "filename": "data_files/class-2/2019-08-26_0014_20190523_BEC_F1_NewODT_DMD_03.npy",
+        "size_bytes": 347268
+      },
+      {
+        "filename": "data_files/class-2/2019-07-17_0011_20190523_BEC_F1_NewODT_DMD_005.npy",
+        "size_bytes": 347268
+      }
+    ],
+    "suffix_counts": {
+      ".npy": 16478,
+      "<dir>": 6
+    },
+    "uncompressed_size_bytes": 5721995916,
+    "zip_path": "E:\\quantule_mapper_external_data\\DATA-BEC-001_nist_dark_solitons_v2\\raw\\data_files.zip"
+  },
+  "dataset_id": "DATA-BEC-001",
+  "direct_level3_comparison_ready": false,
+  "info_zip_inventory": {
+    "compressed_size_bytes": 1556163,
+    "member_count": 7,
+    "sample_members": [
+      {
+        "filename": "data_info/",
+        "size_bytes": 0
+      },
+      {
+        "filename": "data_info/data_roster.csv",
+        "size_bytes": 3383655
+      },
+      {
+        "filename": "__MACOSX/data_info/._data_roster.csv",
+        "size_bytes": 244
+      },
+      {
+        "filename": "data_info/.DS_Store",
+        "size_bytes": 6148
+      },
+      {
+        "filename": "__MACOSX/data_info/._.DS_Store",
+        "size_bytes": 120
+      },
+      {
+        "filename": "data_info/data_roster.npy",
+        "size_bytes": 4160817
+      },
+      {
+        "filename": "__MACOSX/data_info/._data_roster.npy",
+        "size_bytes": 399
+      }
+    ],
+    "suffix_counts": {
+      ".csv": 2,
+      ".ds_store": 1,
+      ".npy": 2,
+      "<dir>": 2
+    },
+    "uncompressed_size_bytes": 7551383,
+    "zip_path": "E:\\quantule_mapper_external_data\\DATA-BEC-001_nist_dark_solitons_v2\\raw\\data_info.zip"
+  },
+  "label_counts": {
+    "0": 1130,
+    "1": 3212,
+    "2": 1036,
+    "8": 879,
+    "9": 10221
+  },
+  "project_data_gap": "No project-side dark-soliton image/morphology dataset exists. Current Quantule Mapper external metrics are trajectory/field summaries, not labelled absorption images.",
+  "queued_followup": "If useful, create a morphology-only benchmark that compares image-processing/node-detection robustness on NIST dark-soliton labels; do not map it to C2/C3 dynamics.",
+  "roster_rows": 16478,
+  "sample_npy": {
+    "load_status": "SKIPPED_UNSAFE_OBJECT_ARRAY",
+    "member": "data_files/class-2/2019-07-15_0011_20190523_BEC_F1_NewODT_DMD_217.npy",
+    "reason": "Object arrays cannot be loaded when allow_pickle=False"
+  },
+  "test_list_count": 640,
+  "train_list_count": 5617
+}

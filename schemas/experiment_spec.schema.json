@@ -1,0 +1,273 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "irer/experiment_spec/v1",
+  "title": "IRER experiment spec",
+  "description": "One experiment as data: substrate + protocol + observers + prediction. Executed by tools/run_spec.py; components resolved in jax_scout/registry.py.",
+  "type": "object",
+  "required": [
+    "spec_version",
+    "id",
+    "title",
+    "substrate",
+    "protocol",
+    "observers",
+    "prediction"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "spec_version": {
+      "type": "integer",
+      "enum": [
+        1
+      ]
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9_.-]{2,80}$",
+      "description": "stable id; becomes the run-id prefix (upper-cased)"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 3
+    },
+    "description": {
+      "type": "string"
+    },
+    "branch": {
+      "type": "string",
+      "description": "the enquiry it serves, e.g. 'Branch - Transport - Index'"
+    },
+    "substrate": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "params": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": false
+    },
+    "protocol": {
+      "type": "object",
+      "required": [
+        "ic",
+        "grid",
+        "dt",
+        "T"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "ic": {
+          "type": "object",
+          "required": [
+            "name"
+          ],
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "version": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "params": {
+              "type": "object"
+            }
+          },
+          "additionalProperties": false
+        },
+        "grid": {
+          "type": "object",
+          "required": [
+            "N",
+            "L"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "N": {
+              "type": "integer",
+              "minimum": 4
+            },
+            "L": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
+          }
+        },
+        "dt": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "T": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "physical duration"
+        },
+        "sample_every": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "physical time between observer samples (default T/100)"
+        },
+        "seed": {
+          "type": "integer"
+        },
+        "stop": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "max_wall_h": {
+              "type": "number"
+            },
+            "nonfinite": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "observers": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "params": {
+            "type": "object"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "invariants": {
+      "type": "object",
+      "description": "{observer_key: tolerance} streamed as telemetry invariants",
+      "additionalProperties": {
+        "type": "number"
+      }
+    },
+    "sweep": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "axes"
+      ],
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": [
+            "grid",
+            "zip"
+          ]
+        },
+        "axes": {
+          "type": "object",
+          "minProperties": 1,
+          "description": "{dotted.path: [values]} e.g. 'substrate.params.param_a'",
+          "additionalProperties": {
+            "type": "array",
+            "minItems": 1
+          }
+        }
+      }
+    },
+    "prediction": {
+      "type": "object",
+      "required": [
+        "statement",
+        "quantities"
+      ],
+      "additionalProperties": false,
+      "description": "written BEFORE launch: what the equations say should happen",
+      "properties": {
+        "statement": {
+          "type": "string",
+          "minLength": 10
+        },
+        "derivation": {
+          "type": "string"
+        },
+        "quantities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "key",
+              "expected"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "key": {
+                "type": "string",
+                "description": "final-observer key, e.g. 'mass_ratio'"
+              },
+              "expected": {
+                "type": "number"
+              },
+              "tolerance": {
+                "type": "number",
+                "minimum": 0
+              },
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "abs",
+                  "rel",
+                  "le",
+                  "ge"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "requires": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "spec_id",
+          "verdict"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "spec_id": {
+            "type": "string"
+          },
+          "verdict": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "budget_h": {
+      "type": "number",
+      "minimum": 0
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

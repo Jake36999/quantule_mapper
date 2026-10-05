@@ -1,0 +1,11 @@
+{
+  "outputs": [
+    "preflight_marker.json",
+    "ui_smoke_metrics.csv",
+    "ui_event_log.json",
+    "completion_status.json"
+  ],
+  "purpose": "Control-panel and archive workflow smoke test only.",
+  "status": "UI_UX_SMOKE_PASS",
+  "timestamp_utc": "2026-07-15T15:53:14Z"
+}

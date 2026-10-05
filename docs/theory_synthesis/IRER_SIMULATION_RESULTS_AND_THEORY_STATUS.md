@@ -12,8 +12,10 @@ IRER models reality as emerging from an a-temporal informational substrate (AIS)
 excitations (OIW). Local resonance density (RD) and readiness-to-actualize (PAS) drive a continuous "collapse" —
 Resolution Field Dynamics — that produces stable structures (Quantules) or novelty. Structures follow paths of least
 informational action (FMIA) across an informational manifold whose geometry they also shape; apparent forces are
-gradient-derived, and time is the ordered chronology of resolution. (Full concept meanings and their standard-language
-translations: Report 1.)
+gradient-derived, and time is the ordered chronology of resolution. **IRER is deterministic**: this "collapse" is
+continuous deterministic relaxation (no stochastic term), not quantum-measurement collapse; any statistics would be
+emergent (unresolved microstates / coarse-graining), not a fundamental random law. (Full concept meanings, their
+standard-language translations, and the determinism framing: Report 1.)
 
 ## 2. What Quantule Mapper actually implements
 A family of well-posed nonlinear field PDEs sharing a cubic–quintic–septic nonlinearity g(ρ) and spectral machinery:
@@ -32,9 +34,13 @@ a numerical test bench, not the full theory: several IRER concepts are only part
   conserved to ~1e-13; VK slope dQ/dω = −849 < 0 (stable branch); density co-moves under a Lorentz boost.
 - **A shared two-body phase-force law** (C2.9 & C3): pairwise force attractive for Δφ<π/2, repulsive above, crossover
   at **Δφ=π/2** — the same in both first-order (NLS) and second-order (KG) substrates (cross-substrate universality).
-- **A mapped C3 collision phase diagram**: capture is generic across (relative-phase × speed); transmission is a
-  narrow feature confined to exact anti-phase (a destructive-interference node) below ~0.5c; the static force law does
-  **not** govern collision outcomes.
+- **A mapped collision phase diagram, cross-substrate** (C3, and C2 via RUN-2): capture is generic across
+  (relative-phase × speed); the exception is exact anti-phase, where the destructive-interference node produces a
+  **non-merging channel that transmits (pass-through) at intermediate speed and captures above a sharp threshold**;
+  the static force law does **not** govern collision outcomes. RUN-2 confirmed the NLS substrate reproduces this
+  structure — including the pass-through window (closing ≈0.47–0.57) and a sharp capture threshold bracketed to
+  closing (0.565, 0.660), plus a low-speed bounce sub-regime (≲0.42) — so the collision diagram, not just the static
+  two-body law, is universal across the first- and second-order conservative substrates.
 
 ## 4. Falsified / retired (real negatives)
 - **Prime-SSE as a stability predictor** — 0/60; the objective is retired.

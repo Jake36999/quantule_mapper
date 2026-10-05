@@ -1,0 +1,53 @@
+{
+  "args": [
+    "--seps",
+    "3.0",
+    "--N",
+    "96",
+    "--T",
+    "180"
+  ],
+  "command": [
+    "/usr/bin/python3",
+    "-u",
+    "jax_scout/gravity_TG_B2_definitive_force.py",
+    "--seps",
+    "3.0",
+    "--N",
+    "96",
+    "--T",
+    "180",
+    "--out",
+    "/content/qm_job/results/cl_tg_r_robustness/rows/r1_grid_N96_sep3"
+  ],
+  "compare_to_baseline_sep": 3.0,
+  "drift_tolerance": 0.2,
+  "duration_seconds": 3642.630120754242,
+  "log_path": "logs/r1_grid_N96_sep3.log",
+  "metrics": {
+    "F_R_hill_avg": 5.45282371341913e-05,
+    "F_R_hill_std": 7.956092404915266e-06,
+    "F_R_off_avg": 0.0,
+    "F_R_well_avg": -5.452931236310377e-05,
+    "F_R_well_std": 7.956136379591495e-06,
+    "charge_ok": true,
+    "gates_pass": true,
+    "n": 361,
+    "nodes_distinct": true,
+    "off_null_ok": true,
+    "sep": 3.0,
+    "sep_min": 2.9251837223243857,
+    "sign_reverses": true,
+    "t_end": 180.0,
+    "well_attracts": true,
+    "well_hill_antisym_rel": 1.9718365515245898e-05,
+    "well_negative": true
+  },
+  "phase": "R1_convergence",
+  "reason": "grid refinement sentinel",
+  "return_code": 0,
+  "row_id": "r1_grid_N96_sep3",
+  "script_verdict": "TG_B2_DEFINITIVE_AWELL_ATTRACTION_CONFIRMED",
+  "status": "COMPLETE",
+  "summary_path": "rows/r1_grid_N96_sep3/summary.json"
+}

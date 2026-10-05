@@ -1,0 +1,54 @@
+{
+  "events": [
+    {
+      "label": "run",
+      "step": 1,
+      "steps": 8,
+      "timestamp_utc": "2026-07-15T15:53:10Z"
+    },
+    {
+      "label": "run",
+      "step": 2,
+      "steps": 8,
+      "timestamp_utc": "2026-07-15T15:53:11Z"
+    },
+    {
+      "label": "run",
+      "step": 3,
+      "steps": 8,
+      "timestamp_utc": "2026-07-15T15:53:11Z"
+    },
+    {
+      "label": "run",
+      "step": 4,
+      "steps": 8,
+      "timestamp_utc": "2026-07-15T15:53:12Z"
+    },
+    {
+      "label": "run",
+      "step": 5,
+      "steps": 8,
+      "timestamp_utc": "2026-07-15T15:53:12Z"
+    },
+    {
+      "label": "run",
+      "step": 6,
+      "steps": 8,
+      "timestamp_utc": "2026-07-15T15:53:12Z"
+    },
+    {
+      "label": "run",
+      "step": 7,
+      "steps": 8,
+      "timestamp_utc": "2026-07-15T15:53:13Z"
+    },
+    {
+      "label": "run",
+      "step": 8,
+      "steps": 8,
+      "timestamp_utc": "2026-07-15T15:53:13Z"
+    }
+  ],
+  "phase": "run",
+  "timestamp_utc": "2026-07-15T15:53:14Z"
+}

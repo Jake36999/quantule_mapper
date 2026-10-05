@@ -1,0 +1,48 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='720' height='420'>
+<rect x='0' y='0' width='720' height='420' fill='white'/>
+<text x='60' y='30' font-size='18'>shell interior force</text>
+<line x1='60' y1='360' x2='680' y2='360' stroke='black'/>
+<line x1='60' y1='60' x2='60' y2='360' stroke='black'/>
+<text x='60' y='395' font-size='12'>radial_distance</text>
+<text x='10' y='55' font-size='12'>radial_force</text>
+<circle cx='60.00' cy='230.30' r='3' fill='#1f77b4'/>
+<circle cx='122.00' cy='90.55' r='3' fill='#d62728'/>
+<circle cx='184.00' cy='308.89' r='3' fill='#2ca02c'/>
+<circle cx='246.00' cy='351.36' r='3' fill='#9467bd'/>
+<circle cx='308.00' cy='236.44' r='3' fill='#ff7f0e'/>
+<circle cx='432.00' cy='230.30' r='3' fill='#17becf'/>
+<circle cx='556.00' cy='230.30' r='3' fill='#7f7f7f'/>
+<circle cx='680.00' cy='230.30' r='3' fill='#1f77b4'/>
+<circle cx='60.00' cy='230.30' r='3' fill='#d62728'/>
+<circle cx='133.67' cy='154.25' r='3' fill='#ff7f0e'/>
+<circle cx='182.78' cy='309.77' r='3' fill='#9467bd'/>
+<circle cx='231.89' cy='360.00' r='3' fill='#17becf'/>
+<circle cx='305.55' cy='237.74' r='3' fill='#2ca02c'/>
+<circle cx='60.00' cy='230.30' r='3' fill='#7f7f7f'/>
+<circle cx='109.11' cy='60.00' r='3' fill='#1f77b4'/>
+<circle cx='158.22' cy='292.83' r='3' fill='#d62728'/>
+<circle cx='182.78' cy='309.77' r='3' fill='#2ca02c'/>
+<circle cx='207.33' cy='319.18' r='3' fill='#9467bd'/>
+<circle cx='281.00' cy='267.33' r='3' fill='#ff7f0e'/>
+<circle cx='354.66' cy='230.36' r='3' fill='#17becf'/>
+<rect x='555' y='55' width='10' height='10' fill='#1f77b4'/><text x='570' y='65' font-size='11'>E1_dist_shell_r0p0</text>
+<rect x='555' y='70' width='10' height='10' fill='#d62728'/><text x='570' y='80' font-size='11'>E1_dist_shell_r0p5</text>
+<rect x='555' y='85' width='10' height='10' fill='#2ca02c'/><text x='570' y='95' font-size='11'>E1_dist_shell_r1p0</text>
+<rect x='555' y='100' width='10' height='10' fill='#9467bd'/><text x='570' y='110' font-size='11'>E1_dist_shell_r1p5</text>
+<rect x='555' y='115' width='10' height='10' fill='#ff7f0e'/><text x='570' y='125' font-size='11'>E1_dist_shell_r2p0</text>
+<rect x='555' y='130' width='10' height='10' fill='#17becf'/><text x='570' y='140' font-size='11'>E1_dist_shell_r3p0</text>
+<rect x='555' y='145' width='10' height='10' fill='#7f7f7f'/><text x='570' y='155' font-size='11'>E1_dist_shell_r4p0</text>
+<rect x='555' y='160' width='10' height='10' fill='#1f77b4'/><text x='570' y='170' font-size='11'>E1_dist_shell_r5p0</text>
+<rect x='555' y='175' width='10' height='10' fill='#d62728'/><text x='570' y='185' font-size='11'>E1_shell_center</text>
+<rect x='555' y='190' width='10' height='10' fill='#2ca02c'/><text x='570' y='200' font-size='11'>E1_shell_exterior</text>
+<rect x='555' y='205' width='10' height='10' fill='#9467bd'/><text x='570' y='215' font-size='11'>E1_shell_gradient</text>
+<rect x='555' y='220' width='10' height='10' fill='#ff7f0e'/><text x='570' y='230' font-size='11'>E1_shell_inner</text>
+<rect x='555' y='235' width='10' height='10' fill='#17becf'/><text x='570' y='245' font-size='11'>E1_shell_outer</text>
+<rect x='555' y='250' width='10' height='10' fill='#7f7f7f'/><text x='570' y='260' font-size='11'>E8_shell_map_r0p0</text>
+<rect x='555' y='265' width='10' height='10' fill='#1f77b4'/><text x='570' y='275' font-size='11'>E8_shell_map_r1p0</text>
+<rect x='555' y='280' width='10' height='10' fill='#d62728'/><text x='570' y='290' font-size='11'>E8_shell_map_r2p0</text>
+<rect x='555' y='295' width='10' height='10' fill='#2ca02c'/><text x='570' y='305' font-size='11'>E8_shell_map_r2p5</text>
+<rect x='555' y='310' width='10' height='10' fill='#9467bd'/><text x='570' y='320' font-size='11'>E8_shell_map_r3p0</text>
+<rect x='555' y='325' width='10' height='10' fill='#ff7f0e'/><text x='570' y='335' font-size='11'>E8_shell_map_r4p5</text>
+<rect x='555' y='340' width='10' height='10' fill='#17becf'/><text x='570' y='350' font-size='11'>E8_shell_map_r6p0</text>
+</svg>

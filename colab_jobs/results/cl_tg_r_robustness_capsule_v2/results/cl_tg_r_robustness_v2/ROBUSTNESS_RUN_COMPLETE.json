@@ -1,0 +1,17 @@
+{
+  "completed_rows": [
+    "r1_grid_N96_sep3",
+    "r1_dt_half_sep3",
+    "r2_eps_003_sep3",
+    "r2_eps_012_sep3",
+    "r1_box_L20_N96_sep3"
+  ],
+  "failed_rows": [],
+  "finished_utc": "2026-07-17T13:44:17Z",
+  "v2_rows_attempted": [
+    "r2_eps_003_sep3",
+    "r2_eps_012_sep3",
+    "r1_box_L20_N96_sep3"
+  ],
+  "verdict": "TG_R_ROBUSTNESS_PASS"
+}

@@ -1,0 +1,25 @@
+{
+  "row_id": "cx_gravity_d_load_capacity_yield_map",
+  "return_code": 0,
+  "duration_seconds": 8.247223138809204,
+  "finished_utc": "2026-07-18T00:03:07Z",
+  "log_path": "/content/qm_job/run_cx_gravity_d_load_capacity_yield_map.log",
+  "log_sha256": "e0b0711036a2a276996a14b7fbcdc4c8f14989e78a0bb265b3c60c82159f070f",
+  "stages": [
+    {
+      "stage_id": "main",
+      "command": [
+        "/usr/bin/python3",
+        "-u",
+        "jax_scout/gravity_D_load_capacity_yield_map_gpu.py",
+        "--out",
+        "/content/qm_job/results/cx_gravity_d_load_capacity_yield_map",
+        "--matrix",
+        "pilot"
+      ],
+      "return_code": 0,
+      "duration_seconds": 8.246538400650024,
+      "finished_utc": "2026-07-18T00:03:07Z"
+    }
+  ]
+}

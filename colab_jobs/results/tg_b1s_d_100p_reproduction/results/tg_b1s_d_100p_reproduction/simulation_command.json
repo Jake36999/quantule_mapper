@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "-u",
+    "jax_scout/gravity_TG_B1S_drift_decomposition_gpu.py",
+    "--out",
+    "/content/qm_job/results/tg_b1s_d_100p_reproduction/simulation",
+    "--matrix",
+    "primary",
+    "--sample-dt",
+    "1.0"
+  ],
+  "finished_utc": "2026-07-15T13:16:45Z",
+  "return_code": 0
+}

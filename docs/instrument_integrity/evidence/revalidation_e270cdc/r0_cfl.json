@@ -1,0 +1,82 @@
+[
+  {
+    "N": 48,
+    "dt": 0.001,
+    "D": 2.7329,
+    "stable": true,
+    "mass_ret_T1": 0.9982418399645342,
+    "linear_stiffness_rad_per_step": 0.62
+  },
+  {
+    "N": 48,
+    "dt": 0.001,
+    "D": 1.0,
+    "stable": true,
+    "mass_ret_T1": 0.9982418399633742,
+    "linear_stiffness_rad_per_step": 0.23
+  },
+  {
+    "N": 48,
+    "dt": 0.0005,
+    "D": 2.7329,
+    "stable": true,
+    "mass_ret_T1": 0.998241839963452,
+    "linear_stiffness_rad_per_step": 0.31
+  },
+  {
+    "N": 48,
+    "dt": 0.0005,
+    "D": 1.0,
+    "stable": true,
+    "mass_ret_T1": 0.998241839963274,
+    "linear_stiffness_rad_per_step": 0.11
+  },
+  {
+    "N": 96,
+    "dt": 0.001,
+    "D": 2.7329,
+    "stable": true,
+    "mass_ret_T1": 0.9982477625882236,
+    "linear_stiffness_rad_per_step": 2.49
+  },
+  {
+    "N": 96,
+    "dt": 0.001,
+    "D": 1.0,
+    "stable": true,
+    "mass_ret_T1": 0.998247762533202,
+    "linear_stiffness_rad_per_step": 0.91
+  },
+  {
+    "N": 96,
+    "dt": 0.0005,
+    "D": 2.7329,
+    "stable": true,
+    "mass_ret_T1": 0.9982477625349702,
+    "linear_stiffness_rad_per_step": 1.24
+  },
+  {
+    "N": 96,
+    "dt": 0.0005,
+    "D": 1.0,
+    "stable": true,
+    "mass_ret_T1": 0.9982477625309614,
+    "linear_stiffness_rad_per_step": 0.45
+  },
+  {
+    "N": 96,
+    "dt": 0.00025,
+    "D": 2.7329,
+    "stable": true,
+    "mass_ret_T1": 0.9982477625310617,
+    "linear_stiffness_rad_per_step": 0.62
+  },
+  {
+    "N": 96,
+    "dt": 0.00025,
+    "D": 1.0,
+    "stable": true,
+    "mass_ret_T1": 0.9982477625306783,
+    "linear_stiffness_rad_per_step": 0.23
+  }
+]

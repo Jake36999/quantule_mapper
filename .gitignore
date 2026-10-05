@@ -115,3 +115,8 @@ docs/runs/_index.sqlite
 queue_runtime.db
 queue_runtime.db-shm
 queue_runtime.db-wal
+
+# graphify output: regenerated on every run (graph.html is ~13 MB). Keep only the readable report in git
+# so the repo stays well under 100 MB.
+graphify-out/*
+!graphify-out/GRAPH_REPORT.md

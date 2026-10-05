@@ -1,0 +1,61 @@
+{
+  "newton_at_astar": {
+    "converged": 0.0,
+    "residuals": [
+      0.023126593353946,
+      0.020606393706207506,
+      0.0188769306422178,
+      0.017747315035528344,
+      0.01666586299243089,
+      0.015657290334936173,
+      0.014251084631303564,
+      0.01315547520576164,
+      0.01180606681166263,
+      0.010807773765035432,
+      0.0099591877194343,
+      0.00901504407685049,
+      0.00879238330525529,
+      0.008134284999755,
+      0.007937075658034766,
+      0.007438192577595686
+    ]
+  },
+  "provenance": {
+    "argv": [
+      "--N",
+      "32",
+      "--out",
+      "/mnt/f/quantule_mapper/sweep_runs/ASTAR_CONTINUATION_PILOT_RERUN"
+    ],
+    "branch": "main",
+    "commit": "17d5c28c25d213fe08cf44a4481fae95ebb2db70",
+    "commit_short": "17d5c28c25d2",
+    "component_hashes": {
+      "gravity/unified_omega.py": "5e00f2ae3aad5d2d92562588fdd37becfc174db9",
+      "jax_scout/__init__.py": "f66dadc848f05b3d609bbff3e14400911ba7ba98",
+      "jax_scout/afield_current_coupled.py": "a540af618e971de65c9a635d2302edcc1806b379",
+      "jax_scout/astar_continuation_pilot.py": "794cb05f3bb823d0361d8bfc932054b9aad8b938",
+      "jax_scout/continuation.py": "2cb1691d6c28970f10764482e1ab8793c3a19b44",
+      "jax_scout/core_saturation_search.py": "0642acaa2820028b58e583576ff51eebc1825f63",
+      "jax_scout/geometry_diag.py": "c2c516e53c4f16e0bf4ce7c82df7ddacef252f6a",
+      "jax_scout/physics.py": "dee2a228a94cf9c7f0d7728de848720f65147e51",
+      "jax_scout/provenance.py": "1fde222537afbf3d5efcb55a5efc6712145bd62e",
+      "jax_scout/transfer_diag.py": "dead3871e74b8dadb100e0962b2ece249017a40a"
+    },
+    "dirty": false,
+    "dirty_components": [],
+    "harness": "astar_continuation_pilot.py",
+    "jax": "0.10.2",
+    "jax_devices": [
+      "cuda:0"
+    ],
+    "numpy": "2.4.6",
+    "platform": "linux",
+    "python": "3.12.3",
+    "started_utc": "2026-10-05T19:08:56Z",
+    "steppers": [
+      "ETDRK4"
+    ]
+  },
+  "verdict": "NOT_A_RELATIVE_EQUILIBRIUM_AT_T_MAP"
+}

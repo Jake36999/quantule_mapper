@@ -2,7 +2,7 @@
 tags: [record, infra, basins, continuation]
 date: 2026-10-04
 branch: Branch - Stability - Index
-status: running
+status: complete
 ---
 
 # Basin mapping: ensembles, clustering, continuation (Phase F)
@@ -103,7 +103,7 @@ spec's prediction.
 | 1 | Continuation for conservative branches (soliton families) | OPEN — add a mass constraint or an unfolding parameter |
 | 2 | Deflation to reach unstable nontrivial states | OPEN |
 | 3 | Periodic-orbit (breathing) shooting with unknown period | OPEN |
-| 4 | The a\* ensemble and continuation runs | OPEN — queued behind B4 |
+| 4 | The a\* ensemble and continuation runs | RESOLVED 2026-10-05: ensemble gives ≥2 basins (4 vs 6 nodes); continuation returns `NOT_A_RELATIVE_EQUILIBRIUM_AT_T_MAP` (\|F\| 2.3e-2 → 7.4e-3, no quadratic convergence), so a\* breathes, which makes issue 3 the next step |
 
 ## Associated docs
 - [[IMPLEMENTATION_PLAN_2026-10]] · [[EXPERIMENT_SPECS_MCP_UI]] · [[SEARCH_STACK_AUDIT_2026-10]] · [[REVALIDATION_E270CDC_RESULTS]]

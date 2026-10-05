@@ -148,9 +148,14 @@ D_imag > 0 cells are incoherent (mass grows, node count rises).
     contrast and gyration radius. So there are at least two basins at a\* (by node count), and
     possibly three. Separating "a different basin" from "the same basin at a different breathing
     phase" needs more replicates per seed.
-- **a\* continuation pilot:** the first run crashed with out-of-memory. The cause was `jax.linearize`
-  through 1000 steps (fixed in `4a482df`, CL-010). The rerun is in progress
-  (`sweep_runs/ASTAR_CONTINUATION_PILOT_RERUN.log`); its verdict will be added to [[BASIN_MAPPING]].
+- **a\* continuation pilot** (N=32, return-map time T=5): the first run crashed with out-of-memory
+  (`jax.linearize` through 1000 steps; fixed in `4a482df`, CL-010). The rerun completed with verdict
+  **`NOT_A_RELATIVE_EQUILIBRIUM_AT_T_MAP`**. Over 15 Newton steps |F| fell only from 2.3e-2 to
+  7.4e-3, a slow linear decrease rather than quadratic convergence. So the settled a\* state does not
+  return to itself, up to a phase and a shift, after T=5. This fits the a\* breathing seen earlier: a\*
+  is a dynamic (breathing) attractor, not a rigidly rotating one. Following its branch needs
+  periodic-orbit shooting with the period as an unknown, which is BASIN_MAPPING open issue 3.
+  Summary: `evidence/phase_f/astar_continuation_pilot_summary.json`.
 
 ## What changed as a result
 - **Catalog** ([[IRER_MASTER_HYPOTHESIS_CATALOG]]):

@@ -177,7 +177,8 @@ def _finalize(m, done, log=print, batch=None):
                "protocol": spec["protocol"], "final": final, "prediction": spec["prediction"],
                "prediction_check": check, "stop_reason": m["stop_reason"], "steps": steps,
                "t_final": sim.t, "wall_s": round(time.time() - m["t0"], 2), "telemetry": stats,
-               "history": rec_stats, "batch": batch, "verdict": None}
+               "history": rec_stats, "batch": batch, "precision": spec["protocol"].get("precision", "fp64"),
+               "verdict": None}
     write_json(os.path.join(point_dir, "summary.json"), summary)
     write_json(os.path.join(point_dir, "verdict.json"),
                {"spec_id": spec["id"], "verdict": "PENDING_REVIEW", "prediction_check": check["status"],
@@ -232,7 +233,7 @@ def plan_batches(points, batch_size=None):
     for key in order:
         items = groups[key]
         n = items[0][1]["protocol"]["grid"]["N"]
-        size = batch_size or registry.max_batch(n)
+        size = batch_size or registry.max_batch(n, precision=registry.precision_of(items[0][1]))
         for i in range(0, len(items), max(1, size)):
             batches.append(items[i:i + size])
     return batches
@@ -247,9 +248,13 @@ def main(argv=None):
     ap.add_argument("--no-batch", dest="batch", action="store_false",
                     help="step every sweep point on its own (default: vmap compatible ETDRK4 points together)")
     ap.add_argument("--batch-size", type=int, default=None, help="members per batch (default: GPU memory budget)")
+    ap.add_argument("--precision", choices=("fp64", "fp32"), default=None,
+                    help="override protocol.precision for every point (fp32 = screening only)")
     args = ap.parse_args(argv)
 
     spec = irer_specs.load(args.spec)
+    if args.precision:
+        spec["protocol"]["precision"] = args.precision
     errs = irer_specs.validate(spec)
     if not errs:
         from jax_scout import registry
@@ -263,6 +268,9 @@ def main(argv=None):
         print("WARNING:", w)
     points = irer_specs.expand(spec)
     print("spec %s: %d point(s)" % (spec["id"], len(points)))
+    if spec["protocol"].get("precision", "fp64") != "fp64":
+        print("NOTE: precision %s -- screening only; confirm anything you will quote in fp64"
+              % spec["protocol"]["precision"])
     if args.dry_run:
         for label, _ in points:
             print("  -", label or "(single)")

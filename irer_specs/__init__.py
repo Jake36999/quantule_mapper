@@ -64,6 +64,11 @@ SCHEMA = {
                 "sample_every": {"type": "number", "exclusiveMinimum": 0,
                                  "description": "physical time between observer samples (default T/100)"},
                 "seed": {"type": "integer"},
+                "precision": {"type": "string", "enum": ["fp64", "fp32"],
+                              "description": "floating-point precision (default fp64). fp32 is 3.7-4.5x faster "
+                                             "on the GTX 1080 but drifts ~0.1-0.5% over an a* replay: for "
+                                             "basin SCREENING only, never for brackets or catalogued numbers. "
+                                             "etdrk4-sncgl only."},
                 "record": {
                     "type": "object", "required": ["every"], "additionalProperties": False,
                     "description": "save a playable history: fields every `every` (physical time), optionally "

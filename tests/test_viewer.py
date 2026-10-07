@@ -134,3 +134,15 @@ def test_numbered_snapshot_packs_become_one_group(tree):
     s = vd.group_series("FEB_TEST_RUN", g[0]["group"], "abs2")
     assert s["stats"]["rho"]["mean"] == [1.0, 2.0, 3.0]   # real fields are shown as-is (rho is already a density)
     assert s["stats"]["phi"]["max"] == [1.0, 4.0, 9.0]
+
+
+def test_screening_runs_are_flagged_by_precision(tmp_path):
+    def spec(d, body):
+        d.mkdir()
+        (d / "spec.json").write_text(json.dumps(body))
+        return str(d / "spec.json")
+    assert vd._precision(spec(tmp_path / "a", {"protocol": {}})) is None
+    assert vd._precision(spec(tmp_path / "b", {"protocol": {"precision": "fp32"}})) == "fp32"
+    assert vd._precision(spec(tmp_path / "c", {"protocol": {},
+                                               "sweep": {"axes": {"protocol.precision": ["fp64", "fp32"]}}})) == "mixed"
+    assert vd._precision(str(tmp_path / "missing.json")) is None

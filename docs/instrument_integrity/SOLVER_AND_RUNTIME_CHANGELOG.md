@@ -29,6 +29,7 @@ bookkeeping, telemetry or tests.
 
 | date | id | summary | output-changing? | commit |
 |---|---|---|---|---|
+| 2026-10-07 | CL-013 | `protocol.precision` (fp64 default \| fp32 screening, ETDRK4 only); `--precision` override; fp32 runs flagged in summary + gallery | no for fp64 (default path unchanged); fp32 is opt-in, ~0.1–0.5% drift | precision branch |
 | 2026-10-07 | CL-012 | Batched (vmap) spec sweeps; `physics.operator_args`/`ops_from_args` refactor (byte-identical); provenance git state cached per process | no (batched ≡ single to 1e-10) | batch branch |
 | 2026-10-07 | CL-011 | Run gallery + viewer; `protocol.record` (whole run or window); render queue + worker; pages moved `ui/`→`web/` (gitignore bug) | no (recording is opt-in) | viewer branch |
 | 2026-10-05 | CL-010 | Continuation: jvp matvec replaces `jax.linearize` (N³ memory → constant) | no | `4a482df` |
@@ -41,6 +42,32 @@ bookkeeping, telemetry or tests.
 | 2026-10-04 | CL-003 | Provenance `steppers`; stale-run view; `--dt`/`--cells` for the a\* harnesses; re-validation driver | no (default paths byte-identical) | `d3d87fd` |
 | 2026-10-04 | CL-002 | Stepper order + MMS gates, stepper mutations, CI extension | no (tests/tooling) | `0419ff9` |
 | 2026-10-02 | CL-001 | ETDRK4: complex-safe contour coefficients + stage-c `N_n` | **YES** | `e270cdc` |
+
+---
+
+## CL-013 — Precision option for screening runs
+- **Branch:** `feat/precision-option`
+- **Files:**
+  - `irer_specs/__init__.py` + `schemas/experiment_spec.schema.json`: `protocol.precision`, enum
+    `fp64` | `fp32`, default `fp64`. It can be a sweep axis (`protocol.precision`).
+  - `jax_scout/registry.py`:
+    - `DTYPES` and `PRECISIONS`; only `etdrk4-sncgl` offers fp32. `check_spec` reports, and
+      `build` refuses, fp32 on KG/TG.
+    - The ETDRK4 Sim passes the dtypes to the existing dtype-parametric `physics.build_operators`.
+      **No solver code changed.**
+    - `batch_key` includes precision, so fp32 and fp64 never share a vmapped batch.
+    - `max_batch` counts 8 bytes per complex point for fp32.
+  - `tools/run_spec.py`: `--precision` overrides every point; `summary.json` gains `precision`; a
+    note is printed for fp32 runs.
+  - `tools/viewer_data.py` + `web/viewer/index.html`: gallery chip "fp32 screen" or "mixed screen".
+  - tests: KG rejects fp32; an fp32 sweep runs in complex64, is batched apart from fp64, and matches
+    fp64 to 1e-3 over a short run; the viewer flag.
+- **Why:** fp32 is 3.7–4.5× faster on the GTX 1080 (see [[BATCHED_RUNS]]), enough to screen many
+  more configurations for basin mapping.
+- **Output-changing?** No for any existing spec: the default is fp64 and that path is unchanged.
+  fp32 is opt-in and drifts about 0.1–0.5% from fp64 over an a\* replay. **fp32 numbers are
+  screening results only.** Brackets, continuation and catalogued values must come from fp64 runs.
+- **Verified:** 21 spec-layer tests in WSL (CPU), plus viewer, spec-UI and MCP tests: 50 passed.
 
 ---
 

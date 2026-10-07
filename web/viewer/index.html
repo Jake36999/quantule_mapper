@@ -103,6 +103,7 @@ function card(x) {
   return `<div class="card" data-id="${esc(x.run_id)}"><div class="thumb">${img}</div><div class="body">
     <div class="rid">${esc(x.run_id)}</div><div class="note">${esc(x.date)} · ${esc(x.substrate)}</div>
     <div class="chips"><span class="chip ${x.badge}">${x.badge}</span>
+      ${x.precision ? `<span class="chip stale" title="single-precision screening run: confirm in fp64 before quoting">${x.precision} screen</span>` : ""}
       ${x.n_field_files ? `<span class="chip">${x.n_field_files} field file${x.n_field_files>1?"s":""}</span>` : ""}
       ${x.n_frames ? `<span class="chip hist">${x.n_frames} frames</span>` : ""}
       ${x.verdict ? `<span class="chip">${esc(x.verdict)}</span>` : ""}</div></div></div>`;

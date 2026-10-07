@@ -9,6 +9,7 @@ from __future__ import annotations
 import copy
 import glob
 import json
+import math
 import os
 import sys
 
@@ -224,3 +225,46 @@ def test_batch_planning_separates_incompatible_points():
     sizes = sorted(len(b) for b in run_spec.plan_batches(pts))
     assert sizes == [1, 1, 1, 2]                                  # only the two a-values share a batch
     assert [len(b) for b in run_spec.plan_batches(pts[:2], batch_size=1)] == [1, 1]
+
+
+@needs_jax
+def test_fp32_is_offered_only_where_registered():
+    from jax_scout import registry
+    s = copy.deepcopy(MINI)                                       # kg-strang: fp64 only
+    s["protocol"]["precision"] = "fp32"
+    assert any("does not support fp32" in e for e in registry.check_spec(s))
+    with pytest.raises(ValueError):
+        registry.build(s)
+
+
+@needs_jax
+def test_fp32_screening_runs_close_to_fp64_and_never_shares_a_batch(tmp_path):
+    """protocol.precision=fp32 really steps in complex64, agrees with fp64 to screening accuracy over a short
+    run, is stamped in the summary, and is never vmapped together with fp64 points."""
+    import run_spec
+    from jax_scout import registry
+    import jax.numpy as jnp
+    spec = irer_specs.load(os.path.join(ROOT, "specs", "approved", "astar-probe-pilot.json"))
+    spec["id"] = "precision-screen"
+    spec["protocol"].update(grid={"N": 16, "L": 10.0}, T=0.2, sample_every=0.05)
+    spec["sweep"] = {"axes": {"protocol.precision": ["fp64", "fp32"],
+                              "substrate.params.param_a": [0.50, 0.60]}}
+    assert irer_specs.validate(spec) == [] and registry.check_spec(spec) == []
+    pts = irer_specs.expand(spec)
+    assert sorted(len(b) for b in run_spec.plan_batches(pts)) == [2, 2]
+    sim, _ = registry.build(dict(pts[-1][1], protocol=dict(pts[-1][1]["protocol"], precision="fp32")))
+    assert sim.psi_k.dtype == jnp.complex64
+    p = tmp_path / "s.json"
+    p.write_text(json.dumps(spec))
+    assert run_spec.main([str(p), "--out", str(tmp_path / "o"), "--sweep-root", str(tmp_path)]) == 0
+    finals = {}
+    for r in json.load(open(tmp_path / "o" / "summary.json"))["rows"]:
+        d = tmp_path / "o" / r["dir"]
+        s, sp = json.load(open(d / "summary.json")), json.load(open(d / "spec.json"))
+        finals[(s["precision"], sp["substrate"]["params"]["param_a"])] = s["final"]
+    assert len(finals) == 4
+    for a in (0.50, 0.60):
+        f64, f32 = finals[("fp64", a)], finals[("fp32", a)]
+        for k, v in f64.items():
+            if isinstance(v, float) and math.isfinite(v) and abs(v) > 1e-6:
+                assert abs(f32[k] - v) <= 1e-3 * abs(v), k

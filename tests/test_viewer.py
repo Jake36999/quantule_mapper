@@ -118,3 +118,19 @@ def test_web_pages_are_not_gitignored():
         assert os.path.exists(os.path.join(ROOT, page)), page
         r = subprocess.run(["git", "check-ignore", "-q", page], cwd=ROOT)
         assert r.returncode == 1, "%s is git-ignored" % page
+
+
+def test_numbered_snapshot_packs_become_one_group(tree):
+    """sample000/010/020 packs in one folder are ONE experiment over time, not three unrelated tabs."""
+    sd = tree / "sweep_runs" / "FEB_TEST_RUN" / "source_snapshots"
+    sd.mkdir()
+    for i, n in enumerate((0, 10, 20)):
+        np.savez(sd / ("two_packet_sample%03d.npz" % n), t=np.float64(0.5 * i),
+                 rho=np.full((8, 8, 8), 1.0 + i), phi=np.ones((8, 8, 8), complex) * (i + 1))
+    d = vd.run_detail("FEB_TEST_RUN")
+    g = [x for x in d["groups"] if x["group"].endswith("two_packet")]
+    assert len(g) == 1 and g[0]["t"] == [0.0, 0.5, 1.0] and set(g[0]["fields"]) == {"rho", "phi"}
+    assert not any(f["file"].startswith("source_snapshots/") for f in d["fields"])
+    s = vd.group_series("FEB_TEST_RUN", g[0]["group"], "abs2")
+    assert s["stats"]["rho"]["mean"] == [1.0, 2.0, 3.0]   # real fields are shown as-is (rho is already a density)
+    assert s["stats"]["phi"]["max"] == [1.0, 4.0, 9.0]

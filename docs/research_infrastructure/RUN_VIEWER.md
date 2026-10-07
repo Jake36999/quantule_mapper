@@ -49,6 +49,14 @@ python tools/render_queue_worker.py   (WSL ~/jax_irer)  ->  runs queued re-runs,
   - Shaded bands where the behaviour **changes**: transients, bends, oscillation.
   - These are found from curvature (d²y/dt²), not slope, so a steady drift produces no suggestions.
     The page then says to record the whole run at a low frame rate instead.
+- **Snapshot series (added 2026-10-07).**
+  - Numbered field packs saved during a run (for example
+    `source_snapshots/two_packet_phase_locking_sample060.npz`) are grouped automatically by folder and
+    name stem. Each group is one experiment over time, using each pack's own `t`.
+  - Each group gets a sample slider, slices and 3-D, and a chart of every field across the samples
+    (Σ, max or mean). The chart can scale each field by its largest |value|; scaling by the first
+    sample was tried first and blew fields that start near zero up to thousands.
+  - For TG_SOURCE_SEMANTICS_GPU this turns **143 tabs into 11 experiments × 3 samples**.
 - **Recorded history.** A frame slider and play/pause, with slices and 3-D. The colour range is held
   fixed during playback so colours mean the same thing on every frame.
 - **Re-run with visuals.** Choose either:

@@ -119,6 +119,21 @@ async function viewer(id) {
   $("#main").innerHTML = `
     <div class="controls"><a href="#gallery">← gallery</a><b>${esc(id)}</b>
       <span class="note">dt = ${d.dt ?? "unknown"} · ${d.fields.filter(f=>f.key).length} fields · ${d.n_frames} recorded frames</span></div>
+    <div class="panel" id="grp-panel" hidden><h2>Snapshot series</h2>
+      <p class="note">Numbered field packs saved during the run, grouped by name: each group is one experiment sampled at several times.</p>
+      <div class="tabs" id="grp-tabs"></div>
+      <div class="controls">
+        <label class="inline">field <select id="g-field"></select></label>
+        <label class="inline">quantity <select id="g-q">${QUANT.map(([k,l]) => `<option value="${k}">${l}</option>`).join("")}</select></label>
+        <label class="inline">sample <input type="range" id="g-slider" min="0" value="0" style="width:220px"></label>
+        <span id="g-t" class="note"></span></div>
+      <div class="row"><div><div class="slices"><div id="g-xy" class="plot small"></div><div id="g-xz" class="plot small"></div><div id="g-yz" class="plot small"></div></div></div>
+        <div id="g-iso" class="plot tall"></div></div>
+      <div class="controls"><label class="inline">plot <select id="g-stat"><option value="sum">integral (Σ)</option><option value="max">max</option><option value="mean">mean</option></select></label>
+        <label class="inline"><input type="checkbox" id="g-norm" checked> scale each field by its largest |value|</label>
+        <span class="note">Every field of the group across its samples; click a legend entry to hide it.</span></div>
+      <div id="g-chart" class="plot"></div>
+    </div>
     <div class="panel"><h2>Final state</h2>
       <div class="tabs" id="field-tabs"></div>
       <div class="controls">
@@ -148,7 +163,11 @@ async function viewer(id) {
     b.onclick = () => { document.querySelectorAll(".tab").forEach(t=>t.classList.remove("on")); b.classList.add("on"); V.field = f; drawField(); };
     tabs.appendChild(b);
   });
-  if (!d.fields.some(f => f.key)) tabs.innerHTML = `<span class="note">This run saved no 3-D fields. Re-run it with recording to see it.</span>`;
+  if (!d.fields.some(f => f.key)) tabs.innerHTML = d.groups && d.groups.length
+    ? `<span class="note">All saved fields belong to the snapshot series above.</span>`
+    : `<span class="note">This run saved no 3-D fields. Re-run it with recording to see it.</span>`;
+  if (d.groups && d.groups.length) drawGroups();
+  if (!d.fields.some(f => f.key) && d.groups && d.groups.length) $("#field-tabs").closest(".panel").hidden = true;
   $("#q").onchange = e => { V.quantity = e.target.value; drawField(); };
   $("#n").onchange = e => { V.n = +e.target.value; drawField(); };
   drawField(); drawSeries(); drawRerun(); if (d.n_frames) drawHistory();
@@ -195,7 +214,7 @@ async function drawSeries() {
   const s = await api("/api/series?id=" + encodeURIComponent(V.id));
   V.series = s.series || [];
   const sel = $("#series");
-  if (!V.series.length) { sel.innerHTML = "<option>no time series saved</option>"; return; }
+  if (!V.series.length) { sel.closest(".panel").hidden = true; return; }   // nothing to plot: don't show an empty panel
   sel.innerHTML = V.series.map((x,i) => `<option value="${i}">${esc(x.name)}</option>`).join("");
   sel.onchange = () => plotSeries(+sel.value); plotSeries(0);
 }
@@ -261,6 +280,49 @@ async function queueRerun() {
   $("#rr-queue").disabled = true;
 }
 const status = (t, c) => { const s = $("#rr-status"); s.textContent = t; s.className = "status " + (c||""); };
+
+// ------------------------------------------------------------------ snapshot series (numbered field packs)
+function drawGroups() {
+  const gs = V.d.groups; $("#grp-panel").hidden = false;
+  const tabs = $("#grp-tabs"); tabs.innerHTML = "";
+  gs.forEach((g, i) => { const b = document.createElement("button"); b.className = "tab" + (i===0?" on":"");
+    b.textContent = `${g.group.split("/").pop()} · ${g.files.length} samples`; b.title = g.group;
+    b.onclick = () => { tabs.querySelectorAll(".tab").forEach(t=>t.classList.remove("on")); b.classList.add("on"); selectGroup(g); };
+    tabs.appendChild(b); });
+  ["g-field","g-q"].forEach(id => $("#"+id).onchange = () => { showGroupSample(); groupChart(); });
+  $("#g-slider").oninput = showGroupSample; $("#g-stat").onchange = groupChart; $("#g-norm").onchange = groupChart;
+  selectGroup(gs[0]);
+}
+function selectGroup(g) {
+  V.group = g; V.groupRange = null;
+  const prefer = ["phi","psi","rho"], fl = [...g.fields].sort((a,b) => (prefer.indexOf(b)>-1) - (prefer.indexOf(a)>-1));
+  $("#g-field").innerHTML = fl.map(f => `<option>${esc(f)}</option>`).join("");
+  $("#g-slider").max = g.files.length - 1; $("#g-slider").value = 0;
+  showGroupSample(); groupChart();
+}
+async function showGroupSample() {
+  const g = V.group, i = +$("#g-slider").value, f = $("#g-field").value, q = $("#g-q").value;
+  $("#g-t").textContent = `t = ${g.t[i]} (${i+1}/${g.files.length})`;
+  const r = await api(`/api/field?id=${encodeURIComponent(V.id)}&file=${encodeURIComponent(g.files[i])}&key=${encodeURIComponent(f)}&quantity=${q}&n=48`);
+  if (!r.data) return; const a = decode(r), sl = slices(a, r.shape);
+  const key = g.group + f + q; if (!V.groupRange || V.groupRange.key !== key) V.groupRange = {key, min:r.min, max:r.max};
+  V.groupRange.min = Math.min(V.groupRange.min, r.min); V.groupRange.max = Math.max(V.groupRange.max, r.max);
+  heat("g-xy", sl.xy, `${f} xy · t = ${g.t[i]}`, q); heat("g-xz", sl.xz, "xz", q); heat("g-yz", sl.yz, "yz", q);
+  iso("g-iso", a, r.shape, r, q, `${g.group.split("/").pop()} · ${f}`, V.groupRange);
+}
+async function groupChart() {
+  const g = V.group, q = $("#g-q").value, stat = $("#g-stat").value, norm = $("#g-norm").checked;
+  const s = await api(`/api/group_series?id=${encodeURIComponent(V.id)}&group=${encodeURIComponent(g.group)}&quantity=${q}`);
+  if (s.status !== "OK") return;
+  const sel = $("#g-field").value;
+  // scale by the largest |value| over the samples, NOT the first sample: fields that start near zero
+  // (currents, lock/threshold maps) would otherwise blow up to ratios in the thousands
+  const traces = Object.entries(s.stats).map(([k, v]) => { const y = v[stat], m = Math.max(...y.map(Math.abs)) || 1;
+    return {x:s.t, y: norm ? y.map(u => u / m) : y, mode:"lines+markers", name:k,
+            line:{width: k===sel ? 3 : 1.2}, visible: true}; });
+  Plotly.react("g-chart", traces, layoutBase({xaxis:{title:"t", gridcolor:grid}, yaxis:{title: norm ? `${stat} / max|${stat}|` : stat, gridcolor:grid},
+    legend:{orientation:"h", y:-0.25}}), {responsive:true});
+}
 
 // ------------------------------------------------------------------ recorded history
 let play = null;

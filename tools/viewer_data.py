@@ -187,15 +187,84 @@ def _dt_T(run_dir):
     return None, {}
 
 
+_SEQ = re.compile(r"^(?P<stem>.*?)[_-]?(?:sample|step|frame|snap|t)?[_-]?(?P<num>\d+)\.npz$", re.I)
+
+
+def snapshot_groups(rd):
+    """Numbered field packs saved during a run (e.g. source_snapshots/two_packet_phase_locking_sample060.npz)
+    form a SERIES: same directory + same stem, different number. Grouping them turns dozens of separate
+    tabs into one experiment you can scrub through and plot over time. Uses each pack's scalar `t` when
+    present, else the number in the file name. Only groups with >= 2 members count."""
+    by = {}
+    for f in glob.glob(os.path.join(rd, "**", "*.npz"), recursive=True):
+        if os.path.basename(f).startswith("snap_") or os.sep + "history" + os.sep in f:
+            continue
+        m = _SEQ.match(os.path.basename(f))
+        if not m:
+            continue
+        rel_dir = os.path.relpath(os.path.dirname(f), rd).replace(os.sep, "/")
+        key = (rel_dir + "/" if rel_dir != "." else "") + m.group("stem").rstrip("_-")
+        by.setdefault(key, []).append((int(m.group("num")), f))
+    groups = []
+    for key, members in sorted(by.items()):
+        if len(members) < 2:
+            continue
+        members.sort()
+        shapes = _npz_shapes(members[0][1])
+        if not any(_is_cube(s) for s, _ in shapes.values()):
+            continue
+        ts = []
+        for num, f in members:
+            t = None
+            if "t" in shapes and shapes["t"][0] == ():
+                with np.load(f) as z:
+                    t = float(z["t"])
+            ts.append(t if t is not None else float(num))
+        groups.append({"group": key, "files": [os.path.relpath(f, rd).replace(os.sep, "/") for _, f in members],
+                       "t": ts, "fields": [k for k, (s, _) in shapes.items() if _is_cube(s)],
+                       "complex": [k for k, (s, d) in shapes.items() if _is_cube(s) and "complex" in d]})
+    return groups
+
+
+_GROUP_CACHE = {}
+
+
+def group_series(run_id, group, quantity="abs2"):
+    """Per sample, for every field of a snapshot group: integral (sum * dV-free), max and mean of the
+    chosen quantity. One pass over the files; cached per (run, group, quantity)."""
+    rd = _run_dir(run_id)
+    g = next((x for x in snapshot_groups(rd) if x["group"] == group), None)
+    if g is None:
+        raise KeyError(group)
+    ck = (run_id, group, quantity, tuple(os.path.getmtime(os.path.join(rd, f)) for f in g["files"]))
+    if ck in _GROUP_CACHE:
+        return _GROUP_CACHE[ck]
+    stats = {k: {"sum": [], "max": [], "mean": []} for k in g["fields"]}
+    for f in g["files"]:
+        with np.load(os.path.join(rd, f)) as z:
+            for k in g["fields"]:
+                v = _quantity(z[k], quantity)
+                stats[k]["sum"].append(float(np.sum(v)))
+                stats[k]["max"].append(float(np.max(v)))
+                stats[k]["mean"].append(float(np.mean(v)))
+    out = {"status": "OK", "group": group, "t": g["t"], "quantity": quantity, "stats": stats}
+    _GROUP_CACHE[ck] = out
+    return out
+
+
 def run_detail(run_id):
     rd = _run_dir(run_id)
     fields, series = [], []
+    groups = snapshot_groups(rd)
+    grouped = {f for g in groups for f in g["files"]}
     files = sorted(set(glob.glob(os.path.join(rd, "*.npz")) + glob.glob(os.path.join(rd, "*", "*.npz")) +
                        glob.glob(os.path.join(rd, "*.h5")) + glob.glob(os.path.join(rd, "*", "*.h5"))))
     for f in files:
         if os.path.basename(f).startswith("snap_"):
             continue
         rel = os.path.relpath(f, rd).replace(os.sep, "/")
+        if rel in grouped:                       # shown as a snapshot group instead of one tab per file
+            continue
         try:
             shapes = _npz_shapes(f) if f.endswith(".npz") else _h5_shapes(f)
         except Exception as exc:                     # a broken file must not break the page
@@ -216,7 +285,7 @@ def run_detail(run_id):
     frame_fields = []
     if frames:
         frame_fields = sorted({k.split("__")[0] for k in _npz_shapes(frames[0]) if "__" in k})
-    return {"status": "OK", "run_id": run_id, "fields": fields, "series": series, "dt": dt,
+    return {"status": "OK", "run_id": run_id, "fields": fields, "groups": groups, "series": series, "dt": dt,
             "n_frames": len(frames), "frame_fields": frame_fields,
             "rerunnable": rerun_spec(run_id, None, dry=True).get("status") == "OK",
             "summary_keys": sorted(summ)[:40]}

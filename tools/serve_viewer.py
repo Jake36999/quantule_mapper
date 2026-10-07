@@ -77,6 +77,8 @@ class Handler(BaseHTTPRequestHandler):
                                                   int(q.get("n", 48)), int(q.get("t", -1))))
             if u.path == "/api/series":
                 return self._send(200, vd.time_series(q["id"]))
+            if u.path == "/api/group_series":
+                return self._send(200, vd.group_series(q["id"], q["group"], q.get("quantity", "abs2")))
             if u.path == "/api/history":
                 return self._send(200, vd.history_index(q["id"]))
             if u.path == "/api/frame":

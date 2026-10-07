@@ -65,7 +65,8 @@ def _slope(ts, ys):
     return sum((t - mt) * (y - my) for t, y in zip(ts, ys)) / den if den else float("nan")
 
 
-def run_point(spec, point_dir, *, log=print):
+def _setup_member(spec, point_dir):
+    """Build one member: substrate + IC + observers + telemetry + optional recorder. No stepping."""
     from jax_scout import registry
     from jax_scout.provenance import write_json
     from jax_scout.snapshots import TelemetryWriter
@@ -76,74 +77,93 @@ def run_point(spec, point_dir, *, log=print):
     dt, T = float(pr["dt"]), float(pr["T"])
     n_total = int(round(T / dt))
     every = max(1, int(round(float(pr.get("sample_every", T / 100.0)) / dt)))
-    max_wall = float((pr.get("stop") or {}).get("max_wall_h", math.inf)) * 3600.0
-    stop_nonfinite = (pr.get("stop") or {}).get("nonfinite", True)
-
-    t0 = time.time()
     sim, observers = registry.build(spec)
-    tel = TelemetryWriter(point_dir, invariants=spec.get("invariants") or {},
-                          meta={"harness": "run_spec.py", "spec_id": spec["id"]})
-
-    final_only = {o["name"] for o in spec["observers"] if (o.get("params") or {}).get("final_only")}
-
-    def sample(last=False):
-        row = {}
-        for name, fn, params in observers:
-            if name in final_only and not last:
-                continue
-            row.update(fn(sim, **params))
-        tel.record(sim.t, **row)
-        return row
-
+    m = {"spec": spec, "dir": point_dir, "sim": sim, "observers": observers, "n_total": n_total, "t0": time.time(),
+         "tel": TelemetryWriter(point_dir, invariants=spec.get("invariants") or {},
+                                meta={"harness": "run_spec.py", "spec_id": spec["id"]}),
+         "final_only": {o["name"] for o in spec["observers"] if (o.get("params") or {}).get("final_only")},
+         "stop_nonfinite": (pr.get("stop") or {}).get("nonfinite", True),
+         "sample_steps": set(range(every, n_total + 1, every)) | {n_total},
+         "recorder": None, "rec_steps": set(), "want": set(), "stop_reason": "completed", "stopped": False}
     # --- optional playable history (protocol.record) --------------------------------------------
     # Frames go to <point>/history/ through the same SnapshotWriter the harnesses use (slices + a
     # downsampled volume per frame). `window` restricts capture to [t_start, t_end]: the run still has to
     # be integrated from t=0 to t_end, but only the window is written, so a short dynamic episode can be
     # recorded at a high frame rate without storing the whole run.
     rec = pr.get("record")
-    recorder, rec_steps = None, set()
     if rec:
         from jax_scout.snapshots import SnapshotWriter
         r_every = max(1, int(round(float(rec["every"]) / dt)))
         lo, hi = rec.get("window", [0.0, T])
         s_lo, s_hi = max(0, int(round(float(lo) / dt))), min(n_total, int(round(float(hi) / dt)))
-        rec_steps = set(range(s_lo, s_hi + 1, r_every))
-        recorder = SnapshotWriter(os.path.join(point_dir, "history"), enabled=True, every=1, volume_every=1,
-                                  volume_target=int(rec.get("volume", 48)), maxqueue=64)
-        want = set(rec.get("fields") or [])
+        m["rec_steps"] = set(range(s_lo, s_hi + 1, r_every))
+        m["recorder"] = SnapshotWriter(os.path.join(point_dir, "history"), enabled=True, every=1, volume_every=1,
+                                       volume_target=int(rec.get("volume", 48)), maxqueue=64)
+        m["want"] = set(rec.get("fields") or [])
+    return m
 
-        def capture():
-            f = sim.fields()
-            recorder.capture(sim.t, {k: v for k, v in f.items() if not want or k in want}, dx=sim.grid.dx)
 
-    sample_steps = set(range(every, n_total + 1, every)) | {n_total}
-    history = [(sim.t, sample(last=n_total == 0))]
-    if recorder and 0 in rec_steps:
-        capture()
-    done, stop_reason = 0, "completed"
-    events = sorted((sample_steps | rec_steps) - {0})
-    for target in events:
+def _sample(m, last=False):
+    row = {}
+    for name, fn, params in m["observers"]:
+        if name in m["final_only"] and not last:
+            continue
+        row.update(fn(m["sim"], **params))
+    m["tel"].record(m["sim"].t, **row)
+    return row
+
+
+def _capture(m):
+    f = m["sim"].fields()
+    m["recorder"].capture(m["sim"].t, {k: v for k, v in f.items() if not m["want"] or k in m["want"]},
+                          dx=m["sim"].grid.dx)
+
+
+def _run_members(members, advance_all, max_wall=math.inf):
+    """Shared event loop: advance ALL members to the next sample/record step, then let each one sample,
+    record and check its stop conditions. A single run is a batch of one. Members in a batch share their
+    step schedule (enforced by the batch key), so one schedule drives them all."""
+    m0 = members[0]
+    for m in members:
+        m["history"] = [(m["sim"].t, _sample(m, last=m["n_total"] == 0))]
+        if m["recorder"] and 0 in m["rec_steps"]:
+            _capture(m)
+    t_start, done = time.time(), 0
+    for target in sorted((m0["sample_steps"] | m0["rec_steps"]) - {0}):
         if target <= done:
             continue
-        sim.advance(target - done)
+        if all(m["stopped"] for m in members):
+            break
+        advance_all(target - done)
         done = target
-        if recorder and done in rec_steps:
-            capture()
-        if done not in sample_steps:
-            continue
-        row = sample(last=done >= n_total)
-        history.append((sim.t, row))
-        if stop_nonfinite and any(isinstance(v, float) and not math.isfinite(v) for v in row.values()):
-            stop_reason = "nonfinite"
+        for m in members:
+            if m["stopped"]:
+                continue
+            if m["recorder"] and done in m["rec_steps"]:
+                _capture(m)
+            if done not in m["sample_steps"]:
+                continue
+            row = _sample(m, last=done >= m["n_total"])
+            m["history"].append((m["sim"].t, row))
+            m["steps"] = done
+            if m["stop_nonfinite"] and any(isinstance(v, float) and not math.isfinite(v) for v in row.values()):
+                m["stop_reason"], m["stopped"] = "nonfinite", True
+        if time.time() - t_start > max_wall:
+            for m in members:
+                if not m["stopped"]:
+                    m["stop_reason"], m["stopped"] = "max_wall_h", True
             break
-        if time.time() - t0 > max_wall:
-            stop_reason = "max_wall_h"
-            break
-    if final_only and stop_reason != "completed":
-        history.append((sim.t, sample(last=True)))      # an early stop still gets its final descriptors
-    stats = tel.close()
-    rec_stats = recorder.close() if recorder else None
+    return done
 
+
+def _finalize(m, done, log=print, batch=None):
+    from jax_scout.provenance import write_json
+    spec, point_dir, sim = m["spec"], m["dir"], m["sim"]
+    if m["final_only"] and m["stop_reason"] != "completed":
+        m["history"].append((sim.t, _sample(m, last=True)))     # an early stop still gets its final descriptors
+    stats = m["tel"].close()
+    rec_stats = m["recorder"].close() if m["recorder"] else None
+    history = m["history"]
     final = dict(history[-1][1])
     slopes = {}
     for o in spec["observers"]:
@@ -152,21 +172,70 @@ def run_point(spec, point_dir, *, log=print):
             slopes[key + "__slope"] = _slope([t for t, _ in half], [y for _, y in half])
     final.update(slopes)
     check = irer_specs.check_prediction(spec["prediction"], final)
+    steps = m.get("steps", done)
     summary = {"spec_id": spec["id"], "title": spec["title"], "substrate": spec["substrate"],
-               "protocol": pr, "final": final, "prediction": spec["prediction"],
-               "prediction_check": check, "stop_reason": stop_reason, "steps": done,
-               "t_final": sim.t, "wall_s": round(time.time() - t0, 2), "telemetry": stats,
-               "history": rec_stats,
-               "verdict": None}
+               "protocol": spec["protocol"], "final": final, "prediction": spec["prediction"],
+               "prediction_check": check, "stop_reason": m["stop_reason"], "steps": steps,
+               "t_final": sim.t, "wall_s": round(time.time() - m["t0"], 2), "telemetry": stats,
+               "history": rec_stats, "batch": batch, "verdict": None}
     write_json(os.path.join(point_dir, "summary.json"), summary)
     write_json(os.path.join(point_dir, "verdict.json"),
                {"spec_id": spec["id"], "verdict": "PENDING_REVIEW", "prediction_check": check["status"],
                 "note": "set by a reviewer; prediction_check is automatic and is not a verdict"},
                stamp_metadata=False)
-    write_json(os.path.join(point_dir, "RUN_COMPLETE.json"), {"status": stop_reason})
-    log("  %s: %s steps, t=%.4g, %s, %.1fs" % (os.path.basename(point_dir), done, sim.t, check["status"],
-                                                summary["wall_s"]))
+    write_json(os.path.join(point_dir, "RUN_COMPLETE.json"), {"status": m["stop_reason"]})
+    log("  %s: %s steps, t=%.4g, %s, %.1fs%s" % (os.path.basename(point_dir), steps, sim.t, check["status"],
+                                                  summary["wall_s"], " [batch %d/%d]" % (batch["index"] + 1, batch["size"]) if batch else ""))
     return summary
+
+
+def run_point(spec, point_dir, *, log=print):
+    """One point, stepped on its own."""
+    m = _setup_member(spec, point_dir)
+    max_wall = float((spec["protocol"].get("stop") or {}).get("max_wall_h", math.inf)) * 3600.0
+    done = _run_members([m], m["sim"].advance, max_wall)
+    return _finalize(m, done, log)
+
+
+def schedule_key(spec):
+    """Everything that must match for points to share one time-stepping schedule."""
+    pr = spec["protocol"]
+    return json.dumps({k: pr.get(k) for k in ("dt", "T", "sample_every", "record", "stop")}, sort_keys=True)
+
+
+def run_batch(specs, dirs, *, log=print):
+    """Several points stepped TOGETHER: one jax.vmap over (parameters, state) per advance
+    (jax_scout.registry.BatchedETDRK4). Initial conditions, observers, telemetry and recording are the
+    per-member single-run code, so a batched member's outputs match its single run (tested)."""
+    from jax_scout import registry
+    members = [_setup_member(s, d) for s, d in zip(specs, dirs)]
+    batched = registry.BatchedETDRK4([m["sim"] for m in members], specs)
+    max_wall = float((specs[0]["protocol"].get("stop") or {}).get("max_wall_h", math.inf)) * 3600.0
+    done = _run_members(members, batched.advance, max_wall)
+    return [_finalize(m, done, log, batch={"index": i, "size": len(members)}) for i, m in enumerate(members)]
+
+
+def plan_batches(points, batch_size=None):
+    """Group expanded points into batches that can share one vmapped call: same registry.batch_key
+    (substrate, grid, dt, static operator args) and same schedule_key. Chunks respect the GPU memory
+    budget (registry.max_batch). Anything that cannot batch runs as a batch of one."""
+    from jax_scout import registry
+    groups, order = {}, []
+    for label, spec in points:
+        bk = registry.batch_key(spec)
+        key = (bk, schedule_key(spec)) if bk is not None else ("single", label)
+        if key not in groups:
+            groups[key] = []
+            order.append(key)
+        groups[key].append((label, spec))
+    batches = []
+    for key in order:
+        items = groups[key]
+        n = items[0][1]["protocol"]["grid"]["N"]
+        size = batch_size or registry.max_batch(n)
+        for i in range(0, len(items), max(1, size)):
+            batches.append(items[i:i + size])
+    return batches
 
 
 def main(argv=None):
@@ -175,6 +244,9 @@ def main(argv=None):
     ap.add_argument("--out", default=None)
     ap.add_argument("--dry-run", action="store_true", help="validate and expand only")
     ap.add_argument("--sweep-root", default=os.path.join(ROOT, "sweep_runs"))
+    ap.add_argument("--no-batch", dest="batch", action="store_false",
+                    help="step every sweep point on its own (default: vmap compatible ETDRK4 points together)")
+    ap.add_argument("--batch-size", type=int, default=None, help="members per batch (default: GPU memory budget)")
     args = ap.parse_args(argv)
 
     spec = irer_specs.load(args.spec)
@@ -202,15 +274,23 @@ def main(argv=None):
     os.makedirs(out, exist_ok=True)
     write_json(os.path.join(out, "spec.json"), spec, stamp_metadata=False)
     results = []
-    for i, (label, concrete) in enumerate(points):
-        pdir = os.path.join(out, label or "run") if len(points) > 1 else out
+    pdir = lambda label: os.path.join(out, label or "run") if len(points) > 1 else out  # noqa: E731
+    batches = plan_batches(points, args.batch_size) if args.batch else [[p] for p in points]
+    if args.batch and any(len(b) > 1 for b in batches):
+        print("batched: %s" % ", ".join(str(len(b)) for b in batches))
+    for batch in batches:
+        labels = [lb for lb, _ in batch]
         try:
-            s = run_point(concrete, pdir)
-            results.append({"point": label, "dir": os.path.relpath(pdir, out), "final": s["final"],
-                            "prediction_check": s["prediction_check"]["status"], "stop_reason": s["stop_reason"]})
-        except Exception as exc:                   # one bad point must not lose the others
-            print("  point %s FAILED: %s" % (label or "run", exc))
-            results.append({"point": label, "error": str(exc)[:300]})
+            if len(batch) == 1:
+                summaries = [run_point(batch[0][1], pdir(labels[0]))]
+            else:
+                summaries = run_batch([sp for _, sp in batch], [pdir(lb) for lb in labels])
+            for label, s in zip(labels, summaries):
+                results.append({"point": label, "dir": os.path.relpath(pdir(label), out), "final": s["final"],
+                                "prediction_check": s["prediction_check"]["status"], "stop_reason": s["stop_reason"]})
+        except Exception as exc:                   # one bad batch must not lose the others
+            print("  batch %s FAILED: %s" % (", ".join(lb or "run" for lb in labels), exc))
+            results += [{"point": lb, "error": str(exc)[:300]} for lb in labels]
     if len(points) > 1:
         write_json(os.path.join(out, "summary.json"),
                    {"spec_id": spec["id"], "title": spec["title"], "n_points": len(points), "rows": results,

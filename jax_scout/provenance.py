@@ -140,18 +140,32 @@ def component_hashes() -> tuple:
     return dict(sorted(hashes.items())), sorted(dirty)
 
 
+_GIT_STATE = None
+
+
+def _git_state():
+    """(commit, porcelain status, branch), read ONCE per process. A run cannot change its own code, and
+    these three git calls cost ~0.6 s each from WSL on /mnt/f: re-running them for every stamped file
+    made provenance 85% of a small batched sweep's wall time (profiled 2026-10-07)."""
+    global _GIT_STATE
+    if _GIT_STATE is None:
+        _GIT_STATE = (_git("rev-parse", "HEAD"),
+                      # -uno skips the untracked scan: with two venvs and sweep_runs/ in the tree a full
+                      # status can take longer than the timeout, which silently returned "unknown" before.
+                      # "Did the TRACKED code differ from the commit" is also the question that matters here.
+                      _git("status", "--porcelain", "--untracked-files=no"),
+                      _git("rev-parse", "--abbrev-ref", "HEAD"))
+    return _GIT_STATE
+
+
 def stamp() -> dict:
     """Provenance for the run about to start. Never raises."""
-    commit = _git("rev-parse", "HEAD")
-    # -uno skips the untracked scan: with two venvs and sweep_runs/ in the tree a full
-    # status can take longer than the timeout, which silently returned "unknown" before.
-    # "Did the TRACKED code differ from the commit" is also the question that matters here.
-    status = _git("status", "--porcelain", "--untracked-files=no")
+    commit, status, branch = _git_state()
     out = {
         "commit": commit,
         "commit_short": commit[:12] if commit else None,
         "dirty": (status != "") if status is not None else None,
-        "branch": _git("rev-parse", "--abbrev-ref", "HEAD"),
+        "branch": branch,
         "started_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "python": sys.version.split()[0],
         "platform": sys.platform,

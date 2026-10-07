@@ -409,3 +409,56 @@ def _descriptors(sim, field="psi", contrast_min=20.0):
     else:
         out["d_aniso"] = 0.0
     return out
+
+
+# =============================================================== batched (vmapped) ETDRK4
+
+def batch_key(spec):
+    """Specs with equal keys can share one vmapped batch: same substrate, grid, dt and all STATIC operator
+    arguments. Only physics.BATCHABLE_PARAMS and the initial condition may differ between members."""
+    from jax_scout import physics
+    if spec["substrate"]["name"] != "etdrk4-sncgl":
+        return None
+    pr = spec["protocol"]
+    _, static = physics.operator_args(spec["substrate"].get("params", {}))
+    return (pr["grid"]["N"], pr["grid"]["L"], pr["dt"], tuple(sorted(static.items())))
+
+
+class BatchedETDRK4:
+    """Advance B members of the ETDRK4 substrate together with jax.vmap over (parameters, state).
+
+    Each member is an ordinary Sim built by build() -- so its IC, observers and recording are exactly the
+    single-run ones -- and this object only replaces the time stepping: advance(n) runs n steps for all
+    members in one compiled call and writes each member's state back into its Sim. Members must share
+    batch_key(); their BATCHABLE_PARAMS may differ.
+    """
+
+    def __init__(self, sims, specs):
+        from jax_scout import physics
+        self.sims = sims
+        s0 = specs[0]
+        pr = s0["protocol"]
+        N, L, dt = pr["grid"]["N"], pr["grid"]["L"], pr["dt"]
+        dyn = [physics.operator_args(s["substrate"].get("params", {}))[0] for s in specs]
+        _, static = physics.operator_args(s0["substrate"].get("params", {}))
+        self.pvec = jnp.asarray([[d[k] for k in physics.BATCHABLE_PARAMS] for d in dyn], dtype=jnp.float64)
+        self.psi_k = jnp.stack([s.psi_k for s in sims])
+        self.dt = dt
+
+        def one(p, pk, n):
+            ops = physics.ops_from_args(N, L, dt, dict(zip(physics.BATCHABLE_PARAMS, p)), static)
+            return jax.lax.fori_loop(0, n, lambda i, q: physics.step(q, ops), pk)
+
+        self._adv = jax.jit(jax.vmap(one, in_axes=(0, 0, None)), static_argnums=2)
+
+    def advance(self, n):
+        self.psi_k = self._adv(self.pvec, self.psi_k, int(n))
+        for i, s in enumerate(self.sims):
+            s.psi_k = self.psi_k[i]
+            s.t += n * self.dt
+
+
+def max_batch(N, budget_gb=5.0):
+    """Members that fit on the GPU at once. ETDRK4 holds roughly 20 complex128 N^3 arrays per member
+    (state, 4 stage nonlinearities, geometry buffers, FFT workspace); budget leaves headroom on 8 GB."""
+    return max(1, int(budget_gb * 1e9 // (20 * 16 * N ** 3)))

@@ -29,6 +29,7 @@ bookkeeping, telemetry or tests.
 
 | date | id | summary | output-changing? | commit |
 |---|---|---|---|---|
+| 2026-10-07 | CL-012 | Batched (vmap) spec sweeps; `physics.operator_args`/`ops_from_args` refactor (byte-identical); provenance git state cached per process | no (batched ≡ single to 1e-10) | batch branch |
 | 2026-10-07 | CL-011 | Run gallery + viewer; `protocol.record` (whole run or window); render queue + worker; pages moved `ui/`→`web/` (gitignore bug) | no (recording is opt-in) | viewer branch |
 | 2026-10-05 | CL-010 | Continuation: jvp matvec replaces `jax.linearize` (N³ memory → constant) | no | `4a482df` |
 | 2026-10-05 | CL-009 | Retired 3 launch-capable legacy MCP tools; pinned `mcp<2` | no | main |
@@ -40,6 +41,31 @@ bookkeeping, telemetry or tests.
 | 2026-10-04 | CL-003 | Provenance `steppers`; stale-run view; `--dt`/`--cells` for the a\* harnesses; re-validation driver | no (default paths byte-identical) | `d3d87fd` |
 | 2026-10-04 | CL-002 | Stepper order + MMS gates, stepper mutations, CI extension | no (tests/tooling) | `0419ff9` |
 | 2026-10-02 | CL-001 | ETDRK4: complex-safe contour coefficients + stage-c `N_n` | **YES** | `e270cdc` |
+
+---
+
+## CL-012 — Batched sweeps, and a provenance speed fix
+- **Branch:** `batch/vmap-executor`
+- **Files:**
+  - `jax_scout/physics.py`: `BATCHABLE_PARAMS`, `operator_args`, `ops_from_args`. `build_operators`
+    is now a two-line wrapper around them. **Solver-adjacent:** the operator construction code is
+    unchanged, and all 60 `Ops` arrays are byte-identical before and after on both branches.
+  - `jax_scout/registry.py`: `batch_key`, `BatchedETDRK4`, `max_batch`
+  - `tools/run_spec.py`: the executor is split into `_setup_member` / `_run_members` / `_finalize`,
+    with a single run being a batch of one. Adds `run_batch`, `plan_batches`, `schedule_key`,
+    `--no-batch` and `--batch-size`.
+  - `jax_scout/provenance.py`: `_git_state()` caches commit, status and branch once per process
+  - tests: two new spec-layer tests (batched ≡ point-by-point to 1e-10; batch planning)
+- **Why:** more configurations per GPU-hour for basin mapping. See [[BATCHED_RUNS]].
+- **Output-changing?** No.
+  - Batched members reproduce single runs to 1e-10.
+  - Provenance records the same fields, read once instead of for every file. A run that edits the
+    repo mid-run would now be stamped with its start-of-run state, which is the correct reading
+    anyway.
+- **Verified:**
+  - 19/19 spec-layer tests in WSL; 62 related tests in `.venv`.
+  - Full-suite failure set: no new failures, and 3 fewer than the baseline (MCP tests now pass).
+  - Benchmarks are in [[BATCHED_RUNS]]: the profile showed 85% of a small sweep was git calls.
 
 ---
 

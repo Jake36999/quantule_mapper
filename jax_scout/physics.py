@@ -374,8 +374,19 @@ def _construct_ops(N, L, dt, D_diff, eta, rho_vac, omega0, a, s, f,
     )
 
 
-def build_operators(N, L, dt, params: Dict[str, float],
-                    real_dtype=jnp.float64, complex_dtype=jnp.complex128) -> Ops:
+#: Parameters that may differ between members of one vmapped batch (traced scalars in _construct_ops).
+BATCHABLE_PARAMS = ("D", "eta", "rho_vac", "omega0", "a", "s", "f", "a_coupling")
+
+
+def operator_args(params: Dict[str, float]):
+    """Resolve a param dict (with its aliases and defaults) into (dynamic, static) operator arguments.
+
+    dynamic: the BATCHABLE_PARAMS, which may be traced under jax.vmap.
+    static:  everything that selects a code path or a grid-wide constant (D_imag and kinetic_mode pick
+             Python branches in _construct_ops), so it must be identical across a batch.
+    build_operators and the batched executor (tools/run_spec.py) both use this, so a batched member
+    resolves its parameters exactly as a single run does.
+    """
     def fget(*keys_and_default):
         *keys, default = keys_and_default
         for k in keys:
@@ -383,25 +394,41 @@ def build_operators(N, L, dt, params: Dict[str, float],
             if v is not None:
                 return float(v)
         return float(default)
+    dynamic = {
+        "D": fget('param_D', 1.0), "eta": fget('param_eta', 0.1),
+        "rho_vac": fget('param_rho_vac', DEFAULT_PARAM_RHO_VAC),
+        "omega0": fget('param_omega0', 'param_rho_vac', DEFAULT_PARAM_OMEGA0),
+        "a": fget('param_a', 0.0),
+        "s": fget('param_s', 'param_splash_coupling', 0.0),
+        "f": fget('param_f', 'param_splash_fraction', 0.0),
+        "a_coupling": fget('param_a_coupling', 1.0),
+    }
+    static = {
+        "soft_clip_beta": fget('param_conformal_softclip_beta', 3.0),
+        "omega_min_geo": fget('param_omega_sq_min', OMEGA_SQ_MIN),
+        "omega_max_geo": fget('param_omega_sq_max', OMEGA_SQ_MAX),
+        "c_affect": fget('param_c_affect', 1.0),
+        "dealias_frac": fget('param_dealias_fraction', 0.5),
+        "D_imag": fget('param_D_imag', 0.0),   # Phase D C1: default 0.0 = frozen baseline
+        "kinetic_mode": str(params.get('kinetic_mode', 'dissipative')),   # Phase D C2: default = frozen baseline
+        "geom_off": bool(params.get('param_geom_off', False)),   # Phase D C2.5: TRUE flat geometry (see Ops.geom_fac)
+    }
+    return dynamic, static
+
+
+def ops_from_args(N, L, dt, dynamic, static, real_dtype=jnp.float64, complex_dtype=jnp.complex128) -> Ops:
+    """_construct_ops from operator_args output; `dynamic` values may be traced (vmap-safe)."""
+    d, s = dynamic, static
     return _construct_ops(
-        N, L, dt,
-        fget('param_D', 1.0), fget('param_eta', 0.1),
-        fget('param_rho_vac', DEFAULT_PARAM_RHO_VAC),
-        fget('param_omega0', 'param_rho_vac', DEFAULT_PARAM_OMEGA0),
-        fget('param_a', 0.0),
-        fget('param_s', 'param_splash_coupling', 0.0),
-        fget('param_f', 'param_splash_fraction', 0.0),
-        fget('param_a_coupling', 1.0),
-        fget('param_conformal_softclip_beta', 3.0),
-        fget('param_omega_sq_min', OMEGA_SQ_MIN),
-        fget('param_omega_sq_max', OMEGA_SQ_MAX),
-        fget('param_c_affect', 1.0),
-        fget('param_dealias_fraction', 0.5),
-        real_dtype, complex_dtype,
-        D_imag=fget('param_D_imag', 0.0),   # Phase D C1: default 0.0 = frozen baseline
-        kinetic_mode=str(params.get('kinetic_mode', 'dissipative')),   # Phase D C2: default = frozen baseline
-        geom_off=bool(params.get('param_geom_off', False)),   # Phase D C2.5: TRUE flat geometry (see Ops.geom_fac)
-    )
+        N, L, dt, d["D"], d["eta"], d["rho_vac"], d["omega0"], d["a"], d["s"], d["f"], d["a_coupling"],
+        s["soft_clip_beta"], s["omega_min_geo"], s["omega_max_geo"], s["c_affect"], s["dealias_frac"],
+        real_dtype, complex_dtype, D_imag=s["D_imag"], kinetic_mode=s["kinetic_mode"], geom_off=s["geom_off"])
+
+
+def build_operators(N, L, dt, params: Dict[str, float],
+                    real_dtype=jnp.float64, complex_dtype=jnp.complex128) -> Ops:
+    dynamic, static = operator_args(params)
+    return ops_from_args(N, L, dt, dynamic, static, real_dtype, complex_dtype)
 
 
 # === vmap sweep API ========================================================

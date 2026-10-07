@@ -31,6 +31,7 @@ It is kept apart from earlier infrastructure documents such as [[INFRASTRUCTURE_
 | [[BASIN_MAPPING]] | Phase F build record | complete |
 | [[RUN_VIEWER]] | run gallery + viewer + recording + render queue | complete |
 | [[BATCHED_RUNS]] | vmapped sweeps + where GPU time goes | complete |
+| [[SCREEN_AND_VERIFY]] | fp32 screen → cluster → fp64 verify of boundaries and outliers | complete |
 
 Phase records are added here as each phase closes. A change to a solver or the runtime is recorded in
 [[SOLVER_AND_RUNTIME_CHANGELOG]] (`docs/instrument_integrity/`).

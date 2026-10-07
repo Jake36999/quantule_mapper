@@ -3,7 +3,7 @@
 
     python tools/serve_spec_ui.py [--port 8765]      ->  http://127.0.0.1:8765/
 
-A schema-driven form over irer_specs.SCHEMA (react-jsonschema-form in ui/spec_editor/index.html), so the
+A schema-driven form over irer_specs.SCHEMA (react-jsonschema-form in web/spec_editor/index.html), so the
 interface adapts to the schema instead of being hand-built per experiment.
 
 WHAT IT CAN DO: list specs (drafts / proposed / approved), load one, edit it in the form or as raw JSON,
@@ -31,7 +31,7 @@ sys.path.insert(0, ROOT)
 import irer_specs  # noqa: E402
 from mcp_server import research_tools as rt  # noqa: E402
 
-UI_FILE = os.path.join(ROOT, "ui", "spec_editor", "index.html")
+UI_FILE = os.path.join(ROOT, "web", "spec_editor", "index.html")
 FOLDERS = ("drafts", "proposed", "approved")
 
 

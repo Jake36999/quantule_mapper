@@ -95,12 +95,42 @@ def run_point(spec, point_dir, *, log=print):
         tel.record(sim.t, **row)
         return row
 
+    # --- optional playable history (protocol.record) --------------------------------------------
+    # Frames go to <point>/history/ through the same SnapshotWriter the harnesses use (slices + a
+    # downsampled volume per frame). `window` restricts capture to [t_start, t_end]: the run still has to
+    # be integrated from t=0 to t_end, but only the window is written, so a short dynamic episode can be
+    # recorded at a high frame rate without storing the whole run.
+    rec = pr.get("record")
+    recorder, rec_steps = None, set()
+    if rec:
+        from jax_scout.snapshots import SnapshotWriter
+        r_every = max(1, int(round(float(rec["every"]) / dt)))
+        lo, hi = rec.get("window", [0.0, T])
+        s_lo, s_hi = max(0, int(round(float(lo) / dt))), min(n_total, int(round(float(hi) / dt)))
+        rec_steps = set(range(s_lo, s_hi + 1, r_every))
+        recorder = SnapshotWriter(os.path.join(point_dir, "history"), enabled=True, every=1, volume_every=1,
+                                  volume_target=int(rec.get("volume", 48)), maxqueue=64)
+        want = set(rec.get("fields") or [])
+
+        def capture():
+            f = sim.fields()
+            recorder.capture(sim.t, {k: v for k, v in f.items() if not want or k in want}, dx=sim.grid.dx)
+
+    sample_steps = set(range(every, n_total + 1, every)) | {n_total}
     history = [(sim.t, sample(last=n_total == 0))]
+    if recorder and 0 in rec_steps:
+        capture()
     done, stop_reason = 0, "completed"
-    while done < n_total:
-        n = min(every, n_total - done)
-        sim.advance(n)
-        done += n
+    events = sorted((sample_steps | rec_steps) - {0})
+    for target in events:
+        if target <= done:
+            continue
+        sim.advance(target - done)
+        done = target
+        if recorder and done in rec_steps:
+            capture()
+        if done not in sample_steps:
+            continue
         row = sample(last=done >= n_total)
         history.append((sim.t, row))
         if stop_nonfinite and any(isinstance(v, float) and not math.isfinite(v) for v in row.values()):
@@ -112,6 +142,7 @@ def run_point(spec, point_dir, *, log=print):
     if final_only and stop_reason != "completed":
         history.append((sim.t, sample(last=True)))      # an early stop still gets its final descriptors
     stats = tel.close()
+    rec_stats = recorder.close() if recorder else None
 
     final = dict(history[-1][1])
     slopes = {}
@@ -125,6 +156,7 @@ def run_point(spec, point_dir, *, log=print):
                "protocol": pr, "final": final, "prediction": spec["prediction"],
                "prediction_check": check, "stop_reason": stop_reason, "steps": done,
                "t_final": sim.t, "wall_s": round(time.time() - t0, 2), "telemetry": stats,
+               "history": rec_stats,
                "verdict": None}
     write_json(os.path.join(point_dir, "summary.json"), summary)
     write_json(os.path.join(point_dir, "verdict.json"),

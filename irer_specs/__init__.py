@@ -64,6 +64,19 @@ SCHEMA = {
                 "sample_every": {"type": "number", "exclusiveMinimum": 0,
                                  "description": "physical time between observer samples (default T/100)"},
                 "seed": {"type": "integer"},
+                "record": {
+                    "type": "object", "required": ["every"], "additionalProperties": False,
+                    "description": "save a playable history: fields every `every` (physical time), optionally "
+                                   "only inside `window` [t_start, t_end] for a high-frame-rate close-up",
+                    "properties": {
+                        "every": {"type": "number", "exclusiveMinimum": 0},
+                        "volume": {"type": "integer", "minimum": 8,
+                                   "description": "downsampled 3-D volume per side (default 48)"},
+                        "window": {"type": "array", "minItems": 2, "items": {"type": "number"}},
+                        "fields": {"type": "array", "items": {"type": "string"},
+                                   "description": "substrate fields to record (default: all)"},
+                    },
+                },
                 "stop": {"type": "object", "additionalProperties": False,
                          "properties": {"max_wall_h": _NUM, "nonfinite": {"type": "boolean"}}},
             },

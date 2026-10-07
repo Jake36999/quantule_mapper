@@ -29,6 +29,7 @@ bookkeeping, telemetry or tests.
 
 | date | id | summary | output-changing? | commit |
 |---|---|---|---|---|
+| 2026-10-07 | CL-011 | Run gallery + viewer; `protocol.record` (whole run or window); render queue + worker; pages moved `ui/`→`web/` (gitignore bug) | no (recording is opt-in) | viewer branch |
 | 2026-10-05 | CL-010 | Continuation: jvp matvec replaces `jax.linearize` (N³ memory → constant) | no | `4a482df` |
 | 2026-10-05 | CL-009 | Retired 3 launch-capable legacy MCP tools; pinned `mcp<2` | no | main |
 | 2026-10-04 | CL-008 | Basin mapping: `state_descriptors`, `basin_cluster.py`, `continuation.py` (Newton–Krylov + arclength + Floquet), a\* pilot, post-replay queue | no (new analysis path) | phase-f |
@@ -39,6 +40,31 @@ bookkeeping, telemetry or tests.
 | 2026-10-04 | CL-003 | Provenance `steppers`; stale-run view; `--dt`/`--cells` for the a\* harnesses; re-validation driver | no (default paths byte-identical) | `d3d87fd` |
 | 2026-10-04 | CL-002 | Stepper order + MMS gates, stepper mutations, CI extension | no (tests/tooling) | `0419ff9` |
 | 2026-10-02 | CL-001 | ETDRK4: complex-safe contour coefficients + stage-c `N_n` | **YES** | `e270cdc` |
+
+---
+
+## CL-011 — Run gallery, viewer, recording, render queue
+- **Branch:** `viewer/run-gallery`
+- **Files:**
+  - `tools/viewer_data.py`, `tools/serve_viewer.py`, `tools/render_queue_worker.py`,
+    `web/viewer/index.html` (all new)
+  - `irer_specs` schema: `protocol.record`
+  - `tools/run_spec.py`: an event-scheduled loop that writes recorded frames to `<run>/history/`, and
+    `summary.history`
+  - `web/spec_editor/index.html`: moved from the never-committed `ui/spec_editor/`;
+    `tools/serve_spec_ui.py` path updated
+  - `.gitignore`: `specs/queue/`
+  - tests: `tests/test_viewer.py` (13); a record-window test in `tests/test_spec_layer.py`
+- **Why:** to let a user view runs the way an agent can, and to record the dynamic parts of a run.
+  See [[RUN_VIEWER]].
+- **Output-changing?** No. Without `record`, the executor visits the same sample steps and gives the
+  same results. Recording only reads `sim.fields()`.
+- **Also fixed:** the Phase E spec editor page was **never committed**, because `.gitignore` `UI/*`
+  matched `ui/` on Windows. It is now in `web/`, with a regression test.
+- **Verified:**
+  - 13/13 viewer tests and 27/27 related UI/MCP tests in `.venv`; 35 spec/snapshot tests in WSL.
+  - In the browser: gallery, final-state viewer, history playback, and window re-run →
+    queue → worker → result.
 
 ---
 
@@ -100,7 +126,7 @@ bookkeeping, telemetry or tests.
   - `mcp_server/research_tools.py` (new); `mcp_server/server.py` (11 `research_*` tools registered)
   - `jax_scout/registry.py` (`export()`, `__main__`); `docs/registry/components.json` (generated)
   - `irer_specs.prune_empty`
-  - `tools/serve_spec_ui.py` (new); `ui/spec_editor/index.html` (new)
+  - `tools/serve_spec_ui.py` (new); `web/spec_editor/index.html` (new)
   - `tests/test_mcp_research_tools.py` (10 tests); `tests/test_spec_ui.py` (5 tests)
 - **Why:** agent oversight through a fenced channel, and a schema-driven editor. See
   [[EXPERIMENT_SPECS_MCP_UI]].

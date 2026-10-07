@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Run Viewer</title>
+<script src="https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js"></script>
+<style>
+  :root { --bg:#f6f6f3; --panel:#fff; --ink:#1d1f21; --muted:#6b6f76; --line:#e2e2de; --accent:#2f6fde;
+          --ok:#1f8a4c; --bad:#c0392b; --warn:#b7791f; --chip:#f0f0ec; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#15171a; --panel:#1d2024; --ink:#e6e6e3; --muted:#9aa0a6; --line:#2e3238; --accent:#6ea0ff;
+            --ok:#4cc283; --bad:#ff7b6b; --warn:#e0b04f; --chip:#262a30; } }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:14px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif; }
+  header { display:flex; gap:14px; align-items:center; padding:10px 16px; border-bottom:1px solid var(--line); flex-wrap:wrap; }
+  header h1 { font-size:16px; margin:0; }
+  nav a { color:var(--muted); text-decoration:none; margin-right:12px; } nav a.on { color:var(--accent); font-weight:600; }
+  .note { color:var(--muted); font-size:12px; }
+  main { padding:12px 16px; }
+  .filters { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px; align-items:center; }
+  select, input, button { font:inherit; color:var(--ink); background:var(--panel); border:1px solid var(--line); border-radius:6px; padding:5px 8px; }
+  button { cursor:pointer; } button.primary { background:var(--accent); color:#fff; border-color:var(--accent); }
+  button:disabled { opacity:.45; cursor:default; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:12px; }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:8px; overflow:hidden; cursor:pointer; display:flex; flex-direction:column; }
+  .card:hover { border-color:var(--accent); }
+  .thumb { height:130px; background:var(--chip); display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:12px; }
+  .thumb img { width:100%; height:100%; object-fit:cover; }
+  .card .body { padding:8px 10px; } .rid { font-weight:600; font-size:12.5px; overflow-wrap:anywhere; }
+  .chips { display:flex; gap:4px; flex-wrap:wrap; margin-top:5px; }
+  .chip { font-size:11px; padding:1px 7px; border-radius:10px; background:var(--chip); color:var(--muted); }
+  .chip.current,.chip.revalidated { color:var(--ok); } .chip.stale { color:var(--bad); } .chip.hist { color:var(--accent); }
+  .panel { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:12px; margin-bottom:12px; min-width:0; }
+  .panel h2 { font-size:13px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); margin:0 0 8px; }
+  .tabs { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:8px; }
+  .tab { font-size:12.5px; } .tab.on { border-color:var(--accent); color:var(--accent); }
+  .row { display:grid; grid-template-columns:1fr 1fr; gap:12px; } @media (max-width:1000px){ .row{grid-template-columns:1fr;} }
+  .slices { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; } @media (max-width:700px){ .slices{grid-template-columns:1fr;} }
+  .plot { width:100%; height:330px; } .plot.small { height:230px; } .plot.tall { height:420px; }
+  .controls { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin:6px 0; }
+  .status { white-space:pre-wrap; font-size:13px; padding:8px; background:var(--chip); border-radius:6px; min-height:2em; }
+  .status.ok { color:var(--ok); } .status.bad { color:var(--bad); }
+  table { border-collapse:collapse; width:100%; font-size:12.5px; } td,th { border-bottom:1px solid var(--line); padding:5px; text-align:left; }
+  label.inline { display:inline-flex; gap:4px; align-items:center; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Run viewer</h1>
+  <nav><a href="#gallery" id="nav-gallery">Gallery</a><a href="#queue" id="nav-queue">Render queue</a></nav>
+  <span class="note">Re-runs are queued, never started here: a person runs <code>tools/render_queue_worker.py</code>.</span>
+</header>
+<main id="main">loading…</main>
+
+<script>
+const $ = (s, el=document) => el.querySelector(s);
+const api = async (p, body) => (await fetch(p, body ? {method:"POST", headers:{"Content-Type":"application/json"},
+                                 body:JSON.stringify(body)} : {})).json();
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const dark = matchMedia("(prefers-color-scheme: dark)").matches;
+const ink = dark ? "#e6e6e3" : "#1d1f21", grid = dark ? "#2e3238" : "#e2e2de";
+const layoutBase = (extra={}) => ({paper_bgcolor:"rgba(0,0,0,0)", plot_bgcolor:"rgba(0,0,0,0)", font:{color:ink, size:11},
+  margin:{l:55,r:10,t:26,b:34}, xaxis:{gridcolor:grid, automargin:true}, yaxis:{gridcolor:grid, automargin:true}, ...extra});
+// plotly.js has no built-in "Magma" or cyclic "Phase" scale (it silently falls back): define them
+const MAGMA = [[0,"#000004"],[0.13,"#1c1044"],[0.25,"#4f127b"],[0.38,"#812581"],[0.5,"#b5367a"],[0.63,"#e55064"],
+               [0.75,"#fb8761"],[0.88,"#fec287"],[1,"#fcfdbf"]];
+const PHASE = [[0,"#e05a5a"],[0.17,"#d9b23d"],[0.33,"#5ec15e"],[0.5,"#3fb8c4"],[0.67,"#4a6fe0"],[0.83,"#b356d6"],[1,"#e05a5a"]];
+const DIVERGE = "RdBu";
+const scaleFor = q => q === "phase" ? PHASE : (q === "real" || q === "imag") ? DIVERGE : MAGMA;
+const QUANT = [["abs2","|ψ|²"],["abs","|ψ|"],["phase","arg ψ"],["real","Re ψ"],["imag","Im ψ"]];
+const decode = r => { const b = atob(r.data), u = new Uint8Array(b.length); for (let i=0;i<b.length;i++) u[i]=b.charCodeAt(i);
+  return new Float32Array(u.buffer); };
+
+// ------------------------------------------------------------------ gallery
+let galleryState = {substrate:"", branch:"", q:"", fields:false, hist:false};
+async function gallery() {
+  setNav("gallery");
+  const p = new URLSearchParams(); for (const k of ["substrate","branch","q"]) if (galleryState[k]) p.set(k, galleryState[k]);
+  const r = await api("/api/runs?" + p);
+  if (r.status !== "OK") { $("#main").innerHTML = `<div class="panel">${esc(r.hint || r.status)}</div>`; return; }
+  let runs = r.runs.filter(x => (!galleryState.fields || x.n_field_files) && (!galleryState.hist || x.n_frames));
+  const opt = (list, v) => `<option value="">all</option>` + list.map(o => `<option ${o===v?"selected":""}>${esc(o)}</option>`).join("");
+  $("#main").innerHTML = `
+    <div class="filters">
+      <label class="inline">substrate <select id="f-sub">${opt(r.facets.substrate, galleryState.substrate)}</select></label>
+      <label class="inline">branch <select id="f-br">${opt(r.facets.branch, galleryState.branch)}</select></label>
+      <input id="f-q" placeholder="search run id" value="${esc(galleryState.q)}">
+      <label class="inline"><input type="checkbox" id="f-fields" ${galleryState.fields?"checked":""}> has fields</label>
+      <label class="inline"><input type="checkbox" id="f-hist" ${galleryState.hist?"checked":""}> has history</label>
+      <span class="note">${runs.length} runs · badges: current/revalidated = trustworthy on the fixed solver; stale = pre-fix ETDRK4</span>
+    </div>
+    <div class="grid">${runs.map(card).join("")}</div>`;
+  $("#f-sub").onchange = e => { galleryState.substrate = e.target.value; gallery(); };
+  $("#f-br").onchange = e => { galleryState.branch = e.target.value; gallery(); };
+  $("#f-q").onchange = e => { galleryState.q = e.target.value; gallery(); };
+  $("#f-fields").onchange = e => { galleryState.fields = e.target.checked; gallery(); };
+  $("#f-hist").onchange = e => { galleryState.hist = e.target.checked; gallery(); };
+  document.querySelectorAll(".card").forEach(c => c.onclick = () => location.hash = "run=" + c.dataset.id);
+}
+function card(x) {
+  const img = x.thumb ? `<img loading="lazy" src="/files/${encodeURI(x.thumb)}" alt="">` : "no preview";
+  return `<div class="card" data-id="${esc(x.run_id)}"><div class="thumb">${img}</div><div class="body">
+    <div class="rid">${esc(x.run_id)}</div><div class="note">${esc(x.date)} · ${esc(x.substrate)}</div>
+    <div class="chips"><span class="chip ${x.badge}">${x.badge}</span>
+      ${x.n_field_files ? `<span class="chip">${x.n_field_files} field file${x.n_field_files>1?"s":""}</span>` : ""}
+      ${x.n_frames ? `<span class="chip hist">${x.n_frames} frames</span>` : ""}
+      ${x.verdict ? `<span class="chip">${esc(x.verdict)}</span>` : ""}</div></div></div>`;
+}
+
+// ------------------------------------------------------------------ viewer
+let V = {};
+async function viewer(id) {
+  setNav("");
+  $("#main").innerHTML = `<div class="panel">loading ${esc(id)}…</div>`;
+  const d = await api("/api/run?id=" + encodeURIComponent(id));
+  if (d.status !== "OK") { $("#main").innerHTML = `<div class="panel">${esc(JSON.stringify(d))}</div>`; return; }
+  V = {id, d, field: d.fields.find(f => f.key), quantity:"abs2", n:48, window:null};
+  $("#main").innerHTML = `
+    <div class="controls"><a href="#gallery">← gallery</a><b>${esc(id)}</b>
+      <span class="note">dt = ${d.dt ?? "unknown"} · ${d.fields.filter(f=>f.key).length} fields · ${d.n_frames} recorded frames</span></div>
+    <div class="panel"><h2>Final state</h2>
+      <div class="tabs" id="field-tabs"></div>
+      <div class="controls">
+        <label class="inline">quantity <select id="q">${QUANT.map(([k,l]) => `<option value="${k}">${l}</option>`).join("")}</select></label>
+        <label class="inline">3-D resolution <select id="n"><option>32</option><option selected>48</option><option>64</option></select></label>
+        <span class="note" id="vol-info"></span></div>
+      <div class="row"><div><div class="slices"><div id="s-xy" class="plot small"></div><div id="s-xz" class="plot small"></div><div id="s-yz" class="plot small"></div></div></div>
+        <div id="iso" class="plot tall"></div></div>
+    </div>
+    <div class="panel"><h2>Time series</h2>
+      <div class="controls"><select id="series"></select>
+        <span class="note">Drag across the plot to pick a window. Shaded bands are suggested windows where the series changes fastest.</span></div>
+      <div id="ts" class="plot"></div>
+      <div class="controls" id="suggest"></div>
+    </div>
+    <div class="panel" id="hist-panel" hidden><h2>Recorded history</h2>
+      <div class="controls"><select id="h-field"></select><select id="h-q">${QUANT.map(([k,l]) => `<option value="${k}">${l}</option>`).join("")}</select>
+        <button id="h-play">▶ play</button><input type="range" id="h-slider" min="0" value="0" style="flex:1">
+        <span id="h-t" class="note"></span></div>
+      <div class="row"><div id="h-xy" class="plot"></div><div id="h-iso" class="plot"></div></div>
+    </div>
+    <div class="panel"><h2>Re-run with visuals</h2><div id="rerun"></div></div>`;
+  const tabs = $("#field-tabs");
+  d.fields.filter(f => f.key).forEach((f, i) => {
+    const b = document.createElement("button"); b.className = "tab" + (i===0?" on":"");
+    b.textContent = `${f.file.replace(/_probe\.npz$|\.npz$|\.h5$/,"")} · ${f.key}`; b.title = `${f.file} ${f.key} ${f.shape.join("×")} ${f.dtype}`;
+    b.onclick = () => { document.querySelectorAll(".tab").forEach(t=>t.classList.remove("on")); b.classList.add("on"); V.field = f; drawField(); };
+    tabs.appendChild(b);
+  });
+  if (!d.fields.some(f => f.key)) tabs.innerHTML = `<span class="note">This run saved no 3-D fields. Re-run it with recording to see it.</span>`;
+  $("#q").onchange = e => { V.quantity = e.target.value; drawField(); };
+  $("#n").onchange = e => { V.n = +e.target.value; drawField(); };
+  drawField(); drawSeries(); drawRerun(); if (d.n_frames) drawHistory();
+}
+
+function cube(arr, n) { return i => arr[i]; }
+function slices(arr, s) {  // centre planes of an (n,n,n) C-order array
+  const [nx, ny, nz] = s, h = [nx>>1, ny>>1, nz>>1], at = (i,j,k) => arr[(i*ny + j)*nz + k];
+  const xy = [], xz = [], yz = [];
+  for (let j=0;j<ny;j++){ const r=[]; for (let i=0;i<nx;i++) r.push(at(i,j,h[2])); xy.push(r); }
+  for (let k=0;k<nz;k++){ const r=[]; for (let i=0;i<nx;i++) r.push(at(i,h[1],k)); xz.push(r); }
+  for (let k=0;k<nz;k++){ const r=[]; for (let j=0;j<ny;j++) r.push(at(h[0],j,k)); yz.push(r); }
+  return {xy, xz, yz};
+}
+function heat(div, z, title, q) {
+  Plotly.react(div, [{z, type:"heatmap", colorscale: scaleFor(q), zmid: (q==="real"||q==="imag") ? 0 : undefined,
+    showscale:false}], layoutBase({title:{text:title, font:{size:11}}, margin:{l:4,r:4,t:22,b:4},
+    xaxis:{visible:false, scaleanchor:"y"}, yaxis:{visible:false}}), {displayModeBar:false, responsive:true});
+}
+function iso(div, arr, s, r, q, title, fixed) {
+  const [nx, ny, nz] = s, X=[], Y=[], Z=[], val=[];
+  for (let i=0;i<nx;i++) for (let j=0;j<ny;j++) for (let k=0;k<nz;k++) { X.push(i); Y.push(j); Z.push(k); val.push(arr[(i*ny+j)*nz+k]); }
+  // four nested surfaces from 20% of the range up, so a smooth blob shows its shell AND its core;
+  // `fixed` holds the range during playback so colours mean the same thing on every frame
+  const rr = fixed || r, lo = rr.min + 0.2*(rr.max-rr.min), hi = rr.max;
+  Plotly.react(div, [{type:"isosurface", x:X, y:Y, z:Z, value:val, isomin:lo, isomax:hi, cmin:rr.min, cmax:rr.max,
+    surface:{count:4}, opacity:0.28, colorscale: scaleFor(q), caps:{x:{show:false},y:{show:false},z:{show:false}}, showscale:false}],
+    layoutBase({title:{text:title, font:{size:11}}, margin:{l:0,r:0,t:24,b:0},
+      scene:{xaxis:{visible:false},yaxis:{visible:false},zaxis:{visible:false}, aspectmode:"cube"}}),
+    {responsive:true, scrollZoom:false});
+}
+async function drawField() {
+  if (!V.field) return;
+  $("#vol-info").textContent = "loading…";
+  const r = await api(`/api/field?id=${encodeURIComponent(V.id)}&file=${encodeURIComponent(V.field.file)}&key=${encodeURIComponent(V.field.key)}&quantity=${V.quantity}&n=${V.n}`);
+  if (!r.data) { $("#vol-info").textContent = JSON.stringify(r); return; }
+  const a = decode(r), sl = slices(a, r.shape), q = V.quantity;
+  heat("s-xy", sl.xy, "xy (centre)", q); heat("s-xz", sl.xz, "xz", q); heat("s-yz", sl.yz, "yz", q);
+  iso("iso", a, r.shape, r, q, `isosurfaces of ${QUANT.find(x=>x[0]===q)[1]} (20–100% of range)`);
+  $("#vol-info").textContent = `${r.full_n}³ shown at ${r.shape[0]}³ · range [${r.min.toPrecision(3)}, ${r.max.toPrecision(3)}]`;
+}
+
+async function drawSeries() {
+  const s = await api("/api/series?id=" + encodeURIComponent(V.id));
+  V.series = s.series || [];
+  const sel = $("#series");
+  if (!V.series.length) { sel.innerHTML = "<option>no time series saved</option>"; return; }
+  sel.innerHTML = V.series.map((x,i) => `<option value="${i}">${esc(x.name)}</option>`).join("");
+  sel.onchange = () => plotSeries(+sel.value); plotSeries(0);
+}
+function plotSeries(i) {
+  const x = V.series[i], shapes = (x.suggest||[]).map(w => ({type:"rect", xref:"x", yref:"paper", x0:w.t0, x1:w.t1, y0:0, y1:1,
+    fillcolor:"rgba(47,111,222,0.12)", line:{width:0}}));
+  const traces = [{x:x.t, y:x.y, mode:"lines", line:{width:1.3}, name:x.name}];
+  if (x.tolerance) traces.push({x:[x.t[0], x.t[x.t.length-1]], y:[x.tolerance, x.tolerance], mode:"lines", line:{dash:"dash", color:"#c0392b"}, name:"tolerance"});
+  Plotly.react("ts", traces, layoutBase({showlegend:false, dragmode:"select", selectdirection:"h", shapes,
+    xaxis:{title:x.t_unit, gridcolor:grid}}), {responsive:true});
+  const ts = $("#ts");
+  ts.removeAllListeners && ts.removeAllListeners("plotly_selected");
+  ts.on("plotly_selected", ev => { if (ev && ev.range) setWindow(ev.range.x[0], ev.range.x[1]); });
+  V.seriesCell = (x.name.match(/^(.*)_probe\.npz:/) || [])[1] || null;
+  $("#suggest").innerHTML = (x.suggest||[]).length ? "suggested windows: " + x.suggest.map(w =>
+    `<button data-t0="${w.t0}" data-t1="${w.t1}">${w.t0.toFixed(1)}–${w.t1.toFixed(1)} (activity ${w.score})</button>`).join(" ")
+    : `<span class="note">No distinct episodes: the behaviour is steady, so a whole-run, low-frame-rate recording is the right choice.</span>`;
+  document.querySelectorAll("#suggest button").forEach(b => b.onclick = () => setWindow(+b.dataset.t0, +b.dataset.t1));
+}
+function setWindow(t0, t1) { V.window = [Math.max(0, Math.min(t0,t1)), Math.max(t0,t1)];
+  const c = $("#rr-cell"); if (c && V.seriesCell && [...c.options].some(o => o.value === V.seriesCell)) c.value = V.seriesCell;
+  const m = $("#rr-mode"); if (m) { m.value = "window"; renderRerunForm(); } }
+
+// ------------------------------------------------------------------ re-run with visuals
+function drawRerun() {
+  if (!V.d.rerunnable) { $("#rerun").innerHTML = `<span class="note">No spec is known for this run (no spec.json and no harness mapping yet), so it can't be re-run from here.</span>`; return; }
+  const cells = V.d.fields.filter(f => /_probe\.npz$/.test(f.file)).map(f => f.file.replace(/_probe\.npz$/, ""));
+  $("#rerun").innerHTML = `
+    <div class="controls">${cells.length ? `<label class="inline">cell <select id="rr-cell">${cells.map(c=>`<option>${esc(c)}</option>`).join("")}</select></label>` : ""}
+      <label class="inline">capture <select id="rr-mode"><option value="whole">whole run, low frame rate</option><option value="window">time window, high frame rate</option></select></label>
+      <span id="rr-win"></span>
+      <label class="inline">frames <input id="rr-frames" type="number" min="10" max="2000" value="120" style="width:80px"></label>
+      <label class="inline">volume <select id="rr-vol"><option>32</option><option selected>48</option><option>64</option></select></label>
+      <button id="rr-prev">Preview cost</button><button class="primary" id="rr-queue" disabled>Queue re-run</button></div>
+    <div class="status" id="rr-status">Pick what to capture, then preview the cost.</div>`;
+  $("#rr-mode").onchange = renderRerunForm; ["rr-frames","rr-vol"].forEach(i => $("#"+i).onchange = () => $("#rr-queue").disabled = true);
+  $("#rr-prev").onclick = previewRerun; $("#rr-queue").onclick = queueRerun; renderRerunForm();
+}
+function renderRerunForm() {
+  const w = $("#rr-mode").value === "window";
+  $("#rr-win").innerHTML = w ? (V.window ? `window <b>${V.window[0].toFixed(2)} – ${V.window[1].toFixed(2)}</b>` :
+    `<span class="note">drag across the time-series plot or pick a suggested window</span>`) : "";
+  $("#rr-queue").disabled = true;
+}
+async function previewRerun() {
+  const cell = $("#rr-cell") ? $("#rr-cell").value : null, frames = +$("#rr-frames").value, vol = +$("#rr-vol").value;
+  const base = await api("/api/rerun_preview", {id:V.id, cell});
+  if (base.status !== "OK") { status(base.reason || JSON.stringify(base), "bad"); return; }
+  const T = base.spec.protocol.T, win = $("#rr-mode").value === "window" ? V.window : [0, T];
+  if (!win) { status("pick a window first", "bad"); return; }
+  const every = Math.max(base.spec.protocol.dt, (win[1]-win[0]) / Math.max(1, frames-1));
+  const rec = {every, volume:vol}; if ($("#rr-mode").value === "window") rec.window = win;
+  const r = await api("/api/rerun_preview", {id:V.id, cell, record:rec});
+  V.pending = r.spec; const e = r.estimate;
+  status(`spec ${r.spec.id}\n${e.steps} steps ≈ ${e.wall_min} min on the GTX 1080 (N=${r.spec.protocol.grid.N}); ` +
+         `${e.frames} frames, ≈ ${e.disk_mb} MB\nframe every ${every.toPrecision(3)} time units over [${win[0].toFixed(2)}, ${win[1].toFixed(2)}]\n${e.note}`, "");
+  $("#rr-queue").disabled = false;
+}
+async function queueRerun() {
+  if (!V.pending || !confirm("Queue this re-run? It runs only when you start tools/render_queue_worker.py.")) return;
+  const r = await api("/api/queue", {spec:V.pending});
+  status(r.status === "QUEUED" ? `queued: ${r.path}\n${r.next}` : (r.errors||[r.status]).join("\n"), r.status === "QUEUED" ? "ok" : "bad");
+  $("#rr-queue").disabled = true;
+}
+const status = (t, c) => { const s = $("#rr-status"); s.textContent = t; s.className = "status " + (c||""); };
+
+// ------------------------------------------------------------------ recorded history
+let play = null;
+async function drawHistory() {
+  const h = await api("/api/history?id=" + encodeURIComponent(V.id));
+  if (!h.n) return;
+  $("#hist-panel").hidden = false; V.hist = h;
+  const hf = [...h.fields].sort((a, b) => (b === "psi") - (a === "psi"));     // psi first when present
+  $("#h-field").innerHTML = hf.map(f => `<option>${esc(f)}</option>`).join("");
+  V.histRange = null;
+  const sl = $("#h-slider"); sl.max = h.n - 1;
+  const show = async () => {
+    const i = +sl.value, f = $("#h-field").value, q = $("#h-q").value;
+    const r = await api(`/api/frame?id=${encodeURIComponent(V.id)}&i=${i}&field=${encodeURIComponent(f)}&quantity=${q}`);
+    if (!r.data) return; const a = decode(r);
+    const key = f + q; if (!V.histRange || V.histRange.key !== key) V.histRange = {key, min:r.min, max:r.max};
+    V.histRange.min = Math.min(V.histRange.min, r.min); V.histRange.max = Math.max(V.histRange.max, r.max);
+    heat("h-xy", slices(a, r.shape).xy, `${f} xy · t = ${r.t.toFixed(3)}`, q);
+    iso("h-iso", a, r.shape, r, q, `frame ${i+1}/${h.n}`, V.histRange); $("#h-t").textContent = `t = ${r.t.toFixed(3)}`;
+  };
+  sl.oninput = show; $("#h-field").onchange = show; $("#h-q").onchange = show;
+  $("#h-play").onclick = () => {
+    if (play) { clearInterval(play); play = null; $("#h-play").textContent = "▶ play"; return; }
+    $("#h-play").textContent = "❚❚ pause";
+    play = setInterval(() => { sl.value = (+sl.value + 1) % h.n; show(); }, 350);
+  };
+  show();
+}
+
+// ------------------------------------------------------------------ queue
+async function queue() {
+  setNav("queue");
+  const r = await api("/api/queue");
+  $("#main").innerHTML = `<div class="panel"><h2>Render queue</h2>
+    <p class="note">Start the worker in the JAX environment: <code>python tools/render_queue_worker.py</code> (Ctrl-C to stop).</p>
+    <table><tr><th>state</th><th>spec</th><th>estimate</th><th>output</th></tr>
+    ${r.jobs.map(j => `<tr><td>${j.state}</td><td>${esc(j.id)}</td><td>${j.estimate ? `${j.estimate.wall_min} min · ${j.estimate.frames} frames · ${j.estimate.disk_mb} MB` : ""}</td>
+      <td>${j.out ? `<a href="#run=${esc(j.out.split("/").pop())}">${esc(j.out)}</a>` : ""}${j.error ? `<div class="note">${esc(j.error).slice(0,300)}</div>` : ""}</td></tr>`).join("") ||
+      `<tr><td colspan="4" class="note">nothing queued</td></tr>`}</table></div>`;
+}
+
+function setNav(which) { ["gallery","queue"].forEach(k => $("#nav-"+k).classList.toggle("on", k===which)); }
+function route() {
+  if (play) { clearInterval(play); play = null; }
+  const h = location.hash.slice(1);
+  if (h.startsWith("run=")) viewer(decodeURIComponent(h.slice(4)));
+  else if (h === "queue") queue(); else gallery();
+}
+addEventListener("hashchange", route); route();
+</script>
+</body>
+</html>

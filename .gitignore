@@ -120,3 +120,6 @@ queue_runtime.db-wal
 # so the repo stays well under 100 MB.
 graphify-out/*
 !graphify-out/GRAPH_REPORT.md
+
+# Runtime render queue written by tools/serve_viewer.py and drained by tools/render_queue_worker.py
+specs/queue/

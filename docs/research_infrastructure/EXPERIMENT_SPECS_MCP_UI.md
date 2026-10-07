@@ -20,7 +20,7 @@ schema.
 >   `tools/run_spec.py`, `specs/{drafts,proposed,approved}/`, `tests/test_spec_layer.py`
 > - E2: `mcp_server/research_tools.py`, `mcp_server/server.py` (11 `research_*` tools),
 >   `docs/registry/components.json`, `tests/test_mcp_research_tools.py`
-> - E3: `ui/spec_editor/index.html`, `tools/serve_spec_ui.py`, `tests/test_spec_ui.py`
+> - E3: `web/spec_editor/index.html`, `tools/serve_spec_ui.py`, `tests/test_spec_ui.py`
 
 ## How it fits together
 ```

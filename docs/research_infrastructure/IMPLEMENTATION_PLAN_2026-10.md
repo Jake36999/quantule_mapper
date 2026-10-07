@@ -18,6 +18,7 @@ status: running
 | C telemetry | **complete** (feb/C2.7 wiring deferred until the replay ends) | [[TELEMETRY_STREAM]] |
 | D provenance + manifest | **complete** | [[PROVENANCE_AND_HARNESS_REGISTRY]] |
 | E specs / MCP / UI | **complete** (C2.7 pilot run pending GPU) | [[EXPERIMENT_SPECS_MCP_UI]] |
+| G run viewer (added 2026-10-07) | **complete** | [[RUN_VIEWER]] |
 | F basin mapping | tools **complete** + validated; a\* GPU runs queued behind B4 | [[BASIN_MAPPING]] |
 
 
@@ -291,7 +292,7 @@ checkpointed, with the original arguments read from the old `summary.json`.
   `specs/proposed/`.
 
 ### E3. Standalone spec UI
-- `ui/spec_editor/index.html`: one static page that loads react-jsonschema-form from a CDN. No build
+- `web/spec_editor/index.html`: one static page that loads react-jsonschema-form from a CDN. No build
   step.
 - `tools/serve_spec_ui.py` (stdlib `http.server`, bound to 127.0.0.1) serves it, with three
   endpoints: GET schemas, GET specs, POST spec (validate, then write to `specs/drafts/`).
@@ -359,7 +360,7 @@ B + E1 ──► F (basins)
   - `tools/build_harness_registry.py`
   - `irer_specs/`, `schemas/`, `jax_scout/registry.py`, `tools/run_spec.py`
   - `mcp_server/research_tools.py`
-  - `ui/spec_editor/`, `tools/serve_spec_ui.py`
+  - `web/spec_editor/`, `tools/serve_spec_ui.py`
   - `tools/basin_cluster.py`, `jax_scout/continuation.py`
 - **Reuse, don't duplicate:**
   - `provenance.stamp` / `write_json`

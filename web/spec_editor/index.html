@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spec Editor</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --panel: #ffffff; --ink: #1d1f21; --muted: #6b6f76; --line: #e2e2de;
+    --accent: #2f6fde; --ok: #1f8a4c; --bad: #c0392b; --warn: #b7791f; --code: #f0f0ec;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #15171a; --panel: #1d2024; --ink: #e6e6e3; --muted: #9aa0a6; --line: #2e3238;
+            --accent: #6ea0ff; --ok: #4cc283; --bad: #ff7b6b; --warn: #e0b04f; --code: #24282d; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+         font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  header { padding: 12px 16px; border-bottom: 1px solid var(--line); display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+  header h1 { font-size: 16px; margin: 0; }
+  header .note { color: var(--muted); font-size: 12px; }
+  main { display: grid; grid-template-columns: 260px 1fr 300px; gap: 12px; padding: 12px 16px; }
+  @media (max-width: 1000px) { main { grid-template-columns: 1fr; } }
+  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 12px; min-width: 0; }
+  .panel h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); margin: 0 0 8px; }
+  .folder { margin-bottom: 10px; }
+  .folder b { font-size: 12px; color: var(--muted); }
+  .spec-item { display: block; width: 100%; text-align: left; background: none; border: 0; color: var(--ink);
+               padding: 5px 6px; border-radius: 5px; cursor: pointer; font: inherit; overflow-wrap: anywhere; }
+  .spec-item:hover, .spec-item.active { background: var(--code); }
+  .tabs { display: flex; gap: 6px; margin-bottom: 10px; }
+  button.btn { background: var(--panel); color: var(--ink); border: 1px solid var(--line); border-radius: 6px;
+               padding: 6px 12px; cursor: pointer; font: inherit; }
+  button.btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  button.btn[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  button.btn:disabled { opacity: .45; cursor: default; }
+  .actions { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0; }
+  textarea { width: 100%; min-height: 60vh; font: 12.5px/1.4 ui-monospace, Consolas, monospace; background: var(--code);
+             color: var(--ink); border: 1px solid var(--line); border-radius: 6px; padding: 10px; }
+  #status { white-space: pre-wrap; font-size: 13px; padding: 8px 10px; border-radius: 6px; background: var(--code); min-height: 2.4em; }
+  #status.ok { color: var(--ok); } #status.bad { color: var(--bad); } #status.warn { color: var(--warn); }
+  code.cmd { display: block; padding: 8px; background: var(--code); border-radius: 6px; overflow-x: auto; }
+  .comp { border-top: 1px solid var(--line); padding: 6px 0; font-size: 12.5px; }
+  .comp b { font-family: ui-monospace, Consolas, monospace; }
+  .comp p { margin: 2px 0 0; color: var(--muted); white-space: pre-wrap; }
+  /* light-touch styling for the generated form */
+  #form-root fieldset { border: 1px solid var(--line); border-radius: 6px; margin: 6px 0; padding: 8px; }
+  #form-root legend { font-weight: 600; padding: 0 4px; }
+  #form-root input, #form-root select, #form-root textarea { background: var(--code); color: var(--ink);
+     border: 1px solid var(--line); border-radius: 4px; padding: 4px 6px; font: inherit; max-width: 100%; min-height: 0; }
+  #form-root .field-description { color: var(--muted); font-size: 12px; }
+  #form-root .btn-add, #form-root .array-item-remove { cursor: pointer; }
+  #form-root button[type=submit] { display: none; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Experiment spec editor</h1>
+  <span class="note">Edits specs only. It cannot launch a run: approved specs show the command to copy.</span>
+</header>
+<main>
+  <section class="panel" aria-label="Specs">
+    <h2>Specs</h2>
+    <div id="spec-list">loading…</div>
+    <div class="actions"><button class="btn" id="new">New spec</button></div>
+  </section>
+
+  <section class="panel" aria-label="Editor">
+    <div class="tabs" role="tablist">
+      <button class="btn" id="tab-form" aria-pressed="true">Form</button>
+      <button class="btn" id="tab-json" aria-pressed="false">JSON</button>
+    </div>
+    <div id="form-root"></div>
+    <textarea id="json" spellcheck="false" hidden></textarea>
+    <div class="actions">
+      <button class="btn" id="validate">Validate</button>
+      <button class="btn primary" id="save">Save draft</button>
+      <button class="btn" id="promote" disabled>Approve (move to approved/)</button>
+    </div>
+    <div id="status" role="status"></div>
+    <div id="runbox" hidden><p>Run it from a terminal:</p><code class="cmd" id="cmd"></code></div>
+  </section>
+
+  <section class="panel" aria-label="Components">
+    <h2>Components</h2>
+    <div id="components">loading…</div>
+  </section>
+</main>
+
+<script type="module">
+const $ = (id) => document.getElementById(id);
+const api = async (path, body) => {
+  const r = await fetch(path, body ? {method: "POST", headers: {"Content-Type": "application/json"},
+                                      body: JSON.stringify(body)} : {});
+  return r.json();
+};
+const TEMPLATE = {
+  spec_version: 1, id: "new-spec", title: "describe the question",
+  substrate: {name: "kg-strang", version: 1, params: {c: 1.0, m: 1.0, a: 0.8, s: -0.5, f: -0.1}},
+  protocol: {ic: {name: "gaussian", version: 1, params: {A: 1.0, sigma: 1.0, omega: 0.9}},
+             grid: {N: 32, L: 10.0}, dt: 0.01, T: 1.0, sample_every: 0.1},
+  observers: [{name: "kg_invariants", version: 1}],
+  prediction: {statement: "write what the equations predict BEFORE running",
+               quantities: [{key: "Q_rel_drift", expected: 0.0, tolerance: 1e-8, kind: "abs"}]}
+};
+
+let schema = null, current = structuredClone(TEMPLATE), currentFolder = null, mode = "form";
+let rjsf = null;
+
+function setStatus(text, cls) { const s = $("status"); s.textContent = text; s.className = cls || ""; }
+
+async function loadRjsf() {
+  try {
+    const React = (await import("https://esm.sh/react@18.3.1")).default;
+    const {createRoot} = await import("https://esm.sh/react-dom@18.3.1/client?deps=react@18.3.1");
+    const Form = (await import("https://esm.sh/@rjsf/core@5.18.4?deps=react@18.3.1,react-dom@18.3.1")).default;
+    const validator = (await import("https://esm.sh/@rjsf/validator-ajv8@5.18.4")).default;
+    const root = createRoot($("form-root"));
+    rjsf = {React, Form, validator, root};
+  } catch (e) {
+    rjsf = null;
+    $("form-root").innerHTML = "<p>The form library could not load (offline?). Use the JSON tab: " +
+                               "validation still runs on the server.</p>";
+    showMode("json");
+  }
+}
+
+function renderForm() {
+  if (!rjsf) return;
+  const {React, Form, validator, root} = rjsf;
+  root.render(React.createElement(Form, {
+    schema, validator, formData: current, liveValidate: false, noHtml5Validate: true,
+    onChange: (e) => { current = e.formData; $("json").value = JSON.stringify(current, null, 2); },
+  }));
+}
+
+function showMode(m) {
+  mode = m;
+  $("tab-form").setAttribute("aria-pressed", m === "form");
+  $("tab-json").setAttribute("aria-pressed", m === "json");
+  $("form-root").hidden = m !== "form";
+  $("json").hidden = m !== "json";
+  if (m === "json") $("json").value = JSON.stringify(current, null, 2);
+  else renderForm();
+}
+
+function readCurrent() {
+  if (mode === "json") {
+    try { current = JSON.parse($("json").value); }
+    catch (e) { setStatus("JSON does not parse: " + e.message, "bad"); return null; }
+  }
+  return current;
+}
+
+async function refreshList() {
+  const res = await api("/api/specs");
+  const by = {drafts: [], proposed: [], approved: []};
+  for (const s of res.specs || []) by[s.status]?.push(s);
+  const box = $("spec-list"); box.innerHTML = "";
+  for (const [folder, items] of Object.entries(by)) {
+    const div = document.createElement("div"); div.className = "folder";
+    div.innerHTML = `<b>${folder} (${items.length})</b>`;
+    for (const s of items) {
+      const b = document.createElement("button");
+      b.className = "spec-item"; b.textContent = s.id || "(unreadable)"; b.title = s.title || "";
+      b.onclick = () => openSpec(s.id, folder, b);
+      div.appendChild(b);
+    }
+    box.appendChild(div);
+  }
+}
+
+async function openSpec(id, folder, btn) {
+  const res = await api("/api/spec?id=" + encodeURIComponent(id));
+  if (res.status !== "OK") { setStatus(JSON.stringify(res), "bad"); return; }
+  current = res.spec; currentFolder = res.folder;
+  document.querySelectorAll(".spec-item").forEach(x => x.classList.remove("active"));
+  btn?.classList.add("active");
+  $("promote").disabled = !["drafts", "proposed"].includes(currentFolder);
+  $("runbox").hidden = currentFolder !== "approved";
+  $("cmd").textContent = `python tools/run_spec.py specs/approved/${id}.json`;
+  setStatus(`loaded ${id} from specs/${currentFolder}/` +
+            (currentFolder === "proposed" ? "  (agent proposal: review before approving)" : ""), "");
+  showMode(mode);
+}
+
+async function renderComponents() {
+  const c = await api("/api/components");
+  if (c.status !== "OK") { $("components").textContent = c.hint || "unavailable"; return; }
+  const parts = [];
+  for (const k of ["substrates", "ics", "observers"]) {
+    parts.push(`<h2>${k}</h2>`);
+    for (const r of c[k]) {
+      const p = document.createElement("p"); p.textContent = r.doc || "";
+      parts.push(`<div class="comp"><b>${r.name}</b> v${r.version}${p.outerHTML}</div>`);
+    }
+  }
+  $("components").innerHTML = parts.join("");
+}
+
+$("tab-form").onclick = () => { if (readCurrent()) showMode("form"); };
+$("tab-json").onclick = () => showMode("json");
+$("new").onclick = () => { current = structuredClone(TEMPLATE); currentFolder = null;
+  $("promote").disabled = true; $("runbox").hidden = true; setStatus("new spec from template", ""); showMode(mode); };
+$("validate").onclick = async () => {
+  const s = readCurrent(); if (!s) return;
+  const r = await api("/api/validate", {spec: s});
+  setStatus(r.status === "VALID" ? `valid: ${r.points} run point(s)` : "invalid:\n- " + r.errors.join("\n- "),
+            r.status === "VALID" ? "ok" : "bad");
+};
+$("save").onclick = async () => {
+  const s = readCurrent(); if (!s) return;
+  const r = await api("/api/save", {spec: s});
+  setStatus(r.status === "SAVED" ? "saved to " + r.path : (r.errors || [r.status]).join("\n"),
+            r.status === "SAVED" ? "ok" : "bad");
+  if (r.status === "SAVED") { currentFolder = "drafts"; $("promote").disabled = false; refreshList(); }
+};
+$("promote").onclick = async () => {
+  const s = readCurrent(); if (!s) return;
+  if (!confirm(`Approve "${s.id}"? It moves to specs/approved/. Running it is still a separate, manual step.`)) return;
+  const r = await api("/api/promote", {id: s.id, from: currentFolder});
+  if (r.status === "APPROVED") {
+    setStatus("approved: " + r.path, "ok"); currentFolder = "approved";
+    $("promote").disabled = true; $("runbox").hidden = false; $("cmd").textContent = r.run_command;
+    refreshList();
+  } else setStatus((r.errors || [r.status]).join("\n"), "bad");
+};
+
+schema = await api("/api/schema");
+await Promise.all([refreshList(), renderComponents(), loadRjsf()]);
+showMode(rjsf ? "form" : "json");
+</script>
+</body>
+</html>

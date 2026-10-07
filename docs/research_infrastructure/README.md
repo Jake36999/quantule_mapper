@@ -28,7 +28,8 @@ It is kept apart from earlier infrastructure documents such as [[INFRASTRUCTURE_
 | [[PROVENANCE_AND_HARNESS_REGISTRY]] | Phase D build record | complete |
 | [[HARNESS_REGISTRY]] | generated registry of every run-writing script | generated |
 | [[EXPERIMENT_SPECS_MCP_UI]] | Phase E build record | complete |
-| [[BASIN_MAPPING]] | Phase F build record | running |
+| [[BASIN_MAPPING]] | Phase F build record | complete |
+| [[RUN_VIEWER]] | run gallery + viewer + recording + render queue | complete |
 
 Phase records are added here as each phase closes. A change to a solver or the runtime is recorded in
 [[SOLVER_AND_RUNTIME_CHANGELOG]] (`docs/instrument_integrity/`).

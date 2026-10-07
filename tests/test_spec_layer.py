@@ -162,3 +162,23 @@ def test_spec_run_reproduces_the_astar_harness_to_round_off(tmp_path):
         energy.append(float(np.sum(np.abs(sim.fields()["psi"]) ** 2)))
     er = np.asarray(energy) / ref["ic_e"]
     assert np.max(np.abs(er - np.asarray(ref["er"]))) < 1e-10
+
+
+@needs_jax
+def test_record_window_writes_only_the_window(tmp_path):
+    """protocol.record: frames every 0.1 inside [0.1, 0.3] only -> 3 frames, each with slices + a volume."""
+    import run_spec
+    import numpy as np
+    s = copy.deepcopy(MINI)
+    s["protocol"]["record"] = {"every": 0.1, "window": [0.1, 0.3], "volume": 8, "fields": ["psi"]}
+    p = tmp_path / "rec.json"
+    p.write_text(json.dumps(s))
+    assert run_spec.main([str(p), "--out", str(tmp_path / "run"), "--sweep-root", str(tmp_path)]) == 0
+    frames = sorted((tmp_path / "run" / "history").glob("snap_*.npz"))
+    ts = [float(np.load(f)["t"]) for f in frames]
+    assert np.allclose(ts, [0.1, 0.2, 0.3])
+    z = np.load(frames[0])
+    v = z["psi__vol"]
+    assert v.ndim == 3 and len(set(v.shape)) == 1 and v.shape[0] <= 8 and "pi__xy" not in z.files
+    summ = json.load(open(tmp_path / "run" / "summary.json"))
+    assert summ["history"]["frames_written"] == 3 and summ["prediction_check"]["status"] == "PREDICTION_MET"

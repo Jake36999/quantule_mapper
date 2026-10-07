@@ -86,8 +86,20 @@ def _scan(run_dir):
     files = [f for f in files if not os.path.basename(f).startswith("snap_")]
     hist = glob.glob(os.path.join(run_dir, "history", "snap_*.npz")) or \
         glob.glob(os.path.join(run_dir, "snapshots", "**", "snap_*.npz"), recursive=True)
+    spec_path = os.path.join(run_dir, "spec.json")
     return {"n_field_files": len(files), "n_frames": len(hist),
-            "has_spec": os.path.exists(os.path.join(run_dir, "spec.json"))}
+            "has_spec": os.path.exists(spec_path), "precision": _precision(spec_path)}
+
+
+def _precision(spec_path):
+    """'fp32' or 'mixed' for screening runs, so they are never mistaken for fp64 results; None = fp64."""
+    try:
+        spec = json.load(open(spec_path, encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+    vals = set(((spec.get("sweep") or {}).get("axes") or {}).get("protocol.precision")
+               or [(spec.get("protocol") or {}).get("precision", "fp64")])
+    return None if vals == {"fp64"} else ("fp32" if vals == {"fp32"} else "mixed")
 
 
 def list_runs(substrate=None, branch=None, query=None, limit=400):

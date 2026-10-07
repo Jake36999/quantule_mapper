@@ -27,6 +27,17 @@ import jax.numpy as jnp  # noqa: E402
 
 SUBSTRATES, ICS, OBSERVERS = {}, {}, {}
 
+# protocol.precision -> (real dtype, complex dtype). fp64 is the default and the only precision any
+# catalogued result uses. fp32 is for SCREENING only (docs/research_infrastructure/BATCHED_RUNS.md:
+# 3.7-4.5x faster on the GTX 1080, ~0.1-0.5% drift over an a* replay) and is offered only by substrates
+# listed in PRECISIONS; everything else is fp64-only.
+DTYPES = {"fp64": (jnp.float64, jnp.complex128), "fp32": (jnp.float32, jnp.complex64)}
+PRECISIONS = {"etdrk4-sncgl": ("fp64", "fp32")}
+
+
+def precision_of(spec):
+    return spec["protocol"].get("precision", "fp64")
+
 
 def _register(table, name, version, doc, params):
     def deco(fn):
@@ -55,7 +66,7 @@ class _Grid:
 Phase C / C1 / C2 S-NCGL on the fixed ETDRK4 (jax_scout/physics.py, e270cdc). params = the physics
 param dict (param_D, param_eta, param_a, ... ; kinetic_mode='conservative' + param_geom_off for the C2
 NLS branch). Fields: psi.""", {"type": "object"})
-def _etdrk4(grid, dt, params):
+def _etdrk4(grid, dt, params, precision="fp64"):
     from jax_scout import physics
 
     class Sim:
@@ -63,12 +74,14 @@ def _etdrk4(grid, dt, params):
 
         def __init__(self):
             self.grid, self.dt, self.params, self.t = grid, dt, dict(params), 0.0
-            self.ops = physics.build_operators(grid.N, grid.L, dt, self.params)
+            self.precision = precision
+            self.rd, self.cd = DTYPES[precision]
+            self.ops = physics.build_operators(grid.N, grid.L, dt, self.params, self.rd, self.cd)
             self._adv = jax.jit(lambda pk, n: jax.lax.fori_loop(0, n, lambda i, p: physics.step(p, self.ops), pk),
                                 static_argnums=1)
 
         def init(self, fields):
-            self.psi_k = physics.initial_psi_k(jnp.asarray(fields["psi"], dtype=jnp.complex128), self.ops)
+            self.psi_k = physics.initial_psi_k(jnp.asarray(fields["psi"], dtype=self.cd), self.ops)
 
         def advance(self, n):
             self.psi_k = self._adv(self.psi_k, int(n))
@@ -293,6 +306,10 @@ def check_spec(spec) -> list:
             errs.append("%s: '%s' needs params %s" % (where, name, missing))
 
     chk(SUBSTRATES, spec["substrate"], "substrate")
+    prec, name = precision_of(spec), spec["substrate"].get("name")
+    if prec not in PRECISIONS.get(name, ("fp64",)):
+        errs.append("protocol.precision: '%s' does not support %s (supports: %s)"
+                    % (name, prec, ", ".join(PRECISIONS.get(name, ("fp64",)))))
     chk(ICS, spec["protocol"]["ic"], "protocol.ic")
     for i, o in enumerate(spec["observers"]):
         chk(OBSERVERS, o, "observers[%d]" % i)
@@ -311,7 +328,11 @@ def build(spec):
     """Concrete spec -> (sim, observers list). Does not run anything."""
     pr = spec["protocol"]
     grid = _Grid(pr["grid"]["N"], pr["grid"]["L"])
-    sim = SUBSTRATES[spec["substrate"]["name"]]["fn"](grid, float(pr["dt"]), spec["substrate"].get("params", {}))
+    name, prec = spec["substrate"]["name"], precision_of(spec)
+    if prec not in PRECISIONS.get(name, ("fp64",)):
+        raise ValueError("substrate '%s' does not support precision %s" % (name, prec))
+    extra = {"precision": prec} if name in PRECISIONS else {}
+    sim = SUBSTRATES[name]["fn"](grid, float(pr["dt"]), spec["substrate"].get("params", {}), **extra)
     fields = ICS[pr["ic"]["name"]]["fn"](sim, **(pr["ic"].get("params") or {}))
     sim.init(fields)
     # `slopes` is an executor-level option (tools/run_spec.py fits d(key)/dt); it is not an observer argument
@@ -421,7 +442,7 @@ def batch_key(spec):
         return None
     pr = spec["protocol"]
     _, static = physics.operator_args(spec["substrate"].get("params", {}))
-    return (pr["grid"]["N"], pr["grid"]["L"], pr["dt"], tuple(sorted(static.items())))
+    return (pr["grid"]["N"], pr["grid"]["L"], pr["dt"], precision_of(spec), tuple(sorted(static.items())))
 
 
 class BatchedETDRK4:
@@ -444,9 +465,10 @@ class BatchedETDRK4:
         self.pvec = jnp.asarray([[d[k] for k in physics.BATCHABLE_PARAMS] for d in dyn], dtype=jnp.float64)
         self.psi_k = jnp.stack([s.psi_k for s in sims])
         self.dt = dt
+        rd, cd = sims[0].rd, sims[0].cd
 
         def one(p, pk, n):
-            ops = physics.ops_from_args(N, L, dt, dict(zip(physics.BATCHABLE_PARAMS, p)), static)
+            ops = physics.ops_from_args(N, L, dt, dict(zip(physics.BATCHABLE_PARAMS, p)), static, rd, cd)
             return jax.lax.fori_loop(0, n, lambda i, q: physics.step(q, ops), pk)
 
         self._adv = jax.jit(jax.vmap(one, in_axes=(0, 0, None)), static_argnums=2)
@@ -458,7 +480,9 @@ class BatchedETDRK4:
             s.t += n * self.dt
 
 
-def max_batch(N, budget_gb=5.0):
-    """Members that fit on the GPU at once. ETDRK4 holds roughly 20 complex128 N^3 arrays per member
-    (state, 4 stage nonlinearities, geometry buffers, FFT workspace); budget leaves headroom on 8 GB."""
-    return max(1, int(budget_gb * 1e9 // (20 * 16 * N ** 3)))
+def max_batch(N, budget_gb=5.0, precision="fp64"):
+    """Members that fit on the GPU at once. ETDRK4 holds roughly 20 complex N^3 arrays per member
+    (state, 4 stage nonlinearities, geometry buffers, FFT workspace); budget leaves headroom on 8 GB.
+    complex128 is 16 bytes per point, complex64 is 8."""
+    itemsize = 16 if precision == "fp64" else 8
+    return max(1, int(budget_gb * 1e9 // (20 * itemsize * N ** 3)))

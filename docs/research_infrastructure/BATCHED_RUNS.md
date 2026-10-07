@@ -78,7 +78,14 @@ the a\* probe (FEB, ×1.15, K=6, seed 619) over the full replay length, T=360 (7
   about 1e-3 per 1k steps, so 0.3% drift in er is the same size as the signal. Bracketing, continuation
   and anything quoted in the catalog stay fp64.
 
-**Suggested workflow** (not yet built):
+**Built: the precision option.** Set `"precision": "fp32"` in a spec's `protocol`, make it a sweep axis
+(`protocol.precision`), or pass `tools/run_spec.py --precision fp32` to override every point.
+- Only `etdrk4-sncgl` offers fp32. KG and TG specs that ask for it are rejected.
+- fp32 and fp64 points never share a vmapped batch.
+- `summary.json` records `precision`, and the gallery marks these runs **fp32 screen** (or
+  **mixed screen**), so a screening run is never mistaken for a result.
+
+**Suggested workflow** (the screen→verify helper is not built yet):
 1. Screen in fp32, batched, at N=32–48.
 2. Cluster the end states.
 3. Re-run cluster boundaries and outliers in fp64 at N=96.
@@ -93,6 +100,7 @@ and dropping to N=48 about 10× more, for screening only.
 | 1 | Provenance stamping cost 85% of a small sweep | RESOLVED — git state cached per process |
 | 2 | Batching gives no gain at N ≥ 48 on the GTX 1080 | NOTED — compute-bound |
 | 3 | Batching covers ETDRK4 only (KG/TG run one at a time) | OPEN — same pattern if needed |
+| 4 | fp32 is 3.7–4.5× faster, but drifts about 0.1–0.5% | RESOLVED as opt-in `protocol.precision` (CL-013); screening only |
 
 ## Associated docs
 - [[BASIN_MAPPING]] · [[RUN_VIEWER]] · [[SOLVER_AND_RUNTIME_CHANGELOG]] · [[PROVENANCE_AND_HARNESS_REGISTRY]]

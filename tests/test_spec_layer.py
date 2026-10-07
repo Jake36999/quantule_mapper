@@ -182,3 +182,45 @@ def test_record_window_writes_only_the_window(tmp_path):
     assert v.ndim == 3 and len(set(v.shape)) == 1 and v.shape[0] <= 8 and "pi__xy" not in z.files
     summ = json.load(open(tmp_path / "run" / "summary.json"))
     assert summ["history"]["frames_written"] == 3 and summ["prediction_check"]["status"] == "PREDICTION_MET"
+
+
+@needs_jax
+def test_batched_sweep_matches_point_by_point(tmp_path):
+    """vmap batching is a speed-up, not a different experiment: a param_a x seed sweep run batched must
+    reproduce the same sweep run one point at a time, observer by observer."""
+    import run_spec
+    spec = irer_specs.load(os.path.join(ROOT, "specs", "approved", "astar-probe-pilot.json"))
+    spec["id"] = "batch-equivalence"
+    spec["protocol"].update(grid={"N": 16, "L": 10.0}, T=0.2, sample_every=0.05)
+    spec["sweep"] = {"axes": {"substrate.params.param_a": [0.50, 0.5522, 0.60],
+                              "protocol.ic.params.seed": [20260619, 20260620]}}
+    p = tmp_path / "s.json"
+    p.write_text(json.dumps(spec))
+    assert run_spec.main([str(p), "--out", str(tmp_path / "b"), "--sweep-root", str(tmp_path)]) == 0
+    assert run_spec.main([str(p), "--out", str(tmp_path / "s"), "--sweep-root", str(tmp_path), "--no-batch"]) == 0
+    rb = json.load(open(tmp_path / "b" / "summary.json"))["rows"]
+    rs = json.load(open(tmp_path / "s" / "summary.json"))["rows"]
+    assert len(rb) == len(rs) == 6
+    for a, b in zip(sorted(rb, key=lambda r: r["point"]), sorted(rs, key=lambda r: r["point"])):
+        assert a["point"] == b["point"]
+        for k in b["final"]:
+            assert abs(a["final"][k] - b["final"][k]) <= 1e-10 * max(1.0, abs(b["final"][k])), (a["point"], k)
+    one = json.load(open(tmp_path / "b" / rb[0]["dir"] / "summary.json"))
+    assert one["batch"]["size"] == 6                              # really ran as one vmapped batch
+
+
+@needs_jax
+def test_batch_planning_separates_incompatible_points():
+    import run_spec
+    base = irer_specs.load(os.path.join(ROOT, "specs", "approved", "astar-probe-pilot.json"))
+    pts = []
+    for i, (a, dt, mode) in enumerate([(0.5, 0.005, "dissipative"), (0.6, 0.005, "dissipative"),
+                                       (0.5, 0.0025, "dissipative"), (0.5, 0.005, "conservative")]):
+        s = copy.deepcopy(base)
+        s["substrate"]["params"].update(param_a=a, kinetic_mode=mode)
+        s["protocol"]["dt"] = dt
+        pts.append(("p%d" % i, s))
+    pts.append(("kg", copy.deepcopy(MINI)))                       # different substrate: never batched
+    sizes = sorted(len(b) for b in run_spec.plan_batches(pts))
+    assert sizes == [1, 1, 1, 2]                                  # only the two a-values share a batch
+    assert [len(b) for b in run_spec.plan_batches(pts[:2], batch_size=1)] == [1, 1]

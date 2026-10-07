@@ -85,7 +85,7 @@ the a\* probe (FEB, ×1.15, K=6, seed 619) over the full replay length, T=360 (7
 - `summary.json` records `precision`, and the gallery marks these runs **fp32 screen** (or
   **mixed screen**), so a screening run is never mistaken for a result.
 
-**Suggested workflow** (the screen→verify helper is not built yet):
+**Workflow** (built: `tools/screen_verify.py`, see [[SCREEN_AND_VERIFY]]):
 1. Screen in fp32, batched, at N=32–48.
 2. Cluster the end states.
 3. Re-run cluster boundaries and outliers in fp64 at N=96.

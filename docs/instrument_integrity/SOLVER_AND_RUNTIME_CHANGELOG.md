@@ -29,6 +29,7 @@ bookkeeping, telemetry or tests.
 
 | date | id | summary | output-changing? | commit |
 |---|---|---|---|---|
+| 2026-10-08 | CL-014 | `tools/screen_verify.py`: fp32 screen → choose boundary/outlier/representative points → fp64 verify spec → compare | no (analysis tool; never launches) | screen-verify branch |
 | 2026-10-07 | CL-013 | `protocol.precision` (fp64 default \| fp32 screening, ETDRK4 only); `--precision` override; fp32 runs flagged in summary + gallery | no for fp64 (default path unchanged); fp32 is opt-in, ~0.1–0.5% drift | precision branch |
 | 2026-10-07 | CL-012 | Batched (vmap) spec sweeps; `physics.operator_args`/`ops_from_args` refactor (byte-identical); provenance git state cached per process | no (batched ≡ single to 1e-10) | batch branch |
 | 2026-10-07 | CL-011 | Run gallery + viewer; `protocol.record` (whole run or window); render queue + worker; pages moved `ui/`→`web/` (gitignore bug) | no (recording is opt-in) | viewer branch |
@@ -42,6 +43,27 @@ bookkeeping, telemetry or tests.
 | 2026-10-04 | CL-003 | Provenance `steppers`; stale-run view; `--dt`/`--cells` for the a\* harnesses; re-validation driver | no (default paths byte-identical) | `d3d87fd` |
 | 2026-10-04 | CL-002 | Stepper order + MMS gates, stepper mutations, CI extension | no (tests/tooling) | `0419ff9` |
 | 2026-10-02 | CL-001 | ETDRK4: complex-safe contour coefficients + stage-c `N_n` | **YES** | `e270cdc` |
+
+---
+
+## CL-014 — Screen-then-verify helper
+- **Branch:** `feat/screen-verify`
+- **Files:**
+  - `tools/screen_verify.py`
+    - `plan` selects screen points by `boundary`, `ic_split`, `outlier`, `representative` and
+      `screen_failed`, and writes one fp64 zip-sweep spec to `specs/proposed/` plus a
+      `verify_plan.json`.
+    - `compare` assigns each fp64 end state to a screen basin, and writes `VERIFY.md` and
+      `verify.json`.
+  - `tests/test_screen_verify.py`: point selection, exact rebuilding of the points, agreement and
+    disagreement, the structure warning, and a real end-to-end fp32→fp64 run.
+- **Why:** to make fp32 screening ([[BATCHED_RUNS]]) safe to use for basin maps.
+- **Output-changing?** No. It is an analysis tool and never launches a run.
+- **Verified:**
+  - Tests: 4 in `.venv`, and the end-to-end test in WSL.
+  - First real use on the a\* neighbourhood: **17/17 AGREE**. The fp32→fp64 descriptor distance was
+    at most 0.008, against a basin radius of 0.2.
+  - That run also found that N=32 does not resolve a\* states. See [[SCREEN_AND_VERIFY]].
 
 ---
 

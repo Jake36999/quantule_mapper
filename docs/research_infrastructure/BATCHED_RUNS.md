@@ -19,7 +19,7 @@ bigger levers: one fixed here (provenance overhead), and one measured below (num
 >   `plan_batches`, `--no-batch`, `--batch-size`
 > - `jax_scout/provenance.py`: `_git_state()`, which caches git once per process
 > - Tests: `test_batched_sweep_matches_point_by_point`, `test_batch_planning_separates_incompatible_points`
-> - Benchmarks: `F:\Maths_exploration\batch\` (16-point `param_a` sweeps of the a\* probe spec,
+> - Benchmarks: `docs/instrument_integrity/evidence/batching/fp32_bench.py` (output alongside it) (16-point `param_a` sweeps of the a\* probe spec,
 >   T=5, GTX 1080)
 
 ## What batching is

@@ -62,7 +62,29 @@ only queues the same arithmetic. Batching helps only where a member leaves the G
 small screening grids. It stays on by default because it is never slower and is exact.
 
 ## Precision (fp64 vs fp32) — the remaining lever
-*Measurement in progress; see below.*
+The GTX 1080 runs float64 at 1/32 of its float32 rate, and every run here is complex128. Measured on
+the a\* probe (FEB, ×1.15, K=6, seed 619) over the full replay length, T=360 (72,000 steps), with
+`F:\Maths_explorationatchp32_bench.py`:
+
+| grid | fp64 | fp32 | speed-up | max drift of er(t), fp32 vs fp64 | final \|ψ\|² field, rel. L2 |
+|---|---|---|---|---|---|
+| N=48 | 6.29 ms/step | 1.70 ms/step | **3.7×** | 1.2e-3 | 3.5e-3 |
+| N=96 | 60.0 ms/step | 13.2 ms/step | **4.5×** | 3.4e-3 | 4.7e-3 |
+
+**What fp32 is good enough for.**
+- **Yes: screening.** Telling which basin a point lands in, its node count and whether it grows or
+  decays. The basins differ by tens of percent in shape descriptors, and fp32 drifts by about 0.5%.
+- **No: knife-edge measurements.** The a\* bracket is ±0.5% in gain, and its late slopes differ by
+  about 1e-3 per 1k steps, so 0.3% drift in er is the same size as the signal. Bracketing, continuation
+  and anything quoted in the catalog stay fp64.
+
+**Suggested workflow** (not yet built):
+1. Screen in fp32, batched, at N=32–48.
+2. Cluster the end states.
+3. Re-run cluster boundaries and outliers in fp64 at N=96.
+
+Against plain fp64 at N=96, that is roughly 4.5× from precision. Small-grid batching adds about 1.2×
+and dropping to N=48 about 10× more, for screening only.
 
 ## Issues raised
 

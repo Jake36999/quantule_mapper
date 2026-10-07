@@ -1,0 +1,6 @@
+N=48 fp64: 6.29 ms/step
+N=48 fp32: 1.70 ms/step
+N=48 speed-up fp32/fp64: 3.7x | energy ratio rel diff over T=360: max 1.22e-03, final |psi|^2 field rel L2 diff 3.54e-03
+N=96 fp64: 60.01 ms/step
+N=96 fp32: 13.24 ms/step
+N=96 speed-up fp32/fp64: 4.5x | energy ratio rel diff over T=360: max 3.37e-03, final |psi|^2 field rel L2 diff 4.70e-03

@@ -19,7 +19,7 @@ bigger levers: one fixed here (provenance overhead), and one measured below (num
 >   `plan_batches`, `--no-batch`, `--batch-size`
 > - `jax_scout/provenance.py`: `_git_state()`, which caches git once per process
 > - Tests: `test_batched_sweep_matches_point_by_point`, `test_batch_planning_separates_incompatible_points`
-> - Benchmarks: `docs/instrument_integrity/evidence/batching/fp32_bench.py` (output alongside it) (16-point `param_a` sweeps of the a\* probe spec,
+> - Benchmarks: `F:\Maths_explorationatch\` (16-point `param_a` sweeps of the a\* probe spec,
 >   T=5, GTX 1080)
 
 ## What batching is
@@ -64,7 +64,7 @@ small screening grids. It stays on by default because it is never slower and is 
 ## Precision (fp64 vs fp32) — the remaining lever
 The GTX 1080 runs float64 at 1/32 of its float32 rate, and every run here is complex128. Measured on
 the a\* probe (FEB, ×1.15, K=6, seed 619) over the full replay length, T=360 (72,000 steps), with
-`F:\Maths_explorationatchp32_bench.py`:
+`docs/instrument_integrity/evidence/batching/fp32_bench.py` (output alongside it):
 
 | grid | fp64 | fp32 | speed-up | max drift of er(t), fp32 vs fp64 | final \|ψ\|² field, rel. L2 |
 |---|---|---|---|---|---|

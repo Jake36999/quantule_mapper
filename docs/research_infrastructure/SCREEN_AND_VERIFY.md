@@ -80,15 +80,16 @@ never localises into the 4- or 6-node states seen at N=96, so the 9 "basins" are
 states rather than distinct objects. That is why `plan` chose almost everything.
 
 So this demo validates **precision**: fp32 does not move states between basins, even over a full
-replay. It does **not** validate N=32 as a screening resolution for a\*. **For a\*, screen at N≥48**
-(1.7 ms/step in fp32). Basin structure is the screen's job, and resolution, not precision, is the
-limit here.
+replay. It does **not** validate N=32 as a screening resolution for a\*. *(Update 2026-10-08:
+N=48 is also under-resolved. The a\* anchor's er grows to 7 by T=360 and never localises; see
+[[QD_EXPLORER]] §4.)* **For a\*, screen at N=96** (13 ms/step in fp32). Basin structure is the
+screen's job, and resolution, not precision, is the limit here.
 
 ## Issues raised
 
 | # | issue | status |
 |---|---|---|
-| 1 | Screening a\* at N=32 shows no localised states, so its basin map is not meaningful | NOTED — screen a\* at N≥48; `plan` now warns when most points are selected |
+| 1 | Screening a\* at N=32 (and N=48) shows no localised states, so its basin map is not meaningful | NOTED — screen a\* at N=96; `plan` now warns when most points are selected |
 | 2 | WSL's JAX env has no sklearn, so replicate clustering tests run only in `.venv` | NOTED — the end-to-end test uses one seed per point so it runs in WSL |
 
 ## Associated docs

@@ -89,7 +89,8 @@ def test_requires_is_a_warning_not_a_gate(tmp_path):
 
 
 def test_every_spec_in_the_repo_is_schema_valid():
-    files = glob.glob(os.path.join(ROOT, "specs", "*", "*.json"))
+    files = [f for f in glob.glob(os.path.join(ROOT, "specs", "*", "*.json"))
+             if os.path.basename(os.path.dirname(f)) != "qd"]      # specs/qd/: explorer configs, not specs
     assert files
     for f in files:
         spec = irer_specs.load(f)

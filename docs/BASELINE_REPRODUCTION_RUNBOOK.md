@@ -17,6 +17,8 @@ dissipative operator. See `BASELINE_AUDIT.md`, `PHASE_C_MOBILITY_ENDPOINT.md`.
 | WSL Ubuntu GPU (`~/jax_irer` venv) | **runs jax_scout** (all Phase C validation) | `source ~/jax_irer/bin/activate` |
 | CuPy production GPU box | `worker_cupy` / `validation_pipeline` | separate; hosts `simulation_ledger.db` |
 
+`~/jax_irer` extras (2026-10-08): `pip install "ribs>=0.12" scikit-learn`. These are needed by the QD explorer (`tools/qd_explore.py`) and by basin clustering in WSL.
+
 ## 2. Frozen reference
 - Geometry frozen at commit `e8d6a78ea`; solver = `jax_scout/physics.py` (ETDRK4, FP64, N=96, L=10, dt=0.005).
 - **feb params** (`core_saturation_search.FEB`): `D=2.7329, eta=0.0704, rho_vac=1.1866, omega0=0.0,

@@ -29,6 +29,7 @@ bookkeeping, telemetry or tests.
 
 | date | id | summary | output-changing? | commit |
 |---|---|---|---|---|
+| 2026-10-08 | CL-015 | QD explorer `tools/qd_explore.py` (CMA-MAE + boundary sampler, background-safe); `BatchedETDRK4` compiled-function cache | no (cache returns the identical compiled function; explorer is a new driver) | qd branch |
 | 2026-10-08 | CL-014 | `tools/screen_verify.py`: fp32 screen → choose boundary/outlier/representative points → fp64 verify spec → compare | no (analysis tool; never launches) | screen-verify branch |
 | 2026-10-07 | CL-013 | `protocol.precision` (fp64 default \| fp32 screening, ETDRK4 only); `--precision` override; fp32 runs flagged in summary + gallery | no for fp64 (default path unchanged); fp32 is opt-in, ~0.1–0.5% drift | precision branch |
 | 2026-10-07 | CL-012 | Batched (vmap) spec sweeps; `physics.operator_args`/`ops_from_args` refactor (byte-identical); provenance git state cached per process | no (batched ≡ single to 1e-10) | batch branch |
@@ -43,6 +44,36 @@ bookkeeping, telemetry or tests.
 | 2026-10-04 | CL-003 | Provenance `steppers`; stale-run view; `--dt`/`--cells` for the a\* harnesses; re-validation driver | no (default paths byte-identical) | `d3d87fd` |
 | 2026-10-04 | CL-002 | Stepper order + MMS gates, stepper mutations, CI extension | no (tests/tooling) | `0419ff9` |
 | 2026-10-02 | CL-001 | ETDRK4: complex-safe contour coefficients + stage-c `N_n` | **YES** | `e270cdc` |
+
+---
+
+## CL-015 — Quality-diversity explorer, and a batch compile cache
+- **Branch:** `feat/qd-explorer`
+- **Files:**
+  - `tools/qd_explore.py`
+    - Drives `run`, `status`, `pause`, `resume`, `stop` and `export`.
+    - CMA-MAE (pyribs) fills a behaviour archive; an extra-trees boundary sampler adds points where
+      the regime is uncertain; each evaluation gets a fresh IC seed.
+    - State lives in one fsync'd `evals.jsonl`, with the archive rebuilt from it on resume.
+    - Disables XLA preallocation before JAX can start.
+  - `tools/qd_background.ps1` + `tools/qd_run_wsl.sh`: hidden background launch at `nice 10`.
+  - `specs/qd/wide-net-v1.qd.json`: an 8-D box containing FEB/a\*.
+  - `tests/test_qd_explore.py`. `tests/test_spec_layer.py` now skips `specs/qd/` (explorer configs,
+    not specs).
+  - `jax_scout/registry.py`: `BatchedETDRK4` reuses one compiled function per (grid, dt, static
+    args, dtype), so a long-running driver does not recompile every generation.
+- **Why:** basin discovery. See [[QD_EXPLORER]], which also records the review of the old search
+  scripts.
+- **Output-changing?** No.
+  - The cache hands back the same `jax.jit` function, built from the same arguments.
+  - The explorer is a new driver; existing paths are unchanged.
+- **Verified:**
+  - In WSL: 5 QD tests (including a real resumable run whose exported evaluations reproduce through
+    `run_spec` to 1e-8), plus 26 spec-layer and screen-verify tests.
+  - GPU smoke tests at N=48 and N=96: see [[QD_EXPLORER]] §4. The N=48 run found that resolution
+    does not reproduce a\*, so the wide net runs at N=96. Diverged members now leave the batch, and
+    `eval_chunk` bounds GPU memory; both are tested to leave survivors' results unchanged.
+  - New WSL dependencies: `ribs` 0.12 and `scikit-learn` 1.9.
 
 ---
 

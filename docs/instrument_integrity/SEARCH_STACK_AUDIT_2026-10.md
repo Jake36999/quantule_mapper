@@ -68,6 +68,16 @@ independent discovery.
   `param_a = 0` (the solver default). That is the one axis later validated as sensitive.
 - `tda_profiler.py`: reasonable. The 0.5 persistence cut sits just above lattice-square noise (≈0.41).
 
+## Addendum (2026-10-08): the orchestrator, and what replaced the stack
+`adaptive_hunt_orchestrator` (only `adaptive_hunt_orchestrator.bak` remains, and nothing calls it):
+- It averages SSE over seeds, so seeds in different basins are blended.
+- It scores a missing artifact as 999, the same as bad physics.
+- It deletes per-seed provenance after scoring.
+- It feeds on `fss_scaling_analyzer` probes, which can never pass their gate.
+
+The Hunter's prime-mode default box does not contain FEB/a\* on 4 of 7 axes. Basin search now runs
+through the quality-diversity explorer: [[QD_EXPLORER]].
+
 ## Status
 No fixes were applied to the search stack. The Hunter's prime mode is retired, and stability mode is
 sound but narrow. Basin finding moves to ensemble clustering plus continuation:

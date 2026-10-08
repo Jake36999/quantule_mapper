@@ -445,6 +445,9 @@ def batch_key(spec):
     return (pr["grid"]["N"], pr["grid"]["L"], pr["dt"], precision_of(spec), tuple(sorted(static.items())))
 
 
+_BATCH_FNS = {}
+
+
 class BatchedETDRK4:
     """Advance B members of the ETDRK4 substrate together with jax.vmap over (parameters, state).
 
@@ -466,12 +469,16 @@ class BatchedETDRK4:
         self.psi_k = jnp.stack([s.psi_k for s in sims])
         self.dt = dt
         rd, cd = sims[0].rd, sims[0].cd
-
-        def one(p, pk, n):
-            ops = physics.ops_from_args(N, L, dt, dict(zip(physics.BATCHABLE_PARAMS, p)), static, rd, cd)
-            return jax.lax.fori_loop(0, n, lambda i, q: physics.step(q, ops), pk)
-
-        self._adv = jax.jit(jax.vmap(one, in_axes=(0, 0, None)), static_argnums=2)
+        # One compiled function per (grid, dt, static args, dtype), shared by every batch with that key:
+        # a long-running driver (tools/qd_explore.py) builds a new batch every generation and would
+        # otherwise recompile each time. jax.jit then caches per batch size.
+        key = (N, L, dt, tuple(sorted(static.items())), jnp.dtype(rd).name, jnp.dtype(cd).name)
+        if key not in _BATCH_FNS:
+            def one(p, pk, n):
+                ops = physics.ops_from_args(N, L, dt, dict(zip(physics.BATCHABLE_PARAMS, p)), static, rd, cd)
+                return jax.lax.fori_loop(0, n, lambda i, q: physics.step(q, ops), pk)
+            _BATCH_FNS[key] = jax.jit(jax.vmap(one, in_axes=(0, 0, None)), static_argnums=2)
+        self._adv = _BATCH_FNS[key]
 
     def advance(self, n):
         self.psi_k = self._adv(self.pvec, self.psi_k, int(n))
